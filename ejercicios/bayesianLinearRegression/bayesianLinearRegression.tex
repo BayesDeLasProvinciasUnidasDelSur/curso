@@ -1,0 +1,58 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\input{../../auxiliar/encabezado.tex}
+
+
+%opening
+\title{Bayesian Linear Regression}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\section{Linear basis function }
+
+Linear regression models share the property of being linear in their parameters but not necessarily in their input variables. 
+Using non-linear basis functions of input variables, linear models are able model arbitrary non-linearities from input variables to targets.  
+Polynomial regression is such an example of basis functions.
+A linear regression model $\text{linear}(\bm{x},\bm{\beta})$
+
+\begin{equation}
+\texttt{linear}(\bm{x},\bm{\beta}) = \sum_{i=0}^{M-1} \beta_i \Phi_i(\bm{x}) = \bm{\beta}^T \bm{\Phi}(\bm{x})
+\end{equation}
+
+Where $\Phi$ is the basis function and $M$ the total number of parameters.
+
+Then, the conditional distribution of $y$ $p(y | \bm{x}, \bm{\beta}, \sigma)$ can therefore be written as
+
+\begin{equation}
+p(\bm{y}_i | \bm{x}_i, \bm{\beta}, \sigma) = N(\bm{y}_i | \bm{\beta}^T \bm{\Phi}(\bm{x}_i) , \sigma)
+\end{equation}
+
+Since we asume i.i.d., the joint conditional probability of $\bm{y}$
+
+\begin{equation}
+p(\bm{y} | \bm{x}, \bm{\beta}, \sigma) = \prod_{i=1}^{N} N(\bm{y}_i | \bm{\beta}^T \bm{\Phi}(\bm{x}_i), \sigma)
+\end{equation}
+
+Maximizing the log likelihood (= minimizing the sum-of-squares error function) gives the maximum likelihood estimate of parameters $\bm{\beta}$.
+
+\begin{equation}
+ \begin{split}
+  l(\bm{y}, \bm{x},\bm{\beta},\sigma) & = \text{log } L(\bm{y}, \bm{x},\bm{\beta},\sigma) = \text{log } \prod_{i=1}^{n} p(\bm{y}_i | \bm{x}_i, \bm{\beta}, \sigma)\\
+  & =  \sum_{i=1}^{n}  \text{log } p(\bm{y}_i | \bm{x}_i, \bm{\beta}, \sigma) = \sum_{i=1}^{n} \text{log } N(\bm{y}_i | \bm{\beta}^T \bm{\Phi}(\bm{x}_i), \sigma)  \\
+  & =  \sum_{i=1}^{n} \text{log }  \frac{1}{\sqrt{2\pi}\sigma} e^{\frac{-(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))}{2\sigma^2} } = \sum_{i=1}^{n} \text{log } \frac{1}{\sqrt{2\pi}\sigma} + \sum_{i=1}^{n} \text{log } e^{\frac{-(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))}{2\sigma^2} } \\
+  & = n \text{log } \frac{1}{\sqrt{2\pi}\sigma} + \sum_{i=1}^{n} \text{log } e^{\frac{-(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))}{2\sigma^2} } = n \text{log } \frac{1}{\sqrt{2\pi}\sigma} + \sum_{i=1}^{n}  \frac{-(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))}{2\sigma^2} \\
+  &  = n \text{log } \frac{1}{\sqrt{2\pi}\sigma} + \frac{1}{2\sigma^2} \sum_{i=1}^{n}  -(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i)) \\
+  & \propto  \sum_{i=1}^{n}  \bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i)
+ \end{split}
+\end{equation}
+
+
+
+\end{document}
