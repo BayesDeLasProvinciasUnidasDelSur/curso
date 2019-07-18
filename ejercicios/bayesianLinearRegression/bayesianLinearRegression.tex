@@ -46,10 +46,10 @@ Maximizing the log likelihood (= minimizing the sum-of-squares error function) g
  \begin{split}
   l(\bm{y}, \bm{x},\bm{\beta},\sigma) & = \text{log } L(\bm{y}, \bm{x},\bm{\beta},\sigma) = \text{log } \prod_{i=1}^{n} p(\bm{y}_i | \bm{x}_i, \bm{\beta}, \sigma)\\
   & =  \sum_{i=1}^{n}  \text{log } p(\bm{y}_i | \bm{x}_i, \bm{\beta}, \sigma) = \sum_{i=1}^{n} \text{log } N(\bm{y}_i | \bm{\beta}^T \bm{\Phi}(\bm{x}_i), \sigma)  \\
-  & =  \sum_{i=1}^{n} \text{log }  \frac{1}{\sqrt{2\pi}\sigma} e^{\frac{-(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))}{2\sigma^2} } = \sum_{i=1}^{n} \text{log } \frac{1}{\sqrt{2\pi}\sigma} + \sum_{i=1}^{n} \text{log } e^{\frac{-(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))}{2\sigma^2} } \\
-  & = n \text{log } \frac{1}{\sqrt{2\pi}\sigma} + \sum_{i=1}^{n} \text{log } e^{\frac{-(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))}{2\sigma^2} } = n \text{log } \frac{1}{\sqrt{2\pi}\sigma} + \sum_{i=1}^{n}  \frac{-(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))}{2\sigma^2} \\
-  &  = n \text{log } \frac{1}{\sqrt{2\pi}\sigma} + \frac{1}{2\sigma^2} \sum_{i=1}^{n}  -(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i)) \\
-  & \propto  \sum_{i=1}^{n}  \bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i)
+  & =  \sum_{i=1}^{n} \text{log }  \frac{1}{\sqrt{2\pi}\sigma} e^{\frac{-(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))^2}{2\sigma^2} } = \sum_{i=1}^{n} \text{log } \frac{1}{\sqrt{2\pi}\sigma} + \sum_{i=1}^{n} \text{log } e^{\frac{-(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))^2}{2\sigma^2} } \\
+  & = n \text{log } \frac{1}{\sqrt{2\pi}\sigma} + \sum_{i=1}^{n} \text{log } e^{\frac{-(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))^2}{2\sigma^2} } = n \text{log } \frac{1}{\sqrt{2\pi}\sigma} + \sum_{i=1}^{n}  \frac{-(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))^2}{2\sigma^2} \\
+  &  = -\frac{n}{2} (\text{log } 2\pi\sigma^2) - \frac{1}{2\sigma^2} \sum_{i=1}^{n}  (\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))^2 \\
+  & \propto  \sum_{i=1}^{n}  (\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))^2
  \end{split}
 \end{equation}
 

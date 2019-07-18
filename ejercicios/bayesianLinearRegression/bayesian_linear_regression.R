@@ -62,8 +62,8 @@ likelihood <- function(ys,xs,betas,alpha){
 "
 Maximizing the log likelihood (= minimizing the sum-of-squares error function) gives the maximum likelihood estimate of parameters $\bm{\beta}$.
 "
-log_likelihood <- function(){
-  return("Implement log_likelihood")
+log_likelihood <- function(ys,xs,betas,alpha){
+  return(-sum( (ys - t(betas)%*%Phi(xs) )^2  )) # \propro sum-of-squares error
 }
 "
 Maximum likelihood estimation can lead to severe over-fitting if complex models (e.g. polynomial regression models of high order) are fit to datasets of limited size.
