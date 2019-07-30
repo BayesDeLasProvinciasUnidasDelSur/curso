@@ -1,16 +1,48 @@
 # Mensaje final del linear regression factor graph 
-# Hermoso, la x se va
-grilla <- seq(-10,20,by=0.1)
-x <- 2
-plot(grilla,dnorm(grilla,5,4),type="l")
-lines(grilla/x,dnorm(grilla/x,5,4),type="l")
-lines(grilla,dnorm(grilla/x,5,4),type="l")
-lines(grilla,dnorm(grilla,x*5,4),type="l")
+# Hermoso: la x pasa al mu y sigma y constante afuera
+# de la normal
 
-step <- 0.1
-sum(dnorm(grilla/x,5,4)*step)
-step <- 0.1
-sum(dnorm(grilla,x*5,4)*step)
+x <- 6
+step <- 0.1; epsilon <- step/10
+beta_ventana <- 20
+# la grilla x.beta la hago depender de beta y x
+x.beta <- seq(-beta_ventana*x,beta_ventana*x,step) 
+######################################################
+# Es f\'acil demostrar anal\'iticamente lo siguiente #
+dnorm(x.beta/x,5,4)==dnorm(x.beta,x*5,x*4)*x         #
+######################################################
+# Notar que no integra uno 
+x-epsilon<sum(dnorm(x.beta/x,5,4)*0.1) & sum(dnorm(x.beta/x,5,4)*0.1)<x+epsilon
+
+# La transformaci\'on no tiene que ser la misma
+plot(x.beta/x,dnorm(x.beta/x,5,4),type="l")
+lines(x.beta,dnorm(x.beta,x*5,x*4),col="red")
+
+#####################
+# Probar la siguiente igualdad
+# if x ~ N(m,s) => (x - m)/s ~ N(0,1)
+
+x <- seq(-20,20,0.1)
+# La transformnaci\'on no tiene que ser la misma
+plot(x,dnorm(x,5,4),type="l")
+lines((x-5)/4,dnorm((x-5)/4,(5-5)/4,4/4),type="l")
+# Ac\'a encontramos cu\'al es, 
+plot(x,dnorm(x,0,1),type="l")
+lines((x-5)/4,dnorm((x-5)/4,0,1),type="l")
+
+# Si solo dividimos 
+plot(x,dnorm(x,5,4),type="l")
+lines(x/4,dnorm(x/4,5/4,4/4),type="l")
+
+
+
+# if x ~ N(m,s) => x * a ~ N(a*m,a*s)
+a <- 2
+plot(x,dnorm(x,5,4),type="l")
+y = a*x
+lines(y,(1/a)*dnorm(y/a,5,4),lty=2)
+lines(x,dnorm(x,a*5,a*4),lty=3)
+lines(y/a,dnorm(y/a,a*5,a*4),lty=3)
 
 #############
 
@@ -171,3 +203,4 @@ dprior <- function(beta, mu, sigma,degree){
 }
 
 dprior()
+
