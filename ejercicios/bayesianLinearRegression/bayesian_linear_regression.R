@@ -1,7 +1,17 @@
 # Mensaje final del linear regression factor graph 
 # Hermoso, la x se va
+grilla <- seq(-10,20,by=0.1)
+x <- 2
 plot(grilla,dnorm(grilla,5,4),type="l")
-lines(grilla,dnorm(2*grilla,2*5,2*4),type="l")
+lines(grilla/x,dnorm(grilla/x,5,4),type="l")
+lines(grilla,dnorm(grilla/x,5,4),type="l")
+lines(grilla,dnorm(grilla,x*5,4),type="l")
+
+step <- 0.1
+sum(dnorm(grilla/x,5,4)*step)
+step <- 0.1
+sum(dnorm(grilla,x*5,4)*step)
+
 #############
 
 "
