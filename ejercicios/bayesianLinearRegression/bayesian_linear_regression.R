@@ -1,3 +1,142 @@
+objective <- function(x){
+  return(sin(x))
+}
+
+x_grilla <- seq(-pi,pi,by=0.01)
+plot(x_grilla,objective(x_grilla),type="l")
+
+
+Phi <- function(xs,degree=3){
+  res <- 1
+  for (g in seq(degree)){
+    res <- rbind(res,xs^g)  
+  }
+  rownames(res) <- seq(0,degree) # Each row corresponds to a degree
+  colnames(res) <- xs            # Each row corresponds to sample
+  return(res)
+}
+
+n <- 1
+x <- runif(n)*2*pi-pi
+y <- objective(x)
+sigma_u <-1/3
+plot(x_grilla,objective(x_grilla),type="l",ylim=c(-1-1.5*sigma_u,1+1.5*sigma_u),lwd=2)
+
+sigma <- c(1,1)
+mu <- c(0,0)
+
+betas_sample <- cbind(rnorm(6,mu[1],sigma[1]),rnorm(6,mu[2],sigma[2]))
+for (i in 1:dim(betas_sample)[1]) {
+  abline(betas_sample[i,],lty=2)
+}
+
+
+
+y <- rnorm(length(x),y,sigma_u)
+points(x,y,pch=19,col=rgb(0,0,0,0.33))
+
+
+beta_grilla <- seq(-4,4,by=0.01)
+
+
+
+i<-1
+prior_0 <- dnorm(beta_grilla,mu[i],sigma[i])
+plot(beta_grilla,prior_0,type="l")
+mu_ML <- c((t(sigma[-i])%*%xs[-i])) + xs[i]*beta_grilla
+sigma_ML <- sqrt(c((t(sigma[-i])^2)%*%(xs[-i])^2) + sigma_u^2)
+likelihood_0 <- dnorm(y,mu_ML, sigma_ML)
+lines(beta_grilla,likelihood_0,lty=2)
+lines(beta_grilla,prior_0*likelihood_0,lty=3)
+evidence_0 <- sum(prior_0*likelihood_0*0.01)
+lines(beta_grilla,prior_0*likelihood_0/sum(prior_0*likelihood_0*0.01),lty=3)
+
+i<-2
+prior_1 <- dnorm(beta_grilla,mu[i],sigma[i])
+plot(beta_grilla,prior_1,type="l")
+mu_ML <- c((t(sigma[-i])%*%xs[-i])) + xs[i]*beta_grilla
+sigma_ML <- sqrt(c((t(sigma[-i])^2)%*%(xs[-i])^2) + sigma_u^2)
+likelihood_1 <- dnorm(y,mu_ML, sigma_ML)
+lines(beta_grilla,likelihood_1,lty=2)
+lines(beta_grilla,prior_1*likelihood_1,lty=3)
+evidence_1 <- sum(prior_1*likelihood_1*0.01)
+lines(beta_grilla,prior_1*likelihood_1/evidence_1,lty=3)
+
+joint_prior <- outer(prior_0,prior_1)
+image(joint_prior)
+joint_likelihood <- outer(likelihood_0,likelihood_1)
+image(joint_likelihood) 
+joint_posterior <- outer(likelihood_0*prior_0/evidence_0,likelihood_1*prior_1/evidence_1)
+image(joint_posterior)
+# Ac\'a me qued\'e pensando que posiblemente el modelo no deba 
+# ser independiente respecto de los valores de los par\'ametros
+# Porque si la ordenada al origen fuera muuuy alta, para que la recta pase por los puntos
+# el parametro de la pendiente tiene que ser negativo. 
+# Es decir, no deber\'ian ser independientes.
+# Esto se refuerza por el hecho de que el libro de Bishop 
+# grafica el likelihood conjunto como una ``recta'',
+# como una gausiana que cambia su media a medida que el otro par\'atro cambia su valor de base.
+
+# Antes de pasar a una soluci\'on con covarianzas vamos a explorar:
+# 1. Ver que muestras de par\'ametros se obtienen de la posterior
+# 2. Proponer un likelihood ``ad-hoc'', donde en vez de usar la media de la 
+# creencia a priori (\mu_i) y sume su incertidumbre, use ``valores posibles'', 
+# es decir, que fije el valor de \beta_i y no agregue la incertidumbre del modelo
+# Capaz eso es lo que est\'a pasando en los modelos con covarianza. Es una sola normal,
+# que se se actualiza sobre todos los par\'amtros, al tiempo, por eso todos argumentos
+# del likelihood y por eso el likelihood no arrastra su incertidumbre.
+
+
+# Expoloraci\'on 1: Ver muestras de par\'ametros que se obtienen de la posterior
+# Queremos sacar la posterior anal\'itica. Ya la tengo, pero trabajando com media y varianza 
+# en vez de con media y precision, se hace solo un poco dif\'icil pasarlo r\'apido, y me tengo que ir
+denominador_0 <- sigma[1]^2 + (sigma[2]^2 + sigma_u^2)
+denominador_1 <- sigma[2]^2 + (sigma[1]^2 + sigma_u^2)/(x^2)  
+
+
+
+betas_sample <- cbind(rnorm(6,mu[1],sigma[1]),rnorm(6,mu[2],sigma[2]))
+for (i in 1:dim(betas_sample)[1]) {
+  abline(betas_sample[i,],lty=2)
+}
+
+# Expoloraci\'on 2: Modificar el likelihood ``ad-hoc''
+likelihood_conjunto <- function(b0,b1,y,x,mu,sigma,sigma_u){
+  xs <- Phi(x,degree=2)
+  mu_ML <- b0 + xs[2]*b1
+  sigma_ML <- sigma_u
+  return()
+}
+
+
+
+
+
+
+posterior <- function(beta,i,y,x,mu,sigma,sigma_u){#i=0; beta=beta_grilla
+  xs <- Phi(x,degree=2)
+  i = i + 1 # pensando en que 0 es el primer elemento
+  # Si pasan el elemento 0 lo busco en la posici\'on 1
+  prior <- dnorm(beta,mu[i],sigma[i])
+  
+  mu_ML <- c((t(sigma[-i])%*%xs[-i])) + xs[i]*beta
+  sigma_ML <- sqrt(c((t(sigma[-i])^2)%*%(xs[-i])^2) + sigma_u^2)
+  likelihood <- dnorm(y,mu_ML, sigma_ML)
+  return(prior*likelihood)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Mensaje final del linear regression factor graph 
 # Hermoso: la x pasa al mu y sigma y constante afuera
 # de la normal
