@@ -1,0 +1,51 @@
+
+\begin{midef}[Separation in MNs]
+ $X$ and $Y$ are \textit{separated} in $H$ given $Z$ if  there is no active trail in $H$ between $X$ and $Y$ given $Z$
+\end{midef}
+
+\vspace{0.3cm}
+\begin{paracol}{3}
+\centering
+\begin{verbatim}
+        A     F 
+        |    /|
+        D---B |
+        |    \|  
+        C-----E
+\end{verbatim}
+
+ \switchcolumn
+
+ $A$ and $E$ are \textit{separated} given
+\begin{itemize}
+ \item $B$, $D$
+ \item $D$
+ \item $C$
+\end{itemize}
+ 
+\end{paracol}
+
+\begin{miteo}(Factorization $\Rightarrow$ Independecies MNs)
+ If $P$ factorized over H, and $\text{sep}_H(X,Y|Z)$ then $P$ satisfies $(X \perp Y \mid Z)$
+\end{miteo}
+
+Given a set of independences induced by a graphical model H, $I(H)$
+
+\begin{equation}
+ I(H) = \{(X \perp Y \mid Z) \, : \, \text{sep}_H(X,Y|Z) \}
+\end{equation}
+
+\begin{midef}(I-map in MNs) If $P$ stisfies $I(H)$, we say that the graphical model $H$ is an I-map (Independecie map) of $P$
+\end{midef}
+
+\begin{miteo}(Factorization $\Rightarrow$ Independence MNs)
+ If $P$ factorizes over the graphical model $H$, then $H$ is an I-map of $P$
+\end{miteo}
+
+The converse also hold on Markov Networks
+
+
+
+
+
+
