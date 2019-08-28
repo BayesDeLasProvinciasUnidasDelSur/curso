@@ -35,9 +35,10 @@
 \newcommand{\citel}[1]{\cite{#1}\label{#1}}
 \newcommand\hfrac[2]{\genfrac{}{}{0pt}{}{#1}{#2}} %\frac{}{} sin la linea del medio
 
-\newtheorem{midef}{Definition}
-\newtheorem{miteo}{Theorem}
-\newtheorem{mipropo}{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
 
 %http://latexcolor.com/
 \definecolor{azul}{rgb}{0.36, 0.54, 0.66}

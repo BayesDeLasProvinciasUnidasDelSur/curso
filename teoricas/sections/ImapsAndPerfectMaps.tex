@@ -1,0 +1,138 @@
+
+We have seen that a graph structure encodes a set of independencies.
+What we want to talk about now is the question of how to take a distribution
+that has a certain set of independencies that that it satisfies and encoded within a graph's structure.
+
+\paragraph{Capturing independencies in $P$}
+
+The set of all independiencies of $P$, 
+\begin{equation}
+ I(P) = \{(X \perp Y \mid Z) : P \models (X \perp Y \mid Z) \}
+\end{equation}
+
+We know that if $P$ factorizes over $G$ $\Rightarrow$ $G$ is an I-map for P
+
+\begin{equation}
+I(G) \subseteq  I(P)
+\end{equation}
+
+\begin{framed} \centering
+ We want the graph that caputres us much of the indpendencies properties of $P$as posible
+\end{framed}
+
+\begin{definition}(Minimal I-map)
+ I-map without rendundant edges ($P(Y|x^0) = P(Y|x^1)$)
+\end{definition}
+
+However, minimal I-mal may still not capture $I(P)$. For example, we show a minimal I-grap (right) for the ``student'' model (left) 
+\begin{paracol}{2}
+\begin{verbatim}
+ D   I 
+  \ /
+   |
+   v
+   G
+\end{verbatim}
+ \switchcolumn
+\begin{verbatim}
+ D-->I 
+ |   ^
+ |  /
+ v /
+  G
+\end{verbatim} 
+
+\end{paracol}
+
+Why this is a minimal I-map? Well
+\begin{description}
+ \item[Case remove $D->G$] we get $(D \perp G)$. NOT in our model 
+ \item[Case remove $G->I$] we get $(G \perp I \mid D)$. NOT in our model
+ \item[Case remove $D->I$] we get $(D \perp I \mid G)$. NOT in our model
+\end{description}
+
+There is a better minumum I-map, but this is a minimum I-map
+
+\begin{definition}(Perfect Map)
+$I(G) = I(P)$ 
+\end{definition}
+
+\paragraph{Converting BNs to MNs loses independcies}
+
+\begin{itemize}
+ \item Bn to MN: loses independencies in v-strucutre
+ \item MN to BN: must add trinagulating edges to loops
+\end{itemize}
+
+
+Example: A scenario where there is a non perfect map.
+This markov network (left) has an I-map (right), but not a perfect map-
+\begin{paracol}{2}
+\begin{verbatim}
+     A
+    / \
+   /   \
+  D     B
+   \   /
+    \ /
+     C     
+\end{verbatim}
+\switchcolumn
+\begin{verbatim}
+     A
+    / \
+   v   v
+   D-> B
+   \   /
+    v v
+     C     
+\end{verbatim}
+\end{paracol}
+
+Another example is the ``XOR model''.
+
+
+\paragraph{Uniqueness of perfect Map}
+
+\begin{itemize}
+ \item $G_1: X \rightarrow Y $, $I(G_1) = \emptyset$
+  \item $G_2: X \leftarrow Y $, $I(G_2) = \emptyset$
+\end{itemize}
+  Then, can represent exactly the same distributions
+
+  \vspace{0.3cm}
+  
+  Which of the following graphs does not encode the same independencies as the others?
+  
+\begin{itemize}
+ \item $G_a: X \rightarrow Y \rightarrow Z$,
+  \item $G_b: X \leftarrow Y \rightarrow Z $,
+\item $G_b: X \leftarrow Y \leftarrow  Z$,
+\item $G_b: X \rightarrow Y \leftarrow Z $ (v-strucutre)
+\end{itemize}
+
+The v-structure holds $X \perp Z$ while the others $X \perp Z | Y $
+Any of these not v-satuructre grpahs can represent each other.
+
+\begin{definition}(I-equivalence)
+ Two graphs $G_1$ and $G_2$ over $X_1, ... X_n$ are I-equivalent if $I(G_1)=I(G_2)$.
+\end{definition}
+
+\begin{framed}
+ \centering
+ There are certain propoerties of the grpah that are unidentifiables by lookin the indpendencies relations.
+\end{framed}
+
+\textbf{And most graph have many I-equivalent variants.
+This is a problem to learn model from data.}
+
+
+
+
+  
+  
+
+
+
+
+

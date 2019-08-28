@@ -1,7 +1,7 @@
 
-\begin{midef}[Separation in MNs]
+\begin{definition}[Separation in MNs]
  $X$ and $Y$ are \textit{separated} in $H$ given $Z$ if  there is no active trail in $H$ between $X$ and $Y$ given $Z$
-\end{midef}
+\end{definition}
 
 \vspace{0.3cm}
 \begin{paracol}{3}
@@ -25,9 +25,9 @@
  
 \end{paracol}
 
-\begin{miteo}(Factorization $\Rightarrow$ Independecies MNs)
+\begin{theorem}(Factorization $\Rightarrow$ Independecies MNs)
  If $P$ factorized over H, and $\text{sep}_H(X,Y|Z)$ then $P$ satisfies $(X \perp Y \mid Z)$
-\end{miteo}
+\end{theorem}
 
 Given a set of independences induced by a graphical model H, $I(H)$
 
@@ -35,14 +35,34 @@ Given a set of independences induced by a graphical model H, $I(H)$
  I(H) = \{(X \perp Y \mid Z) \, : \, \text{sep}_H(X,Y|Z) \}
 \end{equation}
 
-\begin{midef}(I-map in MNs) If $P$ stisfies $I(H)$, we say that the graphical model $H$ is an I-map (Independecie map) of $P$
-\end{midef}
+\begin{definition}(I-map in MNs) If $P$ stisfies $I(H)$, we say that the graphical model $H$ is an I-map (Independecie map) of $P$
+\end{definition}
 
-\begin{miteo}(Factorization $\Rightarrow$ Independence MNs)
+\begin{theorem}(Factorization $\Rightarrow$ Independence MNs)
  If $P$ factorizes over the graphical model $H$, then $H$ is an I-map of $P$
-\end{miteo}
+\end{theorem}
 
 The converse also hold on Markov Networks
+
+\begin{theorem}(Factorization $\Rightarrow$ Independence MNs) 
+For a \textbf{positive distribution} $P$, if $H$ is an I-map for $P$, then $P$ factorizes over $H$.
+\end{theorem}
+
+Positive distributions stisfies $P(x)>0 \forall x$
+
+\paragraph{Summary} Two equivalent (for positive distributions) views of grtaph structure:
+\begin{enumerate}
+ \item Factorization: $H$ alloes $P$ to be represented
+ \item I-map: Independencies encoded by $H$ hold in $P$
+\end{enumerate}
+
+\begin{framed}
+ \centering
+ If $P$ Factorizes over a graph $H$, we can read from the graph independencies that must hold in $P$ (an independency map)
+\end{framed}
+
+
+
 
 
 
