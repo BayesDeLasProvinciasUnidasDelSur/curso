@@ -1,0 +1,172 @@
+% \tikz{ %
+%         
+%         
+%         \node[latent, fill=black!10, minimum size=25pt] (r) {\Large $r_{ab}$} ; %
+%         \node[const, right=of r, xshift=0cm] (r_name) {\large: Result}; 
+%         
+%         \node[factor, above=of r] (fr) {} ;
+%         \edge[-] {r} {fr};
+% } 
+
+
+Local structure that dosn't required full table represention is important is importat both in uniderected and directed models,
+How we incorporate local structure in undiorected models.
+The framework for that is called log-linear models.
+
+\vspace{0.3cm}
+
+In the original representation of the unnormalized density we define $\tilde{P}$ to be a product of factors, potentialy a full table.
+
+\begin{equation}
+ \tilde{P} = \prod_i \phi_i(\bm{D}_i)
+\end{equation}
+
+Now we are going to shift that representation that something that uses a linear form that if subsecuent expontiated
+
+\begin{equation}\label{eq:logLinearRepresentation}
+ \tilde{P} = \text{exp}(\underbrace{-\sum_i w_i f_i(\bm{D}_i)}_{\text{linear form}})
+\end{equation}
+
+This is the \textbf{Log-linear representation}.
+The $w_i$ are called coeficients. 
+And the $f_i$ are called features.
+As factors, each feature have a scope, a set of varaibles that which the feature depends.
+The features can have the same scope, but they have their own parameter $w_i$.
+
+\begin{equation}
+ \tilde{P} = \prod_i \underbrace{\text{exp}(- w_i f_i(\bm{D}_i))}_{\text{factor $\phi$}}
+\end{equation}
+
+If we have a full table factor, for example,
+
+\begin{equation}
+ \phi(X_1,X_2) = \begin{pmatrix}
+ a_{00} & a_{01} \\
+a_{10} & a_{11}
+\end{pmatrix}
+\end{equation}
+
+we can capture using indicator functions as features
+
+\begin{equation}
+\begin{split}
+ f_{12}^{00} & = \mathbb{I}(X_0 = 0, X_1=0)\\
+ & \dots \\
+ f_{12}^{11} & = \mathbb{I}(X_1 = 0, X_1=1)
+\end{split} 
+\end{equation}
+
+Then simply we can sum up 
+
+\begin{equation}
+ \phi(X_1,X_2) = \text{exp}(-\sum_{kl} w_{kl} f_{12}^{kl}(X_1,X_2))
+\end{equation}
+
+This always reduces to 
+
+\begin{equation}
+\text{exp}(-w_{X_1,X_2}) 
+\end{equation}
+
+An if we define the parameter as 
+
+\begin{equation}
+ w_{kl} = -\text{log} a_{kl}
+\end{equation}
+
+Then, this gives us back the factor $\phi$
+
+\begin{equation}
+\text{exp}(-w_{X_1,X_2}) = a_{X_0,X_1}
+\end{equation}
+
+\begin{framed}
+ \centering
+This is a general representation in the sense that we can take any factor and represent it as a log-linear model with the apropiate features.
+\end{framed} 
+
+\paragraph{Example: Ising Model}
+
+\begin{equation}
+ E(x_1, \dots, x_n) = - \sum_{i<j} w_{ij} x_i x_j - \sum_i u_i x_i
+\end{equation}
+
+where $x_i \in \{-1 \, , \, +1 \} $ and $f_{ij} = X_i X_j$
+
+\begin{center}
+\tikz{ %        
+        \node[latent] (r_00) {$\uparrow$} ; %
+        \node[latent, right=of r_00] (r_01) {$\uparrow$}; 
+        \node[latent, right=of r_01] (r_02) {$\downarrow$}; 
+        
+        \node[latent, below=of r_00] (r_10) {$\uparrow$} ; %
+        \node[latent, below=of r_01] (r_11) {$\uparrow$} ; %
+        \node[latent, below=of r_02] (r_12) {$\downarrow$} ; %
+        
+        \node[latent, below=of r_10] (r_20) {$\downarrow$} ; %
+        \node[latent, below=of r_11] (r_21) {$\downarrow$} ; %
+        \node[latent, below=of r_12] (r_22) {$\downarrow$} ; %
+        
+        \edge[-] {r_00} {r_01};
+        \edge[-] {r_01} {r_02};
+        
+        \edge[-] {r_00} {r_10};
+        \edge[-] {r_01} {r_11};
+        \edge[-] {r_02} {r_12};
+        
+        \edge[-] {r_10} {r_11};
+        \edge[-] {r_11} {r_12};
+        
+        \edge[-] {r_10} {r_20};
+        \edge[-] {r_11} {r_21};
+        \edge[-] {r_12} {r_22};
+        
+        \edge[-] {r_20} {r_21};
+        \edge[-] {r_21} {r_22};
+} 
+\end{center}
+
+The model define a joint probability distribution that depends on the energy of the system
+
+\begin{equation}
+ P(\bm{X}) \propto e^{-\frac{1}{T} E(\bm{X})}
+\end{equation}
+
+\paragraph{Example: Metric Feature (MRF)}
+
+In cases when all $X_i$ take values in labels space $V$
+
+\begin{center}
+\tikz[baseline=-0.5ex]{\node[latent,minimum size=15pt] (X_1) {$X_1$} ; %
+        \node[latent,minimum size=15pt, right=of X_1] (X_2) {$X_2$};
+        \edge[-] {X_1} {X_2};
+        } $\Longrightarrow$ we want $X_1$ and $X_2$ to take ``similar'' values 
+\end{center}
+
+
+So we can define a Distance function $\mu: V \times V \mapsto \mathbb{R}^+$.
+This require, a) reflexivity, b) symmetry, c) trinagle inequality
+
+Then, we have a feature
+\begin{equation}
+ f(X_i,X_j) = \mu(X_i, X_j)
+\end{equation}
+
+then 
+
+\begin{equation}
+ \tilde{P} = \prod_{ij} \text{exp}(-w_{ij}\mu(X_i,X_j))
+\end{equation}
+
+This is usefull for image denosing.
+The distance used in general is linear until some point in which becomes linear. 
+$\mu(v_k,v_l) = \text{min}(|v_k-v_l|,d)$
+
+
+
+
+
+
+
+
+
