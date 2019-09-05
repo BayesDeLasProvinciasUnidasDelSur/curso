@@ -1,0 +1,57 @@
+
+\begin{framed} \centering
+Which observation I need to made before take a decision 
+\end{framed}
+
+\paragraph{Value of information}
+
+\begin{definition}[Value of Perfect information]
+ $VPI(A|X)$ is the value of observing $X$ before choosing an action $A$
+\end{definition}
+
+If $D$ is our original influence diagram, we can define an other influence diagram where there is an edge between $X \rightarrow A$ $D_{X \rightarrow A}$
+
+Then, we can define,
+
+\begin{equation}\label{eq:vpi}
+ VPI(A | X) = MEU(D_{X \leftarrow A}) - MEU(D)
+\end{equation}
+
+
+
+
+\begin{paracol}{2} % this is what I want
+  \begin{figure}[H]
+\centering
+\tikz{
+
+ \node[latent, fill=black!0, yshift=1cm] (m) {M} ; %
+ \node[latent, fill=black!0,right=of m,yshift=-0.5cm] (s) {S} ; %
+ \node[latent, fill=red!20, yshift=-0.5cm, xshift=2cm] (f) {F};
+ \node[latent, fill=green!40, below=of x,xshift=1cm] (u) {U} ;
+ 
+ \edge {m,f} {u};
+ \edge {m} {s};
+ }  
+\end{figure}
+  \switchcolumn
+  \begin{figure}[H]
+\centering
+\tikz{
+
+ \node[latent, fill=black!0, yshift=1cm] (m) {M} ; %
+ \node[latent, fill=black!0,right=of m,yshift=-0.5cm] (s) {S} ; %
+ \node[latent, fill=red!20, yshift=-0.5cm, xshift=2cm] (f) {F};
+ \node[latent, fill=green!40, below=of x,xshift=1cm] (u) {U} ;
+ \edge {m,f} {u};
+ \edge {m} {s};
+ \edge[red!40] {s} {f};
+ }  
+\end{figure}
+\end{paracol}
+
+
+Information is useful $\leftrightarrow$ change my decision. 
+
+
+\todo[inline]{agregar los ejemplos}

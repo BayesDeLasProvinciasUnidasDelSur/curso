@@ -41,24 +41,6 @@ Ahora bien, cuando nosotres confiamos en otra distribucion de probabilidades $P^
 EU[D(a)] = P^\prime(X=a) \cdot \text{odd}(a) - \text{bet} + \left( 1 - P^\prime(X=a) \right) \left( 0 - \text{bet} \right) 
 \end{equation}
 
-Por ejemplo, en el caso de Monette vs Roelofse ofrece $\text{odd}(\text{Monette}) = 1.72$ y un $\text{odd}(\text{Roelofse}) = 2$, y tenemos que $P^\prime(X = \text{Monette}) = 0.452$, la utilidad para Monnette es 
-
-\begin{equation}
- EU[D(\text{Monette})] = 0.452 \cdot 0.72 + (1-0.452) \cdot (-1.00) = -0.222
- EU[D(\text{Roelofse})] = (1-0.452) \cdot 1 + 0.452 \cdot (-1.00) = 0.096
-\end{equation}
-
-Apostar por Roelofse, tiene una utilidad del casi el $10\%$
-
-
-
-
-Sin embargo nuestro modelo indica que la probabilidad de ganar es 
-
-
-
-
-
 \vspace{0.3cm}
 
 We want to chosse action $a$ that maximizes the expected utility
@@ -67,5 +49,224 @@ We want to chosse action $a$ that maximizes the expected utility
  a^* = \text{argmax}_a EU[D(a)]
 \end{equation}
 
+\paragraph{Influence Diagram}
+
+Is an extention of Bayesian Diagram with two extentions.
+In addition of random variables that are used as always, $M$:Market and $F$:Found.
+
+\subparagraph{Random, Action and Utility nodes}
+
+Random variables are part of my state $X$ (White).
+We also have two others kinds. 
+We have action variables $A$ (Red) and utility variables $U$  
+
+\begin{center}
+\tikz{
+
+ \node[latent, fill=black!0, minimum size=25pt] (x) {X} ; %
+ \node[const, left=of x, xshift=-1cm] (cpd) {
+ \begin{tabular}{|l|l|l|}
+ \hline
+ $x^0$ & $x^1$ & $x^2$ \\ \hline
+ 0.5 & 0.3 & 0.2  \\ \hline
+ \end{tabular}
+ }; 
+ \node[latent, fill=red!20, minimum size=25pt, xshift=2cm] (a) {A};
+ \node[latent, fill=green!40, minimum size=25pt, below=of x,xshift=1cm] (u) {U} ;
+ \node[const, right=of u, xshift=1cm] (cpd_u) {
+ \begin{tabular}{|l|l|l|}
+ \hline
+       & $a^0$ & $a^1$  \\ \hline
+ $x^0$ & 0 & -7 \\ \hline
+ $x^1$ & 0 & 5 \\ \hline
+ $x^2$ & 0 & 20 \\ \hline
+ \end{tabular}
+ }; 
+ \edge {x} {u};
+ \edge {a} {u};
+ }  
+\end{center}
+
+We have a CPD for $X$ and a factor for $U$.
+$A$ has not a CPD nor a factor, because is an action variable.
+The utility factor depends on $X$ and $A$.
+We can compute the expectation utility function.
+
+\subparagraph{Decomponed utility function}
+
+The student model (Difficulty, Intelligence, Grade ...). 
+
+\begin{center}
+\tikz{
+\node[latent] (d) {$D$};
+\node[latent, xshift=2cm] (i) {$I$};
+\node[latent, below=of d, yshift=-1cm, xshift=1cm] (g) {$G$};
+\node[latent, below=of g] (l) {$L$};
+\node[latent, right=of l] (j) {$J$};
+\node[latent, left=of g, yshift=1cm, fill=red!20,] (s) {$S$};
+\node[latent, left=of g, yshift=-0.5cm, fill=green!40] (u_g) {$U_G$};
+\node[latent, right=of j, fill=green!40] (u_j) {$U_J$};
+\node[latent, left=of s, fill=green!40, yshift=1cm] (u_ds) {$U_{DS}$};
+
+ \edge {d,i} {g};
+ \edge {g} {l};
+ \edge {g} {j,u_g};
+ \edge {j} {u_j};
+ \edge {s} {u_ds,g};
+ \edge {d} {u_ds};
+ \edge {l} {j}
+} 
+\end{center}
+
+In this example we have different components of the utility function.
+That depends on different variables.
+$U_G$ is the happiness due by the grade variable.
+$U_G$ is the happiness due by the job variable.
+$U_{DS}$ is the happiness due by the style of life at the semester.
+
+\vspace{0.3cm}
+
+And we assume that the utility function is the sum of this components of the utility function $ U = U_G + U_J + U_{DS}$.
+This is the decomposed utility function.
+If we used joint utility function this will have 4 arguments, that has exponential complexity.
+
+\subparagraph{Information Edges}
+
+An example were there is a Market $M$, survey $S$, a posible action to Found or not to Found $F$ and an utility function $U$.
+
+\begin{figure}[H]
+\centering
+\tikz{
+
+ \node[latent, fill=black!0, yshift=1cm] (m) {M} ; %
+ \node[const, left=of m, xshift=-1cm] (cpd_m) {M:
+ \begin{tabular}{|l|l|l|}
+ \hline
+ $m^0$ & $m^1$ & $m^2$ \\ \hline
+ 0.5 & 0.3 & 0.2  \\ \hline
+ \end{tabular}
+ }; 
+ 
+ \node[latent, fill=black!0,right=of m,yshift=-0.5cm] (s) {S} ; %
+ \node[const, right=of s, yshift=0.3cm , xshift=0.5cm] (cpd_s) {S:
+ \begin{tabular}{|c|c|c|c|}
+ \hline
+       & $s^0$ & $s^1$ & $s^2$ \\ \hline
+ $m^0$ & 0.6 & 0.3 & 0.1  \\ \hline
+ $m^1$ & 0.3 & 0.4 & 0.3  \\ \hline
+ $m^2$ & 0.1 & 0.4 & 0.5  \\ \hline
+ \end{tabular}
+ }; 
+ 
+ \node[latent, fill=red!20, yshift=-0.5cm, xshift=2cm] (f) {F};
+ \node[const, right=of f] (cpd_f) {F:$\delta$};
+ 
+ \node[latent, fill=green!40, below=of x,xshift=1cm] (u) {U} ;
+ \node[const, right=of u, xshift=1cm] (cpd_u) {U:
+ \begin{tabular}{|l|l|l|}
+ \hline
+       & $f^0$ & $f^1$  \\ \hline
+ $m^0$ & 0 & -7 \\ \hline
+ $m^1$ & 0 & 5 \\ \hline
+ $m^2$ & 0 & 20 \\ \hline
+ \end{tabular}
+ }; 
+ \edge {m,f} {u};
+ \edge {m} {s};
+ \edge[red!40] {s} {f};
+ }  
+ \caption{}
+ \label{fig:market_survey_found}
+\end{figure}
 
 
+In this example the information of the survey $S$ influence the decision $F$. Even the decision generally is deterministic, it is useful to think that we have a factor for the action node that define the decision rule $\delta$.
+
+\vspace{0.3cm}
+
+IN general, a decision rule $\delta$ at action node $A$ is a CPD such that $P(A|\text{Parents}(A))$
+
+\subparagraph{Expected utility with information}
+
+Given a decisition rule $\delta$
+
+\begin{equation}
+ EU[D(\delta_A)] = \sum_{\bm{x},a} P_{d_A}(\bm{x},a) \, U(\bm{x},a)
+\end{equation}
+
+We want to chose the decision rule $\delta_A$ that maximizes the expected utility.
+
+\begin{equation}
+ \text{argmax}_{\delta_A} EU[D(\delta_A)] = MEU[D]
+\end{equation}
+
+This is the optimization problem that the agent wants to solve.
+So see the figure~\ref{fig:market_survey_found}. 
+For this example the utility 
+
+\begin{equation}
+ EU[D(\delta_A)] = \sum_{M,S,F} P(M) P(S|M) \delta_F(F|S) U(F,M)
+\end{equation}
+
+This is just a product of factors.
+
+\begin{equation}
+\begin{split}
+ EU[D(\delta_A)] &=  \sum_{M,S,F} P(M) P(S|M) \delta_F(F|S) U(F,M)  \\
+ & = \sum_{S,F} \delta_F(F|S) \underbrace{\sum_{M} P(M) P(S|M) U(F,M)}_{\mu(F,S) \text{the marginalization}} \\[0.3cm]
+ & =  \sum_{S,F} \delta_F(F|S) \mu(F,S)
+\end{split}
+\end{equation}
+
+This is a simple expression for the maximization problem.
+If we compute the marginlization $\mu$ we get
+
+\begin{table}[H] \centering
+$\mu(F,S)$ =
+ \begin{tabular}{|l|l|l|}
+ \hline
+       & $f^0$ & $f^1$  \\ \hline
+ $s^0$ & 0 & -1.25 \\ \hline
+ $s^1$ & 0 & 1.15 \\ \hline
+ $s^2$ & 0 & 2.1 \\ \hline
+ \end{tabular}
+\end{table}
+
+If we want to maximize, it is clear now that at the row $s^0$ the better action is $f^0$, and in the other to cases $s^1$ and $s^2$ we must choose $f^1$.
+In this case the optimal is this deterministic choose.
+
+\vspace{0.3cm}
+
+More generally. 
+\begin{equation}
+\begin{split}
+ EU[D(\delta_A)] & = \sum_{\bm{x},a} P\delta_A(\bm{x},a) U(\bm{x},a) \\
+ & = \sum_{X_1, \dots, X_n, A} \left( \left(\prod_i P(X_i|\text{Pa}_{X_i}) \right) U(\text{Pa}_{U}) \delta_A(\text{Pa}_{A|\text{Pa}_A})\right) \\
+ & = \sum_{\text{Pa}_A, A} \delta(A|\text{Pa}_A) \sum_{\{X_1, \dots , X_n\} - \text{Pa}_A}  \left( \left(\prod_i P(X_i|\text{Pa}_{X_i}) \right) U(\text{Pa}_{U})\right) \\
+ & = \sum_{\text{Pa}_A, A} \delta(A|\text{Pa}_A) \mu(A,\text{Pa}_A)
+ \end{split}
+\end{equation}
+
+The optimal decision is
+
+\begin{equation}\label{eq:optimal_decision}
+ \delta^*_A(a|\text{Pa}_a) = 
+ \begin{cases}
+  1  & a = \text{argmax}_A \mu(A,\text{Pa}_A) \\
+  1  & \text{otherwise} \\
+ \end{cases}
+\end{equation}
+
+\paragraph{MEU Algorith Summary}
+
+To compute a MEU and optimize decision at $A$
+
+\begin{enumerate}
+ \item Treat $A$ as a random variable with arbitrary CPD
+ \item Introduce a utility factor with scope PA$_U$
+ \item Eliminate all variables (VE: variable elimination) except $A$ Pa$_A$ to produce $\mu(A,\text{Pa}_A)$
+ \item For each PA$_A$ we decide $A$ using the equation~\ref{eq:optimal_decision}.
+\end{enumerate}
+
+
+This algorithm provides a rigorous fundation for decision making under uncertainty.
