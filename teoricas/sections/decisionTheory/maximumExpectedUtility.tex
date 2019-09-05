@@ -1,0 +1,71 @@
+
+\paragraph{Simple Decision Making} We have decision making situation $D$
+
+\begin{itemize}
+ \item Set of actions: $Val(A) = \{a^1,\dots,a^k \}$
+ \item Set of states:  $Val(X) = \{x^1,\dots,x^n \}$
+ \item A distribution: $P(X|A)$
+ \item A utility function $U(X,A)$
+\end{itemize}
+
+Evaluate the differnt merits of different actions.
+The utility function is for that
+
+\vspace{0.3cm}
+
+\subparagraph{Expected utility}
+
+\begin{equation}\label{eq:expectedUtility}
+ EU[D(a)] = \sum_x P(x|a)U(x,a)
+\end{equation}
+
+Notar: que hay que evaluar la probabilidad del estado teniendo en cuenta lo que pasar\'ia si tomamos esa acci\'on, $P(x|a)$.
+Muchas veces puede ser que la acci\'on no afecta la probabilidad del estado $P(x|a) = P(x)$, como puede ser el caso de apostar en casos deportivos, pero muchas veces nuestra intervenci\'on puede afectar el estado del mundo, como es el caso del trabjo de campo, donde nuestras acciones forman parte del mundo que estamos estudiando.
+
+\vspace{0.3cm}
+
+Notar que en las apuestas, $a = x$.
+En t\'erminos generales, en las apuestas para toda acci\'on $a$
+
+\begin{equation}
+\begin{split}
+ EU[D(a)] & = P(X=a|a) U(x, a) +  P(X = \overline{a}| \overline{a}) U(X=a, a) \\
+  & = P(X=a) U(x, a) +  P(X = \overline{a}) U(X=\overline{a}, \overline{a}) \\
+ & = \frac{1}{\text{odd}(a)} \cdot ( \text{odd}(a) - \text{bet}) + \left( 1 - \frac{1}{\text{odd}(a)} \right) \left( 0 - \text{bet} \right) \\
+ & = 1 - \frac{1}{\text{odd}(a)} - 1 + \frac{1}{\text{odd}(a)} = 0
+\end{split}
+\end{equation}
+
+Ahora bien, cuando nosotres confiamos en otra distribucion de probabilidades $P^\prime$
+\begin{equation}
+EU[D(a)] = P^\prime(X=a) \cdot \text{odd}(a) - \text{bet} + \left( 1 - P^\prime(X=a) \right) \left( 0 - \text{bet} \right) 
+\end{equation}
+
+Por ejemplo, en el caso de Monette vs Roelofse ofrece $\text{odd}(\text{Monette}) = 1.72$ y un $\text{odd}(\text{Roelofse}) = 2$, y tenemos que $P^\prime(X = \text{Monette}) = 0.452$, la utilidad para Monnette es 
+
+\begin{equation}
+ EU[D(\text{Monette})] = 0.452 \cdot 0.72 + (1-0.452) \cdot (-1.00) = -0.222
+ EU[D(\text{Roelofse})] = (1-0.452) \cdot 1 + 0.452 \cdot (-1.00) = 0.096
+\end{equation}
+
+Apostar por Roelofse, tiene una utilidad del casi el $10\%$
+
+
+
+
+Sin embargo nuestro modelo indica que la probabilidad de ganar es 
+
+
+
+
+
+\vspace{0.3cm}
+
+We want to chosse action $a$ that maximizes the expected utility
+
+\begin{equation}
+ a^* = \text{argmax}_a EU[D(a)]
+\end{equation}
+
+
+
