@@ -17,13 +17,10 @@ Then, we can define,
  VPI(A | X) = MEU(D_{X \leftarrow A}) - MEU(D)
 \end{equation}
 
-
-
-
-\begin{paracol}{2} % this is what I want
-  \begin{figure}[H]
-\centering
-\tikz{
+\begin{figure}[H]
+ \centering
+ \begin{subfigure}[c]{0.32\textwidth}
+  \tikz{
 
  \node[latent, fill=black!0, yshift=1cm] (m) {M} ; %
  \node[latent, fill=black!0,right=of m,yshift=-0.5cm] (s) {S} ; %
@@ -33,25 +30,267 @@ Then, we can define,
  \edge {m,f} {u};
  \edge {m} {s};
  }  
+ \caption{}
+ \label{fig:market_survey_found_withOutObs}
+ \end{subfigure}
+ \begin{subfigure}[c]{0.32\textwidth}
+  \tikz{
+
+    \node[latent, fill=black!0, yshift=1cm] (m) {M} ; %
+    \node[latent, fill=black!0,right=of m,yshift=-0.5cm] (s) {S} ; %
+    \node[latent, fill=red!20, yshift=-0.5cm, xshift=2cm] (f) {F};
+    \node[latent, fill=green!40, below=of x,xshift=1cm] (u) {U} ;
+    \edge {m,f} {u};
+    \edge {m} {s};
+    \edge[red!40] {s} {f};
+  }  
+  \caption{}
+ \label{fig:market_survey_found_withObs}
+ \end{subfigure}
+ \caption{}
+ \label{fig:market_survey_found}
 \end{figure}
-  \switchcolumn
-  \begin{figure}[H]
+
+\begin{theorem}(Value of information)
+ \begin{itemize}
+  \item $VPI(A|X) \geq 0$ 
+  \item $VPI(A|X) = 0$ if and only if the optimal decision rule for $D$ is still optimal for $D_{X\rightarrow A}$
+ \end{itemize}
+\end{theorem}
+
+
+\begin{framed}
+\centering
+ Information is useful $\leftrightarrow$ when it changes my decision. 
+\end{framed}
+
+\paragraph{Value of Information Example}
+
+An entrepreneur is deciding agains funding a companies, and deciding to peek between two companies.
+For each companie there is the state of the company, from $s^1:$ poor, to $s^3$ great.
+
+\begin{figure}[H]
 \centering
 \tikz{
 
- \node[latent, fill=black!0, yshift=1cm] (m) {M} ; %
- \node[latent, fill=black!0,right=of m,yshift=-0.5cm] (s) {S} ; %
- \node[latent, fill=red!20, yshift=-0.5cm, xshift=2cm] (f) {F};
- \node[latent, fill=green!40, below=of x,xshift=1cm] (u) {U} ;
- \edge {m,f} {u};
- \edge {m} {s};
- \edge[red!40] {s} {f};
+ \node[latent, fill=green!40] (u) {$U$} ;
+ \node[const, right=of u, xshift=0.5cm] (Phi_u) {
+     $ \Phi_U = 
+      \begin{cases}
+       1 & \text{ if company get founded} \\
+       0 & \text{ otherwise}
+      \end{cases}
+    $
+ }; 
+ \node[latent, fill=red!40,yshift=1.33cm] (c) {$C$} ;
+ \node[latent, fill=black!0,xshift=-1.5cm,yshift=1cm] (f1) {$F_1$} ; %
+ \node[const, left=of f1, xshift=-0.3cm,yshift=-0.5cm] (phi_f1) {$\Phi_{F_1}$:
+  \begin{tabular}{|l|l|l|} \hline
+          & $f^0$ & $f^1$  \\ \hline
+    $s^0$ & 0.9 & 0.1 \\ \hline
+    $s^1$ & 0.6 & 0.4 \\ \hline
+    $s^2$ & 0.1 & 0.9 \\ \hline
+  \end{tabular}
+ }; 
+ \node[latent, fill=black!0,xshift=1.5cm,yshift=1cm] (f2) {$F_2$} ; %
+ \node[latent, fill=black!0,xshift=-1cm,yshift=2.5cm] (s1) {$S_1$} ; %
+ \node[const, left=of s1, xshift=-0.5cm] (Phi_s1) {$\Phi_{S_1}$:
+    \begin{tabular}{|l|l|l|}\hline
+    $s^0$ & $s^1$ & $s^2$ \\ \hline
+    0.1 & 0.2 & 0.7  \\ \hline
+    \end{tabular}
+ }; 
+ \node[latent, fill=black!0,xshift=1cm,yshift=2.5cm] (s2) {$S_2$} ; %
+ \node[const, right=of s2, xshift=0.5cm] (Phi_s2) {$\Phi_{S_2}$:
+    \begin{tabular}{|l|l|l|}\hline
+    $s^0$ & $s^1$ & $s^2$ \\ \hline
+    0.4 & 0.5 & 0.1  \\ \hline
+    \end{tabular}
+ }; 
+
+  \edge {s1} {f1};
+  \edge {s2} {f2};
+  \edge {f1,f2,c} {u};
  }  
+ \caption{}
+ \label{fig:value_of_information_example_1}
 \end{figure}
-\end{paracol}
+
+The chance of the founding of the company depends on the state of the companies.
+Then, the two strategies without any information are,
+
+\begin{equation*}
+\begin{split}
+ & EU[D(c_1)] = 0.1 \cdot 0.1 + 0.2 \cdot 0.4 + 0.7 \cdot 0.9 = 0.72 \\
+ & EU[D(c_2)] = 0.4 \cdot 0.1 + 0.5 \cdot 0.4 + 0.1 \cdot 0.9 = 0.33
+\end{split}
+\end{equation*}
+
+What happend if the agent makes an observation?
+So imagen that they have acces to the real information about the company state.
+
+\begin{figure}[H]
+\centering
+\tikz{
+
+ \node[latent, fill=green!40] (u) {$U$} ;
+ \node[const, right=of u, xshift=0.5cm] (Phi_u) {
+     $ \Phi_U = 
+      \begin{cases}
+       1 & \text{ if company get founded} \\
+       0 & \text{ otherwise}
+      \end{cases}
+    $
+ }; 
+ \node[latent, fill=red!40,yshift=1.33cm] (c) {$C$} ;
+ \node[latent, fill=black!0,xshift=-1.5cm,yshift=1cm] (f1) {$F_1$} ; %
+ \node[const, left=of f1, xshift=-0.3cm,yshift=-0.5cm] (phi_f1) {$\Phi_{F_1}$:
+  \begin{tabular}{|l|l|l|} \hline
+          & $f^0$ & $f^1$  \\ \hline
+    $s^0$ & 0.9 & 0.1 \\ \hline
+    $s^1$ & 0.6 & 0.4 \\ \hline
+    $s^2$ & 0.1 & 0.9 \\ \hline
+  \end{tabular}
+ }; 
+ \node[latent, fill=black!0,xshift=1.5cm,yshift=1cm] (f2) {$F_2$} ; %
+ \node[latent, fill=black!0,xshift=-1cm,yshift=2.5cm] (s1) {$S_1$} ; %
+ \node[const, left=of s1, xshift=-0.5cm] (Phi_s1) {$\Phi_{S_1}$:
+    \begin{tabular}{|l|l|l|}\hline
+    $s^0$ & $s^1$ & $s^2$ \\ \hline
+    0.1 & 0.2 & 0.7  \\ \hline
+    \end{tabular}
+ }; 
+ \node[latent, fill=black!0,xshift=1cm,yshift=2.5cm] (s2) {$S_2$} ; %
+ \node[const, right=of s2, xshift=0.5cm] (Phi_s2) {$\Phi_{S_2}$:
+    \begin{tabular}{|l|l|l|}\hline
+    $s^0$ & $s^1$ & $s^2$ \\ \hline
+    0.4 & 0.5 & 0.1  \\ \hline
+    \end{tabular}
+ }; 
+
+  \edge {s1} {f1};
+  \edge {s2} {f2};
+  \edge {f1,f2,c} {u};
+  \edge[red!60] {s2} {c};
+ }  
+ \caption{}
+ \label{fig:value_of_information_example_2}
+\end{figure}
 
 
-Information is useful $\leftrightarrow$ change my decision. 
+If $S_2 = s^1$ and $C = c^2$, the expected utility is $0.1$.
+If $S_2 = s^2$ and $C = c^2$, the expected utility is $0.4$. 
+Both of this are lower than the $EU[D(c_1)] = 0.72$.
+If $S_2 = s^3$ and $C = c^2$, the expected utility is $0.9$.
+This is the only scenario that we prefer change the opinion.
+
+ \begin{equation}
+  \delta^*(C|S_2)
+      \begin{cases}
+       P(c^2) = 1 & \text{ if } S_2 = s^3 \\
+       P(c^1) & \text{ otherwise }
+      \end{cases}
+ \end{equation}
+ 
+ So the 
+ \begin{equation}
+  MEU(D_{S_2 \rightarrow C}) =  (1-P(S_2 = s^3)) \cdot EU[D(c^1)] + P(S_2 = s^3) \Phi_U(f^1,s^3) = 0.738
+ \end{equation}
+ 
+ If the probability of the state of company $1$ changes
+
+ \begin{figure}[H]
+\centering
+\tikz{
+
+ \node[latent, fill=green!40] (u) {$U$} ;
+ \node[const, right=of u, xshift=0.5cm] (Phi_u) {
+     $ \Phi_U = 
+      \begin{cases}
+       1 & \text{ if company get founded} \\
+       0 & \text{ otherwise}
+      \end{cases}
+    $
+ }; 
+ \node[latent, fill=red!40,yshift=1.33cm] (c) {$C$} ;
+ \node[latent, fill=black!0,xshift=-1.5cm,yshift=1cm] (f1) {$F_1$} ; %
+ \node[const, left=of f1, xshift=-0.3cm,yshift=-0.5cm] (phi_f1) {$\Phi_{F_1}$:
+  \begin{tabular}{|l|l|l|} \hline
+          & $f^0$ & $f^1$  \\ \hline
+    $s^0$ & 0.9 & 0.1 \\ \hline
+    $s^1$ & 0.6 & 0.4 \\ \hline
+    $s^2$ & 0.1 & 0.9 \\ \hline
+  \end{tabular}
+ }; 
+ \node[latent, fill=black!0,xshift=1.5cm,yshift=1cm] (f2) {$F_2$} ; %
+ \node[latent, fill=black!0,xshift=-1cm,yshift=2.5cm] (s1) {$S_1$} ; %
+ \node[const, left=of s1, xshift=-0.5cm] (Phi_s1) {$\Phi_{S_1}$:
+    \begin{tabular}{|l|l|l|}\hline
+    $s^0$ & $s^1$ & $s^2$ \\ \hline
+    \textbf{0.5} & \textbf{0.3} &  \textbf{0.2}  \\ \hline
+    \end{tabular}
+ }; 
+ \node[latent, fill=black!0,xshift=1cm,yshift=2.5cm] (s2) {$S_2$} ; %
+ \node[const, right=of s2, xshift=0.5cm] (Phi_s2) {$\Phi_{S_2}$:
+    \begin{tabular}{|l|l|l|}\hline
+    $s^0$ & $s^1$ & $s^2$ \\ \hline
+    0.4 & 0.5 & 0.1  \\ \hline
+    \end{tabular}
+ }; 
+
+  \edge {s1} {f1};
+  \edge {s2} {f2};
+  \edge {f1,f2,c} {u};
+ }  
+ \caption{}
+ \label{fig:value_of_information_example_3}
+\end{figure}
+
+\begin{equation*}
+\begin{split}
+ & EU[D(c_1)] = \textbf{0.35} \\
+ & EU[D(c_2)] = 0.33
+\end{split}
+\end{equation*}
+
+If we add the observation of $S_2$ then we will change our decision either $S_2 = s^3, s^2$.
+
+so 
+
+ \begin{equation*}
+  \delta^*(C|S_2)
+      \begin{cases}
+       P(c^2) = 1 & \text{ if } S_2 = s^3 , s^2 \\
+       P(c^1) & \text{ otherwise }
+      \end{cases}
+ \end{equation*}
+ 
+ So the 
+ \begin{equation*}
+  MEU(D_{S_2 \rightarrow C}) =  P(S_2 = s^1) \cdot EU[D(c^1)] + P(S_2 = s^2) \Phi_U(f^1,s^2) + P(S_2 = s^3) \Phi_U(f^1,s^3) = 0.43
+ \end{equation*}
+ 
+ 
+ \paragraph{Summary}
+ 
+ \begin{itemize}
+  \item influence diagrams (IDs) provide clear and coherent semantics for the value of making an observation: difference between values of two IDs
+   \item Perfect information is valuable if and only if it induces a change in action in at least one context
+ \end{itemize}
+
+ 
+ 
+ 
+
+  
+ 
+ 
 
 
-\todo[inline]{agregar los ejemplos}
+
+
+
+
+
+
+
