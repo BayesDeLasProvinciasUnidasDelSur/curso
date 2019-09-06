@@ -1,14 +1,21 @@
+# Columna vertebral del programa:
+
 - Linear basis functions reggresion
-- Parametrised basis functions regression
+- Parametrised basis functions regression 
 - Hierarchy of parametrised basis functions (Neural Networks)
 
+A esto se le agregan otros ejemplos 
+- TrueSkill
+- Dirichlet-Multinominal
 
-# machine learning summer school 2009
+# Materiales no bibliográfico
+
+## machine learning summer school 2009
 http://videolectures.net/mlss09uk_cambridge/
 http://videolectures.net/mlss09uk_minka_ai/
 
-# Deep Bayes 2019
+## Deep Bayes 2019
 https://www.youtube.com/playlist?list=PLe5rNUydzV9QHe8VDStpU0o8Yp63OecdW
 
-# Otros cursos
+## Otros cursos
 http://www.cs.cmu.edu/~epxing/Class/10708-09/lecture.html
