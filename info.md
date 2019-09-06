@@ -1,3 +1,8 @@
+- Linear basis functions reggresion
+- Parametrised basis functions regression
+- Hierarchy of parametrised basis functions (Neural Networks)
+
+
 # machine learning summer school 2009
 http://videolectures.net/mlss09uk_cambridge/
 http://videolectures.net/mlss09uk_minka_ai/
