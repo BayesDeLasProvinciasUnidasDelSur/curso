@@ -1,7 +1,7 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc}
 \input{../../auxiliar/encabezado.tex}
-
+\input{../../auxiliar/tikzlibrarybayesnet.code.tex}
 
 %opening
 \title{Bayesian Linear Regression}
@@ -21,41 +21,157 @@
 
 \section{Linear basis function }
 
-Linear regression models share the property of being linear in their parameters but not necessarily in their input variables. 
+Linear regression models share the property of being linear in their parameters but not necessarily in their input variables.
 Using non-linear basis functions of input variables, linear models are able model arbitrary non-linearities from input variables to targets.  
 Polynomial regression is such an example of basis functions.
-A linear regression model $\text{linear}(\bm{x},\bm{\beta})$
+A linear regression model $y(\bm{x},\bm{w})$
 
 \begin{equation}
-\texttt{linear}(\bm{x},\bm{\beta}) = \sum_{i=0}^{M-1} \beta_i \Phi_i(\bm{x}) = \bm{\beta}^T \bm{\Phi}(\bm{x})
+y(\bm{x},\bm{w}) = \sum_{i=0}^{M-1} w_i \phi_i(\bm{x}) = \bm{w}^T \bm{\phi}(\bm{x})
 \end{equation}
 
-Where $\Phi$ is the basis function and $M$ the total number of parameters.
+Where $\Phi$ is the basis function and $M$ the total number of parameters $w_j$.
+Here, we use the convention $\phi_0(\bm{x})=1$.
+The simplest form of linear regression models are also linear functions of their input variables i.e. the set of basis functions in this case is the identity $\bm{\phi}(\bm{x})=x$. 
 
-Then, the conditional distribution of $y$ $p(y | \bm{x}, \bm{\beta}, \sigma)$ can therefore be written as
+The target variable $t$ of an observation $\bm{x}$ is given by a deterministic function $y(\bm{x},\bm{w})$ plus additive random noise.
 
 \begin{equation}
-p(\bm{y}_i | \bm{x}_i, \bm{\beta}, \sigma) = N(\bm{y}_i | \bm{\beta}^T \bm{\Phi}(\bm{x}_i) , \sigma)
+ t = y(\bm{x},\bm{w}) + \epsilon
+\end{equation}
+
+where $\epsilon$ is a zero mean Gaussian random variable with precision (inverse variance) $\beta$, $\epsilon \sim N(0,\beta^{-1})$.
+So the probabilistic model of the target random variable,
+
+\begin{equation}
+p(t | \bm{x}, \bm{w}, \beta) = N(t | y(\bm{x},\bm{w}), \beta^{-1}) = N(t | \bm{w}^T \bm{\Phi}(\bm{x}) , \beta^{-1})
 \end{equation}
 
 Since we asume i.i.d., the joint conditional probability of $\bm{y}$
 
 \begin{equation}
-p(\bm{y} | \bm{x}, \bm{\beta}, \sigma) = \prod_{i=1}^{N} N(\bm{y}_i | \bm{\beta}^T \bm{\Phi}(\bm{x}_i), \sigma)
+p(\bm{t} | \bm{x}, \bm{w}, \beta) = \prod_{i=1}^n N(t_i | \bm{w}^T \bm{\Phi}(\bm{x}_i) , \beta^{-1})
 \end{equation}
 
-Maximizing the log likelihood (= minimizing the sum-of-squares error function) gives the maximum likelihood estimate of parameters $\bm{\beta}$.
 
-\begin{equation}
+Maximizing the log likelihood gives the maximum likelihood estimate of parameters $\bm{\beta}$.
+
+\begin{equation}\label{eq:maximum_likelihood}
  \begin{split}
-  l(\bm{y}, \bm{x},\bm{\beta},\sigma) & = \text{log } L(\bm{y}, \bm{x},\bm{\beta},\sigma) = \text{log } \prod_{i=1}^{n} p(\bm{y}_i | \bm{x}_i, \bm{\beta}, \sigma)\\
-  & =  \sum_{i=1}^{n}  \text{log } p(\bm{y}_i | \bm{x}_i, \bm{\beta}, \sigma) = \sum_{i=1}^{n} \text{log } N(\bm{y}_i | \bm{\beta}^T \bm{\Phi}(\bm{x}_i), \sigma)  \\
-  & =  \sum_{i=1}^{n} \text{log }  \frac{1}{\sqrt{2\pi}\sigma} e^{\frac{-(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))^2}{2\sigma^2} } = \sum_{i=1}^{n} \text{log } \frac{1}{\sqrt{2\pi}\sigma} + \sum_{i=1}^{n} \text{log } e^{\frac{-(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))^2}{2\sigma^2} } \\
-  & = n \text{log } \frac{1}{\sqrt{2\pi}\sigma} + \sum_{i=1}^{n} \text{log } e^{\frac{-(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))^2}{2\sigma^2} } = n \text{log } \frac{1}{\sqrt{2\pi}\sigma} + \sum_{i=1}^{n}  \frac{-(\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))^2}{2\sigma^2} \\
-  &  = -\frac{n}{2} (\text{log } 2\pi\sigma^2) - \frac{1}{2\sigma^2} \sum_{i=1}^{n}  (\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))^2 \\
-  & \propto  \sum_{i=1}^{n}  (\bm{y}_i - \bm{\beta}^T\bm{\Phi}(\bm{x}_i))^2
+   \text{log } p(\bm{t} | \bm{x}, \bm{w}, \beta) & = \sum_{i=1}^{n} \text{log } N(t_i | \bm{w}^T \bm{\phi}(\bm{x}_i), \sigma)  \\
+  & =  \sum_{i=1}^{n} \text{log }  \frac{\sqrt{\beta} }{\sqrt{2\pi}} e^{\frac{-(t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2}{2\beta^{-1}} } = \sum_{i=1}^{n} \text{log } \frac{\sqrt{\beta} }{\sqrt{2\pi}} + \sum_{i=1}^{n} \text{log } e^{\frac{-(t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2}{2\beta^{-1}} } \\
+  & = n \text{log } \frac{\sqrt{\beta} }{\sqrt{2\pi}} + \sum_{i=1}^{n} \text{log } e^{\frac{-(t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2}{2\beta^{-1}} } = n \text{log } \frac{\sqrt{\beta} }{\sqrt{2\pi}} + \sum_{i=1}^{n}  \frac{-(t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2}{2\beta^{-1}} \\
+   &  = n \text{ log } \sqrt{\beta} - n \text{ log } \sqrt{2\pi} - \frac{\beta}{2} \sum_{i=1}^{n}  (t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2   \\
+  & \propto  - \sum_{i=1}^{n}  (t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2 = ||\bm{t}-\bm{\Phi}\bm{w}||^2
  \end{split}
 \end{equation}
+
+Maximizing the likelihood is equivalent to minimizing the sum-of-squares error function.
+Matrix $\bm{\Phi}$ is called the \emph{design matrix}
+
+\begin{equation}
+ \bm{\Phi} =
+  \begin{bmatrix}
+    \phi_0(\bm{x}_1) & \phi_1(\bm{x}_1) & \dots & \phi_{M-1}(\bm{x}_1)\\
+    \vdots & \vdots & \ddots & \vdots \\
+    \phi_0(\bm{x}_N) & \phi_1(\bm{x}_N) & \dots & \phi_{M-1}(\bm{x}_N)
+  \end{bmatrix}
+\end{equation}
+
+Notar que cada basis function $\phi_j(\cdot)$ recibe el vector-input completo $\bm{x}_i$.
+Cuando trabajamos en una dimensi\'on, el vector $\bm{x}_i$ es un escalar.
+
+
+
+\todo[inline]{Resolver $\bm{w}_{ML}$ y $\beta_{ML}$}
+% Solving for $\bm{w}$ we obtain
+% 
+% \begin{equation}
+%  \bm{w}_{ML} = ()
+% \end{equation}
+
+
+
+
+
+\section{Bayesian}
+
+Maximum likelihood estimation can lead to severe over-fitting if complex models (e.g. polynomial regression models of high order) are fit to datasets of limited size.
+Common approachs to prevent over-fitting is to add a regularization term to the error function or to perform corss-validation.
+
+\begin{framed}
+Bayesian treatment of linear regression avoid over-fitting problem of maximum likelihood, and which will also leads to automatic methods of determining model complexity using the training data alone.
+\end{framed}
+
+For a Bayesian treatment of linear regression we need a prior probability distribution over model parameters $w$.
+
+\begin{equation}
+ p(\bm{w}) = N(\bm{w}|\bm{m}_0)
+\end{equation}
+
+Due to the choice of a conjugate Gaussian prior, the posterior will also be Gaussian\todo{Demostrar Eq (2.116) Bishop}.
+We can evaluate this distribution by the usal procedure of completing the square in the exponential, and then finding the normalization coefficient using the standard result for normalized Gaussian.
+The work for deriving the general result is at equation 2.116 at the Bishops book.
+
+\begin{equation}
+ p(\bm{w}|\bm{t}) = N(\bm{w}|\bm{m}_N, \bm{S}_N)
+\end{equation}
+
+where 
+
+\begin{equation}
+ \bm{m}_N = \bm{S}_N (\bm{S}_0^{-1} \bm{m}_0 + \beta \bm{\Phi}^T \bm{t})
+\end{equation}
+
+\begin{equation}
+ \bm{S}_N^{-1} = \bm{S}_0^{-1} + \beta \bm{\Phi}^T\bm{\Phi}
+\end{equation}
+
+For simplicity, we consider a zero-mean isotropic Gaussian governed by a single precision paramater $\alpha$ so that
+
+\begin{equation}
+ p(\bm{w}|\bm{t}) = N(\bm{w}|\bm{0}, \alpha^{-1} \bm{I})
+\end{equation}
+
+and the corresponding posterior distribution over $\bm{w}$ is then 
+
+
+\begin{equation}
+ \bm{m}_N = \beta  \bm{S}_N\bm{\Phi}^T \bm{t}
+\end{equation}
+
+\begin{equation}
+ \bm{S}_N^{-1} = \alpha^{-1} \bm{I} + \beta \bm{\Phi}^T\bm{\Phi}
+\end{equation}
+
+
+
+To obtain an analytical solution we will treat $\beta$ as a known constant.
+Note that in supervised learning problems such as regression we are not seeking to model the distribution of the input variables, so we will treat the input $\bm{x}$ as a known constant.
+
+\begin{figure}[H]
+    \centering
+    \tikz{
+
+    \node[latent, fill=black!100, minimum size=2pt] (x) {} ; %
+    \node[const, right=of x] (c_x) {$\bm{x}_n$};
+    \node[latent, fill=black!20, yshift=-1.5cm] (t) {$t_n$} ; %
+    \node[latent, fill=black!100, yshift=-1.5cm , xshift=-2cm,minimum size=2pt] (beta)
+    {} ; %
+    \node[const, above=of beta] (c_beta) {$\beta$};
+    \node[latent, fill=black!0, yshift=-1.5cm, xshift=2cm] (w) {$\bm{w}$};
+    \node[latent, fill=black!100, xshift=2cm, minimum size=2pt] (alpha) {} ; %
+    \node[const, right=of alpha] (c_alpha) {$\alpha$};
+    
+    \edge {x,beta,w} {t};
+    \edge {alpha} {w};
+    
+    \node[inv, fill=black!0, minimum size=0pt, xshift=-0.45cm] (data_inv) {} ; %
+    \plate {data} {(t)(x)(c_x)(data_inv)} {$N$}; %
+      
+    }  
+\end{figure}
+
 
 
 
