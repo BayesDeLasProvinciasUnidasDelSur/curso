@@ -1,0 +1,105 @@
+
+Factorized familiy of variational distributions
+
+\begin{equation}
+  q(\theta) = \prod_{j=1}^m q_j(\theta_j), \ \ \ \ \theta = [\theta_1, \dots, \theta_m] \ , \ \  \forall_{ij} \theta_i \cap \theta_j = \emptyset
+ \end{equation}
+ 
+ It is a restriction since we assume that $\theta_j$ are independent.
+ Simpler approximation.
+ 
+ \vspace{0.3cm}
+ 
+ We want to maximize the ELBO
+ 
+ \begin{equation}
+ \mathcal{L}(q(\theta)) = \int q(\theta) \log \frac{p(x,\theta)}{q(\theta)} \, d\theta
+ \end{equation}
+
+ \begin{framed}
+ \paragraph{Block coordinate assent}
+ 
+ At each step fix all factors $\{q_i(\theta_i) \}_{i\neq j}$ except one and optimize with respect to $j$
+ 
+ \begin{equation}
+   \underset{q(\theta) = q_1(\theta_1) \dots q_m(\theta_m) }{\text{argmax }} \mathcal{L}(q(\theta))
+ \end{equation}
+\end{framed}
+
+
+\begin{equation}
+ \begin{split}
+  \mathcal{L}(q(\theta)) &= \mathbb{E}_{q(\theta)} \log p(x,\theta) - \mathbb{E}_{q(\theta)} \log q(\theta) \\
+  & = \mathbb{E}_{q(\theta)} \log p(x,\theta) -  \sum_{k=1}^m \mathbb{E}_{q_k(\theta_k)} \log q_k(\theta_k) \\
+  & = \mathbb{E}_{q(\theta)} \log p(x,\theta) -  \mathbb{E}_{q_j(\theta_j)} \log q_j(\theta_j) + \text{const} \\
+  & = \mathbb{E}_{q_j(\theta_j)}[ \mathbb{E}_{q_{j\neq i}} \log p(x,\theta)] -  \mathbb{E}_{q_j(\theta_j)} \log q_j(\theta_j) + \text{const} \\
+ \end{split}
+\end{equation}
+
+Given $r_j(\theta_j) = \frac{1}{Z_j} \text{exp}(\mathbb{E}_{q_{j\neq i}} \log p(x,\theta))$, where $Z_j$ is the normalization constant for $r$ to be a distribution.
+ 
+ \begin{equation}
+  \mathcal{L}(q(\theta)) =  \mathbb{E}_{q_j(\theta_j)} \log \frac{r_j(\theta_j)}{q_j(\theta_j)} +  \text{const} = - \text{KL}(q_j(\theta_j)||r_j(\theta_j)) +  \text{const} 
+ \end{equation}
+ 
+ Now, to maximize this expresion to respect to $q_j$ is simply given by $r_j(\theta_j)$!
+ 
+ \begin{framed}
+ \paragraph{Block coordinate assent solution}
+ The optimization problem at each step $j$ of the block coordinate assent
+ \begin{equation}
+\underset{q(\theta) = q_1(\theta_1) \dots q_m(\theta_m) }{\text{argmax }} \mathcal{L}(q(\theta))   = r_j(\theta_j) = \frac{1}{Z_j} \text{exp}(\mathbb{E}_{q_{j\neq i}} \log p(x,\theta))
+ \end{equation} 
+ \end{framed}
+
+ \begin{algorithm}
+    \caption{Block coordinate assent}
+    \label{alg:blockCoordinateAssent}
+    \begin{itemize}
+    \item Initialize $q(\theta) = \prod_{j=1}^m q_j(\theta_j)$ 
+    \item Repeat until convergence of ELBO $\mathcal{L}(q(\theta))$:
+
+        \begin{itemize}
+        \item Update each factor $q_1 \dots q_m$:
+        
+        \[q_j(\theta_j)= \frac{1}{Z_j} \text{exp}(\mathbb{E}_{q_{j\neq i}} \log p(x,\theta))\]
+        
+        
+        
+        \end{itemize}
+    \end{itemize}
+\end{algorithm}
+
+This process guarantees convergence.
+In the most of cases the convergence is pretty fast.
+
+
+\begin{framed}
+ \paragraph{When applicable?}: Conditional conjugancy.
+ 
+ When our probabilistic model ($p(x,\theta) = p(x \mid \theta)$) has \textbf{conditional conjugancy} of likelihood and prior on each $\theta_j$ conditioned on all other $\{\theta_j\}_{i\neq j}$:
+ 
+ \begin{equation*}
+  p(\theta_j \mid \theta_{i\neq j}) \in \mathcal{A}(\alpha), \ \ p(x \mid \theta_j, \theta_{i\neq j}) \in \mathcal{B}(\theta_j) \Rightarrow p(\theta_j \mid x, \theta_{i\neq j}) \in \mathcal{A}(\alpha\prime)
+ \end{equation*}
+\end{framed}
+
+When conditional conjugancy holds, we can compute the update equation in close form. 
+
+\vspace{0.3cm}
+
+\textbf{In practice} people use this update equation:
+\begin{equation}
+ \log q_j(\theta_j) = \mathbb{E}_{q_{j\neq i}} \log p(x,\theta) + \text{const}
+\end{equation}
+
+They compute the close form of $\mathbb{E}_{q_{j\neq i}} \log p(x,\theta)$ to have acces to $\log q_j(\theta_j)$.
+
+
+
+
+
+
+ 
+ 
+

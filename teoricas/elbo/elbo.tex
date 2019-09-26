@@ -1,0 +1,110 @@
+
+\begin{equation}
+\begin{split}
+ \log p(x) & = \log p(x) \int q(\theta) \, d\theta =  \int q(\theta) \log p(x) \, d\theta \\
+ & = \int q(\theta) \log \frac{p(x,\theta)}{p(\theta \mid x)} \, d\theta =  \int q(\theta) \log \frac{p(x,\theta)q(\theta)}{p(\theta \mid x)q(\theta)} \, d\theta \\
+ & = \underbrace{\int q(\theta) \log \frac{p(x,\theta)}{q(\theta)} \, d\theta}_{\text{Evidence lower bound , } \mathcal{L}(q(\theta)) } + \underbrace{\int q(\theta) \log \frac{q(\theta)}{p(\theta \mid x)} \, d\theta}_{\text{KL}(q(\theta),p(\theta|x))} 
+\end{split}
+\end{equation}
+
+\todo[inline]{why the name ELBO}
+
+\paragraph{Optimization}
+
+\begin{equation}
+  \log p(x) =  \mathcal{L}(q(\theta))  + \text{KL}(q(\theta),p(\theta|x))
+\end{equation}
+
+The left side does not depend on $q$.
+The right side depends on $q$.
+We want the $q$ that minimize the KL divergence.
+Because de left side is constant on $q$, minimize the KL divergence is the same to maximize the ELBO.
+
+\begin{equation}
+ \underset{q(\theta) \in \mathcal{Q}}{\text{argmin}} \ \text{KL}(q(\theta) || p(\theta|x)) \Leftrightarrow \underset{q(\theta) \in \mathcal{Q}}{\text{argmax}} \mathcal{L}(q(\theta)) 
+\end{equation}
+
+\paragraph{Final optimization problem}
+
+This is very nice since in $\mathcal{L}(q(\theta)) $ all is computable.
+We select $q$ to be the tractable family.
+And we always can compute the joint $p(x,\theta)$, because this is our probabilistic model that can be decomposed into de prior $p(\theta)$ and the liklihood $p(x\mid \theta)$.
+The likelihood funtion is always given in machine learning problems.
+And prior distributions we seted ourselfs.
+
+\vspace{0.3cm}
+
+However we have an integral here. 
+
+\begin{equation}
+ \begin{split}
+  \mathcal{L}(q(\theta)) & = \int q(\theta) \log \frac{p(x,\theta)}{q(\theta)} \, d\theta = \int q(\theta) \log \frac{p(x\mid \theta)p(\theta)}{q(\theta)} \, d\theta \\
+  & = \int q(\theta) \log p(x,\theta) \, d\theta + \int q(\theta) \log \frac{p(\theta)}{q(\theta)} \, d\theta  \\
+  & = \mathbb{E}_{q(\theta)} \log p(x \mid \theta) - \text{KL}(q(\theta)||p(\theta))
+ \end{split}
+\end{equation}
+
+If we have acces to any $q$ and we want to maximize the \textbf{first term} of the right side, we will get de $q(\theta) = \delta(\theta - \theta_{ML})$, because with this distribution we put all the mass over point where likelihood is maximum.
+
+\begin{equation}
+  \underset{q(\theta)}{\text{argmax }} \mathbb{E}_{q(\theta)} \log p(x \mid \theta) = \delta(\theta - \theta_{ML})
+\end{equation}
+ 
+The first term encourage us to set $q(\theta)$ as the maximum likelihood estimation.
+
+\vspace{0.3cm}
+
+Again, If we have acces to any $q$ and we want to maximize the \textbf{second term} of the right side, we will end up with $q(\theta) = p(\theta)$, because the KL is always non negative and equal to 0 only in this especial case.
+
+\begin{equation}
+  \underset{q(\theta)}{\text{argmax }} - \text{KL}(q(\theta)||p(\theta)) = p(\theta)
+\end{equation}
+
+The second term encourage us to set $q(\theta)$ as the prior $p(\theta)$.
+
+\vspace{0.3cm}
+
+The two terms together is a compromise between likelihood maximum estimation and our prior distribution.
+Indeed, if we have acces to any $q$ to maximize the hole term, we will end up with the posterior distribution $q(\theta \mid x)$.
+Because we know that maximization of $\mathcal{L}(q(\theta))$ is equivalent to minimzation of $\text{KL}(q(\theta)||p(\theta\mid x))$, and is zero only when $q(\theta) = p(\theta \mid x)$.
+
+\vspace{0.3cm}
+
+This is not posible because the true posterior is untractable by assumption, so we need restrict the family of distributions $\mathcal{Q}$.
+
+\vspace{0.3cm}
+
+We can see this decompositon as a generalization of Bayes theorem because it stablished the same compromise.
+
+\begin{framed}
+ \centering
+ How to perform an optimization with respect to (w.r.t) a distribution family?
+\end{framed}
+
+\begin{description}
+ \item[Mean field approximation]: Factorized familiy
+ 
+ \begin{equation}
+  q(\theta) = \prod_{j=1}^m q_j(\theta_j), \ \ \ \ \theta = [\theta_1, \dots, \theta_m] \ , \ \  \forall_{ij} \theta_i \cap \theta_j = \emptyset
+ \end{equation}
+
+ \item[Parametric approximation]: Parametric family
+ 
+ \begin{equation}
+  q(\theta) = q(\theta \mid \lambda)
+ \end{equation}
+
+ 
+\end{description}
+
+
+
+
+
+
+
+
+
+
+
+

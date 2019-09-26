@@ -1,0 +1,32 @@
+
+\begin{equation}
+ q(\theta) = q(\theta \mid \lambda), \ \ \ \lambda \text{ some parameters }
+\end{equation}
+
+The restriction is about choosing a family of some fixed form.
+Because any parametric family defines a very very narrow set of posible distributions, it will take a to simple family, we may end up with a very poor approximation of the true posterior. It minimiza KL divergence but since the parametric class is to narrow, we end up with a distribution that is pretty far away from the true posterior.
+
+If we use a riche family of distributions, variational inference becomes very ineficient and too complicated.  
+
+\vspace{0.3cm}
+
+When we fix a parametric distribution, the optmization problem becomes a parametric optmization problem.
+And then, the ELBO becomes a function of lambda,
+
+\begin{equation}
+ \mathcal{L}(q(\theta \mid \lambda )) = int q(\theta\mid \lambda ) \log \frac{p(x,\theta)}{q(\theta\mid \lambda )} \, d\theta
+\end{equation}
+
+and the problem becomes
+\begin{equation}
+  \underset{\lambda}{\text{argmax }} \int q(\theta\mid \lambda ) \log \frac{p(x,\theta)}{q(\theta\mid \lambda )} \, d\theta
+\end{equation}
+
+
+If we are able to compute derivatives of ELBO w.r.t. $\theta$, then we can solve this problem using some numerical optimization solver. 
+The problem is that this integral in most cases is still intractable.
+However, we are able to optimize it with respect to $\lambda$. 
+
+
+
+
