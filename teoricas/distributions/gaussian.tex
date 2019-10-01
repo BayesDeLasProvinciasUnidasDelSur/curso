@@ -1,0 +1,147 @@
+
+In the case of a single variable $x$, the Gaussian distribution can be written in the form
+
+\begin{equation}\label{eq:gaussian}
+ \mathcal{N}(x|\mu,\sigma^2) = \frac{1}{(2\pi \sigma^2)^{1/2}} \exp\left(- \frac{1}{2\sigma^2} (x-\mu)^2 \right)
+\end{equation}
+
+For a D-dimensional vector $\mathbf{x}$, the multivariate Gaussian distribution takes de form
+
+\begin{equation}
+ \mathcal{N}(\mathbf{x}|\bm{\mu},\mathbf{\Sigma}) =
+ \frac{1}{(2\pi)^{D/2}} \frac{1}{|\mathbf{\Sigma}|^{1/2}} \exp \left(- \frac{1}{2} (\mathbf{x} - \bm{\mu})^T \mathbf{\Sigma}^{-1} (\mathbf{x} - \bm{\mu}) \right)
+\end{equation}
+
+The term that appears in the exponent 
+
+\begin{equation}\label{eq:mahalanobisDistance2}
+ \Delta^2 = (\mathbf{x} - \bm{\mu})^T \mathbf{\Sigma}^{-1} (\mathbf{x} - \bm{\mu})
+\end{equation}
+
+is the quadratic \emph{Mahalanobis distance} form $\bm{\mu}$ to $\mathbf{x}$, and reduces to the Euclidean distance when $\bm{\Sigma}$ is the identity matrix.
+
+\begin{algorithm}  
+  \caption{Quadratic Mahalanobis distance}
+  \label{alg:mahalanobisDistance2}
+  \lstinputlisting{distributions/code/mahalanobisDistance2.py}
+\end{algorithm}
+
+Note that the matrix $\bm{\Sigma}$ can be taken to be symmetric since any antisymmetric component would disapper from the Mahalanobis distance.
+Consider the precision matrix $\bm{\Lambda}$.
+We always can decompose it as $\bm{\Lambda} = \bm{\Lambda}^A + \bm{\Lambda}^S$, where
+
+\begin{equation}
+ \bm{\Lambda}^S = \frac{\bm{\Lambda} + \bm{\Lambda}^T}{2}  \ \ \ \ \ \ \bm{\Lambda}^A = \frac{\bm{\Lambda} - \bm{\Lambda}^T}{2}
+\end{equation}
+
+Where each element of $\bm{\Lambda}^S$ has the average of the symmetric elements of $\bm{\Lambda}$.
+And each element of $\bm{\Lambda}^A$ has the half of the difference that each element of $\bm{\Lambda}$ has to their symmetric element, so $\Lambda_{ij}^A = -\Lambda_{ji}^A  $.
+The Mahalanobis distance can be written as
+
+\begin{equation}
+\frac{1}{2} \sum_{i=1}^D \sum_{j=1}^D (x_i - \mu_i) (\Lambda_{ij}^S + \Lambda_{ij}^A)(x_j - \mu_j)
+\end{equation}
+
+The term involving $\bm{\Lambda}^A$ vanishes since for every positive element there is an equal and opposite negative term.
+
+\begin{algorithm}  
+  \caption{Symmetric $\bm{\Sigma}^S$ from a general $\bm{\Sigma}$}
+  \label{alg:symmetricSigma}
+  \lstinputlisting{distributions/code/symmetricSigma.py}
+\end{algorithm}
+
+Now, consider the eigenvector equation for the covariance matrix.
+
+\begin{equation}
+ \bm{\Sigma}\mathbf{u_i} = \lambda \mathbf{u_i}
+\end{equation}
+
+where $\mathbf{u}$ is a matrix whose columns are given by the $i$-th eigenvector $\mathbf{u_i}$.
+
+\begin{algorithm}  
+  \caption{Eigenvalue and eigenvectors of $\bm{\Sigma}$}
+  \label{alg:eigenvectorSigma}
+  \lstinputlisting{distributions/code/eigenvectorSigma.py}
+\end{algorithm}
+
+Because $\bm{\Sigma}$ is a real, symmetric matrix, its eigenvalues will be real, and its eigenvectors form an orthonormal set.
+
+\begin{equation}
+ \mathbf{U}^T \mathbf{U} = \mathbf{I}
+\end{equation}
+
+And the covariance can be expressed as an expansion of its eigenvectors,
+
+\begin{equation}
+ \bm{\Sigma} = \sum_{i=1}^D  \lambda_i \mathbf{u_i} \mathbf{u_i}^T
+\end{equation}
+
+\begin{equation}\label{eq:precisionFromEigen}
+  \bm{\Sigma}^{-1} = \sum_{i=1}^D  \frac{1}{\lambda_i}\mathbf{u_i} \mathbf{u_i}^T 
+\end{equation}
+
+
+\begin{algorithm}  
+  \caption{Covariance from eigenvalue and eigenvectors}
+  \label{alg:covarianceEigenvector}
+  \lstinputlisting{distributions/code/covarianceEigenvector.py}
+\end{algorithm}
+
+Substituting Eq.~\ref{eq:precisionFromEigen} into Eq.~\ref{eq:mahalanobisDistance2}, the quadratic form becomes
+
+\begin{equation}
+\begin{split}
+ \Delta^2 & = (\mathbf{x} - \bm{\mu})^T \left( \sum_{i=1}^{D}\frac{1}{\lambda_i}\mathbf{u_i} \mathbf{u_i}^T \right) (\mathbf{x} - \bm{\mu}) \\ 
+ &=  \sum_{i=1}^{D}\frac{1}{\lambda_i}(\mathbf{x} - \bm{\mu})^T\mathbf{u_i} \mathbf{u_i}^T (\mathbf{x} - \bm{\mu}) \\
+ &= \sum_{i=1}^{D}\frac{1}{\lambda_i} (\underbrace{\mathbf{u_i}^T (\mathbf{x} - \bm{\mu})}_{y_i})^2 = \sum_{i=1}^{D}\frac{y_i^2}{\lambda_i} 
+\end{split}
+\end{equation}
+
+where can interpret $\{ y_i \}$ as a new coordinate system defined by the orthonormal vectors $\mathbf{u_i}$, that are shifted y rotated with respect to the original $\mathbf{x}$ coordinates.
+Defining the vector $\mathbf{y} = (y_1, \dots, y_D)^T$, we have
+\begin{equation}
+ \mathbf{y} = \mathbf{U}(\mathbf{x}-\bm{\mu})
+\end{equation}
+
+where $\mathbf{U}$ is a matrix whose rows are given by $\mathbf{u_i}^T$. 
+
+%\lstinputlisting[breaklines]{distributions/code/multivariateGaussian.py}
+
+\vspace{0.3cm}
+For the Gaussian distribution to be well defined, it is necessary for all the eigenvalues $\lambda_i$ to strictly positive.
+When all of the eigenvalues $\lambda_i$ are positive, the gaussian will be constant on ellipoids, with their center at $\bm{\mu}$ and their axes oriented along $\mathbf{u_i}$ scaled by a factor of $\lambda_i$ as illustrated in
+\todo[inline]{Figure 2.7}
+\vspace{0.3cm}
+
+In going from $\mathbf{x}$ to the $\mathbf{y}$ coordinate system, we have a Jacobian matrix $\mathbf{J}$ given by $\mathbf{U}^T$.
+
+\begin{equation}
+ J_{ij} = \frac{\partial x_i}{\partial y_j} = U_{ji}
+\end{equation}
+
+Using the orthonormality property of the matrix $\mathbf{U}$, we know that the determinant of the Jacobian matrix is 1
+\begin{equation}
+  |\mathbf{J}|^2 = |\mathbf{U}^T|^2 = |\mathbf{U}^T||\mathbf{U}| =|\mathbf{U}^T \mathbf{U}| = |\mathbf{I}| = 1
+\end{equation}
+
+and hence $|\mathbf{J}| = 1$.
+
+Also, the determinant of the covariance matrix $|\bm{\Sigma}|^{1/2}$ can be wirtten as the product of its eigenvalues,
+
+\begin{equation}
+ |\bm{\Sigma}|^{1/2} = \prod_{j=1}^D \lambda_j^{1/2}
+\end{equation}
+
+Thus, in the $\mathbf{y}$ coordinate system, the multivariate Gaussian distribution takes the form of a product of D independent univariate Gaussian distributions
+
+\begin{equation}
+p(\mathbf{x}) = \prod_{j=1}^D \frac{1}{(2 \pi \lambda_j)^{1/2}} \exp \left( - \frac{\mathbf{u_i}(\mathbf{x}-\bm{\mu}) }{2 \lambda_j } \right)
+\end{equation}
+
+The eigenvectors therefore define a new set of shifted and rotated coordinates with respect to which the joint probability distribution factorizes into a product of independent distributions.
+
+
+\todo[inline, color=black!30]{Moments of the multivariate Gaussian distribution}
+
+
+

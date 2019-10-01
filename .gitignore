@@ -1,5 +1,6 @@
 *  # Ignora todo
 !*/ # Salvo las carpetas
+*/pdf
 
 ########################
 # Archivos que NO ignora

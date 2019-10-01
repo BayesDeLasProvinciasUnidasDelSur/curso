@@ -1,0 +1,59 @@
+
+An important property of the multivariate Gaussian distribution is that if two sets of variables are jointly Gaussian, then the conditional distribution of one set conditioned on the other is again Gaussian. 
+
+\vspace{0.3cm}
+
+Suppose $\mathbf{x}$ is a $D$-dimensional vector with distributed as a multivariate Gaussian $\mathcal{N}(\mathbf{x}|\bm{\mu},\bm{\Sigma})$.
+And we partition $\mathbf{x}$ into two disjoint subsets $\mathbf{x}_a$ and $\mathbf{x}_b$, so that,
+
+\begin{equation}
+\mathbf{x} = 
+\begin{pmatrix}
+ \mathbf{x}_a \\
+ \mathbf{x}_b
+\end{pmatrix}
+\end{equation}
+
+We also define corresponding partitions of the mean vector $\bm{\mu}$ given by
+
+
+\begin{equation}
+\bm{\mu} = 
+\begin{pmatrix}
+ \bm{\mu}_a \\
+ \bm{\mu}_b
+\end{pmatrix}
+\end{equation}
+
+and of the covariance matrix $\bm{\Sigma}$ given by
+
+\begin{equation}
+\bm{\Sigma} = 
+\begin{pmatrix}
+ \bm{\Sigma}_{aa} & \bm{\Sigma}_{ab} \\
+ \bm{\Sigma}_{ba} & \bm{\Sigma}_{bb}
+\end{pmatrix}
+\end{equation}
+
+Remember that covariance matrix can always be taken to be symmetric, since any antisymmetric component would disapper from the Mahalanobis distance.
+In many situations, it will be conveninet to work with the precision matrix,
+
+\begin{equation}
+ \bm{\Lambda} = \bm{\Sigma}^{-1}
+\end{equation}
+
+that will be partitioned as follows,
+\begin{equation}
+\bm{\Lambda} = 
+\begin{pmatrix}
+ \bm{\Lambda}_{aa} & \bm{\Lambda}_{ab} \\
+ \bm{\Lambda}_{ba} & \bm{\Lambda}_{bb}
+\end{pmatrix}
+\end{equation}
+
+Note that $\bm{\Lambda}_{aa}$ is not simply given by the inverse of $\bm{\Sigma}_{aa}$.
+We shall shortly examine the relationship between them.
+
+\vspace{0.3cm}
+
+From the product rule, the conditional distribution $p(\mathbf{x}_a|\mathbf{x}_b)$ can be 
