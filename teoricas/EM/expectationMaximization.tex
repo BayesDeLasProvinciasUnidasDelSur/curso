@@ -1,0 +1,90 @@
+
+We are given a data set of several points generated from different gaussians.
+We need to estamate the parameters of those gaussians.
+The problem is easy if we know for which gaussian generated each point.
+
+\vspace{0.3cm}
+
+If we do not know from which gaussian each point was generated, we need to do something else.
+A single gaussian is not a good estimate in general.
+
+\vspace{0.3cm}
+
+The standard way to solve this problema is to establish a \textbf{latent variable model}.
+
+For each object $x_i$, we establish additional latent variables $z_i$ which denotes the index of gaussain from which $i$-th object was generated
+
+\begin{equation}
+ p(X,Z\mid \theta) = \prod_{i=1}^m p(x_i, z_i \mid \theta) = \prod_{i=1}^m \underbrace{P(x_i \mid z_i, \theta)}_{\mathcal{N}(x_i \mid \mu_{z_i},\sigma_{z_i}^2)} \underbrace{p(z_i \mid \theta)}_{\text{prior } p(z_i)} = \prod_{i=1}^m \mathcal{N}(x_i \mid \mu_{z_i},\sigma_{z_i}^2) \pi_{z_i}
+\end{equation}
+
+where $\theta = \{\mu_{z_i}, \sigma_{z_i}, \pi_{z_i}\}^m_{j=1}$.
+If we know both $X$ and $Z$, we obtain explicit ML-solution:
+
+\begin{equation}
+ \theta_{ML} = \underset{\theta}{\text{argmax }} p(X,Z\mid \theta) =\underset{\theta}{\text{argmax }} \log p(X,Z\mid \theta)
+\end{equation}
+
+\begin{equation}
+ \log p(X \mid \theta) = \underbrace{\int q(Z) \log \frac{p(X, Z \mid \theta)}{q(Z)} \, dZ}_{\text{Evidence lower bound , } \mathcal{L}(q,\theta) } + \underbrace{\int q(Z) \log \frac{q(Z)}{p(Z \mid \theta, X)} \, dZ}_{\text{KL}(q(Z),p(Z|\theta, X))} 
+\end{equation}
+
+The evidence lower bound can be writen as,
+\begin{equation}
+ \mathcal{L}(q,\theta) = \int q(Z) \log p(X, Z \mid \theta)\, dZ - \int q(Z) \log q(Z)\, dZ 
+\end{equation}
+
+
+
+Instead of optimizing $\log p(X \mid \theta)$ we optimize $\mathcal{L}(q,\theta)$ w.r.t. both $\theta$ and $q$.
+And we perform block-coordinate algorithm, known as EM-algorithm.
+We fix $\theta$ aun we update $q$.
+And we fix $q$ and we update $\theta$.
+
+ \begin{algorithm}
+    \caption{Expectation Maximization}
+    \label{alg:expectationMaximization}
+    \begin{itemize}
+    \item Initialize $\theta_0$ 
+    \item Repeat until convergence of ELBO $\mathcal{L}(q(Z), \theta)$:
+
+        \begin{description}
+         \item[E-step]  
+         
+         \begin{equation}\label{eq:e_step}
+          q(Z) = \underset{q}{\text{argmax }} \mathcal{L}(q,\theta) =  \underset{q}{\text{argmin }} \text{KL}(p||q) = p(Z \mid \theta_0 , X)
+         \end{equation}
+         
+         \item[M-step] 
+         
+         \begin{equation}\label{eq:m_step}
+         \theta_0 = \underset{\theta}{\text{argmax }} \mathcal{L}(q,\theta) = \mathbb{E}_{q(Z)} \log p(X,Z \mid \theta)
+         \end{equation}
+        \end{description}
+
+    \end{itemize}
+The algorithm converges to $\log p(X \mid \theta)$.
+\end{algorithm}
+
+If $p(X,Z|\theta)$ is a distribution from the exponential familly, $\log p(X, Z \mid \theta)$ is a concave function, so is easy to optimize.
+And the expectation $\mathbb{E}_{q(Z)} \log p(X, Z \mid \theta)$ is convex convination.
+Convex convination of concave function is still a concave function, so this problem is a convex optimization problem.
+
+\vspace{0.3cm}
+
+Benefits of EM algorithm
+\begin{itemize}
+ \item Allows to build models using mixtures of simple distributions.
+ \item In many cases (e.g. for the mixture of gaussians) E-step and M-step can be performed in closed form
+ \item If true posterior $p(Z\mid \theta, X)$ is intractable, we may search for the closet $q(Z)$ among tractable distributions
+ \item Allows to process missing data by treating them as latent variables
+\end{itemize}
+
+In general some variable are observable and others are latent.
+However, we also can have the problem were all variables are observable, but we have some non-reported values.
+The EM-algorithm allows to fill in arbitrary gaps in data.
+
+
+
+    
+
