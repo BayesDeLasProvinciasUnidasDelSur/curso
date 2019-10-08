@@ -6,7 +6,7 @@ An important property of the multivariate Gaussian distribution is that if two s
 Suppose $\mathbf{x}$ is a $D$-dimensional vector with distributed as a multivariate Gaussian $\mathcal{N}(\mathbf{x}|\bm{\mu},\bm{\Sigma})$.
 And we partition $\mathbf{x}$ into two disjoint subsets $\mathbf{x}_a$ and $\mathbf{x}_b$, so that,
 
-\begin{equation}
+\begin{equation}\label{eq:partitioned_x}
 \mathbf{x} = 
 \begin{pmatrix}
  \mathbf{x}_a \\
@@ -17,7 +17,7 @@ And we partition $\mathbf{x}$ into two disjoint subsets $\mathbf{x}_a$ and $\mat
 We also define corresponding partitions of the mean vector $\bm{\mu}$ given by
 
 
-\begin{equation}
+\begin{equation}\label{eq:partitioned_mu}
 \bm{\mu} = 
 \begin{pmatrix}
  \bm{\mu}_a \\
@@ -27,7 +27,7 @@ We also define corresponding partitions of the mean vector $\bm{\mu}$ given by
 
 and of the covariance matrix $\bm{\Sigma}$ given by
 
-\begin{equation}
+\begin{equation}\label{eq:partitioned_Sigma}
 \bm{\Sigma} = 
 \begin{pmatrix}
  \bm{\Sigma}_{aa} & \bm{\Sigma}_{ab} \\
@@ -43,7 +43,7 @@ In many situations, it will be conveninet to work with the precision matrix,
 \end{equation}
 
 that will be partitioned as follows,
-\begin{equation}
+\begin{equation}\label{eq:partitioned_Lambda}
 \bm{\Lambda} = 
 \begin{pmatrix}
  \bm{\Lambda}_{aa} & \bm{\Lambda}_{ab} \\
@@ -56,4 +56,37 @@ We shall shortly examine the relationship between them.
 
 \vspace{0.3cm}
 
-From the product rule, the conditional distribution $p(\mathbf{x}_a|\mathbf{x}_b)$ can be 
+From the product rule, the conditional distribution $p(\mathbf{x}_a|\mathbf{x}_b)$ can be evaluated from the joint distribution $p(\mathbf{x}) = p(\mathbf{x}_a,\mathbf{x}_b)$ by fixing $\mathbf{x}_b$ to the observed value and normalized the resulting expression.
+
+Instead of performing the normalization explicity, we can consider only the quadratic form of the Mahalanobis distance of thye Gaussian distribution given by~(\ref{eq:mahalanobisDistance2}), and then reinstating the normalization at the end. 
+
+Making use of the paritioning~(\ref{eq:partitioned_x}),~(\ref{eq:partitioned_mu}) and~(\ref{eq:partitioned_Lambda})
+
+\begin{equation}\label{eq:partitioned_mahalanobisDistance2}
+\begin{split}
+ \Delta^2  = & -\frac{1}{2} (\vm{x}-\bm{\mu})^T \bm{\Sigma}^{-1} (\vm{x}-\bm{\mu}) \\
+  = &  -\frac{1}{2} (\vm{x}_a-\bm{\mu}_a)^T \bm{\Lambda}_{aa} (\vm{x}_a-\bm{\mu}_a) -\frac{1}{2} (\vm{x}_a-\bm{\mu}_a)^T \bm{\Lambda}_{ab} (\vm{x}_b-\bm{\mu}_b) \\
+ & -\frac{1}{2} (\vm{x}_b-\bm{\mu}_b)^T \bm{\Lambda}_{ba} (\vm{x}_a-\bm{\mu}_a) -\frac{1}{2} (\vm{x}_b-\bm{\mu}_b)^T \bm{\Lambda}_{bb} (\vm{x}_b-\bm{\mu}_b)  
+\end{split}
+\end{equation}
+
+
+\begin{framed}
+
+ Given the partitioning~(\ref{eq:partitioned_x}),~(\ref{eq:partitioned_mu}),~(\ref{eq:partitioned_Sigma}) and~(\ref{eq:partitioned_Lambda}), the \textbf{conditional distribution} is, 
+
+ \begin{equation}
+ \begin{split}
+ p(\vm{x}_a|\vm{x}_b) & = \mathcal{N}(\vm{x}| \bm{\mu}_{a|b}, \bm{\Lambda}_{aa}^{-1}) \\
+ \bm{\mu}_{a|b} & = \bm{\mu}_a - \bm{\Lambda}_{aa}^{-1}\bm{\Lambda}_{ab} (\vm{x}_b-\bm{\mu}_b)
+ \end{split}
+ \end{equation}
+
+ 
+ 
+\end{framed}
+
+
+
+
+

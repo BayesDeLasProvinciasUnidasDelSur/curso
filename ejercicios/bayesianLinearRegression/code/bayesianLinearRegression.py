@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def posterior(Phi, t, alpha, beta, return_inverse=False):
     """Computes mean and covariance matrix of the posterior distribution."""
     S_N_inv = alpha * np.eye(Phi.shape[1]) + beta * Phi.T.dot(Phi)

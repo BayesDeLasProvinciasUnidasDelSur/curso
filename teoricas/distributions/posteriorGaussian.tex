@@ -1,0 +1,31 @@
+
+Here we shall suppose that we are gioven a marginal Gaussian distribution $p(\vm{x})$ and a conditional Gaussian distribution in which $p(\vm{y}|\vm{x})$ has a mean that is linear function of $\vm{x}$.
+
+\begin{align}
+    p(\vm{x}) &=  \N(\vm{x}|\bm{\mu},\bm{\Lambda}^{-1}) \\
+   p(\vm{y}|\vm{x}) &=  \N(\vm{y}|\vm{A}\vm{x}+\vm{b},\vm{L}^{-1})    
+\end{align}
+
+\begin{framed}
+
+ Given the partitioning~(\ref{eq:partitioned_x}),~(\ref{eq:partitioned_mu}),~(\ref{eq:partitioned_Sigma}) and~(\ref{eq:partitioned_Lambda}), the \textbf{Bayes' theorem for Gaussian distribution} is, 
+
+ 
+\begin{align}
+    p(\vm{y}) &=  \N(\vm{y}|\vm{A}\bm{\mu}+\vm{b},\, \vm{L}^{-1} + \vm{A}\vm{\Lambda}^{-1}\vm{A}^T) \\
+   p(\vm{x}|\vm{y}) &=  \N(\vm{x}|\vm{\Sigma}[\vm{A}^T \vm{L}(\vm{y}-\vm{b})+ \bm{\Lambda\mu}],\,  \vm{\Sigma})\label{eq:post}
+\end{align}
+
+where, 
+
+\begin{equation}
+ \vm{\Sigma} = (\vm{\Lambda} + \vm{A}^T \vm{LA} )^{-1}
+\end{equation}
+
+
+\end{framed}
+
+
+
+
+

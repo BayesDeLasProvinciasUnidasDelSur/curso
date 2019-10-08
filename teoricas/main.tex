@@ -1,6 +1,7 @@
 \documentclass[a4paper,10pt]{book}
 \usepackage[utf8]{inputenc}
 \input{../auxiliar/encabezado.tex}
+\input{../auxiliar/tikzlibrarybayesnet.code.tex}
 
  
 %opening
@@ -13,14 +14,32 @@
 
 \chapter{Probability distributions}
 
-\section{The Gaussian Distribution}
+    \section{The Gaussian Distribution}
 
-\input{distributions/gaussian.tex}
+    \input{distributions/gaussian.tex}
 
-\subsection{Conditional Gaussian Distribution}
+        \subsection{Conditional Gaussian Distribution}
 
-\input{distributions/conditionalGaussian.tex}
+        \input{distributions/conditionalGaussian.tex}
 
+        \subsection{Marginal Gaussian Distribution}
+
+        \input{distributions/marginalGaussian.tex}
+        
+        \subsection{Bayes' theorem for Gaussian variables}
+        
+        \input{distributions/posteriorGaussian.tex}
+
+\chapter{Linear Models for Regression}
+
+    \section{Linear Basis Function Models}
+    
+    \input{linearModels/linearBasisFunctionModels.tex}
+    
+    \section{Bayesian Linear Regression}
+    
+    \input{linearModels/bayesianLinearRegression.tex}
+        
 \chapter{Variational inference}
 
 \section{ELBO: Evidence Lower Bound}

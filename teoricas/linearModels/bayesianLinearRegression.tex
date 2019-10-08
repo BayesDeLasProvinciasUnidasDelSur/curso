@@ -1,0 +1,89 @@
+
+Maximum likelihood estimation can lead to severe over-fitting if complex models (e.g. polynomial regression models of high order) are fit to datasets of limited size.
+Common approachs to prevent over-fitting is to add a regularization term to the error function or to perform corss-validation.
+
+\begin{framed}
+Bayesian treatment of linear regression avoid over-fitting problem of maximum likelihood, and which will also leads to automatic methods of determining model complexity using the training data alone.
+\end{framed}
+
+For a Bayesian treatment of linear regression we need a prior probability distribution over model parameters $w$.
+
+\begin{equation}
+ p(\vm{w}) = \N(\vm{w}|\vm{m}_0, \vm{S}_0)
+\end{equation}
+
+Due to the choice of a conjugate Gaussian prior, the posterior will also be Gaussian.
+We can evaluate this distribution by the usal procedure of completing the square in the exponential, and then finding the normalization coefficient using the standard result for normalized Gaussian.
+The work for deriving the general result is at equation (\ref{eq:post})
+
+\begin{equation}
+ p(\vm{w}|\vm{t}) = \N(\vm{w}|\vm{m}_N, \vm{S}_N)
+\end{equation}
+
+where 
+
+\begin{equation}
+ \vm{m}_N = \vm{S}_N (\vm{S}_0^{-1} \vm{m}_0 + \beta \vm{\Phi}^T \vm{t})
+\end{equation}
+
+\begin{equation}
+ \vm{S}_N^{-1} = \vm{S}_0^{-1} + \beta \vm{\Phi}^T\vm{\Phi}
+\end{equation}
+
+For simplicity, we consider a zero-mean isotropic Gaussian prior governed by a single precision paramater $\alpha$ so that
+
+\begin{equation}
+ p(\vm{w}) = N(\vm{w}|\vm{0}, \alpha^{-1} \vm{I})
+\end{equation}
+
+then corresponding posterior distribution over $\vm{w}$ is then 
+
+
+\begin{equation}
+ \vm{m}_N = \beta  \vm{S}_N\vm{\Phi}^T \vm{t}
+\end{equation}
+
+\begin{equation}
+ \vm{S}_N^{-1} = \alpha \vm{I} + \beta \vm{\Phi}^T\vm{\Phi}
+\end{equation}
+
+
+To obtain an analytical solution we will treat $\beta$ as a known constant.
+Note that in supervised learning problems such as regression we are not seeking to model the distribution of the input variables, so we will treat the input $\vm{x}$ as a known constant.
+
+\begin{figure}[H]
+    \centering
+    \tikz{
+
+    \node[latent, fill=black!100, minimum size=2pt] (x) {} ; %
+    \node[const, right=of x] (c_x) {$\vm{x}_n$};
+    \node[latent, fill=black!20, yshift=-1.5cm] (t) {$t_n$} ; %
+    \node[latent, fill=black!100, yshift=-1.5cm , xshift=-2cm,minimum size=2pt] (beta)
+    {} ; %
+    \node[const, above=of beta] (c_beta) {$\beta$};
+    \node[latent, fill=black!0, yshift=-1.5cm, xshift=2cm] (w) {$\vm{w}$};
+    \node[latent, fill=black!100, xshift=2cm, minimum size=2pt] (alpha) {} ; %
+    \node[const, right=of alpha] (c_alpha) {$\alpha$};
+    
+    \edge {x,beta,w} {t};
+    \edge {alpha} {w};
+    
+    \node[inv, fill=black!0, minimum size=0pt, xshift=-0.45cm] (data_inv) {} ; %
+    \plate {data} {(t)(x)(c_x)(data_inv)} {$N$}; %
+      
+    }  
+\end{figure}
+
+
+
+\begin{algorithm}  
+  \caption{Posterior for Linear Regression Model}
+  \label{alg:posterior_for_linear_regression_model}
+  \lstinputlisting{linearModels/code/posterior.py}
+\end{algorithm}
+
+
+
+
+
+
