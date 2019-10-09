@@ -14,22 +14,31 @@ The simplest form of linear regression models are also linear functions of their
 The target variable $t$ of an observation $\bm{x}$ is given by a deterministic function $y(\bm{x},\bm{w})$ plus additive random noise.
 
 \begin{equation}
- t = y(\bm{x},\bm{w}) + \epsilon
+ t = y(\vm{x},\vm{w}) + \epsilon
 \end{equation}
 
 where $\epsilon$ is a zero mean Gaussian random variable with precision (inverse variance) $\beta$, $\epsilon \sim N(0,\beta^{-1})$.
 So the probabilistic model of the target random variable,
 
 \begin{equation}
-p(t | \bm{x}, \bm{w}, \beta) = N(t | y(\bm{x},\bm{w}), \beta^{-1}) = N(t | \bm{w}^T \bm{\Phi}(\bm{x}) , \beta^{-1})
+p(t | \bm{x}, \bm{w}, \beta) = N(t | y(\bm{x},\bm{w}), \beta^{-1}) = N(t | \bm{w}^T \bm{\phi}(\bm{x}) , \beta^{-1})
 \end{equation}
 
 Since we asume i.i.d., the joint conditional probability of $\bm{y}$
 
 \begin{equation}
-p(\bm{t} | \bm{x}, \bm{w}, \beta) = \prod_{i=1}^n N(t_i | \bm{w}^T \bm{\Phi}(\bm{x}_i) , \beta^{-1})
+p(\bm{t} | \bm{x}, \bm{w}, \beta) = \prod_{i=1}^n N(t_i | \bm{w}^T \bm{\phi}(\bm{x}_i) , \beta^{-1})
 \end{equation}
 
+
+\begin{algorithm}[H]
+  \caption{Likelihood for Linear Regression Model}
+  \label{alg:likelihood_for_linear_regression_model}
+  \lstinputlisting{linearModels/code/likelihood.py}
+\end{algorithm}
+
+
+\paragraph{Maximum likelihood}
 
 Maximizing the log likelihood gives the maximum likelihood estimate of parameters $\bm{\beta}$.
 
@@ -48,11 +57,17 @@ Matrix $\bm{\Phi}$ is called the \emph{design matrix}
 
 \begin{equation}
  \bm{\Phi} =
-  \begin{bmatrix}
+  \begin{pmatrix}
     \phi_0(\bm{x}_1) & \phi_1(\bm{x}_1) & \dots & \phi_{M-1}(\bm{x}_1)\\
     \vdots & \vdots & \ddots & \vdots \\
     \phi_0(\bm{x}_N) & \phi_1(\bm{x}_N) & \dots & \phi_{M-1}(\bm{x}_N)
-  \end{bmatrix}
+  \end{pmatrix}
+  = 
+  \begin{pmatrix}
+   \bm{\phi}(\vm{x}_1) \\
+   \vdots \\
+   \bm{\phi}(\vm{x}_N) \\
+  \end{pmatrix}
 \end{equation}
 
 Notar que cada basis function $\phi_j(\cdot)$ recibe el vector-input completo $\bm{x}_i$.
