@@ -28,7 +28,26 @@ y_true= generative_model(X_grilla , 0, w0, w1)
 
 # Design matrix of test observations
 Phi_grilla = phi(X_grilla, identity_basis_function)
+
+w = np.array([-0.3,0.5]).reshape((2,1))
+
+Phi = phi(X, identity_basis_function)
+
+ w.T.dot(Phi.T)
+
+I_w = np.eye(len(w))
+I_t = np.eye(len(t))
+
+w.T.dot((alpha*I_w)).dot(w)
+
+(Phi.dot(w)).T.dot(beta*I_t).dot(Phi.dot(w))
+
+beta*w.T.dot(Phi.T.dot(Phi)).dot(w)
+
+w.T.dot(Phi.T)
  
+
+
 #plt.plot(X_grilla,y_true)
 #plt.plot(X,t,'.')
 
