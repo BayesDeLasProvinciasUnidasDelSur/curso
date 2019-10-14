@@ -33,21 +33,6 @@ w = np.array([-0.3,0.5]).reshape((2,1))
 
 Phi = phi(X, identity_basis_function)
 
- w.T.dot(Phi.T)
-
-I_w = np.eye(len(w))
-I_t = np.eye(len(t))
-
-w.T.dot((alpha*I_w)).dot(w)
-
-(Phi.dot(w)).T.dot(beta*I_t).dot(Phi.dot(w))
-
-beta*w.T.dot(Phi.T.dot(Phi)).dot(w)
-
-w.T.dot(Phi.T)
- 
-
-
 #plt.plot(X_grilla,y_true)
 #plt.plot(X,t,'.')
 
@@ -61,10 +46,6 @@ def use_likelihood(x,y):#x=-0.3;y=0.5
     return likelihood(w,T,Phi,beta)
 lv = np.vectorize(use_likelihood)
 
-
-plt.close()
-plt.figure()
-plt.subplots_adjust(hspace=0.4)   
 
 for i, N in enumerate(N_list):#i=4;N=20
     X_N = X[:N]
@@ -85,27 +66,27 @@ for i, N in enumerate(N_list):#i=4;N=20
     
     # Likelihood
     if i > 0:
-        plt.subplot(len(N_list), 3, i * 3 + 1 )
         Phi = Phi_N[N_list[i-1]:,:]
         T = t_N[N_list[i-1]:,:]
         likeli = np.matrix(lv(w0_grilla[:, np.newaxis],w1_grilla))
         plt.imshow(likeli .T,extent=[-1,1,-1,1])
         plt.plot(w0,w1,'+',color="red")
-    
+        plt.savefig("img/example1_likelihood_{}.pdf".format(i))
+        plt.close()
         
     # Posterior
-    plt.subplot(len(N_list), 3, i * 3 + 2)
     belief = np.matrix(pdfv(w0_grilla[:, np.newaxis],w1_grilla))
     plt.imshow(belief.T,extent=[-1,1,-1,1])
     plt.plot(w0,w1,'+',color="red")
+    plt.savefig("img/example1_posterior_{}.pdf".format(i))
+    plt.close()
 
     # Data space
-    plt.subplot(len(N_list), 3, i * 3 + 3)
     plt.plot(X_grilla, y_samples)
     plt.ylim(-1., 1.)
     plt.plot(X_N, t_N,'.',color="black")
+    plt.savefig("img/example1_dataSpace_{}.pdf".format(i))
+    plt.close()
+    
 
-    
-    
-plt.savefig("img/example1.pdf", bbox_inches='tight')
     
