@@ -9,9 +9,9 @@ def gaussian_basis_function(x, mu=0, sigma=0.1):
 def polynomial_basis_function(x, degree=1):
     return x ** degree
 
-def phi(x, bf, bf_args=None):
-    if bf_args is None:
+def phi(x, bf, args=None):
+    if args is None:
         return np.concatenate([np.ones(x.shape), bf(x)], axis=1)
     else:
-        return np.concatenate([np.ones(x.shape)] + [bf(x, bf_arg) for bf_arg in bf_args], axis=1)
+        return np.concatenate([np.ones(x.shape)] + [bf(x, *args)], axis=1)
 
