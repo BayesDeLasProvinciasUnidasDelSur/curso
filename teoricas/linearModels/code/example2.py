@@ -1,24 +1,23 @@
 #http://krasserm.github.io/2019/02/23/bayesian-linear-regression/
 from posterior import posterior
-from predictive import predictive
+from predictive import predictive, log_evidence
 #from mathematics import pdf, cdf
 from likelihood import likelihood
 from generative import linear_model, sinus_model
-from basisFunctions import identity_basis_function, phi,polynomial_basis_function
+from basisFunctions import identity_basis_function, phi, polynomial_basis_function
 import matplotlib.pyplot as plt
 import numpy as np
 import math
 from scipy.stats import multivariate_normal as normal
 # Training dataset sizes
+plt.close()
 N_list = [0, 1, 2, 4,25]
 
-plt.close()
 beta = (1/0.2)**2
 '''
 Bishop usa alpha = 5e-3
 '''
-alpha = 1e-6
-
+alpha = (5e-12)
 
 # Data 
 X =np.random.rand(N_list[-1],1)-0.5
@@ -33,11 +32,25 @@ X_, Y_ = np.meshgrid(X_grilla, y_grilla,sparse=True)
 
 online_evidence = np.zeros((10,1))
 joint_evidence = np.zeros((10,1))
+
+
+joint_evidence = np.zeros((10,1))
+for d in range(10):#i=2;N=25
+    #d = 3
+    
+    Phi =  polynomial_basis_function(X, np.array(range(d+1)) )
+    joint_evidence[d,0] = log_evidence(t,Phi,beta,alpha)
+    
+    #Phi = Phi_N    
+plt.close()
+plt.plot(joint_evidence/N_list[-1])
+    
 for d in range(10):#i=2;N=25
     #d = 3
     m_0 = np.zeros((d+1,1))
     S_0 = (1/alpha)*np.eye(d+1)
-    
+    Phi_new =  polynomial_basis_function(0.33, np.array(range(d+1)) )
+    predictive(y_grilla, Phi_new , beta, alpha)
     
     for i in range(N_list[-1]) :#i=24   
         
@@ -71,7 +84,7 @@ for d in range(10):#i=2;N=25
                 xi = X_grilla[ix]
                 Phi_new = polynomial_basis_function(xi, np.array(range(d+1)))
                 Phi_new = Phi_new.reshape((1,d+1))
-                moments[ix,:] = predictive(m_N, S_N, Phi_new , beta)
+                moments[ix,:] = predictive(t, Phi_new , beta, alpha)
                 belief[:,ix] =   normal.pdf(y_grilla,moments[ix,0],np.sqrt(moments[ix,1]))[::-1]
             plt.imshow(belief,extent=[-0.5,0.5,-1.4,1.4])
             plt.plot(X_grilla, y_true,color="black")
@@ -142,7 +155,6 @@ plt.plot(online_evidence)
 plt.savefig("img/example2_online_log_eviudence.pdf")
 plt.close()    
     
-    
-    
+
     
     
