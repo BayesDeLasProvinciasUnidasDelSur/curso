@@ -1,6 +1,6 @@
 #http://krasserm.github.io/2019/02/23/bayesian-linear-regression/
-from posterior import posterior
-from predictive import predictive, log_evidence
+from posterior import posterior, prior
+from predictive import moments_predictive, predictive, log_evidence
 #from mathematics import pdf, cdf
 from likelihood import likelihood
 from generative import linear_model, sinus_model
@@ -10,14 +10,12 @@ import numpy as np
 import math
 from scipy.stats import multivariate_normal as normal
 # Training dataset sizes
-plt.close()
-N_list = [0, 1, 2, 4,25]
+
+N = 20
+N_list = [0, 1, 2, 4,N]
 
 beta = (1/0.2)**2
-'''
-Bishop usa alpha = 5e-3
-'''
-alpha = (5e-12)
+alpha = (5e-7) # Bishop usa alpha = 5e-3
 
 # Data 
 X =np.random.rand(N_list[-1],1)-0.5
@@ -26,135 +24,101 @@ t = sinus_model(X, 1/beta)
 # Grilla
 X_grilla = np.linspace(0, 1, 100).reshape(-1, 1)-0.5
 y_grilla = np.linspace(-1.4, 1.4, 100).reshape(-1, 1)
-# Function values without noise
 y_true = sinus_model(X_grilla , 0)
-X_, Y_ = np.meshgrid(X_grilla, y_grilla,sparse=True)
 
-online_evidence = np.zeros((10,1))
-joint_evidence = np.zeros((10,1))
+plt.plot(X_grilla, y_true, '--', color="black")
+plt.plot(X,t,'.', color='black')
+plt.savefig("img/example2_true_and_sample.pdf")
+plt.close()    
 
 
-joint_evidence = np.zeros((10,1))
-for d in range(10):#i=2;N=25
-    #d = 3
-    
-    Phi =  polynomial_basis_function(X, np.array(range(d+1)) )
-    joint_evidence[d,0] = log_evidence(t,Phi,beta,alpha)
-    
-    #Phi = Phi_N    
-plt.close()
-plt.plot(joint_evidence/N_list[-1])
-    
-for d in range(10):#i=2;N=25
-    #d = 3
-    m_0 = np.zeros((d+1,1))
-    S_0 = (1/alpha)*np.eye(d+1)
-    Phi_new =  polynomial_basis_function(0.33, np.array(range(d+1)) )
-    predictive(y_grilla, Phi_new , beta, alpha)
-    
-    for i in range(N_list[-1]) :#i=24   
-        
-        X_N = X[:i]
-        t_N = t[:i]
-        x_new = X[i]
-        t_new = t[i]
+prior_predictive_online = np.zeros((10,1))
+prior_predictive_joint = np.zeros((10,1)) 
+log_evidence_joint = np.zeros((10,1)) 
+for d in range(10):#d=1    
+    for i in range(N_list[-1]) :#i=10
+        X_train = X[:i]
+        t_train = t[:i]
+        x_test = X[i]
+        t_test = t[i]
         # Design matrix of training observations
-        Phi_N =  polynomial_basis_function(X_N, np.array(range(d+1)) )
-        Phi_new = polynomial_basis_function(x_new , np.array(range(d+1)))
+        Phi_train =  polynomial_basis_function(X_train, np.array(range(d+1)) )
+        Phi_test = polynomial_basis_function(x_test , np.array(range(d+1)))
+        Phi_test = Phi_test.reshape((1,d+1))
         
-        # Mean and covariance matrix of posterior
-        m_N, S_N = posterior(Phi_N, t_N, alpha, beta)
+        prior_predictive_online[d,0] += np.log(predictive(t_test, Phi_test, beta, alpha, t_train, Phi_train ))
         
-        Phi_new = Phi_new.reshape((1,d+1))
-        mus, sigmas2 = predictive(m_N, S_N, Phi_new, beta)    
-        log_evidence = np.log10(normal.pdf(t_new.ravel(),mus.ravel(),np.sqrt(sigmas2)))
-        online_evidence[d,0] += log_evidence
-        
-        if d == 9:
-            Phi_grilla = polynomial_basis_function(X_grilla, np.array(range(d+1)) )
-            w_samples = np.random.multivariate_normal(m_N.ravel(), S_N, 6).T
-            y_samples = Phi_grilla.dot(w_samples)
-            
-            plt.plot(X_grilla,y_samples,alpha=0.6)
-            plt.plot(X_N,t_N,'.',color="black")
-            
-            belief = np.zeros((len(y_grilla),len(X_grilla)))
-            moments = np.zeros((len(X_grilla),2))
-            for ix in range(len(X_grilla)):
-                xi = X_grilla[ix]
-                Phi_new = polynomial_basis_function(xi, np.array(range(d+1)))
-                Phi_new = Phi_new.reshape((1,d+1))
-                moments[ix,:] = predictive(t, Phi_new , beta, alpha)
-                belief[:,ix] =   normal.pdf(y_grilla,moments[ix,0],np.sqrt(moments[ix,1]))[::-1]
-            plt.imshow(belief,extent=[-0.5,0.5,-1.4,1.4])
-            plt.plot(X_grilla, y_true,color="black")
-            plt.plot(X_grilla,moments[:,0],color="red",linewidth=2.0)
-            plt.plot(X_grilla,moments[:,0]+np.sqrt(moments[:,1]),color="white")
-            plt.plot(X_grilla,moments[:,0]-np.sqrt(moments[:,1]),color="white")
-            plt.plot(X_grilla,moments[:,0]+2*np.sqrt(moments[:,1]),color="white")
-            plt.plot(X_grilla,moments[:,0]-2*np.sqrt(moments[:,1]),color="white")
-            plt.plot(X_grilla,moments[:,0]+3*np.sqrt(moments[:,1]),color="white")
-            plt.plot(X_grilla,moments[:,0]-3*np.sqrt(moments[:,1]),color="white")
-            plt.ylim(-1.4, 1.4)
-            plt.tight_layout()
-            plt.savefig("img/example2_predictive_d9_{}.pdf".format(i))
-            plt.close()  
+    Phi =  polynomial_basis_function(X, np.array(range(d+1)) )
+    prior_predictive_joint[d,0] = np.log(predictive(t, Phi, beta, alpha ))
+    log_evidence_joint[d,0] = log_evidence(t, Phi, beta, alpha)
     
-    #max(online_evidence)
-    #plt.close()
-    #plt.plot(online_evidence)
-     
-    
-    X_N = X
-    t_N = t
-    Phi_N =  polynomial_basis_function(X_N, np.array(range(d+1)) )
-    m_N, S_N = posterior(Phi_N, t_N, alpha, beta)
-    #Phi = Phi_N    
-    
-    
-    #mus, sigmas2 = predictive(m_0, S_0, Phi_N, beta) 
-    #joint_evidence[d,0] = np.log10(normal.pdf(t.ravel(),mus.ravel(),np.sqrt(sigmas2)))
-    
-    
-    Phi_grilla = polynomial_basis_function(X_grilla, np.array(range(d+1)) )
-            
-    w_samples = np.random.multivariate_normal(m_N.ravel(), S_N, 6).T
-    y_samples = Phi_grilla.dot(w_samples)
-    
-    plt.plot(X_grilla,y_samples,alpha=0.3)
-    plt.plot(X_N,t_N,'.',color="black")
-    
-    # Predictive
-    belief = np.zeros((len(y_grilla),len(X_grilla)))
-    moments = np.zeros((len(X_grilla),2))
-    for ix in range(len(X_grilla)):
-        xi = X_grilla[ix]
-        Phi_new = polynomial_basis_function(xi, np.array(range(d+1)))
-        Phi_new = Phi_new.reshape((1,d+1))
-        moments[ix,:] = predictive(m_N, S_N, Phi_new , beta)
-        belief[:,ix] =   normal.pdf(y_grilla,moments[ix,0],np.sqrt(moments[ix,1]))[::-1]
-    plt.imshow(belief,extent=[-0.5,0.5,-1.4,1.4])
-    plt.plot(X_grilla, y_true,color="black")
-    plt.plot(X_grilla,moments[:,0],color="red",linewidth=2.0)
-    plt.plot(X_grilla,moments[:,0]+np.sqrt(moments[:,1]),color="white")
-    plt.plot(X_grilla,moments[:,0]-np.sqrt(moments[:,1]),color="white")
-    plt.plot(X_grilla,moments[:,0]+2*np.sqrt(moments[:,1]),color="white")
-    plt.plot(X_grilla,moments[:,0]-2*np.sqrt(moments[:,1]),color="white")
-    plt.plot(X_grilla,moments[:,0]+3*np.sqrt(moments[:,1]),color="white")
-    plt.plot(X_grilla,moments[:,0]-3*np.sqrt(moments[:,1]),color="white")
-    plt.ylim(-1.4, 1.4)
-    plt.tight_layout()
-    plt.savefig("img/example2_predictive_{}.pdf".format(d))
-    plt.close()    
-    #plt.plot(X_grilla,belief[:,50])
-    #plt.plot(y_grilla,belief[50,:].T)
-    #plt.plot(y_grilla,belief[0,:].T)
-    
-
-plt.plot(online_evidence)
-plt.savefig("img/example2_online_log_eviudence.pdf")
+plt.close()
+plt.plot(prior_predictive_joint)
+plt.plot(log_evidence_joint)
+plt.plot(prior_predictive_online)
+plt.savefig("img/example2_evidence.pdf")
 plt.close()    
     
+'''
+for d in range(10):#d=3
+    X_0 = X[:0]
+    t_0 = t[:0]
+    Phi_0 =  polynomial_basis_function(X_0, np.array(range(d+1)) )        
+    Phi_ = polynomial_basis_function(0.25, np.array(range(d+1)) ).reshape((1,d+1))
+    plt.plot(y_grilla, predictive(y_grilla, Phi_, beta, alpha, t_0, Phi_0 ))
+plt.savefig("img/example2_prior_predictive_at05.pdf".format(d))
+plt.close()    
 
-    
-    
+for d in range(10):#d=1
+    Phi =  polynomial_basis_function(X, np.array(range(d+1)) )        
+    Phi_ = polynomial_basis_function(0.25, np.array(range(d+1)) ).reshape((1,d+1))
+    plt.plot(y_grilla, predictive(y_grilla, Phi_, beta, alpha, t, Phi ))
+plt.savefig("img/example2_posterior_predictive_at05.pdf".format(d))
+plt.close()    
+'''
+
+#
+belief = np.zeros((len(y_grilla),len(X_grilla),10))
+for d in range(10):#d=1
+    Phi =  polynomial_basis_function(X, np.array(range(d+1)) )
+    for ix in range(len(X_grilla)):
+        xi = X_grilla[ix]
+        Phi_x = polynomial_basis_function(xi, np.array(range(d+1)))
+        Phi_x = Phi_x.reshape((1,d+1))
+        belief[:,ix,d] =  predictive(y_grilla, Phi_x, beta, alpha, t, Phi)[::-1] 
+        
+max_diff = -np.inf; 
+min_diff = np.inf; 
+for d in range(10):
+    if max_diff < np.max(belief[:,:,3]-belief[:,:,d]):
+        max_diff = np.max(belief[:,:,3]-belief[:,:,d])
+    if min_diff > np.min(belief[:,:,3]-belief[:,:,d]):
+        min_diff = np.min(belief[:,:,3]-belief[:,:,d])
+        
+
+for d in range(10):
+    if d != 3:
+        Zpos = np.ma.masked_less(belief[:,:,3]-belief[:,:,d], 0)
+        Zneg = np.ma.masked_greater(belief[:,:,3]-belief[:,:,d], 0)
+        plt.imshow(Zpos,extent=[-0.5,0.5,-1.4,1.4],cmap='Greens')
+        plt.imshow(Zneg,extent=[-0.5,0.5,-1.4,1.4],cmap='Reds_r')
+        plt.plot(X_grilla, y_true, '--', color="black")
+        plt.savefig("img/example2_posterior_predictive_difference_3_{}.pdf".format(d))
+        plt.close()
+
+
+
+
+belief_at_true = np.zeros((10,len(X_grilla)))
+for d in range(10):
+    Phi =  polynomial_basis_function(X, np.array(range(d+1)) )
+    for ix in range(len(X_grilla)):
+        xi = X_grilla[ix]
+        Phi_x = polynomial_basis_function(xi, np.array(range(d+1)))
+        Phi_x = Phi_x.reshape((1,d+1))
+        belief_at_true[d,ix] = predictive(y_true[ix].ravel(), Phi_x, beta, alpha, t, Phi)
+plt.axhline(y=0, color='r', linestyle='-')
+for d in range(10):#d=0
+    if d != 3:
+        plt.plot(X_grilla,belief_at_true[3,:]-belief_at_true[d,:])
+

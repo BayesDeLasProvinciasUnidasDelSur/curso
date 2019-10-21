@@ -66,7 +66,7 @@ for i, N in list(enumerate(N_list[::-1])):#i=2;N=2
     Phi_N = phi(X_N, identity_basis_function)
     
     # Mean and covariance matrix of posterior
-    m_N, S_N = posterior(Phi_N, t_N, alpha, beta)
+    m_N, S_N = posterior(alpha, beta,t_N, Phi_N)
        
     # Mean and variances of posterior predictive
     #y, y_var = posterior_predictive(Phi_test, m_N, S_N, beta)
