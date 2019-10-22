@@ -1,0 +1,33 @@
+% https://stats.idre.ucla.edu/other/mult-pkg/introduction-to-linear-mixed-models/
+
+\begin{quotation}
+% https://stats.idre.ucla.edu/other/mult-pkg/introduction-to-linear-mixed-models/
+Linear mixed models are an extension of simple linear models to allow both fixed and random effects, and are particularly used when there is non independence in the data, such as arises from a hierarchical structure.
+For example, students could be sampled from within classrooms, or patients from within doctors.
+
+When there are multiple levels, such as patients seen by the same doctor, the variability in the outcome can be thought of as being either within group or between group.
+Patient level observations are not independent, as within a given doctor patients are more similar.
+Units sampled at the highest level (in our example, doctors) are independent.
+
+There are multiple ways to deal with hierarchical data. One simple approach is to aggregate. For example, suppose 10 patients are sampled from each doctor. Rather than using the individual patients’ data, which is not independent, we could take the average of all patients within a doctor. This aggregated data would then be independent.
+
+Although aggregate data analysis yields consistent and effect estimates and standard errors, it does not really take advantage of all the data, because patient data are simply averaged. Looking at the figure above, at the aggregate level, there would only be six data points.
+
+Another approach to hierarchical data is analyzing data from one unit at a time. Again in our example, we could run six separate linear regressions—one for each doctor in the sample. Again although this does work, there are many models, and each one does not take advantage of the information in data from other doctors. This can also make the results “noisy” in that the estimates from each model are not based on very much data
+
+Linear mixed models (also called multilevel models) can be thought of as a trade off between these two alternatives. The individual regressions has many estimates and lots of data, but is noisy. The aggregate is less noisy, but may lose important differences by averaging all samples within each doctor. LMMs are somewhere inbetween.
+
+\end{quotation}
+
+\begin{equation}
+ \vm{t} = \vm{\Phi w} + \vm{C v}  + \bm{\varepsilon}
+\end{equation}
+
+Given $N$ number of data points, $M$ complexity of the model and $L$ the number of levels in the data.
+
+where the target $\vm{t}$ is a $N \times 1$ vector, the predictor $\vm{\Phi}$ is a $N \times M$ matrix, the fixed-effect parameter $\vm{w}$ is a $N \times 1$ vector, the random effects $\vm{C}$ is a $N \times L$ matrix, and their parameters $\vm{v}$ is a $L \times 1$ vector.
+
+
+
+\todo[inline]{Subir la posterior y evidence del mixed model (hoy en papel)}
+
