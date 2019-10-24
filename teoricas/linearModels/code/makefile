@@ -5,3 +5,6 @@ example1:
 
 example2:
 	python3 example2.py
+
+mixedModel:
+	python3 mixedModel.py
