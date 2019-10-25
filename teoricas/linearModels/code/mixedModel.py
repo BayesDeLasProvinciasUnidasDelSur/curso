@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import multivariate_normal as normal
-'''
+
 def moments_posterior(t,Phi, C, alpha, beta):
     N, M = Phi.shape
     _, L = C.shape
@@ -45,8 +45,13 @@ def moments_posterior(t,Phi, C, alpha, beta):
     
     A = np.concatenate((C,Phi),axis=1)
     
-    m_N = (1/beta)*S_N.dot(A.T).dot(t)
-'''
+    m_N = beta*S_N.dot(A.T).dot(t)
+    
+    mv_N = m_N[:L] 
+    mw_N = m_N[L:] 
+    
+    return (m_N, [mv_N, mw_N]), (S_N, [[Sv_N, Svw_N],[Swv_N, Sw_N]])
+
 def p_de_w_dado_t(t, Phi, C, alpha, beta):
     
     N, M = Phi.shape
@@ -64,7 +69,6 @@ def p_de_w_dado_t(t, Phi, C, alpha, beta):
     
     return m_N, Sw_N
 
-
 def p_de_v_dado_t(t, Phi, C, alpha, beta):
     
     N, M = Phi.shape
@@ -80,21 +84,19 @@ def p_de_v_dado_t(t, Phi, C, alpha, beta):
     Sv_N = np.linalg.inv(Sv_N_inv )
     m_N = Sv_N.dot(C.T).dot(St_dado_v_inv).dot(t)
     
-    return m_N, Sv_N
-    
-    
+    return m_N, Sv_N    
     
 def polynomial_basis_function(x, degree=1):
     return x ** degree
 
 M, L = 2, 10
-n = [2]*L
+n = [3]*L
 N = sum(n)
 
 w_true = np.array([1,-1]).reshape((M,1))
 v_true = np.arange(L).reshape((L,1))
 
-def dijoint_sample(n, M, L, w_true, v_true, alpha = (1e-5)**2, beta = (10.0)**2):
+def dijoint_sample(n, M, L, w_true, v_true, alpha = (1e-5)**2, beta = (10.0)**2, R=1):
     X = np.zeros((N,1))
     for i in range(L):
         X[(n[i]*i):n[i]*(i+1),:] = (np.random.rand(n[i],1)+i)*2/L -1
@@ -105,22 +107,39 @@ def dijoint_sample(n, M, L, w_true, v_true, alpha = (1e-5)**2, beta = (10.0)**2)
     
     Phi = polynomial_basis_function(X,range(M))
     
-    C = np.zeros((N,L))
-    for i in range(L):
+    C = np.zeros((N,R*L))
+    for i in range(L):#i=1
         # Intercept
-        C[(n[i]*i):n[i]*(i+1),i] = 1 
-    
+        pos = np.arange((n[i]*i),n[i]*(i+1))
+        for r in range(R):
+            C[pos,(r*L)+i] = Phi[pos,r]
+        
     epsilon = np.random.normal(0,np.sqrt(1/beta), N).reshape((N,1))
     t = Phi.dot(w_true) + C.dot(v_true) + epsilon 
-    return t, Phi, C, alpha, beta
+    return t, X, Phi, C, alpha, beta
     
+t, X, Phi, C, alpha, beta = dijoint_sample(n, M, L, w_true, v_true,alpha=0.0001)
+
+m, S = moments_posterior(t,Phi,C,alpha,beta)
+mw_N, Sw_N = p_de_w_dado_t(t,Phi,C,alpha,beta)
+mv_N, Sv_N = p_de_v_dado_t(t,Phi,C,alpha,beta)
+
+m[1][0] == mv_N
+m[1][1] == mw_N
+S[1][0][0] == Sv_N
+S[1][1][1] == Sw_N
+
+for i in range(L):#i=0
+    plt.plot([-1,1],[mw_N[0]+mv_N[i]-mw_N[1],mw_N[0]+mv_N[i]+mw_N[1]],color="gray" )
+    plt.plot(X[(n[i]*i):n[i]*(i+1),0],t[(n[i]*i):n[i]*(i+1),0], '.')
+
 plt.close()
 rep = 20
 MAPw = np.zeros((rep,M))
 MAPv = np.zeros((rep,L))
 for r in range(rep):
     
-    t, Phi, C, alpha, beta = dijoint_sample(n, M, L, w_true, v_true,alpha=0.01)
+    t, X, Phi, C, alpha, beta = dijoint_sample(n, M, L, w_true, v_true,alpha=0.01)
     mw_N, Sw_N = p_de_w_dado_t(t,Phi,C,alpha,beta)
     mv_N, Sv_N = p_de_v_dado_t(t,Phi,C,alpha,beta)
     
@@ -132,11 +151,10 @@ for r in range(rep):
         #plt.plot(X[(n[i]*i):n[i]*(i+1),0],t[(n[i]*i):n[i]*(i+1),0], '.')
 for i in range(L):#i=0
     plt.plot([-1,1],[w_true[0]+v_true[i]-w_true[1],w_true[0]+v_true[i]+w_true[1]],'--',color="red" )
-
+plt.show()
 
 plt.plot(MAPw[:,0],MAPw[:,1],'.')
 plt.plot(5,-1,'.',color="red")
-
 
 
 M, L = 2, 10
@@ -161,50 +179,20 @@ plt.imshow(belief,extent=[0,10,-2,0],)
 plt.plot(w_true[0]+sum(v_true)/L,w_true[1],'+',color="red")
 plt.tight_layout()
 
+# intercept
+M, L = 2, 10
+n = [6]*L
+N = sum(n)
+R = 2
+w_true = np.array([1,-1]).reshape((M,1))
+v0_true = np.arange(L).reshape((L,1))
+v1_true = np.linspace(-1, -6, L).reshape((L,1))
+v_true = np.concatenate((v0_true,v1_true ))
 
-mw_N, Sw_N = fixed_effects_posterior(t, Phi, C, alpha, beta)
+t, X, Phi, C, alpha, beta = dijoint_sample(n, M, L, w_true, v_true,alpha=(1/1e3),beta=(1/1e-3),R=R)
 
-grilla = np.linspace(-2, 2, 100)
-X_, Y_ = np.meshgrid(grilla, grilla)
+(m_N, (mv_N, mw_N)), (S_N, [[Sv_N, Svw_N],[Swv_N, Sw_N]]) = moments_posterior(t,Phi,C,alpha,beta)
 
-def _posterior(x, y):
-    return normal.pdf(np.array([x,y]).ravel(), mw_N.ravel(),Sw_N)
-_posterior_v = np.vectorize(_posterior)
-belief = _posterior_v(X_,Y_)
-plt.close()
-plt.imshow(belief,extent=[-2,2,-2,2])
-plt.plot(0,1,".",color="white")
-
-t_standar = (t - np.mean(t) )/(np.std(t)**2)
-'''
-#x_L = np.array([ ((0+i)*2/L -1 + (1+i)*2/L -1)/2    for i in range(L)]).reshape((L,1))
-#Phi_L = polynomial_basis_function(x_L,range(M))
-#y_L =  Phi_L.dot(w_true) + np.eye(L).dot(v_true)
-#plt.plot(x_L, y_L,'--',color="gray")
-'''
-plt.close()
-mw_N, Sw_N = fixed_effects_posterior(t, Phi, C, alpha, beta)
-mv_N, Sv_N = random_effects_posterior(t, Phi, C, alpha, beta)
-    plt.plot([-1,1],[mv_N[i]+mw_N[0]+mv_N[1], mv_N[i]+mw_N[0]-mv_N[1]])
-plt.savefig("img/mixedModel_dataAndGenerativeModel.pdf")
-plt.close()
-
-
-plt.plot(mw_N[0]-mw_N[1])
-
-# TODO: JUSTIFICAR EL 2!
-t_new = t-C.dot(mv_N) 
-for i in range(L):
-    plt.plot(X[(n[i]*i):n[i]*(i+1),0],t_new[(n[i]*i):n[i]*(i+1),0], '.')
-    
-plt.plot([-1,1],[mw_N[0]-mw_N[1],mw_N[0]+mw_N[1]])
-plt.savefig("img/mixedModel_overallFixedEstimate.pdf")
-plt.close()
-
-
-for i in range(L):
-    plt.plot([x_L[i]-1/L,x_L[i]+1/L], [mv_N[i]-(mw_N[1])/L,mv_N[i]+(mw_N[1])/L],color="gray")
-    plt.plot([x_L[i]-1/L,x_L[i]+1/L], [y_L[i]-w_true[1]/L,y_L[i]+w_true[1]/L],"--", color="black",)
+for i in range(L):#i=0
+    plt.plot([-1,1], [mw_N[0]+mv_N[:L][i]-(mv_N[L:][i]+mw_N[1]), mw_N[0]+mv_N[:L][i]+(mv_N[L:][i]+mw_N[1])],color="gray" )
     plt.plot(X[(n[i]*i):n[i]*(i+1),0],t[(n[i]*i):n[i]*(i+1),0], '.')
-plt.savefig("img/mixedModel_randomFixedEstimate.pdf")
-plt.close()
