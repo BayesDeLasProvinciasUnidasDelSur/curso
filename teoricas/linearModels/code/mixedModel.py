@@ -196,3 +196,24 @@ t, X, Phi, C, alpha, beta = dijoint_sample(n, M, L, w_true, v_true,alpha=(1/1e3)
 for i in range(L):#i=0
     plt.plot([-1,1], [mw_N[0]+mv_N[:L][i]-(mv_N[L:][i]+mw_N[1]), mw_N[0]+mv_N[:L][i]+(mv_N[L:][i]+mw_N[1])],color="gray" )
     plt.plot(X[(n[i]*i):n[i]*(i+1),0],t[(n[i]*i):n[i]*(i+1),0], '.')
+
+
+# Datos reales
+'''
+ftot_perf <- read.csv("../Datos/dosClases/glmm/10.csv", header =T)
+for (i in seq(11,500)){ #i<-100
+  file <- paste0(paste0("../Datos/dosClases/glmm/",toString(i)),".csv")
+  ftot_perf <- rbind(ftot_perf,read.csv(file, header =T))
+}
+
+activity <- ftot_perf[,"team_times1"]>=1
+loyalty <- ftot_perf[,"max_times12"][activity]/ftot_perf[,"team_times1"][activity]
+teamOriented <- ftot_perf[,"team_times1"][activity]/ftot_perf[,"times1"][activity]
+experience <- log(ftot_perf$times1,10)
+skill <- log(ftot_perf[,"mean"][activity],10)
+players <- ftot_perf$p
+
+pm.prueba <-lmer(skill~loyalty*teamOriented*experience*(1|players))
+names(pm.prueba)
+summary(pm.prueba)
+'''
