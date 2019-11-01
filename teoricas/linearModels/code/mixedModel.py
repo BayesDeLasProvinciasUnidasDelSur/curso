@@ -1,3 +1,4 @@
+#https://colab.research.google.com/github/tensorflow/probability/blob/master/tensorflow_probability/examples/jupyter_notebooks/Linear_Mixed_Effects_Models.ipynb#scrollTo=yDCkuCjq2DfW
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import multivariate_normal as normal
@@ -123,6 +124,8 @@ t, X, Phi, C, alpha, beta = dijoint_sample(n, M, L, w_true, v_true,alpha=0.0001)
 m, S = moments_posterior(t,Phi,C,alpha,beta)
 mw_N, Sw_N = p_de_w_dado_t(t,Phi,C,alpha,beta)
 mv_N, Sv_N = p_de_v_dado_t(t,Phi,C,alpha,beta)
+
+Phi.shape
 
 m[1][0] == mv_N
 m[1][1] == mw_N
