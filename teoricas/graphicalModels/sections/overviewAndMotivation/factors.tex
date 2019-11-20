@@ -1,0 +1,295 @@
+
+\begin{framed}
+Factors are fundamental building block for defining distributions in high-dimensional spaces 
+\end{framed}
+
+A factor $\Phi : (X_1, \dots, X_k) \rightarrow \mathbb{R}$.
+
+So a factor really is a function, or a table. 
+It takes a bunch of arguments. In this case, a set of random variables
+$X_1$ up to $X_k$, and just like any function it gives us a value for every assignment to those random variables.  \\
+
+\paragraph{Factors examples}
+
+\subparagraph{A join distribution is factor}.
+
+\begin{tabular}{|c|c|c|c|}
+ \hline
+ I & D & R & $P(I,D,R)$ \\ \hline
+ i$^0$ & d$^0$ & r$^0$ & 0.126 \\ \hline
+ i$^0$ & d$^0$ & r$^1$ & 0.168 \\ \hline
+ i$^0$ & d$^0$ & r$^2$ & 0.126 \\ \hline
+ i$^0$ & d$^1$ & r$^0$ & 0.009 \\ \hline
+ i$^0$ & d$^1$ & r$^1$ & 0.045 \\ \hline
+ i$^0$ & d$^1$ & r$^2$ & 0.126 \\ \hline
+ i$^1$ & d$^0$ & r$^0$ & 0.252 \\ \hline
+ i$^1$ & d$^0$ & r$^1$ & 0.0224 \\ \hline
+ i$^1$ & d$^0$ & r$^2$ & 0.0056 \\ \hline
+ i$^1$ & d$^1$ & r$^0$ & 0.06 \\ \hline
+ i$^1$ & d$^1$ & r$^1$ & 0.036 \\ \hline
+ i$^1$ & d$^1$ & r$^2$ & 0.024 \\ \hline \hline
+         &         &         & 1.0     \\ \hline
+ \end{tabular}
+
+ 
+\subparagraph{Unormalized measure is a factor.}
+ 
+ \begin{tabular}{|c|c|c|c|}
+ \hline
+ I & D & R & $P(I,D,r^0)$ \\ \hline
+ i$^0$ & d$^0$ & r$^0$ & 0.126 \\ \hline
+ i$^0$ & d$^1$ & r$^0$ & 0.009 \\ \hline
+ i$^1$ & d$^0$ & r$^0$ & 0.252 \\ \hline
+ i$^1$ & d$^1$ & r$^0$ & 0.06 \\ \hline
+       &       &       & 0.447     \\ \hline
+ \end{tabular}
+ 
+The scope of $P(I,D,r^0)$ is I and D.
+ 
+\subparagraph{Conditional Probability Distribution is a factor}.
+ 
+ $P(R|I,D)$
+ 
+ \begin{tabular}{c||c|c|c}
+  & r$^0$ & r$^1$ & r$^2$ \\ \hline \hline
+ (i$^0$ , d$^0$) & 0.3 & 0.4 & 0.3 \\ \hline
+ (i$^0$ , d$^0$) & 0.05 & 0.25 & 0.7 \\ \hline
+ (i$^0$ , d$^0$) & 0.9 & 0.008 & 0.02 \\ \hline
+ (i$^0$ , d$^0$) & 0.5 & 0.3 & 0.2 
+ \end{tabular}
+ 
+\subparagraph{Generals factors}.
+ 
+ \begin{tabular}{c|c|c|c}
+ \hline 
+A & B & $\phi$ \\ \hline 
+  $a^1$ & $b^1$ &  30 \\ \hline
+  $a^1$ & $b^2$ &  5 \\ \hline
+  $a^2$ & $b^1$ &  1 \\ \hline
+  $a^2$ & $b^2$ & 10  \\ \hline
+ \end{tabular}
+ 
+ \paragraph{Factor Product} .
+ 
+ \todo[inline]{example}
+ 
+ \paragraph{Factor Marginalization} .
+
+ \todo[inline]{example}
+ 
+ \paragraph{Factor Reduction} .
+ 
+ \todo[inline]{example}
+ 
+
+\begin{figure}[H]
+ \centering
+ \begin{subfigure}[c]{1\textwidth}
+ \centering
+  \tikz{
+ \node[latent, fill=black!0, minimum size=25pt] (d) {D} ; %
+ \node[const, left=of d, xshift=-1cm] (cpd_d) {
+ \begin{tabular}{|l|l|}
+ \hline
+ $d^0$ & $d^1$ \\ \hline
+ 0.6 & 0.4  \\ \hline
+ \end{tabular}
+ }; 
+ \node[latent, fill=black!0, minimum size=25pt, xshift=2cm] (i) {I};
+ \node[const, right=of i, xshift=1cm] (cpd_i) {
+ \begin{tabular}{|l|l|}
+ \hline
+ $i^0$ & $i^1$ \\ \hline
+ 0.7 & 0.3  \\ \hline
+ \end{tabular}
+ }; 
+ \node[latent, fill=black!0, minimum size=25pt, below=of d,xshift=1cm] (r) {R} ;
+ \node[const, left=of r, xshift=-1cm] (cpd_r) {
+ \begin{tabular}{|c|c|c|c|}
+ \hline 
+  & r$^0$ & r$^1$ & r$^2$ \\ \hline 
+ (i$^0$ , d$^0$) & 0.3 & 0.4 & 0.3 \\ \hline
+ (i$^0$ , d$^1$) & 0.05 & 0.25 & 0.7 \\ \hline
+ (i$^1$ , d$^0$) & 0.9 & 0.008 & 0.02 \\ \hline
+ (i$^1$ , d$^1$) & 0.5 & 0.3 & 0.2 \\ \hline
+ \end{tabular}
+ };
+ 
+ 
+ \node[latent, fill=black!0, minimum size=25pt, below=of i,xshift=1cm] (t) {T} ;
+ \node[const, right=of t, xshift=1cm] (cpd_t) {
+ \begin{tabular}{|c|c|c|}
+ \hline 
+  & t$^0$ & t$^1$  \\ \hline 
+ i$^0$  & 0.95 & 0.05 \\ \hline
+ i$^1$ & 0.2 & 0.8 \\ \hline
+ \end{tabular}
+ };
+ 
+ 
+ \node[latent, fill=black!0, minimum size=25pt, below=of r] (c) {C} ;
+ \node[const, right=of c, xshift=1cm] (cpd_c) {
+ \begin{tabular}{|c|c|c|}
+ \hline 
+  & c$^0$ & c$^1$  \\ \hline 
+ r$^0$  & 0.1 & 0.9 \\ \hline
+ r$^1$ & 0.4 & 0.6 \\ \hline
+ r$^2$ & 0.99 & 0.01 \\ \hline
+ \end{tabular} 
+}; 
+ 
+ \edge {d} {r};
+ \edge {i} {r,t};
+ \edge {r} {c};
+ 
+ }  
+ 
+% \caption{}
+ \label{fig:market_survey_found_withObs}
+ \end{subfigure}
+ \caption{}
+ \label{fig:market_survey_found}
+\end{figure}
+
+
+\paragraph{Chain rule for bayesian networks}
+
+
+\begin{equation}
+ P(I,D,G,T,L) = P(I)P(D)P(G|I,D)P(T|I)P(C|G)
+\end{equation}
+
+\begin{framed}
+Distribution defined as a product of factors!
+\end{framed}
+
+$P(d^0,i^1,g^2,t^1,c^0) = 0.6 \cdot 0.3 \cdot 0.02 \cdot 0.8 \cdot 0.01 $
+
+\paragraph{Bayesian Network}
+
+A Bayesian network is
+\begin{itemize}
+ \item Directed \textbf{acyclic} graph (DAG) G whose nodes represent random variables
+ \item For each node we have a factor or a function, A CPD $P(X_i | Par_G(X_i))$
+\end{itemize}
+
+The BN represents a joint distribution via the chain rule $P(X_i, \dots, X_n) = \prod_i P(X_i|Par_G(X_i))$
+
+\paragraph{Causal Reasoning}
+
+\begin{figure}[H]
+ \centering
+ \begin{subfigure}[c]{1\textwidth}
+ \centering
+  \tikz{
+ \node[latent, fill=black!0, minimum size=25pt] (d) {D} ; %
+ \node[latent, fill=black!40, minimum size=25pt, xshift=2cm] (i) {I};
+ \node[latent, fill=black!0, minimum size=25pt, below=of d,xshift=1cm] (r) {R} ;
+ \node[latent, fill=black!0, minimum size=25pt, below=of i,xshift=1cm] (t) {T} ;
+ \node[latent, fill=black!0, minimum size=25pt, below=of r] (c) {C} ;
+ \edge {d} {r};
+ \edge {i} {r,t};
+ \edge {r} {c};
+ 
+ } 
+ \end{subfigure}
+  \begin{subfigure}[c]{1\textwidth}
+ \centering
+  \tikz{
+ \node[latent, fill=black!40, minimum size=25pt] (d) {D} ; %
+ \node[latent, fill=black!40, minimum size=25pt, xshift=2cm] (i) {I};
+ \node[latent, fill=black!0, minimum size=25pt, below=of d,xshift=1cm] (r) {R} ;
+ \node[latent, fill=black!0, minimum size=25pt, below=of i,xshift=1cm] (t) {T} ;
+ \node[latent, fill=black!0, minimum size=25pt, below=of r] (c) {C} ;
+ \edge {d} {r};
+ \edge {i} {r,t};
+ \edge {r} {c};
+ 
+ } 
+ \end{subfigure}
+ \caption{}
+\end{figure}
+
+\begin{itemize}
+\item $P(c^1) \approx 0.5$ 
+ \item $P(c^1|i^0) \approx 0.39$
+ \item $P(c^1|i^0,d^0) \approx 0.51$ 
+\end{itemize}
+
+\paragraph{Evidencial Reasoning}
+
+\begin{figure}[H]
+ \centering
+ \begin{subfigure}[c]{1\textwidth}
+ \centering
+  \tikz{
+ \node[latent, fill=black!0, minimum size=25pt] (d) {D} ; %
+ \node[latent, fill=black!0, minimum size=25pt, xshift=2cm] (i) {I};
+ \node[latent, fill=black!40, minimum size=25pt, below=of d,xshift=1cm] (r) {R} ;
+ \node[latent, fill=black!0, minimum size=25pt, below=of i,xshift=1cm] (t) {T} ;
+ \node[latent, fill=black!0, minimum size=25pt, below=of r] (c) {C} ;
+ \edge {d} {r};
+ \edge {i} {r,t};
+ \edge {r} {c};
+ 
+ } 
+ \end{subfigure}
+ \caption{}
+\end{figure}
+
+\begin{multicols}{2}
+\begin{itemize}
+ \item $P(d^1)=0.4$
+ \item $P(d^1|r^2)\approx 0.63$
+\end{itemize}
+\begin{itemize}
+ \item $P(i^1)=0.3$
+ \item $P(3^1|r^2)\approx 0.08$
+\end{itemize}
+\end{multicols}
+
+
+\paragraph{Intercausal Reasoning}
+
+\begin{figure}[H]
+ \centering
+ \begin{subfigure}[c]{1\textwidth}
+ \centering
+  \tikz{
+ \node[latent, fill=black!40, minimum size=25pt] (d) {D} ; %
+ \node[latent, fill=black!0, minimum size=25pt, xshift=2cm] (i) {I};
+ \node[latent, fill=black!40, minimum size=25pt, below=of d,xshift=1cm] (r) {R} ;
+ \node[latent, fill=black!0, minimum size=25pt, below=of i,xshift=1cm] (t) {T} ;
+ \node[latent, fill=black!0, minimum size=25pt, below=of r] (c) {C} ;
+ \edge {d} {r};
+ \edge {i} {r,t};
+ \edge {r} {c};
+ 
+ } 
+ \end{subfigure}
+ \caption{}
+\end{figure}
+
+\begin{itemize}
+ \item $P(i^1)=0.3$
+\item $P(i^1|r^1)\approx 0.175$
+ \item $P(i^1|r^1, d^1)\approx 0.34$
+\end{itemize}
+
+\paragraph{Active traials}
+
+ \begin{tabular}{c c|c}
+  
+  & $W \notin D $ &  $W \notin D $ \\
+ $X \rightarrow W \rightarrow Y $   & SI  & NO  \\ 
+ $X \leftarrow W \leftarrow Y $  & SI & NO\\ 
+$X \leftarrow W \rightarrow Y $  & SI& NO\\
+$X \rightarrow W \leftarrow Y $  & NO (if! any descendatnt) & SI (if! non of their descendatnt)
+ \end{tabular} 
+ 
+ A trail is active given $D$ Data if:
+ \begin{itemize}
+  \item for any v-structure we have the collider or one of its descendants is in D
+  \item No other variable is in D
+ \end{itemize}
+

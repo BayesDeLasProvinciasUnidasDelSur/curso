@@ -1,0 +1,138 @@
+
+
+Tres random variables.
+
+\begin{itemize}
+ \item Inteligencia (I)
+ \begin{enumerate}
+  \item low (i$^0$)
+  \item high (i$^1$)
+ \end{enumerate}
+ \item Dificultad (D)
+ \begin{enumerate}
+  \item easy (d$^0$)
+  \item hard (d$^1$)
+ \end{enumerate}
+ \item Resultado (R)
+ \begin{enumerate}
+  \item Desaprobado (r$^0$)
+  \item Aprobado (r$^1$)
+  \item Sobresaliente (r$^2$)
+ \end{enumerate}
+\end{itemize}
+
+\paragraph{Joint Distribution} .
+
+ \begin{tabular}{|c|c|c|c|}
+ \hline
+ I & D & R & $P(I,D,R)$ \\ \hline
+ i$^0$ & d$^0$ & r$^0$ & 0.126 \\ \hline
+ i$^0$ & d$^0$ & r$^1$ & 0.168 \\ \hline
+ i$^0$ & d$^0$ & r$^2$ & 0.126 \\ \hline
+ i$^0$ & d$^1$ & r$^0$ & 0.009 \\ \hline
+ i$^0$ & d$^1$ & r$^1$ & 0.045 \\ \hline
+ i$^0$ & d$^1$ & r$^2$ & 0.126 \\ \hline
+ i$^1$ & d$^0$ & r$^0$ & 0.252 \\ \hline
+ i$^1$ & d$^0$ & r$^1$ & 0.0224 \\ \hline
+ i$^1$ & d$^0$ & r$^2$ & 0.0056 \\ \hline
+ i$^1$ & d$^1$ & r$^0$ & 0.06 \\ \hline
+ i$^1$ & d$^1$ & r$^1$ & 0.036 \\ \hline
+ i$^1$ & d$^1$ & r$^2$ & 0.024 \\ \hline \hline
+         &         &         & 1.0     \\ \hline
+ \end{tabular}
+
+ Todas las combinaciones $2\cdot2\cdot3 = 12$.
+ 
+
+ 
+ \paragraph{Conditioning} .
+
+ Conditioning on (r$^0$)
+
+ \subparagraph{Reduction} .
+ 
+ \begin{tabular}{|c|c|c|c|}
+ \hline
+ I & D & R & $P(I,D,r^0)$ \\ \hline
+ i$^0$ & d$^0$ & r$^0$ & 0.126 \\ \hline
+ i$^0$ & d$^1$ & r$^0$ & 0.009 \\ \hline
+ i$^1$ & d$^0$ & r$^0$ & 0.252 \\ \hline
+ i$^1$ & d$^1$ & r$^0$ & 0.06 \\ \hline
+       &       &       & 0.447     \\ \hline
+ \end{tabular}
+ 
+%  \begin{equation}
+%   P(I,D,R=r^0) = \sum_
+%  \end{equation}
+
+
+ \subparagraph{Renormalization} .
+ 
+ \begin{tabular}{|c|c|c|c|}
+ \hline
+ I & D & R & $P(I,D|r^0)$ \\ \hline
+ i$^0$ & d$^0$ & r$^0$ & 0.282 \\ \hline
+ i$^0$ & d$^1$ & r$^0$ & 0.02 \\ \hline
+ i$^1$ & d$^0$ & r$^0$ & 0.564 \\ \hline
+ i$^1$ & d$^1$ & r$^0$ & 0.134\\ \hline
+       &       &       & 1.0     \\ \hline
+ \end{tabular}
+
+\paragraph{Marginalization (sum rule)} .
+
+\begin{multicols}{2}
+ 
+ \begin{tabular}{|c|c|c|}
+ \hline
+ I & D & $P(I,D|r^0)$ \\ \hline
+ i$^0$ & d$^0$  & 0.282 \\ \hline
+ i$^0$ & d$^1$  & 0.02 \\ \hline
+ i$^1$ & d$^0$  & 0.564 \\ \hline
+ i$^1$ & d$^1$  & 0.134\\ \hline
+       &        &  1.0     \\ \hline
+ \end{tabular}
+
+ \begin{tabular}{|c|c|}
+ \hline
+  D & $P(D|r^0)$ \\ \hline
+  d$^0$  & 0.846 \\ \hline
+  d$^1$  & 0.154 \\ \hline
+         & 1.0     \\ \hline
+ \end{tabular}
+
+\end{multicols}
+
+
+% \begin{figure}[H]
+%  \centering
+%  \begin{subfigure}[c]{0.32\textwidth}
+%   \tikz{
+%  \node[latent, fill=black!0, minimum size=25pt] (d) {D} ; %
+% %  \node[const, left=of d, xshift=-1cm] (cpd) {
+% %  \begin{tabular}{|l|l|l|}
+% %  \hline
+% %  $x^0$ & $x^1$ & $x^2$ \\ \hline
+% %  0.5 & 0.3 & 0.2  \\ \hline
+% %  \end{tabular}
+% %  }; 
+%  \node[latent, fill=black!0, minimum size=25pt, xshift=2cm] (i) {I};
+%  \node[latent, fill=black!0, minimum size=25pt, below=of d,xshift=1cm] (r) {R} ;
+% %  \node[const, right=of i, xshift=1cm] (cpd_u) {
+% %  \begin{tabular}{|l|l|l|}
+% %  \hline
+% %        & $a^0$ & $a^1$  \\ \hline
+% %  $x^0$ & 0 & -7 \\ \hline
+% %  $x^1$ & 0 & 5 \\ \hline
+% %  $x^2$ & 0 & 20 \\ \hline
+% %  \end{tabular}
+% %  
+% %}; 
+%  \edge {d} {r};
+%  \edge {i} {r};
+%  }  
+% % \caption{}
+%  \label{fig:market_survey_found_withObs}
+%  \end{subfigure}
+%  \caption{}
+%  \label{fig:market_survey_found}
+% \end{figure}
