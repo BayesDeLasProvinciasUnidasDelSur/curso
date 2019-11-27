@@ -98,15 +98,13 @@ for d in range(10):
 
 for d in range(10):
     if d != 3:
-        Zpos = np.ma.masked_less(belief[:,:,3]-belief[:,:,d], 0)
-        Zneg = np.ma.masked_greater(belief[:,:,3]-belief[:,:,d], 0)
+        Zpos = np.ma.masked_less(np.log(belief[:,:,3]/belief[:,:,d]), 0)
+        Zneg = np.ma.masked_greater(np.log(belief[:,:,3]/belief[:,:,d]), 0)
         plt.imshow(Zpos,extent=[-0.5,0.5,-1.4,1.4],cmap='Greens')
         plt.imshow(Zneg,extent=[-0.5,0.5,-1.4,1.4],cmap='Reds_r')
         plt.plot(X_grilla, y_true, '--', color="black")
         plt.savefig("img/example2_posterior_predictive_difference_3_{}.pdf".format(d))
         plt.close()
-
-
 
 
 belief_at_true = np.zeros((10,len(X_grilla)))
@@ -118,7 +116,38 @@ for d in range(10):
         Phi_x = Phi_x.reshape((1,d+1))
         belief_at_true[d,ix] = predictive(y_true[ix].ravel(), Phi_x, beta, alpha, t, Phi)
 plt.axhline(y=0, color='r', linestyle='-')
-for d in range(10):#d=0
+for d in range(10):#d=3
     if d != 3:
         plt.plot(X_grilla,belief_at_true[3,:]-belief_at_true[d,:])
 
+
+i=20
+belief = np.zeros((len(y_grilla),len(X_grilla),10))
+for d in range(10):#d=1
+    Phi =  polynomial_basis_function(X[:i], np.array(range(d+1)) )
+    for ix in range(len(X_grilla)):
+        xi = X_grilla[ix]
+        Phi_x = polynomial_basis_function(xi, np.array(range(d+1)))
+        Phi_x = Phi_x.reshape((1,d+1))
+        belief[:,ix,d] =  predictive(y_grilla, Phi_x, beta, alpha, t[:i], Phi)[::-1] 
+
+
+plt.close()
+plt.plot(X_grilla,belief[:,0,3])
+plt.plot(X_grilla,belief[:,0,9])
+
+plt.close()
+plt.plot(X_grilla,belief[:,24,3])
+plt.plot(X_grilla,belief[:,24,9])
+
+plt.close()
+plt.plot(X_grilla,belief[:,49,3])
+plt.plot(X_grilla,belief[:,49,9])
+
+plt.close()
+plt.plot(X_grilla,belief[:,74,3])
+plt.plot(X_grilla,belief[:,74,9])
+
+plt.close()
+plt.plot(X_grilla,belief[:,-1,3])
+plt.plot(X_grilla,belief[:,-1,9])
