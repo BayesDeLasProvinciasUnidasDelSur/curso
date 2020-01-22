@@ -1,12 +1,10 @@
-Bienvenides al seminario del grupo bayes exactas-UBA !
+# Seminario grupo bayes exactas-UBA 
 
 Manual de uso de git https://git-scm.com/book/en/v2
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+## Prácticas de uso
 
-# Prácticas de uso
-
-## ```.gitignore```
+### ```.gitignore```
 
 **Atención**: El archivo ```.gitignore``` ignora *TODOS* los archivos *SALVO* algunas extensiones específicas a archivos fuentes. 
 
@@ -14,18 +12,18 @@ QUEREMOS: Solo archivo de código fuente. Si actualemnte está siendo ignorado u
 
 NO QUEREMOS: pdf, imágenes, datos, archivos "office" (.doc .docx .odt), muchos etceteras.
 
-## Buenas prácticas
+### Buenas prácticas
 
 - *Antes de empezar a trabajar:* hacer ``` git pull origin master```. 
 
 - *Al terminar de trabajar:* hacer un ``` git commit``` e inmediatemente compartirlo con el resto con ``` git push origin master```. 
 
-#### ```git pull --rebase```
+##### ```git pull --rebase```
 
 **Recomendación:** Antes de hacer ``` push ``` se recomienda hacer ```git pull --rebase```, para traer eventuales modificaciones que hayan ocurrido en el ```origin``` no vistas previamente.
 De esta forma, los conflictos se recuelven localmente.
 
-#### ```.bib```
+##### ```.bib```
 
 **Reglas de estilo**: las claves de las citas del archivo ``` .bib``` se espera que sigan el siguiente esquema: 
 
@@ -33,7 +31,7 @@ De esta forma, los conflictos se recuelven localmente.
     apellido1999-resumenDelTitulo
 `
 
-## ```biblio/```
+### ```biblio/```
 
 Estructura:
 
