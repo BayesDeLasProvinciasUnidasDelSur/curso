@@ -1,6 +1,8 @@
-Racial shoot debate.
+# Causal inference
 
-## Jonathan Mummolo ([thread](https://twitter.com/jonmummolo/status/1219694149424861184))
+## Racial shoot debate.
+
+ Jonathan Mummolo ([thread](https://twitter.com/jonmummolo/status/1219694149424861184))
 
 *@PNASNews published a study last year claiming no racial bias in police shootings. The study's central claim was mathematically unsupported. @dean_c_knox
  & I submitted critique to PNAS, which was rejected. We appealed. Today PNAS published our critique.1/n*
@@ -18,3 +20,10 @@ Racial shoot debate.
   url={https://www.pnas.org/content/pnas/117/3/1261.full.pdf}
 }
 
+## Cofunder
+
+@analisereal ([thread](https://twitter.com/analisereal/status/1220110017111584770?s=19))
+
+*In this paper, we develop new sensitivity analyses tools to precisely quantify how strong confounders need to be to overturn your research conclusions*
+
+Paper: Making sense of sensitivity: extending omitted variable bias
