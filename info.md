@@ -10,6 +10,9 @@ A esto se le agregan otros ejemplos
 
 # Materiales no bibliográfico
 
+## Mc Elreath bayes course
+https://github.com/rmcelreath/statrethinking_winter2019
+
 ## machine learning summer school 2009
 http://videolectures.net/mlss09uk_cambridge/
 http://videolectures.net/mlss09uk_minka_ai/
