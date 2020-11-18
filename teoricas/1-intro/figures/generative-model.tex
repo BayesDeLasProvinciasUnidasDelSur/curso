@@ -1,0 +1,54 @@
+\documentclass[10pt]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\newif\ifen
+\newif\ifes
+\newcommand{\en}[1]{\ifen#1\fi}
+\newcommand{\es}[1]{\ifes#1\fi}
+\entrue
+
+
+
+\input{../aux/tex/tikzlibrarybayesnet.code.tex}
+\input{../aux/tex/encabezado.tex}
+\makeatletter
+\newcommand{\vast}{\bBigg@{2.5}}
+\newcommand{\Vast}{\bBigg@{14.5}}
+\makeatother
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\begin{document}
+
+\color{black!85}
+
+\tikz{         
+    \node[det, fill=black!10] (r) {$r_{ij}$} ; 
+    \node[const, left=of r, xshift=-1.35cm] (r_name) {\small \en{Result}\es{Resultado}:}; 
+    \node[const, right=of r] (dr) {\normalsize $ r_{ij} = (d_{ij}>0)$}; 
+
+    \node[latent, above=of r, yshift=-0.45cm] (d) {$d_{ij}$} ; %
+    \node[const, right=of d] (dd) {\normalsize $ d_{ij}=p_i-p_j$}; 
+    \node[const, left=of d, xshift=-1.35cm] (d_name) {\small \en{Difference}\es{Diferencia}:};
+    
+    \node[latent, above=of d, xshift=-0.8cm, yshift=-0.45cm] (p1) {$p_i$} ; %
+    \node[latent, above=of d, xshift=0.8cm, yshift=-0.45cm] (p2) {$p_j$} ; %
+    \node[const, left=of p1, xshift=-0.55cm] (p_name) {\small \en{Performance}\es{Rendimiento}:}; 
+
+    \node[accion, above=of p1,yshift=0.3cm,fill=black!85] (s1) {} ; %
+    \node[const, right=of s1] (ds1) {$s_i$};
+    \node[accion, above=of p2,yshift=0.3cm,fill=black!85] (s2) {} ; %
+    \node[const, right=of s2] (ds2) {$s_j$};
+    
+    \node[const, right=of p2] (dp2) {\normalsize $p \sim \N(s,\beta^2)$};
+
+    \node[const, left=of s1, xshift=-.85cm] (s_name) {\small \en{Skill}\es{Habilidad}:}; 
+    
+    \edge {d} {r};
+    \edge {p1,p2} {d};
+    \edge {s1} {p1};
+    \edge {s2} {p2};
+}
+\hspace{1.2cm}
+
+\end{document}

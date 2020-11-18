@@ -1,0 +1,38 @@
+\documentclass[10pt]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\input{../aux/tex/tikzlibrarybayesnet.code.tex}
+\input{../aux/tex/encabezado.tex}
+\makeatletter
+\newcommand{\vast}{\bBigg@{2.5}}
+\newcommand{\Vast}{\bBigg@{14.5}}
+\makeatother
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\begin{document}
+
+\tikz{ %
+        
+         \node[factor, minimum size=1cm] (p1) {} ;
+         \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
+         \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+%         
+%         
+         \node[const, above=of p1, yshift=.15cm] (fp1) {$33\%$};
+         \node[const, above=of p2, yshift=.15cm] (fp2) {$33\%$};
+         \node[const, above=of p3, yshift=.15cm] (fp3) {$33\%$};
+%         \node[const, above=of p2, xshift=.8cm, yshift=.15cm] (fp3) {$66\%$};
+%         
+         \node[invisible, xshift=4.75cm] (s-dist) {};
+         \node[invisible, yshift=-1cm] (s-dist) {};
+         \node[invisible, yshift=1.2cm] (s-dist) {};
+%         
+%         \plate[color=red] {no} {(p1)} {}; %
+%         \plate {si} {(p2)(p3)} {}; %
+        
+        } 
+
+
+\end{document}
