@@ -1,0 +1,906 @@
+\documentclass[shownotes,aspectratio=169]{beamer}
+\input{../../aux/tex/diapo_encabezado.tex}
+\input{../../aux/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+ 
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+%\title[Bayes del Sur]{}
+
+\begin{document}
+
+ \color{black!85}
+
+\small
+\setbeamercolor{background canvas}{bg=gray!18}
+
+\begin{frame}[plain,noframenumbering]
+ 
+ \begin{textblock}{80}(0,0)
+\begin{center}
+ \huge  \textcolor{black!66}{Logia Bayesiana de las \\ Provincias Unidas del Sud}
+\end{center}
+\end{textblock}
+
+ %\vspace{2cm}brown
+%\maketitle
+\Wider[2cm]{
+\includegraphics[width=1\textwidth]{../../aux/static/peligro_predador}
+}
+\end{frame}
+
+\begin{frame}[plain]
+\vspace{0.5cm}
+\begin{center} 
+ \LARGE Modelos con m\'ultiples param\'etros \\
+ 
+ \large Cap\'itulo 3
+\end{center}
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Posteriori marginal
+\end{center}
+\end{textblock}
+ \vspace{0.75cm}
+ 
+ \only<1->{
+ \begin{textblock}{160}(0,25)
+ \begin{equation*}
+  p(\theta_1,\theta_2|y) = \frac{p(y|\theta_1,\theta_2)p(\theta_1,\theta_2) }{p(y)}
+ \end{equation*}
+ \end{textblock}
+ }
+ 
+ \only<2->{
+ \begin{textblock}{160}(0,45)
+ \begin{equation*}
+  p(\theta_1|y) = \int p(\theta_1,\theta_2|y) d\theta_2
+ \end{equation*} 
+ \end{textblock}
+ }
+ 
+ \begin{textblock}{160}(0,63)
+ \begin{center}
+ \only<3>{\textbf{Ejemplo}:  \ \ $p(y|\mu,\sigma) = \N(y| \mu,\sigma^2)$ \\}
+ \end{center}
+ \end{textblock}
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Posteriori marginal \\
+ \large Ejemplo
+\end{center}
+\end{textblock}
+ \vspace{0.75cm}
+ 
+ \only<1->{
+ \begin{textblock}{160}(0,25)
+ \begin{equation*}
+  p(y|\mu,\sigma) = \N(y| \mu,\sigma^2)  \hspace{1cm} p(\mu, \sigma) \propto \sigma^{-2}
+ \end{equation*}
+ \end{textblock}
+ }
+% 
+ \begin{textblock}{160}(0,35)
+ \begin{align*}
+\onslide<2->{ p(\mu,\sigma|\vm{y}) & \propto \sigma^{-n-2} \exp \left( -\frac{1}{2\sigma^2} \sum_{i=1}^{n} (\vm{y}_i - \mu)^2 \right) \\}
+\onslide<3->{& = \sigma^{-n-2} \exp \left( -\frac{1}{2\sigma^2}  \left[ n(\overline{y}-\mu)^2 + \sum_{i=1}^n (\vm{y}_i - \overline{y}) \right] \right) \\}
+\onslide<4->{& = \sigma^{-n-2} \exp \left( -\frac{1}{2\sigma^2}  \left[ n(\overline{y}-\mu)^2 + (n-1) s^2 \right] \right) \\
+& \text{ con } s^2 = \frac{1}{n-1} \sum_{i=1}^n (\vm{y}_i - \overline{y})^2
+}
+ \end{align*}
+ \end{textblock}
+
+ 
+\end{frame}
+
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Posteriori marginal \\
+ \large Ejemplo
+\end{center}
+\end{textblock}
+ \vspace{0.75cm}
+ 
+ \only<1->{
+ \begin{textblock}{160}(0,25)
+ \begin{equation*}
+  p(y|\mu,\sigma) = \N(y| \mu,\sigma^2)  \hspace{1cm} p(\mu, \sigma) \propto \sigma^{-2}
+ \end{equation*}
+ \end{textblock}
+ }
+
+ \only<2->{
+ \begin{textblock}{160}(0,35)
+ \begin{equation*}
+  p(\mu|\sigma,y) = \N(\mu|\overline{y},\sigma^2/n)
+ \end{equation*}
+ \end{textblock}
+ }
+ 
+  \only<3->{
+ \begin{textblock}{160}(0,45)
+ \begin{equation*}
+  p(\sigma|y) = \text{Inv-}\chi^2(n-1,s^2)
+ \end{equation*}
+ \end{textblock}
+ }
+
+ \only<4->{
+ \begin{textblock}{160}(0,55)
+ \begin{equation*}
+  p(\mu|y) = t_{n-1}(\overline{y},s^2/n)
+ \end{equation*}
+ \end{textblock}
+ }
+
+ \only<5->{
+\begin{textblock}{160}(0,68)
+\centering
+Ocurre algo similar cuando los priors son 
+\begin{align*}
+ \mu|\sigma^2 \sim \N(\mu_0, \sigma^2/\kappa_0) \ \ \ \ \ \ \sigma \sim \text{Inv-}\chi^2(\nu_0,\sigma_0^2)
+\end{align*}
+ \end{textblock}
+ }
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Multinomial y Dirichlet \\
+\end{center}
+\end{textblock}
+ \vspace{0.75cm}
+
+ 
+ \pause
+ Multinomial
+ \begin{align*}
+  p(\vm{y}|\vm{\theta}) \propto \prod_{j=1}^k \vm{\theta}_j^{\vm{y}_j}
+ \end{align*}
+
+ 
+ \pause
+ Dirichlet
+ \begin{align*}
+  p(\vm{\theta}|\bm{\alpha}) \propto \prod_{j=1}^k \vm{\theta}_j^{\bm{\alpha}_j}
+ \end{align*}
+
+ 
+ 
+ 
+ \end{frame}
+
+ 
+
+%  
+%  \begin{textblock}{160}(0,35)
+%  \begin{equation*}
+%  \begin{split}
+%  \only<2->{ p(\mu,\sigma|\bm{y}) &\propto p(\mu, \sigma) \prod_i^n p(\bm{y}_i|\mu,\sigma) \\}
+%  \only<3->{&= } \sigma^{-n}\sigma^{-2} \exp\Big( \frac{1}{2\sigma^2} \sum_i^n (\bm{y}_i - \mu)^2 \Big) \\
+%   \only<4->{&= } \sigma^{-(n+2)} \exp\Big( \frac{1}{2\sigma^2} [ n(\overline{y}-\mu)^2 + (n-1)s^2]\Big)
+%  \end{split}
+%  \end{equation*}
+%  
+%  con 
+%  \end{textblock}
+%  
+ 
+
+ \begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Gaussiana multivariada
+\end{center}
+\end{textblock}
+
+
+\begin{align*}
+\N(\vm{x}|\bm{\mu},\vm{\Sigma}) = \frac{1}{(2\pi)^{D/2}} \frac{1}{|\vm{\Sigma}|^{1/2}} \exp\left( - \frac{1}{2} (\vm{x}-\bm{\mu})^T \vm{\Sigma}^{-1} (\vm{x}-\bm{\mu}) \right)
+\end{align*}
+
+\vspace{0.5cm}
+
+\begin{itemize}
+ \item[$\circ$] Con $\vm{x}$ y $\bm{\mu}$ vectores $D$-dimensionales
+ \item[$\circ$] Con $\vm{\Sigma}$ matriz de covarianza $D \times D$
+ \item[$\circ$] $|\Sigma|$ el determinante de $\Sigma$
+\end{itemize}
+
+ \end{frame}
+ 
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Distribuci\'on Gaussiana condicional y marginal.
+\end{center}
+\end{textblock}
+\vspace{0.5cm}
+
+Dado
+\begin{align*}
+ p(\vm{x}) = \N(\vm{x}|\bm{\mu},\vm{\Sigma})
+\end{align*}
+
+tal que
+\begin{align*}
+ \vm{x} = \begin{pmatrix} \vm{x}_a \\ \vm{x}_b \end{pmatrix} 
+ \ \ \
+ \bm{\mu} = \begin{pmatrix} \bm{\mu}_a \\ \bm{\mu}_b \end{pmatrix} 
+\ \ \
+ \vm{\Sigma} = \begin{pmatrix} \vm{\Sigma}_{aa} & \vm{\Sigma}_{ab} \\ \vm{\Sigma}_{ba} & \vm{\Sigma}_{bb} \end{pmatrix} 
+ \ \ \ 
+ \vm{\Sigma}^{-1} = \vm{\Lambda} = \begin{pmatrix} \vm{\Lambda}_{aa} & \vm{\Lambda}_{ab} \\ \vm{\Lambda}_{ba} & \vm{ \Lambda}_{bb} \end{pmatrix} 
+ \end{align*}
+
+Queremos encontrar,
+\begin{align*}
+ p(\vm{x}_a|\vm{x}_b) & = \N(\vm{x}_a|\bm{\mu}_{a|b},\vm{\Sigma}_{a|b}) \\
+ p(\vm{x}_a) & = \N(\vm{x}_a|\bm{\mu}_a,\vm{\Sigma}_a)
+\end{align*}
+
+\only<2>{
+ \begin{textblock}{160}(0,84)\centering \scriptsize
+Notar que $\bm{\Lambda}_{aa} \neq \bm{\Sigma}_{aa}^{-1}$
+ \end{textblock}
+ }
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Distribuci\'on Gaussiana condicional.
+\end{center}
+\end{textblock}
+\vspace{0.75cm}
+
+\onslide<1->{
+\begin{textblock}{160}(0,12)
+\begin{align*}
+ p(\vm{x}_a|\vm{x}_b) \propto p(\vm{x}_a,\vm{x}_b) \propto \exp\Big( -\frac{1}{2} (\vm{x}-\bm{\mu})^T \vm{\Sigma}^{-1} (\vm{x}-\bm{\mu}) \Big)
+\end{align*}
+\end{textblock}
+}
+
+\only<2->{
+\begin{textblock}{160}(0,28)
+\begin{align*}
+-\frac{1}{2}(\vm{x}-\bm{\mu})^T \vm{\Sigma}^{-1} (\vm{x}-\bm{\mu}) = -\frac{1}{2} \underbrace{\vm{x}^T \vm{\Sigma}^{-1} \vm{x}}_{\text{Cuadr\'atico}} +  \underbrace{\vm{x}^T \vm{\Sigma}^{-1} \bm{\mu}}_{\text{Lineal}} + \text{const} 
+\end{align*}
+\end{textblock}
+}
+ 
+
+\begin{textblock}{160}(0,46)
+\begin{align*}
+\onslide<3->{& -\frac{1}{2}(\vm{x}_a-\bm{\mu}_a)^T \vm{\Lambda}_{aa}^{-1} (\vm{x}_a-\bm{\mu}_a)
+ -\frac{1}{2}(\vm{x}_a-\bm{\mu}_a)^T \vm{\Lambda}_{ab}^{-1} (\vm{x}_b-\bm{\mu}_b) \\
+&  -\frac{1}{2}(\vm{x}_b-\bm{\mu}_b)^T \vm{\Lambda}_{ba}^{-1} (\vm{x}_a-\bm{\mu}_a)
+-\frac{1}{2}(\vm{x}_b-\bm{\mu}_b)^T \vm{\Lambda}_{bb}^{-1} (\vm{x}_b-\bm{\mu}_b) \\
+& = } \\
+\only<3>{ & -\frac{1}{2} \vm{x}_a^T \, \vm{\Lambda}_{aa} \, \vm{x}_a + \vm{x}_a^T \big( \, \vm{\Lambda}_{aa} \bm{\mu}_a  - \vm{\Lambda}_{ab}(\vm{x}_b-\bm{\mu}_b) \, \big) + \text{const} \\} 
+\onslide<4->{ & -\frac{1}{2} \vm{x}_a^T \underbrace{\vm{\Lambda}_{aa}}_{\vm{\Sigma}_{a|b}^{-1}} \vm{x}_a + \vm{x}_a^T \big( \underbrace{\vm{\Lambda}_{aa} \bm{\mu}_a  - \vm{\Lambda}_{ab}(\vm{x}_b-\bm{\mu}_b)}_{\vm{\Sigma}_{a|b}^{-1}\bm{\mu}_{a|b}} \big) + \text{const}}
+\end{align*}
+\end{textblock}
+
+
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Distribuci\'on Gaussiana condicional
+\end{center}
+\end{textblock}
+\vspace{0.75cm}
+
+\begin{align*}
+\vm{\Sigma}_{a|b} = \vm{\Lambda}_{aa}^{-1}
+ \ \ \ \ \ \ 
+ \bm{\mu}_{a|b} & = \vm{\Sigma}_{a|b} \Big( \vm{\Lambda}_{aa} \bm{\mu}_a  - \vm{\Lambda}_{ab}(\vm{x}_b-\bm{\mu}_b)  \Big) \\
+ & = \bm{\mu}_a - \vm{\Lambda}_{aa}^{-1} \vm{\Lambda}_{ab}(\vm{x}_b-\bm{\mu}_b)
+\end{align*}
+
+\pause
+\vspace{1cm}
+\Wider[-7cm]{
+\begin{mdframed}[backgroundcolor=black!20]
+\[p(\vm{x}_a|\vm{x}_b) = \N(\vm{x}| \bm{\mu}_{a|b} , \vm{\Lambda}_{aa}^{-1} ) \]
+\end{mdframed}
+}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \large Matriz de precisi\'on
+\end{center}
+\end{textblock}
+\vspace{0.75cm}
+
+\begin{align*}
+ \begin{pmatrix} \vm{A} & \vm{B} \\ \vm{C} & \vm{D} \end{pmatrix}  
+ = 
+ \begin{pmatrix} 
+ \vm{M} &  -\vm{M}\vm{B}\vm{D}^{-1}  \\
+ -\vm{D}^{-1}\vm{C}\vm{M}  & \vm{D}^{-1} \vm{C}\vm{M}\vm{B}\vm{D}^{-1} 
+ \end{pmatrix}
+ \hspace{0.8cm} \text{con } \vm{M} = (\vm{A}-\vm{B}\vm{D}^{-1}\vm{C})^{-1} 
+\end{align*}
+
+
+\begin{align*}
+ \vm{\Lambda}_{aa} & = ( \vm{\Sigma}_{aa} - \vm{\Sigma}_{ab} \vm{\Sigma}_{bb}^{-1} \vm{\Sigma}_{ba} )^{-1} \\
+ \vm{\Lambda}_{ab} & = -( \vm{\Sigma}_{aa} - \vm{\Sigma}_{ab} \vm{\Sigma}_{bb}^{-1} \vm{\Sigma}_{ba} )^{-1}  \vm{\Sigma}_{ab}  \vm{\Sigma}_{bb}^{-1}
+\end{align*}
+
+% 
+% \Wider[-6cm]{
+% \begin{mdframed}[backgroundcolor=black!20]
+% \vspace{-0.4cm}
+% \begin{equation*}
+% \begin{split}
+%  \bm{\mu}_{a|b} & = \bm{\mu}_a + \vm{\Sigma}_{ab}  \vm{\Sigma}_{bb}^{-1} (\vm{x}_b-\bm{\mu}_b)\\
+%  \bm{\Sigma}_{a|b} & = \vm{\Sigma}_{aa} - \vm{\Sigma}_{ab} \vm{\Sigma}_{bb}^{-1} \vm{\Sigma}_{ba} \\
+%  \end{split}
+% \end{equation*}
+% \end{mdframed}
+% }
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \large Demostraci\'on de la matriz inversa
+\end{center}
+\end{textblock}
+\vspace{0.75cm}
+
+\only<1->{
+\begin{textblock}{160}(0,18)
+\begin{align*}
+ \begin{pmatrix} \vm{A} & \vm{B} \\ \vm{C} & \vm{D} \end{pmatrix}  
+ \begin{pmatrix} \vm{A} & \vm{B} \\ \vm{C} & \vm{D} \end{pmatrix}^{-1}   = \begin{pmatrix} \vm{I} & \vm{O} \\ \vm{O} & \vm{I} \end{pmatrix}  
+\end{align*}
+\end{textblock}
+}
+
+\only<2->{
+\begin{textblock}{160}(0,38)
+\begin{align*}
+ \begin{pmatrix} \vm{A} & \vm{B} \\ \vm{C} & \vm{D} \end{pmatrix}  
+  \begin{pmatrix} 
+ \vm{M} &  -\vm{M}\vm{B}\vm{D}^{-1}  \\
+ -\vm{D}^{-1}\vm{C}\vm{M}  & \vm{D}^{-1} \vm{C}\vm{M}\vm{B}\vm{D}^{-1} 
+ \end{pmatrix}
+ = \begin{pmatrix} \vm{I} & \vm{O} \\ \vm{O} & \vm{I} \end{pmatrix}  \\
+ \end{align*}
+ \vspace{-1cm}
+ \[\text{con } \vm{M} = (\vm{A}-\vm{B}\vm{D}^{-1}\vm{C})^{-1}  \]
+\end{textblock}
+}
+
+
+\begin{textblock}{160}(0,64)
+ \begin{align*}
+\onslide<3->{  \vm{A}\vm{M} - \vm{B}\vm{D}^{-1}\vm{C}\vm{M}}
+\onslide<4->{= \Big(\vm{A} - \vm{B}\vm{D}^{-1}\vm{C}\Big) \vm{M}} \onslide<5>{= \vm{M}^{-1}\vm{M}}
+ \end{align*}
+\end{textblock}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Distribuci\'on Gaussiana marginal
+\end{center}
+\end{textblock}
+\vspace{0.75cm}
+
+ \begin{textblock}{160}(0,12)
+\begin{align*}
+\onslide<1->{ p(\vm{x}_a) = \int p(\vm{x}_a,\vm{x}_b) d\vm{x}_b }
+\end{align*}
+\end{textblock}
+
+\begin{textblock}{160}(0,24)
+\begin{align*}
+\only<2>{ -\frac{1}{2}\vm{x}_b^T \vm{\Lambda}_{bb}\vm{x}_b + \vm{x}_b^T \, (  \vm{\Lambda}_{bb}\bm{\mu}_b - \vm{\Lambda}_{ba}( \vm{x}_a - \bm{\mu}_a))  }
+\only<3->{ -\frac{1}{2}\vm{x}_b^T \vm{\Lambda}_{bb}\vm{x}_b + \vm{x}_b^T \underbrace{(\vm{\Lambda}_{bb}\bm{\mu}_b - \vm{\Lambda}_{ba}(\vm{x}_a - \bm{\mu}_a))}_{\vm{m}} }
+\end{align*}
+\end{textblock}
+
+\begin{textblock}{160}(0,38)
+\begin{align*}
+ \onslide<4->{ -\frac{1}{2}\vm{x}_b^T \vm{\Lambda}_{bb}\vm{x}_b + \vm{x}_b^T \vm{m} }
+  \onslide<5->{ & =  -\frac{1}{2}\vm{x}_b^T \vm{\Lambda}_{bb}\vm{x}_b + \vm{x}_b^T \vm{m} \overbrace{- \frac{1}{2}\vm{m}^T \vm{\Lambda}_{bb}^{-1} \vm{m} + \frac{1}{2}\vm{m}^T \vm{\Lambda}_{bb}^{-1} \vm{m}}^{\vm{0}}  \\ }
+  \onslide<6->{ & =   \underbrace{-\frac{1}{2} (\vm{x}_b - \vm{\Lambda}_{bb}^{-1}\vm{m})^T \vm{\Lambda}_{bb}(\vm{x}_b - \vm{\Lambda}_{bb}^{-1} \vm{m})}_{\text{Exponente de la Gaussiana}} +  \frac{1}{2}\vm{m}^T \vm{\Lambda}_{bb}^{-1} \vm{m} }
+\end{align*}
+\end{textblock}
+
+\begin{textblock}{160}(0,70)
+\begin{align*}
+\onslide<7->{ p(\vm{x}_a) =  f(\vm{x}_a)  \int \exp\left( -\frac{1}{2} (\vm{x}_b - \vm{\Lambda}_{bb}^{-1}\vm{m})^T \vm{\Lambda}_{bb}(\vm{x}_b - \vm{\Lambda}_{bb}^{-1} \vm{m}) \right) d\vm{x}_b }
+\end{align*}
+\end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Distribuci\'on Gaussiana marginal
+\end{center}
+\end{textblock}
+\vspace{0.75cm}
+
+\begin{textblock}{160}(0,18)
+\begin{align*}
+\onslide<1->{ f(\vm{x}_a) & = \frac{1}{2}\vm{m}^T \vm{\Lambda}_{bb}^{-1} \vm{m}  - \frac{1}{2}\vm{x}_a^T \vm{\Lambda}_{aa} \vm{x} + \vm{x}_a^T (\vm{\Lambda}_{aa} \bm{\mu}_a + \vm{\Lambda}_{ab} \bm{\mu}_b) + \text{const} \transparent{0} \text{cdddddonsssst}\\} 
+\only<2>{ & \overset{*}{=} -\frac{1}{2} \vm{x}_a^T \, (\vm{\Lambda}_{aa}-\vm{\Lambda}_{ab}\vm{\Lambda}_{bb}^{-1}\vm{\Lambda}_{ba}) \, \vm{x}_a  + \vm{x}_a^T \, (\vm{\Lambda}_{aa}-\vm{\Lambda}_{ab}\vm{\Lambda}_{bb}^{-1}\vm{\Lambda}_{ba})^{-1} \bm{\mu}_a + \text{c}}
+\only<3->{ & \overset{*}{=} -\frac{1}{2} \vm{x}_a^T \underbrace{ (\vm{\Lambda}_{aa}-\vm{\Lambda}_{ab}\vm{\Lambda}_{bb}^{-1}\vm{\Lambda}_{ba})}_{\vm{\Sigma}_a^{-1}} \vm{x}_a  + \vm{x}_a^T \underbrace{(\vm{\Lambda}_{aa}-\vm{\Lambda}_{ab}\vm{\Lambda}_{bb}^{-1}\vm{\Lambda}_{ba})^{-1} \bm{\mu}_a}_{\vm{\Sigma}_a^{-1}\bm{\mu}_a} +  \ \text{c}}
+\end{align*}
+\end{textblock}
+
+
+\begin{textblock}{160}(0,46)
+ \begin{align*}
+  \only<4>{ \vm{\Sigma}_a =  (\vm{\Lambda}_{aa}-\vm{\Lambda}_{ab}\vm{\Lambda}_{bb}^{-1}\vm{\Lambda}_{ba})^{-1} \, \ \ \ \ \  \bm{\mu}_a = \vm{\Sigma}_a \vm{\Sigma}_a^{-1} \bm{\mu}_a  }
+  \only<5->{ \vm{\Sigma}_a = \underbrace{(\vm{\Lambda}_{aa}-\vm{\Lambda}_{ab}\vm{\Lambda}_{bb}^{-1}\vm{\Lambda}_{ba})^{-1}}_{\vm{\Sigma}_{aa}} \ \ \ \ \  \bm{\mu}_a = \vm{\Sigma}_a \vm{\Sigma}_a^{-1} \bm{\mu}_a  }
+ \end{align*}
+\end{textblock}
+
+
+
+\begin{textblock}{160}(0,66)
+\onslide<6->{
+\Wider[-8cm]{
+\begin{mdframed}[backgroundcolor=black!20]
+ \[  p(\vm{x}_a) = \N(\vm{x}_a | \bm{\mu}_a , \vm{\Sigma}_{aa}) \]
+ \end{mdframed}
+}
+}
+ \end{textblock}
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Teorema de Bayes para Gaussiana multivariada
+\end{center}
+\end{textblock}
+\vspace{0.75cm}
+
+Dadas un modelo lineal
+\begin{align*}
+    p(\vm{w}) &=  \N(\vm{w}|\bm{\mu},\bm{\Lambda}^{-1}) \\
+   p(\vm{y}|\vm{w}) &=  \N(\vm{y}|\vm{A}\vm{w}+\vm{b},\vm{L}^{-1})    
+\end{align*}
+
+\pause
+
+Queremos probar,  
+\begin{align*}
+    p(\vm{y}) &=  \N(\vm{y}|\cdot,\cdot) \\ %\N(\vm{y}|\vm{A}\bm{\mu}+\vm{b},\, \vm{L}^{-1} + \vm{A}\vm{\Lambda}^{-1}\vm{A}^T) \\
+   p(\vm{w}|\vm{y}) &=  \N(\vm{y}|\cdot,\cdot) %\N(\vm{w}|\vm{\Sigma}[\vm{A}^T \vm{L}(\vm{y}-\vm{b})+ \bm{\Lambda\mu}],\,  \vm{\Sigma})\label{eq:post}
+\end{align*}
+
+\pause 
+
+Vamos a usar la probabilidad conjunta
+\begin{align*}
+ \vm{z} = \begin{pmatrix} \vm{w} \\ \vm{y}  \end{pmatrix}
+\end{align*}
+
+% 
+% donde, 
+% \begin{equation*}
+%  \vm{\Sigma} = (\vm{\Lambda} + \vm{A}^T \vm{LA} )^{-1}
+% \end{equation*}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Probabilidad conjunta \\
+ \onslide<3->{\large T\'erminos cuadr\'aticos}
+\end{center}
+\end{textblock}
+
+\begin{textblock}{160}(0,14)
+\begin{align*}
+ \onslide<1->{\log p(\vm{z}) &= \log p(w) + \log p(y|w) \\ }
+ \onslide<2->{& = -\frac{1}{2}(\vm{w}-\bm{\mu})^T \vm{\Lambda}(\vm{w}-\bm{\mu}) -\frac{1}{2}(\vm{y}-\vm{A}\vm{w}-\vm{b})^T \vm{L}(\vm{w}-\vm{A}\vm{w}-\vm{b}) + \text{const} }
+ \end{align*}
+ \end{textblock}
+
+ \begin{textblock}{140}(10,38)
+ \onslide<4->{
+ T\'erminos cuadr\'aticos}
+ \begin{align*}
+ \onslide<4->{
+ &  -\frac{1}{2}\vm{w}^T(\vm{\Lambda} + \vm{A}^T\vm{L}\vm{A}) \vm{w}
+   -\frac{1}{2}\vm{y}^T(\vm{L}) \vm{y}
+   +\frac{1}{2}\vm{y}^T(\vm{L}\vm{A}) \vm{w}
+   +\frac{1}{2}\vm{w}^T(\vm{A}^T\vm{L})\vm{y} 
+   \\}
+ \only<5>{
+ & =  -\frac{1}{2} 
+ \begin{pmatrix} \vm{w} \\ \vm{y}  \end{pmatrix}^T 
+ \begin{pmatrix} \vm{\Lambda} + \vm{A}^T\vm{L}\vm{A}  &  -\vm{A}^T\vm{L}            \\ -\vm{L}\vm{A} & \vm{L}
+  \end{pmatrix}
+  \begin{pmatrix} \vm{w} \\ \vm{y}  \end{pmatrix}
+ }
+ \only<6->{
+ & =  -\frac{1}{2} 
+ \begin{pmatrix} \vm{w} \\ \vm{y}  \end{pmatrix}^T \underbrace{
+ \begin{pmatrix} \vm{\Lambda} + \vm{A}^T\vm{L}\vm{A}  &  -\vm{A}^T\vm{L}            \\ -\vm{L}\vm{A} & \vm{L}
+  \end{pmatrix}}_{\vm{R}}
+  \begin{pmatrix} \vm{w} \\ \vm{y}  \end{pmatrix}
+ }
+ \end{align*}
+ \end{textblock}
+
+ 
+\begin{textblock}{160}(0,70)
+ \begin{align*}
+  \onslide<7->{\text{cov}[\vm{z}] = \vm{R}^{-1} = \begin{pmatrix} \vm{\Lambda}^{-1}   & \vm{\Lambda}^{-1}\vm{A}^T  \\
+  \vm{A}\vm{\Lambda}^{-1} & \vm{L}^{-1} + \vm{A}\vm{\Lambda}^{-1}\vm{A}^T
+  \end{pmatrix}}
+ \end{align*}
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Probabilidad conjunta \\
+ \large T\'erminos lineales
+\end{center}
+\end{textblock}
+
+\begin{textblock}{160}(0,14)
+\begin{align*}
+ \onslide<1->{\log p(\vm{z}) &= \log p(w) + \log p(y|w) \\ }
+ \onslide<1->{& = -\frac{1}{2}(\vm{w}-\bm{\mu})^T \vm{\Lambda}(\vm{w}-\bm{\mu}) -\frac{1}{2}(\vm{y}-\vm{A}\vm{w}-\vm{b})^T \vm{L}(\vm{w}-\vm{A}\vm{w}-\vm{b}) + \text{const} }
+ \end{align*}
+ \end{textblock}
+
+ \begin{textblock}{140}(10,38)
+ \onslide<2->{
+ T\'erminos lineales}
+ \begin{align*}
+ \onslide<2->{\vm{w}^T\vm{\Lambda}\bm{\mu}-\vm{w}^T\vm{A}^T\vm{L}\vm{b} + \vm{y}^T \vm{L}\vm{b}  = \begin{pmatrix} \vm{w} \\ \vm{y}  \end{pmatrix}^T \begin{pmatrix} \vm{\Lambda}\bm{\mu} - \vm{A}^T\vm{L}\vm{b} \\ \vm{L}\vm{b} \end{pmatrix} }
+ \end{align*}
+ \end{textblock}
+
+ \begin{textblock}{160}(0,60)
+ \begin{align*}
+  \onslide<3->{\text{E}[\vm{z}] = \vm{R}^{-1} \begin{pmatrix} \vm{\Lambda}\bm{\mu} - \vm{A}^T\vm{L}\vm{b} \\ \vm{L}\vm{b} \end{pmatrix} } 
+  \onslide<4->{ = \begin{pmatrix} \bm{\mu} \\ \vm{A}\bm{\mu}+\vm{b} \end{pmatrix} }
+ \end{align*}
+ \end{textblock}
+
+ \end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Evidencia y Posterior \\
+\end{center}
+\end{textblock}
+\vspace{1cm}
+
+Dado: \ \ \ \ \ $ p(\vm{w}) =  \N(\vm{w}|\bm{\mu},\bm{\Lambda}^{-1}) \ \ \ \ \ \
+   p(\vm{y}|\vm{w}) =  \N(\vm{y}|\vm{A}\vm{w}+\vm{b},\vm{L}^{-1})    $
+   \vspace{0.25cm}
+   
+\Wider[2cm]{
+\begin{align*}
+ \vm{z} = \begin{pmatrix} \vm{w} \\ \vm{y}  \end{pmatrix}  \ \  \text{E}_{\vm{Z}} = \begin{pmatrix} \bm{\mu} \\ \vm{A}\bm{\mu}+\vm{b} \end{pmatrix} \ \ \text{cov}_{\vm{Z}} = \begin{pmatrix} \vm{\Lambda}^{-1}   & \vm{\Lambda}^{-1}\vm{A}^T  \\
+  \vm{A}\vm{\Lambda}^{-1} & \vm{L}^{-1} + \vm{A}\vm{\Lambda}^{-1}\vm{A}^T  \end{pmatrix}  \ \ \text{cov}_{\vm{Z}}^{-1} = \begin{pmatrix} \vm{\Lambda} + \vm{A}^T\vm{L}\vm{A}  &  -\vm{A}^T\vm{L}            \\ -\vm{L}\vm{A} & \vm{L}
+  \end{pmatrix}
+\end{align*}
+}
+\pause1
+\vspace{1cm}
+
+Luego, usando la propiedades de la marginal y la condicional,
+\pause
+\begin{align*}
+ p(\vm{y}) &= \N(\vm{y}| \vm{A}\bm{\mu} + \vm{b} , \ \   \vm{L}^{-1} + \vm{A}\vm{\Lambda}^{-1}\vm{A}^T ) \\[0.3cm]
+ p(\vm{w}|\vm{y}) &= \N(\vm{w} | \vm{\Sigma}\left( \vm{A}^T \vm{L} (\vm{y}-\vm{b}) + \vm{\Lambda} \bm{\mu}  \right), \ \ \vm{\Sigma}) \\ 
+ &  \text{ con } \vm{\Sigma} = (\vm{\Lambda} + \vm{A}^T \vm{L}\vm{A})^{-1}
+\end{align*}
+
+\end{frame}
+ 
+\begin{frame}[plain]
+ \begin{textblock}{100}(30,0)
+ \begin{figure}
+\begin{subfigure}[t]{0.32\textwidth} 
+\caption*{Verosimilitud} 
+\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}
+\caption*{Priori/Posteriori} 
+\includegraphics[width=\textwidth]{../../figures/linearRegression_posterior_0.png} 
+\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}
+\caption*{Data space} 
+\includegraphics[width=\textwidth]{../../figures/linearRegression_dataSpace_0.png} 
+\end{subfigure}
+
+
+\begin{subfigure}[c]{0.32\textwidth}
+\includegraphics[width=\textwidth]{../../figures/linearRegression_likelihood_1.png} 
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\includegraphics[width=\textwidth]{../../figures/linearRegression_posterior_1.png} 
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\includegraphics[width=\textwidth]{../../figures/linearRegression_dataSpace_1.png} 
+\end{subfigure}
+
+\begin{subfigure}[c]{0.32\textwidth}
+\includegraphics[width=\textwidth]{../../figures/linearRegression_likelihood_2.png} 
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\includegraphics[width=\textwidth]{../../figures/linearRegression_posterior_2.png} 
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\includegraphics[width=\textwidth]{../../figures/linearRegression_dataSpace_2.png} 
+\end{subfigure}
+
+\end{figure}
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{140}(10,0)
+ \begin{center}
+  \Large Selecci\'on de modelo
+ \end{center}
+\end{textblock}
+
+\begin{textblock}{80}(0,20)
+ \centering
+Funci\'on objetivo
+\end{textblock}
+
+\begin{textblock}{80}(80,20)
+ \centering
+ Modelos polinomiales
+\end{textblock}
+
+\begin{textblock}{140}(10,28)
+     \centering 
+       \includegraphics[width=0.48\textwidth]{../../figures/model_selection_true_and_sample.png} 
+       \includegraphics[width=0.48\textwidth]{../../figures/model_selection_MAP.png} 
+\end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,0)
+\begin{center}
+ \Large Selecci\'on de modelo \\
+ \large Evidencia
+\end{center}
+\end{textblock}
+
+
+\only<1>{
+\begin{textblock}{160}(0,24) 
+\begin{equation*}
+ P(\text{Modelo}|\text{Datos}) = \frac{P(\text{Datos}|\text{Modelo})P(\text{Modelo})}{ P(\text{Datos})}
+\end{equation*}
+\end{textblock}
+}
+
+\only<2>{
+\begin{textblock}{160}(0,24)
+\begin{equation*}
+   \frac{P(\text{Modelo}_i|\text{Datos})}{P(\text{Modelo}_j|\text{Datos})}  = \frac{P(\text{Datos}|\text{Modelo}_i)\,\,P(\text{Modelo}_i)}{P(\text{Datos}|\text{Modelo}_j)\,\,P(\text{Modelo}_j)}  
+\end{equation*}
+\end{textblock}
+}
+\only<3>{
+\begin{textblock}{160}(0,24)
+\begin{equation*}
+ \frac{P(\text{Modelo}_i|\text{Datos})}{P(\text{Modelo}_j|\text{Datos})}  = \frac{P(\text{Datos}|\text{Modelo}_i)\,\,P(\text{Modelo}_i)}{ \underbrace{P(\text{Datos}|\text{Modelo}_j)}_{\text{Evidencia!}}\,P(\text{Modelo}_j)}
+\end{equation*}
+\end{textblock}
+}
+
+\only<4->{
+\begin{textblock}{160}(0,24)
+\begin{equation*}
+  \frac{p(\text{Modelo}_i|\text{Datos})}{p(\text{Modelo}_j|\text{Datos})}  = \frac{p(\text{Datos}|\text{Modelo}_i)\,\,p(\text{Modelo}_i)}{ \underbrace{p(\text{Datos}|\text{Modelo}_j)}_{\text{Evidencia!}}\, \underbrace{p(\text{Modelo}_j)}_{\text{Escalar } k } }
+\end{equation*}
+\end{textblock}
+}
+
+
+\begin{textblock}{160}(0,40)
+\begin{equation*}
+\begin{split}
+\only<5->{p(\text{Datos}|\text{Modelo}) &= \sum_{h}^H p(\text{Datos}|\text{Hip\'otesis}=h,\text{Modelo}) p(\text{Hip\'otesis}=h|\text{Modelo}) } \\
+\only<6->{& = p(\text{D}_1|\text{M}) p(\text{D}_2|\text{D}_1, \text{M}) \dots p(\text{D}_N|\text{D}_{N-1} \dots \text{D}_1, \text{M}) }
+\end{split} 
+\end{equation*}
+\end{textblock}
+
+\only<7>{
+\begin{textblock}{140}(10,68)
+\begin{mdframed}[backgroundcolor=black!15]
+\footnotesize \centering Preferimos modelos con la \textbf{menor sorpresa conjunta}!
+\end{mdframed}
+ \end{textblock} 
+}
+ 
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,0)
+\begin{center}
+ \large Evidencia vs M\'aximo A Posteriori \\
+ \normalsize offline
+\end{center}
+\end{textblock}
+
+
+
+\begin{textblock}{80}(0,14)
+ \centering \footnotesize
+ \begin{align*}
+ p(\text{Datos}|\text{Modelo})
+\end{align*}
+Evidencia conjunta
+\end{textblock}
+
+\begin{textblock}{80}(80,14)
+ \centering \footnotesize
+\begin{align*}
+   p(\text{Datos}| h_{\text{MAP}}, \text{Modelo}) 
+\end{align*}
+ M\'aximo A Posteriori \\ \scriptsize
+ (Likelihood regularizado)
+\end{textblock}
+
+
+\begin{textblock}{140}(10,28)
+     \centering 
+       \begin{figure}[H]     
+     \centering 
+     \begin{subfigure}[b]{0.47\textwidth}
+       \includegraphics[width=1\textwidth]{../../figures/model_selection_evidence.png}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.49\textwidth}
+       \includegraphics[width=1\textwidth]{../../figures/model_selection_maxLikelihood.png}
+     \end{subfigure}
+\end{figure}
+\end{textblock}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,0)
+\begin{center}
+ \large Evidencia vs M\'aximo A Posteriori \\
+ \normalsize online
+\end{center}
+\end{textblock}
+
+
+\begin{textblock}{60}(0,14)
+ \centering \footnotesize
+ \begin{align*} 
+ p(\text{D}_1|\text{M}) \dots p(\text{D}_N|\text{D}_{N-1} \dots \text{D}_1, \text{M})
+\end{align*}
+Evidencia conjunta
+\end{textblock}
+
+\begin{textblock}{80}(60,14)
+ \centering \footnotesize
+\begin{align*}
+ p(\text{D}_1|h_0 , \text{M}) p(\text{D}_2|h_{\text{MAP}_1}, \text{D}_1, \text{M}) \dots p(\text{D}_N|h_{\text{MAP}_{N-1}} , \text{D}_{N-1} \dots \text{D}_1, \text{M})
+\end{align*}
+ M\'aximo A Posteriori
+\end{textblock}
+
+
+\begin{textblock}{140}(10,28)
+     \centering 
+       \begin{figure}[H]     
+     \centering 
+     \begin{subfigure}[b]{0.47\textwidth}
+       \includegraphics[width=1\textwidth]{../../figures/model_selection_evidence.png}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.49\textwidth}
+       \includegraphics[width=1\textwidth]{../../figures/model_selection_maxApriori_online.png}
+     \end{subfigure}
+\end{figure}
+\end{textblock}
+
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{140}(10,0)
+ \begin{center}
+  \Large  Evidencia
+ \end{center}
+\end{textblock}
+
+
+ \begin{textblock}{130}(10,14)
+  \centering
+  \includegraphics[width=0.8\textwidth]{../../figures/evidencia_de_modelos_alternativos} 
+ \end{textblock} 
+ 
+ 
+ \begin{textblock}{120}(20,76)
+  \begin{mdframed}[backgroundcolor=black!15]
+\centering
+  Balance natural entre complejidad y predicci\'on
+  \end{mdframed}
+ \end{textblock}
+\end{frame}
+ 
+\begin{frame}[plain]
+\centering
+  \includegraphics[width=0.35\textwidth]{../../aux/static/pachacuteckoricancha.jpg}
+\end{frame}
+
+
+
+
+
+
+\end{document}
+
+
+
