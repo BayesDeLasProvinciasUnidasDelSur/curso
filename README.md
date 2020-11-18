@@ -1,45 +1,41 @@
 # Seminario grupo bayes exactas-UBA 
 
-Manual de uso de git https://git-scm.com/book/en/v2
 
-## Prácticas de uso
 
-### ```.gitignore```
+## Bloque TrueSkill
 
-**Atención**: El archivo ```.gitignore``` ignora *TODOS* los archivos *SALVO* algunas extensiones específicas a archivos fuentes. 
+Objetivo: Yo estoy para darte todas las pistas que necesites, pero lo tenés que descubrir vos.
 
-QUEREMOS: Solo archivo de código fuente. Si actualemnte está siendo ignorado un archivo fuente, agregarlo en el ```.gitignore```.
+### Práctica 0.
 
-NO QUEREMOS: pdf, imágenes, datos, archivos "office" (.doc .docx .odt), muchos etceteras.
+- Requiere: Programar y ¿Cómo será una aplicación de inferencia Bayesiana?
+- Tarea: Base de datos analizada con el paquete TrueSkill de Python
+- Asegura: Oh! Interesante. ¿Cómo funcionará esto?
 
-### Buenas prácticas
+### Práctica 1.
 
-- *Antes de empezar a trabajar:* hacer ``` git pull origin master```. 
+- Requiere: asegura previo.
+- Tarea: Leer el paper original de TrueSkill
+- Asegura: Oh! Qué difícil! El modelo gráfico de TrueSkill se entendió pero necesito que me lo expliquen mejor.
 
-- *Al terminar de trabajar:* hacer un ``` git commit``` e inmediatemente compartirlo con el resto con ``` git push origin master```. 
+### Práctica 2.
 
-##### ```git pull --rebase```
+- Requiere: asegura previo.
+- Tarea: Leer sum-product algorithm
+- Asegura: Entiendo las reglas del algoritmo, pero no entiendo cómo se relaciona.
 
-**Recomendación:** Antes de hacer ``` push ``` se recomienda hacer ```git pull --rebase```, para traer eventuales modificaciones que hayan ocurrido en el ```origin``` no vistas previamente.
-De esta forma, los conflictos se recuelven localmente.
+### Práctica 3
 
-##### ```.bib```
+- Requiere: asegura previo
+- Tarea: Leer fuentes alternativa, "The math behind trueskill" y "Model based machine learning"
+- Asegura: Entiendo la relación entre las reglas del sum-product y el problema TrueSkill
 
-**Reglas de estilo**: las claves de las citas del archivo ``` .bib``` se espera que sigan el siguiente esquema: 
+### Práctica 4
 
-`
-    apellido1999-resumenDelTitulo
-`
+- Requiere: Entiendo la relación entre las reglas del sum-product y el problema TrueSkill
+- A
 
-### ```biblio/```
 
-Estructura:
-
-- ```bayes.bib```
-- ```pdf.sh```
-- ```pdf/```
-
-El archivo ``` pdf.sh``` requiere como parámetro una clave del archivo ``` bayes.bib``` y descarga en el carpeta ``` pdf/``` el archivo especificado en el item ``` url={}```
 
 
 
