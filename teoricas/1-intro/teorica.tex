@@ -255,7 +255,7 @@
  \includegraphics[width=0.55\textwidth]{figures/montyHall_5}     
  \end{textblock}
 }
- 
+
 \end{frame}
 
 
@@ -310,11 +310,66 @@
  \en{Example: Monty Hall}
  \es{Ejemplo: Monty Hall}
  \end{textblock}
+ \vspace{-1cm}
+
+ \only<1-2>{
+ \begin{textblock}{160}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{figures/montyHall_7}     
+ \end{textblock}
  
+}
+
+\onslide<2>{\includegraphics[width=0.4\textwidth]{figures/montyHall_model.pdf}}
  
+
+\only<3->{
+\begin{columns}[c]
+\begin{column}{0.4\textwidth}
+ \centering 
  
+ \includegraphics[width=0.8\textwidth]{figures/montyHall_model.pdf}
+\end{column}
+ \begin{column}{0.6\textwidth}
+
+ \centering
  
+ Caminos:
+ \vspace{0.2cm}
  
+ \begin{tabular}{c|c|c|c|c}
+        
+        & $d_1$ & $d_2$ & $d_3$ & \\ \hline 
+        $r_1$ & $0$ & $1$ & $1$ & $2$\\ \hline
+        $r_2$ & $0$ & $0$ & $1$ & $1$ \\ \hline
+        $r_3$ & $0$ & $1$ & $0$ & $1$\\ \hline
+              & $0$ & $2$ & $2$ & $\bm{4}$ \\ 
+\end{tabular}
+
+ \end{column}
+\end{columns}
+}
+
+
+\only<3->{\begin{textblock}{130}(15,60) 
+ Joint belief: $  B(H = h_i, D= d_j) = \frac{n_{ij}}{N}$
+\end{textblock}}
+
+\only<3->{\begin{textblock}{130}(15,68.7) 
+Marginal belief: $ B(H = h_i) =   \frac{r_i}{N}$\end{textblock}}
+
+\only<4>{\begin{textblock}{130}(15,76)
+Conditional belief: $ B(D= d_j| H=h_i) = \frac{n_{ij}}{r_i} \color{white} \frac{B(H = h_i , D = d_j)}{B(H = h_i)}  $
+\end{textblock}}
+
+\only<5>{\begin{textblock}{130}(15,76)
+Conditional belief: $ B(D= d_j| H=h_i) = \frac{n_{ij}}{r_i} \frac{N}{N} \color{white} \frac{B(H = h_i , D = d_j)}{B(H = h_i)}  $
+\end{textblock}}
+
+\only<6>{\begin{textblock}{130}(15,76)
+Conditional belief: $ B(D= d_j| H=h_i) = \frac{n_{ij}}{N} \frac{N}{r_i} = \frac{B(H = h_i , D = d_j)}{B(H = h_i)}  $
+\end{textblock}}
+
+
 \end{frame}
 
  
