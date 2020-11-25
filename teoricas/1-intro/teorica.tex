@@ -1,4 +1,5 @@
 \documentclass[shownotes,aspectratio=169]{beamer}
+
 \input{../../aux/tex/diapo_encabezado.tex}
 \input{../../aux/tex/tikzlibrarybayesnet.code.tex}
  \mode<presentation>
@@ -23,8 +24,10 @@
 
 \begin{document}
 
- \color{black!85}
+\color{black!85}
+\large
 
+ 
 %\setbeamercolor{background canvas}{bg=gray!15}
 
 \begin{frame}[plain,noframenumbering]
@@ -46,22 +49,137 @@
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
  \centering
- \LARGE \textcolor{black!85}{\en{Science}\es{Ciencia}}
+ \LARGE \textcolor{black!85}{\en{Today}\es{Hoy}}
+\end{textblock}
+
+\begin{itemize}
+ \item[$\bullet$] Intersubjectividad
+ \item[$\bullet$] Base empírica 
+ \item[$\bullet$] Matriz de datos 
+ \item[$\bullet$] Ciencia empírica 
+ \item[$\bullet$] Niveles de conocimiento
+ \item[$\bullet$] Incertidumbre
+ \item[$\bullet$] Creencias honestas
+ \item[$\bullet$] Modelos causales
+ \item[$\bullet$] La lógica de la ciencia empírica
+ \item[$\bullet$] Selección de modelo
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering
+ \LARGE \textcolor{black!85}{\en{Science as intersubjectivity}\es{Ciencia como intersubjectividad}}
 \end{textblock}
 \vspace{0.75cm}
-\Large
 
- \begin{center}
- \en{The goal of science are \\ \textbf{intersubjective agreements}}
- \es{El objetivo de la ciencia son \\ \textbf{acuerdos intersubjectivos}}
- \end{center}
+ 
+\begin{center}
+conoce de tal manera que puedas \emph{poner en}
+
+\emph{correspondencia unívoca los fenómenos percibidos por}
+
+\emph{tu conciencia mediante algún \textbf{esquema de operación}}
+
+\emph{\textbf{que sea públicamente inteligible y reproducible}}
+
+\vspace{0.2cm}
+{\small \hspace{5cm} Juan Samaja. Metodología y Epistemología.}
+\end{center}
+
+
+%  \begin{center}
+% \en{The ambiguity of natural language \\ prevents building agreements}
+% \es{La ambiguedad del lenguaje natural \\ impide construir acuerdos}
+%  \end{center}
+
+\end{frame}
+
+\begin{frame}[plain] 
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE
+ \en{Empirical Basis}
+ \es{Base empírica}
+\end{textblock}
+\vspace{1cm}
+
+
+\centering 
+\en{We call \emph{empirical basis} the portion of the world that a certain community momentarily leaves out of all doubt}
+\es{Llamamos \emph{base empírica} a la porción del mundo que \\ cierta comunidad deja momentaneamente fuera de toda duda}
+
+\vspace{0.1cm}
+{\hspace{4cm} \small Gregorio Klimovsky. Desventuras del conocimiento científico.}
+
+\vspace{1.3cm}
+
+%Para aceptar la entidad de nuestros objetos más cotidianos, el árbol, la mesa, el libro son suficiente los supuestos del sentido común. No hay mayor controversia al respecto. 
+\Wider[-2cm]{\normalsize
+\begin{itemize}
+ % Sin embargo ciertos círculos filosóficos los ponen en duda y pretenden justificar incluso la existencia misma de la realidad externa.
+ \onslide<2->{
+ \en{\item[\textbf{FEB}:] Filosofical Empirical Basis (Empty set or primary perceptions)}
+ \es{\item[\textbf{BEF}:] Base empírica filosófica (Conjunto vacío o percepciones primarias)}
+ }
+ %Cuando relajamos la exigencia y aceptamos los objetos que nos son cotidianamente evidentes, obtenemos una base empírica significativamente más amplia que Klimovsky llama base empírica epistemológica, pues los epistemólogos admitirían lo que cualquier persona tomaría por cierto en su vida cotidiana y pondrían en duda al conjunto de la teorías científicas.
+ \onslide<3->{
+ \en{\item[\textbf{EEB}:] Epistemological Empirical Basis (Common sence)}
+ \es{\item[\textbf{BEE}:] Base empírica epistemológica (Sentido común)}
+ }
+ % Los científicos por su parte trabajan constantemente con objetos que obtienen mediante teorías o técnicas especiales. los llama base empírica metodológica (BEM), en alusión a la metodología de trabajo normal de la actividad científica.
+ \onslide<4->{
+ \en{\item[\textbf{MEB}:] Methodological Empirical Basis (Constructed data)}
+ \es{\item[\textbf{BEM}:] Base empírica metodológica (Datos construidos)}
+ }
+\end{itemize}
+}
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \en{Levels of empírical basis}%\en{Empirical basis and theoretical data}
+ \es{Niveles de base empírica}%\es{Base empírica y datos teóricos}
+\end{textblock}
+\vspace{1.2cm}
+
+\centering
+
+La base empírica puede ampliarse o reducirse 
+
+aumentando o disminuyendo el conjunto de supuestos 
+
+que una comunidad esta dispuesta a no poner en duda
 
 \vspace{0.5cm}
- 
- \begin{center}
-\en{Disagreements in social sciences \\ are mostly semantic}
-\es{Los mayoría de los desacuerdos en las \\ ciencias sociales son semánticos}
- \end{center}
+
+\en{\includegraphics[page=1,width=0.45\textwidth]{figures/baseEmpirica.pdf}}
+\es{\includegraphics[page=2,width=0.45\textwidth]{figures/baseEmpirica.pdf}}
+
+\vspace{0.5cm}
+
+
+\Wider[-2cm]{\normalsize
+\begin{itemize}
+ \onslide<2->{
+ \es{\item[\textbf{BEE}:] Precios en los negocios}
+ }
+ \onslide<3->{
+ \es{\item[\textbf{BEM}$_1$:] Inflación}
+ }
+ \onslide<4->{
+ \es{\item[\textbf{BEM}$_2$:] Producto Bruto Interno}
+ }
+ \onslide<5->{
+ \es{\item[\textbf{DT}:] Bienestar del pueblo}
+ }
+\end{itemize}
+}
+
+
 
 \end{frame}
 
@@ -93,58 +211,58 @@
 \end{itemize}
 \end{textblock}
 
+
 \only<2>{
-\begin{textblock}{130}(15,60)
-\begin{mdframed}
- $\bullet$ 
-   \en{It is a function because each $f(x)$ is associated with a unique $y$}
-   \es{Es una función porque cada $f(x)$ está asociado a un \'unico $y$}
-   \\[0.1cm]
- $\bullet$ 
-   \en{To understand each other, it is necessary to make this functions explicit}
-   \es{Para entendernos es necesario hacer explícita esa función}
- \end{mdframed}
+\begin{textblock}{160}(0,65) \centering
+ \emph{Altura}(Gustavo) = $1.78$m
+\end{textblock}
+}
+
+
+\only<3>{
+\begin{textblock}{160}(0,65) \centering
+ \emph{Inflación}(Argentina) = $2.3\%$
+\end{textblock}
+}
+
+\only<4>{
+\begin{textblock}{160}(0,65) \centering
+ \emph{Ideología}(Partido Obrero) = Izquierda
+\end{textblock}
+}
+
+\only<5>{
+\begin{textblock}{160}(0,65) \centering
+ \emph{Habilidad}(Maradona) $>$ \emph{Habilidad}(Messi)
+\end{textblock}
+}
+
+\only<6>{
+\begin{textblock}{70}(45,60)
+\begin{framed} \centering
+   \en{\textbf{The data is a function!}}
+   \es{\textbf{Los datos son funciones!}}
+ \end{framed}
 \end{textblock}
 }
 \end{frame}
 
 \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
- \centering \LARGE 
- \en{Empirical basis and theoretical data}
- \es{Base empírica y datos teóricos}
+ \centering \LARGE
+ \en{Esquema indicador}
+ \es{Esquema indicador}
 \end{textblock}
-\vspace{1.5cm}
+\vspace{0.75cm}
 
-\centering
-\includegraphics[width=0.45\textwidth]{figures/baseEmpirica.pdf}
-
-\vspace{0.25cm}
-
-\flushleft
-\en{The set of hypotheses we assume define an empirical basis}
-\es{El conjunto de hipótesis que dejamos fuera de toda duda definen la base empírica}
-\\[0.2cm]
-
-\todo[inline]{Presentar por pasos}
-
-\Wider[-2cm]{
-\begin{itemize}
- \en{\item[\textbf{FEB}:] Filosofical Empirical Basis (Empty set)}
- \es{\item[\textbf{BEF}:] Base empírica filosófica (Conjunto vacío)}
- %
- \en{\item[\textbf{EEB}:] Epistemological Empirical Basis (Common sence)}
- \es{\item[\textbf{BEE}:] Base empírica epistemológica (Sentido común)}
- %
- \en{\item[\textbf{MEB}:] Methodological Empirical Basis (Assumed estimates)}
- \es{\item[\textbf{BEM}:] Base empírica metodológica (Estimaciones fuera de toda duda)}
- %
- \en{\item[\textbf{TD}:] Theoretical Data (Estimators under development)}
- \es{\item[\textbf{DT}:] Datos teóricos (Estimadores en desarrollo)}
-\end{itemize}
-}
+\begin{framed} \centering
+   \en{The meaning of data is implicit in their \textbf{operationalization}}
+   \es{El significado preciso del dato está implícito en su \textbf{operacionalización}}
+ \end{framed}
 
 \end{frame}
+
+
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
@@ -158,49 +276,6 @@
  
  \includegraphics[width=0.35\textwidth]{../../aux/static/elo}
   
- 
-\end{frame}
-
-
-
-\begin{frame}[plain]
- \begin{textblock}{160}(0,4)
-\centering  \LARGE 
-\en{Hidden variable, data and causal model}
-\es{Variable oculta, datos y modelo causal}
- \end{textblock}
-\vspace{1cm}
-
-\centering
- 
-\tikz{         
-    \node[det, fill=black!15] (r) {$r_{ij}$} ; 
-    \node[const, left=of r, xshift=-1.35cm] (r_name) {\small \en{Result}\es{Resultado}:}; 
-    \node[const, right=of r] (dr) {\normalsize $ r_{ij} = (d_{ij}>0)$}; 
-
-    \node[latent, above=of r, yshift=-0.45cm] (d) {$d_{ij}$} ; %
-    \node[const, right=of d] (dd) {\normalsize $ d_{ij}=p_i-p_j$}; 
-    \node[const, left=of d, xshift=-1.35cm] (d_name) {\small \en{Difference}\es{Diferencia}:};
-    
-    \node[latent, above=of d, xshift=-0.8cm, yshift=-0.45cm] (p1) {$p_i$} ; %
-    \node[latent, above=of d, xshift=0.8cm, yshift=-0.45cm] (p2) {$p_j$} ; %
-    \node[const, left=of p1, xshift=-0.55cm] (p_name) {\small \en{Performance}\es{Rendimiento}:}; 
-
-    \node[accion, above=of p1,yshift=0.3cm,fill=white] (s1) {} ; %
-    \node[const, right=of s1] (ds1) {$s_i$};
-    \node[accion, above=of p2,yshift=0.3cm,fill=white] (s2) {} ; %
-    \node[const, right=of s2] (ds2) {$s_j$};
-    
-    \node[const, right=of p2] (dp2) {\normalsize $p \sim \N(s,\beta^2)$};
-
-    \node[const, left=of s1, xshift=-.85cm] (s_name) {\small \en{Skill}\es{Habilidad}:}; 
-    
-    \edge {d} {r};
-    \edge {p1,p2} {d};
-    \edge {s1} {p1};
-    \edge {s2} {p2};
-}
-
  
 \end{frame}
 
@@ -371,6 +446,50 @@ Conditional belief: $ B(D= d_j| H=h_i) = \frac{n_{ij}}{N} \frac{N}{r_i} = \frac{
 
 
 \end{frame}
+
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+\centering  \LARGE 
+\en{Hidden variable, data and causal model}
+\es{Variable oculta, datos y modelo causal}
+ \end{textblock}
+\vspace{1cm}
+
+\centering
+ 
+\tikz{         
+    \node[det, fill=black!15] (r) {$r_{ij}$} ; 
+    \node[const, left=of r, xshift=-1.35cm] (r_name) {\small \en{Result}\es{Resultado}:}; 
+    \node[const, right=of r] (dr) {\normalsize $ r_{ij} = (d_{ij}>0)$}; 
+
+    \node[latent, above=of r, yshift=-0.45cm] (d) {$d_{ij}$} ; %
+    \node[const, right=of d] (dd) {\normalsize $ d_{ij}=p_i-p_j$}; 
+    \node[const, left=of d, xshift=-1.35cm] (d_name) {\small \en{Difference}\es{Diferencia}:};
+    
+    \node[latent, above=of d, xshift=-0.8cm, yshift=-0.45cm] (p1) {$p_i$} ; %
+    \node[latent, above=of d, xshift=0.8cm, yshift=-0.45cm] (p2) {$p_j$} ; %
+    \node[const, left=of p1, xshift=-0.55cm] (p_name) {\small \en{Performance}\es{Rendimiento}:}; 
+
+    \node[accion, above=of p1,yshift=0.3cm,fill=white] (s1) {} ; %
+    \node[const, right=of s1] (ds1) {$s_i$};
+    \node[accion, above=of p2,yshift=0.3cm,fill=white] (s2) {} ; %
+    \node[const, right=of s2] (ds2) {$s_j$};
+    
+    \node[const, right=of p2] (dp2) {\normalsize $p \sim \N(s,\beta^2)$};
+
+    \node[const, left=of s1, xshift=-.85cm] (s_name) {\small \en{Skill}\es{Habilidad}:}; 
+    
+    \edge {d} {r};
+    \edge {p1,p2} {d};
+    \edge {s1} {p1};
+    \edge {s2} {p2};
+}
+
+ 
+\end{frame}
+
 
  
 \begin{frame}[plain]

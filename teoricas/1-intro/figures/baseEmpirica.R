@@ -14,6 +14,7 @@ setwd(this.dir)
 par(mar=c(0.3,0.3,0.3,0.3))
 
 
+
 elipse <- function(x,x0=0, y0=0, a=1.5, b=1){
   y1 = sqrt((1 -  ((x-x0)^2)/(a^2))*(b^2))+y0
   y2 = y0 - sqrt((1 -  ((x-x0)^2)/(a^2))*(b^2))
@@ -33,18 +34,26 @@ draw.elipse <- function(a,b=1,x0=0,y0=0,fill=F,col=rgb(0,0,0),...){
 
 plot(0,0,type="l",ylim=c(-5,5),xlim=c(-2,8) ,ylab = "",xlab="",axes=F)
 draw.elipse(a=0.5,b=0.5,x0=0,fill=T,lwd=2)
-draw.elipse(a=2,b=1,x0=1, lwd=2)
+draw.elipse(a=2,b=1,x0=1, lwd=2, fill=T, col=rgb(0,0,0,0.2))
 draw.elipse(a=3.5,b=1.5,x0=2, fill=T, col=rgb(0,0,0,0.2),  lwd=2)
 draw.elipse(a=5,b=2,x0=3,lwd=2)
 text(1.5,0.0,expression(MEB[1]),cex=1.5)
 text(4,0.0,expression(MEB[2]),cex=1.5)
 text(6.5,0.0,expression(TD),cex=1.5)
-text(0,0,expression(EEB),cex=1.5,col=rgb(1,1,1))
-
-
+text(0,0,expression(EEB),cex=1.5,col=rgb(0.85,0.85,0.85))
 
 plot(0,0,type="l",ylim=c(-5,5),xlim=c(-2,8) ,ylab = "",xlab="",axes=F)
-draw.elipse(a=0.66,b=0.66,x0=0,fill=T,lwd=2)
+draw.elipse(a=0.5,b=0.5,x0=0,fill=T,lwd=2)
+draw.elipse(a=2,b=1,x0=1, lwd=2, fill=T, col=rgb(0,0,0,0.2))
+draw.elipse(a=3.5,b=1.5,x0=2, fill=T, col=rgb(0,0,0,0.2),  lwd=2)
+draw.elipse(a=5,b=2,x0=3,lwd=2)
+text(1.5,0.0,expression(BEM[1]),cex=1.5)
+text(4,0.0,expression(BEM[2]),cex=1.5)
+text(6.5,0.0,expression(DT),cex=1.5)
+text(0,0,expression(BEE),cex=1.5,col=rgb(0.85,0.85,0.85))
+
+plot(0,0,type="l",ylim=c(-5,5),xlim=c(-2,8) ,ylab = "",xlab="",axes=F)
+draw.elipse(a=0.66,b=0.66,x0=0,fill=T,lwd=2, col=rgb(0.15,0.15,0.15))
 draw.elipse(a=2,b=1,x0=1, fill=T, col=rgb(0,0,0,0.2), lwd=2)
 draw.elipse(a=3.5,b=1.5,x0=2, lwd=2)
 text(1.5,0.0,"Skill",cex=1.5)
