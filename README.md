@@ -1,39 +1,53 @@
 # Seminario grupo bayes exactas-UBA 
 
-
-
 ## Bloque TrueSkill
 
 Objetivo: Yo estoy para darte todas las pistas que necesites, pero lo tenés que descubrir vos.
 
-### Práctica 0.
+### Clase -2.
 
-- Requiere: Programar y ¿Cómo será una aplicación de inferencia Bayesiana?
-- Tarea: Base de datos analizada con el paquete TrueSkill de Python
-- Asegura: Oh! Interesante. ¿Cómo funcionará esto?
+- Requiere: Programar y me interesa las ciencias de datos
+- Tarea
+    - Teórica: datos, modelos, creencias y máxima incertidumbre.
+    - Práctica: (buscar los papers que vamos a ver en el futuro)
+- Asegura: ¿Cómo se actualizan de forma óptima (honesta) las creencias?
 
-### Práctica 1.
-
-- Requiere: asegura previo.
-- Tarea: Leer el paper original de TrueSkill
-- Asegura: Oh! Qué difícil! El modelo gráfico de TrueSkill se entendió pero necesito que me lo expliquen mejor.
-
-### Práctica 2.
-
-- Requiere: asegura previo.
-- Tarea: Leer sum-product algorithm
-- Asegura: Entiendo las reglas del algoritmo, pero no entiendo cómo se relaciona.
-
-### Práctica 3
+### Clase -1.
 
 - Requiere: asegura previo
-- Tarea: Leer fuentes alternativa, "The math behind trueskill" y "Model based machine learning"
-- Asegura: Entiendo la relación entre las reglas del sum-product y el problema TrueSkill
+- Tareas
+    - Teórica: modelos gráficos, probabilidad y d-separation.
+    - Práctica: Varios ejemplos de modelos gráficos discretos para contar caminos (incluye derivar d-sepatration)
+    - Leer: Paper original de TrueSkill
+- Asegura: ¿Cómo será una aplicación real de inferencia Bayesiana?
 
-### Práctica 4
+### Clase 0.
 
-- Requiere: Entiendo la relación entre las reglas del sum-product y el problema TrueSkill
-- A
+- Requiere: asegura previo
+- Tarea
+    - Teórica: Modelos gráfico de TrueSkill y pasaje de mansajes 1
+    - Práctica: Descarcar base de datos y paquete TrueSkill de python, y copmenzar a estimar habilidad
+    - Leer: sum-product algorithm
+- Asegura: Oh! Interesante. ¿Cómo funcionará esto?
+
+### Clase 1.
+
+- Requiere: asegura previo.
+- Tarea
+    - Teórica: Pasaje de mansajes 2 (predicción a priori)
+    - Práctica: Terminar de estimar habilidad y graficar curvas
+    - Leer: Fuentes Alternativas "The math behind trueskill" y "Model based machine learning".
+- Asegura: El modelo gráfico de TrueSkill se entendió pero necesito que me lo expliquen mejor.
+
+### Clase 2.
+
+- Requiere: asegura previo.
+- Tarea
+    - Teórica: Pasaje de mansajes 3 (Posterior)
+    - Práctica: Calcular prediccón a priori (documentar y crear código própio)
+- Asegura: El modelo gráfico de TrueSkill se entendió completo.
+
+### Clase 3. 
 
 
 
