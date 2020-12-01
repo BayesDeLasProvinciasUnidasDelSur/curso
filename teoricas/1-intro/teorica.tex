@@ -373,79 +373,304 @@ que una comunidad esta dispuesta a no poner en duda
  \end{textblock}
 \vspace{1.25cm} 
 
+
+\only<1>{
+\begin{center}
+ \en{\Large Count all the ways data can happen \\ according to asummptions (Hypotesis and Model)}
+ \es{\Large Contar todos los caminos que pueden generar los datos \\ de acuerdo a los supuestos: hipótesis y modelo}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{center}
+ \en{\Large Hypotesis with more ways that are consistent \\ with data and the model are more plausible}
+ \es{\Large Las hipótesis con más caminos consistente \\ con los datos y el modelo son los más plausibles}
+\end{center}
+}
+
+\only<2>{
+
  \begin{equation*}
-  \text{\en{Belief}\es{Creencia}}(x) = \frac{\text{\en{Number of paths on which $x$ becomes true}\es{Cantidad de caminos en los que $x$ se hace verdadera}}}{\text{\en{Total number of paths}\es{Cantidad de caminos totales}}}
+  \text{\en{Belief}\es{Creencia}}(H|D,M) = \frac{\text{\en{Number of ways $D$ can happen given $H$ and $M$}\es{Cantidad de caminos que pueden generar $D$ dado $H$ y $M$}}}{\text{\en{Total number of paths}\es{Cantidad de caminos totales}}}
  \end{equation*}
+}
+ 
+ 
  
 \end{frame}
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
  \centering \LARGE 
- \en{Example: Monty Hall}
- \es{Ejemplo: Monty Hall}
+ \en{Model: Monty Hall}
+ \es{Modelo: Monty Hall}
  \end{textblock}
  \vspace{-1cm}
 
- \only<1-2>{
- \begin{textblock}{160}(0,30)\centering
- \includegraphics[width=0.55\textwidth]{figures/montyHall_7}     
+ \only<1>{
+ \begin{textblock}{80}(0,22)
+ \centering
+ \includegraphics[width=0.8\textwidth]{figures/montyHall_model_0.pdf}
  \end{textblock}
+ }
  
+ \only<2-3>{
+ \begin{textblock}{80}(0,22)
+ \centering
+ \includegraphics[width=0.8\textwidth]{figures/montyHall_model_1.pdf}
+ \end{textblock}
+ }
+
+\only<4-6>{
+ \begin{textblock}{80}(0,22)
+ \centering
+ \includegraphics[width=0.8\textwidth]{figures/montyHall_model_2.pdf}
+ \end{textblock}
+ }
+ 
+ 
+\only<7-13>{
+ \begin{textblock}{80}(0,22)%20.75)
+ \centering
+ \includegraphics[width=0.8\textwidth]{figures/montyHall_model_2.pdf}
+ \end{textblock}
+ }
+
+ \only<14>{
+ \begin{textblock}{76}(4,24)
+ $\hfrac{\text{\large \en{Marginal}\es{Creencia}}}{\text{\large \en{belief}\es{marginal}}}$:  $ B(H = r_1) = \frac{r_1}{N}$
+ \end{textblock}
+ } 
+ 
+ \only<15->{
+ \begin{textblock}{76}(4,24)
+ $\hfrac{\text{\large \en{Marginal}\es{Creencia}}}{\text{\large \en{belief}\es{marginal}}}$:  $ B(H = r_1) = \frac{r_1}{N}$
+ \end{textblock}
+ } 
+ 
+\only<16>{
+ \begin{textblock}{76}(4,38)
+ $\hfrac{\text{\large \en{Joint}\es{Creencia}}}{\text{\large \en{belief}\es{conjunta}}}$: $  B(H = r_1, D= d_2) = \frac{n_{12}}{N}$
+ \end{textblock}
+ }
+
+\only<17->{
+ \begin{textblock}{76}(4,38)
+
+ $\hfrac{\text{\large \en{Joint}\es{Creencia}}}{\text{\large \en{belief}\es{conjunta}}}$: $  B(H = r_1, D= d_2) = \frac{n_{12}}{N} = \frac{1}{4}$
+ \end{textblock}
+ } 
+ 
+ % \only<3->{\begin{textblock}{130}(15,60) 
+%  Joint belief: $  B(H = h_i, D= d_j) = \frac{n_{ij}}{N}$
+% \end{textblock}}
+% 
+% \only<3->{\begin{textblock}{130}(15,68.7) 
+% Marginal belief: $ B(H = h_i) =   \frac{r_i}{N}$\end{textblock}}
+% 
+% \only<4>{\begin{textblock}{130}(15,76)
+% Conditional belief: $ B(D= d_j| H=h_i) = \frac{n_{ij}}{r_i} \color{white} \frac{B(H = h_i , D = d_j)}{B(H = h_i)}  $
+% \end{textblock}}
+% 
+% \only<5>{\begin{textblock}{130}(15,76)
+% Conditional belief: $ B(D= d_j| H=h_i) = \frac{n_{ij}}{r_i} \frac{N}{N} \color{white} \frac{B(H = h_i , D = d_j)}{B(H = h_i)}  $
+% \end{textblock}}
+% 
+% \only<6>{\begin{textblock}{130}(15,76)
+% Conditional belief: $ B(D= d_j| H=h_i) = \frac{n_{ij}}{N} \frac{N}{r_i} = \frac{B(H = h_i , D = d_j)}{B(H = h_i)}  $
+% \end{textblock}}
+% 
+
+
+ 
+\only<1-2>{ 
+ \begin{textblock}{80}(70,30)
+ \centering
+\includegraphics[width=1\textwidth]{figures/montyHall_2}
+ \end{textblock}
 }
 
-\onslide<2>{\includegraphics[width=0.4\textwidth]{figures/montyHall_model.pdf}}
- 
-
-\only<3->{
-\begin{columns}[c]
-\begin{column}{0.4\textwidth}
- \centering 
- 
- \includegraphics[width=0.8\textwidth]{figures/montyHall_model.pdf}
-\end{column}
- \begin{column}{0.6\textwidth}
-
+\only<3-4>{ 
+ \begin{textblock}{80}(70,30)
  \centering
- 
- Caminos:
- \vspace{0.2cm}
- 
- \begin{tabular}{c|c|c|c|c}
-        
+\includegraphics[width=1\textwidth]{figures/montyHall_6}
+ \end{textblock}
+}
+
+\only<5>{ 
+ \begin{textblock}{80}(70,30)
+ \centering
+\includegraphics[width=1\textwidth]{figures/montyHall_7}
+ \end{textblock}
+}
+
+\only<6->{
+ \begin{textblock}{80}(70,20)
+  \Large \centering
+  Caminos
+ \end{textblock} 
+}
+
+\only<6>{
+ \begin{textblock}{80}(70,30)
+ \centering \Large
+\includegraphics[width=1\textwidth]{figures/forkingPath_montyHall}
+ \end{textblock}
+}
+
+\only<7>{
+ \begin{textblock}{80}(70,30)
+ \centering \Large
+\includegraphics[page=2,width=1\textwidth]{figures/forkingPath_montyHall}
+ \end{textblock}
+}
+
+\only<8>{
+ \begin{textblock}{80}(70,30)
+ \centering \Large
+\includegraphics[page=3,width=1\textwidth]{figures/forkingPath_montyHall}
+ \end{textblock}
+}
+
+
+\only<16-17>{ 
+ \begin{textblock}{80}(70,25)
+ \centering \Large
+ Caminos \\
+ \vspace{0.3cm}
+ \begin{tabular}{c|c|c|c||c}
         & $d_1$ & $d_2$ & $d_3$ & \\ \hline 
-        $r_1$ & $0$ & $1$ & $1$ & $2$\\ \hline
+        $r_1$ &  &  &  & \\ \hline
+        $r_2$ &  & {\scriptsize $n_{22}$} & &  \\ \hline
+        $r_3$ &  &  &  & \\ \hline \hline
+              &  &  &  & \phantom{$\bm{4}$} \\ 
+\end{tabular}
+\end{textblock}
+}
+
+\only<18>{ 
+ \begin{textblock}{80}(70,25)
+ \centering \Large
+ Caminos \\
+ \vspace{0.3cm}
+ \begin{tabular}{c|c|c|c||c}
+        & $d_1$ & $d_2$ & $d_3$ & \\ \hline 
+        $r_1$ & $0$ &  &  & \\ \hline
+        $r_2$ & $0$ &  &  &  \\ \hline
+        $r_3$ & $0$ &  &  & \\ \hline \hline
+              &  &  &  & \phantom{$\bm{4}$} \\ 
+\end{tabular}
+\end{textblock}
+}
+
+\only<9>{ 
+ \begin{textblock}{80}(70,25)
+ \centering \Large
+ Caminos \\
+ \vspace{0.3cm}
+ \begin{tabular}{c|c|c|c||c}
+        & $d_1$ & $d_2$ & $d_3$ & \\ \hline 
+        $r_1$ & $0$ &  &  & \\ \hline
+        $r_2$ & $0$ & $0$ &  &  \\ \hline
+        $r_3$ & $0$ &  & $0$ & \\ \hline \hline
+              &  &  &  & \phantom{$\bm{4}$} \\ 
+\end{tabular}
+\end{textblock}
+}
+
+\only<10>{ 
+ \begin{textblock}{80}(70,25)
+ \centering \Large
+ Caminos \\
+ \vspace{0.3cm}
+ \begin{tabular}{c|c|c|c||c}
+        & $d_1$ & $d_2$ & $d_3$ & \\ \hline 
+        $r_1$ & $0$ & $1$ & $1$ & \\ \hline
+        $r_2$ & $0$ & $0$ & $1$ &  \\ \hline
+        $r_3$ & $0$ & $1$ & $0$ & \\ \hline \hline
+              &  &  &  & \phantom{$\bm{4}$} \\ 
+\end{tabular}
+\end{textblock}
+}
+
+\only<11>{ 
+ \begin{textblock}{80}(70,25)
+ \centering \Large
+ Caminos \\
+ \vspace{0.3cm}
+ \begin{tabular}{c|c|c|c||c}
+        & $d_1$ & $d_2$ & $d_3$ & \\ \hline 
+        $r_1$ & $0$ & $1$ & $1$ & $2$ \\ \hline
         $r_2$ & $0$ & $0$ & $1$ & $1$ \\ \hline
-        $r_3$ & $0$ & $1$ & $0$ & $1$\\ \hline
+        $r_3$ & $0$ & $1$ & $0$ & $1$ \\ \hline \hline
+              &  &  &  & \phantom{$\bm{4}$} \\ 
+\end{tabular}
+\end{textblock}
+}
+
+\only<12>{ 
+ \begin{textblock}{80}(70,25)
+ \centering \Large
+ Caminos \\
+ \vspace{0.3cm}
+ \begin{tabular}{c|c|c|c||c}
+        & $d_1$ & $d_2$ & $d_3$ & \\ \hline 
+        $r_1$ & $0$ & $1$ & $1$ & $2$ \\ \hline
+        $r_2$ & $0$ & $0$ & $1$ & $1$ \\ \hline 
+        $r_3$ & $0$ & $1$ & $0$ & $1$ \\ \hline \hline
+              &  & & & $\bm{4}$ \\ 
+\end{tabular}
+\end{textblock}
+}
+
+\only<13-14>{ 
+ \begin{textblock}{80}(70,25)
+ \centering \Large
+ Caminos \\
+ \vspace{0.3cm}
+ \begin{tabular}{c|c|c|c||c}
+        & $d_1$ & $d_2$ & $d_3$ & \\ \hline 
+        $r_1$ & $0$ & $1$ & $1$ & $2$ \\ \hline
+        $r_2$ & $0$ & $0$ & $1$ & $1$ \\ \hline
+        $r_3$ & $0$ & $1$ & $0$ & $1$ \\ \hline \hline
               & $0$ & $2$ & $2$ & $\bm{4}$ \\ 
 \end{tabular}
-
- \end{column}
-\end{columns}
+\end{textblock}
 }
 
+\only<15>{ 
+ \begin{textblock}{80}(70,25)
+ \centering \Large
+ Caminos \\
+ \vspace{0.3cm}
+ \begin{tabular}{c|c|c|c||c}
+        & $d_1$ & $d_2$ & $d_3$ & \\ \hline 
+        $r_1$ & $0$ & ${\color{red}\bm{1}}$ & $1$ & $2$ \\ \hline
+        $r_2$ & $0$ & $0$ & $1$ & $1$ \\ \hline
+        $r_3$ & $0$ & $1$ & $0$ & $1$ \\ \hline \hline
+              & $0$ & $2$ & $2$ & $\bm{4}$ \\ 
+\end{tabular}
+\end{textblock}
+}
 
-\only<3->{\begin{textblock}{130}(15,60) 
- Joint belief: $  B(H = h_i, D= d_j) = \frac{n_{ij}}{N}$
-\end{textblock}}
-
-\only<3->{\begin{textblock}{130}(15,68.7) 
-Marginal belief: $ B(H = h_i) =   \frac{r_i}{N}$\end{textblock}}
-
-\only<4>{\begin{textblock}{130}(15,76)
-Conditional belief: $ B(D= d_j| H=h_i) = \frac{n_{ij}}{r_i} \color{white} \frac{B(H = h_i , D = d_j)}{B(H = h_i)}  $
-\end{textblock}}
-
-\only<5>{\begin{textblock}{130}(15,76)
-Conditional belief: $ B(D= d_j| H=h_i) = \frac{n_{ij}}{r_i} \frac{N}{N} \color{white} \frac{B(H = h_i , D = d_j)}{B(H = h_i)}  $
-\end{textblock}}
-
-\only<6>{\begin{textblock}{130}(15,76)
-Conditional belief: $ B(D= d_j| H=h_i) = \frac{n_{ij}}{N} \frac{N}{r_i} = \frac{B(H = h_i , D = d_j)}{B(H = h_i)}  $
-\end{textblock}}
+\only<16->{ 
+ \begin{textblock}{80}(70,25)
+ \centering \Large
+ Caminos \\
+ \vspace{0.3cm}
+ \begin{tabular}{c|c|c|c||c}
+        & $d_1$ & $d_2$ & $d_3$ & \\ \hline 
+        $r_1$ & $0$ & $1$ & $1$ & $2$ \\ \hline
+        $r_2$ & $0$ & $0$ & $1$ & $1$ \\ \hline
+        $r_3$ & $0$ & $1$ & $0$ & $1$ \\ \hline \hline
+              & $0$ & $2$ & $2$ & $\bm{4}$ \\ 
+\end{tabular}
+\end{textblock}
+}
 
 
 \end{frame}
+
 
 
 
