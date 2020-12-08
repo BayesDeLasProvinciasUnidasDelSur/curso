@@ -105,25 +105,8 @@
 \end{frame}
 
 
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \LARGE
- Exploradores erupeos perdidos
- \end{textblock}
-\vspace{1cm}
- \centering
- \includegraphics[width=0.7\textwidth]{../../aux/static/naufrago.jpg}  
-
- 
-\end{frame}
-
 
 \begin{frame}[plain]
-\begin{textblock}{155}(0,4)
- \centering \LARGE 
- \en{The cultural hypotesis}
- \es{La hipótesis cultural}
-\end{textblock}
 
  \begin{textblock}{160}(5,30)
 \includegraphics[width=0.33\textwidth]{../../aux/static/evolucionLitica.jpg} 
@@ -142,38 +125,38 @@
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
  \centering \LARGE 
- Aprendizaje social
+ La hipótesis cultural
  \end{textblock}
 \vspace{1cm}
 
 \includegraphics[width=1\textwidth]{../../aux/static/evolucionCultural.jpg}
 
 \end{frame}
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \LARGE 
- \en{Evolution of empathy}
- \es{La evolución de la empatía}
-\end{textblock}
-\vspace{1cm}
- 
-%Wired To mutual understanding
-%Cableados para la comprensión mutua
- \centering
-\includegraphics[width=0.7\textwidth]{../../aux/static/empatia}
-
-% Cooperative breeding permited the evolution of extended life span, prolonged childhoods
-
-% \centering
-% \en{Cooperative breeding permited the evolution of empathy}
-% \es{La crianza cooperative permitió la evolución de la empatía}
- 
-%Humans are often eager to understand others, to be understood, and to cooperate. 
-%Los seres humanos suelen estar ansiosos por comprender a los demás, por ser comprendidos y por cooperar. 
-
-
-\end{frame}
+% 
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \LARGE 
+%  \en{Evolution of empathy}
+%  \es{La evolución de la empatía}
+% \end{textblock}
+% \vspace{1cm}
+%  
+% %Wired To mutual understanding
+% %Cableados para la comprensión mutua
+%  \centering
+% \includegraphics[width=0.7\textwidth]{../../aux/static/empatia}
+% 
+% % Cooperative breeding permited the evolution of extended life span, prolonged childhoods
+% 
+% % \centering
+% % \en{Cooperative breeding permited the evolution of empathy}
+% % \es{La crianza cooperative permitió la evolución de la empatía}
+%  
+% %Humans are often eager to understand others, to be understood, and to cooperate. 
+% %Los seres humanos suelen estar ansiosos por comprender a los demás, por ser comprendidos y por cooperar. 
+% 
+% 
+% \end{frame}
 
 
 \begin{frame}[plain]
@@ -574,15 +557,182 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 }
 
 \only<5>{
+ \begin{center}
+ Regla 1 \\
+   \LARGE
+\textbf{Dividir las creencias \\ en partes iguales}
+ \end{center}
+}
+
+\only<6>{
  \begin{textblock}{160}(0,30)\centering
- \includegraphics[width=0.55\textwidth]{figures/montyHall_4}     
+ \includegraphics[width=0.55\textwidth]{figures/montyHall_2}     
  \end{textblock}
 }
-\only<6>{
+
+
+\only<7>{
+ \begin{textblock}{160}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{figures/montyHall_3}     
+ \end{textblock}
+}
+
+% \only<8>{
+%  \begin{textblock}{160}(0,30)\centering
+%  \includegraphics[width=0.55\textwidth]{figures/montyHall_4}     
+%  \end{textblock}
+% }
+\only<8>{
  \begin{textblock}{160}(0,30)\centering
  \includegraphics[width=0.55\textwidth]{figures/montyHall_5}     
  \end{textblock}
 }
+
+\only<9>{
+ \begin{center}
+ Regla 2 \\
+   \LARGE
+\textbf{Contextualizar las creencias \\ en partes iguales}
+ \end{center}
+}
+
+\only<10>{
+\begin{textblock}{160}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{figures/montyHall_0}     
+ \end{textblock}
+}
+
+\only<11>{
+\begin{textblock}{160}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{figures/montyHall_9}     
+ \end{textblock}
+}
+
+\only<12>{
+\begin{textblock}{160}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{figures/montyHall_9bis}     
+ \end{textblock}
+}
+
+\only<13>{ 
+\begin{textblock}{160}(0,20)\centering
+\tikz{
+\node[latent, draw=white] (i) {$1$};
+\node[latent, below=of i, fill=black, yshift=0.6cm,minimum size=2pt] (b0) {};
+\node[latent,below=of b0,yshift=0.6cm, xshift=-2cm] (x1) {$x_1$};
+\node[latent,below=of b0,yshift=0.6cm] (x2) {$x_2$};
+\node[latent,below=of b0,yshift=0.6cm, xshift=2cm] (x3) {$x_3$};
+
+\node[latent, below=of x1, fill=black, yshift=0.6cm,minimum size=2pt] (bx1) {};
+\node[latent, below=of x2, fill=black, yshift=0.6cm,minimum size=2pt] (bx2) {};
+\node[latent, below=of x3, fill=black, yshift=0.6cm, minimum size=2pt] (bx3) {};
+
+\node[latent,below=of bx1,yshift=0.6cm] (y1) {$y_1$};
+\node[latent,below=of bx2,yshift=0.6cm, xshift=-0.7cm] (y2) {$y_2$};
+\node[latent,below=of bx2,yshift=0.6cm, xshift=0.7cm] (y3) {$y_3$};
+\node[latent,below=of bx3,yshift=0.6cm] (y4) {$y_4$};
+
+\node[latent,below=of y1,yshift=0.6cm,draw=white] (by1) {$\frac{1}{3}\frac{1}{1}$};
+\node[latent,below=of y2,yshift=0.6cm,draw=white] (by2) {$\frac{1}{3}\frac{1}{2}$};
+\node[latent,below=of y3,yshift=0.6cm, draw=white] (by3) {$\frac{1}{3}\frac{1}{2}$};
+\node[latent,below=of y4,yshift=0.6cm,draw=white] (by4) {$\frac{1}{3}\frac{1}{1}$};
+
+\edge[-] {b0} {i,x1,x2,x3};
+\edge[-] {x1} {bx1};
+\edge[-] {x2} {bx2};
+\edge[-] {x3} {bx3};
+\edge[-] {bx1} {y1};
+\edge[-] {bx3} {y4};
+\edge[-] {bx2} {y2,y3};
+\edge[-] {y1} {by1};
+\edge[-] {y2} {by2};
+\edge[-] {y3} {by3};
+\edge[-] {y4} {by4};
+}
+\end{textblock}
+}
+
+\only<14>{
+\begin{textblock}{160}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{figures/montyHall_10}     
+ \end{textblock}
+}
+
+\only<15>{
+\begin{textblock}{160}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{figures/montyHall_10bis}     
+ \end{textblock}
+}
+
+\only<16>{
+\begin{textblock}{160}(0,30)\centering
+ \begin{center}
+ Regla 3 \\
+   \LARGE
+\textbf{Sumar las creencias \\ en partes iguales}
+ \end{center}
+\end{textblock}
+}
+
+\only<17>{
+\begin{textblock}{160}(0,30)\centering
+ \includegraphics[width=0.55\textwidth]{figures/montyHall_16}     
+\end{textblock}
+}
+
+\only<18>{\centering
+Creencia$(x,y)$ \vspace{0.3cm}
+\\
+\begin{tabular}{c|c|c|c||c}
+& $x_1$ & $x_2$ & $x_3$ & \\ \hline
+$y_1$ & $\frac{1}{3}\frac{1}{1}$ & & & \\ \hline
+$y_2$ & & $\frac{1}{3}\frac{1}{2}$ & & \\ \hline
+$y_3$ & & $\frac{1}{3}\frac{1}{2}$ & & \\ \hline
+$y_4$ & & & $\frac{1}{3}\frac{1}{1}$ & \\ \hline \hline
+& & & & \\ \hline
+\end{tabular}
+}
+
+% 
+% \onslide<14>{ 
+% \begin{textblock}{80}(70,18) \centering
+% \tikz{
+% \node[latent] (c1) {$c_1$};
+% \node[latent, below=of c1, draw=white, yshift=0.6cm] (b0) {$ 1$};
+% \node[latent,below=of b0,yshift=0.6cm, xshift=-2cm] (r1) {$r_1$};
+% \node[latent,below=of b0,yshift=0.6cm] (r2) {$r_2$};
+% \node[latent,below=of b0,yshift=0.6cm, xshift=2cm] (r3) {$r_3$};
+% 
+% \node[latent, below=of r1, draw=white, yshift=0.6cm] (br1) {$\frac{1}{3}$};
+% \node[latent, below=of r2, draw=white, yshift=0.6cm] (br2) {$\frac{1}{3}$};
+% \node[latent, below=of r3, draw=white, yshift=0.6cm] (br3) {$\frac{1}{3}$};
+% 
+% \node[latent,below=of br1,yshift=0.6cm, xshift=-0.7cm] (r1d2) {$d_2$};
+% \node[latent,below=of br1,yshift=0.6cm, xshift=0.7cm] (r1d3) {$d_3$};
+% \node[latent,below=of br2,yshift=0.6cm] (r2d3) {$d_3$};
+% \node[latent,below=of br3,yshift=0.6cm] (r3d2) {$d_2$};
+% 
+% \node[latent,below=of r1d2,yshift=0.6cm,draw=white] (br1d2) {$\frac{1}{3}\frac{1}{2}$};
+% \node[latent,below=of r1d3,yshift=0.6cm, draw=white] (br1d3) {$\frac{1}{3}\frac{1}{2}$};
+% \node[latent,below=of r2d3,yshift=0.6cm,draw=white] (br2d3) {$\frac{1}{3}$};
+% \node[latent,below=of r3d2,yshift=0.6cm,draw=white] (br3d2) {$\frac{1}{3}$};
+% \edge[-] {c1} {b0};
+% \edge[-] {b0} {r1,r2,r3};
+% \edge[-] {r1} {br1};
+% \edge[-] {r2} {br2};
+% \edge[-] {r3} {br3};
+% \edge[-] {br1} {r1d2,r1d3};
+% \edge[-] {br2} {r2d3};
+% \edge[-] {br3} {r3d2};
+% \edge[-] {r1d2} {br1d2};
+% \edge[-] {r1d3} {br1d3};
+% \edge[-] {r2d3} {br2d3};
+% \edge[-] {r3d2} {br3d2};
+% }
+% \end{textblock}
+% }
+%  
+
 
 \end{frame}
 
@@ -595,12 +745,6 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
  \end{textblock}
 \vspace{1cm} 
 
-
-\begin{center}
- \LARGE 
- \en{\textbf{Maximum uncertainty \\ given the available states}}
- \es{\textbf{Máxima incertidumbre \\ dado los estados disponibles}}
-\end{center}
 
 \end{frame}
 
