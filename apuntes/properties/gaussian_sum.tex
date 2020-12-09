@@ -1,0 +1,65 @@
+Sabemos que
+
+\begin{equation}
+t_n = \sum_{i=1}^n x_i \sim \int \dots \int \mathbb{I}(t_n= \sum_{i=1}^n x_i ) \left( \prod_{i=1}^n N(x_i;\mu_i,\sigma_i^2) \right) dx_1 \dots dx_n = N(t;\sum_{i=1}^n \mu_i,\sum_{i=1}^n \sigma_i^2 )
+\end{equation}
+
+
+Queremos probar por inducci\'on.
+\begin{equation}
+ P(n):= \int \dots \int \mathbb{I}(t_n= \sum_{i=1}^n x_i ) \left( \prod_{i=1}^n N(x_i;\mu_i,\sigma_i^2) \right) dx_1 \dots dx_n \overset{?}{=} N(t;\sum_{i=1}^n \mu_i,\sum_{i=1}^n \sigma_i^2 )
+\end{equation}
+
+\paragraph{Casos base}
+
+\begin{equation}
+\begin{split}
+ P(1) := \int \mathbb{I}(t_1 = x_1) N(x_1;\mu_1,\sigma_1^2) dx_1 = N(x;\mu_1,\sigma_1^2)
+\end{split}
+\end{equation}
+
+Luego $P(1)$ es verdadera.
+
+\begin{equation}
+ \begin{split}
+P(2) & := \iint \mathbb{I}(t_2 = x_1 + x_2) N(x_1|\mu_1, \sigma_1^2)N(x_2|\mu_2, \sigma_2^2) dx_1dx_2 \\
+ &= \int N(x_1|\mu_1, \sigma_1^2) N(t_2 - x_1|\mu_2, \sigma_2^2) dx_1   \\
+ & = \int N(x_1|\mu_1, \sigma_1^2) N(x_1|t_2 - \mu_2, \sigma_2^2) dx_1 \\
+ & \overset{*}{=} \int \underbrace{N(t_2|\mu_1+\mu_2,\sigma_1^2 + \sigma_2^2)}_{\text{const.}} \underbrace{N(x_1|\mu_{*},\sigma_{*}^2) dx_1}_{1} \\
+ & = N(t_2|\mu_1+\mu_2,\sigma_1^2 + \sigma_2^2)
+ \end{split}
+ \end{equation}
+
+ Donde $\overset{*}{=}$ vale por la demostraci\'on de miltiplicaci\'on de normales en la secci\'on~\ref{multiplicacion_normales}.
+ Luego, vale $P(2)$.
+
+
+\paragraph{Paso inductivo} $P(n) \Rightarrow P(n+1)$
+
+Sea,
+\begin{equation}
+ P(n) :=\int \dots \int \mathbb{I}(t_n= \sum_{i=1}^n x_i ) \left( \prod_{i=1}^n N(x_i;\mu_i,\sigma_i^2) \right) dx_1 \dots dx_n = N(t;\sum_{i=1}^n \mu_i,\sum_{i=1}^n \sigma_i^2 )
+\end{equation}
+
+Queremos ver que vale $P(n+1)$
+
+\begin{equation}
+ P(n+1) := \int \dots \int \mathbb{I}(t_{n+1}=  x_{n+1} + \sum_{i=1}^{n} x_i ) \left( \prod_{i=1}^{n} N(x_i;\mu_i,\sigma_i^2) \right) N(x_{n+1};\mu_{n+1},\sigma_{n+1}^2) dx_1 \dots dx_{n} dx_{n+1}
+\end{equation}
+
+Por independencia
+\begin{equation}
+ \int N(x_{n+1};\mu_{n+1},\sigma_{n+1}^2) \left( \int \dots \int \mathbb{I}(t_{n+1}= x_{n+1} + \sum_{i=1}^{n} x_i ) \left( \prod_{i=1}^{n} N(x_i;\mu_i,\sigma_i^2) \right)  dx_1 \dots dx_{n}\right) dx_{n+1}
+\end{equation}
+
+Por hip\'otesis inductiva
+\begin{equation}
+ \int N(x_{n+1};\mu_{n+1},\sigma_{n+1}^2) N(t-x_{n+1};\sum_{i=1}^n \mu_i,\sum_{i=1}^n \sigma_i^2) dx_{n+1}
+\end{equation}
+
+Por demostraci\'on de la secci\'on~\ref{multiplicacion_normales},
+\begin{equation}
+  N(t;\mu_{n+1}+\sum_{i=1}^{n} \mu_i,\sigma_{n+1}^2 \sum_{i=1}^n \sigma_i^2) dx_{n+1}
+\end{equation}
+
+Luego, vale $P(n+1)$.

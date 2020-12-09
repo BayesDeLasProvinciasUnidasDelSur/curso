@@ -1,7 +1,7 @@
 \documentclass[a4paper,10pt]{book}
 \usepackage[utf8]{inputenc}
-\input{../auxiliar/encabezado.tex}
-\input{../auxiliar/tikzlibrarybayesnet.code.tex}
+\input{../aux/tex/encabezado.tex}
+\input{../aux/tex/tikzlibrarybayesnet.code.tex}
 
  
 %opening
@@ -61,5 +61,23 @@
 \section{Expectation Maximization}
 
 \input{EM/expectationMaximization.tex}
+
+\chapter{Appendix}
+
+\section{Propiedades de las funciones de densidad Normales}
+
+
+\subsection{Multiplicacion de normales}\label{multiplicacion_normales}
+\input{properties/gaussian_product.tex}
+
+\subsection{Suma de n normales}\label{suma_normales_induccion}
+\input{properties/gaussian_sum.tex}
+
+\subsection{Normal por acumulada de Normal}
+\input{properties/gaussian_x_acum.tex}
+
+\subsection{Division de Normales}\label{sec:division_normales}
+\input{properties/gaussian_division.tex}
+
 
 \end{document}

@@ -1,0 +1,39 @@
+Queremos resolver la integral
+
+\begin{equation}
+ f(x) = \int N(y;\mu_1,\sigma_1^2)\Phi(y+x;\mu_2,\sigma_2^2) dy
+\end{equation}
+
+Para ello trabajamos con la drivada $\frac{\partial}{\partial x}f(x) = \theta(x)$,
+\begin{equation}
+ \theta(x) = \frac{\partial}{\partial x}\int N(y;\mu_1,\sigma_1^2)\Phi(y+x;\mu_2,\sigma_2^2) dy
+\end{equation}
+
+Por ``Dominated convergence theorem, integrales y derivadas pueden intercambiar posiciones.
+\begin{equation}
+ \theta(x) = \int N(y;\mu_1,\sigma_1^2)\frac{\partial}{\partial x}\Phi(y+x;\mu_2,\sigma_2^2) dy
+\end{equation}
+
+La derivada de $\Phi$ es justamente una normal,
+\begin{equation}
+\begin{split}
+\theta(x) & = \int N(y;\mu_1,\sigma_1^2)N(y+x;\mu_2,\sigma_2^2) dy \\
+& = \int N(y;\mu_1,\sigma_1^2)N(y;\mu_2-x,\sigma_2^2) dy
+\end{split}
+\end{equation}
+
+Por la demostraci\'on de la secci\'on~\ref{multiplicacion_normales} sabemos
+\begin{equation}
+ \theta(x) = N(\mu_1; \mu_2 - x, \sigma_1^2 + \sigma_2^2)
+\end{equation}
+
+Por simetr\'ia
+\begin{equation}
+ \theta(x) = N(x; \mu_2 - \mu_1, \sigma_1^2 + \sigma_2^2)
+\end{equation}
+
+Retornando a $f(x)$
+\begin{equation}
+ f(x) = \Phi(x; \mu_2 - \mu_1, \sigma_1^2 + \sigma_2^2)
+\end{equation}
+
