@@ -1,0 +1,53 @@
+\documentclass[10pt]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\input{../../../aux/tex/tikzlibrarybayesnet.code.tex}
+\input{../../../aux/tex/encabezado.tex}
+\makeatletter
+\newcommand{\vast}{\bBigg@{2.5}}
+\newcommand{\Vast}{\bBigg@{14.5}}
+\makeatother
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\begin{document}
+
+\tikz{ %
+        
+        
+        \node[det, fill=black!10] (r) {$r_{ab}$} ; %
+        
+        \node[factor, above=of r] (fr) {} ;
+        \node[const, right=of fr] (dfr) {\large $f_r$}; 
+        \node[latent, above=of fr, xshift=-0.8cm] (p1) {$p_a$} ; %
+        \node[latent, above=of fr, xshift=0.8cm] (p2) {$p_b$} ; %
+        
+        \node[factor, above=of p1] (fp1) {} ;
+        \node[factor, above=of p2] (fp2) {} ;
+        \node[const, right=of fp2] (dp) {\large $f_p$};
+        
+        
+        \node[latent, above=of fp1] (s1) {$s_a$} ; %
+        \node[latent, above=of fp2] (s2) {$s_b$} ; %        
+        
+        \node[factor, above=of s1] (fs1) {} ;
+        \node[factor, above=of s2] (fs2) {} ;                        \node[const, right=of fs2] (ds) {\large $f_s$};
+
+        
+        
+        \node[invisible, right=of s2, xshift=1.5cm] (s-dist) {};
+        
+        \edge[-] {fr} {r};
+        \edge[-] {p1} {fr};
+        \edge[-] {p2} {fr};
+        \edge[-] {fp1} {p1};
+        \edge[-] {fp2} {p2};
+        \edge[-] {s1} {fp1};
+        \edge[-] {s2} {fp2};
+        \edge[-] {fs1} {s1};
+        \edge[-] {fs2} {s2};
+        } 
+
+
+\end{document}

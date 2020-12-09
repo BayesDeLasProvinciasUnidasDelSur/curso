@@ -45,6 +45,18 @@
 }
 \end{frame}
  
+ % if we are told that a highly improbable event has just occurred, we will
+% have received more information than if we were told that some very likely event
+% has just occurred, and if we knew that the event was certain to happen we would
+% receive no information. Our measure of information content will therefore depend
+% on the probability distribution p(x), and we therefore look for a quantity h(x) that
+% is a monotonic function of the probability p(x) and that expresses the information
+% content. The form of h(·) can be found by noting that if we have two events x
+% and y that are unrelated, then the information gain from observing both of them
+% should be the sum of the information gained from each of them separately, so that
+% h(x, y) = h(x) + h(y). Two unrelated events will be statistically independent and
+% so p(x, y) = p(x)p(y).
+
  
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)

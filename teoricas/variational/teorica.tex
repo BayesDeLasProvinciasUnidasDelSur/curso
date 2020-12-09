@@ -1,0 +1,308 @@
+\documentclass[shownotes]{beamer}
+\input{../../aux/tex/diapo_encabezado.tex}
+\input{../../aux/tex/tikzlibrarybayesnet.code.tex}
+
+\mode<presentation>
+{
+%   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+%   \usecolortheme{default} % or try albatross, beaver, crane, ...
+%   \usefonttheme{default}  % or try serif, structurebold, ...
+ \usetheme{Antibes}
+ \usecolortheme[rgb={0.6,0.75,0}]{structure}%divido los RGB por 252
+ \setbeamercolor{block title}{fg=white,bg=azuluca}
+ \xdefinecolor{azuluca}{rgb}{0.02, 0.2, 0.18}
+ \definecolor{greenblue}{rgb}{0.1, 0.55, 0.5}
+
+ \setbeamercolor{palette quaternary}{fg=white,bg=azuluca}
+ \setbeamertemplate{caption}[numbered]
+ \setbeamercolor{item projected}{bg=black}
+ \setbeamertemplate{enumerate items}[default]
+ \setbeamertemplate{navigation symbols}{}
+ %\setbeamercovered{transparent}
+ \setbeamercolor{block title}{fg=black}
+ \setbeamercolor{local structure}{fg=black}
+
+}
+
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+\title[Inferencia variacional]{Inferencia variacional}
+
+\institute[Bayes del sur]{\includegraphics[width=0.85\textwidth]{../../aux/static/peligro_predador}}
+
+\date{\today}
+
+\begin{document}
+
+\small
+
+\begin{frame}[noframenumbering]
+ 
+ %\vspace{2cm}
+\maketitle
+ \end{frame}
+ 
+\section{Problema}
+ 
+\begin{frame}
+\begin{textblock}{128}(0,8)
+\begin{center}
+ \large Enfoque Bayesiano
+\end{center}
+\end{textblock}
+\vspace{1cm}
+Dado un modelo,
+\begin{equation*}
+ p(x, \theta) = p(x | \theta) p(\theta)
+\end{equation*}
+
+\vspace{0.25cm}
+\pause
+\begin{center}
+ Queremos calcular
+\end{center}
+
+$\bullet$ La posterior: 
+\begin{equation*}
+ p(\theta|x) = \frac{p(x | \theta) p(\theta)}{p(x)}
+\end{equation*}
+
+% $\bullet$ La evidencia: 
+% \begin{equation*}
+%  p(x) = \int p(x | \theta) p(\theta) d\theta
+% \end{equation*}
+% 
+% $\bullet$ La predicci\'on: 
+% \begin{equation*}
+%  p(\tilde{x}|x) = \int p(\tilde{x} | \theta, x) p(\theta, x) d\theta
+% \end{equation*}
+% 
+
+
+
+\end{frame}
+
+\subsection{Aproximaciones}
+
+\begin{frame}
+\begin{textblock}{128}(0,8)
+\begin{center}
+ \large Aproximaciones
+\end{center}
+\end{textblock}
+
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+ \centering \textbf{Inferencia variacional}
+ 
+\begin{itemize}
+  \item[$\circ$] Sesgado
+  \item[$\circ$] R\'apido y escalable
+ \end{itemize}
+
+ 
+ \end{column}
+ \begin{column}{0.5\textwidth}
+\centering  \textbf{Cadenas de Markov}
+
+\begin{itemize}
+  \item[$\circ$] No sesgado
+  \item[$\circ$] Lento y no escalable
+ \end{itemize}
+
+\end{column}
+\end{columns}
+
+
+\end{frame}
+ 
+\section{Inferencia variacional}
+
+\begin{frame}
+\begin{textblock}{128}(0,8)
+\begin{center}
+ \large Inferencia variacional
+\end{center}
+\end{textblock}
+
+Encontrar la mejor aproximaci\'on a la posterior
+
+\begin{equation*}
+ p(\theta|x) \approx q(\theta)
+\end{equation*}
+
+\vspace{0.3cm}
+Que minimice una distancia $D$
+\begin{equation*}
+ q(\theta) = \underset{q \in \mathcal{Q}}{\text{arg min}} \ \ D(q(\theta) \ || \ p(\theta|x))
+\end{equation*}
+\end{frame}
+ 
+\begin{frame}
+\begin{textblock}{128}(0,8)
+\begin{center}
+ \large Solcuiones
+\end{center}
+\end{textblock}
+
+$\bullet$ \textbf{Variational Bayes}
+
+\begin{equation*}
+ q(\theta) = \underset{q \in \mathcal{Q}}{\text{arg min}} \ \ \text{KL}(q(\theta) \ || \ p(\theta|x))
+\end{equation*}
+
+\pause
+\vspace{0.5cm}
+
+$\bullet$ \textbf{Expecatation Propagation}
+
+\begin{equation*}
+ q(\theta) = \underset{q \in \mathcal{Q}}{\text{arg min}} \ \ \text{KL}(p(\theta|x) \ || \  q(\theta))
+\end{equation*}
+
+\end{frame}
+
+\subsection{Kullback-Leibler}
+
+\begin{frame}
+ \begin{textblock}{128}(0,8)
+\begin{center}
+ \large Kullback-Leibler
+\end{center}
+\end{textblock}
+\vspace{0.5cm}
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+\centering
+$\text{KL}(q(\theta) \ || \ p(\theta|x))$
+
+\begin{equation*}
+  \int q(\theta) \log \frac{q(\theta)}{p(\theta|x)} d\theta
+\end{equation*}
+
+ \end{column}
+ \begin{column}{0.5\textwidth}
+\centering
+ $\text{KL}( p(\theta|x) \ || \ q(\theta))$
+
+ \begin{equation*}
+\int p(\theta|x) \log \frac{p(\theta|x)}{q(\theta)} d\theta
+\end{equation*}
+
+ 
+\end{column}
+\end{columns}
+
+ \vspace{0.5cm}
+\todo[inline]{IMAGEN}
+
+\end{frame}
+
+
+\section{Variationl Bayes}
+
+\begin{frame}
+ \begin{textblock}{128}(0,8)
+\begin{center}
+ \large Variationl Bayes
+\end{center}
+\end{textblock}
+
+\begin{equation*}
+ \begin{split}
+ \log p(x) &= \log p(x) \int q(\theta) d\theta =  \int q(\theta) \log p(x) d\theta \\
+ & = \int q(\theta) \log \frac{p(x,\theta)}{p(\theta|x)} d\theta \\
+ & = \int q(\theta) \log \frac{p(x,\theta)}{p(\theta|x)} \frac{q(\theta)}{q(\theta)} d\theta \\
+ & = \int q(\theta) \log \frac{p(x,\theta)}{q(\theta)} d\theta + \int q(\theta) \log \frac{q(\theta)}{p(\theta|x)} d\theta 
+ \end{split}
+\end{equation*}
+
+
+\end{frame}
+
+\begin{frame}
+
+\begin{equation*}
+ \log p(x)  = \underbrace{\int q(\theta) \log \frac{p(x,\theta)}{q(\theta)} d\theta}_{\mathcal{L}(q(\theta))} + \underbrace{\int q(\theta) \log \frac{q(\theta)}{p(\theta|x)} d\theta}_{\text{KL}(q(\theta) \ || \ p(\theta|x))}  
+\end{equation*}
+
+
+\pause
+
+\begin{itemize}
+ \item[$\bullet$] Evidence Lower Bound $\log p(x) \geq \mathcal{L}(q(\theta))$
+ \item[$\bullet$] $ \underset{q \in \mathcal{Q}}{\text{arg max}} \ \mathcal{L}(q(\theta)) \Leftrightarrow\underset{q \in \mathcal{Q}}{\text{arg min}} \ \text{KL}(q(\theta) \ || \ p(\theta|x))$ 
+\end{itemize}
+
+
+\end{frame}
+
+\subsection{Evidence Lower Bound}
+
+\begin{frame}
+ \begin{textblock}{128}(0,8)
+\begin{center}
+ \large Evidence Lower Bound
+\end{center}
+\end{textblock}
+
+\begin{equation*}
+ \begin{split}
+ \mathcal{L}(q(\theta)) &= \int q(\theta) \log \frac{p(x,\theta)}{q(\theta)} d\theta \\
+ &= \int q(\theta) \log \frac{p(x|\theta) p(\theta)}{q(\theta)} d\theta \\
+ & = \int q(\theta) \log p(x|\theta) d\theta + \int q(\theta) \log  \frac{ p(\theta)}{q(\theta)} d\theta \\
+ & = \int q(\theta) \log p(x|\theta) d\theta - \int q(\theta) \log  \frac{ q(\theta)}{p(\theta)} d\theta \\
+ & = \underbrace{{q(\theta)}[\log p(x|\theta)]}_{\text{m\'axima verosimilitud}} - \underbrace{\text{KL}(q(\theta) \ || \ p(\theta))}_{\text{prior}}
+ \end{split}
+\end{equation*}
+ 
+\end{frame}
+
+
+\begin{frame}
+ \begin{textblock}{128}(0,8)
+\begin{center}
+ \large Mean field approximation
+\end{center}
+\end{textblock}
+\vspace{0.5cm}
+
+Restricci\'on de independencia sobre $q$ para que se pueda factorizar,
+\begin{equation*}
+ q(\theta) = \prod_{i=1}^m q_i(\theta_i)
+\end{equation*}
+
+\textbf{Block coordinate assent}: En cada paso fijamos todos los factores $q_i(\theta_i)$ salvo uno, y optimizamos con respeto al restante $q_j(\theta_j)$
+
+\begin{equation*}
+ \underset{q_j \in \mathcal{Q}}{\text{arg max}} \ \mathcal{L}(q_j(\theta_j)\prod_{i\neq j}^m q_i(\theta_i))
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}
+ 
+ 
+ \todo[inline]{SEGUIR ACA}
+ 
+ \Wider[3cm]{
+\begin{equation*}
+ \begin{split}
+ \mathcal{L}(q(\theta)) &= \int q(\theta) \log \frac{p(x,\theta)}{q(\theta)} d\theta \\
+ & = \int q(\theta) \log p(x,\theta)d\theta - \int q(\theta) \log q(\theta) d\theta \\
+ & = \int q_j(\theta_j) \big(\int \log p(x,\theta)\prod_{i\neq j}^m q_i(\theta_i) d\theta_i\big)d\theta_j - \int q_j(\theta_j) \log q_j(\theta_j)  d\theta_j + \text{cont} \\
+  & = E_j [E_{i\neq j} \log p(x,\theta) ] - E_j [ \log q_j(\theta_j) ] + \text{cont} \\
+\end{split}
+\end{equation*}
+ }
+ 
+\end{frame}
+
+
+\end{document}
+
+
+

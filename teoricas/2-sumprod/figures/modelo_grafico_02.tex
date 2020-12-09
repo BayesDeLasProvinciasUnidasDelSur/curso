@@ -1,0 +1,38 @@
+
+\documentclass[10pt]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\input{../../../aux/tikzlibrarybayesnet.code.tex}
+\input{../../../aux/encabezado.tex}
+\makeatletter
+\newcommand{\vast}{\bBigg@{2.5}}
+\newcommand{\Vast}{\bBigg@{14.5}}
+\makeatother
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\begin{document}
+ 
+ 
+
+\tikz{
+    \node[invisible, xshift=8cm] () {};
+    \node[invisible, xshift=-6.5cm] () {};
+    \node[invisible, yshift=-3.5cm] () {};
+    \node[invisible, yshift=2.5cm] () {};
+    
+    
+    \node[det] (r) {$r$} ; %
+    \node[latent, above=of r, xshift=-1cm] (d) {$d$} ; %
+    \node[const, left= of d] (d_name) {\small Dificultad}; 
+    \node[latent, above=of r, xshift=1cm] (p) {$p$} ; %
+    \node[const, right= of p] (p_name) {\small Rendimiento}; 
+    
+
+    \edge {d,p} {r};
+    
+ }
+ 
+ 
+\end{document}
