@@ -598,23 +598,11 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 
 \only<10>{
 \begin{textblock}{160}(0,30)\centering
- \includegraphics[width=0.55\textwidth]{figures/montyHall_0}     
- \end{textblock}
-}
-
-\only<11>{
-\begin{textblock}{160}(0,30)\centering
- \includegraphics[width=0.55\textwidth]{figures/montyHall_9}     
- \end{textblock}
-}
-
-\only<12>{
-\begin{textblock}{160}(0,30)\centering
  \includegraphics[width=0.55\textwidth]{figures/montyHall_9bis}     
  \end{textblock}
 }
 
-\only<13>{ 
+\only<11>{ 
 \begin{textblock}{160}(0,20)\centering
 \tikz{
 \node[latent, draw=white] (i) {$1$};
@@ -652,19 +640,19 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 \end{textblock}
 }
 
-\only<14>{
+\only<12>{
 \begin{textblock}{160}(0,30)\centering
  \includegraphics[width=0.55\textwidth]{figures/montyHall_10}     
  \end{textblock}
 }
 
-\only<15>{
+\only<13>{
 \begin{textblock}{160}(0,30)\centering
  \includegraphics[width=0.55\textwidth]{figures/montyHall_10bis}     
  \end{textblock}
 }
 
-\only<16>{
+\only<14>{
 \begin{textblock}{160}(0,30)\centering
  \begin{center}
  Regla 3 \\
@@ -673,25 +661,25 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
  \end{center}
 \end{textblock}
 }
-
-\only<17>{
-\begin{textblock}{160}(0,30)\centering
- \includegraphics[width=0.55\textwidth]{figures/montyHall_16}     
-\end{textblock}
-}
-
-\only<18>{\centering
-Creencia$(x,y)$ \vspace{0.3cm}
-\\
-\begin{tabular}{c|c|c|c||c}
-& $x_1$ & $x_2$ & $x_3$ & \\ \hline
-$y_1$ & $\frac{1}{3}\frac{1}{1}$ & & & \\ \hline
-$y_2$ & & $\frac{1}{3}\frac{1}{2}$ & & \\ \hline
-$y_3$ & & $\frac{1}{3}\frac{1}{2}$ & & \\ \hline
-$y_4$ & & & $\frac{1}{3}\frac{1}{1}$ & \\ \hline \hline
-& & & & \\ \hline
-\end{tabular}
-}
+% 
+% \only<17>{
+% \begin{textblock}{160}(0,30)\centering
+%  \includegraphics[width=0.55\textwidth]{figures/montyHall_16}     
+% \end{textblock}
+% }
+% 
+% \only<18->{\centering
+% Creencia$(x,y)$ \vspace{0.3cm}
+% \\
+% \begin{tabular}{c|c|c|c||c}
+% & $x_1$ & $x_2$ & $x_3$ & \\ \hline
+% $y_1$ & $\frac{1}{3}\frac{1}{1}$ & & & \onslide<19->{$\frac{1}{3}$} \\ \hline
+% $y_2$ & & $\frac{1}{3}\frac{1}{2}$ & & \onslide<19->{$\frac{1}{6}$} \\ \hline
+% $y_3$ & & $\frac{1}{3}\frac{1}{2}$ & & \onslide<19->{$\frac{1}{6}$} \\ \hline
+% $y_4$ & & & $\frac{1}{3}\frac{1}{1}$ & \onslide<19->{$\frac{1}{3}$} \\ \hline \hline
+% & \onslide<19->{$\frac{1}{3}$} & \onslide<19->{$\frac{1}{3}$} & \onslide<19->{$\frac{1}{3}$} & \only<20>{$1$} \\ \hline
+% \end{tabular}
+% }
 
 % 
 % \onslide<14>{ 
@@ -736,53 +724,6 @@ $y_4$ & & & $\frac{1}{3}\frac{1}{1}$ & \\ \hline \hline
 
 \end{frame}
 
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \LARGE 
- \en{Principle of intellectual honesty}
- \es{Principio de la honestidad intelectual}
- \end{textblock}
-\vspace{1cm} 
-
-
-\end{frame}
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \LARGE 
- \en{Honesty optimizes information}
- \es{La honestidad óptimiza la información}
- \end{textblock}
- \vspace{1.4cm}
-
- \begin{equation*}
- \underbrace{\text{\en{Entropy}\es{Entropía}}(X)}_{\text{\en{Expected information}\es{Información esperada}}} = \ \sum_{x\in X} \ P(x) \  \cdot \underbrace{(-\log P(x))}_{\hfrac{\text{\scriptsize \en{Information generated}\es{Información generada}}}{\text{\scriptsize \en{by the surprise}\es{por la sorpresa}}}}
-\end{equation*}
-
-\pause
-
-\vspace{0.3cm}
-
-\begin{center}
-\en{Maximum expected information $\Leftrightarrow$ Maximum uncertainty}
-\es{M\'axima información esperada $\Leftrightarrow$ Máxima incertidumbre}
-\end{center}
-
-\vspace{0.7cm}
-
-\pause
-
-\Wider[-5cm]{
-\begin{mdframed}[backgroundcolor=black!20]
-\begin{equation*}
-  \text{\en{Honesty}\es{Honestidad}} = \underset{P(X)}{\text{ arg max }} \text{\en{Entropy}\es{Entropía}}(X)
-\end{equation*}
-\end{mdframed}
-}
-
-\end{frame}
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
