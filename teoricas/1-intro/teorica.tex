@@ -558,7 +558,7 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 
 \only<5>{
  \begin{center}
- Regla 1 \\
+ Principio de honestidad \\
    \LARGE
 \textbf{Dividir las creencias \\ en partes iguales}
  \end{center}
@@ -590,7 +590,7 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 
 \only<9>{
  \begin{center}
- Regla 2 \\
+ Regla 1 \\
    \LARGE
 \textbf{Contextualizar las creencias \\ en partes iguales}
  \end{center}
@@ -602,8 +602,51 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
  \end{textblock}
 }
 
-\only<11>{ 
-\begin{textblock}{160}(0,20)\centering
+\only<11-12>{ 
+\begin{textblock}{80}(0,20)\centering
+\tikz{
+\node[latent, draw=white] (i) {$1$};
+\node[latent, below=of i, fill=black, yshift=0.6cm,minimum size=2pt] (b0) {};
+\node[latent,below=of b0,yshift=0.6cm, xshift=-3cm] (y1) {$y_1$};
+\node[latent,below=of b0,yshift=0.6cm, xshift=-1cm] (y2) {$y_2$};
+\node[latent,below=of b0,yshift=0.6cm, xshift=1cm] (y3) {$y_3$};
+\node[latent,below=of b0,yshift=0.6cm, xshift=3cm] (y4) {$y_4$};
+
+\node[latent, below=of y1, fill=black, yshift=0.6cm,minimum size=2pt] (by1) {};
+\node[latent, below=of y2, fill=black, yshift=0.6cm,minimum size=2pt] (by2) {};
+\node[latent, below=of y3, fill=black, yshift=0.6cm, minimum size=2pt] (by3) {};
+\node[latent, below=of y4, fill=black, yshift=0.6cm, minimum size=2pt] (by4) {};
+
+\node[latent,below=of by1,yshift=0.6cm] (y1x) {$x_1$};
+\node[latent,below=of by2,yshift=0.6cm] (y2x) {$x_2$};
+\node[latent,below=of by3,yshift=0.6cm] (y3x) {$x_2$};
+\node[latent,below=of by4,yshift=0.6cm] (y4x) {$x_3$};
+
+\node[latent,below=of y1x,yshift=0.6cm,draw=white] (by1x) {$\frac{1}{4}\frac{1}{1}$};
+\node[latent,below=of y2x,yshift=0.6cm,draw=white] (by2x) {$\frac{1}{4}\frac{1}{1}$};
+\node[latent,below=of y3x,yshift=0.6cm, draw=white] (by3x) {$\frac{1}{4}\frac{1}{1}$};
+\node[latent,below=of y4x,yshift=0.6cm,draw=white] (by4x) {$\frac{1}{4}\frac{1}{1}$};
+
+\edge[-] {b0} {i,y1,y2,y3,y4};
+\edge[-] {y1} {by1};
+\edge[-] {y2} {by2};
+\edge[-] {y3} {by3};
+\edge[-] {y4} {by4};
+\edge[-] {by1} {y1x};
+\edge[-] {by2} {y2x};
+\edge[-] {by3} {y3x};
+\edge[-] {by4} {y4x};
+\edge[-] {y1x} {by1x};
+\edge[-] {y2x} {by2x};
+\edge[-] {y3x} {by3x};
+\edge[-] {y4x} {by4x};
+}
+\end{textblock}
+}
+
+
+\only<12>{ 
+\begin{textblock}{80}(80,20)\centering
 \tikz{
 \node[latent, draw=white] (i) {$1$};
 \node[latent, below=of i, fill=black, yshift=0.6cm,minimum size=2pt] (b0) {};
@@ -640,22 +683,30 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 \end{textblock}
 }
 
-\only<12>{
+\only<13>{
+ \begin{center}
+ Principio de honestidad \\
+   \LARGE
+\textbf{Dividir las creencias en partes iguales \\ (por los caminos del modelo causal)}
+ \end{center}
+}
+
+\only<14>{
 \begin{textblock}{160}(0,30)\centering
  \includegraphics[width=0.55\textwidth]{figures/montyHall_10}     
  \end{textblock}
 }
 
-\only<13>{
+\only<15>{
 \begin{textblock}{160}(0,30)\centering
  \includegraphics[width=0.55\textwidth]{figures/montyHall_10bis}     
  \end{textblock}
 }
 
-\only<14>{
+\only<16>{
 \begin{textblock}{160}(0,30)\centering
  \begin{center}
- Regla 3 \\
+ Regla 2 \\
    \LARGE
 \textbf{Sumar las creencias \\ en partes iguales}
  \end{center}
@@ -777,20 +828,20 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 }
 
 \end{frame}
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \LARGE 
- Reglas de la honestidad
- \end{textblock}
-\vspace{1.25cm} 
-
-\begin{center}
- Regla 1  \\ \LARGE
- Creencia$(r,c,d) = $ Dividir la creencias en partes iguales \\ a través de los posibles caminos del modelo causal
- \end{center} 
- 
-\end{frame}
+% 
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \LARGE 
+%  Reglas de la honestidad
+%  \end{textblock}
+% \vspace{1.25cm} 
+% 
+% \begin{center}
+%  Regla 1  \\ \LARGE
+%  Creencia$(r,c,d) = $ Dividir la creencias en partes iguales \\ a través de los posibles caminos del modelo causal
+%  \end{center} 
+%  
+% \end{frame}
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
@@ -849,7 +900,7 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
  \centering 
 \begin{center}
  {\normalsize Regla 2 } \\ 
- Integrar las creencias parciales \\ en partes iguales
+ Sumar las creencias parciales \\ en partes iguales
  \end{center} 
  
  Creencia$(d_i) = \sum_{j} \text{Creencia}(r_j,d_i)$ 
@@ -862,7 +913,7 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 \begin{textblock}{80}(0,53)
  \centering 
 \begin{center}
- {\normalsize Regla 3 } \\ 
+ {\normalsize Regla 1} \\ 
  Contextualizar las creencias \\ en partes iguales
  \end{center} 
  \begin{equation*}

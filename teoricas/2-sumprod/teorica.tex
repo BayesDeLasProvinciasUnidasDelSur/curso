@@ -34,7 +34,7 @@
  
  \begin{textblock}{90}(00,05)
 \begin{center}
- \huge  \textcolor{black!66}{Creencias, datos y sorpresas}
+ \huge  \textcolor{black!66}{Creencias adaptativas}
 \end{center}
 \end{textblock}
 
@@ -45,12 +45,184 @@
 }
 \end{frame}
 
+
+
 \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Las reglas de la probabilidad
+\end{textblock}
 
-\centering
 
- \Large Modelos gr\'aficos
+\vspace{0.75cm}
+
+
+
+\begin{equation*}
+  \text{Marginal}_{i} = \sum_j \text{Conjunta}_{ij}  \ \ \ \ \ \ \ \ \ \ \ \  \text{Condicional}_{j|i} = \frac{\text{Conjunta}_{ij}}{\text{Marginal}_{i}}
+\end{equation*}
+
+\pause
+\vspace{0.75cm}
+
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+ \centering \textbf{Regla de la suma}
  
+ 
+\begin{equation*}
+ P(X) = \sum_Y P(X,Y)
+\end{equation*}
+ 
+ \justifying \footnotesize
+  Cualquier distribución marginal puede ser obtenida integrando la distribución conjunta
+
+ \end{column}
+ \begin{column}{0.5\textwidth}
+\centering  \textbf{Regla del producto}
+
+\begin{equation*}
+ P(X,Y) = P(Y|X) P(X)
+\end{equation*}
+
+ \justifying \footnotesize
+Cualquier distribución conjunta puede ser expresada como el producto de distribuciones condicionales uni-dimensionles.
+
+\end{column}
+\end{columns}
+
+\end{frame}
+
+ \begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Las reglas de la probabilidad
+ \end{textblock}
+\vspace{0.7cm} 
+ 
+ 
+  \centering 
+  
+   \Wider[-0.5cm]{
+  \begin{framed}
+  \centering
+ Teorema de Cox
+  
+Son las reglas del razonamiento con incertidumbre
+  \end{framed}
+}
+ 
+ 
+\vspace{1cm}
+ \Wider[0.5cm]{
+
+Las \'unicas que grantizan:
+\begin{itemize}
+ \item[$\bullet$] Representaci\'on de las creencias con valores reales 
+ \item[$\bullet$] Actualizaci\'on en la direcci\'on de la evidencia
+ \item[$\bullet$] Consistencia
+ \end{itemize}
+}
+ 
+% In 1946, thanks to Cox, it was now a theorem that any set of rules for conducting inference, in which we represent degrees of plausibility by real numbers, is necessarily either equivalent to the Laplace-Jefreys rules, or inconsistent
+ 
+\only<2>{
+ \begin{textblock}{160}(0,92)
+  \tiny \centering  \href{https://doi.org/10.1119/1.1990764}{Cox, R (1946). Probability, frequency and reasonable expectation.}
+ \end{textblock}
+ }
+%  
+ \end{frame}
+ 
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Teorema de Bayes 
+\end{textblock}
+
+\only<1>{
+\begin{textblock}{160}(0,43)
+\begin{equation*}
+ P(X,Y) = P(Y,X)
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<2>{
+\begin{textblock}{160}(0,43)
+\begin{equation*}
+ P(Y|X) P(X) =  P(X,Y) = P(Y,X) = P(X|Y) P(Y)
+\end{equation*}
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{160}(0,43)
+\begin{equation*}
+ P(Y|X) P(X) = P(X|Y) P(Y) 
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<4>{
+\begin{textblock}{160}(0,43)
+\begin{equation*}
+ P(Y|X) = \frac{p(X|Y) p(Y)}{p(X)}
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<5>{
+\begin{textblock}{160}(0,43)
+\begin{equation*}
+P(\text{Hip\'otesis }|\text{ Datos}) = \frac{P(\text{Datos }|\text{ Hip\'otesis}) P(\text{Hip\'otesis})}{P(\text{Datos})}
+\end{equation*}
+\end{textblock}
+
+}
+
+
+\only<6>{
+\begin{textblock}{160}(0,37.75)
+\begin{equation*}
+\underbrace{P(\text{Hip\'otesis }|\text{ Datos})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos }|\text{ Hip\'otesis})}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis})}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos})}_{\text{\scriptsize Evidencia}}}
+\end{equation*}
+\end{textblock}
+
+}
+
+\vspace{0.2cm}
+
+\only<7->{  
+%\vspace{0.3cm}
+\Wider[2cm]{
+\begin{textblock}{160}(0,34.25) 
+\begin{equation*}
+\underbrace{P(\text{Hip\'otesis }|\text{ Datos, Modelo})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos }|\text{ Hip\'otesis, Modelo})}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis }|\text{ Modelo})}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos }|\text{ Modelo})}_{\text{\scriptsize Evidencia}}}
+\end{equation*}
+
+\end{textblock}
+
+}
+}
+% 
+% \only<8->{  
+% \begin{textblock}{100}(30,65)
+% \begin{mdframed}[backgroundcolor=black!30]
+% \centering \vspace{0.05cm}
+% El \textbf{modelo} es lo que permite relacionar 
+% 
+% los \textbf{datos} con nuestras \textbf{hipótesis}! 
+% \vspace{0.1cm}
+% \end{mdframed}
+% \end{textblock}
+% }
+
+
+
+
+
 \end{frame}
 
 
@@ -401,7 +573,7 @@
 }
 
 \only<14>{
-\begin{textblock}{128}(0,92)
+\begin{textblock}{160}(0,92)
 \tiny \centering
 \href{http://93.174.95.29/_ads/6B4DC58C0028F2BBEAA2CC9204F01845}{Pearl, J. 2018. The Book of Why: The New Science of Cause and Effect}
 \end{textblock}
@@ -1448,14 +1620,14 @@ P(r| s, A) = \Phi \Big(\frac{\delta}{\vartheta} \Big)
 % \begin{frame}
 % 
 % \only<-7>{
-% \begin{textblock}{128}(0,11)
+% \begin{textblock}{160}(0,11)
 % \begin{equation*}
 % \overbrace{P(s_1 \mid r, \text{Modelo})}^{\text{Posteriori}} \propto \overbrace{N(s_1 \, | \, \mu_1, \sigma_1^2) }^{\text{Priori}} \, \overbrace{1-\Phi(0 \, | s_1 - \mu_2 , \vartheta^2 - \sigma_1^2)}^{\text{Verosimilitud}}  \ \  \text{Caso ganador} 
 % \end{equation*}
 % \end{textblock}
 % }
 % 
-% \begin{textblock}{128}(0,11)
+% \begin{textblock}{160}(0,11)
 % \only<8->{
 % \begin{equation*}
 % \overbrace{P(s_2 \mid r, \text{Modelo})}^{\text{Posteriori}} \propto \overbrace{N(s_2 \, | \,\mu_2, \sigma_2^2) }^{\text{Priori}} \, \overbrace{\Phi(0  \, | \mu_1 - s_2, \vartheta^2 - \sigma_1^2)}^{\text{Verosimilitud}}  \ \  \text{Caso perdedor} 
@@ -1465,50 +1637,50 @@ P(r| s, A) = \Phi \Big(\frac{\delta}{\vartheta} \Big)
 % 
 % 
 % 
-% \begin{textblock}{128}(0,26)
+% \begin{textblock}{160}(0,26)
 % \centering
 % \only<2>{\includegraphics[width=0.49\textwidth]{figures/posterior_win} 
 % }
 % \end{textblock}
 % 
-% \begin{textblock}{128}(0,26)
+% \begin{textblock}{160}(0,26)
 % \centering
 % \only<3>{\includegraphics[page=2,width=0.49\textwidth]{figures/posterior_win} 
 % }
 % \end{textblock}
 % 
-% \begin{textblock}{128}(0,26)
+% \begin{textblock}{160}(0,26)
 % \centering
 % \only<4>{\includegraphics[page=3,width=0.49\textwidth]{figures/posterior_win} 
 % }
 % \end{textblock}
 % 
-% \begin{textblock}{128}(0,26)
+% \begin{textblock}{160}(0,26)
 % \centering
 % \only<5>{\includegraphics[page=4,width=0.49\textwidth]{figures/posterior_win} 
 % }
 % \end{textblock}
 % 
 % 
-% \begin{textblock}{128}(0,26)
+% \begin{textblock}{160}(0,26)
 % \centering
 % \only<6>{\includegraphics[page=5,width=0.49\textwidth]{figures/posterior_win} 
 % }
 % \end{textblock}
 % 
-% \begin{textblock}{128}(0,26)
+% \begin{textblock}{160}(0,26)
 % \centering
 % \only<7>{\includegraphics[page=6,width=0.49\textwidth]{figures/posterior_win} 
 % }
 % \end{textblock}
 % 
-% \begin{textblock}{128}(0,26)
+% \begin{textblock}{160}(0,26)
 % \centering
 % \only<8->{\includegraphics[width=0.49\textwidth]{figures/posterior_loose} 
 % }
 % \end{textblock}
 % 
-% \begin{textblock}{128}(0,93)
+% \begin{textblock}{160}(0,93)
 % \centering
 % \only<9>{\tiny Todos los detalles en: \href{https://journals.plos.org/plosone/article/file?type=supplementary&id=info:doi/10.1371/journal.pone.0211014.s002}{Landfried. TrueSkill: Technical Report. 2019} }
 % \end{textblock}
