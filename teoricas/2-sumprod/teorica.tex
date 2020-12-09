@@ -534,211 +534,6 @@ P(\text{Hip\'otesis }|\text{ Datos}) = \frac{P(\text{Datos }|\text{ Hip\'otesis}
 
 \end{frame}
 
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering \Large Flujos de inferencia
-\end{textblock}
-
-\only<2->{
-\begin{textblock}{160}(0,18)
-\centering
- \begin{tabular}{c c|c}
- & $\hfrac{\text{Intermedio}}{\text{no observable}}$ &   $\hfrac{\text{Intermedio}}{\text{observable}}$ \\
- & & \\
- $ p \rightarrow r \rightarrow a $    & \onslide<3->{$P(a) \overset{?}{=} P(a|p)$} & \onslide<4->{$P(a|r) \overset{?}{=} P(a|p,r)$} \\ 
- $a \leftarrow r \leftarrow p $      &  \onslide<5->{$P(p) \overset{?}{=} P(p|a)$}  & \onslide<6->{$P(p|r) \overset{?}{=} P(p|a,r)$} \\ 
- $ r \leftarrow p \rightarrow c $     & \onslide<7->{$P(c) \overset{?}{=} P(c|r)$} & \onslide<8->{$P(c|p) \overset{?}{=} P(c|r,p)$} \\
- $ d \rightarrow r \leftarrow p $     & \onslide<9->{$P(p) \overset{?}{=} P(p|d)$} & \onslide<10->{$P(p|r) \overset{?}{=} P(p|d,r)$} \\
-                                      & \onslide<11->{$P(p) \overset{?}{=} P(p|d)$} & \onslide<11->{$P(p|a) \overset{?}{=} P(p|d,a)$}
- \end{tabular} 
- \end{textblock}
- }
- 
- 
-\only<13->{
-\footnotesize
-\begin{textblock}{140}(10,60)
-
-\begin{framed}
-
- Un flujo de inferencia permenece abierto si:
- \begin{itemize}
-  \item[$\bullet$] Toda consecuencia com\'un (o alguno de sus descendientes) es observable
-  \item[$\bullet$] Ning\'una otra variable es observable
- \end{itemize}
- \end{framed}
-
-\end{textblock}
-
-}
-
-\only<14>{
-\begin{textblock}{160}(0,92)
-\tiny \centering
-\href{http://93.174.95.29/_ads/6B4DC58C0028F2BBEAA2CC9204F01845}{Pearl, J. 2018. The Book of Why: The New Science of Cause and Effect}
-\end{textblock}
-}
-
-
-\end{frame}
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large Factor graph
-\end{textblock}
-\vspace{1cm}
-
-\only<1>{
- \begin{textblock}{160}(0,18)
-\begin{equation*}
-g(x_1,\dots,x_n) = \prod f_j(X) 
-\end{equation*}
-\end{textblock}
-}
-\only<2->{
-\begin{textblock}{160}(0,18)
-\begin{equation*}
-g(x_1,x_2,x_3,x_4,x_5) = f_A(x_1)f_B(x_2)f_C(x_1,x_2,x_3)f_D(x_3,x_4)f_E(x_3,x_5)
-\end{equation*}
-\end{textblock}
-
-}
-
-\only<3->{
-\begin{textblock}{160}(0,26)
-\begin{figure}[H]
- \centering
-  \includegraphics[width=0.6\textwidth]{figures/factorGraph} 
-\end{figure}
-\end{textblock}
-}
-
-\vspace{0.2cm}
-
-\only<4>{
-\begin{textblock}{140}(10,64)
-
-Un factor graph sin ciclos codifica:
-\begin{itemize}
- \item[$\bullet$] La factorizaci\'on de una funci\'on $g(x_1,\dots,x_n)$ \color{white}
- \item[$\bullet$] \textbf{Las operaciones para computar sus marginales} $g_i(x_i)$
-\end{itemize}  
-\end{textblock}
-}
-
-
-\only<5>{
-\begin{textblock}{140}(10,64)
-
-Un factor graph sin ciclos codifica:
-\begin{itemize}
- \item[$\bullet$] La factorizaci\'on de una funci\'on $g(x_1,\dots,x_n)$ 
- \item[$\bullet$] \textbf{Las operaciones para computar sus marginales} $g_i(x_i)$
-\end{itemize}  
-\end{textblock}
-}
-
-\end{frame}
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering Ejemplo
-\end{textblock}
-\vspace{1cm}
-
-\only<1-3>{
-\begin{textblock}{160}(0,12)
-\footnotesize
-\begin{equation*}
- g_1(x_1) = \sum_{x_2}\sum_{x_3}\sum_{x_4}\sum_{x_5} f_A(x_1)f_B(x_2)f_C(x_1,x_2,x_3)  f_D(x_3,x_4) f_E(x_3,x_5) 
-\end{equation*}
-
-\end{textblock}
-
-}
-
-\only<2-3>{
-\begin{textblock}{160}(0,18)
-\begin{figure}[H]
-\centering
-  \begin{subfigure}[b]{0.42\textwidth} 
-  \centering
-    \includegraphics[width=0.75\textwidth]{figures/factorGraph_margin1} 
-    %\caption*{$g_1(x_1)$}
-  \end{subfigure} 
-% \ \ \
-%   \begin{subfigure}[b]{0.45\textwidth} 
-%   \centering
-%     \includegraphics[width=1\textwidth]{figures/factorGraph_margin3} 
-%    %\caption*{$g_3(x_3)$}
-%   \end{subfigure} 
-\end{figure}
-\end{textblock}
-}
-
-
-\only<3>{
-\begin{textblock}{160}(0,76)
-\footnotesize
-\begin{equation*}
- g_1(x_1) = f_A(x_1) \left(\sum_{x_2, x_3} f_B(x_2) f_C(x_1,x_2,x_3) \left( \sum_{x_4} f_D(x_3,x_4) \right) \left( \sum_{x_5} f_E(x_3,x_5) \right) \right)
-\end{equation*}
-% 
-% \begin{equation*}
-%  g_3(x_3) =  \left( \sum_{\setminus x_3} f_A(x_1)f_B(x_2)f_C(x_1,x_2,x_3)  \right) \left( \sum_{\setminus x_3} f_D(x_3,x_4) \right) \left( \sum_{\setminus x_3} f_E(x_3,x_5) \right) 
-% \end{equation*}
-\end{textblock}
-
-}
-
-\only<4->{
-\begin{textblock}{160}(0,12)
-\footnotesize
-\begin{equation*}
- g_3(x_3) = \sum_{x_1}\sum_{x_2}\sum_{x_4}\sum_{x_5} f_A(x_1)f_B(x_2)f_C(x_1,x_2,x_3)  f_D(x_3,x_4) f_E(x_3,x_5) 
-\end{equation*}
-
-\end{textblock}
-
-}
-
-\only<4->{
-\begin{textblock}{160}(0,22)
-\begin{figure}[H]
-\centering
-%   \begin{subfigure}[b]{0.42\textwidth} 
-%   \centering
-%     \includegraphics[width=0.75\textwidth]{figures/factorGraph_margin1} 
-%     %\caption*{$g_1(x_1)$}
-%   \end{subfigure} 
-% \ \ \
-  \begin{subfigure}[b]{0.45\textwidth} 
-  \centering
-    \includegraphics[width=0.85\textwidth]{figures/factorGraph_margin3} 
-   %\caption*{$g_3(x_3)$}
-  \end{subfigure} 
-\end{figure}
-\end{textblock}
-}
-
-\only<5>{
-\begin{textblock}{160}(0,76)
-\footnotesize
-% \begin{equation*}
-%  g_1(x_1) = f_A(x_1) \left(\sum_{x_2, x_3} f_B(x_2) f_C(x_1,x_2,x_3) \left( \sum_{x_4} f_D(x_3,x_4) \right) \left( \sum_{x_5} f_E(x_3,x_5) \right) \right)
-% \end{equation*}
-% 
-\begin{equation*}
- g_3(x_3) =  \left( \sum_{x_1,x_2} f_A(x_1)f_B(x_2)f_C(x_1,x_2,x_3)  \right) \left( \sum_{x_4} f_D(x_3,x_4) \right) \left( \sum_{x_5} f_E(x_3,x_5) \right) 
-\end{equation*}
-\end{textblock}
-
-}
-
-
-\end{frame}
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
@@ -1339,10 +1134,76 @@ m_{f_{s_i} \rightarrow s_i}(s_i)  & = \int N(s_i| \mu_i, \sigma_i^2) d\bm{x}_{\s
 \end{textblock}
 
 \begin{equation*}
-P(r| s, A) = \Phi \Big(\frac{\delta}{\vartheta} \Big)
+P(\text{Dato}| \text{Modelo}) = \Phi \Big(\frac{\delta}{\vartheta} \Big)
 \end{equation*}
 
 \end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large Selección de modelo
+\end{textblock}
+
+
+\only<1>{
+\begin{textblock}{160}(0,34) 
+\begin{equation*}
+ P(\text{Modelo}|\text{Datos}) = \frac{P(\text{Datos}|\text{Modelo})P(\text{Modelo})}{ P(\text{Datos})}
+\end{equation*}
+\end{textblock}
+}
+
+\only<2>{
+\begin{textblock}{160}(0,34)
+\begin{equation*}
+   \frac{P(\text{Modelo}_i|\text{Datos})}{P(\text{Modelo}_j|\text{Datos})}  = \frac{P(\text{Datos}|\text{Modelo}_i)\,\,P(\text{Modelo}_i)}{P(\text{Datos}|\text{Modelo}_j)\,\,P(\text{Modelo}_j)}  
+\end{equation*}
+\end{textblock}
+}
+\only<3>{
+\begin{textblock}{160}(0,34)
+\begin{equation*}
+ \frac{P(\text{Modelo}_i|\text{Datos})}{P(\text{Modelo}_j|\text{Datos})}  = \frac{P(\text{Datos}|\text{Modelo}_i)\,\,P(\text{Modelo}_i)}{ \underbrace{P(\text{Datos}|\text{Modelo}_j)}_{\text{Evidencia!}}\,P(\text{Modelo}_j)}
+\end{equation*}
+\end{textblock}
+}
+
+\only<4->{
+\begin{textblock}{160}(0,34)
+\begin{equation*}
+  \frac{P(\text{Modelo}_i|\text{Datos})}{P(\text{Modelo}_j|\text{Datos})}  = \frac{P(\text{Datos}|\text{Modelo}_i)\,\,P(\text{Modelo}_i)}{ \underbrace{P(\text{Datos}|\text{Modelo}_j)}_{\text{Evidencia!}}\, \underbrace{P(\text{Modelo}_j)}_{\text{Escalar } k } }
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<5->{
+\begin{textblock}{160}(0,48) 
+\begin{equation*}
+\begin{split}
+P(\text{Datos}|\text{Modelo}) &= \sum_{h}^H P(\text{Datos}|\text{Hip\'otesis}=h,\text{Modelo}) P(\text{Hip\'otesis}=h|\text{Modelo}) 
+\\
+\onslide<6>{& = P(\text{D}_1|\text{M}) P(\text{D}_2|\text{D}_1, \text{M}) \dots P(\text{D}_N|\text{D}_{N-1} \dots \text{D}_1, \text{M})  }
+\end{split} 
+\end{equation*}
+\end{textblock}
+}
+
+
+
+% 
+% \only<7>{
+% \begin{textblock}{108}(10,74)
+% \begin{mdframed}[backgroundcolor=black!15]
+% \footnotesize \centering Preferimos modelos con la \textbf{menor sorpresa conjunta}!
+% \end{mdframed}
+% }
+
+
+\end{frame}
+
+
+
 % 
 % 
 % \subsection{Mensaje ascendete}
