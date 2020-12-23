@@ -1,43 +1,44 @@
 # Seminario grupo bayes exactas-UBA 
 
-## Bloque TrueSkill
+- Objetivo: Aprender inferencia probabilistica y sus algoritmos eficientes
+- Metodología: Damos todas las pistas que necesites, pero lo tenés que descubrir vos.
+- Requiere: Programar (if, for y listas) y me re-interesa la ciencia de datos 
 
-Objetivo: Yo estoy para darte todas las pistas que necesites, pero lo tenés que descubrir vos.
+### Encuentro 1
 
-### Clase -2.
+- **Requiere**: True
+- **Teorica**: Datos, modelos (gráficos) y creencias 
+- **Práctica**:
+    1. Usar sorpresa del Modelo elo para actualizar hipótesis
+    2. Distribuciones de creencias honestas, ejemplos.
+    3. Reglas de la honestidad.
+    4. Monty Hall.
+    5. Monty Hall extendido (sólo se presenta el modelo)
+- **Asegura**: Entiendo la definición de creencia honesta. ¿Cómo se resuelve el Monty Hall extendido?
+- *Tarea*: Buscar los papers que vamos a leer en el futuro 
+- *Leer*: 
 
-- Requiere: Programar y me interesa las ciencias de datos
-- Tarea
-    - Teórica: datos, modelos, creencias y máxima incertidumbre.
-    - Práctica: (buscar los papers que vamos a ver en el futuro)
-- Asegura: ¿Cómo se actualizan de forma óptima (honesta) las creencias?
+### Encuentro 2
 
-### Clase -1.
+- **Requiere**: previo
+- **Teorica**: Reglas de la probabilidad, sum-product algorithm, definición de d-separation, mostrar modelo gráfico trueskill otra vez.
+- **Práctica**:
+    0. Resolver algunas inferencias en el monty hall extendido
+    0. Jugar con el paquete TrueSkill 
+    0. Dejar ejemplos sintéticos para resolver con trueskill
+- **Asegura**: Entendí como usar las reglas de la suma y el producto en modelos gráficos.
+- *Tarea*:
+    1. Terminar de redescubrir flujo de inferencia (d-separation)
+    2. Estimar con trueskill sobre los ejemplos sintéticos
+- *Leer*: Leer paper original de TrueSkill
 
-- Requiere: asegura previo
-- Tareas
-    - Teórica: modelos gráficos, probabilidad y d-separation.
-    - Práctica: Varios ejemplos de modelos gráficos discretos para contar caminos (incluye derivar d-sepatration)
-    - Leer: Paper original de TrueSkill
-- Asegura: ¿Cómo será una aplicación real de inferencia Bayesiana?
+### Encuentro 3
 
-### Clase 0.
+| 3 | Modelos gráfico de TrueSkill y pasaje de mansajes 1| Evidencia 1 vs 1 | El pasaje de mensajes se entendió pero necesito que me lo expliquen mejor | Resolver evidencia 2vs2 y Estimar habilidad en tenis (descargar datos)  | Leer: sum-product algorithm |
+| 4 | Consultas | Terminar de estimar habilidad y calcular evidencia |  | Deadline | -
+| 5 | Pasaje de mansajes 2  | | El modelo gráfico de TrueSkill se entendió pero necesito que me lo expliquen mejor | | Fuentes Alternativas "The math behind trueskill" y "Model based machine learning".
 
-- Requiere: asegura previo
-- Tarea
-    - Teórica: Modelos gráfico de TrueSkill y pasaje de mansajes 1
-    - Práctica: Descarcar base de datos y paquete TrueSkill de python, y copmenzar a estimar habilidad
-    - Leer: sum-product algorithm
-- Asegura: Oh! Interesante. ¿Cómo funcionará esto?
 
-### Clase 1.
-
-- Requiere: asegura previo.
-- Tarea
-    - Teórica: Pasaje de mansajes 2 (predicción a priori)
-    - Práctica: Terminar de estimar habilidad y graficar curvas
-    - Leer: Fuentes Alternativas "The math behind trueskill" y "Model based machine learning".
-- Asegura: El modelo gráfico de TrueSkill se entendió pero necesito que me lo expliquen mejor.
 
 ### Clase 2.
 
