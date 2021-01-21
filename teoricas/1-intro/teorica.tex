@@ -53,10 +53,7 @@
 % \end{textblock}
 % 
 % \begin{itemize}
-%  \item[$\bullet$] Human dispersal
-%  \item[$\bullet$] Biomass (dentro de los vertebrados terrestres)
 %  \item[$\bullet$] Empatia
-%  \item[$\bullet$] Evolución cultural
 %  \item[$\bullet$] Ciencia como intersubjectividad (muto entendimiento)
 %  \item[$\bullet$] Base empírica 
 %  \item[$\bullet$] Matriz de datos 
@@ -66,98 +63,9 @@
 %  \item[$\bullet$] Creencias honestas
 %  \item[$\bullet$] Modelos causales
 %  \item[$\bullet$] La lógica de la ciencia empírica
-%  \item[$\bullet$] Selección de modelo
 % \end{itemize}
 % 
 % \end{frame}
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \LARGE
- Humanos
-\end{textblock}
-\vspace{1.2cm}
-\Wider[1cm]{
-\includegraphics[width=1\textwidth]{../../aux/static/mapamundi2.jpg}
-}
-\end{frame}
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \LARGE
- Ocupamos todos los nichos ecológicos
-\end{textblock}
-\Wider[2cm]{
-\includegraphics[width=1\textwidth]{../../aux/static/inuit_igloo_low}
-}
-\end{frame}
-
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \LARGE
- \en{The cognitive hypotesis}
- \es{La hipótesis cognitiva}
-\end{textblock}
-\centering \vspace{1cm}
- \includegraphics[width=0.5\textwidth]{../../aux/static/cerebros}  
-\end{frame}
-
-
-
-\begin{frame}[plain]
-
- \begin{textblock}{160}(5,30)
-\includegraphics[width=0.33\textwidth]{../../aux/static/evolucionLitica.jpg} 
-\end{textblock}
-\begin{textblock}{160}(0,40)
- \centering \LARGE
- \en{Cultural \\ evolution}
- \es{Evolución \\ cultural}
-\end{textblock}
-\begin{textblock}{160}(105,1)
-\includegraphics[width=0.285\textwidth]{../../aux/static/debian_tree.png}
-\end{textblock}
-\end{frame}
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \LARGE 
- La hipótesis cultural
- \end{textblock}
-\vspace{1cm}
-
-\includegraphics[width=1\textwidth]{../../aux/static/evolucionCultural.jpg}
-
-\end{frame}
-% 
-% \begin{frame}[plain]
-% \begin{textblock}{160}(0,4)
-%  \centering \LARGE 
-%  \en{Evolution of empathy}
-%  \es{La evolución de la empatía}
-% \end{textblock}
-% \vspace{1cm}
-%  
-% %Wired To mutual understanding
-% %Cableados para la comprensión mutua
-%  \centering
-% \includegraphics[width=0.7\textwidth]{../../aux/static/empatia}
-% 
-% % Cooperative breeding permited the evolution of extended life span, prolonged childhoods
-% 
-% % \centering
-% % \en{Cooperative breeding permited the evolution of empathy}
-% % \es{La crianza cooperative permitió la evolución de la empatía}
-%  
-% %Humans are often eager to understand others, to be understood, and to cooperate. 
-% %Los seres humanos suelen estar ansiosos por comprender a los demás, por ser comprendidos y por cooperar. 
-% 
-% 
-% \end{frame}
-
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
@@ -343,7 +251,9 @@ que una comunidad esta dispuesta a no poner en duda
 
 \centering
  
- \includegraphics[width=0.35\textwidth]{../../aux/static/elo}
+ \includegraphics[width=0.35\textwidth]{../../aux/static/elo} \\
+ \vspace{0.1cm}
+ Arpad Elo
    
 \end{frame}
 
@@ -479,11 +389,11 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 \tikz{         
     \node[det, fill=black!15] (r) {$r_{ij}$} ; 
     \node[const, left=of r, xshift=-1.35cm] (r_name) {\small \en{Result}\es{Ganar/perder}:}; 
-    \node[const, right=of r] (dr) {\normalsize $ r_{ij} = (d_{ij}>0)$}; 
+    \node[const, right=of r] (dr) {\normalsize $ r_{ij} = (s_{ij}>0)$}; 
 
-    \node[latent, above=of r, yshift=-0.45cm] (d) {$d_{ij}$} ; %
-    \node[const, right=of d] (dd) {\normalsize $ d_{ij}=p_i-p_j$}; 
-    \node[const, left=of d, xshift=-1.35cm] (d_name) {\small \en{Difference}\es{Diferencia}:};
+    \node[latent, above=of r, yshift=-0.45cm] (d) {$s_{ij}$} ; %
+    \node[const, right=of d] (dd) {\normalsize $ s_{ij}=p_i-p_j$}; 
+    \node[const, left=of d, xshift=-1.35cm] (s_name) {\small \en{Difference}\es{Diferencia}:};
     
     \node[latent, above=of d, xshift=-0.8cm, yshift=-0.45cm] (p1) {$p_i$} ; %
     \node[latent, above=of d, xshift=0.8cm, yshift=-0.45cm] (p2) {$p_j$} ; %
@@ -515,11 +425,83 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 \end{frame}
 
 \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering  \Large 
+Propuesta de Arpad Elo
+ \end{textblock}
+ 
+\only<1>{
+\begin{textblock}{160}(0,35)
+\large \centering
+Usar la sorpresa para \\ actualizar las estimaciones previas
+\end{textblock}
+}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering  \Large 
+Probabilidad de ganar (gr\'afica)
+ \end{textblock}
+\vspace{0.75cm}
+ 
+\begin{figure}[H]     
+     \centering
+     \begin{subfigure}[b]{0.55\textwidth}
+       \includegraphics[width=1\textwidth]{figures/probaOfWin_2D.pdf} 
+     \end{subfigure}
+\end{figure}
+  
+\end{frame}
+ 
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large
+Sistema Elo 
+\end{textblock}
+\vspace{0.75cm}
+
+\begin{equation*}
+ \Delta = \underbrace{(1 - P(r|s_i^{\text{old}},s_j^{\text{old}}))}_{\hfrac{\textbf{Sorpresa}}{\text{del resultado}}}
+\end{equation*}
+
+\vspace{0.5cm}
+
+\pause
+
+\begin{equation*}
+s_\text{ganador}^{\text{new}} = s_\text{ganador}^{\text{old}} + \Delta \ \ \ \ \ \ \  s_\text{perdedor}^{\text{new}} = s_\text{perdedor}^{\text{old}} - \Delta
+\end{equation*}
+
+\pause
+\vspace{0.5cm}
+
+\begin{center}
+\tikz{ %
+        \node[const] (e) {Estimaci\'on}; 
+
+        \node[const, xshift=3cm] (p) {Predicci\'on};
+        \node[const, xshift=1.5cm, yshift=-1cm] (s) {Sorpresa}; 
+        
+         \edge {e} {p};
+         \edge {p} {s};
+         \edge {s} {e};
+} 
+\end{center}
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
 \only<1-2>{
  \begin{textblock}{160}(0,4)
  \centering \LARGE 
  \en{Hidden variables and beliefs}
- \es{Variables ocultas y creencias}
+ \es{Hipótesis y creencias}
  \end{textblock}
 }
 
@@ -527,7 +509,7 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 \begin{textblock}{160}(0,4)
  \centering \LARGE 
  \en{Hidden variables and \textbf{honest} beliefs}
- \es{Variables ocultas y creencias \textbf{honestas}}
+ \es{Hipótesis y creencias \textbf{honestas}}
  \end{textblock}
 
 }
@@ -563,174 +545,315 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 \textbf{Dividir las creencias \\ en partes iguales}
  \end{center}
 }
-
-\only<6>{
- \begin{textblock}{160}(0,30)\centering
- \includegraphics[width=0.55\textwidth]{figures/montyHall_2}     
- \end{textblock}
-}
-
-
-\only<7>{
- \begin{textblock}{160}(0,30)\centering
- \includegraphics[width=0.55\textwidth]{figures/montyHall_3}     
- \end{textblock}
-}
-
-% \only<8>{
+% 
+% \only<6>{
 %  \begin{textblock}{160}(0,30)\centering
-%  \includegraphics[width=0.55\textwidth]{figures/montyHall_4}     
+%  \includegraphics[width=0.55\textwidth]{figures/montyHall_2}     
 %  \end{textblock}
 % }
-\only<8>{
- \begin{textblock}{160}(0,30)\centering
- \includegraphics[width=0.55\textwidth]{figures/montyHall_5}     
- \end{textblock}
-}
-
-\only<9>{
- \begin{center}
- Regla 1 \\
-   \LARGE
-\textbf{Contextualizar las creencias \\ en partes iguales}
- \end{center}
-}
-
-\only<10>{
-\begin{textblock}{160}(0,30)\centering
- \includegraphics[width=0.55\textwidth]{figures/montyHall_9bis}     
- \end{textblock}
-}
-
-\only<11-12>{ 
-\begin{textblock}{80}(0,20)\centering
-\tikz{
-\node[latent, draw=white] (i) {$1$};
-\node[latent, below=of i, fill=black, yshift=0.6cm,minimum size=2pt] (b0) {};
-\node[latent,below=of b0,yshift=0.6cm, xshift=-3cm] (y1) {$y_1$};
-\node[latent,below=of b0,yshift=0.6cm, xshift=-1cm] (y2) {$y_2$};
-\node[latent,below=of b0,yshift=0.6cm, xshift=1cm] (y3) {$y_3$};
-\node[latent,below=of b0,yshift=0.6cm, xshift=3cm] (y4) {$y_4$};
-
-\node[latent, below=of y1, fill=black, yshift=0.6cm,minimum size=2pt] (by1) {};
-\node[latent, below=of y2, fill=black, yshift=0.6cm,minimum size=2pt] (by2) {};
-\node[latent, below=of y3, fill=black, yshift=0.6cm, minimum size=2pt] (by3) {};
-\node[latent, below=of y4, fill=black, yshift=0.6cm, minimum size=2pt] (by4) {};
-
-\node[latent,below=of by1,yshift=0.6cm] (y1x) {$x_1$};
-\node[latent,below=of by2,yshift=0.6cm] (y2x) {$x_2$};
-\node[latent,below=of by3,yshift=0.6cm] (y3x) {$x_2$};
-\node[latent,below=of by4,yshift=0.6cm] (y4x) {$x_3$};
-
-\node[latent,below=of y1x,yshift=0.6cm,draw=white] (by1x) {$\frac{1}{4}\frac{1}{1}$};
-\node[latent,below=of y2x,yshift=0.6cm,draw=white] (by2x) {$\frac{1}{4}\frac{1}{1}$};
-\node[latent,below=of y3x,yshift=0.6cm, draw=white] (by3x) {$\frac{1}{4}\frac{1}{1}$};
-\node[latent,below=of y4x,yshift=0.6cm,draw=white] (by4x) {$\frac{1}{4}\frac{1}{1}$};
-
-\edge[-] {b0} {i,y1,y2,y3,y4};
-\edge[-] {y1} {by1};
-\edge[-] {y2} {by2};
-\edge[-] {y3} {by3};
-\edge[-] {y4} {by4};
-\edge[-] {by1} {y1x};
-\edge[-] {by2} {y2x};
-\edge[-] {by3} {y3x};
-\edge[-] {by4} {y4x};
-\edge[-] {y1x} {by1x};
-\edge[-] {y2x} {by2x};
-\edge[-] {y3x} {by3x};
-\edge[-] {y4x} {by4x};
-}
-\end{textblock}
-}
-
-
-\only<12>{ 
-\begin{textblock}{80}(80,20)\centering
-\tikz{
-\node[latent, draw=white] (i) {$1$};
-\node[latent, below=of i, fill=black, yshift=0.6cm,minimum size=2pt] (b0) {};
-\node[latent,below=of b0,yshift=0.6cm, xshift=-2cm] (x1) {$x_1$};
-\node[latent,below=of b0,yshift=0.6cm] (x2) {$x_2$};
-\node[latent,below=of b0,yshift=0.6cm, xshift=2cm] (x3) {$x_3$};
-
-\node[latent, below=of x1, fill=black, yshift=0.6cm,minimum size=2pt] (bx1) {};
-\node[latent, below=of x2, fill=black, yshift=0.6cm,minimum size=2pt] (bx2) {};
-\node[latent, below=of x3, fill=black, yshift=0.6cm, minimum size=2pt] (bx3) {};
-
-\node[latent,below=of bx1,yshift=0.6cm] (y1) {$y_1$};
-\node[latent,below=of bx2,yshift=0.6cm, xshift=-0.7cm] (y2) {$y_2$};
-\node[latent,below=of bx2,yshift=0.6cm, xshift=0.7cm] (y3) {$y_3$};
-\node[latent,below=of bx3,yshift=0.6cm] (y4) {$y_4$};
-
-\node[latent,below=of y1,yshift=0.6cm,draw=white] (by1) {$\frac{1}{3}\frac{1}{1}$};
-\node[latent,below=of y2,yshift=0.6cm,draw=white] (by2) {$\frac{1}{3}\frac{1}{2}$};
-\node[latent,below=of y3,yshift=0.6cm, draw=white] (by3) {$\frac{1}{3}\frac{1}{2}$};
-\node[latent,below=of y4,yshift=0.6cm,draw=white] (by4) {$\frac{1}{3}\frac{1}{1}$};
-
-\edge[-] {b0} {i,x1,x2,x3};
-\edge[-] {x1} {bx1};
-\edge[-] {x2} {bx2};
-\edge[-] {x3} {bx3};
-\edge[-] {bx1} {y1};
-\edge[-] {bx3} {y4};
-\edge[-] {bx2} {y2,y3};
-\edge[-] {y1} {by1};
-\edge[-] {y2} {by2};
-\edge[-] {y3} {by3};
-\edge[-] {y4} {by4};
-}
-\end{textblock}
-}
-
-\only<13>{
- \begin{center}
- Principio de honestidad \\
-   \LARGE
-\textbf{Dividir las creencias en partes iguales \\ (por los caminos del modelo causal)}
- \end{center}
-}
-
-\only<14>{
-\begin{textblock}{160}(0,30)\centering
- \includegraphics[width=0.55\textwidth]{figures/montyHall_10}     
- \end{textblock}
-}
-
-\only<15>{
-\begin{textblock}{160}(0,30)\centering
- \includegraphics[width=0.55\textwidth]{figures/montyHall_10bis}     
- \end{textblock}
-}
-
-\only<16>{
-\begin{textblock}{160}(0,30)\centering
- \begin{center}
- Regla 2 \\
-   \LARGE
-\textbf{Sumar las creencias \\ en partes iguales}
- \end{center}
-\end{textblock}
-}
+% 
+% 
+% \only<7>{
+%  \begin{textblock}{160}(0,30)\centering
+%  \includegraphics[width=0.55\textwidth]{figures/montyHall_3}     
+%  \end{textblock}
+% }
+% 
+% % \only<8>{
+% %  \begin{textblock}{160}(0,30)\centering
+% %  \includegraphics[width=0.55\textwidth]{figures/montyHall_4}     
+% %  \end{textblock}
+% % }
+% \only<8>{
+%  \begin{textblock}{160}(0,30)\centering
+%  \includegraphics[width=0.55\textwidth]{figures/montyHall_5}     
+%  \end{textblock}
+% }
+% 
+% \only<9-10>{
+%  \begin{center}
+%  Regla 1 \\
+%    \LARGE
+% \textbf{Contextualizar las creencias \\ en partes iguales}
+%  \end{center}
+%  
+%  \begin{align*}
+%   \text{Creencia}(x_i|\neg x_2) = \frac{\text{Creencia}(x_i, \neg x_2)}{\text{Creencia}(\neg x_2)}
+%  \end{align*}
+% 
+%  \onslide<10>{
+%  \begin{align*}
+%   \text{Creencia}(x_1|\neg x_2) = \frac{1/3}{2/3} = 1/2 \ \ \ \ \ \ \ \text{Creencia}(x_2|\neg x_2) = \frac{0}{2/3} = 0
+%  \end{align*}
+%  }
+%  
+% }
+% 
+% \only<11>{
+%  \begin{textblock}{160}(0,30)\centering
+%  \includegraphics[width=0.55\textwidth]{figures/montyHall_2}     
+%  \end{textblock}
+% }
+% 
+% \only<12>{
+% \begin{textblock}{160}(0,30)\centering
+%  \includegraphics[width=0.55\textwidth]{figures/montyHall_9}     
+%  \end{textblock}
+% }
+% 
+% \only<13>{
+% \begin{textblock}{160}(0,30)\centering
+%  \includegraphics[width=0.55\textwidth]{figures/montyHall_9-1}     
+%  \end{textblock}
+% }
+% 
+% \only<14>{
+% \begin{textblock}{160}(0,30)\centering
+%  \includegraphics[width=0.55\textwidth]{figures/montyHall_10bis}     
+%  \end{textblock}
+% }
+% % 
+% % \only<12-13>{ 
+% % \begin{textblock}{80}(0,20)\centering
+% % \tikz{
+% % \node[latent, draw=white] (i) {$1$};
+% % \node[latent, below=of i, fill=black, yshift=0.6cm,minimum size=2pt] (b0) {};
+% % \node[latent,below=of b0,yshift=0.6cm, xshift=-3cm] (y1) {$y_1$};
+% % \node[latent,below=of b0,yshift=0.6cm, xshift=-1cm] (y2) {$y_2$};
+% % \node[latent,below=of b0,yshift=0.6cm, xshift=1cm] (y3) {$y_3$};
+% % \node[latent,below=of b0,yshift=0.6cm, xshift=3cm] (y4) {$y_4$};
+% % 
+% % \node[latent, below=of y1, fill=black, yshift=0.6cm,minimum size=2pt] (by1) {};
+% % \node[latent, below=of y2, fill=black, yshift=0.6cm,minimum size=2pt] (by2) {};
+% % \node[latent, below=of y3, fill=black, yshift=0.6cm, minimum size=2pt] (by3) {};
+% % \node[latent, below=of y4, fill=black, yshift=0.6cm, minimum size=2pt] (by4) {};
+% % 
+% % \node[latent,below=of by1,yshift=0.6cm] (y1x) {$x_1$};
+% % \node[latent,below=of by2,yshift=0.6cm] (y2x) {$x_2$};
+% % \node[latent,below=of by3,yshift=0.6cm] (y3x) {$x_2$};
+% % \node[latent,below=of by4,yshift=0.6cm] (y4x) {$x_3$};
+% % 
+% % \node[latent,below=of y1x,yshift=0.6cm,draw=white] (by1x) {$\frac{1}{4}\frac{1}{1}$};
+% % \node[latent,below=of y2x,yshift=0.6cm,draw=white] (by2x) {$\frac{1}{4}\frac{1}{1}$};
+% % \node[latent,below=of y3x,yshift=0.6cm, draw=white] (by3x) {$\frac{1}{4}\frac{1}{1}$};
+% % \node[latent,below=of y4x,yshift=0.6cm,draw=white] (by4x) {$\frac{1}{4}\frac{1}{1}$};
+% % 
+% % \edge[-] {b0} {i,y1,y2,y3,y4};
+% % \edge[-] {y1} {by1};
+% % \edge[-] {y2} {by2};
+% % \edge[-] {y3} {by3};
+% % \edge[-] {y4} {by4};
+% % \edge[-] {by1} {y1x};
+% % \edge[-] {by2} {y2x};
+% % \edge[-] {by3} {y3x};
+% % \edge[-] {by4} {y4x};
+% % \edge[-] {y1x} {by1x};
+% % \edge[-] {y2x} {by2x};
+% % \edge[-] {y3x} {by3x};
+% % \edge[-] {y4x} {by4x};
+% % }
+% % \end{textblock}
+% % }
+% 
+% 
+% \only<15-16>{ 
+% \begin{textblock}{160}(0,20)\centering
+% \tikz{
+% \node[latent, draw=white] (b0) {$1$};
+% \node[latent,below=of b0,yshift=0.6cm, xshift=-2cm] (x1) {$x_1$};
+% \node[latent,below=of b0,yshift=0.6cm] (x2) {$x_2$};
+% \node[latent,below=of b0,yshift=0.6cm, xshift=2cm] (x3) {$x_3$};
+% 
+% \node[latent, below=of x1, draw=white, yshift=0.6cm] (bx1) {$\frac{1}{3}$};
+% \node[latent, below=of x2, draw=white, yshift=0.6cm] (bx2) {$\frac{1}{3}$};
+% \node[latent, below=of x3, draw=white, yshift=0.6cm] (bx3) {$\frac{1}{3}$};
+% 
+% \only<16>{
+% \node[latent,below=of bx1,yshift=0.6cm] (y1) {$y_1$};
+% \node[latent,below=of bx2,yshift=0.6cm, xshift=-0.7cm] (y2) {$y_2$};
+% \node[latent,below=of bx2,yshift=0.6cm, xshift=0.7cm] (y3) {$y_3$};
+% \node[latent,below=of bx3,yshift=0.6cm] (y4) {$y_4$};
+% 
+% \node[latent,below=of y1,yshift=0.6cm,draw=white] (by1) {$\frac{1}{3}\frac{1}{1}$};
+% \node[latent,below=of y2,yshift=0.6cm,draw=white] (by2) {$\frac{1}{3}\frac{1}{2}$};
+% \node[latent,below=of y3,yshift=0.6cm, draw=white] (by3) {$\frac{1}{3}\frac{1}{2}$};
+% \node[latent,below=of y4,yshift=0.6cm,draw=white] (by4) {$\frac{1}{3}\frac{1}{1}$};
+% }
+% 
+% \edge[-] {b0} {x1,x2,x3};
+% \edge[-] {x1} {bx1};
+% \edge[-] {x2} {bx2};
+% \edge[-] {x3} {bx3};
+% 
+% \only<16>{
+% \edge[-] {bx1} {y1};
+% \edge[-] {bx3} {y4};
+% \edge[-] {bx2} {y2,y3};
+% \edge[-] {y1} {by1};
+% \edge[-] {y2} {by2};
+% \edge[-] {y3} {by3};
+% \edge[-] {y4} {by4};}
+% }
+% \end{textblock}
+% }
+% 
+% 
 % 
 % \only<17>{
+%  \begin{center}
+%  Principio de honestidad \\
+%    \LARGE
+% \textbf{Dividir las creencias en partes iguales \\ (por los caminos del modelo)}
+%  \end{center}
+% }
+% 
+% \only<18-22>{
+% \begin{textblock}{80}(0,20)\centering
+% \tikz{
+% \node[latent, draw=white] (b0) {$1$};
+% \node[latent,below=of b0,yshift=0.6cm, xshift=-2cm] (x1) {$x_1$};
+% \node[latent,below=of b0,yshift=0.6cm] (x2) {$x_2$};
+% \node[latent,below=of b0,yshift=0.6cm, xshift=2cm] (x3) {$x_3$};
+% 
+% \node[latent, below=of x1, draw=white, yshift=0.6cm] (bx1) {$\frac{1}{3}$};
+% \node[latent, below=of x2, draw=white, yshift=0.6cm] (bx2) {$\frac{1}{3}$};
+% \node[latent, below=of x3, draw=white, yshift=0.6cm] (bx3) {$\frac{1}{3}$};
+% 
+% \node[latent,below=of bx1,yshift=0.6cm] (y1) {$y_1$};
+% \node[latent,below=of bx2,yshift=0.6cm, xshift=-0.7cm] (y2) {$y_2$};
+% \node[latent,below=of bx2,yshift=0.6cm, xshift=0.7cm] (y3) {$y_3$};
+% \node[latent,below=of bx3,yshift=0.6cm] (y4) {$y_4$};
+% 
+% \node[latent,below=of y1,yshift=0.6cm,draw=white] (by1) {$\frac{1}{3}\frac{1}{1}$};
+% \node[latent,below=of y2,yshift=0.6cm,draw=white] (by2) {$\frac{1}{3}\frac{1}{2}$};
+% \node[latent,below=of y3,yshift=0.6cm, draw=white] (by3) {$\frac{1}{3}\frac{1}{2}$};
+% \node[latent,below=of y4,yshift=0.6cm,draw=white] (by4) {$\frac{1}{3}\frac{1}{1}$};
+% 
+% \edge[-] {b0} {x1,x2,x3};
+% \edge[-] {x1} {bx1};
+% \edge[-] {x2} {bx2};
+% \edge[-] {x3} {bx3};
+% 
+% \edge[-] {bx1} {y1};
+% \edge[-] {bx3} {y4};
+% \edge[-] {bx2} {y2,y3};
+% \edge[-] {y1} {by1};
+% \edge[-] {y2} {by2};
+% \edge[-] {y3} {by3};
+% \edge[-] {y4} {by4};
+% }
+% \end{textblock}
+% 
+% \begin{textblock}{80}(70,23) \centering
+% Creencia$(x,y)$ \vspace{0.3cm} \\
+% \begin{tabular}{c|c|c|c||c} \Large
+% & $x_1$ & $x_2$ & $x_3$ & \\ \hline
+% $y_1$ & $\frac{1}{3}\frac{1}{1}$ & $0$ & $0$ & \onslide<22>{$\frac{1}{3}$} \\ \hline
+% $y_2$ & $0$ & $\frac{1}{3}\frac{1}{2}$ & $0$ & \onslide<22>{$\frac{1}{6}$} \\ \hline
+% $y_3$ & $0$ & $\frac{1}{3}\frac{1}{2}$ & $0$ & \onslide<22>{$\frac{1}{6}$} \\ \hline
+% $y_4$ & $0$ & $0$ & $\frac{1}{3}\frac{1}{1}$ & \onslide<22>{$\frac{1}{3}$} \\ \hline \hline
+% & \onslide<20-22>{$\frac{1}{3}$} & \onslide<20-22>{$\frac{1}{3}$} & \onslide<20-22>{$\frac{1}{3}$} & \only<22>{$1$} \\ \hline
+% \end{tabular}
+% 
+% \vspace{0.3cm}
+% \onslide<19-22>{
+% \begin{align*}
+%  & \text{Creencia}(x_i) = \ ? 
+%  \onslide<21->{\\ & \text{Creencia}(y_j) = \ ?} 
+% \end{align*}
+% }
+% \end{textblock}
+% }
+% 
+% \only<23>{
+% \begin{textblock}{160}(0,25)\centering
+%  \begin{center}
+%  Regla 2 \\
+%    \LARGE
+% \textbf{Sumar las creencias \\ en partes iguales}
+%  \end{center}
+%  
+%  \begin{equation*}
+%   \text{Creencia}(x_i) = \sum_j \text{Creencia}(x_i, y_j) 
+%  \end{equation*}
+%  
+% \end{textblock}
+% }
+% 
+% \only<24>{
+% \begin{textblock}{160}(0,30)\centering
+%  \includegraphics[width=0.55\textwidth]{figures/montyHall_10bis}     
+%  \end{textblock}
+% }
+% 
+% \only<25>{
 % \begin{textblock}{160}(0,30)\centering
 %  \includegraphics[width=0.55\textwidth]{figures/montyHall_16}     
 % \end{textblock}
 % }
 % 
-% \only<18->{\centering
-% Creencia$(x,y)$ \vspace{0.3cm}
-% \\
-% \begin{tabular}{c|c|c|c||c}
-% & $x_1$ & $x_2$ & $x_3$ & \\ \hline
-% $y_1$ & $\frac{1}{3}\frac{1}{1}$ & & & \onslide<19->{$\frac{1}{3}$} \\ \hline
-% $y_2$ & & $\frac{1}{3}\frac{1}{2}$ & & \onslide<19->{$\frac{1}{6}$} \\ \hline
-% $y_3$ & & $\frac{1}{3}\frac{1}{2}$ & & \onslide<19->{$\frac{1}{6}$} \\ \hline
-% $y_4$ & & & $\frac{1}{3}\frac{1}{1}$ & \onslide<19->{$\frac{1}{3}$} \\ \hline \hline
-% & \onslide<19->{$\frac{1}{3}$} & \onslide<19->{$\frac{1}{3}$} & \onslide<19->{$\frac{1}{3}$} & \only<20>{$1$} \\ \hline
-% \end{tabular}
+% \only<26-27>{
+% \begin{textblock}{80}(0,20)\centering
+% \tikz{
+% \node[latent, draw=white] (b0) {$1$};
+% \node[latent,below=of b0,yshift=0.6cm, xshift=-2cm] (x1) {$x_1$};
+% \node[latent,below=of b0,yshift=0.6cm] (x2) {$x_2$};
+% \node[latent,below=of b0,yshift=0.6cm, xshift=2cm] (x3) {$x_3$};
+% 
+% \node[latent, below=of x1, draw=white, yshift=0.6cm] (bx1) {$\frac{1}{3}$};
+% \node[latent, below=of x2, draw=white, yshift=0.6cm] (bx2) {$\frac{1}{3}$};
+% \node[latent, below=of x3, draw=white, yshift=0.6cm] (bx3) {$\frac{1}{3}$};
+% 
+% \node[latent,below=of bx1,yshift=0.6cm] (y1) {$y_1$};
+% \node[latent,below=of bx2,yshift=0.6cm, xshift=-0.7cm] (y2) {$y_2$};
+% \node[latent,below=of bx2,yshift=0.6cm, xshift=0.7cm] (y3) {$y_3$};
+% \node[latent,below=of bx3,yshift=0.6cm] (y4) {$y_4$};
+% 
+% \node[latent,below=of y1,yshift=0.6cm,draw=white] (by1) {$\frac{1}{3}\frac{1}{1}$};
+% \node[latent,below=of y2,yshift=0.6cm,draw=white] (by2) {$\frac{1}{3}\frac{1}{2}$};
+% \node[latent,below=of y3,yshift=0.6cm, draw=white] (by3) {$\frac{1}{3}\frac{1}{2}$};
+% \node[latent,below=of y4,yshift=0.6cm,draw=white] (by4) {$\frac{1}{3}\frac{1}{1}$};
+% 
+% \edge[-] {b0} {x1,x2,x3};
+% \edge[-] {x1} {bx1};
+% \edge[-] {x2} {bx2};
+% \edge[-] {x3} {bx3};
+% 
+% \edge[-] {bx1} {y1};
+% \edge[-] {bx3} {y4};
+% \edge[-] {bx2} {y2,y3};
+% \edge[-] {y1} {by1};
+% \edge[-] {y2} {by2};
+% \edge[-] {y3} {by3};
+% \edge[-] {y4} {by4};
 % }
+% \end{textblock}
+% 
+% \begin{textblock}{80}(70,23) \centering
+% Creencia\only<26>{$(x,y)$}\only<27>{$(x,y,\neg y_2)$} \vspace{0.3cm} \\
+% \begin{tabular}{c|c|c|c||c} \Large
+% & $x_1$ & $x_2$ & $x_3$ & \\ \hline
+% $y_1$ & $\frac{1}{3}\frac{1}{1}$ & $0$ & $0$ & $\frac{1}{3}$ \\ \hline
+% $y_2$ & $0$ & \only<26>{$\frac{1}{3}\frac{1}{2}$}\only<27>{$0$} & $0$ & \only<26>{$\frac{1}{6}$}\only<27>{$0$} \\ \hline
+% $y_3$ & $0$ & $\frac{1}{3}\frac{1}{2}$ & $0$ & $\frac{1}{6}$ \\ \hline
+% $y_4$ & $0$ & $0$ & $\frac{1}{3}\frac{1}{1}$ & $\frac{1}{3}$ \\ \hline \hline
+% & $\frac{1}{3}$ & \only<26>{$\frac{1}{3}$}\only<27>{$\frac{1}{6}$} & $\frac{1}{3}$ & \only<26>{$1$}\only<27>{$\bm{\frac{5}{6}}$} \\ \hline
+% \end{tabular}
+% \end{textblock}
+% }
+% 
+% \only<28>{
+%  \begin{center}
+%  Regla 1 \\
+%    \LARGE
+% \textbf{Contextualizar las creencias \\ en partes iguales}
+%  \end{center}
+% 
+%  \begin{align*}
+%   \text{Creencia}(x_i, y_j | \neg y_2) = \frac{\text{Creencia}(x_i,  y_j, \neg y_2)}{\text{Creencia}(\neg y_2)}
+%  \end{align*} 
+% }
+% 
 
 % 
 % \onslide<14>{ 
@@ -746,10 +869,10 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 % \node[latent, below=of r2, draw=white, yshift=0.6cm] (br2) {$\frac{1}{3}$};
 % \node[latent, below=of r3, draw=white, yshift=0.6cm] (br3) {$\frac{1}{3}$};
 % 
-% \node[latent,below=of br1,yshift=0.6cm, xshift=-0.7cm] (r1d2) {$d_2$};
-% \node[latent,below=of br1,yshift=0.6cm, xshift=0.7cm] (r1d3) {$d_3$};
-% \node[latent,below=of br2,yshift=0.6cm] (r2d3) {$d_3$};
-% \node[latent,below=of br3,yshift=0.6cm] (r3d2) {$d_2$};
+% \node[latent,below=of br1,yshift=0.6cm, xshift=-0.7cm] (r1d2) {$s_2$};
+% \node[latent,below=of br1,yshift=0.6cm, xshift=0.7cm] (r1d3) {$s_3$};
+% \node[latent,below=of br2,yshift=0.6cm] (r2d3) {$s_3$};
+% \node[latent,below=of br3,yshift=0.6cm] (r3d2) {$s_2$};
 % 
 % \node[latent,below=of r1d2,yshift=0.6cm,draw=white] (br1d2) {$\frac{1}{3}\frac{1}{2}$};
 % \node[latent,below=of r1d3,yshift=0.6cm, draw=white] (br1d3) {$\frac{1}{3}\frac{1}{2}$};
@@ -774,6 +897,532 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 
 
 \end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \en{Hidden variables and \textbf{honest} beliefs}
+ \es{Hipótesis y creencias \textbf{honestas}}
+ \end{textblock}
+\vspace{1cm}
+
+ 
+\begin{textblock}{160}(20,22)
+\onslide<2->{Modelo causal} \\ \vspace{0.3cm}
+ \tikz{            
+    \node[latent,] (r) {\includegraphics[width=0.06\textwidth]{../../aux/static/regalo.png}} ;
+    \node[const,left=of r] (nr) {\Large $r$} ;    
+    
+    \onslide<2->{
+    \node[latent, below=of r] (d) {\includegraphics[width=0.05\textwidth]{../../aux/static/dedo.png}} ;
+    \node[const, left=of d] (nd) {\Large $s$} ;
+
+    \edge {r} {d};
+    }
+}
+\end{textblock}
+
+\only<1-2>{
+\begin{textblock}{160}(65,33)
+\scalebox{1.5}{
+\tikz{
+    \node[factor, minimum size=1cm] (p1) {} ;
+    \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
+    \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+
+    \node[const, above=of p1, yshift=.15cm] (fp1) {$1/3$};
+    \node[const, above=of p2, yshift=.15cm] (fp2) {$1/3$};
+    \node[const, above=of p3, yshift=.15cm] (fp3) {$1/3$};
+    \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
+    
+    \node[invisible, xshift=4.75cm] (s-dist) {};
+    \node[invisible, yshift=-1cm] (s-dist) {};
+    \node[invisible, yshift=1.2cm] (s-dist) {};
+    } 
+}
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{160}(65,33)
+\scalebox{1.5}{
+\tikz{ %
+        
+         \node[factor, minimum size=1cm] (p1) {} ;
+         \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.03\textwidth]{../../aux/static/dedo.png}} ;
+         \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+%         
+%         
+         \node[const, above=of p1, yshift=.15cm] (fp1) {$?$};
+         \node[const, above=of p2, yshift=.15cm] (fp2) {$0$};
+         \node[const, above=of p3, yshift=.15cm] (fp3) {$?$};
+         \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
+         
+%         \node[const, above=of p2, xshift=.8cm, yshift=.15cm] (fp3) {$66\%$};
+%         
+         \node[invisible, xshift=4.75cm] (s-dist) {};
+         \node[invisible, yshift=-1cm] (s-dist) {};
+         \node[invisible, yshift=1.2cm] (s-dist) {};
+%         
+%         \plate[color=red] {no} {(p1)} {}; %
+%         \plate {si} {(p2)(p3)} {}; %
+        
+        } 
+}
+\end{textblock}
+}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \en{Hidden variables and \textbf{honest} beliefs}
+ \es{Hipótesis y creencias \textbf{honestas}}
+ \end{textblock}
+\vspace{1cm}
+
+ \begin{center}
+ Principio de honestidad \\
+   \LARGE
+\textbf{Dividir las creencias en partes iguales \\ (por los caminos del modelo causal)}
+ \end{center}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \en{Hidden variables and \textbf{honest} beliefs}
+ \es{Hipótesis y creencias \textbf{honestas}}
+ \end{textblock}
+\vspace{1cm}
+
+\only<1-4>{
+\begin{textblock}{160}(20,22)
+Modelo causal \\ \vspace{0.3cm}
+ \tikz{            
+    \node[latent,] (r) {\includegraphics[width=0.06\textwidth]{../../aux/static/regalo.png}} ;
+    \node[const,left=of r] (nr) {\Large $r$} ;    
+    
+    \node[latent, below=of r] (d) {\includegraphics[width=0.05\textwidth]{../../aux/static/dedo.png}} ;
+    \node[const, left=of d] (nd) {\Large $s$} ;
+
+    \edge {r} {d};
+}
+\end{textblock}
+}
+
+
+\only<2->{ 
+\begin{textblock}{80}(60,18) \centering
+\scalebox{1.1}{
+\tikz{
+\onslide<2->{ 
+\node[latent, draw=white, yshift=0.6cm] (b0) {$ 1$};
+
+\node[latent,below=of b0,yshift=0.6cm, xshift=-3cm] (r1) {$r_1$};
+\node[latent,below=of b0,yshift=0.6cm] (r2) {$r_2$};
+\node[latent,below=of b0,yshift=0.6cm, xshift=3cm] (r3) {$r_3$};
+
+\node[latent, below=of r1, draw=white, yshift=0.6cm] (br1) {$\frac{1}{3}$};
+\node[latent, below=of r2, draw=white, yshift=0.6cm] (br2) {$\frac{1}{3}$};
+\node[latent, below=of r3, draw=white, yshift=0.6cm] (br3) {$\frac{1}{3}$};
+}
+\onslide<3->{
+\node[latent,below=of br1,yshift=0.6cm, xshift=-0.7cm] (r1d2) {$s_2$};
+\node[latent,below=of br1,yshift=0.6cm, xshift=0.7cm] (r1d3) {$s_3$};
+
+\node[latent,below=of r1d2,yshift=0.6cm,draw=white] (br1d2) {$\frac{1}{3}\frac{1}{2}$};
+\node[latent,below=of r1d3,yshift=0.6cm, draw=white] (br1d3) {$\frac{1}{3}\frac{1}{2}$};
+}
+\onslide<4->{
+\node[latent,below=of br2,yshift=0.6cm, xshift=-0.7cm] (r2d1) {$s_1$};
+\node[latent,below=of br2,yshift=0.6cm, xshift=0.7cm] (r2d3) {$s_3$};
+\node[latent,below=of br3,yshift=0.6cm, xshift=-0.7cm] (r3d1) {$s_1$};
+\node[latent,below=of br3,yshift=0.6cm, xshift=0.7cm] (r3d2) {$s_2$};
+
+\node[latent,below=of r2d1,yshift=0.6cm, draw=white] (br2d1) {$\frac{1}{3}\frac{1}{2}$};
+\node[latent,below=of r2d3,yshift=0.6cm,draw=white] (br2d3) {$\frac{1}{3}\frac{1}{2}$};
+\node[latent,below=of r3d1,yshift=0.6cm, draw=white] (br3d1) {$\frac{1}{3}\frac{1}{2}$};
+\node[latent,below=of r3d2,yshift=0.6cm,draw=white] (br3d2) {$\frac{1}{3}\frac{1}{2}$};
+}
+\onslide<2->{
+\edge[-] {b0} {r1,r2,r3};
+\edge[-] {r1} {br1};
+\edge[-] {r2} {br2};
+\edge[-] {r3} {br3};
+}
+\onslide<3->{
+\edge[-] {br1} {r1d2,r1d3};
+\edge[-] {r1d2} {br1d2};
+\edge[-] {r1d3} {br1d3};
+}
+\onslide<4->{
+\edge[-] {br2} {r2d1, r2d3};
+\edge[-] {br3} {r3d1,r3d2};
+\edge[-] {r2d1} {br2d1};
+\edge[-] {r2d3} {br2d3};
+\edge[-] {r3d1} {br3d1};
+\edge[-] {r3d2} {br3d2};
+}
+}
+}
+\end{textblock}
+}
+ 
+
+\only<5->{
+ \begin{textblock}{65}(0,22)
+  \centering
+  Creencia$(r,s)$ \\ \vspace{0.3cm}
+ \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
+        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline 
+  $s_1$  & \onslide<6->{$0$} & \onslide<7->{$1/6$} & \onslide<7->{$1/6$} & \\ \hline
+  $s_2$  & \onslide<8->{$1/6$} & \onslide<8->{$0$} & \onslide<8->{$1/6$} &  \\ \hline
+       $s_3$ & \onslide<9->{$1/6$} & \onslide<9->{$1/6$} & \onslide<9->{$0$} &  \\ \hline \hline
+              & & &  & \\ 
+\end{tabular}
+\end{textblock}
+}
+
+\end{frame}
+
+\begin{frame}[plain]
+\only<1>{
+\begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \en{Hidden variables and \textbf{honest} beliefs}
+ \es{Hipótesis y creencias \textbf{honestas}}
+ \end{textblock}
+}
+
+\only<2->{
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \en{Hidden variables and honest reasoning}
+ \es{Creencias y razonamiento \textbf{honesto}}
+ \end{textblock}
+ }
+ 
+\vspace{1cm}
+
+ \begin{textblock}{160}(0,22)
+  \centering
+  Creencia$(r,s)$ \\ \vspace{0.3cm}
+ \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
+        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline 
+  $s_1$ & $0$ & $1/6$ & $1/6$ & \onslide<6->{$1/3$} \\ \hline
+  $s_2$ & $1/6$ & $0$ & $1/6$ & \onslide<6->{$1/3$} \\ \hline
+  $s_3$ & $1/6$ & $1/6$ & $0$ & \onslide<6->{$1/3$} \\ \hline \hline
+        & \onslide<4->{$1/3$} & \onslide<4->{$1/3$} & \onslide<4->{$1/3$} & \onslide<7>{$1$} \\ 
+\end{tabular}
+
+\vspace{0.3cm}
+
+\onslide<3->{
+\begin{align*}
+ \text{Creencia}(r) = \ ?
+\end{align*}
+}
+\vspace{-1cm}
+\onslide<5->{
+\begin{align*}
+ \text{Creencia}(s) = \ ?
+\end{align*}
+}
+\end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \en{Hidden variables and honest reasoning}
+ \es{Creencias y razonamiento \textbf{honesto}}
+ \end{textblock}
+ 
+\begin{textblock}{160}(0,25)\centering
+ \begin{center}
+ Regla 1 \\
+   \LARGE
+\textbf{Integrar las creencias \\ en partes iguales}
+ \end{center}
+ 
+ \begin{equation*}
+  \text{Creencia}(r_i) = \sum_j \text{Creencia}(r_i, s_j) 
+ \end{equation*}
+ 
+\end{textblock}
+
+ 
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \en{Hidden variables and honest reasoning}
+ \es{Creencias y razonamiento \textbf{honesto}}
+ \end{textblock}
+ 
+\vspace{1cm}
+\only<1-2>{
+ \begin{textblock}{160}(0,22)
+  \centering
+  Creencia$(r,s)$ \\ \vspace{0.3cm}
+ \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
+        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{\bm{$1/3$}} \\ \hline 
+  $s_1$ & $0$ & $1/6$ & $1/6$ & $1/3$ \\ \hline
+  $s_2$ & $1/6$ & $0$ & $1/6$ & $1/3$ \\ \hline
+  $s_3$ & $1/6$ & $1/6$ & $0$ & $1/3$ \\ \hline \hline
+        & $1/3$ & $1/3$ & $1/3$ & $1$ \\ 
+\end{tabular}
+\end{textblock}
+}
+
+\only<2-3>{
+\begin{textblock}{160}(0,60)
+\begin{align*}
+ \text{Creencia}(r|s_2) = \ ?
+\end{align*}
+\end{textblock}
+}
+
+\only<3->{
+ \begin{textblock}{160}(0,22)
+  \centering
+  \only<3-6>{Creencia$(r,s_2)$}\only<7>{Creencia$(r|s_2)$} \\ \vspace{0.3cm}
+ \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
+        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, &  \phantom{\bm{$1/3$}} \\ \hline 
+  &  &  &  & \\ \hline
+  $s_2$ & \only<3-5>{$1/6$}\only<6>{$\frac{1}{6}/\frac{1}{3}$}\only<7>{$1/2$} & $0$ & \only<3-5>{$1/6$}\only<6>{$\frac{1}{6}/\frac{1}{3}$}\only<7>{$1/2$} & \only<3-4>{$1/3$}\only<5>{\bm{$1/3$}}\only<6>{$\frac{1}{3}/\frac{1}{3}$}\only<7>{$1$} \\ \hline
+  &  &  & &  \\ 
+\end{tabular}
+\end{textblock}
+}
+
+\only<4->{
+\begin{textblock}{160}(7,57)
+\centering
+\scalebox{1.2}{
+\tikz{ %
+        
+         \node[factor, minimum size=1cm] (p1) {} ;
+         \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.03\textwidth]{../../aux/static/dedo.png}} ;
+         \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+
+         \node[const, above=of p1, yshift=.15cm] (fp1) {$1/2$};
+         \node[const, above=of p2, yshift=.15cm] (fp2) {$0$};
+         \node[const, above=of p3, yshift=.15cm] (fp3) {$1/2$};
+         \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
+         
+         \node[invisible, xshift=4.75cm] (s-dist) {};
+         \node[invisible, yshift=-1cm] (s-dist) {};
+         \node[invisible, yshift=1.2cm] (s-dist) {};
+        
+        } 
+}
+\end{textblock}
+}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \en{Hidden variables and honest reasoning}
+ \es{Creencias y razonamiento \textbf{honesto}}
+ \end{textblock}
+ \vspace{1cm}
+ 
+\begin{center}
+  Regla 2 \\
+\LARGE
+\textbf{Contextualizar las creencias \\ en partes iguales}
+ \end{center}
+
+ \begin{align*}
+ P(r|s_2) = \frac{P(r, s_2)}{P(s_2)}
+ \end{align*} 
+
+ 
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE  Las reglas de la probabilidad
+\end{textblock}
+
+
+\vspace{0.75cm}
+
+
+
+\begin{equation*}
+  \text{Marginal}_{i} = \sum_j \text{Conjunta}_{ij}  \ \ \ \ \ \ \ \ \ \ \ \  \text{Condicional}_{j|i} = \frac{\text{Conjunta}_{ij}}{\text{Marginal}_{i}}
+\end{equation*}
+
+\pause
+\vspace{0.75cm}
+
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+ \centering \textbf{Regla de la suma}
+ 
+ 
+\begin{equation*}
+ P(X) = \sum_Y P(X,Y)
+\end{equation*}
+ 
+ \justifying \footnotesize
+  Cualquier distribución marginal puede ser obtenida integrando la distribución conjunta
+
+ \end{column}
+ \begin{column}{0.5\textwidth}
+\centering  \textbf{Regla del producto}
+
+\begin{equation*}
+ P(X,Y) = P(Y|X) P(X)
+\end{equation*}
+
+ \justifying \footnotesize
+Cualquier distribución conjunta puede ser expresada como el producto de distribuciones condicionales uni-dimensionles.
+
+\end{column}
+\end{columns}
+
+\end{frame}
+
+ \begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE Las reglas de la probabilidad
+ \end{textblock}
+ 
+ 
+\vspace{1.2cm}
+ 
+  \textbf{Teorema de Cox} \\ 
+  
+  \vspace{0.3cm}
+  
+  \'Unicas reglas de razonamiento que grantizan:
+\begin{itemize}
+ \item[$\bullet$] Representar creencias con valores reales 
+ \item[$\bullet$] Actualizar creencias en la direcci\'on de la evidencia
+ \item[$\bullet$] Consistencia
+ \end{itemize}
+ 
+% In 1946, thanks to Cox, it was now a theorem that any set of rules for conducting inference, in which we represent degrees of plausibility by real numbers, is necessarily either equivalent to the Laplace-Jefreys rules, or inconsistent
+ 
+\only<2>{
+ \begin{textblock}{160}(0,85)
+  \scriptsize \centering  \href{https://doi.org/10.1119/1.1990764}{Cox, R (1946). Probability, frequency and reasonable expectation.}
+ \end{textblock}
+ }
+%  
+ \end{frame}
+ 
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Teorema de Bayes 
+\end{textblock}
+
+\only<1>{
+\begin{textblock}{160}(0,43)
+\begin{equation*}
+ P(X,Y) = P(Y,X)
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<2>{
+\begin{textblock}{160}(0,43)
+\begin{equation*}
+ P(Y|X) P(X) =  P(X,Y) = P(Y,X) = P(X|Y) P(Y)
+\end{equation*}
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{160}(0,43)
+\begin{equation*}
+ P(Y|X) P(X) = P(X|Y) P(Y) 
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<4>{
+\begin{textblock}{160}(0,43)
+\begin{equation*}
+ P(Y|X) = \frac{p(X|Y) p(Y)}{p(X)}
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<5>{
+\begin{textblock}{160}(0,43)
+\begin{equation*}
+P(\text{Hip\'otesis }|\text{ Datos}) = \frac{P(\text{Datos }|\text{ Hip\'otesis}) P(\text{Hip\'otesis})}{P(\text{Datos})}
+\end{equation*}
+\end{textblock}
+
+}
+
+
+\only<6>{
+\begin{textblock}{160}(0,37.75)
+\begin{equation*}
+\underbrace{P(\text{Hip\'otesis }|\text{ Datos})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos }|\text{ Hip\'otesis})}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis})}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos})}_{\text{\scriptsize Evidencia}}}
+\end{equation*}
+\end{textblock}
+
+}
+
+\vspace{0.2cm}
+
+\only<7->{  
+%\vspace{0.3cm}
+\Wider[2cm]{
+\begin{textblock}{160}(0,34.25) 
+\begin{equation*}
+\underbrace{P(\text{Hip\'otesis }|\text{ Datos, Modelo})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos }|\text{ Hip\'otesis, Modelo})}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis }|\text{ Modelo})}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos }|\text{ Modelo})}_{\text{\scriptsize Evidencia}}}
+\end{equation*}
+
+\end{textblock}
+
+}
+}
+% 
+% \only<8->{  
+% \begin{textblock}{100}(30,65)
+% \begin{mdframed}[backgroundcolor=black!30]
+% \centering \vspace{0.05cm}
+% El \textbf{modelo} es lo que permite relacionar 
+% 
+% los \textbf{datos} con nuestras \textbf{hipótesis}! 
+% \vspace{0.1cm}
+% \end{mdframed}
+% \end{textblock}
+% }
+
+
+
+
+
+\end{frame}
+
+
+
 
 
 \begin{frame}[plain]
@@ -828,20 +1477,7 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 }
 
 \end{frame}
-% 
-% \begin{frame}[plain]
-% \begin{textblock}{160}(0,4)
-%  \centering \LARGE 
-%  Reglas de la honestidad
-%  \end{textblock}
-% \vspace{1.25cm} 
-% 
-% \begin{center}
-%  Regla 1  \\ \LARGE
-%  Creencia$(r,c,d) = $ Dividir la creencias en partes iguales \\ a través de los posibles caminos del modelo causal
-%  \end{center} 
-%  
-% \end{frame}
+
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
@@ -861,12 +1497,12 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
   \only<5-18>{
  \begin{textblock}{80}(0,22)
   \centering
-  Creencia$(r,d)$ \\ \vspace{0.3cm}
+  $P(r,s)$ \\ \vspace{0.3cm}
  \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
         & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline 
-  { $d_2$}  & \onslide<6->{$\frac{1}{3}$ $\frac{1}{2}$} & \onslide<8->{$0$} & \onslide<10->{$\frac{1}{3}$} & \onslide<13->{$\frac{1}{2}$} \\ \hline
-       {$d_3$} & \onslide<7->{$\frac{1}{3}$ $\frac{1}{2}$} & \onslide<9->{$\frac{1}{3}$} & \onslide<11->{$0$} & \onslide<14->{$\frac{1}{2}$} \\ \hline
-              & \onslide<15->{$\frac{1}{3}$} &  \onslide<16->{$\frac{1}{3}$} & \onslide<16->{$\frac{1}{3}$}  & \onslide<17->{$1$} \\ 
+  { $s_2$}  & \onslide<6->{$1/6$} & \onslide<8->{$0$} & \onslide<10->{$1/3$} & \onslide<13->{$1/2$} \\ \hline
+       {$s_3$} & \onslide<7->{$1/6$} & \onslide<9->{$1/3$} & \onslide<11->{$0$} & \onslide<14->{$1/2$} \\ \hline
+              & \onslide<15->{$1/3$} &  \onslide<16->{$1/3$} & \onslide<16->{$1/3$}  & \onslide<17->{$1$} \\ 
 \end{tabular}
 \end{textblock}
 }
@@ -874,10 +1510,10 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 \only<19>{
  \begin{textblock}{80}(0,22)
   \centering
-  Creencia$(r,d)$ \\ \vspace{0.3cm}
+  $P(r,s_2)$ \\ \vspace{0.3cm}
  \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
         & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline 
-        { $d_2$}  & \onslide<6->{$\frac{1}{3}$ $\frac{1}{2}$} & \onslide<8->{$0$} & \onslide<10->{$\frac{1}{3}$} & \onslide<13->{$\frac{1}{2}$} \\ \hline
+        { $s_2$}  & \onslide<6->{$1/6$} & \onslide<8->{$0$} & \onslide<10->{$1/3$} & \onslide<13->{$1/2$} \\ \hline
 \end{tabular}
 \end{textblock}
 }
@@ -886,38 +1522,36 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 \only<20->{
  \begin{textblock}{80}(0,22)
   \centering
-  Creencia$(r|d)$ \\ \vspace{0.3cm}
+  $P(r|s_2)$ \\ \vspace{0.3cm}
  \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
-        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline 
-  { $d_2$}  & \onslide<6->{$\frac{1}{3}$} & \onslide<8->{$0$} & \onslide<10->{$\frac{2}{3}$} & \onslide<13->{$1$} \\ \hline
+        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{$1/2$}\\ \hline 
+  { $s_2$}  & \onslide<6->{$1/3$} & \onslide<8->{$0$} & \onslide<10->{$2/3$} & \onslide<13->{$1$} \\ \hline
 \end{tabular}
 \end{textblock}
 }
 
 
 \only<12-16>{
-\begin{textblock}{80}(0,53)
+\begin{textblock}{80}(0,58)
  \centering 
 \begin{center}
- {\normalsize Regla 2 } \\ 
- Sumar las creencias parciales \\ en partes iguales
+ Regla de la suma
  \end{center} 
  
- Creencia$(d_i) = \sum_{j} \text{Creencia}(r_j,d_i)$ 
+ $P(s_i) = \sum_{j} P(r_j,s_i)$ 
  \\
  
 \end{textblock}
 }
  
 \only<18-20>{
-\begin{textblock}{80}(0,53)
+\begin{textblock}{80}(0,58)
  \centering 
 \begin{center}
- {\normalsize Regla 1} \\ 
- Contextualizar las creencias \\ en partes iguales
+ Regla del producto
  \end{center} 
  \begin{equation*}
-\text{Creencia}(r_i|d_2) = \frac{\text{Creencia}(r_i,d_2)}{\text{Creencia}(d_2)} 
+P(r_i|s_2) = \frac{P(r_i,s_2)}{P(s_2)} 
  \end{equation*}
  
 \end{textblock}
@@ -932,50 +1566,62 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 }
  
 \onslide<2->{ 
-\begin{textblock}{80}(70,18) \centering
+\begin{textblock}{80}(70,11) \centering
+\scalebox{1.2}{
 \tikz{
 \onslide<2->{
-\node[latent] (c1) {$c_1$};
-\node[latent, below=of c1, draw=white, yshift=0.6cm] (b0) {$ 1$};
+\node[latent, draw=white, yshift=0.8cm] (b0) {$1$};
+\node[latent,below=of b0,yshift=0.8cm, xshift=-2cm] (r1) {$r_1$};
+\node[latent,below=of b0,yshift=0.8cm] (r2) {$r_2$};
+\node[latent,below=of b0,yshift=0.8cm, xshift=2cm] (r3) {$r_3$};
+
+\node[latent, below=of r1, draw=white, yshift=0.8cm] (br1) {$\frac{1}{3}$};
+\node[latent, below=of r2, draw=white, yshift=0.8cm] (br2) {$\frac{1}{3}$};
+\node[latent, below=of r3, draw=white, yshift=0.8cm] (br3) {$\frac{1}{3}$};
 }
 \onslide<3->{
-\node[latent,below=of b0,yshift=0.6cm, xshift=-2cm] (r1) {$r_1$};
-\node[latent,below=of b0,yshift=0.6cm] (r2) {$r_2$};
-\node[latent,below=of b0,yshift=0.6cm, xshift=2cm] (r3) {$r_3$};
+\node[latent,below=of br1,yshift=0.8cm] (c11) {$c_1$};
+\node[latent,below=of br2,yshift=0.8cm] (c12) {$c_1$};
+\node[latent,below=of br3,yshift=0.8cm] (c13) {$c_1$};
 
-\node[latent, below=of r1, draw=white, yshift=0.6cm] (br1) {$\frac{1}{3}$};
-\node[latent, below=of r2, draw=white, yshift=0.6cm] (br2) {$\frac{1}{3}$};
-\node[latent, below=of r3, draw=white, yshift=0.6cm] (br3) {$\frac{1}{3}$};
+\node[latent, below=of c11, draw=white, yshift=0.8cm] (bc11) {$\frac{1}{3}$};
+\node[latent, below=of c12, draw=white, yshift=0.8cm] (bc12) {$\frac{1}{3}$};
+\node[latent, below=of c13, draw=white, yshift=0.8cm] (bc13) {$\frac{1}{3}$};
 }
-
 \onslide<4->{
-\node[latent,below=of br1,yshift=0.6cm, xshift=-0.7cm] (r1d2) {$d_2$};
-\node[latent,below=of br1,yshift=0.6cm, xshift=0.7cm] (r1d3) {$d_3$};
-\node[latent,below=of br2,yshift=0.6cm] (r2d3) {$d_3$};
-\node[latent,below=of br3,yshift=0.6cm] (r3d2) {$d_2$};
+\node[latent,below=of bc11,yshift=0.8cm, xshift=-0.7cm] (r1d2) {$s_2$};
+\node[latent,below=of bc11,yshift=0.8cm, xshift=0.7cm] (r1d3) {$s_3$};
+\node[latent,below=of bc12,yshift=0.8cm] (r2d3) {$s_3$};
+\node[latent,below=of bc13,yshift=0.8cm] (r3d2) {$s_2$};
 
-\node[latent,below=of r1d2,yshift=0.6cm,draw=white] (br1d2) {$\frac{1}{3}\frac{1}{2}$};
-\node[latent,below=of r1d3,yshift=0.6cm, draw=white] (br1d3) {$\frac{1}{3}\frac{1}{2}$};
-\node[latent,below=of r2d3,yshift=0.6cm,draw=white] (br2d3) {$\frac{1}{3}$};
-\node[latent,below=of r3d2,yshift=0.6cm,draw=white] (br3d2) {$\frac{1}{3}$};
+\node[latent,below=of r1d2,yshift=0.8cm,draw=white] (br1d2) {$\frac{1}{3}\frac{1}{2}$};
+\node[latent,below=of r1d3,yshift=0.8cm, draw=white] (br1d3) {$\frac{1}{3}\frac{1}{2}$};
+\node[latent,below=of r2d3,yshift=0.8cm,draw=white] (br2d3) {$\frac{1}{3}$};
+\node[latent,below=of r3d2,yshift=0.8cm,draw=white] (br3d2) {$\frac{1}{3}$};
 }
 \onslide<2->{
-\edge[-] {c1} {b0};
-}
-\onslide<3->{
 \edge[-] {b0} {r1,r2,r3};
 \edge[-] {r1} {br1};
 \edge[-] {r2} {br2};
 \edge[-] {r3} {br3};
 }
+\onslide<3->{
+\edge[-] {br1} {c11};
+\edge[-] {br2} {c12};
+\edge[-] {br3} {c13};
+\edge[-] {c11} {bc11};
+\edge[-] {c12} {bc12};
+\edge[-] {c13} {bc13};
+}
 \onslide<4->{
-\edge[-] {br1} {r1d2,r1d3};
-\edge[-] {br2} {r2d3};
-\edge[-] {br3} {r3d2};
+\edge[-] {bc11} {r1d2,r1d3};
+\edge[-] {bc12} {r2d3};
+\edge[-] {bc13} {r3d2};
 \edge[-] {r1d2} {br1d2};
 \edge[-] {r1d3} {br1d3};
 \edge[-] {r2d3} {br2d3};
 \edge[-] {r3d2} {br3d2};
+}
 }
 }
 \end{textblock}
@@ -983,7 +1629,69 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
  
 \end{frame}
 
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \en{Likelihood}
+ \es{Verosimilutd: predicción del dato dada la hipótesis }
+ \end{textblock}
+ \vspace{-1cm}
+
+ \only<1-4>{
+ \begin{textblock}{160}(0,16)
+  \centering
+  $P(r,s)$\\ \vspace{0.1cm}
+ \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
+          & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline 
+   $s_2$ & $1/6$ & $0$ & $1/3$     & $1/2$ \\ \hline
+   $s_3$ & $1/6$ & $1/3$ & $0$     & $1/2$ \\ \hline
+         & $1/3$ &  $1/3$ & $1/3$  & $1$ \\ 
+\end{tabular} 
+\end{textblock}
+}
+
+\begin{textblock}{160}(0,44)
+ \begin{equation*}
+  P(r_i|s_2) = \frac{P(r_i, s_2)}{P(s_2)} \onslide<2->{= \frac{\overbrace{P(s_2|r_i)}^{?}P(r_i)}{P(s_2)}}  \ \ \ \ \ \ \ \ \ \  \onslide<3->{P(s_2 | r_i) = \frac{P(r_i, s_2)}{P(r_i)}}
+ \end{equation*}
+\end{textblock}
+
+\only<4-10>{
+ \begin{textblock}{150}(0,70)
+  \centering
+  $P(s_2|r_i)$: \ \ \ 
+ \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
+          & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{$1/2$} \\ \hline 
+   $s_2$ & \onslide<6->{$1/2$} & \onslide<8->{$0$} & \onslide<10->{$1$} &  \\ \hline
+\end{tabular} 
+\end{textblock}
+}
+
+\only<5->{
+\begin{textblock}{160}(0,16)
+  \centering
+  \only<5>{$P(r_1, s)$}\only<6>{$P(s|r_1)$}\only<7>{$P(r_2, s)$}\only<8>{$P(s|r_2)$}\only<9>{$P(r_3, s)$}\only<10>{$P(s|r_3)$} \\ \vspace{0.1cm}
+ \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
+          & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, &  \phantom{$1/2$} \\ \hline 
+   $s_2$ & \only<5>{$1/6$}\only<6>{\bm{$1/2$}} & \only<7>{$0$}\only<8>{\bm{$0$}} & \only<9>{$1/3$}\only<10>{\bm{$1$}} &  \\ \hline
+   $s_3$ & \only<5>{$1/6$}\only<6>{$1/2$} & \only<7>{$1/3$}\only<8>{$1$} & \only<9-10>{$0$}  &  \\ \hline
+         & \only<5>{$1/3$}\only<6>{$1$} & \only<7>{$1/3$}\only<8>{$1$} & \only<9>{$1/3$}\only<10>{$1$}  &  \\ 
+\end{tabular} 
+\end{textblock}
+}
+
+\end{frame}
+
  
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \en{Surprise as a filter of prior beliefs}
+ \es{La sorpresa como filtro de las creencias previas}
+ \end{textblock}
+ 
+\end{frame}
+
  
 \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
@@ -997,11 +1705,11 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
 \tikz{         
     \node[det, fill=black!15] (r) {$r_{ij}$} ; 
     \node[const, left=of r, xshift=-1.35cm] (r_name) {\small \en{Result}\es{Ganar/perder}:}; 
-    \node[const, right=of r] (dr) {\normalsize $ r_{ij} = (d_{ij}>0)$}; 
+    \node[const, right=of r] (dr) {\normalsize $ r_{ij} = (s_{ij}>0)$}; 
 
-    \node[latent, above=of r, yshift=-0.45cm] (d) {$d_{ij}$} ; %
-    \node[const, right=of d] (dd) {\normalsize $ d_{ij}=p_i-p_j$}; 
-    \node[const, left=of d, xshift=-1.35cm] (d_name) {\small \en{Difference}\es{Diferencia}:};
+    \node[latent, above=of r, yshift=-0.45cm] (d) {$s_{ij}$} ; %
+    \node[const, right=of d] (dd) {\normalsize $ s_{ij}=p_i-p_j$}; 
+    \node[const, left=of d, xshift=-1.35cm] (s_name) {\small \en{Difference}\es{Diferencia}:};
     
     \node[latent, above=of d, xshift=-0.8cm, yshift=-0.45cm] (p1) {$p_i$} ; %
     \node[latent, above=of d, xshift=0.8cm, yshift=-0.45cm] (p2) {$p_j$} ; %

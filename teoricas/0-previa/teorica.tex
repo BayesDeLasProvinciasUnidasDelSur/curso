@@ -1,0 +1,175 @@
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\input{../../aux/tex/diapo_encabezado.tex}
+\input{../../aux/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+ 
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+\newif\ifen
+\newif\ifes
+\newcommand{\en}[1]{\ifen#1\fi}
+\newcommand{\es}[1]{\ifes#1\fi}
+\estrue
+
+%\title[Bayes del Sur]{}
+
+\begin{document}
+
+\color{black!85}
+\large
+
+ 
+%\setbeamercolor{background canvas}{bg=gray!15}
+
+\begin{frame}[plain,noframenumbering]
+ 
+ \begin{textblock}{90}(00,05)
+\begin{center}
+ \huge  \textcolor{black!66}{Creencias, datos y sorpresas}
+\end{center}
+\end{textblock}
+
+ %\vspace{2cm}brown
+%\maketitle
+\Wider[2cm]{
+\includegraphics[width=1\textwidth]{../../aux/static/peligro_predador}
+}
+\end{frame}
+
+% 
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering
+%  \LARGE \textcolor{black!85}{\en{Today}\es{Hoy}}
+% \end{textblock}
+% 
+% \begin{itemize}
+%  \item[$\bullet$] Human dispersal
+%  \item[$\bullet$] Biomass (dentro de los vertebrados terrestres)
+%  \item[$\bullet$] Empatia
+%  \item[$\bullet$] Evolución cultural
+%  \item[$\bullet$] Ciencia como intersubjectividad (muto entendimiento)
+%  \item[$\bullet$] Base empírica 
+%  \item[$\bullet$] Matriz de datos 
+%  \item[$\bullet$] Ciencia empírica 
+%  \item[$\bullet$] Niveles de conocimiento
+%  \item[$\bullet$] Incertidumbre
+%  \item[$\bullet$] Creencias honestas
+%  \item[$\bullet$] Modelos causales
+%  \item[$\bullet$] La lógica de la ciencia empírica
+%  \item[$\bullet$] Selección de modelo
+% \end{itemize}
+% 
+% \end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE
+ Humanos
+\end{textblock}
+\vspace{1.2cm}
+\Wider[1cm]{
+\includegraphics[width=1\textwidth]{../../aux/static/mapamundi2.jpg}
+}
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE
+ Ocupamos todos los nichos ecológicos
+\end{textblock}
+\Wider[2cm]{
+\includegraphics[width=1\textwidth]{../../aux/static/inuit_igloo_low}
+}
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE
+ \en{The cognitive hypotesis}
+ \es{La hipótesis cognitiva}
+\end{textblock}
+\centering \vspace{1cm}
+ \includegraphics[width=0.5\textwidth]{../../aux/static/cerebros}  
+\end{frame}
+
+
+
+\begin{frame}[plain]
+
+ \begin{textblock}{160}(5,30)
+\includegraphics[width=0.33\textwidth]{../../aux/static/evolucionLitica.jpg} 
+\end{textblock}
+\begin{textblock}{160}(0,40)
+ \centering \LARGE
+ \en{Cultural \\ evolution}
+ \es{Evolución \\ cultural}
+\end{textblock}
+\begin{textblock}{160}(105,1)
+\includegraphics[width=0.285\textwidth]{../../aux/static/debian_tree.png}
+\end{textblock}
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ La hipótesis cultural
+ \end{textblock}
+\vspace{1cm}
+
+\includegraphics[width=1\textwidth]{../../aux/static/evolucionCultural.jpg}
+
+\end{frame}
+% 
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \LARGE 
+%  \en{Evolution of empathy}
+%  \es{La evolución de la empatía}
+% \end{textblock}
+% \vspace{1cm}
+%  
+% %Wired To mutual understanding
+% %Cableados para la comprensión mutua
+%  \centering
+% \includegraphics[width=0.7\textwidth]{../../aux/static/empatia}
+% 
+% % Cooperative breeding permited the evolution of extended life span, prolonged childhoods
+% 
+% % \centering
+% % \en{Cooperative breeding permited the evolution of empathy}
+% % \es{La crianza cooperative permitió la evolución de la empatía}
+%  
+% %Humans are often eager to understand others, to be understood, and to cooperate. 
+% %Los seres humanos suelen estar ansiosos por comprender a los demás, por ser comprendidos y por cooperar. 
+% 
+% 
+% \end{frame}
+
+ 
+\begin{frame}[plain]
+\centering
+  \includegraphics[width=0.35\textwidth]{../../aux/static/pachacuteckoricancha.jpg}
+\end{frame}
+
+
+
+
+
+
+\end{document}
+
+
+
