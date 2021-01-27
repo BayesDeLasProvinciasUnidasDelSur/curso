@@ -391,8 +391,8 @@ Resultado (R) & \multicolumn{1}{r|}{} &  & Habilidad (V) &  &  \multicolumn{1}{|
     \node[const, left=of r, xshift=-1.35cm] (r_name) {\small \en{Result}\es{Ganar/perder}:}; 
     \node[const, right=of r] (dr) {\normalsize $ r_{ij} = (s_{ij}>0)$}; 
 
-    \node[latent, above=of r, yshift=-0.45cm] (d) {$s_{ij}$} ; %
-    \node[const, right=of d] (dd) {\normalsize $ s_{ij}=p_i-p_j$}; 
+    \node[latent, above=of r, yshift=-0.45cm] (d) {$d_{ij}$} ; %
+    \node[const, right=of d] (dd) {\normalsize $ d_{ij}=p_i-p_j$}; 
     \node[const, left=of d, xshift=-1.35cm] (s_name) {\small \en{Difference}\es{Diferencia}:};
     
     \node[latent, above=of d, xshift=-0.8cm, yshift=-0.45cm] (p1) {$p_i$} ; %
@@ -1848,8 +1848,8 @@ P(\text{Hip\'otesis }|\text{ Dato}) = \frac{P(\text{Dato }|\text{ Hip\'otesis}) 
  
 \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
-\centering  \LARGE 
-¿Y el Resultado (R)? ¿Cuál es el valor de la variable oculta?
+\centering  \Large 
+¿Cuáles son las creencia honestas dado este modelo causal?
 \end{textblock}
 \vspace{0.5cm}
 
@@ -1860,8 +1860,8 @@ P(\text{Hip\'otesis }|\text{ Dato}) = \frac{P(\text{Dato }|\text{ Hip\'otesis}) 
     \node[const, left=of r, xshift=-1.35cm] (r_name) {\small \en{Result}\es{Ganar/perder}:}; 
     \node[const, right=of r] (dr) {\normalsize $ r_{ij} = (s_{ij}>0)$}; 
 
-    \node[latent, above=of r, yshift=-0.45cm] (d) {$s_{ij}$} ; %
-    \node[const, right=of d] (dd) {\normalsize $ s_{ij}=p_i-p_j$}; 
+    \node[latent, above=of r, yshift=-0.45cm] (d) {$d_{ij}$} ; %
+    \node[const, right=of d] (dd) {\normalsize $ d_{ij}=p_i-p_j$}; 
     \node[const, left=of d, xshift=-1.35cm] (s_name) {\small \en{Difference}\es{Diferencia}:};
     
     \node[latent, above=of d, xshift=-0.8cm, yshift=-0.45cm] (p1) {$p_i$} ; %
