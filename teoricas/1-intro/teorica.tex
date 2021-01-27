@@ -1278,7 +1278,7 @@ Modelo causal \\ \vspace{0.3cm}
  
  
 \begin{equation*}
- P(X) = \sum_Y P(X,Y)
+ P(r) = \sum_j P(r,s_j)
 \end{equation*}
  
  \justifying \footnotesize
@@ -1289,7 +1289,7 @@ Modelo causal \\ \vspace{0.3cm}
 \centering  \textbf{Regla del producto}
 
 \begin{equation*}
- P(X,Y) = P(Y|X) P(X)
+ P(r,s) = P(s|r) P(r)
 \end{equation*}
 
  \justifying \footnotesize
@@ -1328,101 +1328,6 @@ Cualquier distribución conjunta puede ser expresada como el producto de distrib
  }
 %  
  \end{frame}
- 
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering \Large Teorema de Bayes 
-\end{textblock}
-
-\only<1>{
-\begin{textblock}{160}(0,43)
-\begin{equation*}
- P(X,Y) = P(Y,X)
-\end{equation*}
-\end{textblock}
-}
-
-
-\only<2>{
-\begin{textblock}{160}(0,43)
-\begin{equation*}
- P(Y|X) P(X) =  P(X,Y) = P(Y,X) = P(X|Y) P(Y)
-\end{equation*}
-\end{textblock}
-}
-
-\only<3>{
-\begin{textblock}{160}(0,43)
-\begin{equation*}
- P(Y|X) P(X) = P(X|Y) P(Y) 
-\end{equation*}
-\end{textblock}
-}
-
-
-\only<4>{
-\begin{textblock}{160}(0,43)
-\begin{equation*}
- P(Y|X) = \frac{p(X|Y) p(Y)}{p(X)}
-\end{equation*}
-\end{textblock}
-}
-
-
-\only<5>{
-\begin{textblock}{160}(0,43)
-\begin{equation*}
-P(\text{Hip\'otesis }|\text{ Datos}) = \frac{P(\text{Datos }|\text{ Hip\'otesis}) P(\text{Hip\'otesis})}{P(\text{Datos})}
-\end{equation*}
-\end{textblock}
-
-}
-
-
-\only<6>{
-\begin{textblock}{160}(0,37.75)
-\begin{equation*}
-\underbrace{P(\text{Hip\'otesis }|\text{ Datos})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos }|\text{ Hip\'otesis})}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis})}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos})}_{\text{\scriptsize Evidencia}}}
-\end{equation*}
-\end{textblock}
-
-}
-
-\vspace{0.2cm}
-
-\only<7->{  
-%\vspace{0.3cm}
-\Wider[2cm]{
-\begin{textblock}{160}(0,34.25) 
-\begin{equation*}
-\underbrace{P(\text{Hip\'otesis }|\text{ Datos, Modelo})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos }|\text{ Hip\'otesis, Modelo})}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis }|\text{ Modelo})}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos }|\text{ Modelo})}_{\text{\scriptsize Evidencia}}}
-\end{equation*}
-
-\end{textblock}
-
-}
-}
-% 
-% \only<8->{  
-% \begin{textblock}{100}(30,65)
-% \begin{mdframed}[backgroundcolor=black!30]
-% \centering \vspace{0.05cm}
-% El \textbf{modelo} es lo que permite relacionar 
-% 
-% los \textbf{datos} con nuestras \textbf{hipótesis}! 
-% \vspace{0.1cm}
-% \end{mdframed}
-% \end{textblock}
-% }
-
-
-
-
-
-\end{frame}
-
-
-
 
 
 \begin{frame}[plain]
@@ -1631,66 +1536,314 @@ P(r_i|s_2) = \frac{P(r_i,s_2)}{P(s_2)}
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
+\centering \LARGE 
+\st{Teorema de Bayes} \\
+\Large El corolario de Laplace
+\end{textblock}
+
+\only<1-4>{
+\begin{textblock}{160}(0,34)
+ \begin{align*}
+  \phantom{P(r_i)} P(r_i|s_2) & = \frac{P(r_i, s_2)}{P(s_2)} \onslide<4>{= \frac{P(s_2|r_i)P(r_i)}{P(s_2)}}
+  \only<2>{\\ P(s_2 | r_i) &= \frac{P(r_i, s_2)}{P(r_i)}}
+  \only<3-4>{\\[0.27cm]P(r_i) P(s_2 | r_i)  &= P(r_i, s_2)}
+ \end{align*}
+\end{textblock}
+}
+
+\only<5>{
+\begin{textblock}{160}(0,34)
+ \begin{align*}
+  \phantom{P(r_i)} P(r_i|s_2) & = \frac{P(s_2|r_i)P(r_i)}{P(s_2)} \phantom{= \frac{P(r_i, s_2)}{P(s_2)} \ }
+  \end{align*}
+\end{textblock}
+}
+
+
+
+\only<6>{
+\begin{textblock}{160}(0,43)
+\begin{equation*}
+P(\text{Hip\'otesis }|\text{ Dato}) = \frac{P(\text{Dato }|\text{ Hip\'otesis}) P(\text{Hip\'otesis})}{P(\text{Dato})}
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<7>{
+\begin{textblock}{160}(0,37.75)
+\begin{equation*}
+\underbrace{P(\text{Hip\'otesis }|\text{ Datos})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos }|\text{ Hip\'otesis})}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis})}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos})}_{\text{\scriptsize Evidencia}}}
+\end{equation*}
+\end{textblock}
+}
+
+\vspace{0.2cm}
+
+\only<8->{  
+%\vspace{0.3cm}
+\Wider[2cm]{
+\begin{textblock}{160}(0,34.25) 
+\begin{equation*}
+\underbrace{P(\text{Hip\'otesis }|\text{ Datos, Modelo})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos }|\text{ Hip\'otesis, Modelo})}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis }|\text{ Modelo})}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos }|\text{ Modelo})}_{\text{\scriptsize Evidencia}}}
+\end{equation*}
+
+\end{textblock}
+
+}
+}
+% 
+% \only<8->{  
+% \begin{textblock}{100}(30,65)
+% \begin{mdframed}[backgroundcolor=black!30]
+% \centering \vspace{0.05cm}
+% El \textbf{modelo} es lo que permite relacionar 
+% 
+% los \textbf{datos} con nuestras \textbf{hipótesis}! 
+% \vspace{0.1cm}
+% \end{mdframed}
+% \end{textblock}
+% }
+
+
+
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
  \centering \LARGE 
  \en{Likelihood}
- \es{Verosimilutd: predicción del dato dada la hipótesis }
+ \es{Verosimilutd: predicción del dato dada la hipótesis}
  \end{textblock}
  \vspace{-1cm}
 
- \only<1-4>{
- \begin{textblock}{160}(0,16)
+ 
+\begin{textblock}{80}(70,11) \centering
+\scalebox{1.2}{
+\tikz{
+\only<3->{\phantom}{\node[latent, draw=white, yshift=0.8cm] (b0) {$1$};}
+\only<8->{\phantom}{\node[latent,below=of b0,yshift=0.8cm, xshift=-2cm] (r1) {$r_1$};}
+\only<3-7,10-11>{\phantom}{\node[latent,below=of b0,yshift=0.8cm] (r2) {$r_2$};}
+\only<3-9>{\phantom}{\node[latent,below=of b0,yshift=0.8cm, xshift=2cm] (r3) {$r_3$};}
+
+\only<8->{\phantom}{\node[latent, below=of r1, draw=white, yshift=0.8cm] (br1) {$\frac{1}{3}$};}
+\only<3-7,10-11>{\phantom}{\node[latent, below=of r2, draw=white, yshift=0.8cm] (br2) {$\frac{1}{3}$};}
+\only<3-9>{\phantom}{\node[latent, below=of r3, draw=white, yshift=0.8cm] (br3) {$\frac{1}{3}$};}
+\only<8->{\phantom}{\node[latent,below=of br1,yshift=0.8cm] (c11) {$c_1$};}
+\only<3-7,10-11>{\phantom}{\node[latent,below=of br2,yshift=0.8cm] (c12) {$c_1$};}
+\only<3-9>{\phantom}{\node[latent,below=of br3,yshift=0.8cm] (c13) {$c_1$};}
+
+\only<8->{\phantom}{\node[latent, below=of c11, draw=white, yshift=0.8cm] (bc11) {$\frac{1}{3}$};}
+\only<3-7,10-11>{\phantom}{\node[latent, below=of c12, draw=white, yshift=0.8cm] (bc12) {$\frac{1}{3}$};}
+\only<3-9>{\phantom}{\node[latent, below=of c13, draw=white, yshift=0.8cm] (bc13) {$\frac{1}{3}$};}
+\only<8->{\phantom}{\node[latent,below=of bc11,yshift=0.8cm, xshift=-0.7cm] (r1d2) {$s_2$};}
+\only<8->{\phantom}{\node[latent,below=of bc11,yshift=0.8cm, xshift=0.7cm] (r1d3) {$s_3$};}
+\only<3-7,10-11>{\phantom}{\node[latent,below=of bc12,yshift=0.8cm] (r2d3) {$s_3$};}
+\only<3-9>{\phantom}{\node[latent,below=of bc13,yshift=0.8cm] (r3d2) {$s_2$};}
+
+\only<8->{\phantom}{\node[latent,below=of r1d2,yshift=0.8cm,draw=white] (br1d2) {$\frac{1}{3}\frac{1}{2}$};}
+\only<8->{\phantom}{\node[latent,below=of r1d3,yshift=0.8cm, draw=white] (br1d3) {$\frac{1}{3}\frac{1}{2}$};}
+\only<3-7,10-11>{\phantom}{\node[latent,below=of r2d3,yshift=0.8cm,draw=white] (br2d3) {$\frac{1}{3}$};}
+\only<3-9>{\phantom}{\node[latent,below=of r3d2,yshift=0.8cm,draw=white] (br3d2) {$\frac{1}{3}$};}
+
+\only<3->{\phantom}{\edge[-] {b0} {r1};}
+\only<3->{\phantom}{\edge[-] {b0} {r2};}
+\only<3->{\phantom}{\edge[-] {b0} {r3};}
+\only<8->{\phantom}{\edge[-] {r1} {br1};}
+\only<3-7,10-11>{\phantom}{\edge[-] {r2} {br2};}
+\only<3-9>{\phantom}{\edge[-] {r3} {br3};}
+\only<8->{\phantom}{\edge[-] {br1} {c11};}
+\only<3-7,10-11>{\phantom}{\edge[-] {br2} {c12};}
+\only<3-9>{\phantom}{\edge[-] {br3} {c13};}
+\only<8->{\phantom}{\edge[-] {c11} {bc11};}
+\only<3-7,10-11>{\phantom}{\edge[-] {c12} {bc12};}
+\only<3-9>{\phantom}{\edge[-] {c13} {bc13};}
+\only<8->{\phantom}{\edge[-] {bc11} {r1d2,r1d3};}
+\only<3-7,10-11>{\phantom}{\edge[-] {bc12} {r2d3};}
+\only<3-9>{\phantom}{\edge[-] {bc13} {r3d2};}
+\only<8->{\phantom}{\edge[-] {r1d2} {br1d2};}
+\only<8->{\phantom}{\edge[-] {r1d3} {br1d3};}
+\only<3-7,10-11>{\phantom}{\edge[-] {r2d3} {br2d3};}
+\only<3-9>{\phantom}{\edge[-] {r3d2} {br3d2};}
+}
+}
+\end{textblock}
+
+
+\only<1->{
+ \begin{textblock}{80}(0,16)
+  \centering
+  $P(s_2|r_i)$ \\ \vspace{0.1cm} 
+  \onslide<2->{
+  \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm} 
+          & \, \only<3-7>{\bm}{$r_1$} \, &  \, \only<8-9>{\bm}{$r_2$} \, & \, \only<10-11>{\bm}{$r_3$} \, \\ \hline 
+   $s_2$ & \onslide<7->{$1/2$} & \onslide<9->{$0$} & \onslide<11->{$1$}  \\ \hline
+\end{tabular} 
+}
+\end{textblock}
+}
+
+\only<4->{
+\begin{textblock}{80}(0,40)
+ \begin{equation*}
+  P(s|r_{\only<4-7>{1}\only<8-9>{2}\only<10-11>{3}}) = \frac{P(r_{\only<4-7>{1}\only<8-9>{2}\only<10-11>{3}}, s)}{P(r_{\only<4-7>{1}\only<8-9>{2}\only<10-11>{3}})}
+ \end{equation*}
+\end{textblock}
+}
+
+
+ \only<5>{
+ \begin{textblock}{80}(0,57)
   \centering
   $P(r,s)$\\ \vspace{0.1cm}
  \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
           & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline 
    $s_2$ & $1/6$ & $0$ & $1/3$     & $1/2$ \\ \hline
-   $s_3$ & $1/6$ & $1/3$ & $0$     & $1/2$ \\ \hline
+   $s_3$ & $1/6$ & $1/3$ & $0$     & $1/2$ \\ \hline \hline
          & $1/3$ &  $1/3$ & $1/3$  & $1$ \\ 
 \end{tabular} 
 \end{textblock}
 }
 
-\begin{textblock}{160}(0,44)
- \begin{equation*}
-  P(r_i|s_2) = \frac{P(r_i, s_2)}{P(s_2)} \onslide<2->{= \frac{\overbrace{P(s_2|r_i)}^{?}P(r_i)}{P(s_2)}}  \ \ \ \ \ \ \ \ \ \  \onslide<3->{P(s_2 | r_i) = \frac{P(r_i, s_2)}{P(r_i)}}
- \end{equation*}
-\end{textblock}
-
-\only<4-10>{
- \begin{textblock}{150}(0,70)
+\only<6->{
+\begin{textblock}{80}(0,57)
   \centering
-  $P(s_2|r_i)$: \ \ \ 
- \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
-          & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{$1/2$} \\ \hline 
-   $s_2$ & \onslide<6->{$1/2$} & \onslide<8->{$0$} & \onslide<10->{$1$} &  \\ \hline
-\end{tabular} 
-\end{textblock}
-}
-
-\only<5->{
-\begin{textblock}{160}(0,16)
-  \centering
-  \only<5>{$P(r_1, s)$}\only<6>{$P(s|r_1)$}\only<7>{$P(r_2, s)$}\only<8>{$P(s|r_2)$}\only<9>{$P(r_3, s)$}\only<10>{$P(s|r_3)$} \\ \vspace{0.1cm}
+  \only<6>{$P(r_1, s)$}\only<7>{$P(s|r_1)$}\only<8>{$P(r_2, s)$}\only<9>{$P(s|r_2)$}\only<10>{$P(r_3, s)$}\only<11>{$P(s|r_3)$} \\ \vspace{0.1cm}
  \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
           & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, &  \phantom{$1/2$} \\ \hline 
-   $s_2$ & \only<5>{$1/6$}\only<6>{\bm{$1/2$}} & \only<7>{$0$}\only<8>{\bm{$0$}} & \only<9>{$1/3$}\only<10>{\bm{$1$}} &  \\ \hline
-   $s_3$ & \only<5>{$1/6$}\only<6>{$1/2$} & \only<7>{$1/3$}\only<8>{$1$} & \only<9-10>{$0$}  &  \\ \hline
-         & \only<5>{$1/3$}\only<6>{$1$} & \only<7>{$1/3$}\only<8>{$1$} & \only<9>{$1/3$}\only<10>{$1$}  &  \\ 
+   \only<7->{\bm}{$s_2$} & \only<6>{$1/6$}\only<7>{\bm{$1/2$}} & \only<8>{$0$}\only<9>{\bm{$0$}} & \only<10>{$1/3$}\only<11>{\bm{$1$}} &  \\ \hline
+   $s_3$ & \only<6>{$1/6$}\only<7>{$1/2$} & \only<8>{$1/3$}\only<9>{$1$} & \only<10-11>{$0$}  &  \\ \hline \hline
+         & \only<6>{$1/3$}\only<7>{$1$} & \only<8>{$1/3$}\only<9>{$1$} & \only<10>{$1/3$}\only<11>{$1$}  &  \\ 
 \end{tabular} 
 \end{textblock}
 }
 
 \end{frame}
 
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \en{Likelihood}
+ \es{Verosimilitud: los caminos del modelo causal}
+ \end{textblock}
+
+ \begin{textblock}{160}(0,18)
+  \centering
+  $P(s_2|r_i)$ \\ \vspace{0.1cm} 
+  \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm} 
+          & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, \\ \hline 
+   $s_2$ & $1/2$ & $0$ & $1$  \\ \hline
+\end{tabular}
+\end{textblock}
+
+\only<2>{
+ \begin{textblock}{160}(0,49)
+ \begin{align*}
+  P(s_2|r_i, M) = \frac{\text{\textbf{Caminos que generan} $\bm{s_2}$ dada la hipótesis $r_i$ y el modelo}}{\text{\textbf{Caminos totales} dada la hipótesis $r_i$ y el modelo }}
+ \end{align*}
+\end{textblock}
+}
  
+\end{frame}
+
+
+
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
  \centering \LARGE 
  \en{Surprise as a filter of prior beliefs}
- \es{La sorpresa como filtro de las creencias previas}
+ \es{La \textbf{sorpresa} como filtro de las creencias previas}
  \end{textblock}
+
+ \begin{textblock}{160}(0,18)
+  \begin{align*}
+   P(r_i|s_2) \propto P(r_i) P(s_2|r_i) 
+  \end{align*}
+ \end{textblock}
+
+ 
+ \only<2>{
+ \begin{textblock}{160}(0,40)
+  \centering
+   \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm} 
+  \phantom{$P(r_i|s_2) \propto$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, \\ \hline 
+   $P(s_2|r_i)$ & $1/2$ & $0$ & $1$  \\ \hline
+   \end{tabular}
+\end{textblock}
+}
+
+ 
+\only<3>{
+ \begin{textblock}{160}(0,40)
+  \centering
+   \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm} 
+       \phantom{$P(r_i|s_2) \propto$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, \\ \hline 
+   $P(s_2|r_i)$ & $1/2$ & $0$ & $1$  \\ \hline
+   $P(r_i)$ & $1/3$ & $1/3$ & $1/3$  \\ \hline
+   \end{tabular}
+\end{textblock}
+}
+
+ 
+\only<4>{
+ \begin{textblock}{160}(0,40)
+  \centering
+  \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm} 
+        \phantom{$P(r_i|s_2) \propto$}  & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, \\ \hline 
+   $P(s_2|r_i)$ & $1/2$ & $0$ & $1$  \\ \hline
+   $P(r_i)$ & $1/3$ & $1/3$ & $1/3$  \\ \hline
+   $P(r_i|s_2) \propto$ & $1/6$ & $0$ & $1/3$  \\ \hline
+\end{tabular}
+\end{textblock}
+}
+ 
+\only<5>{
+ \begin{textblock}{160}(0,40)
+  \centering
+  \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm} 
+         \phantom{$P(r_i|s_2) \propto$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, \\ \hline 
+   $P(s_2|r_i)$ & $1/2$ & $0$ & $1$  \\ \hline
+   $P(r_i)$ & $1/3$ & $1/3$ & $1/3$  \\ \hline
+   $P(r_i|s_2) \propto$ & $1/6$ & $0$ & $1/3$  \\ \hline \hline
+   $P(r_i|s_2) =$ & $1/3$ & $0$ & $2/3$  \\ \hline 
+\end{tabular}
+\end{textblock}
+}
+ 
  
 \end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \es{Posterior}
+ \end{textblock}
+ \vspace{1cm}
+ 
+ \begin{center}
+ $P(r_i|s_2) = $ \Large Creencia inicial no filtrada por la sorpresa
+ \end{center}
+
+\end{frame}
+% 
+% 
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \LARGE 
+%  \es{Sermón}
+%  \end{textblock}
+% 
+% \begin{enumerate}
+%  \item s
+% \end{enumerate}
+% 
+% \end{frame}
+
+
 
  
 \begin{frame}[plain]
