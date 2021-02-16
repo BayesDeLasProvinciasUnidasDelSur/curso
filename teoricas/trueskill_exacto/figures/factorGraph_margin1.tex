@@ -1,0 +1,53 @@
+
+\documentclass[10pt]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\input{../../../aux/tex/tikzlibrarybayesnet.code.tex}
+\input{../../../aux/tex/encabezado.tex}
+\makeatletter
+\newcommand{\vast}{\bBigg@{2.5}}
+\newcommand{\Vast}{\bBigg@{14.5}}
+\makeatother
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\begin{document}
+ 
+ 
+\tikz{ %
+        
+        \node[latent] (x1) {$x_1$} ; %
+        
+        \node[factor, below=of x1,xshift=-1cm] (fA) {} ; 
+        \node[const, left=of fA] () {$f_A$}; %              
+        \node[factor, below=of x1,xshift=1cm] (fC) {} ;
+        \node[const, right=of fC] () {$f_C$}; %
+        %\node[det, left=of fA,xshift=-0.6cm] () {$\sum_{\setminus x_1}$}; %
+        
+        \node[latent, below=of fC,xshift=1cm] (x3) {$x_3$} ; %
+        \node[latent, below=of fC,xshift=-1cm] (x2) {$x_2$} ; %
+        
+        \node[factor, below=of x2,xshift=-1cm] (fB) {} ;
+        \node[const, left=of fB] () {$f_B$}; %
+        \node[factor, below=of x3,xshift=-1cm] (fD) {} ;
+        \node[const, left=of fD] () {$f_D$}; %
+        \node[factor, below=of x3, xshift=1cm] (fE) {} ;
+        \node[const, right=of fE] () {$f_E$}; %
+        %\node[const, left=of fB,xshift=-0.6cm] () {$\sum_{\setminus x_3}$}; %
+           
+        \node[latent, below=of fD] (x4) {$x_4$} ; %
+        \node[latent, below=of fE] (x5) {$x_5$} ; %
+     
+	\edge[-] {x1} {fA,fC};
+        \edge[-] {x2} {fB,fC};
+	\edge[-] {x3} {fC,fD,fE};
+	\edge[-] {x4} {fD};
+	\edge[-] {x5} {fE};
+	
+	\node[invisible, right=of x5, xshift=1.5cm] () {};
+	
+	
+        }
+        
+\end{document}

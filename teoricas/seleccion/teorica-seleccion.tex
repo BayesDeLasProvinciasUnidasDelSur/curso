@@ -1,0 +1,614 @@
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\input{../../aux/tex/diapo_encabezado.tex}
+\input{../../aux/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+ 
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+\newif\ifen
+\newif\ifes
+\newcommand{\en}[1]{\ifen#1\fi}
+\newcommand{\es}[1]{\ifes#1\fi}
+\estrue
+
+%\title[Bayes del Sur]{}
+
+\begin{document}
+
+\color{black!85}
+\large
+
+\begin{frame}[plain,noframenumbering]
+ 
+ \begin{textblock}{90}(00,05)
+\begin{center}
+ \huge  \textcolor{black!66}{Creencias, datos y sorpresas}
+\end{center}
+\end{textblock}
+
+ %\vspace{2cm}brown
+%\maketitle
+\Wider[2cm]{
+\includegraphics[width=1\textwidth]{../../aux/static/peligro_predador}
+}
+\end{frame}
+
+
+\begin{frame}[plain]
+
+\vspace{0.75cm}
+
+ \begin{center}
+  \Large >Cuál es la forma \'optima de actualizar creencias 
+  
+dadas restricciones: modelos y datos?
+ \end{center}
+
+\begin{textblock}{160}(0,86)
+\tiny \centering
+\href{https://doi.org/10.1016/S0888-613X(03)00051-3}{Teorema de Cox}
+\end{textblock}
+
+\end{frame}
+ 
+ 
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \en{Hidden variables and honest reasoning}
+ \es{Creencias y razonamiento \textbf{honesto}}
+ \end{textblock}
+ \vspace{1cm}
+ 
+\begin{center}
+  Regla 2 \\
+\LARGE
+\textbf{Contextualizar las creencias \\ en partes iguales}
+ \end{center}
+
+ \begin{align*}
+ P(r|s_2) = \frac{P(r, s_2)}{P(s_2)}
+ \end{align*} 
+
+ 
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE  Las reglas de la probabilidad
+\end{textblock}
+
+\vspace{1cm}
+
+
+
+\begin{equation*}
+  \text{Marginal}_{i} = \sum_j \text{Conjunta}_{ij}  \ \ \ \ \ \ \ \ \ \ \ \  \text{Condicional}_{j|i} = \frac{\text{Conjunta}_{ij}}{\text{Marginal}_{i}}
+\end{equation*}
+
+\pause
+\vspace{1cm}
+
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+ \centering \textbf{Regla de la suma}
+ 
+ 
+\begin{equation*}
+ P(r) = \sum_j P(r,s_j)
+\end{equation*}
+ 
+ \justifying \footnotesize
+  Cualquier distribución marginal puede ser obtenida integrando la distribución conjunta
+
+ \end{column}
+ \begin{column}{0.5\textwidth}
+\centering  \textbf{Regla del producto}
+
+\begin{equation*}
+ P(r,s) = P(s|r) P(r)
+\end{equation*}
+
+ \justifying \footnotesize
+Cualquier distribución conjunta puede ser expresada como el producto de distribuciones condicionales uni-dimensionles.
+
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE 
+\st{Teorema de Bayes} \\
+\Large El corolario de Laplace
+\end{textblock}
+
+\only<1-4>{
+\begin{textblock}{160}(0,34)
+ \begin{align*}
+  \phantom{P(r_i)} P(r_i|s_2) & = \frac{P(r_i, s_2)}{P(s_2)} \onslide<4>{= \frac{P(s_2|r_i)P(r_i)}{P(s_2)}}
+  \only<2>{\\ P(s_2 | r_i) &= \frac{P(r_i, s_2)}{P(r_i)}}
+  \only<3-4>{\\[0.27cm]P(r_i) P(s_2 | r_i)  &= P(r_i, s_2)}
+ \end{align*}
+\end{textblock}
+}
+
+\only<5>{
+\begin{textblock}{160}(0,34)
+ \begin{align*}
+  \phantom{P(r_i)} P(r_i|s_2) & = \frac{P(s_2|r_i)P(r_i)}{P(s_2)} \phantom{= \frac{P(r_i, s_2)}{P(s_2)} \ }
+  \end{align*}
+\end{textblock}
+}
+
+
+
+\only<6>{
+\begin{textblock}{160}(0,43)
+\begin{equation*}
+P(\text{Hip\'otesis }|\text{ Dato}) = \frac{P(\text{Dato }|\text{ Hip\'otesis}) P(\text{Hip\'otesis})}{P(\text{Dato})}
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<7>{
+\begin{textblock}{160}(0,37.75)
+\begin{equation*}
+\underbrace{P(\text{Hip\'otesis }|\text{ Datos})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos }|\text{ Hip\'otesis})}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis})}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos})}_{\text{\scriptsize Evidencia}}}
+\end{equation*}
+\end{textblock}
+}
+
+\vspace{0.2cm}
+
+\only<8->{  
+%\vspace{0.3cm}
+\Wider[2cm]{
+\begin{textblock}{160}(0,34.25) 
+\begin{equation*}
+\underbrace{P(\text{Hip\'otesis }|\text{ Datos, Modelo})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos }|\text{ Hip\'otesis, Modelo})}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis }|\text{ Modelo})}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos }|\text{ Modelo})}_{\text{\scriptsize Evidencia}}}
+\end{equation*}
+
+\end{textblock}
+
+}
+}
+
+\end{frame}
+
+\begin{frame}[plain]
+
+\vspace{0.75cm}
+
+ \begin{center}
+ \Large ¿Y nuestras creencias respecto de modelos alternativos?  
+ \end{center}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large Modelos \\
+\end{textblock}
+
+\begin{textblock}{160}(16,24) 
+\begin{equation*}
+ P(\text{Modelo}|\text{Datos}) = \frac{\only<1>{P(\text{Datos}|\text{Modelo})\,}\only<2->{\overbrace{P(\text{Datos}|\text{Modelo})}^{\text{Evidencia}}}P(\text{Modelo})}{ P(\text{Datos})} \phantom{\frac{\overbrace{P(\text{Datos}|\text{Modelo})}^{\text{Evidencia}}}{ P(\text{Datos})}}
+\end{equation*}
+\end{textblock}
+
+\only<3>{
+\begin{textblock}{160}(0,50) 
+\begin{equation*}
+ P(\text{Datos}) = \sum_i P(\text{Datos}|\text{Modelo})P(\text{Modelo})
+\end{equation*}
+\end{textblock}
+}
+
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large Evidencia \\
+\end{textblock}
+\only<1>{
+\begin{textblock}{160}(0,30) 
+\begin{align*}
+P(\text{Datos}|\text{Modelo}) & = \sum_{i}^H P(\text{Datos}|\text{Hip\'otesis}_i,\text{Modelo}) P(\text{Hip\'otesis}_i|\text{Modelo}) 
+\end{align*}
+\end{textblock}
+}
+
+\only<2->{
+\begin{textblock}{160}(0,30) 
+\begin{align*}
+P(\text{Datos}|\text{Modelo}) & = \sum_{i}^H P(\text{Datos}|\text{Hip\'otesis}_i,\text{Modelo}) P(\text{Hip\'otesis}_i|\text{Modelo}) \\
+& = P(\text{D}_1|\text{M}) P(\text{D}_2|\text{D}_1, \text{M}) \dots P(\text{D}_N|\text{D}_{N-1} \dots \text{D}_1, \text{M})  
+\end{align*}
+\end{textblock}
+}
+
+
+% \only<7>{
+% \begin{textblock}{128}(0,92)
+% \centering \tiny Sobre comparaci\'on de modelos ver: \href{http://xyala.cap.ed.ac.uk/teaching/tutorials/phylogenetics/Bayesian_Workshop/PDFs/Kass\%20and\%20Raftery\%201995.pdf}{Kass \& Raftery. Bayes factors. 1995.}
+% \end{textblock}
+% }
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Modelos lineales
+\end{textblock}
+ \vspace{1.25cm}
+ 
+\begin{equation*}
+y(\bm{x},\bm{w}) = \sum_{i=0}^{M-1} w_i \phi_i(\bm{x}) = \bm{w}^T \bm{\phi}(\bm{x})
+\end{equation*}
+
+\vspace{0.5cm}
+\pause
+% 
+% \begin{equation*}
+%  t = y(\vm{x},\vm{w}) + \epsilon  \ \ \ \ \  \text{con} \ \ \  \epsilon \sim \N(0,\beta^{-1})
+% \end{equation*}
+ 
+ \begin{equation*}
+p(t \, | \, \bm{x}, \bm{w}, \beta) = \N(t \, | \, y(\bm{x},\bm{w}) , \beta^{-1})
+\end{equation*}
+\vspace{0.025cm}
+\pause
+ 
+\begin{equation*}
+P(\bm{t} | \bm{x}, \bm{w}, \beta) = \prod_{i=1}^n \N(t_i | \bm{w}^T \bm{\phi}(\bm{x}_i) , \beta^{-1}) = \N(\bm{t}|\bm{w}^T \bm{\Phi}, \beta^{-1} \vm{I})
+\end{equation*}
+\vspace{0.05cm}
+\pause
+
+\begin{equation*}
+ \bm{\Phi} =
+  \begin{pmatrix}
+    \phi_0(\bm{x}_1) & \phi_1(\bm{x}_1) & \dots & \phi_{M-1}(\bm{x}_1)\\
+    \vdots & \vdots & \ddots & \vdots \\
+    \phi_0(\bm{x}_N) & \phi_1(\bm{x}_N) & \dots & \phi_{M-1}(\bm{x}_N)
+  \end{pmatrix}
+  = 
+  \begin{pmatrix}
+   \bm{\phi}(\vm{x}_1)^T \\
+   \vdots \\
+   \bm{\phi}(\vm{x}_N)^T \\
+  \end{pmatrix}
+\end{equation*}
+
+ 
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large Solución fecuentista
+\end{textblock}
+\vspace{1.25cm}
+
+
+\begin{equation*}
+ \underset{\bm{w}}{\text{ max }} P(\bm{t} | \bm{x}, \bm{w}, \beta) = \underset{\bm{w}}{\text{ min }} \sum_{i=1}^{n}  (t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2 
+\end{equation*}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \Large \centering Soluci\'on completa
+\end{textblock}
+ \vspace{1cm}
+
+\begin{equation*}
+ p(\vm{w}) = N(\vm{w}| \vm{0}, \alpha^{-1} \vm{I})
+\end{equation*}
+ 
+\begin{figure}[H]
+    \centering
+    \tikz{
+
+    \node[latent, fill=black!100, minimum size=2pt] (x) {} ; %
+    \node[const, right=of x] (c_x) {$\vm{X}$};
+    \node[latent, fill=black!20, yshift=-1.5cm] (t) {$\bm{t}$} ; %
+    \node[latent, fill=black!100, yshift=-1.5cm , xshift=-2cm,minimum size=2pt] (beta)
+    {} ; %
+    \node[const, above=of beta] (c_beta) {$\beta$};
+    \node[latent, fill=black!0, yshift=-1.5cm, xshift=2cm] (w) {$\vm{w}$};
+    \node[latent, fill=black!100, xshift=2cm, minimum size=2pt] (alpha) {} ; %
+    \node[const, right=of alpha] (c_alpha) {$\alpha$};
+    
+    \edge {x,beta,w} {t};
+    \edge {alpha} {w};
+    
+    \node[invisible, fill=black!0, minimum size=0pt, xshift=-0.52cm] (data_inv) {} ; %
+      
+    }  
+\end{figure}
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \Large \centering Soluci\'on completa
+\end{textblock}
+ \vspace{0.75cm}
+
+
+
+ La distribuci\'on \textbf{posteriori} sobre $\vm{w}$ tiene como media
+
+\begin{equation}
+ \vm{m}_N = \beta  \vm{S}_N\vm{\Phi}^T \vm{t}
+\end{equation}
+
+y como covarianzas
+
+\begin{equation}
+ \vm{S}_N^{-1} = \alpha \vm{I} + \beta \vm{\Phi}^T\vm{\Phi}
+\end{equation}
+
+\pause
+
+
+Y la \textbf{evidencia} del modelo es
+
+\begin{equation}
+ P(t) = \N(\bm{t}| \vm{0}, \beta^{-1} \vm{I} + \alpha^{-1}\bm{\Phi}\bm{\Phi}^T  )
+\end{equation}
+
+\vspace{0.75cm}
+
+\small
+\Wider[-8cm]{
+\begin{mdframed}[backgroundcolor=black!15]\centering
+ Cap\'itulo 2 de Bishop
+\end{mdframed}
+}
+
+\end{frame}
+
+% 
+% \begin{frame}
+% \begin{textblock}{128}(0,8)
+% \begin{center}
+%  \normalsize Propiedades importantes para la vida
+% \end{center}
+% \end{textblock}
+% \vspace{0.75cm}
+% 
+% \tiny
+% 
+% Dadas las distribuciones
+% \begin{align*}
+%     P(\vm{x}) &=  \N(\vm{x}|\bm{\mu},\bm{\Lambda}^{-1}) \\
+%    P(\vm{y}|\vm{x}) &=  \N(\vm{y}|\vm{A}\vm{x}+\vm{b},\vm{L}^{-1})    
+% \end{align*}
+% 
+% 
+%  Luego,  
+% \begin{align*}
+%     P(\vm{y}) &=  \N(\vm{y}|\vm{A}\bm{\mu}+\vm{b},\, \vm{L}^{-1} + \vm{A}\vm{\Lambda}^{-1}\vm{A}^T) \\
+%    P(\vm{x}|\vm{y}) &=  \N(\vm{x}|\vm{\Sigma}[\vm{A}^T \vm{L}(\vm{y}-\vm{b})+ \bm{\Lambda\mu}],\,  \vm{\Sigma})\label{eq:post}
+% \end{align*}
+% 
+% donde, 
+% \begin{equation*}
+%  \vm{\Sigma} = (\vm{\Lambda} + \vm{A}^T \vm{LA} )^{-1}
+% \end{equation*}
+% 
+% \vspace{0.3cm}
+% 
+% \small
+% \begin{mdframed}[backgroundcolor=black!15]\centering
+%  Leer cap\'itulo 2 de Bishop y/o anexo de la pr\'actica
+% \end{mdframed}
+% 
+% \end{frame}
+
+
+\begin{frame}[plain]
+
+\Wider[-3cm]{
+ \begin{figure}
+\begin{subfigure}[t]{0.32\textwidth} 
+\caption*{Verosimilitud} 
+\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}
+\caption*{Priori/Posteriori} 
+\includegraphics[width=\textwidth]{figures/pdf/linearRegression_posterior_0.pdf} 
+\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}
+\caption*{Data space} 
+\includegraphics[width=\textwidth]{figures/pdf/linearRegression_dataSpace_0.pdf} 
+\end{subfigure}
+
+
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<2->{\includegraphics[width=\textwidth]{figures/pdf/linearRegression_likelihood_1.pdf}}
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<3->{\includegraphics[width=\textwidth]{figures/pdf/linearRegression_posterior_1.pdf}}
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<4->{\includegraphics[width=\textwidth]{figures/pdf/linearRegression_dataSpace_1.pdf}}
+\end{subfigure}
+
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<5->{\includegraphics[width=\textwidth]{figures/pdf/linearRegression_likelihood_2.pdf}}
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<6->{\includegraphics[width=\textwidth]{figures/pdf/linearRegression_posterior_2.pdf}}
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<7->{\includegraphics[width=\textwidth]{figures/pdf/linearRegression_dataSpace_2.pdf}}
+\end{subfigure}
+
+\end{figure}
+}
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering  \Large Regresi\'on lineal Bayesiana
+\end{textblock}
+
+
+\begin{textblock}{80}(0,20)
+ \centering
+ \onslide<1->{Funci\'on objetivo}
+\end{textblock}
+
+\begin{textblock}{80}(80,20)
+ \centering
+ \onslide<2>{Modelos polinomiales}
+\end{textblock}
+
+\begin{textblock}{160}(0,26)
+     \centering 
+       \onslide<1->{\includegraphics[width=0.45\textwidth]{figures/pdf/model_selection_true_and_sample} }
+       \onslide<2>{\includegraphics[width=0.45\textwidth]{figures/pdf/model_selection_MAP} }
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large Evidencia vs Verosimilitud
+\end{textblock}
+
+
+\begin{textblock}{80}(0,22)
+ \centering
+Evidencia conjunta
+\end{textblock}
+
+\begin{textblock}{80}(80,22)
+ \centering
+ M\'axima verosimilitud
+\end{textblock}
+
+
+\begin{textblock}{160}(0,24)
+     \centering 
+       \begin{figure}[H]     
+     \centering 
+     \begin{subfigure}[b]{0.47\textwidth}
+       \includegraphics[width=1\textwidth]{figures/pdf/model_selection_evidence}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.49\textwidth}
+       \includegraphics[width=1\textwidth]{figures/pdf/model_selection_maxLikelihood}
+     \end{subfigure}
+\end{figure}
+\end{textblock}
+
+
+\end{frame}
+
+
+
+% \begin{frame}
+%  \begin{textblock}{108}(10,08)
+%  \begin{center}
+%   \large Evidencia
+%  \end{center}
+% \end{textblock}
+% 
+% \begin{textblock}{108}(10,22)
+% \begin{align*}
+%  P(\text{C}|\text{D},\text{M}) = \frac{P(\text{D}|\text{C},\text{M})P(\text{C}|\text{M})}{\underbrace{P(\text{D}|\text{M})}_{\text{Evidencia}}}
+% \end{align*}
+% \end{textblock}
+% 
+% 
+% 
+% \only<2>{
+% \begin{textblock}{108}(10,44)
+% \begin{align*}
+%  P(\text{D}|\text{M}) = \sum_C P(\text{D}|\text{C},\text{M})\, P(\text{C}|\text{M})
+% \end{align*}
+% \end{textblock}
+% 
+% }
+% 
+% 
+% \only<3>{
+% \begin{textblock}{108}(10,44)
+% \begin{align*}
+%  P(\text{D}|\text{M}) = \sum_C \underbrace{P(\text{D}|\text{C},\text{M})}_{\hfrac{\text{\tiny Predicci\'on}}{\text{\tiny de D dado C}}}\underbrace{P(\text{C}|\text{M})}_{\hfrac{\text{\tiny Creencia de}}{\text{\tiny C a Priori}}} %\text{La predicci\'on de los datos observados a partir de las creencias a priori}
+% \end{align*}
+% \end{textblock}
+% 
+% }
+% 
+% \only<4->{
+% \begin{textblock}{108}(10,44)
+% \begin{align*}
+%  P(\text{D}|\text{M}) = \underbrace{ \sum_C \underbrace{P(\text{D}|\text{C},\text{M})}_{\hfrac{\text{\tiny Predicci\'on}}{\text{\tiny de D dado C}}}\underbrace{P(\text{C}|\text{M})}_{\hfrac{\text{\tiny Creencia de}}{\text{\tiny C a Priori}}}}_{\hfrac{\text{\tiny Predicci\'on de la datos observados}}{\text{\tiny pesando todas las creencias a priori}}}
+% \end{align*}
+% \end{textblock}
+% }
+% 
+% 
+% 
+% 
+% \end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large  Evidencia
+\end{textblock}
+
+
+ \begin{textblock}{120}(20,14)
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/pdf/evidencia_de_modelos_alternativos} 
+ \end{textblock} 
+ 
+ 
+ \begin{textblock}{100}(30,83)
+  \centering
+ \ \ \ \  Balance natural entre complejidad y predicci\'on
+  \end{textblock}
+\end{frame}
+
+
+\begin{frame}[plain]
+
+\centering
+  \includegraphics[width=0.55\textwidth]{../../aux/static/pachacuteckoricancha.jpg}
+\end{frame}
+
+
+
+
+
+\end{document}
+
+
+

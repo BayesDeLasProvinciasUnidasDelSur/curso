@@ -1,0 +1,974 @@
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\input{../../aux/tex/diapo_encabezado.tex}
+\input{../../aux/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+ 
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+\newif\ifen
+\newif\ifes
+\newcommand{\en}[1]{\ifen#1\fi}
+\newcommand{\es}[1]{\ifes#1\fi}
+\estrue
+
+%\title[Bayes del Sur]{}
+
+\begin{document}
+
+\color{black!85}
+\large
+ 
+%\setbeamercolor{background canvas}{bg=gray!15}
+
+
+\begin{frame}[plain,noframenumbering]
+ 
+ \begin{textblock}{90}(00,05)
+\begin{center}
+ \huge  \textcolor{black!66}{Creencias adaptativas}
+\end{center}
+
+\begin{textblock}{47}(113,72)
+\centering \Large  \textcolor{white!55}{TrueSkill} \ \ \ \ \ \
+\end{textblock}
+\begin{textblock}{47}(113,76)
+\centering \Large \ \ \ \ \ \textcolor{white!55}{exacto}
+\end{textblock}
+
+\end{textblock}
+
+ %\vspace{2cm}brown
+%\maketitle
+\Wider[2cm]{
+\includegraphics[width=1\textwidth]{../../aux/static/peligro_predador}
+}
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Las reglas de la probabilidad
+\end{textblock}
+
+
+\vspace{0.75cm}
+
+
+
+\begin{equation*}
+  \text{Marginal}_{i} = \sum_j \text{Conjunta}_{ij}  \ \ \ \ \ \ \ \ \ \ \ \  \text{Condicional}_{j|i} = \frac{\text{Conjunta}_{ij}}{\text{Marginal}_{i}}
+\end{equation*}
+
+\pause
+\vspace{0.75cm}
+
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+ \centering \textbf{Regla de la suma}
+ 
+ 
+\begin{equation*}
+ P(X) = \sum_Y P(X,Y)
+\end{equation*}
+ 
+ \justifying \footnotesize
+  Cualquier distribución marginal puede ser obtenida integrando la distribución conjunta
+
+ \end{column}
+ \begin{column}{0.5\textwidth}
+\centering  \textbf{Regla del producto}
+
+\begin{equation*}
+ P(X,Y) = P(Y|X) P(X)
+\end{equation*}
+
+ \justifying \footnotesize
+Cualquier distribución conjunta puede ser expresada como el producto de distribuciones condicionales uni-dimensionles.
+
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large
+ Sum-product algorithm
+\end{textblock}
+
+\only<1->{
+\begin{textblock}{80}(45,30)
+\begin{description}
+ \item[$m_{x \rightarrow f}(x)$ :] Mensaje de variable $x$ a factor $f$ 
+ \item[$m_{f \rightarrow x}(x)$ :] Mensaje factor $f$ a variable $x$
+ \item[$n(v)$ :] Conjunto de nodos vecinos del nodo $v$
+\end{description}
+\end{textblock}
+}
+
+\only<1->{
+\begin{textblock}{80}(45,16)
+\begin{equation*}
+P(x) = \prod_{h \in n(x)} m_{h \rightarrow x} 
+\end{equation*} 
+\end{textblock}
+}
+
+\only<2->{
+\begin{textblock}{80}(45,56)
+\begin{equation*}\label{eq:m_v_f}
+m_{x \rightarrow f}(x) = \prod_{h \in n(x) \setminus \{f\} } m_{h \rightarrow x}(x) 
+\end{equation*}
+\end{textblock}
+}
+
+\only<3->{
+\begin{textblock}{80}(45,68)
+\begin{equation*}\label{eq:m_f_v}
+ m_{f \rightarrow x}(x) = \sum_{X\setminus \{x\} } \Big( f(X) \prod_{h \in n(f) \setminus \{x\} } m_{h \rightarrow f}(h) \Big) 
+\end{equation*}
+\end{textblock}
+}
+
+\only<1->{
+\begin{textblock}{45}(5,10)
+\centering
+\begin{figure}[H]
+\centering
+  \scalebox{.8}{
+\tikz{ %
+        
+        
+        \node[det, fill=black!10] (r) {$r_{ab}$} ; %
+        
+        \node[factor, above=of r] (fr) {} ;
+        \node[const, right=of fr] (dfr) {\large $f_r$}; 
+        \node[latent, above=of fr, xshift=-0.8cm] (p1) {$p_a$} ; %
+        \node[latent, above=of fr, xshift=0.8cm] (p2) {$p_b$} ; %
+        
+        \node[factor, above=of p1] (fp1) {} ;
+        \node[factor, above=of p2] (fp2) {} ;
+        \node[const, right=of fp2] (dp) {\large $f_p$};
+        
+        
+        \node[latent, above=of fp1] (s1) {$s_a$} ; %
+        \node[latent, above=of fp2] (s2) {$s_b$} ; %        
+        
+        \node[factor, above=of s1] (fs1) {} ;
+        \node[factor, above=of s2] (fs2) {} ;                        \node[const, right=of fs2] (ds) {\large $f_s$};
+
+        
+        
+        \node[invisible, right=of s2, xshift=1.5cm] (s-dist) {};
+        
+        \edge[-] {fr} {r};
+        \edge[-] {p1} {fr};
+        \edge[-] {p2} {fr};
+        \edge[-] {fp1} {p1};
+        \edge[-] {fp2} {p2};
+        \edge[-] {s1} {fp1};
+        \edge[-] {s2} {fp2};
+        \edge[-] {fs1} {s1};
+        \edge[-] {fs2} {s2};
+        } 
+}   
+\end{figure}
+\end{textblock}
+}
+
+% % 
+\only<4>{
+\begin{textblock}{160}(0,87)
+\centering \tiny
+\href{https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=910572}{Kschischang FR, Frey BJ, Loeliger HA. Factor graphs and the sum-product algorithm. 2001}
+\end{textblock}
+}
+
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large TrueSkill
+\end{textblock}
+
+\vspace{1cm}
+\Wider[2cm]{
+\begin{figure}[h!]
+  \centering
+  \scalebox{.8}{
+  \tikz{
+      
+        \node[factor] (fr) {} ;
+        \node[const, right=of fr] (nfr) {$f_{r}$}; %
+	
+	\node[latent, above=of fr, yshift=-0.4cm] (d) {$d$} ; %
+        \node[factor, above=of d, yshift=-0.4cm] (fd) {} ;
+        \node[const, above=of fd] (nfd) {$f_{d}$}; %
+	
+        
+        \node[latent, left=of fd,xshift=0.4cm] (ta) {$t_a$} ; %
+        \node[factor, left=of ta,xshift=0.4cm] (fta) {} ;
+        \node[const, above=of fta] (nfta) {$f_{t_a}$}; %
+        
+        \node[latent, left=of fta,yshift=1cm,xshift=0.4cm] (p1) {$p_1$} ; %
+        \node[factor, left=of p1,xshift=0.4cm] (fp1) {} ;
+        \node[const, above=of fp1] (nfp1) {$f_{p_1}$}; %
+        
+        \node[latent, left=of fp1,xshift=0.4cm] (s1) {$s_1$} ; %
+        \node[factor, left=of s1,xshift=0.4cm] (fs1) {} ;
+	\node[const, above=of fs1] (nfs1) {$f_{s_1}$}; %
+     
+        \node[latent, left=of fta,yshift=-1cm,xshift=0.4cm] (p2) {$p_2$} ; %
+        \node[factor, left=of p2,xshift=0.4cm] (fp2) {} ;
+        \node[const, above=of fp2] (nfp2) {$f_{p_2}$}; %
+        
+        \node[latent, left=of fp2,xshift=0.4cm] (s2) {$s_2$} ; %
+        \node[factor, left=of s2,xshift=0.4cm] (fs2) {} ;
+	\node[const, above=of fs2] (nfs2) {$f_{s_2}$}; %
+        
+            
+        \node[latent, right=of fd,xshift=-0.4cm] (tb) {$t_b$} ; %
+        \node[factor, right=of tb,xshift=-0.4cm] (ftb) {} ;
+        \node[const, above=of ftb] (nftb) {$f_{t_b}$}; %
+        
+        \node[latent, right=of ftb,yshift=1cm,xshift=-0.4cm] (p3) {$p_3$} ; %
+        \node[factor, right=of p3,xshift=-0.4cm] (fp3) {} ;
+        \node[const, above=of fp3] (nfp3) {$f_{p_3}$}; %
+        
+        \node[latent, right=of fp3,xshift=-0.4cm] (s3) {$s_3$} ; %
+        \node[factor, right=of s3,xshift=-0.4cm] (fs3) {} ;
+	\node[const, above=of fs3] (nfs3) {$f_{s_3}$}; %
+     
+        \node[latent, right=of ftb,yshift=-1cm,xshift=-0.5cm] (p4) {$p_4$} ; %
+        \node[factor, right=of p4,xshift=-0.4cm] (fp4) {} ;
+        \node[const, above=of fp4] (nfp4) {$f_{p_4}$}; %
+        
+        \node[latent, right=of fp4,xshift=-0.4cm] (s4) {$s_4$} ; %
+        \node[factor, right=of s4,xshift=-0.4cm] (fs4) {} ;
+	\node[const, above=of fs4] (nfs4) {$f_{s_4}$}; %
+     
+        \edge[-] {fr} {d};
+	\edge[-] {d} {fd};
+	
+        \edge[-] {fd} {ta};
+        \edge[-] {ta} {fta};
+        \edge[-] {fta} {p1};
+        \edge[-] {p1} {fp1};
+        \edge[-] {fp1} {s1};
+        \edge[-] {s1} {fs1};
+        \edge[-] {fta} {p2};
+        \edge[-] {p2} {fp2};
+        \edge[-] {fp2} {s2};
+        \edge[-] {s2} {fs2};
+        	
+	\edge[-] {fd} {tb};
+        \edge[-] {tb} {ftb};
+        \edge[-] {ftb} {p3};
+        \edge[-] {p3} {fp3};
+        \edge[-] {fp3} {s3};
+        \edge[-] {s3} {fs3};
+        \edge[-] {ftb} {p4};
+        \edge[-] {p4} {fp4};
+        \edge[-] {fp4} {s4};
+        \edge[-] {s4} {fs4};
+        
+	
+	\node[const, below=of fr,xshift=8cm,yshift=-0.3cm] (dfr) { $f_r = \mathbb{I}(d>0)$}; %
+	\node[const, left=of dfr,xshift=-0.5cm] (dfd) {$f_d = \mathbb{I}(d=t_a - t_b)$}; %
+	\node[const, left=of dfd,xshift=-0.5cm] (dft) {$f_{t_e} = \mathbb{I}(t_e = \sum_{i \in A_e} p_i)$}; %
+        \node[const, left=of dft,xshift=-0.5cm] (dfp) {$f_{p_i} = \N(p_i|s_i,\beta^2)$}; %
+        \node[const, left=of dfp,xshift=-0.5cm] (dfs) {$f_{s_i} = \N(s_i|\mu_i,\sigma^2)$}; %
+   }
+   }
+\end{figure}
+}
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large Propiedades 
+\end{textblock}
+
+\footnotesize
+
+\only<1->{
+\begin{textblock}{160}(0,15)
+\begin{equation*}\label{eq:simetria}
+ \N(x|\mu,\sigma^2) = \N(\mu|x,\sigma^2) = \N(-\mu|-x,\sigma^2) = \N(-x|-\mu,\sigma^2) 
+\end{equation*}
+\end{textblock}
+}
+
+\only<2->{
+\begin{textblock}{160}(0,30)
+\begin{equation*}\label{eq:estandarizar}
+ \N(x|\mu,\sigma^2) = \N( \frac{X-\mu}{\sigma} | 0,1)
+\end{equation*}
+\end{textblock}
+}
+
+\only<3->{
+\begin{textblock}{160}(0,45)
+\begin{equation*}\label{eq:phi_norm}
+ \frac{\partial}{\partial x} \Phi(x|\mu,\sigma^2) = \N(x|\mu,\sigma^2)
+\end{equation*}
+\end{textblock}
+}
+
+\only<4->{
+\begin{textblock}{160}(0,60)
+\begin{equation*}\label{eq:integral_con_indicadora}
+  \iint_{-\infty}^{\infty}  \mathbb{I}(x=h(y,z)) \, f(x) \,  g(y)\, dx\, dy 
+ = \int_{-\infty}^{\infty} f(h(y,z)) \, g(y) \, dy 
+\end{equation*}
+
+\end{textblock}
+}
+
+
+\only<5>{
+\begin{textblock}{160}(0,75)
+\begin{equation*}\label{eq:multiplicacion_normales}
+ \int_{-\infty}^{\infty} N(x|\mu_x,\sigma_x^2)N(x|\mu_y,\sigma_y^2) \, dx  \overset{*}{=} \int_{-\infty}^{\infty}  \underbrace{N(\mu_x|\mu_y,\sigma_x^2+\sigma_y^2)}_{\text{constante}} \underbrace{ N(x|\mu_{*},\sigma_{*}^2) dx}_{\text{integra } 1} 
+\end{equation*}
+\end{textblock}
+}
+
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering  \large $m_{f_{s} \rightarrow s}(s)$
+\end{textblock}
+
+\only<1->{
+\begin{textblock}{120}(20,10)
+
+\centering
+  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fs_s} 
+\end{textblock}
+
+}
+
+\begin{textblock}{140}(10,50)
+  \begin{flalign*}
+ m_{f_{s_i} \rightarrow s_i}(s_i)  & = \onslide<2>{\N(s_i| \mu_i, \sigma_i^2)}\phantom{\int}  &&
+\end{flalign*}
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering $m_{s \rightarrow f_p}(s)$
+\end{textblock}
+
+\only<1->{
+\begin{textblock}{120}(20,10)
+\centering
+  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_s_fp} 
+\end{textblock}
+}
+
+\begin{textblock}{140}(10,50)
+  \begin{flalign*}
+ m_{s_i \rightarrow f_{p_i}}(s_i) & = \onslide<2>{\N(s_i| \mu_i, \sigma_i^2)}\phantom{\int} &&
+\end{flalign*}
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \large $m_{f_p \rightarrow p}(p)$
+\end{textblock}
+
+\only<1->{
+\begin{textblock}{120}(20,10)
+\centering
+  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fp_p}   
+\end{textblock}
+}
+
+\only<1->{
+\begin{textblock}{140}(10,50)
+  \begin{flalign*}
+ m_{f_{p_i} \rightarrow p_i}(p_i) & = \onslide<3->{\int \N(p_i|s_i,\beta^2)\, \N(s_i|\mu_i, \sigma_i^2) \, ds_i} \onslide<4->{ = \int \N(s_i|p_i,\beta^2)\, \N(s_i|\mu_i, \sigma_i^2) \, ds_i } \\
+  \onslide<5->{ & = \int \underbrace{\N(p_i|\mu_i,\beta^2+\sigma_i^2)}_{\text{const.}} \underbrace{ \N(s_i|\mu_{*},\sigma_{*}^2) \, ds_i}_{1} } 
+  \onslide<6>{ = \N(p_i|\mu_i,\beta^2+\sigma_i^2)} &&
+\end{flalign*}
+\end{textblock}
+
+}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \large $m_{p \rightarrow f_t}(p)$
+\end{textblock}
+
+\only<1->{
+\begin{textblock}{120}(20,10)
+\centering
+  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_p_ft}   
+\end{textblock}
+}
+
+\only<1->{
+\begin{textblock}{140}(10,50)
+  \begin{flalign*}
+ m_{p_i \rightarrow f_{t_e}}(p_i) & = \onslide<2->{\N(p_i|\mu_i, \beta^2 + \sigma_i^2)} \phantom{\int}  &&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \large $m_{f_t \rightarrow t}(t)$
+\end{textblock}
+
+\only<1->{
+\begin{textblock}{120}(20,10)
+\centering
+  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_ft_t} 
+\end{textblock}
+}
+
+\only<1-4>{
+\begin{textblock}{140}(10,50)
+  \begin{flalign*}
+ m_{f_{t_e} \rightarrow t_e}(t_e) & = \onslide<2->{\iint \mathbb{I}(t_e = p_i + p_j) \N(p_i|\mu_i,\beta^2 + \sigma_i^2) \N(p_j|\mu_j,\beta^2 + \sigma_j^2) dp_idp_j \\}
+  \onslide<3->{& = \int \N(p_i|\mu_i,\beta^2 + \sigma_i^2) \N(t_e - p_i|\mu_j,\beta^2 + \sigma_j^2) dp_i   \\}
+  \onslide<4>{& = \int \underbrace{\N(t_e|\, \mu_i+\mu_j\,,\,2\beta^2 + \sigma_i^2 + \sigma_j^2\,)}_{\text{const.}} \underbrace{\N(p_i|\mu_{*},\sigma_{*}^2) dp_i}_{1} \\ }
+    &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<5>{
+\begin{textblock}{140}(10,50)
+  \begin{flalign*}
+ m_{f_{t_e} \rightarrow t_e}(t_e) & = \onslide<2->{\iint \mathbb{I}(t_e = p_i + p_j) \N(p_i|\mu_i,\beta^2 + \sigma_i^2) \N(p_j|\mu_j,\beta^2 + \sigma_j^2) dp_idp_j \\}
+  \onslide<3->{& = \int \N(p_i|\mu_i,\beta^2 + \sigma_i^2) \N(t_e - p_i|\mu_j,\beta^2 + \sigma_j^2) dp_i   \\}
+  \onslide<5->{& = \phantom{\int} \N(t_e|\, \mu_i+\mu_j\,,\,2\beta^2 + \sigma_i^2 + \sigma_j^2\,) \phantom{\int} \\}
+    &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<6>{
+\begin{textblock}{140}(10,50)
+  \begin{flalign*}
+ m_{f_{t_e} \rightarrow t_e}(t_e) & = \onslide<2->{\iint \mathbb{I}(t_e = p_i + p_j) \N(p_i|\mu_i,\beta^2 + \sigma_i^2) \N(p_j|\mu_j,\beta^2 + \sigma_j^2) dp_idp_j \\}
+  \onslide<3->{& = \int \N(p_i|\mu_i,\beta^2 + \sigma_i^2) \N(t_e - p_i|\mu_j,\beta^2 + \sigma_j^2) dp_i   \\}
+  \onslide<5->{& = \phantom{\int} \N(t_e|\underbrace{\mu_i+\mu_j}_{\mu_e}\,, \, \underbrace{2\beta^2 + \sigma_i^2 + \sigma_j^2}_{\sigma_e^2} \,) \phantom{\int} \\}
+    &&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering $m_{f_d\rightarrow d}(d)$
+\end{textblock}
+
+\only<1->{
+\begin{textblock}{120}(20,10)
+\centering
+  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fd_d} 
+\end{textblock}
+}
+
+\only<1-3>{
+\begin{textblock}{140}(10,50)
+  \begin{flalign*}
+ m_{f_d \rightarrow d}(d) & = \onslide<2->{\iint \mathbb{I}(d= t_a - t_b) \N(t_a | \mu_a, \sigma_a^2) \N(t_b | \mu_b, \sigma_b^2) \, dt_a dt_b \\}
+ & \onslide<3>{ = \int \N(d + t_b | \mu_a, \sigma_a^2) \N(t_b | \mu_b, \sigma_b^2) \, dt_b }&&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<4-5>{
+\begin{textblock}{140}(10,50)
+  \begin{flalign*}
+ m_{f_d \rightarrow d}(d) & = \, \iint \mathbb{I}(d= t_a - t_b) \N(t_a | \mu_a, \sigma_a^2) \N(t_b | \mu_b, \sigma_b^2) \, dt_a dt_b \\
+ &  = \int \N( t_b | \mu_a - d , \sigma_a^2) \N(t_b | \mu_b, \sigma_b^2) \, dt_b \\
+ & \onslide<5>{= \int \underbrace{\N(d|\mu_a -\mu_b, \sigma_a^2 + \sigma_b^2)}_{\text{const.}} \, \underbrace{\N(t_b|\mu_{*},\sigma_{*}^2) \, dt_b}_{1} } &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<6>{
+\begin{textblock}{140}(10,50)
+  \begin{flalign*}
+ m_{f_d \rightarrow d}(d) & = \, \iint \mathbb{I}(d= t_a - t_b) \N(t_a | \mu_a, \sigma_a^2) \N(t_b | \mu_b, \sigma_b^2) \, dt_a dt_b \\
+ &  = \int \N( t_b | \mu_a - d , \sigma_a^2) \N(t_b | \mu_b, \sigma_b^2) \, dt_b \\
+ & = \phantom{\int} \N(d|\, \mu_a -\mu_b, \sigma_a^2 + \sigma_b^2)  &&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\only<7->{
+\begin{textblock}{140}(10,50)
+  \begin{flalign*}
+ m_{f_d \rightarrow d}(d) & = \, \iint \mathbb{I}(d= t_a - t_b) \N(t_a | \mu_a, \sigma_a^2) \N(t_b | \mu_b, \sigma_b^2) \, dt_a dt_b \\
+ &  = \int \N( t_b | \mu_a - d , \sigma_a^2) \N(t_b | \mu_b, \sigma_b^2) \, dt_b \\
+ & = \phantom{\int} \N(d|\underbrace{\mu_a -\mu_b}_{\hfrac{\text{Diferencia}}{\text{esperada}} \delta }, \underbrace{\sigma_a^2 + \sigma_b^2}_{\hfrac{\text{Varianza}}{\text{total}} \, \vartheta } ) \onslide<8>{ = \N(d| \delta, \vartheta^2)} &&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\end{frame}
+% 
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering $m_{d\rightarrow f_r}(d)$
+% \end{textblock}
+% 
+% \only<1->{
+% \begin{textblock}{120}(20,10)
+% \centering
+%   \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_d_fr} 
+% \end{textblock}
+% }
+% 
+% \only<1-2>{
+% \begin{textblock}{140}(10,50)
+%   \begin{flalign*}
+%  m_{t_e \rightarrow f_{d}}(t_e) & = \onslide<2>{N(d|\delta,\vartheta^2)} \color{white}\int  &&
+% \end{flalign*}
+% \end{textblock}
+% }
+% 
+% \end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering $m_{f_r\rightarrow r}(r)$
+\end{textblock}
+
+\only<1->{
+\begin{textblock}{120}(20,10)
+\centering
+  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fr_r} 
+\end{textblock}
+}
+
+\only<1->{
+\begin{textblock}{140}(10,50)
+  \begin{flalign*}
+ m_{f_r \rightarrow r}(r) & = \onslide<2->{ \int \mathbb{I}(d>0) \N(d|\delta,\vartheta^2) \, dd} \\
+ \onslide<3->{& = \int_0^\infty \N(d|\delta,\vartheta^2) \, dd } \\
+ \onslide<4->{& = 1 - \Phi(0 | \delta, \vartheta^2)} \onslide<6->{ = \Phi\Big(\frac{\delta}{\vartheta}\Big)} &&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+ \centering \Large Evidencia
+\end{textblock}
+\vspace{1.75cm}
+
+\Wider[2cm]{
+\begin{align*}
+P(\text{Resultado}| \text{Modelo}) & = 1 - \Phi\Big(0 \, | \, \underbrace{(\mu_1 + \mu_2) - (\mu_3 + \mu_4)}_{\text{\normalsize Diferencia esperada: $\delta$}} \, , \, \underbrace{4\beta^2 + \sigma_1^2  + \sigma_2^2  + \sigma_3^2  + \sigma_4^2}_{\text{\normalsize incertidumbre total: $\vartheta^2$}}\Big)
+\end{align*}
+}
+
+\vspace{1cm}
+
+\centering
+ \includegraphics[width=0.50\textwidth]{figures/evidence} 
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+ 
+ \centering \Large
+
+ Mensajes ascendentes
+ 
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{108}(10,8)
+\begin{center}
+ \large $m_{f_r\rightarrow d}(d)$
+\end{center}
+\end{textblock}
+\only<1->{
+\begin{textblock}{108}(10,18)
+\centering
+  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fr_d} 
+\end{textblock}
+}
+
+\only<1->{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+   & m_{f_r\rightarrow d}(d) = \onslide<2>{\mathbb{I}(d>0)}  \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{108}(10,8)
+\begin{center}
+ \large $m_{f_d\rightarrow t_a}(t_a)$
+\end{center}
+\end{textblock}
+\only<1->{
+\begin{textblock}{108}(10,18)
+\centering
+  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fd_ta} 
+\end{textblock}
+}
+
+\only<1-2>{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+    m_{f_d\rightarrow t_a}(t_a) &= \onslide<2->{\iint \mathbb{I}(d=t_a-t_b) \mathbb{I}(d>0) N(t_b|\mu_b,\sigma_b^2) \, dt_b  \, dd } \\
+   \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+\only<3->{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+    m_{f_d\rightarrow t_a}(t_a) &= \int \mathbb{I}(t_a>t_b) N(t_b|\mu_b,\sigma_b^2) \, dt_b  \, dd  \\
+    \onslide<5->{&= \Phi(t_a| \mu_b, \sigma_b^2)}
+    \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+
+\only<4->{
+\begin{textblock}{48}(80,46)
+ \includegraphics[width=0.9\textwidth]{figures/m_d_ta} 
+\end{textblock}
+}
+
+
+
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{108}(10,8)
+\begin{center}
+ \large $m_{f_t \rightarrow p}(p)$
+\end{center}
+\end{textblock}
+\only<1->{
+\begin{textblock}{108}(10,18)
+\centering
+  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_ft_p} 
+\end{textblock}
+}
+
+\only<1-2>{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+    m_{f_{t_a}\rightarrow p_1}(p_1) &= \onslide<2->{\iint \mathbb{I}(t_a=p_1+p_2) N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \Phi(t_a|\mu_b,\sigma_b^2)  \, dt_a  \, dp_2 } \\
+   \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+   m_{f_{t_a}\rightarrow p_1}(p_1) &=\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \Phi(p_1+p_2|\mu_b,\sigma_b^2)  \, dp_2  \\
+   \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+\only<4-5>{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+   \onslide<5>{&\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \frac{\partial}{\partial p_1} \int  N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2 } \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+\only<6>{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+   &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \int  N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \frac{\partial}{\partial p_1} \Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+\only<7>{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+   &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \int  N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, N(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+
+\only<8>{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+   &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \int  N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, N(p_2|\mu_b-p_1,\sigma_b^2)  \, dp_2  \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+\only<9>{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+   &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) =  \int \underbrace{N(\mu_2| \mu_b - p_1, \sigma_b^2 + \sigma_2^2 + \beta^2)}_{\text{const.}} \underbrace{N(p_2 | \mu_*, \sigma_*^2) dp_2}_{1} \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+\only<10->{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+   &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) =  N(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \\
+   & \onslide<11->{ m_{f_{t_a}\rightarrow p_1}(p_1) = } \onslide<12>{\Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) } \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+
+
+
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{108}(10,8)
+\begin{center}
+ \large $m_{f_p \rightarrow s}(s)$
+\end{center}
+\end{textblock}
+\only<1->{
+\begin{textblock}{108}(10,18)
+\centering
+  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fp_s} 
+\end{textblock}
+}
+
+\only<1-2>{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+    m_{f_{p_1}\rightarrow s_1}(s_1) &= \onslide<2->{\int N(p_1|s_1, \beta^2) \, \Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1 } \\
+   \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+\only<3-4>{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+    & m_{f_{p_1}\rightarrow s_1}(s_1) = \int N(p_1|s_1, \beta^2) \, \Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1  \\
+  & \frac{\partial}{\partial \mu_2} m_{f_{s_1}\rightarrow s_1}(s_1) = \onslide<4>{\int N(p_1|s_1, \beta^2) \, N(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1}
+   \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+\only<5-6>{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+    & m_{f_{p_1}\rightarrow s_1}(s_1) = \int N(p_1|s_1, \beta^2) \, \Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1  \\
+  & \frac{\partial}{\partial \mu_2} m_{f_{s_1}\rightarrow s_1}(s_1) =  N(s_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + 2\beta^2) \\
+  & \onslide<6>{ m_{f_{p_1}\rightarrow s_1}(s_1) = \Phi(s_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + 2\beta^2) }
+   \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+\only<7>{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+     m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1| \mu_b - \mu_2 , \sigma_b^2 + \sigma_2^2 + 2\beta^2) \color{white}\int &&
+  \end{flalign*}
+  \end{textblock}
+}
+
+\only<8>{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+     m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1| \mu_b - \underbrace{\mu_2}_{\mu_a-\mu_1} , \sigma_b^2 + \underbrace{\sigma_2^2 + 2\beta^2}_{\sigma_a^2 - \sigma_1^2}) \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+\only<9>{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+     m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1| \mu_b - \mu_a + \mu_1 , \sigma_b^2 + \sigma_a^2 - \sigma_1^2) \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+\only<10>{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+     m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1|  \underbrace{\mu_b - \mu_a}_{-\delta} + \mu_1 , \underbrace{\sigma_b^2 + \sigma_a^2}_{\vartheta^2} - \sigma_1^2) \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+\only<11>{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+     m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1|  -\delta + \mu_1 ,\vartheta^2 - \sigma_1^2)   \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+\only<12-13>{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+     m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(0|  -\delta + \mu_1 - s_1,\vartheta^2 - \sigma_1^2) \\ 
+     \onslide<13>{& = 1 - \Phi(0| \,  \delta - \mu_1 + s_1 \, ,\vartheta^2 - \sigma_1^2)} & \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+\only<14->{
+\begin{textblock}{118}(5,60)
+  \begin{flalign*}
+     m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(0|  -\delta + \mu_1 - s_1,\vartheta^2 - \sigma_1^2) \\[0.2cm] 
+     & = 1 - \Phi(0| \,  \underbrace{\delta - \mu_1 + s_1}_{\hfrac{\text{\tiny Diferencia esperada}}{\text{\tiny parametrizada en $s$}}} \, ,  \underbrace{\vartheta^2 - \sigma_1^2}_{\hfrac{\text{\tiny Sin incertidumbre}}{\text{\tiny respecto de $s$}}}) \\
+     & \onslide<15->{= \text{Probabilidad de ganar si la verdadera habilidad fuera $s_1$}}   \color{white}\int && 
+  \end{flalign*}
+  \end{textblock}
+}
+
+
+\end{frame}
+
+\begin{frame}[plain]
+
+\only<-7>{
+\begin{textblock}{160}(0,11)
+\begin{equation*}
+\overbrace{P(s_1 \mid r, \text{Modelo})}^{\text{Posteriori}} \propto \overbrace{N(s_1 \, | \, \mu_1, \sigma_1^2) }^{\text{Priori}} \, \overbrace{1-\Phi(0 \, | s_1 - \mu_2 , \vartheta^2 - \sigma_1^2)}^{\text{Verosimilitud}}  \ \  \text{Caso ganador} 
+\end{equation*}
+\end{textblock}
+}
+
+\begin{textblock}{160}(0,11)
+\only<8->{
+\begin{equation*}
+\overbrace{P(s_2 \mid r, \text{Modelo})}^{\text{Posteriori}} \propto \overbrace{N(s_2 \, | \,\mu_2, \sigma_2^2) }^{\text{Priori}} \, \overbrace{\Phi(0  \, | \mu_1 - s_2, \vartheta^2 - \sigma_1^2)}^{\text{Verosimilitud}}  \ \  \text{Caso perdedor} 
+\end{equation*}
+}
+\end{textblock}
+
+
+
+\begin{textblock}{160}(0,26)
+\centering
+\only<2>{\includegraphics[width=0.49\textwidth]{figures/posterior_win} 
+}
+\end{textblock}
+
+\begin{textblock}{160}(0,26)
+\centering
+\only<3>{\includegraphics[page=2,width=0.49\textwidth]{figures/posterior_win} 
+}
+\end{textblock}
+
+\begin{textblock}{160}(0,26)
+\centering
+\only<4>{\includegraphics[page=3,width=0.49\textwidth]{figures/posterior_win} 
+}
+\end{textblock}
+
+\begin{textblock}{160}(0,26)
+\centering
+\only<5>{\includegraphics[page=4,width=0.49\textwidth]{figures/posterior_win} 
+}
+\end{textblock}
+
+
+\begin{textblock}{160}(0,26)
+\centering
+\only<6>{\includegraphics[page=5,width=0.49\textwidth]{figures/posterior_win} 
+}
+\end{textblock}
+
+\begin{textblock}{160}(0,26)
+\centering
+\only<7>{\includegraphics[page=6,width=0.49\textwidth]{figures/posterior_win} 
+}
+\end{textblock}
+
+\begin{textblock}{160}(0,26)
+\centering
+\only<8->{\includegraphics[width=0.49\textwidth]{figures/posterior_lose} 
+}
+\end{textblock}
+
+\begin{textblock}{160}(0,93)
+\centering
+\only<9>{\tiny Todos los detalles en: \href{https://journals.plos.org/plosone/article/file?type=supplementary&id=info:doi/10.1371/journal.pone.0211014.s002}{Landfried. TrueSkill: Technical Report. 2019} }
+\end{textblock}
+%\includegraphics[width=0.49\textwidth]{figures/posterior_loose}   
+\end{frame}
+
+
+
+ 
+\begin{frame}[plain]
+\centering
+  \includegraphics[width=0.35\textwidth]{../../aux/static/pachacuteckoricancha.jpg}
+\end{frame}
+
+
+\end{document}
+
+
+

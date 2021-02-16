@@ -1,0 +1,198 @@
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\input{../../aux/tex/diapo_encabezado.tex}
+\input{../../aux/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+ 
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+\newif\ifen
+\newif\ifes
+\newcommand{\en}[1]{\ifen#1\fi}
+\newcommand{\es}[1]{\ifes#1\fi}
+\estrue
+
+%\title[Bayes del Sur]{}
+
+\begin{document}
+
+\color{black!85}
+\large
+
+ 
+%\setbeamercolor{background canvas}{bg=gray!15}
+
+\begin{frame}[plain,noframenumbering]
+ 
+ \begin{textblock}{90}(03,05)
+ \centering \huge  \textcolor{black!40}{Creencias, datos y sorpresas}
+\end{textblock}
+
+ \begin{textblock}{47}(113,74)
+\centering \Large  \textcolor{white!55}{Combinatoria}
+\end{textblock}
+
+ %\vspace{2cm}brown
+%\maketitle
+\Wider[2cm]{
+\includegraphics[width=1\textwidth]{../../aux/static/peligro_predador}
+}
+\end{frame}
+
+\begin{frame}[plain]
+ 
+ \centering
+ Resumir clase anterior
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ 
+ \centering
+ Recordar que el likelihood no es otra cosa que contar caminos.
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ 
+ \centering
+ Imagen de niña contanto contando
+ 
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \es{Conjunto de pares ordenados}
+ \end{textblock}
+ \vspace{1cm}
+
+ Dados dos conjuntos A y B, donde A tiene k elementos y B tiene m ele-
+mentos, queremos determinar cuántos elementos tiene A $\times$ B.
+
+\begin{align*}
+\underbrace{m + m + \dots + m}_{k \text{ veces}} = km
+\end{align*}
+ 
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \es{Conjunto de pares ordenados}
+ \end{textblock}
+ \vspace{1cm}
+
+Dados los conjuntos $A_1 , A_2 , \dots , A_n$ , donde $\#A_i = k_i$, ¿cuántos
+elementos tiene $A_1 \times A_2 \times \dots A_n$?
+
+
+\begin{align*}
+k_1 k_2 \dots k_n
+\end{align*}
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \es{Conjunto de funciones}
+ \end{textblock}
+ \vspace{1cm}
+ 
+ Si $A$ es un conjunto de $n$ elementos y $B$ es un conjunto de $k$ elementos,
+¿cuántas funciones de $A$ en $B$ se pueden definir?
+ 
+\begin{align*}
+ (f(a_1),f(a_2),\dots,f(a_n)) \in \underbrace{B \times B \times \dots \times B}_{n \text{ factores}}
+\end{align*}
+
+Luego
+
+\begin{align*}
+ k^n
+\end{align*}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \es{Bolitas numeradas en cajas numeradas}
+ \end{textblock}
+ \vspace{1cm}
+ \centering
+ 
+ ¿De cuántas maneras se pueden ubicar n bolitas numeradas en k cajas numeradas?
+ 
+ \vspace{0.3cm}
+ 
+ Notemos que esto es lo mismo que determinar cuántas funciones hay del tipo 
+ 
+ \begin{align*}
+  f(i) = \text{número de caja donde está ubicada la bolita } i
+ \end{align*}
+ 
+ Luego, hay $k^n$ formas de ubicar las bolitas.
+
+ \end{frame}
+
+ \begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \es{Funciones inyectivas}
+ \end{textblock}
+ \vspace{1cm}
+ \centering
+ 
+ Si $A$ es un conjunto de $n$ elementos y $B$ es un conjunto de $m$ elementos, con $n \geq m$
+¿cuántas funciones inyectivas de $A$ en $B$ se pueden definir?
+ 
+\begin{align*}
+ (f(a_1),f(a_2),\dots,f(a_n)) \in \underbrace{B \times B \times \dots \times B}_{n \text{ factores}} \text{ que tienen todas sus coordenadas distintas}
+\end{align*}
+
+Luego
+
+\begin{align*}
+ m(m-1)(m-2)\dots(m-(n-1)) = m(m-1)(m-2)\dots(m-n+1) = \frac{m!}{(m-n)!}
+\end{align*}
+
+ 
+ \end{frame}
+
+ 
+ \begin{frame}[plain]
+  
+  ¿De cuántas maneras se pueden ubicar n bolitas numeradas en m cajas
+numeradas de manera que haya a lo sumo una bolita por caja?
+
+
+\begin{align*}
+ m(m-1)(m-2)\dots(m-(n-1)) = m(m-1)(m-2)\dots(m-n+1) = \frac{m!}{(m-n)!}
+\end{align*}
+
+ \end{frame}
+
+
+\begin{frame}[plain]
+\centering
+  \includegraphics[width=0.35\textwidth]{../../aux/static/pachacuteckoricancha.jpg}
+\end{frame}
+
+
+
+\end{document}
+
+
+

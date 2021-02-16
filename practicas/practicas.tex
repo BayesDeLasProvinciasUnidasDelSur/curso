@@ -1,0 +1,132 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\input{../aux/tex/encabezado.tex}
+
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Code}% Listing -> Algorithm
+\lstset{
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=true,
+  columns=flexible,
+  basicstyle={\footnotesize\ttfamily},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showlines=true
+}
+\definecolor{all}{rgb}{0.90, 0.90, 0.90}
+
+
+%opening
+\title{Prácticas}
+\author{Bayes de las Provincias Unidas del Sur}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introducción}
+
+\subsection{El problema de la apuesta no finalizada. (Pascal y Fermat 1654).}
+
+Antes de que la teoría de la probabilidad hubiera sido desarrollada, antes incluso de que la palabra probabilidad estuviera en el volcabulario, Blaise Pascal le escribe el lunes 24 de Agosto una carta a su colega Pierre de Fermat:
+
+\begin{quotation}
+No he podido exponerle todo mi pensamiento sobre el problema de la apuesta no finalizada, y tengo cierta reticencia a hacerlo por temor a que esta admirable armonía que existe entre nosotros y que me es tan querida comience a flaquear, pues temo que tengamos opiniones diferentes sobre este tema.
+Deseo exponerle todo mi razonamiento y que me haga el favor de corregirme si estoy en un error o de respaldarme si estoy en lo cierto.
+Se lo pido con toda fe y sinceridad, pues ni siquiera estoy seguro de si estará usted de mi parte.
+\footnote{El original está escrito en Francés.}
+\end{quotation}
+
+El problema abierto que Pascal menciona es el siguiente. 
+Supongamos que dos jugadores hacen apuestas iguales sobre quién ganará una serie de tres lanzamientos de una moneda justa.
+Cada uno tira su moneda.
+El que obtiene más caras gana.
+Antes de terminar se ven obligados a escapar. 
+Las apuestas son juegos clandestinos.
+¿Cuál es la forma justa de repartir las apuestas?
+Esta es la pregunta que buscan resolver Pascal y Fermat.
+
+\begin{enumerate}
+ \item >Qué idea usaría usted para repartir una apuesta de un juego no finalizado?
+ \item Calcular cómo se reparte la apuesta si el juego hubiera finalizado luego de 2 tiradas con:
+ \begin{enumerate}
+  \item Dos jugadores en total, uno con 2 caras y otro con 1
+  \item Tres jugadores en total, dos con 2 caras y otro con 1
+ \end{enumerate}
+ \item Programar una función que resuelva cómo se reparten las apuestas si en vez de monedas fueran dados.
+ La función recibe una lista de puntos no finalizados, y la cantidad de pasos que se requieren para finalizar y devuelve una lista de proporciones.
+\end{enumerate}
+
+
+
+
+\section{Sum-product algorithm}
+
+
+\section{Tenis ATP} 
+
+La base de datos cuenta con más de 400 mil partidas.
+
+\begin{enumerate}
+ \item Descargar la historia de partidas (1915-2020) de los tenistas profesionales ATP en: \url{https://github.com/glandfried/tennis/releases/download/atp/history.csv.zip}
+ \item Identificar jugadores que tengan nombres con algún substring \texttt{unknown}
+ \item Hacer un ranking de los 20 jugadores con más partidas en orden descendente, con sus nombres y sus identificadores.
+ \item Probar el paquete \texttt{trueskill}. Tiene un página dónde explica la funciones básicas \url{https://trueskill.org/}.
+ \item Revisen el \emph{environment} de \texttt{trueskill}.
+    Recomendamos que usen los siguientes parámetros,
+
+    \begin{lstlisting}[backgroundcolor=\color{white},label=lst:env, caption=\relax, belowskip=-1.0 \baselineskip, aboveskip=-0 \baselineskip]
+    \end{lstlisting}
+    \begin{lstlisting}[backgroundcolor=\color{all}]
+    env = trueskill.TrueSkill(mu=0, sigma=2 beta=1, tau=0.0, draw_probability=0.0)
+    \end{lstlisting}  
+ \item Imageninen algunos escenario para explorar y estimen las habilidades de los jugadores. Por ejemplo, >qué pasa si hay 3 jugadores, el jugador $1$ le gana al $2$, luego el $2$ le gana al $3$ y finalmente el $3$ le gana al $1$?
+    \begin{enumerate}
+    \item >Cuál es la habilidad que ustedes creen que tienen los jugadores luego de ver las 3 partidas?
+    \item >Qué resultado ofrece TrueSkill?
+    \item >Cuál es la diferencia entre lo que estima TrueSkill y lo que esperaban ustedes?
+    \item >Por qué creen que ocurre esa diferencia?
+    \item >Cuántas rondas como la mencionada tienen que pasar para que la diferencia de estimación media ente los jugadores sea menor a 0.1 entre los 3.
+    \item >Grafiquen como varía la incertidumbre de la estimación.
+    \end{enumerate}
+\end{enumerate}
+
+
+
+\section{Anexo}
+
+\subsection{Tenis}
+
+\paragraph{Datos}
+
+Pueden descargar la historia de partidas (1915-2020) de los tenistas profesionales ATP en: \url{https://github.com/glandfried/tennis/releases/download/atp/history.csv.zip}.
+La base de datos cuenta con más de 400 mil partidas.
+
+Columnas:
+\begin{description} \setlength\itemsep{0cm}
+ \item[\texttt{match\_id}:] Identificador de la partida
+ \item[\texttt{double}:] Bool indicando si la partida es en equipos de 2
+ \item[\texttt{round\_number}:] Indica la ronda de la partida, donde $0$ represeta la final
+ \item[\texttt{winner\_player\_1}:] Identificador del jugador ganador número 1
+ \item[\texttt{w1\_name}:] Nombre del jugador ganador número 1
+ \item[\texttt{winner\_player\_2}:] Identificador del jugador ganador número 2
+ \item[\texttt{w2\_name}:] Nombre del jugador ganador número 2
+ \item[\texttt{loser\_player\_1}:] Identificador del jugador perdedor número 1
+ \item[\texttt{l1\_name}:] Nombre del jugador perdedor número 1
+ \item[\texttt{loser\_player\_2}:] Identificador del jugador perdedor número 2
+ \item[\texttt{l2\_name}:] Nombre del jugador perdedor número 2
+ \item[\texttt{time\_start}:] Comienzo del torneo 
+ \item[\texttt{time\_end}:] Finalizacion del torneo (puede ser nulo)
+ \item[\texttt{ground}:] Tipo de piso del torneo
+ \item[\texttt{tour\_id}:] Identificador del torneo
+ \item[\texttt{tour\_name}:] Nombre del torneo 
+\end{description}
+
+
+
+
+\end{document}
