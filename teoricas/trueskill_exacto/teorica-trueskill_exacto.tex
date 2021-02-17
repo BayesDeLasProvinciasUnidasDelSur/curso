@@ -355,8 +355,7 @@ m_{x \rightarrow f}(x) = \prod_{h \in n(x) \setminus \{f\} } m_{h \rightarrow x}
 \end{textblock}
 
 \only<1->{
-\begin{textblock}{120}(20,10)
-
+\begin{textblock}{145}(5,4)
 \centering
   \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fs_s} 
 \end{textblock}
@@ -377,7 +376,7 @@ m_{x \rightarrow f}(x) = \prod_{h \in n(x) \setminus \{f\} } m_{h \rightarrow x}
 \end{textblock}
 
 \only<1->{
-\begin{textblock}{120}(20,10)
+\begin{textblock}{145}(5,4)
 \centering
   \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_s_fp} 
 \end{textblock}
@@ -397,7 +396,7 @@ m_{x \rightarrow f}(x) = \prod_{h \in n(x) \setminus \{f\} } m_{h \rightarrow x}
 \end{textblock}
 
 \only<1->{
-\begin{textblock}{120}(20,10)
+\begin{textblock}{145}(5,4)
 \centering
   \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fp_p}   
 \end{textblock}
@@ -423,7 +422,7 @@ m_{x \rightarrow f}(x) = \prod_{h \in n(x) \setminus \{f\} } m_{h \rightarrow x}
 \end{textblock}
 
 \only<1->{
-\begin{textblock}{120}(20,10)
+\begin{textblock}{145}(5,4)
 \centering
   \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_p_ft}   
 \end{textblock}
@@ -447,7 +446,7 @@ m_{x \rightarrow f}(x) = \prod_{h \in n(x) \setminus \{f\} } m_{h \rightarrow x}
 \end{textblock}
 
 \only<1->{
-\begin{textblock}{120}(20,10)
+\begin{textblock}{145}(5,4)
 \centering
   \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_ft_t} 
 \end{textblock}
@@ -496,7 +495,7 @@ m_{x \rightarrow f}(x) = \prod_{h \in n(x) \setminus \{f\} } m_{h \rightarrow x}
 \end{textblock}
 
 \only<1->{
-\begin{textblock}{120}(20,10)
+\begin{textblock}{145}(5,4)
 \centering
   \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fd_d} 
 \end{textblock}
@@ -573,7 +572,7 @@ m_{x \rightarrow f}(x) = \prod_{h \in n(x) \setminus \{f\} } m_{h \rightarrow x}
 \end{textblock}
 
 \only<1->{
-\begin{textblock}{120}(20,10)
+\begin{textblock}{145}(5,4)
 \centering
   \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fr_r} 
 \end{textblock}
@@ -584,7 +583,7 @@ m_{x \rightarrow f}(x) = \prod_{h \in n(x) \setminus \{f\} } m_{h \rightarrow x}
   \begin{flalign*}
  m_{f_r \rightarrow r}(r) & = \onslide<2->{ \int \mathbb{I}(d>0) \N(d|\delta,\vartheta^2) \, dd} \\
  \onslide<3->{& = \int_0^\infty \N(d|\delta,\vartheta^2) \, dd } \\
- \onslide<4->{& = 1 - \Phi(0 | \delta, \vartheta^2)} \onslide<6->{ = \Phi\Big(\frac{\delta}{\vartheta}\Big)} &&
+ \onslide<4->{& = 1 - \Phi(0 | \delta, \vartheta^2)} \onslide<5->{ = \Phi\Big(\frac{\delta}{\vartheta}\Big)} &&
 \end{flalign*}
 \end{textblock}
 }
@@ -600,11 +599,11 @@ m_{x \rightarrow f}(x) = \prod_{h \in n(x) \setminus \{f\} } m_{h \rightarrow x}
 
 \Wider[2cm]{
 \begin{align*}
-P(\text{Resultado}| \text{Modelo}) & = 1 - \Phi\Big(0 \, | \, \underbrace{(\mu_1 + \mu_2) - (\mu_3 + \mu_4)}_{\text{\normalsize Diferencia esperada: $\delta$}} \, , \, \underbrace{4\beta^2 + \sigma_1^2  + \sigma_2^2  + \sigma_3^2  + \sigma_4^2}_{\text{\normalsize incertidumbre total: $\vartheta^2$}}\Big)
+P(\text{Resultado}| \text{Modelo}) & = 1 - \Phi\Big(0 \, | \, \underbrace{(\overbrace{\mu_1 + \mu_2}^{\text{\normalsize$\mu_a$}}) - (\overbrace{\mu_3 + \mu_4}^{\text{\normalsize$\mu_b$}})}_{\text{\normalsize Diferencia esperada: $\delta$}} \, , \, \underbrace{\overbrace{2\beta^2 + \sigma_1^2  + \sigma_2^2}^{\text{\normalsize$\sigma_a^2$}}  + \overbrace{2\beta^2 +\sigma_3^2  + \sigma_4^2}^{\text{\normalsize$\sigma_b^2$}}}_{\text{\normalsize incertidumbre total: $\vartheta^2$}}\Big)
 \end{align*}
 }
 
-\vspace{1cm}
+\vspace{0.7cm}
 
 \centering
  \includegraphics[width=0.50\textwidth]{figures/evidence} 
@@ -624,53 +623,49 @@ P(\text{Resultado}| \text{Modelo}) & = 1 - \Phi\Big(0 \, | \, \underbrace{(\mu_1
 
 
 \begin{frame}[plain]
-\begin{textblock}{108}(10,8)
-\begin{center}
- \large $m_{f_r\rightarrow d}(d)$
-\end{center}
+\begin{textblock}{160}(0,4)
+\centering \large $m_{f_r\rightarrow d}(d)$
 \end{textblock}
 \only<1->{
-\begin{textblock}{108}(10,18)
+\begin{textblock}{145}(5,4)
 \centering
   \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fr_d} 
 \end{textblock}
 }
 
 \only<1->{
-\begin{textblock}{118}(5,60)
+\begin{textblock}{140}(10,50)
   \begin{flalign*}
-   & m_{f_r\rightarrow d}(d) = \onslide<2>{\mathbb{I}(d>0)}  \color{white}\int && 
+   & m_{f_r\rightarrow d}(d) = \onslide<2>{\mathbb{I}(d>0)}  \phantom{\int} && 
   \end{flalign*}
   \end{textblock}
 }
 \end{frame}
 
 \begin{frame}[plain]
-\begin{textblock}{108}(10,8)
-\begin{center}
- \large $m_{f_d\rightarrow t_a}(t_a)$
-\end{center}
+\begin{textblock}{160}(0,4)
+ \centering $m_{f_d\rightarrow t_a}(t_a)$
 \end{textblock}
 \only<1->{
-\begin{textblock}{108}(10,18)
+\begin{textblock}{145}(5,4)
 \centering
   \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fd_ta} 
 \end{textblock}
 }
 
 \only<1-2>{
-\begin{textblock}{118}(5,60)
+\begin{textblock}{140}(10,50)
   \begin{flalign*}
-    m_{f_d\rightarrow t_a}(t_a) &= \onslide<2->{\iint \mathbb{I}(d=t_a-t_b) \mathbb{I}(d>0) N(t_b|\mu_b,\sigma_b^2) \, dt_b  \, dd } \\
+    m_{f_d\rightarrow t_a}(t_a) &= \onslide<2->{\iint \mathbb{I}(d=t_a-t_b) \mathbb{I}(d>0) \N(t_b|\mu_b,\sigma_b^2) \, dt_b  \, dd } \\
    \color{white}\int && 
   \end{flalign*}
   \end{textblock}
 }
 
 \only<3->{
-\begin{textblock}{118}(5,60)
+\begin{textblock}{140}(10,50)
   \begin{flalign*}
-    m_{f_d\rightarrow t_a}(t_a) &= \int \mathbb{I}(t_a>t_b) N(t_b|\mu_b,\sigma_b^2) \, dt_b  \, dd  \\
+    m_{f_d\rightarrow t_a}(t_a) &= \int \mathbb{I}(t_a>t_b) \N(t_b|\mu_b,\sigma_b^2) \, dt_b  \\
     \onslide<5->{&= \Phi(t_a| \mu_b, \sigma_b^2)}
     \color{white}\int && 
   \end{flalign*}
@@ -679,8 +674,8 @@ P(\text{Resultado}| \text{Modelo}) & = 1 - \Phi\Big(0 \, | \, \underbrace{(\mu_1
 
 
 \only<4->{
-\begin{textblock}{48}(80,46)
- \includegraphics[width=0.9\textwidth]{figures/m_d_ta} 
+\begin{textblock}{56}(100,54)
+ \includegraphics[width=1\textwidth]{figures/m_d_ta} 
 \end{textblock}
 }
 
@@ -692,214 +687,327 @@ P(\text{Resultado}| \text{Modelo}) & = 1 - \Phi\Big(0 \, | \, \underbrace{(\mu_1
 
 
 \begin{frame}[plain]
-\begin{textblock}{108}(10,8)
-\begin{center}
- \large $m_{f_t \rightarrow p}(p)$
-\end{center}
+\begin{textblock}{160}(0,4)
+ \centering \large $m_{f_t \rightarrow p}(p)$
 \end{textblock}
 \only<1->{
-\begin{textblock}{108}(10,18)
+\begin{textblock}{145}(5,4)
 \centering
   \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_ft_p} 
 \end{textblock}
 }
 
 \only<1-2>{
-\begin{textblock}{118}(5,60)
+\begin{textblock}{140}(10,50)
   \begin{flalign*}
-    m_{f_{t_a}\rightarrow p_1}(p_1) &= \onslide<2->{\iint \mathbb{I}(t_a=p_1+p_2) N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \Phi(t_a|\mu_b,\sigma_b^2)  \, dt_a  \, dp_2 } \\
-   \color{white}\int && 
+    m_{f_{t_a}\rightarrow p_1}(p_1) &= \onslide<2->{\iint \mathbb{I}(t_a=p_1+p_2) \N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \Phi(t_a|\mu_b,\sigma_b^2)  \, dt_a  \, dp_2 } \\
+   \phantom{\int} && 
   \end{flalign*}
   \end{textblock}
 }
 
 \only<3>{
-\begin{textblock}{118}(5,60)
+\begin{textblock}{140}(10,50)
   \begin{flalign*}
-   m_{f_{t_a}\rightarrow p_1}(p_1) &=\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \Phi(p_1+p_2|\mu_b,\sigma_b^2)  \, dp_2  \\
-   \color{white}\int && 
+   m_{f_{t_a}\rightarrow p_1}(p_1) &=\int \N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \Phi(p_1+p_2|\mu_b,\sigma_b^2)  \, dp_2  \\
+   \phantom{\int} && 
   \end{flalign*}
   \end{textblock}
 }
 
 \only<4-5>{
-\begin{textblock}{118}(5,60)
+\begin{textblock}{140}(10,50)
   \begin{flalign*}
-   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
-   \onslide<5>{&\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \frac{\partial}{\partial p_1} \int  N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2 } \color{white}\int && 
+   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int \N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+   \onslide<5>{&\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \frac{\partial}{\partial p_1} \int  \N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2 } \phantom{\int} && 
   \end{flalign*}
   \end{textblock}
 }
 
 \only<6>{
-\begin{textblock}{118}(5,60)
+\begin{textblock}{140}(10,50)
   \begin{flalign*}
-   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
-   &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \int  N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \frac{\partial}{\partial p_1} \Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \color{white}\int && 
+   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int \N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+   &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \int  \N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \frac{\partial}{\partial p_1} \Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \phantom{\int} && 
   \end{flalign*}
   \end{textblock}
 }
 
 \only<7>{
-\begin{textblock}{118}(5,60)
+\begin{textblock}{140}(10,50)
   \begin{flalign*}
-   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
-   &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \int  N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, N(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \color{white}\int && 
+   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int \N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+   &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \int  \N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \N(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \phantom{\int} && 
   \end{flalign*}
   \end{textblock}
 }
 
 
 \only<8>{
-\begin{textblock}{118}(5,60)
+\begin{textblock}{140}(10,50)
   \begin{flalign*}
-   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
-   &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \int  N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, N(p_2|\mu_b-p_1,\sigma_b^2)  \, dp_2  \color{white}\int && 
+   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int \N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+   &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \int  \N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \N(p_2|\mu_b-p_1,\sigma_b^2)  \, dp_2  \phantom{\int} && 
   \end{flalign*}
   \end{textblock}
 }
 
 \only<9>{
-\begin{textblock}{118}(5,60)
+\begin{textblock}{140}(10,50)
   \begin{flalign*}
-   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
-   &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) =  \int \underbrace{N(\mu_2| \mu_b - p_1, \sigma_b^2 + \sigma_2^2 + \beta^2)}_{\text{const.}} \underbrace{N(p_2 | \mu_*, \sigma_*^2) dp_2}_{1} \color{white}\int && 
+   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int \N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+   &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) =  \int \underbrace{\N(\mu_2| \mu_b - p_1, \sigma_b^2 + \sigma_2^2 + \beta^2)}_{\text{const.}} \underbrace{\N(p_2 | \mu_*, \sigma_*^2) dp_2}_{1} \phantom{\int} && 
   \end{flalign*}
   \end{textblock}
 }
 
 \only<10->{
-\begin{textblock}{118}(5,60)
+\begin{textblock}{140}(10,50)
   \begin{flalign*}
-   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
-   &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) =  N(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \\
-   & \onslide<11->{ m_{f_{t_a}\rightarrow p_1}(p_1) = } \onslide<12>{\Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) } \color{white}\int && 
+   & m_{f_{t_a}\rightarrow p_1}(p_1) =\int \N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
+   &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) =  \N(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \\
+   & \onslide<11->{ m_{f_{t_a}\rightarrow p_1}(p_1) = } \onslide<12>{\Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) } \phantom{\int} && 
   \end{flalign*}
   \end{textblock}
 }
 
-
-
-
-
 \end{frame}
 
 \begin{frame}[plain]
-\begin{textblock}{108}(10,8)
-\begin{center}
- \large $m_{f_p \rightarrow s}(s)$
-\end{center}
+\begin{textblock}{160}(0,4)
+ \centering \large $m_{f_p \rightarrow s}(s)$
 \end{textblock}
 \only<1->{
-\begin{textblock}{108}(10,18)
+\begin{textblock}{145}(5,4)
 \centering
   \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fp_s} 
 \end{textblock}
 }
 
-\only<1-2>{
-\begin{textblock}{118}(5,60)
+\only<1-3>{
+\begin{textblock}{140}(10,50)
   \begin{flalign*}
-    m_{f_{p_1}\rightarrow s_1}(s_1) &= \onslide<2->{\int N(p_1|s_1, \beta^2) \, \Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1 } \\
-   \color{white}\int && 
+    m_{f_{p_1}\rightarrow s_1}(s_1) &= \onslide<2->{\int \N(p_1|s_1, \beta^2) \, \Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1 } \\
+   \phantom{\int} && 
   \end{flalign*}
   \end{textblock}
 }
 
 \only<3-4>{
-\begin{textblock}{118}(5,60)
+\begin{textblock}{90}(10,70)
+ \centering >Sobre cu\'al variable derivamos?
+\end{textblock}
+}
+
+\only<4>{
+\begin{textblock}{140}(10,50)
   \begin{flalign*}
-    & m_{f_{p_1}\rightarrow s_1}(s_1) = \int N(p_1|s_1, \beta^2) \, \Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1  \\
-  & \frac{\partial}{\partial \mu_2} m_{f_{s_1}\rightarrow s_1}(s_1) = \onslide<4>{\int N(p_1|s_1, \beta^2) \, N(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1}
-   \color{white}\int && 
+    m_{f_{p_1}\rightarrow s_1}(s_1) &= \, \int \N(p_1|s_1, \beta^2) \, \Phi(\mu_2| \mu_b - p_1, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1 \\
+   \phantom{\int} && 
   \end{flalign*}
   \end{textblock}
 }
 
 \only<5-6>{
-\begin{textblock}{118}(5,60)
+\begin{textblock}{140}(10,50)
   \begin{flalign*}
-    & m_{f_{p_1}\rightarrow s_1}(s_1) = \int N(p_1|s_1, \beta^2) \, \Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1  \\
-  & \frac{\partial}{\partial \mu_2} m_{f_{s_1}\rightarrow s_1}(s_1) =  N(s_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + 2\beta^2) \\
-  & \onslide<6>{ m_{f_{p_1}\rightarrow s_1}(s_1) = \Phi(s_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + 2\beta^2) }
+    & m_{f_{p_1}\rightarrow s_1}(s_1) = \, \int \N(p_1|s_1, \beta^2) \, \Phi(\mu_2| \mu_b - p_1, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1 \\
+  & \frac{\partial}{\partial \mu_2} m_{f_{s_1}\rightarrow s_1}(s_1) = \onslide<6>{\int \N(p_1|s_1, \beta^2) \, \N(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1}
    \color{white}\int && 
   \end{flalign*}
   \end{textblock}
 }
 
-\only<7>{
-\begin{textblock}{118}(5,60)
+\only<7-8>{
+\begin{textblock}{140}(10,50)
   \begin{flalign*}
-     m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1| \mu_b - \mu_2 , \sigma_b^2 + \sigma_2^2 + 2\beta^2) \color{white}\int &&
+& m_{f_{p_1}\rightarrow s_1}(s_1) = \, \int \N(p_1|s_1, \beta^2) \, \Phi(\mu_2| \mu_b - p_1, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1 \\
+  & \frac{\partial}{\partial \mu_2} m_{f_{s_1}\rightarrow s_1}(s_1) =  \N(s_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + 2\beta^2) \\
+  & \onslide<8>{ m_{f_{p_1}\rightarrow s_1}(s_1) = \Phi(s_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + 2\beta^2) }
+   \phantom{\int} && 
   \end{flalign*}
   \end{textblock}
 }
 
-\only<8>{
-\begin{textblock}{118}(5,60)
-  \begin{flalign*}
-     m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1| \mu_b - \underbrace{\mu_2}_{\mu_a-\mu_1} , \sigma_b^2 + \underbrace{\sigma_2^2 + 2\beta^2}_{\sigma_a^2 - \sigma_1^2}) \color{white}\int && 
-  \end{flalign*}
-  \end{textblock}
-}
 
-\only<9>{
-\begin{textblock}{118}(5,60)
-  \begin{flalign*}
-     m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1| \mu_b - \mu_a + \mu_1 , \sigma_b^2 + \sigma_a^2 - \sigma_1^2) \color{white}\int && 
-  \end{flalign*}
-  \end{textblock}
-}
-
-\only<10>{
-\begin{textblock}{118}(5,60)
-  \begin{flalign*}
-     m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1|  \underbrace{\mu_b - \mu_a}_{-\delta} + \mu_1 , \underbrace{\sigma_b^2 + \sigma_a^2}_{\vartheta^2} - \sigma_1^2) \color{white}\int && 
-  \end{flalign*}
-  \end{textblock}
-}
-
-\only<11>{
-\begin{textblock}{118}(5,60)
-  \begin{flalign*}
-     m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1|  -\delta + \mu_1 ,\vartheta^2 - \sigma_1^2)   \color{white}\int && 
-  \end{flalign*}
-  \end{textblock}
-}
-
-\only<12-13>{
-\begin{textblock}{118}(5,60)
-  \begin{flalign*}
-     m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(0|  -\delta + \mu_1 - s_1,\vartheta^2 - \sigma_1^2) \\ 
-     \onslide<13>{& = 1 - \Phi(0| \,  \delta - \mu_1 + s_1 \, ,\vartheta^2 - \sigma_1^2)} & \color{white}\int && 
-  \end{flalign*}
-  \end{textblock}
-}
-
-\only<14->{
-\begin{textblock}{118}(5,60)
-  \begin{flalign*}
-     m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(0|  -\delta + \mu_1 - s_1,\vartheta^2 - \sigma_1^2) \\[0.2cm] 
-     & = 1 - \Phi(0| \,  \underbrace{\delta - \mu_1 + s_1}_{\hfrac{\text{\tiny Diferencia esperada}}{\text{\tiny parametrizada en $s$}}} \, ,  \underbrace{\vartheta^2 - \sigma_1^2}_{\hfrac{\text{\tiny Sin incertidumbre}}{\text{\tiny respecto de $s$}}}) \\
-     & \onslide<15->{= \text{Probabilidad de ganar si la verdadera habilidad fuera $s_1$}}   \color{white}\int && 
-  \end{flalign*}
-  \end{textblock}
-}
-
+% \only<9>{
+% \begin{textblock}{140}(10,50)
+%   \begin{flalign*}
+%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1| \mu_b - \mu_a + \mu_1 , \sigma_b^2 + \sigma_a^2 - \sigma_1^2) \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<10>{
+% \begin{textblock}{140}(10,50)
+%   \begin{flalign*}
+%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1|  \underbrace{\mu_b - \mu_a}_{-\delta} + \mu_1 , \underbrace{\sigma_b^2 + \sigma_a^2}_{\vartheta^2} - \sigma_1^2) \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<11>{
+% \begin{textblock}{140}(10,50)
+%   \begin{flalign*}
+%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1|  -\delta + \mu_1 ,\vartheta^2 - \sigma_1^2)   \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<12-13>{
+% \begin{textblock}{140}(10,50)
+%   \begin{flalign*}
+%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(0|  -\delta + \mu_1 - s_1,\vartheta^2 - \sigma_1^2) \\ 
+%      \onslide<13>{& = 1 - \Phi(0| \,  \delta - \mu_1 + s_1 \, ,\vartheta^2 - \sigma_1^2)} & \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
+% 
+% \only<14->{
+% \begin{textblock}{140}(10,50)
+%   \begin{flalign*}
+%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(0|  -\delta + \mu_1 - s_1,\vartheta^2 - \sigma_1^2) \\[0.2cm] 
+%      & = 1 - \Phi(0| \,  \underbrace{\delta - \mu_1 + s_1}_{\hfrac{\text{\tiny Diferencia esperada}}{\text{\tiny parametrizada en $s$}}} \, ,  \underbrace{\vartheta^2 - \sigma_1^2}_{\hfrac{\text{\tiny Sin incertidumbre}}{\text{\tiny respecto de $s$}}}) \\
+%      & \onslide<15->{= \text{Probabilidad de ganar si la verdadera habilidad fuera $s_1$}}   \color{white}\int && 
+%   \end{flalign*}
+%   \end{textblock}
+% }
 
 \end{frame}
 
 \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering Posterior proporcional
+\end{textblock}
+\only<1->{
+\begin{textblock}{145}(5,4)
+\centering
+  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_posterior} 
+\end{textblock}
+}
+
+ \only<1-2>{
+\begin{textblock}{140}(10,50)
+  \begin{flalign*}
+     p(s_1|r) \propto p(s_1, r) & = \onslide<2>{ \N(s_1|\mu_1, \sigma_1^2)\,\Phi(s_1| \mu_b - \mu_2 , \sigma_b^2 + \sigma_2^2 + 2\beta^2)} \phantom{\int} &&
+  \end{flalign*}
+  \end{textblock}
+}
+
+ \only<3>{
+\begin{textblock}{140}(10,50)
+  \begin{flalign*}
+     p(s_1|r) \propto p(s_1, r) & = \underbrace{\N(s_1|\mu_1, \sigma_1^2)}_{\text{Prior}}\underbrace{\Phi(s_1| \mu_b - \mu_2 , \sigma_b^2 + \sigma_2^2 + 2\beta^2)}_{\text{Verosimilitud}} \phantom{\int} &&
+  \end{flalign*}
+  \end{textblock}
+}
+
+ 
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Verosimilitud
+\end{textblock}
+
+ \only<1-2>{
+\begin{textblock}{160}(35,20)
+ \begin{flalign*}
+  p(r|s_1) & = \Phi(s_1| \mu_b - \mu_2 , \sigma_b^2 + \sigma_2^2 + 2\beta^2) \phantom{\int} \\
+  \onslide<2>{& = \Phi(\, 0\,| \mu_b - \mu_2 - s_1 , \sigma_b^2 + \sigma_2^2 + 2\beta^2)} \phantom{\int}
+  &&
+ \end{flalign*}
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{160}(35,20)
+ \begin{flalign*}
+  p(r|s_1) & = \Phi(s_1| \mu_b - \mu_2 , \sigma_b^2 + \sigma_2^2 + 2\beta^2) \phantom{\int} \\
+  & = \Phi(\, 0\,| \bm{\mu_b} - \mu_2 - s_1 , \bm{\sigma_b^2} + \sigma_2^2 + 2\beta^2) \phantom{\int}
+  &&
+ \end{flalign*}
+\end{textblock}
+}
+
+\only<4>{
+\begin{textblock}{160}(35,20)
+ \begin{flalign*}
+  p(r|s_1) & = \Phi(s_1| \mu_b - \mu_2 , \sigma_b^2 + \sigma_2^2 + 2\beta^2) \phantom{\int} \\
+  & = \Phi(\, 0\,| \bm{\mu_3} + \bm{\mu_4} - \mu_2 - s_1 , \bm{\sigma_3^2} + \bm{\sigma_4^2} + \bm{2\beta^2} + \sigma_2^2 + 2\beta^2) \phantom{\int}
+  &&
+ \end{flalign*}
+\end{textblock}
+}
+
+\only<5-6>{
+\begin{textblock}{160}(35,20)
+ \begin{flalign*}
+  p(r|s_1) & = \Phi(s_1| \mu_b - \mu_2 , \sigma_b^2 + \sigma_2^2 + 2\beta^2) \phantom{\int} \\
+  & = \Phi(\, 0\,| (\mu_3 + \mu_4) - (s_1+\mu_2) , 4\beta^2 +  \sigma_2^2 + \sigma_3^2 + \sigma_4^2) \phantom{\int} \\
+  & = \onslide<6>{1 - \Phi(\, 0\,| \, (s_1+\mu_2) - (\mu_3 + \mu_4) , 4\beta^2 +  \sigma_2^2 + \sigma_3^2 + \sigma_4^2) \phantom{\int}}
+  && 
+ \end{flalign*}
+\end{textblock}
+}
+
+\only<7>{
+\begin{textblock}{160}(35,20)
+ \begin{flalign*}
+  p(r|s_1) & = \Phi(s_1| \mu_b - \mu_2 , \sigma_b^2 + \sigma_2^2 + 2\beta^2) \phantom{\int} \\
+  & = \Phi(\, 0\,| (\mu_3 + \mu_4) - (s_1+\mu_2) , 4\beta^2 +  \sigma_2^2 + \sigma_3^2 + \sigma_4^2) \phantom{\int} \\
+  & = 1 - \Phi(\, 0\,| \underbrace{(s_1+\mu_2) - (\mu_3 + \mu_4)}_{\hfrac{\text{\small Diferencia esperada}}{\text{\small si la habilidad fuera $s_1$}}} , \underbrace{4\beta^2 +  \sigma_2^2 + \sigma_3^2 + \sigma_4^2}_{\hfrac{\text{\small Incertidumbre total\phantom{p}}}{\text{\small salvo la de la habilidad $s_1$ }}}) \phantom{\int}
+  && 
+ \end{flalign*}
+\end{textblock}
+}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Evidencia vs Verosimilitud
+\end{textblock}
+\vspace{1.5cm}
+
+\begin{align*}
+p(r) & =  1 - \Phi\Big(0 \, | \, \underbrace{(\bm{\mu_1} + \mu_2) - (\mu_3 + \mu_4)}_{\text{\normalsize Diferencia esperada}} \, , \, \underbrace{4\beta^2 + \bm{\sigma_1^2}  + \sigma_2^2  + \sigma_3^2  + \sigma_4^2}_{\text{\normalsize Incertidumbre total}}\Big) \\[0.2cm]
+ p(r|s_1) & =  1 - \Phi(\, 0\,| \underbrace{(s_1+\mu_2) - (\mu_3 + \mu_4)}_{\hfrac{\text{\normalsize Diferencia esperada}}{\text{\normalsize si la habilidad fuera $s_1$}}} , \underbrace{4\beta^2 +  \sigma_2^2 + \sigma_3^2 + \sigma_4^2}_{\hfrac{\text{\normalsize Incertidumbre total\phantom{p}}}{\text{\normalsize salvo la de la habilidad $s_1$ }}})
+\end{align*}
+ 
+\vspace{0.3cm}
+
+
+
+\begin{columns}[c]
+\begin{column}{0.5\textwidth}
+ \flushright Predicciones del resultado \\ 
+ usando todas las hipótesis \\
+ pesadas por la creencia a prior \\
+ \vspace{0.8cm}
+ \end{column}
+ \begin{column}{0.5\textwidth}
+\includegraphics[width=0.7\textwidth]{figures/evidence} 
+
+\end{column}
+\end{columns}
+
+ 
+ 
+\end{frame}
+
+
+\begin{frame}[plain]
 
 \only<-7>{
-\begin{textblock}{160}(0,11)
+\begin{textblock}{160}(0,6)
 \begin{equation*}
-\overbrace{P(s_1 \mid r, \text{Modelo})}^{\text{Posteriori}} \propto \overbrace{N(s_1 \, | \, \mu_1, \sigma_1^2) }^{\text{Priori}} \, \overbrace{1-\Phi(0 \, | s_1 - \mu_2 , \vartheta^2 - \sigma_1^2)}^{\text{Verosimilitud}}  \ \  \text{Caso ganador} 
+\overbrace{P(s_1 \mid r, \text{Modelo})}^{\text{Posterior}} \propto \overbrace{\N(s_1 \, | \, \mu_1, \sigma_1^2) }^{\text{Prior}} \, \overbrace{1 - \Phi(\, 0\,| \, \delta - \mu_1 + s_1 , \vartheta^2 - \sigma_1^2)}^{\text{Verosimilitud}}  \ \  \text{Caso ganador} 
 \end{equation*}
 \end{textblock}
 }
 
-\begin{textblock}{160}(0,11)
+\begin{textblock}{160}(0,6)
 \only<8->{
 \begin{equation*}
 \overbrace{P(s_2 \mid r, \text{Modelo})}^{\text{Posteriori}} \propto \overbrace{N(s_2 \, | \,\mu_2, \sigma_2^2) }^{\text{Priori}} \, \overbrace{\Phi(0  \, | \mu_1 - s_2, \vartheta^2 - \sigma_1^2)}^{\text{Verosimilitud}}  \ \  \text{Caso perdedor} 
@@ -909,53 +1017,53 @@ P(\text{Resultado}| \text{Modelo}) & = 1 - \Phi\Big(0 \, | \, \underbrace{(\mu_1
 
 
 
-\begin{textblock}{160}(0,26)
+\begin{textblock}{160}(0,32)
 \centering
 \only<2>{\includegraphics[width=0.49\textwidth]{figures/posterior_win} 
 }
 \end{textblock}
 
-\begin{textblock}{160}(0,26)
+\begin{textblock}{160}(0,32)
 \centering
 \only<3>{\includegraphics[page=2,width=0.49\textwidth]{figures/posterior_win} 
 }
 \end{textblock}
 
-\begin{textblock}{160}(0,26)
+\begin{textblock}{160}(0,32)
 \centering
 \only<4>{\includegraphics[page=3,width=0.49\textwidth]{figures/posterior_win} 
 }
 \end{textblock}
 
-\begin{textblock}{160}(0,26)
+\begin{textblock}{160}(0,32)
 \centering
 \only<5>{\includegraphics[page=4,width=0.49\textwidth]{figures/posterior_win} 
 }
 \end{textblock}
 
 
-\begin{textblock}{160}(0,26)
+\begin{textblock}{160}(0,32)
 \centering
 \only<6>{\includegraphics[page=5,width=0.49\textwidth]{figures/posterior_win} 
 }
 \end{textblock}
 
-\begin{textblock}{160}(0,26)
+\begin{textblock}{160}(0,32)
 \centering
 \only<7>{\includegraphics[page=6,width=0.49\textwidth]{figures/posterior_win} 
 }
 \end{textblock}
 
-\begin{textblock}{160}(0,26)
+\begin{textblock}{160}(0,32)
 \centering
 \only<8->{\includegraphics[width=0.49\textwidth]{figures/posterior_lose} 
 }
 \end{textblock}
 
-\begin{textblock}{160}(0,93)
-\centering
-\only<9>{\tiny Todos los detalles en: \href{https://journals.plos.org/plosone/article/file?type=supplementary&id=info:doi/10.1371/journal.pone.0211014.s002}{Landfried. TrueSkill: Technical Report. 2019} }
-\end{textblock}
+% \begin{textblock}{160}(0,93)
+% \centering
+% \only<9>{\tiny Todos los detalles en: \href{https://journals.plos.org/plosone/article/file?type=supplementary&id=info:doi/10.1371/journal.pone.0211014.s002}{Landfried. TrueSkill: Technical Report. 2019} }
+% \end{textblock}
 %\includegraphics[width=0.49\textwidth]{figures/posterior_loose}   
 \end{frame}
 

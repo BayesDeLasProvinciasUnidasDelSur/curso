@@ -6,7 +6,7 @@ this.dir <- dirname(parent.frame(2)$ofile)
 nombre.R <-  sys.frame(1)$ofile
 require(tools)
 nombre <- print(file_path_sans_ext(nombre.R))
-pdf(paste0(nombre,".pdf"))
+pdf(paste0(nombre,".pdf"),width = 8, height = 5  )
 setwd(this.dir)
 #setwd("~/gaming/materias/inferencia_bayesiana/trabajoFinal/imagenes")
 #####################################
