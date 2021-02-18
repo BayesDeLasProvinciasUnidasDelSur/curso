@@ -184,12 +184,14 @@ p(d) =
 \begin{textblock}{160}(0,40)
 \begin{align*}
  m_{d_1 \rightarrow f_{d_1}}(d_1)   = \frac{p(d_1)}{m_{f_{d_1} \rightarrow d_1}(d_1)} 
- & \approx \frac{\widehat{p}(d_1)}{m_{f_{d_1} \rightarrow d_1}(d_1)}  \\
-& = \frac{\N(d_1 \,  | \,\widehat{\delta} , \, \widehat{\vartheta}^{\,2} )}{\N(d_1 | \delta, \vartheta^2)} 
-\propto N(d_1,\delta_{\div},\vartheta_{\div}^2 )
+ & \onslide<4->{\approx \frac{\widehat{p}(d_1)}{m_{f_{d_1} \rightarrow d_1}(d_1)}}  \\
+& \onslide<5-> {= \frac{\N(d_1 \,  | \,\widehat{\delta} , \, \widehat{\vartheta}^{\,2} )}{\N(d_1 | \delta, \vartheta^2)}}
+\onslide<6->{\propto \N(d_1,\delta_{\div},\vartheta_{\div}^2 )}
 \end{align*}
-
-\es{con} $\delta_{\div} = \frac{\widehat{\delta}}{\widehat{\vartheta}^2} - \frac{\delta}{\vartheta^2}$ \en{and}\es{y} $\vartheta_{\div}^2 = (\frac{1}{\widehat{\vartheta}^2} - \frac{1}{\vartheta^2})^{-1}$ 
+\onslide<7>{
+\vspace{0.3cm}
+\centering
+\es{con} $\delta_{\div} = \frac{\widehat{\delta}}{\widehat{\vartheta}^2} - \frac{\delta}{\vartheta^2}$ \en{and}\es{y} $\vartheta_{\div}^2 = (\frac{1}{\widehat{\vartheta}^2} - \frac{1}{\vartheta^2})^{-1}$ }
 \end{textblock}
 }
 
@@ -197,13 +199,17 @@ p(d) =
 \end{frame}
 
 \begin{frame}[plain]
- \begin{equation}\label{eq:mean_aprox_double}
+\begin{textblock}{160}(0,4)
+ \centering \Large Momentos de la Gaussiana Truncada
+\end{textblock}
+
+ \begin{equation*}
  E(X| a < X < b) = \mu + \sigma \frac{\N(\alpha) - \N(\beta) }{\Phi(\beta) - \Phi(\alpha) }
-\end{equation}
+\end{equation*}
 %
-\begin{equation}\label{eq:variance_aprox_double}
+\begin{equation*}
  V(X| a < X < b) = \sigma^2 \Bigg( 1 + \bigg(\frac{\alpha N(\alpha) - \beta N(\beta) }{\Phi(\beta) - \Phi(\alpha) }\bigg) - \bigg(\frac{N(\alpha) - N(\beta) }{\Phi(\beta) - \Phi(\alpha) }\bigg)^2 \Bigg)
-\end{equation}
+\end{equation*}
 %
 \en{where $\beta = \frac{b-\mu}{\sigma}$ and $\alpha = \frac{a-\mu}{\sigma}$.}
 \es{donde $\beta = \frac{b-\mu}{\sigma}$ y $\alpha = \frac{a-\mu}{\sigma}$.}
@@ -212,62 +218,82 @@ p(d) =
 
 
 \begin{frame}[plain]
- %
-\en{With a single-sided truncation, these functions can be simplified as,}
-\es{Con un \'unico truncamiento, estas funciones se pueden simplificar como,}
-%
-\begin{equation*}
- E(X| a < X )   =  \mu + \sigma \frac{\N(\alpha)}{1 - \Phi(\alpha) } \ \ , \ \ V(X| a < X )  = \sigma^2 \Bigg( 1 + \bigg(\frac{\alpha \N(\alpha)}{1 - \Phi(\alpha) }\bigg) - \bigg(\frac{\N(\alpha)}{1 - \Phi(\alpha) }\bigg)^2 \Bigg) 
-\end{equation*}
+\begin{textblock}{160}(0,4)
+ \centering \Large Momentos de la Gaussiana Truncada
+\end{textblock}
+
+\begin{align*}
+ E(X| a < X )  &=  \mu + \sigma \frac{\N(\alpha)}{1 - \Phi(\alpha) } \\ 
+ V(X| a < X )  &= \sigma^2 \Bigg( 1 + \bigg(\frac{\alpha \N(\alpha)}{1 - \Phi(\alpha) }\bigg) - \bigg(\frac{\N(\alpha)}{1 - \Phi(\alpha) }\bigg)^2 \Bigg) 
+\end{align*}
 \end{frame}
 
 
 \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large Diferencia aproximada
+\end{textblock}
 
-\begin{equation}\label{eq:p*_d} \tag{\texttt{approx()}}
+\begin{equation*}
  \widehat{p}(d) = \N(d | \widehat{\delta}, \widehat{\vartheta}^2) =
  \begin{cases*}
  \N\Big(d \,  | \, E(d | -\varepsilon < d < \varepsilon ) , \,  V(d | -\varepsilon < d < \varepsilon ) \, \Big) & \text{tie} \\
 \N\Big(d \,  | \, E(d | d > -\varepsilon ) , \,  V(d | d > -\varepsilon ) \, \Big) & \text{not tie}
   \end{cases*}
-\end{equation}
+\end{equation*}
 %
 
 \end{frame}
 
 \begin{frame}[plain]
- \begin{equation}\label{eq:^m_fd_ta} \tag{\texttt{lhood\_ta\_approx}}
+\begin{textblock}{160}(0,4)
+ \centering \Large $\widehat{m}_{f_{d_1} \rightarrow t_a}(t_a)$
+ \end{textblock}
+
+ 
+ 
+ \begin{equation*}
 \begin{split}
 \widehat{m}_{f_{d_1} \rightarrow t_a}(t_a) & =  \iint \mathbb{I}(d_1 = t_a - t_b) \N(d_1 | \delta_{\div}, \vartheta_{\div}^2) \N(t_b | \mu_b , \sigma_b^2 )  \, d{d_1} d_{t_b} \\
 & = \int  \N( t_a-t_b | \delta_{\div}, \vartheta_{\div}^2) \N(t_b | \mu_b , \sigma_b^2 )  \,  d_{t_b} \\
 & = \N(t_a \, | \, \mu_b + \delta_{\div} \, , \, \vartheta_{\div}^2 + \sigma_b^2) \\
 \end{split}
-\end{equation}
+\end{equation*}
 \end{frame}
 
 \begin{frame}[plain]
- \begin{equation}\label{eq:^m_fta_p} \tag{\texttt{lhood\_p1\_approx}}
-\begin{split}
+\begin{textblock}{160}(0,4)
+ \centering \Large $\widehat{m}_{f_{t_a} \rightarrow p_1}(p_1)$
+\end{textblock}
+ \begin{equation*}
+ \begin{split}
 \widehat{m}_{f_{t_a} \rightarrow p_1}(p_1) &= \iint \mathbb{I}(t_a = p_1 + p_2) \N(t_a \, | \, \mu_b + \delta_{\div} \, , \, \vartheta_{\div}^2 + \sigma_b^2) \N(p_2 | \mu_2 , \sigma_2^2 + \beta^2)  \, d{t_a} d_{p_2} \\
 & = \int \N(p_1 + p_2 \, | \, \mu_b + \delta_{\div} \, , \, \vartheta_{\div}^2 + \sigma_b^2) \N(p_2 | \mu_2 , \sigma_2^2+ \beta^2 )   \, d_{p_2} \\
 & = \N( p_1 \,|\,  \underbrace{\mu_b - \mu_2}_{\mu_1-\delta} + \delta_{\div}  \,,\,\vartheta_{\div}^2 + \underbrace{\sigma_b^2 + \sigma_2^2 + \beta^2}_{\vartheta^2 - (\sigma_1^2 + \beta^2)})  \\
 \end{split}
-\end{equation}
+\end{equation*}
 \end{frame}
 
 \begin{frame}[plain]
- \begin{equation}\label{eq:^m_fp_s} \tag{\texttt{lhood\_s1\_approx}}
+\begin{textblock}{160}(0,4)
+ \centering \Large Verosimilitud aproximada
+\end{textblock}
+
+ \begin{equation*}
 \begin{split}
 \widehat{m}_{f_{p_1} \rightarrow s_1}(s_1) & = \int \N(p_1|s_1,\beta^2) \N(p_1| \mu_1 - \delta + \delta_{\div}, \vartheta_{\div}^2 + \vartheta^2 - \sigma_1^2 - \beta^2)dp_1 \\
 & = \N(s_1| \mu_1 - \delta + \delta_{\div}, \vartheta_{\div}^2 + \vartheta^2 - \sigma_1^2)
 \end{split}
-\end{equation}
+\end{equation*}
 \end{frame}
 
 \begin{frame}[plain]
-\begin{equation}\label{eq:^p_s} \tag{\texttt{posterior\_s1\_approx}}
- \widehat{p}(s_1) = \N(s_1|\mu_1, \sigma_1^2) \N(s_1| \mu_1 - \delta + \delta_{\div}, \vartheta_{\div}^2 + \vartheta^2 - \sigma_1^2)
-\end{equation}
+\begin{textblock}{160}(0,4)
+ \centering \Large Posterior aproximado
+\end{textblock}
+\begin{equation*}
+ \widehat{p}(s_1, r) = \N(s_1|\mu_1, \sigma_1^2) \N(s_1| \mu_1 - \delta + \delta_{\div}, \vartheta_{\div}^2 + \vartheta^2 - \sigma_1^2)
+\end{equation*}
 \end{frame}
 
 
