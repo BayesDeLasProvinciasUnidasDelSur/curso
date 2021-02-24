@@ -1,0 +1,189 @@
+ \documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+\usepackage{cite}
+\usepackage[utf8]{inputenc}
+\usepackage{a4wide}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{float} % para que los gr\'aficos se queden en su lugar con [H]
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{color}
+\usepackage{amsmath} %para escribir funci\'on partida , matrices
+\usepackage{amsthm} %para numerar definciones y teoremas
+\usepackage[hidelinks]{hyperref} % para inlcuir links dentro del texto
+\usepackage{tabu} 
+\usepackage{comment}
+\usepackage{amsfonts} % \mathbb{N} -> conjunto de los n\'umeros naturales  
+\usepackage{enumerate}
+\usepackage{listings}
+\usepackage[colorinlistoftodos, textsize=small]{todonotes} % Para poner notas en el medio del texto!! No olvidar hacer. 
+\usepackage{framed} % Para encuadrar texto. \begin{framed}
+\usepackage{csquotes} % Para citar texto \begin{displayquote}
+\usepackage{epigraph} % Epigrafe  \epigraph{texto}{\textit{autor}}
+\usepackage{authblk}
+\usepackage{titlesec}
+\usepackage{varioref}
+\usepackage{bm} % \bm{\alpha} bold greek symbol
+\usepackage{pdfpages} % \includepdf
+\usepackage[makeroom]{cancel} % \cancel{} \bcancel{} etc
+\usepackage{wrapfig} % \begin{wrapfigure} Pone figura al lado del texto
+\usepackage{mdframed}
+\usepackage{algorithm}
+%\usepackage{quoting}
+\usepackage{mathtools}	
+\usepackage{tikz}
+\usepackage{paracol}
+
+\newcommand{\vm}[1]{\mathbf{#1}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\citel}[1]{\cite{#1}\label{#1}}
+\newcommand\hfrac[2]{\genfrac{}{}{0pt}{}{#1}{#2}} %\frac{}{} sin la linea del medio
+
+\newtheorem{midef}{Definition}
+\newtheorem{miteo}{Theorem}
+\newtheorem{mipropo}{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+
+
+%http://latexcolor.com/
+\definecolor{azul}{rgb}{0.36, 0.54, 0.66}
+\definecolor{rojo}{rgb}{0.7, 0.2, 0.116}
+\definecolor{rojopiso}{rgb}{0.8, 0.25, 0.17}
+\definecolor{verdeingles}{rgb}{0.12, 0.5, 0.17}
+\definecolor{ubuntu}{rgb}{0.44, 0.16, 0.39}
+\definecolor{debian}{rgb}{0.84, 0.04, 0.33}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=true,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4
+}
+
+
+%opening
+\title{Anexo}
+\author{-}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+ 
+\section{Propiedades de las funciones de densidad Normales}
+
+\subsection{Multiplicacion de normales}\label{multiplicacion_normales}
+
+Luego, el problema que tenemos que resolver es
+\begin{equation}
+ \int N(x;\mu_1,\sigma_1^2)N(x;\mu_2,\sigma_2^2) dx
+\end{equation}
+
+Por defnici\'on,
+\begin{equation}
+\begin{split}
+ N(x;y,\beta^2)N(x;\mu,\sigma^2) & = \frac{1}{\sqrt{2\pi}\sigma_1}e^{-\frac{(x-\mu_1)^2}{2\sigma_1^2}} \frac{1}{\sqrt{2\pi}\sigma_2}e^{-\frac{(x-\mu_2)^2}{2\sigma_2^2}}  \\
+ & = \frac{1}{2\pi\sigma_1\sigma_2}\text{exp}\Bigg(-\underbrace{\left( \frac{(x-\mu_1)^2}{2\sigma_1^2} + \frac{(x-\mu_2)^2}{2\sigma_2^2} \right)}_{\theta} \Bigg)
+\end{split}
+\end{equation}
+
+Luego,
+\begin{equation}
+ \theta = \frac{\sigma_2^2(x^2 + \mu_1^2 - 2x\mu_1) + \sigma_1^2(x^2 + \mu_2^2 - 2x\mu_2) }{2\sigma_1^2\sigma_2^2}
+\end{equation}
+
+Expando y reordeno los factores por potencias de $x$
+\begin{equation}
+ \frac{(\sigma_1^2 + \sigma_2^2) x^2 - (2\mu_1\sigma_2^2 + 2\mu_2\sigma_1^2) x + (\mu_1^2\sigma_2^2 + \mu_2^2\sigma_1^2)}{2\sigma_1^2\sigma_2^2}
+\end{equation}
+
+Divido al numerador y el denominador por el factor de $x^2$
+\begin{equation}
+ \frac{x^2 - 2\frac{(\mu_1\sigma_2^2 + \mu_2\sigma_1^2)}{(\sigma_1^2 + \sigma_2^2) } x + \frac{(\mu_1^2\sigma_2^2 + \mu_2^2\sigma_1^2)}{(\sigma_1^2 + \sigma_2^2) }}{2\frac{\sigma_1^2\sigma_2^2}{(\sigma_1^2 + \sigma_2^2)}}
+\end{equation}
+
+Esta ecuaci\'on es cuadr\'atica en x, y por lo tanto es proporcional a una funci\'on de densidad gausiana con desv\'io
+\begin{equation}
+\sigma_{\times} = \sqrt{\frac{\sigma_1^2\sigma_2^2}{\sigma_1^2+\sigma_2^2}}
+\end{equation}
+
+y media
+\begin{equation}
+ \mu_{\times} = \frac{(\mu_1\sigma_2^2 + \mu_2\sigma_1^2)}{(\sigma_1^2 + \sigma_2^2) }
+\end{equation}
+
+Dado que un t\'ermino $\varepsilon = 0$ puede ser agregado para completar el cuadrado en $\theta$, esta prueba es suficiente cuando no se necesita una normalizaci\'on.
+Sea,
+\begin{equation}
+ \varepsilon = \frac{\mu_{\times}^2-\mu_{\times}^2}{2\sigma_{\times}^2} = 0
+\end{equation}
+
+Al agregar este t\'ermino a $\theta$ tenemos
+\begin{equation}
+ \theta = \frac{x^2 - 2\mu_{\times}x + \mu_{\times}^2 }{2\sigma_{\times}^2} + \underbrace{\frac{ \frac{(\mu_1^2\sigma_2^2 + \mu_2^2\sigma_1^2)}{(\sigma_1^2 + \sigma_2^2) } - \mu_{\times}^2}{2\sigma_{\times}^2}}_{\varphi}
+\end{equation}
+
+Reorganizando el t\'ermino $\varphi$
+\begin{equation}
+\begin{split}
+\varphi & = \frac{\frac{(\mu_1^2\sigma_2^2 + \mu_2^2\sigma_1^2)}{(\sigma_1^2 + \sigma_2^2) } - \left(\frac{(\mu_1\sigma_2^2 + \mu_2\sigma_1^2)}{(\sigma_1^2 + \sigma_2^2) }\right)^2 }{2\frac{\sigma_1^2\sigma_2^2}{\sigma_1^2+\sigma_2^2}}  \\
+& = \frac{(\sigma_1^2 + \sigma_2^2)(\mu_1^2\sigma_2^2 + \mu_2^2\sigma_1^2) - (\mu_1\sigma_2^2 + \mu_2\sigma_1^2)^2}{\sigma_1^2 + \sigma_2^2}\frac{1}{2\sigma_1^2\sigma_2^2} \\[0.3cm]
+& = \frac{(\mu_1^2\sigma_1^2\sigma_2^2 + \cancel{\mu_2^2\sigma_1^4} + \bcancel{\mu_1^2\sigma_2^4} + \mu_2^2\sigma_1^2\sigma_2^2) - (\bcancel{\mu_1^2\sigma_2^4} + 2\mu_1\mu_2\sigma_1^2\sigma_2^2 + \cancel{\mu_2^2\sigma_1^4} )}{\sigma_1^2 + \sigma_2^2}  \frac{1}{2\sigma_1^2\sigma_2^2} \\[0.3cm]
+& = \frac{(\sigma_1^2\sigma_2^2)(\mu_1^2 + \mu_2^2 - 2\mu_1\mu_2)}{\sigma_1^2 + \sigma_2^2}\frac{1}{2\sigma_1^2\sigma_2^2} = \frac{\mu_1^2 + \mu_2^2 - 2\mu_1\mu_2}{2(\sigma_1^2 + \sigma_2^2)} = \frac{(\mu_1 - \mu_2)^2}{2(\sigma_1^2 + \sigma_2^2)}
+\end{split}
+\end{equation}
+
+Luego,
+\begin{equation}
+ \theta = \frac{(x-\mu_{\times})^2}{2\sigma_{\times}^2} + \frac{(\mu_1 - \mu_2)^2}{2(\sigma_1^2 + \sigma_2^2)}
+\end{equation}
+
+Colocando esta forma de $\theta$ en su lugar
+\begin{equation}
+\begin{split}
+ N(x;y,\beta^2)N(x;\mu,\sigma^2) & = \frac{1}{2\pi\sigma_1\sigma_2}\text{exp}\Bigg(-\underbrace{\left( \frac{(x-\mu_{\times})^2}{2\sigma_{\times}^2} + \frac{(\mu_1 - \mu_2)^2}{2(\sigma_1^2 + \sigma_2^2)} \right)}_{\theta} \Bigg) \\
+ & = \frac{1}{2\pi\sigma_1\sigma_2}\text{exp}\left(  - \frac{(x-\mu_{\times})^2}{2\sigma_{\times}^2} \right) \text{exp} \left( - \frac{(\mu_1 - \mu_2)^2}{2(\sigma_1^2 + \sigma_2^2)} \right)
+\end{split}
+\end{equation}
+
+Multiplicando por $\sigma_{\times}\sigma_{\times}^{-1}$
+\begin{equation}
+\overbrace{\frac{\cancel{\sigma_1\sigma_2}}{\sqrt{\sigma_1^2+\sigma_2^2}}}^{\sigma_{\times}} \frac{1}{\sigma_{\times}} \frac{1}{2\pi\cancel{\sigma_1\sigma_2}}\text{exp}\left(  - \frac{(x-\mu_{\times})^2}{2\sigma_{\times}^2} \right) \text{exp} \left( - \frac{(\mu_1 - \mu_2)^2}{2(\sigma_1^2 + \sigma_2^2)} \right)
+\end{equation}
+
+Luego,
+\begin{equation}
+ \frac{1}{\sqrt{2\pi}\sigma_{\times}}\text{exp}\left(  - \frac{(x-\mu_{\times})^2}{2\sigma_{\times}^2} \right) \frac{1}{\sqrt{2\pi(\sigma_1^2+\sigma_2^2)}} \text{exp} \left( - \frac{(\mu_1 - \mu_2)^2}{2(\sigma_1^2 + \sigma_2^2)} \right)
+\end{equation}
+
+Retonando a la integral
+\begin{equation}
+\begin{split}
+I & = \int N(x;\mu_{\times},\sigma_{\times}^2) \overbrace{N(\mu_1;\mu_2,\sigma_1^2 + \sigma_2^2)}^{\text{Escalar independiente de x}} dx \\[0.3cm]
+& = N(\mu_1;\mu_2,\sigma_1^2 + \sigma_2^2) \underbrace{\int N(x,\mu_{\times},\sigma_{\times}^2)  dx}_{\text{Integra 1}} \\
+& = N(\mu_1;\mu_2,\sigma_1^2 + \sigma_2^2)
+\end{split}
+\end{equation}
+
+\end{document}
