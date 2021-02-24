@@ -1,0 +1,235 @@
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\input{../../aux/tex/diapo_encabezado.tex}
+\input{../../aux/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+ 
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+\newif\ifen
+\newif\ifes
+\newcommand{\en}[1]{\ifen#1\fi}
+\newcommand{\es}[1]{\ifes#1\fi}
+\estrue
+
+%\title[Bayes del Sur]{}
+
+\begin{document}
+
+\color{black!85}
+\large
+ 
+%\setbeamercolor{background canvas}{bg=gray!15}
+
+
+\begin{frame}[plain,noframenumbering]
+ 
+ \begin{textblock}{90}(00,05)
+\begin{center}
+ \huge  \textcolor{black!66}{Creencias adaptativas}
+\end{center}
+
+\begin{textblock}{47}(113,72)
+\centering \Large  \textcolor{white!55}{TrueSkill} \ \ \ \ \ \
+\end{textblock}
+% \begin{textblock}{47}(116,75)
+% \centering \Large \ \ \ \ \ \textcolor{white!55}{aproximado}
+% \end{textblock}
+
+\end{textblock}
+
+ %\vspace{2cm}brown
+%\maketitle
+\Wider[2cm]{
+\includegraphics[width=1\textwidth]{../../aux/static/peligro_predador}
+}
+\end{frame}
+
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Modelo de empate
+ \end{textblock}
+\vspace{1.25cm}
+ 
+ \begin{equation*}
+  p(r) = 
+  \begin{cases}
+   1 - \Phi(\varepsilon| \delta, \vartheta^2) & \text{ gana } \\
+   \Phi(\varepsilon| \delta, \vartheta^2) - \Phi(-\varepsilon| \delta, \vartheta^2) & \text{ empata } \\
+   \Phi(-\varepsilon| \delta, \vartheta^2) & \text{ pierde }
+  \end{cases}
+ \end{equation*}
+
+ \vspace{0.5cm}
+
+ \centering
+\includegraphics[page=1,width=0.49\textwidth]{figures/draw}
+
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \centering \Large \vspace{1cm}
+ 
+ >Qu\'e valor de margen $\varepsilon$ deberiamos usar?
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Propuesta original \\ \normalsize (Herbrich et al. 2006)
+ \end{textblock}
+\centering 
+
+\only<2-3>{
+\begin{textblock}{160}(0,18)
+\begin{align*}
+ p(r=\text{empate}) = \Phi(\varepsilon| \delta, \vartheta^2) - \Phi(-\varepsilon| \delta, \vartheta^2) 
+\end{align*}
+\end{textblock}
+}
+
+\only<4->{
+\begin{textblock}{160}(0,18)
+\begin{align*}
+ p(r=\text{empate}) = \Phi(\varepsilon| 0 , N\beta^2) - \Phi(-\varepsilon| 0, N\beta^2) 
+\end{align*}
+\end{textblock}
+}
+
+
+\only<1-2>{
+\begin{textblock}{160}(0,40)
+\centering \Large 
+Usar la frecuencia empírica de empates
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{160}(0,40)
+\centering
+La frecuencia de empates depende \\ de la diferencia de habilidad $\delta$, \\ \textbf{que justamente no conocemos!}
+\end{textblock}
+}
+
+\only<4>{
+\begin{textblock}{160}(0,40)
+\centering
+Suponer que la frecuencia surge \\ de jugadores que sabemos\\ tienen misma habilidad \\
+\end{textblock}
+}
+
+
+\only<5>{
+ \begin{textblock}{160}(0,40)
+ \centering
+\includegraphics[page=2,width=0.49\textwidth]{figures/draw}
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Modelo de empate
+ \end{textblock}
+\vspace{1.25cm}
+ 
+ \begin{equation*}
+  p(r) = 
+  \begin{cases}
+   1 - \Phi(\varepsilon| \delta, \vartheta^2) & \text{ gana } \\
+   \Phi(\varepsilon| \delta, \vartheta^2) - \Phi(-\varepsilon| \delta, \vartheta^2) & \text{ empata } \\
+   \Phi(-\varepsilon| \delta, \vartheta^2) & \text{ pierde }
+  \end{cases}
+ \end{equation*}
+
+ \vspace{0.5cm}
+
+ \centering
+\includegraphics[page=1,width=0.49\textwidth]{figures/draw}
+
+ 
+\end{frame}
+
+
+\begin{frame}[plain]
+ \centering \Large \vspace{1cm}
+ 
+ >Qu\'e valor de margen $\varepsilon$ deberiamos usar?
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Propuesta original \\ \normalsize (Herbrich et al. 2006)
+ \end{textblock}
+\centering 
+
+\only<2-3>{
+\begin{textblock}{160}(0,18)
+\begin{align*}
+ p(r=\text{empate}) = \Phi(\varepsilon| \delta, \vartheta^2) - \Phi(-\varepsilon| \delta, \vartheta^2) 
+\end{align*}
+\end{textblock}
+}
+
+\only<4->{
+\begin{textblock}{160}(0,18)
+\begin{align*}
+ p(r=\text{empate}) = \Phi(\varepsilon| 0 , N\beta^2) - \Phi(-\varepsilon| 0, N\beta^2) 
+\end{align*}
+\end{textblock}
+}
+
+
+\only<1-2>{
+\begin{textblock}{160}(0,40)
+\centering \Large 
+Usar la frecuencia empírica de empates
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{160}(0,40)
+\centering
+La frecuencia de empates depende \\ de la diferencia de habilidad $\delta$, \\ \textbf{que justamente no conocemos!}
+\end{textblock}
+}
+
+\only<4>{
+\begin{textblock}{160}(0,40)
+\centering
+Suponer que la frecuencia surge \\ de jugadores que sabemos\\ tienen misma habilidad \\
+\end{textblock}
+}
+
+
+\only<5>{
+ \begin{textblock}{160}(0,40)
+ \centering
+\includegraphics[page=2,width=0.49\textwidth]{figures/draw}
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+
+\end{document}
+
+
+
