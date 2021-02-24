@@ -71,89 +71,166 @@
 \end{frame}
 
 \begin{frame}[plain]
- \begin{textblock}{160}(0,4)
-  \centering \Large Modelo de empate
- \end{textblock}
-\vspace{1.25cm}
+\begin{textblock}{160}(0,4)
+ \Large \centering Aproximaciones
+\end{textblock}
+
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+ \centering \textbf{Inferencia variacional}
  
+\begin{itemize}
+  \item[$\circ$] Sesgado
+  \item[$\circ$] R\'apido y escalable
+ \end{itemize}
+
+ 
+ \end{column}
+ \begin{column}{0.5\textwidth}
+\centering  \textbf{Cadenas de Markov}
+
+\begin{itemize}
+  \item[$\circ$] No sesgado
+  \item[$\circ$] Lento y no escalable
+ \end{itemize}
+
+\end{column}
+\end{columns}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Inferencia variacional
+\end{textblock}
+
+Encontrar la mejor aproximaci\'on a la posterior
+
+\begin{equation*}
+ p(\theta|x) \approx q(\theta)
+\end{equation*}
+
+\vspace{0.3cm}
+Que minimice una distancia $D$
+\begin{equation*}
+ q(\theta) = \underset{q \in \mathcal{Q}}{\text{arg min}} \ \ D(q(\theta) \ || \ p(\theta|x))
+\end{equation*}
+\end{frame}
+ 
+ 
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Solcuiones
+\end{textblock}
+
+$\bullet$ \textbf{Variational Bayes}
+
+\begin{equation*}
+ q(\theta) = \underset{q \in \mathcal{Q}}{\text{arg min}} \ \ \text{KL}(q(\theta) \ || \ p(\theta|x))
+\end{equation*}
+
+\pause
+\vspace{0.5cm}
+
+$\bullet$ \textbf{Expecatation Propagation}
+
+\begin{equation*}
+ q(\theta) = \underset{q \in \mathcal{Q}}{\text{arg min}} \ \ \text{KL}(p(\theta|x) \ || \  q(\theta))
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+\centering \Large Kullback-Leibler
+\end{textblock}
+\vspace{0.5cm}
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+\centering
+
+
  \begin{equation*}
-  p(r) = 
-  \begin{cases}
-   1 - \Phi(\varepsilon| \delta, \vartheta^2) & \text{ gana } \\
-   \Phi(\varepsilon| \delta, \vartheta^2) - \Phi(-\varepsilon| \delta, \vartheta^2) & \text{ empata } \\
-   \Phi(-\varepsilon| \delta, \vartheta^2) & \text{ pierde }
-  \end{cases}
- \end{equation*}
+ \text{KL}( p \ || \ q) = 
+\int p(\theta|x) \log \frac{p(\theta|x)}{q(\theta)} d\theta
+\end{equation*}
+
+ \end{column}
+ \begin{column}{0.5\textwidth}
+\centering
+
+
+\begin{equation*}
+ \text{KL}(q \ || \ p) =  \int q(\theta) \log \frac{q(\theta)}{p(\theta|x)} d\theta
+\end{equation*}
+
+ 
+\end{column}
+\end{columns}
 
  \vspace{0.5cm}
 
  \centering
-\includegraphics[page=1,width=0.49\textwidth]{figures/draw}
-
+ \includegraphics[width=0.7\textwidth]{../../aux/static/kl-divergence.png}
+ 
  
 \end{frame}
 
+
 \begin{frame}[plain]
- \centering \Large \vspace{1cm}
+ \begin{textblock}{160}(0,4)
+\centering \Large Divergencia generalizada
+\end{textblock}
+\vspace{0.5cm}
+
+
+\centering
+\includegraphics[width=0.7\textwidth]{../../aux/static/d-divergence.png}
+
+\vspace{0.3cm}
+
+\includegraphics[width=1\textwidth]{../../aux/static/divergence.png}
  
- >Qu\'e valor de margen $\varepsilon$ deberiamos usar?
+
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+\centering \Large Propiedades
+\end{textblock}
+\vspace{0.5cm}
+
+\centering
+\includegraphics[width=1\textwidth]{../../aux/static/divergence2.png}
+
 
 \end{frame}
 
 \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
-  \centering \Large Propuesta original \\ \normalsize (Herbrich et al. 2006)
- \end{textblock}
-\centering 
-
-\only<2-3>{
-\begin{textblock}{160}(0,18)
-\begin{align*}
- p(r=\text{empate}) = \Phi(\varepsilon| \delta, \vartheta^2) - \Phi(-\varepsilon| \delta, \vartheta^2) 
-\end{align*}
+\centering \Large Mean field approximation
 \end{textblock}
-}
+\vspace{0.5cm}
 
-\only<4->{
-\begin{textblock}{160}(0,18)
-\begin{align*}
- p(r=\text{empate}) = \Phi(\varepsilon| 0 , N\beta^2) - \Phi(-\varepsilon| 0, N\beta^2) 
-\end{align*}
-\end{textblock}
-}
+Restricci\'on de independencia sobre $q$ para que se pueda factorizar,
+\begin{equation*}
+ q(\theta) = \prod_{i=1}^m q_i(\theta_i)
+\end{equation*}
 
-
-\only<1-2>{
-\begin{textblock}{160}(0,40)
-\centering \Large 
-Usar la frecuencia empírica de empates
-\end{textblock}
-}
-
-\only<3>{
-\begin{textblock}{160}(0,40)
-\centering
-La frecuencia de empates depende \\ de la diferencia de habilidad $\delta$, \\ \textbf{que justamente no conocemos!}
-\end{textblock}
-}
-
-\only<4>{
-\begin{textblock}{160}(0,40)
-\centering
-Suponer que la frecuencia surge \\ de jugadores que sabemos\\ tienen misma habilidad \\
-\end{textblock}
-}
-
-
-\only<5>{
- \begin{textblock}{160}(0,40)
- \centering
-\includegraphics[page=2,width=0.49\textwidth]{figures/draw}
-\end{textblock}
-}
-
+\textbf{Block coordinate assent}: En cada paso fijamos todos los factores $q_i(\theta_i)$ salvo uno, y optimizamos con respeto al restante $q_j(\theta_j)$
+% 
+% \begin{equation*}
+%  \underset{q_j \in \mathcal{Q}}{\text{arg max}} \ \mathcal{L}(q_j(\theta_j)\prod_{i\neq j}^m q_i(\theta_i))
+% \end{equation*}
 
 \end{frame}
+
 
 \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
