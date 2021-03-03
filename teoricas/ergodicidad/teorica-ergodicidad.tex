@@ -48,11 +48,230 @@
 \end{frame}
 
 
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE Monedas
+ \end{textblock}
+
+\vspace{1cm}
+
+\includegraphics[width=1\textwidth]{../../aux/static/plata-potosi}
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large The Unfinished game (1654) \\ \normalsize Pascal, Fermat and the letters
+ \end{textblock}
+ \vspace{1cm}
+
+Dos personas apuestan quién ganará tres lanzamientos de una moneda
+
+\vspace{0.5cm}
+
+Cada uno tira su moneda. El que obtiene más caras gana.
+
+\vspace{0.5cm}
+
+Antes de terminar se ven obligados a escapar. 
+
+\vspace{0.5cm}
+
+¿Cuál es la forma justa de repartir las apuestas?
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Valor esperado
+ \end{textblock}
+ \vspace{1cm}
+ 
+ \centering
+ El promedio de todos los $N$ resultados posibles $x_i$ 
+ 
+ \begin{align*}
+  \frac{1}{N} \sum_i^N x_i
+ \end{align*}
+
+ % TODO: Pregunta práctica. Qué diferencia tiene este criterio respecto de dividir las creencias en partes iguales. (En el caso de la moneda se reduce a dividir las creencias en partes iguales, pero en otros casos no). Mostrar ejemplo y calcular uno y otro valor.
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Paradoja de San Petersburgo (1712)
+ \end{textblock}
+ \vspace{1cm}
+
+ \centering
+ Apuesta que paga $2^{n-1}$, donde $n$ son caras consecutivas de una moneda
+
+ \vspace{0.5cm}
+ 
+ ¿Cuánto pagarías para entrar?
+ 
+ \pause
+ \begin{align*}
+ \sum_i^{\infty} \left(\frac{1}{2} \right)^n 2^{n-1} = \frac{1}{2} \cdot \infty
+ \end{align*}
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Teoría de la utilidad esperada (1738)
+ \end{textblock}
+
+
+ \begin{align*}
+  \frac{1}{N} \sum_i^N u(x_i)
+ \end{align*}
+ 
+ \end{frame}
+
+ 
+
+ 
+ \begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Psicologización de la economía
+\end{textblock}
+\centering
+\vspace{1cm}
+ 
+\includegraphics[width=1\textwidth]{../../aux/static/risk-aversion}
+
+ \end{frame}
 
 
 \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
-  \centering \LARGE La moneda
+  \centering \Large >Apostar o no apostar?
+ \end{textblock}
+ \vspace{1cm}
+ 
+ \begin{align*}
+ \Delta \,r = 
+      \begin{cases*}
+       (+0.5) & \ \ \text{Cara} \\
+       (-0.4) & \ \ \text{Seca}
+    \end{cases*}
+ \end{align*}
+
+ \pause
+ \vspace{1cm}
+ \centering
+ 
+ Función de utilidad neutral
+ \begin{align*}
+  0.5\cdot \frac{1}{2} - 0.4 \frac{1}{2} = 0.05
+ \end{align*} 
+ 
+ 
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Resultado temporal
+ \end{textblock}
+ 
+
+ \centering
+\vspace{1cm}
+ 
+\includegraphics[width=0.66\textwidth]{figures/simple_gamble.pdf}
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Promedio temporal
+ \end{textblock}
+ \vspace{1cm}
+ 
+ 
+ \centering
+\includegraphics[width=1\textwidth]{../../aux/static/ergodicity}
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Ergodicidad
+ \end{textblock}
+
+
+ \begin{align*}
+  \lim_{N\rightarrow \infty} \frac{1}{N} \sum_i^N Y_i(t*) = \lim_{T\rightarrow \infty} \frac{1}{T} \sum_t^T Y_{i*}(t)
+ \end{align*}
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE Monedas
+ \end{textblock}
+
+ \vspace{1cm}
+
+\includegraphics[width=0.9\textwidth]{../../aux/static/monedas} 
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE Galton board
+ \end{textblock}
+
+ \vspace{1cm}
+
+ \centering
+\includegraphics[width=0.33\textwidth]{../../aux/static/galton_board.png} 
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE El triangulo de Yanghui
+ \end{textblock}
+
+\vspace{1cm}
+
+\centering
+\includegraphics[width=0.42\textwidth]{../../aux/static/triangleYanghui}
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE El triangulo de Yanghui
+ \end{textblock}
+
+\vspace{1cm}
+
+\centering
+\includegraphics[width=0.6\textwidth]{../../aux/static/triangleCombinatorio}
+
+ 
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE Monedas
+ \end{textblock}
+
+ \begin{textblock}{160}(20,8)
+\includegraphics[width=0.75\textwidth]{../../aux/static/moneda}  
+ \end{textblock}
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE Monedas
  \end{textblock}
 
 \vspace{1cm}
@@ -63,106 +282,176 @@
 
 
 \begin{frame}[plain]
- The Unfinished game: Pascal, Fermat and the letters
-
- Antes de que la teoría de la probabilidad hubiera sido desarrollada, de que la palabra probabilidad estuviera en el volcabulario, 
-
-Supongamos que dos jugadores hacen apuestas iguales sobre quién ganará una serie de tres lanzamientos de una moneda justa.
-Cada uno tira su moneda.
-El que obtiene más caras gana.
-Antes de terminar se ven obligados a escapar. 
-Las apuestas son juegos clandestinos.
-¿Cuál es la forma justa de repartir las apuestas?
-Esta es la pregunta que buscan resolver Pascal y Fermat.
- 
-\end{frame}
-
-\begin{frame}[plain]
  \begin{textblock}{160}(0,4)
-  \centering \LARGE La moneda
+  \centering \LARGE Monedas \\ \normalsize Polya Urn
+ \end{textblock}
+
+ \vspace{1cm}
+\centering
+\includegraphics[width=0.5\textwidth]{../../aux/static/polya-urn}
+
+ \end{frame}
+
+
+ \begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE Monedas \\ \normalsize Polya Urn
+ \end{textblock}
+
+ \vspace{1cm}
+\centering
+\includegraphics[width=0.75\textwidth]{../../aux/static/polya-urn-exp}
+ 
+ \end{frame}
+
+ \begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE Monedas
  \end{textblock}
 
 \vspace{1cm}
 
-%\includegraphics[width=1\textwidth]{../../aux/static/triangleYanghui.gif}
-
+\includegraphics[width=1\textwidth]{../../aux/static/plata-potosi}
+ 
 \end{frame}
-
-
+ 
+ 
 \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
-  \centering \Large Contar los caminos de la moneda
+  \centering \Large Resultado temporal \\ \normalsize Individual
  \end{textblock}
  
- Combinatoria
+
+ \centering
+\vspace{1cm}
  
+\includegraphics[width=0.66\textwidth]{figures/simple_gamble.pdf}
+
 \end{frame}
 
 
 \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
-  \centering \Large Binomial
- \end{textblock}
- 
- 
-\end{frame}
-
-
-
-
-\begin{frame}[plain]
- \begin{textblock}{160}(0,4)
-  \centering \Large Los orígenes de la economía
+  \centering \Large Proceso multiplicativo
  \end{textblock}
  \vspace{1cm}
  
- \begin{align*}
- \Delta \,r = 
-      \begin{cases*}
-       (+0.5)\cdot r & \ \ \text{Cara} \\
-       (-0.4)\cdot r & \ \ \text{Seca}
-    \end{cases*}
- \end{align*}
+ 
+\begin{align*}
+ V_N & = V_0 (1+r)^N = V_0 (1-l)^L (1+xl)^W \\
+\end{align*}
 
- \vspace{0.5cm}
+\vspace{-1cm}
+ \begin{align*}
+V_N & := \text{Capital at time } N \\
+V_0 & := \text{initial capital} \\
+r & := \text{the exponentiation growth (continuous) rate} \\
+L &:= \text{number of losses} \\
+W &:= \text{number of wins} \\
+l & := \text{capital invested (proportion)} \\
+x & := \text{odds as } (\text{probability}^{-1})
+\end{align*} 
+ 
+\end{frame}
+
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large \textbf{Evoluci\'on}: secuencia de tasas de reproducción y supervivencia 
+ \end{textblock}
+\vspace{1.33cm}
  
  \centering
- 
- >Apostar o no apostar?
+ \includegraphics[width=0.85\textwidth]{../../aux/static/peligro_predador}
+
  
 \end{frame}
 
 \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
-  \centering \Large The rule of thumb
+  \centering \Large Solución temporal cooperativa \\ \normalsize Cooperar: la puerta a los multiversos
  \end{textblock}
  
- \begin{align*}
- \text{Decisión} = 
- \begin{cases*}
-  \text{Tomar puesta} & E[\Delta r] > 0 \\ 
-  \text{Rechazar apuesta} & E[\Delta r] < 0 \\
- \end{cases*}
-\end{align*}
+ \centering
+\vspace{1cm}
+ 
+\includegraphics[width=0.66\textwidth]{figures/simple_gamble_incesto.pdf}
 
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Solución temporal individual \\ \normalsize Apuesta parcial
+ \end{textblock}
+
+ \centering
+\vspace{1cm}
+ 
+\includegraphics[width=0.9\textwidth]{../../aux/static/kelly}
+
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Kelly criterion
+ \end{textblock}
+\vspace{1.3cm}
+ 
+Tomo logaritmo de ambos lados
 \begin{align*}
-  E[\Delta r] = 0.5 \cdot 1/2 + (-0.4) \cdot 1/2
+ \log V_0 (1+r)^N = \log V_0 (1-l)^L (1+xl)^W \\
+\end{align*}
+
+\pause
+
+Simplifico
+\begin{align*}
+ N \log (1+r) &= L \log (1-l) + W \log (1+xl) \\
+ \log (1+r) &= \frac{L}{N} \log (1-l) + \frac{W}{N} \log (1+xl) \\
+\end{align*}
+
+\pause
+
+En el límite $N \rightarrow \infty$
+\begin{align*}
+ \log (1+r) &= p \log (1-l) + (1-p) \log (1+xl) \\
 \end{align*}
 
 \end{frame}
 
-
 \begin{frame}[plain]
- \begin{textblock}{160}(0,4)
-  \centering \Large 
+\begin{textblock}{160}(0,4)
+  \centering \Large Kelly criterion
  \end{textblock}
-
- Phil. Trans. R. Soc. A(2011)369, 4913–4931doi:10.1098/rsta.2011.0065
+\vspace{1.3cm}
  
- The time resolution of the St Petersburg paradox
- 
- \end{frame}
 
+Podemos maximizar $r$ encontrnado su punto crítico en $l$ (es cóncava).
+\begin{align*}
+0 &= \frac{\delta}{\delta l} p \log (1-l) + (1-p) \log (1+xl) \\
+\end{align*}
+
+\pause
+
+Resolviendo la derivada
+\begin{align*}
+0 = - \frac{x (p+l-1) + p}{(1-l)(xl+1)}
+\end{align*}
+
+\pause
+
+Despejando
+\begin{align*}
+ l = \frac{x(1 - p) - p}{x}
+\end{align*}
+ 
+\end{frame}
+
+
+ 
 \begin{frame}[plain]
 \centering
   \includegraphics[width=0.35\textwidth]{../../aux/static/pachacuteckoricancha.jpg}
