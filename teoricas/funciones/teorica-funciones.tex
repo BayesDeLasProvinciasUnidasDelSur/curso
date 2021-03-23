@@ -1,0 +1,250 @@
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\input{../../aux/tex/diapo_encabezado.tex}
+\input{../../aux/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+ 
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+\newif\ifen
+\newif\ifes
+\newcommand{\en}[1]{\ifen#1\fi}
+\newcommand{\es}[1]{\ifes#1\fi}
+\estrue
+
+%\title[Bayes del Sur]{}
+
+\begin{document}
+
+\color{black!85}
+\large
+
+ 
+%\setbeamercolor{background canvas}{bg=gray!15}
+
+\begin{frame}[plain,noframenumbering]
+ 
+ \begin{textblock}{90}(03,05)
+ \centering \huge  \textcolor{black!40}{Creencias, datos y sorpresas}
+\end{textblock}
+
+ \begin{textblock}{47}(113,74)
+\centering \Large  \textcolor{white!55}{Funciones}
+\end{textblock}
+
+ %\vspace{2cm}brown
+%\maketitle
+\Wider[2cm]{
+\includegraphics[width=1\textwidth]{../../aux/static/peligro_predador}
+}
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Intersubjetividad
+\end{textblock}
+\vspace{0.75cm}
+
+ \begin{mdframed}[backgroundcolor=black!20]
+ \centering
+  Conoce de tal manera que puedas poner en
+  
+\textbf{correspondencia un\'ivoca} los fenómenos percibidos
+
+por tu conciencia con algún esquema de operación
+
+\textbf{que sea públicamente inteligible y reproducible}.
+ \end{mdframed}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Función matemática
+\end{textblock}
+\vspace{1.25cm}
+ 
+\begin{quote}
+ Operación $f$ que asigna a cada elemento de un conjunto (dominio) $X$
+un único elemento de otro conjunto (imagen) $Y$.
+\end{quote}
+
+\begin{equation}
+ f(x)=y
+\end{equation}
+
+\pause
+
+ \begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.3\textwidth}
+      \includegraphics[width=\textwidth]{../../aux/static/funcionMatematica.png}
+            \caption*{$x \ \ \  \overset{f}{\longmapsto} \ \ \  y $}
+    \end{subfigure}
+\end{figure}
+ 
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Función matemática
+\end{textblock}
+\vspace{1.25cm}
+
+AGREGAR ejemplos 
+
+- $x + 2$
+
+- $3x^2-1$
+
+- $sin$
+
+- $2^x$
+
+- $1/x$
+
+- $log x$
+
+\end{frame}
+
+
+\begin{frame}
+ 
+ \begin{center}
+  Pensar ejemplos de relaciones entre conjuntos 
+  
+  que sean y que no sean funciones
+ \end{center}
+
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE
+ \en{Data as emprirical functions}
+ \es{Los datos como funciones empíricas}
+\end{textblock}
+\vspace{0.75cm}
+
+\begin{textblock}{160}(0,20)
+\begin{equation*}
+ f(x) = y
+\end{equation*}
+\end{textblock}
+
+\begin{textblock}{160}(43,33) 
+\begin{itemize}
+ \item[$x$] 
+    \textbf{\en{Unit of analysis}\es{Unidad de análisis}} (UA)
+ \item[$f$] 
+   \en{\textbf{Variable} of the unit of analysis}
+   \es{\textbf{Variable} de la unidad de análisis} (V)
+ \item[$y$] 
+   \en{\textbf{Value} of the variable}
+   \es{\textbf{Resultado} o valor de la variable} (R)
+\end{itemize}
+\end{textblock}
+
+
+\only<2>{
+\begin{textblock}{160}(0,65) \centering
+ \emph{Altura}(Gustavo) = $1.78$m
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{160}(0,65) \centering
+ \emph{Ideología}(Partido Obrero) = Izquierda
+\end{textblock}
+}
+
+\only<4>{
+\begin{textblock}{160}(0,65) \centering
+ \emph{Habilidad}(Maradona) $>$ \emph{Habilidad}(Messi)
+\end{textblock}
+}
+
+\only<5>{
+\begin{textblock}{140}(10,60)
+\begin{framed} \centering
+   \en{The meaning of data is implicit in their \textbf{operationalization}}
+   \es{El significado preciso de la función depende de la \textbf{operacionalización}}
+   \end{framed}
+\end{textblock}
+}
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE
+ Los modelos causales como funciones teóricas
+\end{textblock}
+\vspace{0.75cm}
+
+\begin{align*}
+ q &= b_1p + d_1i + u_1 \\
+ p &= b_2p + d_2w + u_2
+\end{align*}
+
+\vspace{0.5cm}
+
+\pause
+\centering
+\tikz{        
+    
+    \node[latent] (q) {$Q$} ;
+    \node[latent, right=of q] (p) {$P$} ;
+    
+    \node[latent, above= of q] (i) {$I$};
+    \node[latent, left=of i,xshift=0.3cm] (u1) {$U_1$};
+    
+    \node[latent, above= of p] (w) {$W$};
+    \node[latent, right=of w, xshift=-0.3cm] (u2) {$U_2$};
+    
+    \edge {u1} {q};
+    \edge {u2} {p};
+    \path[->] (q.east) edge[yshift=0.1cm] node[yshift=0.2cm]  {\small $b_2$} ([yshift=0cm]p.west);
+    \path[->] (p.west) edge[yshift=-0.1cm] node[yshift=-0.2cm]  {\small $b_1$} ([yshift=0cm]q.east);
+    \path[->] (i.south) edge node[yshift=0.1cm,xshift=0.2cm]  {\small $d_1$} ([yshift=0cm]q.north);
+    \path[->] (w.south) edge node[yshift=0.1cm,xshift=-0.2cm]  {\small $d_2$} ([yshift=0cm]p.north);
+    
+}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+ Poblaciones
+
+lorenz 
+
+juego de la vida
+
+\end{frame}
+
+
+ 
+\begin{frame}[plain]
+\centering
+  \includegraphics[width=0.35\textwidth]{../../aux/static/pachacuteckoricancha.jpg}
+\end{frame}
+
+
+
+
+
+
+\end{document}
+
+
+
