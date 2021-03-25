@@ -183,6 +183,45 @@ AGREGAR ejemplos
 }
 \end{frame}
 
+% \begin{frame}[plain]
+%  \begin{textblock}{160}(0,4)
+%  \centering \LARGE
+%  Los modelos causales como funciones teóricas
+% \end{textblock}
+% \vspace{0.75cm}
+% 
+% \begin{align*}
+%  q &= b_1p + d_1i + u_1 \\
+%  p &= b_2p + d_2w + u_2
+% \end{align*}
+% 
+% \vspace{0.5cm}
+% 
+% \pause
+% \centering
+% \tikz{        
+%     
+%     \node[latent] (q) {$Q$} ;
+%     \node[latent, right=of q] (p) {$P$} ;
+%     
+%     \node[latent, above= of q] (i) {$I$};
+%     \node[latent, left=of i,xshift=0.3cm] (u1) {$U_1$};
+%     
+%     \node[latent, above= of p] (w) {$W$};
+%     \node[latent, right=of w, xshift=-0.3cm] (u2) {$U_2$};
+%     
+%     \edge {u1} {q};
+%     \edge {u2} {p};
+%     \path[->] (q.east) edge[yshift=0.1cm] node[yshift=0.2cm]  {\small $b_2$} ([yshift=0cm]p.west);
+%     \path[->] (p.west) edge[yshift=-0.1cm] node[yshift=-0.2cm]  {\small $b_1$} ([yshift=0cm]q.east);
+%     \path[->] (i.south) edge node[yshift=0.1cm,xshift=0.2cm]  {\small $d_1$} ([yshift=0cm]q.north);
+%     \path[->] (w.south) edge node[yshift=0.1cm,xshift=-0.2cm]  {\small $d_2$} ([yshift=0cm]p.north);
+%     
+% }
+% 
+% 
+% \end{frame}
+
 \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
  \centering \LARGE
@@ -190,45 +229,76 @@ AGREGAR ejemplos
 \end{textblock}
 \vspace{0.75cm}
 
-\begin{align*}
- q &= b_1p + d_1i + u_1 \\
- p &= b_2p + d_2w + u_2
-\end{align*}
-
-\vspace{0.5cm}
-
-\pause
 \centering
-\tikz{        
+
+\tikz{         
+    \node[det, fill=black!15] (r) {$r$} ; 
+    \node[const, left=of r, xshift=-2.35cm] (r_name) {\small \en{Result}\es{Ganar/perder}:}; 
+    \node[const, right=of r] (dr) {\normalsize $ r = (d>0)$}; 
+
+    \node[latent, above=of r, yshift=-0.45cm] (d) {$d$} ; %
+    \node[const, right=of d] (dd) {\normalsize $ d=p_i-p_j$}; 
+    \node[const, left=of d, xshift=-2.35cm] (s_name) {\small \en{Difference}\es{Diferencia}:};
     
-    \node[latent] (q) {$Q$} ;
-    \node[latent, right=of q] (p) {$P$} ;
+    \node[latent, above=of d, xshift=-0.8cm, yshift=-0.45cm] (p1) {$p_i$} ; %
+    \node[latent, above=of d, xshift=0.8cm, yshift=-0.45cm] (p2) {$p_j$} ; %
+    \node[const, left=of p1, xshift=-1.55cm] (p_name) {\small \en{Performance}\es{Desempeño}:}; 
+
+    \node[latent, above=of p1,yshift=0.7cm,fill=white] (s1) {$s_i$} ; %
+    \node[latent, above=of p2,yshift=0.7cm,fill=white] (s2) {$s_j$} ; %
     
-    \node[latent, above= of q] (i) {$I$};
-    \node[latent, left=of i,xshift=0.3cm] (u1) {$U_1$};
+    \node[latent, above=of p1,xshift=-1cm, yshift=-0.45cm,fill=white] (u1) {$u_i$} ; 
+    \node[latent, above=of p2,xshift=1cm, yshift=-0.45cm,fill=white] (u2) {$u_j$} ; 
+    \node[const, left=of u1, xshift=-0.55cm] (u_name) {\small \en{Others factors}\es{Otros factores}:}; 
     
-    \node[latent, above= of p] (w) {$W$};
-    \node[latent, right=of w, xshift=-0.3cm] (u2) {$U_2$};
+    \node[const, right=of p2] (dp2) {\normalsize $p = s + u$};
+
+    \node[const, left=of s1, xshift=-1.55cm] (s_name) {\small \en{Skill}\es{Habilidad}:}; 
     
-    \edge {u1} {q};
-    \edge {u2} {p};
-    \path[->] (q.east) edge[yshift=0.1cm] node[yshift=0.2cm]  {\small $b_2$} ([yshift=0cm]p.west);
-    \path[->] (p.west) edge[yshift=-0.1cm] node[yshift=-0.2cm]  {\small $b_1$} ([yshift=0cm]q.east);
-    \path[->] (i.south) edge node[yshift=0.1cm,xshift=0.2cm]  {\small $d_1$} ([yshift=0cm]q.north);
-    \path[->] (w.south) edge node[yshift=0.1cm,xshift=-0.2cm]  {\small $d_2$} ([yshift=0cm]p.north);
-    
+    \edge {d} {r};
+    \edge {p1,p2} {d};
+    \edge {s1} {p1};
+    \edge {s2} {p2};
+    \edge {u1} {p1};
+    \edge {u2} {p2};
 }
 
 
 \end{frame}
 
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE
+ Determinismo
+\end{textblock}
+\vspace{0.75cm}
+
+FRASE o IMAGEN
+
+\end{frame}
+
 
 \begin{frame}[plain]
- Poblaciones
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE
+ Determinismo
+\end{textblock}
+\vspace{0.75cm}
 
-lorenz 
+\centering
 
-juego de la vida
+\tikz{         
+    \node[latent] (n1) {$x_n$} ; 
+    
+    \node[latent, right=of n1, xshift=3cm] (n2) {$x_{n+1}$} ;
+    
+     \path[->] (n1) edge node[yshift=0.5cm] {$rx_n(1-x_n)$} (n2);
+
+}
+ 
+%lorenz 
+
+%juego de la vida
 
 \end{frame}
 
