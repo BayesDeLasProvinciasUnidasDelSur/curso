@@ -28,22 +28,140 @@ destino_final <- function(r, T=2000, pasado = 0.5){
     return(pasado)
 }
 
-rs = seq(2.5,4,0.002)
-n = length(rs)
-T = 1000
-eje_r = rep(0,n*T)
-eje_f = rep(0,n*T)
-for(i in seq(1,n)){#i=150
-    eje_r[seq(T*(i-1)+1,T*i)] = rs[i] 
-    eje_f[seq(T*(i-1)+1,T*i)] = historia(rs[i],T*2)[seq(T+1,T*2)]
-    #plot(eje_f,pch=19,cex=0.3,axes = F,ann = F,ylim=c(0,1))
-}
 
-plot(eje_r, eje_f,pch=19,cex=0.1,xlim=c(2.5,4),col=rgb(0,0,0,0.2))
-axis(side=2,cex.axis=0.6,tck=0.015)
-axis(side=1,cex.axis=0.6,tck=0.015)
-mtext(text= "r",side =1,line=2,cex=2.5)
-mtext(text = "Dinámica" ,side =2,line=1,cex=2.5)
+plot(historia(1,100,0.5), cex=0.5, pch=19 ,ylab="",xlab="",axes = F,ann = F, ylim=c(0,1))
+lines(historia(1,100,0.5))
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext(text= "Parámetro r = 1.00",side =1,line=2.33,cex=2)
+mtext(text = "Población" ,side =2,line=2,cex=2)
+
+plot(historia(1,100,0.5), cex=0.5, pch=19 ,ylab="",xlab="",axes = F,ann = F, ylim=c(0,1))
+lines(historia(1,100,0.5))
+points(historia(1,100,0.75), cex=0.5, pch=19)
+lines(historia(1,100,0.75))
+points(historia(1,100,0.25), cex=0.5, pch=19)
+lines(historia(1,100,0.25))
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext(text= "Parámetro r = 1.00",side =1,line=2.33,cex=2)
+mtext(text = "Población" ,side =2,line=2,cex=2)
+
+
+plot(historia(1.3,100,0.5), cex=0.5, pch=19 ,ylab="",xlab="",axes = F,ann = F, ylim=c(0,1))
+lines(historia(1.3,100,0.5))
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext(text= "Parámetro r = 1.30",side =1,line=2.33,cex=2)
+mtext(text = "Población" ,side =2,line=2,cex=2)
+
+
+plot(historia(2,100,0.5), cex=0.5, pch=19 ,ylab="",xlab="",axes = F,ann = F, ylim=c(0,1))
+lines(historia(2,100,0.5))
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext(text= "Parámetro r = 2.00",side =1,line=2.33,cex=2)
+mtext(text = "Población" ,side =2,line=2,cex=2)
+
+
+plot(historia(2.5,100,0.5), cex=0.5, pch=19 ,ylab="",xlab="",axes = F,ann = F, ylim=c(0,1))
+lines(historia(2.5,100,0.5))
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext(text= "Parámetro r = 2.50",side =1,line=2.33,cex=2)
+mtext(text = "Población" ,side =2,line=2,cex=2)
+
+plot(historia(2.75,100,0.5), cex=0.5, pch=19 ,ylab="",xlab="",axes = F,ann = F, ylim=c(0,1))
+lines(historia(2.75,100,0.5))
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext(text= "Parámetro r = 2.75",side =1,line=2.33,cex=2)
+mtext(text = "Población" ,side =2,line=2,cex=2)
+
+
+plot(historia(3,100,0.5), cex=0.5, pch=19 ,ylab="",xlab="",axes = F,ann = F, ylim=c(0,1))
+lines(historia(3,100,0.5))
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext(text= "Parámetro r = 3.00",side =1,line=2.33,cex=2)
+mtext(text = "Población" ,side =2,line=2,cex=2)
+
+
+plot(historia(3.25,100,0.5), cex=0.5, pch=19 ,ylab="",xlab="",axes = F,ann = F, ylim=c(0,1))
+lines(historia(3.25,100,0.5))
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext(text= "Parámetro r = 3.25",side =1,line=2.33,cex=2)
+mtext(text = "Población" ,side =2,line=2,cex=2)
+
+plot(historia(3.5,100,0.5), cex=0.5, pch=19 ,ylab="",xlab="",axes = F,ann = F, ylim=c(0,1))
+lines(historia(3.5,100,0.5))
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext(text= "Parámetro r = 3.50",side =1,line=2.33,cex=2)
+mtext(text = "Población" ,side =2,line=2,cex=2)
+
+plot(historia(3.75,100,0.5), cex=0.5, pch=19 ,ylab="",xlab="",axes = F,ann = F, ylim=c(0,1))
+lines(historia(3.75,100,0.5))
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext(text= "Parámetro r = 3.75",side =1,line=2.33,cex=2)
+mtext(text = "Población" ,side =2,line=2,cex=2)
+
+plot(historia(3.99,100,0.5), cex=0.5, pch=19 ,ylab="",xlab="",axes = F,ann = F, ylim=c(0,1))
+lines(historia(3.99,100,0.5))
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext(text= "Parámetro r = 3.99",side =1,line=2.33,cex=2)
+mtext(text = "Población" ,side =2,line=2,cex=2)
+
+plot(historia(3.99,30,0.5), cex=0.5, pch=19 ,ylab="",xlab="",axes = F,ann = F, ylim=c(0,1), type="l", lwd=2)
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext(text= "Parámetro r = 3.99",side =1,line=2.33,cex=2)
+mtext(text = "Población" ,side =2,line=2,cex=2)
+
+plot(historia(3.99,30,0.499), cex=0.5, pch=19 ,ylab="",xlab="",axes = F,ann = F, ylim=c(0,1), type="l", lwd=2,col="red")
+lines(historia(3.99,30,0.5),  lwd=2)
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext(text= "Parámetro r = 3.99",side =1,line=2.33,cex=2)
+mtext(text = "Población" ,side =2,line=2,cex=2)
+
+plot(historia(3.99,2000,0.499), cex=0.1, pch=19 ,ylab="",xlab="",axes = F,ann = F, ylim=c(0,1))
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext(text= "Parámetro r = 3.99",side =1,line=2.33,cex=2)
+mtext(text = "Población" ,side =2,line=2,cex=2)
+
 
 
 #######################################
