@@ -158,11 +158,11 @@
  \vspace{0.75cm}
  
  \begin{align*}
-  \onslide<1->{e &= u_e \\ 
+  \onslide<4->{e &= u_e \\ 
   t &= u_t \\}
-  \onslide<2->{r &= f(t,u_r) = t \vee u_r \\}
-  \onslide<3->{a &= f(e,t,u_a) = e \vee t \vee u_a \\}
-  \onslide<4->{l &= f(a,u_l) = a \vee u_l}
+  \onslide<1->{r &= f(t,u_r) = t \vee u_r \\}
+  \onslide<2->{a &= f(e,t,u_a) = e \vee t \vee u_a \\}
+  \onslide<3->{l &= f(a,u_l) = a \vee u_l}
  \end{align*} 
  \end{frame}
 
@@ -1617,6 +1617,266 @@ $P(r|t^*,a^*) = \frac{\only<13>{P(r,t^*,a^*)}\only<14->{P(t^*,a^*) P(r|t^*)}}{P(
 }
 
 \end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Flujos de inferencia
+\end{textblock}
+
+\begin{textblock}{160}(0,18)
+\centering
+ \begin{tabular}{c c|c}
+ & $\hfrac{\text{Intermedio}}{\text{no observable}}$ &   $\hfrac{\text{Intermedio}}{\text{observable}}$ \\
+ & & \\
+ $ e \rightarrow a \rightarrow l $    & $P(l) \neq P(l|e)$ & $P(l|a) \overset{\phantom{?}}{=} P(l|e,a)$ \\ 
+ $ l \leftarrow a \leftarrow t $      &  $P(t) \neq P(t|l)$  & $P(t|a) \overset{\phantom{?}}{=} P(t|a,l)$ \\ 
+ $ a \leftarrow t \rightarrow r $     & $P(r) \only<1>{\overset{?}{=}}\only<2->{\neq} P(r|a)$ & $P(r|t) \only<-2>{\overset{?}{=}}\only<3>{\overset{\phantom{?}}{=}} P(r|t,a)$ \\
+ $ e \rightarrow a \leftarrow t $     & $P(t) = P(t|e)$ & $P(t|a) \overset{?}{=} P(t|e,a)$ \\
+            $\overset{\downarrow}{l}$  & $P(t) = P(t|e)$ & $P(t|l) \overset{?}{=} P(t|e,l)$
+ \end{tabular} 
+ \end{textblock}
+ 
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large
+ $P(t|a) \overset{?}{=} P(t|e,a)$
+\end{textblock}
+
+\only<1->{
+\begin{textblock}{40}(0,16)
+\centering
+  \scalebox{.6}{
+\tikz{ %
+        
+        
+        \node[factor] (fa) {} ;
+        \node[det, fill=black!15, below=of fa, minimum size=0.55cm, yshift=0.6cm] (a) {$a$} ; %
+        
+        \node[factor, below=of a, yshift=0.6cm] (fl) {} ;
+        \node[det, below=of fl, minimum size=0.55cm,yshift=0.6cm] (l) {$l$} ; %
+        
+        \node[det, above=of fa, minimum size=0.55cm, xshift=-0.8cm, yshift=-0.6cm] (e) {$e$} ; %
+        \node[factor, above=of e, yshift=-0.6cm] (fe) {} ;
+        
+        \node[det,minimum size=0.55cm, above=of fa, xshift=0.8cm, yshift=-0.6cm] (t) {$t$} ; %
+        \node[factor, above=of t, yshift=-0.6cm] (ft) {} ;
+        \node[factor, below=of t, xshift=0.8cm, yshift=0.6cm] (fr) {} ;
+        \node[det,minimum size=0.55cm, below=of fr, yshift=0.6cm] (r) {$r$} ; %
+        
+        \edge[-] {fa} {a,e,t};
+        \edge[-] {fe} {e};
+        \edge[-] {ft} {t};
+        \edge[-] {fr} {r,t};
+        \edge[-] {fl} {l,a};
+        
+        } 
+}   
+\end{textblock}
+}
+
+\begin{textblock}{100}(50,22)
+ \onslide<2->{$m_{f_a\rightarrow t}(t) =  \sum_e P(e)P(a^*|e,t) $}  \\[0.1cm]
+ $\onslide<3->{P(t|a^*) = \frac{P(t,a^*)}{P(a^*)} } \onslide<4->{ = \frac{1}{P(a^*)} \sum_{e} P(e)P(t)P(a^*|e,t)}$ \\[0.1cm]
+ \end{textblock}
+
+\only<5->{
+\begin{textblock}{40}(0,52)
+\centering
+  \scalebox{.6}{
+\tikz{ %
+        
+        
+        \node[factor] (fa) {} ;
+        \node[det, fill=black!15, below=of fa, minimum size=0.55cm, yshift=0.6cm] (a) {$a$} ; %
+        
+        \node[factor, below=of a, yshift=0.6cm] (fl) {} ;
+        \node[det, below=of fl, minimum size=0.55cm,yshift=0.6cm] (l) {$l$} ; %
+        
+        \node[det, fill=black!15, above=of fa, minimum size=0.55cm, xshift=-0.8cm, yshift=-0.6cm] (e) {$e$} ; %
+        \node[factor, above=of e, yshift=-0.6cm] (fe) {} ;
+        
+        \node[det, minimum size=0.55cm, above=of fa, xshift=0.8cm, yshift=-0.6cm] (t) {$t$} ; %
+        \node[factor, above=of t, yshift=-0.6cm] (ft) {} ;
+        \node[factor, below=of t, xshift=0.8cm, yshift=0.6cm] (fr) {} ;
+        \node[det,minimum size=0.55cm, below=of fr, yshift=0.6cm] (r) {$r$} ; %
+        
+        \edge[-] {fa} {a,e,t};
+        \edge[-] {fe} {e};
+        \edge[-] {ft} {t};
+        \edge[-] {fr} {r,t};
+        \edge[-] {fl} {l,a};
+        
+        } 
+}   
+\end{textblock}
+}
+
+\only<6->{
+\begin{textblock}{120}(45,52)
+ $\onslide<6->{m_{f_a\rightarrow t}(t) =  P(e^*)P(a^*|e^*,t)}$ \\[0.1cm]
+ $\onslide<7->{P(t|e^*,a^*) = \frac{P(t,e^*,a^*)}{P(e^*,a^*)}} \onslide<8->{= \frac{1}{P(e^*,a^*)} P(e^*)P(t)P(a^*|e^*,t) } $ \\[0.1cm]
+ $\onslide<9->{m_{f_a\rightarrow a}\phantom{(a)} = \sum_t P(e^*)P(t)P(a^*|e^*,t)} \onslide<10->{ = P(e^*,a^*)} $
+ \end{textblock}
+}
+
+\only<11->{
+\begin{textblock}{80}(60,38)
+$P(t=1|a=1) \approx 0.42$
+\end{textblock}
+}
+
+\only<12->{
+\begin{textblock}{80}(60,75)
+$P(t=1|e=1,a=1) \approx 0.008$
+\end{textblock}
+}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Flujos de inferencia
+\end{textblock}
+
+\begin{textblock}{160}(0,18)
+\centering
+ \begin{tabular}{c c|c}
+ & $\hfrac{\text{Intermedio}}{\text{no observable}}$ &   $\hfrac{\text{Intermedio}}{\text{observable}}$ \\
+ & & \\
+ $ e \rightarrow a \rightarrow l $    & $P(l) \neq P(l|e)$ & $P(l|a) \overset{\phantom{?}}{=} P(l|e,a)$ \\ 
+ $ l \leftarrow a \leftarrow t $      &  $P(t) \neq P(t|l)$  & $P(t|a) \overset{\phantom{?}}{=} P(t|a,l)$ \\ 
+ $ a \leftarrow t \rightarrow r $     & $P(r) \neq P(r|a)$ & $P(r|t) \overset{\phantom{?}}{=} P(r|t,a)$ \\
+ $ e \rightarrow a \leftarrow t $     & $P(t) \overset{\phantom{?}}{=}  P(t|e)$ & $P(t|a) \only<1>{\overset{?}{=}}\only<2->{\neq} P(t|e,a)$ \\
+            $\overset{\downarrow}{l}$  & $P(t) \overset{\phantom{?}}{=}  P(t|e)$ & $P(t|l) \overset{?}{=} P(t|e,l)$
+ \end{tabular} 
+ \end{textblock}
+ 
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large
+ $P(t|l) \overset{?}{=} P(t|e,l)$
+\end{textblock}
+
+\only<1->{
+\begin{textblock}{40}(0,16)
+\centering
+  \scalebox{.6}{
+\tikz{ %
+        
+        
+        \node[factor] (fa) {} ;
+        \node[det, below=of fa, minimum size=0.55cm, yshift=0.6cm] (a) {$a$} ; %
+        
+        \node[factor, below=of a, yshift=0.6cm] (fl) {} ;
+        \node[det, fill=black!15, below=of fl, minimum size=0.55cm,yshift=0.6cm] (l) {$l$} ; %
+        
+        \node[det, above=of fa, minimum size=0.55cm, xshift=-0.8cm, yshift=-0.6cm] (e) {$e$} ; %
+        \node[factor, above=of e, yshift=-0.6cm] (fe) {} ;
+        
+        \node[det,minimum size=0.55cm, above=of fa, xshift=0.8cm, yshift=-0.6cm] (t) {$t$} ; %
+        \node[factor, above=of t, yshift=-0.6cm] (ft) {} ;
+        \node[factor, below=of t, xshift=0.8cm, yshift=0.6cm] (fr) {} ;
+        \node[det,minimum size=0.55cm, below=of fr, yshift=0.6cm] (r) {$r$} ; %
+        
+        \edge[-] {fa} {a,e,t};
+        \edge[-] {fe} {e};
+        \edge[-] {ft} {t};
+        \edge[-] {fr} {r,t};
+        \edge[-] {fl} {l,a};
+        
+        } 
+}   
+\end{textblock}
+}
+
+\begin{textblock}{100}(50,22)
+ \onslide<2->{$m_{f_a\rightarrow t}(t) =  \sum_{ea} P(e)P(a|e,t) P(l^*|a) $}  \\[0.1cm]
+ $\onslide<3->{P(t|l^*) = \frac{P(t,l^*)}{P(l^*)} } \onslide<4->{ = \frac{1}{P(l^*)} \sum_{ea} P(e)P(t)P(a|e,t) P(l^*|a)}$
+ \end{textblock}
+
+\only<6->{
+\begin{textblock}{40}(0,52)
+\centering
+  \scalebox{.6}{
+\tikz{ %
+        
+        
+        \node[factor] (fa) {} ;
+        \node[det, below=of fa, minimum size=0.55cm, yshift=0.6cm] (a) {$a$} ; %
+        
+        \node[factor, below=of a, yshift=0.6cm] (fl) {} ;
+        \node[det, fill=black!15, below=of fl, minimum size=0.55cm,yshift=0.6cm] (l) {$l$} ; %
+        
+        \node[det, fill=black!15, above=of fa, minimum size=0.55cm, xshift=-0.8cm, yshift=-0.6cm] (e) {$e$} ; %
+        \node[factor, above=of e, yshift=-0.6cm] (fe) {} ;
+        
+        \node[det, minimum size=0.55cm, above=of fa, xshift=0.8cm, yshift=-0.6cm] (t) {$t$} ; %
+        \node[factor, above=of t, yshift=-0.6cm] (ft) {} ;
+        \node[factor, below=of t, xshift=0.8cm, yshift=0.6cm] (fr) {} ;
+        \node[det,minimum size=0.55cm, below=of fr, yshift=0.6cm] (r) {$r$} ; %
+        
+        \edge[-] {fa} {a,e,t};
+        \edge[-] {fe} {e};
+        \edge[-] {ft} {t};
+        \edge[-] {fr} {r,t};
+        \edge[-] {fl} {l,a};
+        
+        } 
+}   
+\end{textblock}
+}
+
+\only<7->{
+\begin{textblock}{120}(45,52)
+ $\onslide<7->{m_{f_a\rightarrow t}(t) =  \sum_a P(e^*)P(a|e^*,t) P(l^*|a)}$ \\[0.1cm]
+ $\onslide<8->{P(t|e^*,a^*) = \frac{P(t,e^*,l^*)}{P(e^*,l^*)}} \onslide<9->{= \frac{1}{P(e^*,l^*)} \sum_a P(e^*)P(t)P(a|e^*,t) P(l^*|a)} $ \\[0.1cm]
+ $ \only<10>{m_{f_a\rightarrow a}(a) = \sum_{ta} P(e^*)P(t)P(a|e^*,t)} \only<11->{m_{f_{\,l\,}\rightarrow l\,}\phantom{(a)} =  \sum_{ta} P(e^*)P(t)P(a|e^*,t)P(l^*|a)} \only<12->{= P(e^*, l^*)} $
+ \end{textblock}
+}
+
+\only<5->{
+\begin{textblock}{80}(60,38)
+$P(t=1|l=1) \approx 0.27$
+\end{textblock}
+}
+
+\only<13->{
+\begin{textblock}{80}(60,75)
+$P(t=1|e=1,l=1) \approx 0.008$
+\end{textblock}
+}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Flujos de inferencia
+\end{textblock}
+
+\begin{textblock}{160}(0,18)
+\centering
+ \begin{tabular}{c c|c}
+ & $\hfrac{\text{Intermedio}}{\text{no observable}}$ &   $\hfrac{\text{Intermedio}}{\text{observable}}$ \\
+ & & \\
+ $ e \rightarrow a \rightarrow l $    & $P(l) \neq P(l|e)$ & $P(l|a) \overset{\phantom{?}}{=} P(l|e,a)$ \\ 
+ $ l \leftarrow a \leftarrow t $      &  $P(t) \neq P(t|l)$  & $P(t|a) \overset{\phantom{?}}{=} P(t|a,l)$ \\ 
+ $ a \leftarrow t \rightarrow r $     & $P(r) \neq P(r|a)$ & $P(r|t) \overset{\phantom{?}}{=} P(r|t,a)$ \\
+ $ e \rightarrow a \leftarrow t $     & $P(t) \overset{\phantom{?}}{=}  P(t|e)$ & $P(t|a) \neq P(t|e,a)$ \\
+            $\overset{\downarrow}{l}$  & $P(t) \overset{\phantom{?}}{=}  P(t|e)$ & $P(t|l) \only<1>{\overset{?}{=}}\only<2->{\neq} P(t|e,l)$
+ \end{tabular} 
+ \end{textblock}
+ 
+\end{frame}
+
 
 
 
