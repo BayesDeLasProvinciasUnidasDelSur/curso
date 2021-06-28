@@ -1,0 +1,59 @@
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\input{../../aux/tex/diapo_encabezado.tex}
+\input{../../aux/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+ 
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+\newif\ifen
+\newif\ifes
+\newcommand{\en}[1]{\ifen#1\fi}
+\newcommand{\es}[1]{\ifes#1\fi}
+\estrue
+
+%\title[Bayes del Sur]{}
+
+\begin{document}
+
+\color{black!85}
+\large
+
+\begin{frame}[plain,noframenumbering]
+ 
+ \begin{textblock}{90}(00,05)
+\begin{center}
+ \huge  \textcolor{black!66}{Creencias, datos y sorpresas}
+\end{center}
+\end{textblock}
+
+ %\vspace{2cm}brown
+%\maketitle
+\Wider[2cm]{
+\includegraphics[width=1\textwidth]{../../aux/static/peligro_predador}
+}
+\end{frame}
+
+
+\begin{frame}[plain]
+
+\centering
+  \includegraphics[width=0.55\textwidth]{../../aux/static/pachacuteckoricancha.jpg}
+\end{frame}
+
+
+
+
+
+\end{document}
+
+
+
