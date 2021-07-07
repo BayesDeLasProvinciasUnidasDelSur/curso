@@ -43,309 +43,638 @@
 \Wider[2cm]{
 \includegraphics[width=1\textwidth]{../../aux/static/peligro_predador}
 }
-\end{frame}
 
+ \begin{textblock}{47}(113,74)
+\centering \large  \textcolor{white!55}{Sum-product algorithm}
+\end{textblock}
+
+\end{frame}
 
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \Large Las reglas de la probabilidad
-\end{textblock}
-
-
-\vspace{0.75cm}
-
-
-
-\begin{equation*}
-  \text{Marginal}_{i} = \sum_j \text{Conjunta}_{ij}  \ \ \ \ \ \ \ \ \ \ \ \  \text{Condicional}_{j|i} = \frac{\text{Conjunta}_{ij}}{\text{Marginal}_{i}}
-\end{equation*}
-
-\pause
-\vspace{0.75cm}
-
-
-\begin{columns}[t]
-\begin{column}{0.5\textwidth}
- \centering \textbf{Regla de la suma}
+ \centering \Large
+ Modelo Causal
+ \end{textblock}
+ \centering
+ \vspace{0.75cm}
  
+ \tikz{
+    \node[det] (l) {$l$} ; %
+    \node[det, above=of l] (a) {$a$} ; %
+    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+    \node[det, above=of a,xshift=-1.5cm] (e) {$e$} ; %
+    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+    
+    \edge {a} {l};
+    \edge {t,e} {a};
+    \edge {t} {r};
+    
+    \node[const, left= of e, xshift=-0.1cm] (cpd_e) {Entradera:};
+    \node[const, right= of t, xshift=0.1cm] (cpd_t) {:Terremoto};
+    \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
+    \node[const, right= of r, xshift=0.1cm] (cpd_r) {:Redes};
+    \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
+    
+    }
+
+
  
-\begin{equation*}
- P(X) = \sum_Y P(X,Y)
-\end{equation*}
+ \end{frame}
  
- \justifying \footnotesize
-  Cualquier distribución marginal puede ser obtenida integrando la distribución conjunta
+ \begin{frame}[plain]
+    \begin{textblock}{160}(0,4)
+    \centering \Large
+    Modelo Causal
+    \end{textblock}
+    \centering
+    \vspace{0.75cm}
 
- \end{column}
- \begin{column}{0.5\textwidth}
-\centering  \textbf{Regla del producto}
+    
+    \begin{itemize}
+     \item[$\bullet$] Permite expresar todas las hipótesis de forma intuititva.
+     \item[$\bullet$] Representa la probabilidad conjunta de forma completa.
+     \item[$\bullet$] Proporciona información para hacer inferencia eficientemente.
+    \end{itemize}
 
-\begin{equation*}
- P(X,Y) = P(Y|X) P(X)
-\end{equation*}
+     
+ \end{frame}
 
- \justifying \footnotesize
-Cualquier distribución conjunta puede ser expresada como el producto de distribuciones condicionales uni-dimensionles.
-
-\end{column}
-\end{columns}
-
-\end{frame}
 
  \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
-  \centering \Large Las reglas de la probabilidad
- \end{textblock}
-\vspace{0.7cm} 
- 
- 
-  \centering 
-  
-   \Wider[-0.5cm]{
-  \begin{framed}
-  \centering
- Teorema de Cox
-  
-Son las reglas del razonamiento con incertidumbre
-  \end{framed}
-}
- 
- 
-\vspace{1cm}
- \Wider[0.5cm]{
-
-Las \'unicas que grantizan:
-\begin{itemize}
- \item[$\bullet$] Representaci\'on de las creencias con valores reales 
- \item[$\bullet$] Actualizaci\'on en la direcci\'on de la evidencia
- \item[$\bullet$] Consistencia
- \end{itemize}
-}
- 
-% In 1946, thanks to Cox, it was now a theorem that any set of rules for conducting inference, in which we represent degrees of plausibility by real numbers, is necessarily either equivalent to the Laplace-Jefreys rules, or inconsistent
- 
-\only<2>{
- \begin{textblock}{160}(0,92)
-  \tiny \centering  \href{https://doi.org/10.1119/1.1990764}{Cox, R (1946). Probability, frequency and reasonable expectation.}
- \end{textblock}
- }
-%  
- \end{frame}
- 
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering \Large Teorema de Bayes 
-\end{textblock}
-
-\only<1>{
-\begin{textblock}{160}(0,43)
-\begin{equation*}
- P(X,Y) = P(Y,X)
-\end{equation*}
-\end{textblock}
-}
-
-
-\only<2>{
-\begin{textblock}{160}(0,43)
-\begin{equation*}
- P(Y|X) P(X) =  P(X,Y) = P(Y,X) = P(X|Y) P(Y)
-\end{equation*}
-\end{textblock}
-}
-
-\only<3>{
-\begin{textblock}{160}(0,43)
-\begin{equation*}
- P(Y|X) P(X) = P(X|Y) P(Y) 
-\end{equation*}
-\end{textblock}
-}
-
-
-\only<4>{
-\begin{textblock}{160}(0,43)
-\begin{equation*}
- P(Y|X) = \frac{p(X|Y) p(Y)}{p(X)}
-\end{equation*}
-\end{textblock}
-}
-
-
-\only<5>{
-\begin{textblock}{160}(0,43)
-\begin{equation*}
-P(\text{Hip\'otesis }|\text{ Datos}) = \frac{P(\text{Datos }|\text{ Hip\'otesis}) P(\text{Hip\'otesis})}{P(\text{Datos})}
-\end{equation*}
-\end{textblock}
-
-}
-
-
-\only<6>{
-\begin{textblock}{160}(0,37.75)
-\begin{equation*}
-\underbrace{P(\text{Hip\'otesis }|\text{ Datos})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos }|\text{ Hip\'otesis})}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis})}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos})}_{\text{\scriptsize Evidencia}}}
-\end{equation*}
-\end{textblock}
-
-}
-
-\vspace{0.2cm}
-
-\only<7->{  
-%\vspace{0.3cm}
-\Wider[2cm]{
-\begin{textblock}{160}(0,34.25) 
-\begin{equation*}
-\underbrace{P(\text{Hip\'otesis }|\text{ Datos, Modelo})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos }|\text{ Hip\'otesis, Modelo})}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis }|\text{ Modelo})}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos }|\text{ Modelo})}_{\text{\scriptsize Evidencia}}}
-\end{equation*}
-
-\end{textblock}
-
-}
-}
-% 
-% \only<8->{  
-% \begin{textblock}{100}(30,65)
-% \begin{mdframed}[backgroundcolor=black!30]
-% \centering \vspace{0.05cm}
-% El \textbf{modelo} es lo que permite relacionar 
-% 
-% los \textbf{datos} con nuestras \textbf{hipótesis}! 
-% \vspace{0.1cm}
-% \end{mdframed}
-% \end{textblock}
-% }
-
-
-
-
-
-\end{frame}
-
-
-
-\begin{frame}[plain]
- \only<1->{
- \begin{textblock}{160}(0,4)
  \centering \Large
- Modelos gr\'aficos
+ Causalidad
  \end{textblock}
-}
 
- \only<1>{
- \begin{textblock}{160}(0,10)
- \centering
-  \includegraphics[width=0.85\textwidth]{figures/modelo_grafico_0.pdf}
- \end{textblock}
- }
- 
- \only<2>{
- \begin{textblock}{160}(0,10)
- \centering
-  \includegraphics[width=0.85\textwidth]{figures/modelo_grafico_01.pdf}
- \end{textblock}
- }
+ \centering \normalsize
+ Causal relationships are expressed in the form of deterministic, functional equations, and probabilities are introduced through the assumption that certain variables in the equations are unobserved.
 
-  \only<3>{
- \begin{textblock}{160}(0,10)
- \centering
-  \includegraphics[width=0.85\textwidth]{figures/modelo_grafico_02.pdf}
- \end{textblock}
- }
+\end{frame} 
  
- \only<4>{
- \begin{textblock}{160}(0,10)
- \centering
-  \includegraphics[width=0.85\textwidth]{figures/modelo_grafico_02bis.pdf}
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large
+ Mecanismos Causales
  \end{textblock}
- }
+ \vspace{0.75cm}
  
- \only<5>{
- \begin{textblock}{160}(0,10)
- \centering
-  \includegraphics[width=0.85\textwidth]{figures/modelo_grafico_03.pdf}
- \end{textblock}
- }
- 
- \only<6>{
- \begin{textblock}{160}(0,10)
- \centering
-  \includegraphics[width=0.85\textwidth]{figures/modelo_grafico_04.pdf}
- \end{textblock}
- }
- 
- \only<7>{
- \begin{textblock}{160}(0,10)
- \centering
-  \includegraphics[width=0.85\textwidth]{figures/modelo_grafico_05.pdf}
- \end{textblock}
- }
- \only<8>{
- \begin{textblock}{160}(0,10)
- \centering
-  \includegraphics[width=0.85\textwidth]{figures/modelo_grafico_06.pdf}
- \end{textblock}
- }
- \only<9>{
- \begin{textblock}{160}(0,10)
- \centering
-  \includegraphics[width=0.85\textwidth]{figures/modelo_grafico_07.pdf}
- \end{textblock}
- }
- \only<10>{
- \begin{textblock}{160}(0,10)
- \centering
-  \includegraphics[width=0.85\textwidth]{figures/modelo_grafico_08.pdf}
- \end{textblock}
- }
- \only<11>{
- \begin{textblock}{160}(0,10)
- \centering
-  \includegraphics[width=0.85\textwidth]{figures/modelo_grafico_09.pdf}
- \end{textblock}
- }
- \only<12-31>{
- \begin{textblock}{160}(0,10)
- \centering
- 
-  \includegraphics[width=0.85\textwidth]{figures/modelo_grafico_10.pdf}
- \end{textblock}
-}
- \only<32->{
- \begin{textblock}{160}(0,10)
- \centering
-  \includegraphics[width=0.85\textwidth]{figures/modelo_grafico_11.pdf}
- \end{textblock}
-}
+ \begin{align*}
+  \onslide<4->{e &= u_e \\ 
+  t &= u_t \\}
+  \onslide<1->{r &= f(t,u_r) = t \vee u_r \\}
+  \onslide<2->{a &= f(e,t,u_a) = e \vee t \vee u_a \\}
+  \onslide<3->{l &= f(a,u_l) = a \vee u_l}
+ \end{align*} 
+ \end{frame}
 
-
-\only<13>{
-\begin{textblock}{140}(10,68)
-\begin{mdframed}[backgroundcolor=black!20]
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large
+ Proabilidad conjunta
+ \end{textblock}
+ \vspace{0.75cm}
+ 
+ 
+\only<1>{
+\begin{textblock}{140}(10,34)
+\begin{mdframed}[backgroundcolor=black!15]
  \centering 
-  Los factores son \'utiles para definir distribuciones 
+  Los modelos son \'utiles para definir distribuciones 
   
   de probabilidad en espacios de alta dimensión.
 \end{mdframed}
 \end{textblock}
 }
 
+
+\only<2>{
+\begin{textblock}{130}(18,33)
+\begin{flalign*}
+ & P(e,t,a,r,l) = && 
+\end{flalign*}
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{130}(18,33)
+\begin{flalign*}
+ & P(e,t,a,r,l) = P(e)\,P(t|e)\,P(a|t,e)\,P(r|a,t,e)\,P(l|a,r,t,e) && 
+\end{flalign*}
+\end{textblock}
+}
+
+\only<4>{
+\begin{textblock}{130}(18,33)
+\begin{flalign*}
+ & P(e,t,a,r,l) = P(e)\,P(t|\cancel{e})\,P(a|t,e)\,P(r|\cancel{a},t,\cancel{e})\,P(l|a,\cancel{r},\cancel{t},\cancel{e}) && 
+\end{flalign*}
+\end{textblock}
+}
+
+\only<5>{
+\begin{textblock}{130}(18,33)
+\begin{flalign*}
+ & P(e,t,a,r,l) = P(e)\,P(t)\,P(a|t,e)\,P(r|t)\,P(l|a) && 
+\end{flalign*}
+\end{textblock}
+}
+
+\only<6>{
+\begin{textblock}{130}(17.3,33)
+\begin{flalign*}
+ & \underbrace{P(e,t,a,r,l)}_{\text{Complejidad } 2^n} = P(e)\,P(t)\,P(a|t,e)\,P(r|t)\,P(l|a) && 
+\end{flalign*}
+\end{textblock}
+}
+
+\only<7>{
+\begin{textblock}{130}(17.3,33)
+\begin{flalign*}
+ & \underbrace{P(e,t,a,r,l)}_{\text{Complejidad } 2^n} = \underbrace{P(e)}_{2}\underbrace{P(t)}_{2}\underbrace{P(a|t,e)}_{2^3}\underbrace{P(r|t)}_{2^2}\underbrace{P(l|a)}_{2^2} && 
+\end{flalign*}
+\end{textblock}
+}
+
+
+ 
+%  
+%  \only<1->{
+%  \begin{textblock}{160}(0,14)
+% \begin{align*}
+%   \underbrace{P(e,t,r,a,l)}_{\text{Complejidad } 2^n} = \onslide<2->{\underbrace{P(e)P(t)P(r|t)P(a|e,t)P(l|a)}_{\text{Complejidad } 2 + 2 + 2^2 + 2^3 + 2^2}}
+%  \end{align*}
+%  \end{textblock}
+% }
+% 
+% \begin{textblock}{160}(0,34)
+%  \onslide<3>{
+%  \begin{align*}
+%  P(e|t,r,a,l) & = P(e) \\
+%  P(t|e,r,a,l) & = P(t) \\
+%  P(r|e,t,a,l) & = p(r|t) \\
+%  P(a|e,t,r,l) & = p(a|e,t) \\
+%  P(l|e,t,r,a) & = p(l|a) \\
+%  \end{align*}
+% }
+% \end{textblock}
+% 
+  
+ \end{frame}
+
+ 
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large
+ Modelo Causal \\
+ \large Prior Entradera
+ \end{textblock}
+ \vspace{0.75cm}
+ 
+ \centering
+ 
+ \begin{textblock}{160}(0,25)
+  $P(e)$ \\[0.1cm]
+    \begin{tabular}{|c|c|}
+        \hline
+        \,$e^0$\, & \,$e^1$\, \\ \hline
+        \onslide<3>{$999/1000$} & \onslide<3>{$1/1000$}   \\ \hline
+    \end{tabular}
+  \end{textblock}
+
+\begin{textblock}{160}(10,54) 
+\onslide<2->{ 
+ \begin{itemize}
+  \item[$\bullet$] Una vez cada 3 años
+  \item[$\bullet$] Una casa cada 1000 por día
+ \end{itemize}
+}
+\end{textblock}
+
+ 
+ \end{frame}
+ 
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large
+ Modelo Causal \\
+ \large Prior Terremoto
+ \end{textblock}
+ \vspace{0.75cm}
+ 
+ \centering
+
+ \begin{textblock}{160}(0,25)
+  $P(t)$ \\[0.1cm]
+    \begin{tabular}{|c|c|}
+        \hline
+        \,$t^0$\, & \,$t^1$\, \\ \hline
+        \onslide<3>{$362/365$} & \onslide<3>{$3/365$}   \\ \hline
+    \end{tabular}
+\end{textblock}
+
+ 
+ \begin{textblock}{160}(10,54)
+\onslide<2->{ 
+ \begin{itemize}
+  \item[$\bullet$] Hay 3 terremotos (leves) por años
+ \end{itemize}
+}
+\end{textblock}
+
+ 
+ \end{frame}
+ 
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large
+ Modelo Causal \\
+ \large Prior redes sociales
+ \end{textblock}
+ \vspace{0.75cm}
+ 
+ \centering
+
+ 
+ \begin{textblock}{160}(0,25)
+  $P(r|t)$ \\[0.1cm]
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \, $r^0$ \, & \, $r^1$ \,  \\ \hline
+       $(t^0)$ & \only<3-4>{$1$}\only<5>{$0.99$} & \only<3-4>{$0$}\only<5>{$0.01$}   \\ \hline
+       $(t^1)$ & \only<3-4>{$0$}\only<5>{$0.01$} & \only<3-4>{$1$}\only<5>{$0.99$}   \\ \hline
+    \end{tabular}
+\end{textblock}
+
+ 
+ \begin{textblock}{140}(10,54)
+\onslide<2->{ 
+ \begin{itemize}
+  \item[$\bullet$] Siempre que hay un terremoto, en alguna de mis redes sociales (whatsapp, facebook, twitter, instagram), se habla del tema.
+  \only<4->{\item[$\bullet$] También puedo mirar mal, o por algún momento no haya nada, o que por algún otro motivo nadie pueda comunicarse}
+ \end{itemize}
+}
+\end{textblock}
+
+ 
+ \end{frame}
+ 
+ 
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large
+ Modelo Causal \\
+ \large Prior llamada
+ \end{textblock}
+ \vspace{0.75cm}
+ 
+ \centering
+
+ 
+ \begin{textblock}{160}(0,25)
+  $P(l|a)$ \\[0.1cm]
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \, $l^0$ \, & \, $l^1$ \,  \\ \hline
+       $(a^0)$ & \onslide<3>{$0.99$} & \onslide<3>{$0.01$}   \\ \hline
+       $(a^1)$ & \onslide<3>{$0.01$} & \onslide<3>{$0.99$}   \\ \hline
+    \end{tabular}
+\end{textblock}
+
+ 
+ \begin{textblock}{140}(10,54)
+\onslide<2->{ 
+ \begin{itemize}
+  \item[$\bullet$] Siempre que se activa la alarma, me llaman desde el call center de la empresa (si no pasa nada raro)
+ \end{itemize}
+}
+\end{textblock}
+
+ \end{frame}
+ 
+ 
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large
+ Modelo Causal \\
+ \large Prior alarma
+ \end{textblock}
+ \vspace{0.75cm}
+ 
+ \centering
+
+ 
+ \begin{textblock}{160}(0,18)
+  $P(l|a)$ \\[0.1cm]
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \hspace{1cm} $a^0$ \hspace{1cm} & \hspace{1cm} $a^1$ \hspace{1cm} \\ \hline
+       $(e^0, t^0)$ & \only<10->{$0.99$}\only<4-9>{$P(\overline{\alpha})$} & \only<11->{$0.01$}\only<4-10>{$P(\alpha)$} \\ \hline
+       $(e^1, t^0)$ & \only<13->{$\approx 0.01$}\only<12>{$0.99 \cdot 0.01$}\only<7-11>{$P(\overline{\alpha} \cap \overline{\varepsilon})$}\only<6>{$P(\overline{\alpha \cup \varepsilon})$} & \only<14->{$\approx 0.99$} \only<5-13>{$P(\alpha \cup \varepsilon)$}  \\ \hline
+       $(e^0, t^1)$ & \only<15->{$\approx 0.01$}\only<8-14>{$P(\overline{\alpha} \cap \overline{\tau})$} &\only<15->{$\approx0.99$}\only<8-14>{$P(\alpha \cup \tau)$}  \\ \hline 
+       $(e^1, t^1)$ & \only<16>{$\approx 0.0001$} \only<9-15>{$P(\overline{\alpha} \cap \overline{\varepsilon}  \cap \overline{\tau})$} & \only<16>{$\approx 0.9999$} \only<9-15>{$P(\alpha \cup \varepsilon \cup \tau)$}  \\ \hline 
+    \end{tabular}
+\end{textblock}
+
+ 
+ \begin{textblock}{140}(10,52)
+\onslide<2->{ 
+ \begin{itemize}
+  \item[$\bullet$] Siempre que entra alguien a la casa o que hay un terremoto se activa la alarma (si no pasa nada raro):
+  \onslide<3->{
+  \begin{description}
+   \item[$\alpha$] Se activa sola: $P(\alpha) = 0.01$
+   \item[$\overline{\varepsilon}$] No se activa a pesar de entradera: $P(\overline{\varepsilon}) = 0.01$ 
+   \item[$\overline{\tau}$] No se activa a pesar de terremoto: $P(\overline{\tau}) = 0.01$
+  \end{description}
+}
+ \end{itemize}
+}
+\end{textblock}
+
+ \end{frame}
+ 
+ 
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large
+ Modelo Causal
+ \end{textblock}
+ 
+\begin{textblock}{160}(0,12)
+ \centering
+
+ \tikz{
+    \node[det] (l) {$l$} ; %
+    \node[det, above=of l] (a) {$a$} ; %
+    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+    \node[det, above=of a,xshift=-1.5cm] (e) {$e$} ; %
+    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+    
+    \edge {a} {l};
+    \edge {t,e} {a};
+    \edge {t} {r};
+    
+    \onslide<2->{
+    \node[const, left= of e, xshift=-0.1cm] (cpd_e) {
+    \begin{tabular}{|c|c|}
+        \hline
+        $e^0$ & $e^1$ \\ \hline
+        $0.999$ & $0.001$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_e] (n_e) {Entradera:};
+        }
+    
+    \onslide<3->{
+    \node[const, right= of t, xshift=0.1cm] (cpd_t) {
+    \begin{tabular}{|c|c|}
+        \hline
+        $t^0$ & $t^1$ \\ \hline
+        $0.992$ & $0.008$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_t] (n_t) {Terremoto:};
+    }
+    
+    \onslide<4->{
+    \node[const, left= of a, yshift=-0.7cm, xshift=-0.3cm] (cpd_a) {
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & $a^0$ & $a^1$ \\ \hline
+       ($e^0, t^0$) & $0.99$ & $0.01$  \\ \hline
+       ($e^1, t^0$) & $0.01$ & $0.99$  \\ \hline
+       ($e^0, t^1$) & $0.01$ & $0.99$  \\ \hline
+       ($e^1, t^1$) & $0.0001$ & $0.9999$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_a] (n_a) {Alarma:};
+    }
+ 
+ \onslide<5->{
+    \node[const, right= of r, xshift=0.1cm] (cpd_r) {
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \, $r^0$ \, & \, $r^1$ \,  \\ \hline
+       $(t^0)$ & $0.99$ & $0.01$   \\ \hline
+       $(t^1)$ & $0.01$ & $0.99$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_r] (n_r) {Redes:};
+    }
+    
+ 
+ \onslide<6->{
+    \node[const, right= of l, xshift=0.1cm] (cpd_l) {
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \, $l^0$ \, & \, $l^1$ \,  \\ \hline
+       $(a^0)$ & $0.99$ & $0.01$   \\ \hline
+       $(a^1)$ & $0.01$ & $0.99$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_l] (n_l) {Llamada:};
+    }
+    
+ 
+ }
+\end{textblock}
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large
+ Modelo Causal
+ \end{textblock}
+ 
+\begin{textblock}{160}(0,12)
+ \centering
+
+ \tikz{
+    \node[det] (l) {$l$} ; %
+    \node[det, above=of l] (a) {$a$} ; %
+    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+    \node[det, above=of a,xshift=-1.5cm] (e) {$e$} ; %
+    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+    
+    \edge {a} {l};
+    \edge {t,e} {a};
+    \edge {t} {r};
+    
+    \node[const, left= of e, xshift=-0.1cm] (cpd_e) {
+    \begin{tabular}{|c|c|}
+        \hline
+        $e^0$ & $e^1$ \\ \hline
+        $0.999$ & $0.001$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_e] (n_e) {Entradera:};
+    
+    \node[const, right= of t, xshift=0.1cm] (cpd_t) {
+    \begin{tabular}{|c|c|}
+        \hline
+        $t^0$ & $t^1$ \\ \hline
+        $0.992$ & $0.008$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_t] (n_t) {Terremoto:};
+
+    \node[const, left= of a, yshift=-0.7cm, xshift=-0.3cm] (cpd_a) {
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & $a^0$ & $a^1$ \\ \hline
+       ($e^0, t^0$) & $0.99$ & $0.01$  \\ \hline
+       ($e^1, t^0$) & $0.01$ & $0.99$  \\ \hline
+       ($e^0, t^1$) & $0.01$ & $0.99$  \\ \hline
+       ($e^1, t^1$) & $0.0001$ & $0.9999$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_a] (n_a) {Alarma:};
+
+    \node[const, right= of r, xshift=0.1cm] (cpd_r) {
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \, $r^0$ \, & \, $r^1$ \,  \\ \hline
+       $(t^0)$ & $0.99$ & $0.01$   \\ \hline
+       $(t^1)$ & $0.01$ & $0.99$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_r] (n_r) {Redes:};
+ 
+    \node[const, right= of l, xshift=0.1cm] (cpd_l) {
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \, $l^0$ \, & \, $l^1$ \,  \\ \hline
+       $(a^0)$ & $0.99$ & $0.01$   \\ \hline
+       $(a^1)$ & $0.01$ & $0.99$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_l] (n_l) {Llamada:};    
+ 
+ }
+\end{textblock}
+
+\only<1>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(e^0,t^0,a^0,r^0,l^0) = P(e^0)P(t^0)P(a^0|t^0,e^0)P(r^0|t^0)P(l^0|a^0) && 
+\end{flalign*}
+\end{textblock}
+}
+
+\only<2>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(e^0,t^0,a^0,r^0,l^0) = 0.999 \cdot P(t^0)P(a^0|t^0,e^0)P(r^0|t^0)P(l^0|a^0) && 
+\end{flalign*}
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(e^0,t^0,a^0,r^0,l^0) = 0.999 \cdot 0.992 \cdot 0.99 \cdot 0.99 \cdot 0.99 && 
+\end{flalign*}
+\end{textblock}
+}
+
+\only<4>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(e^0,t^0,a^0,r^0,l^0) = 0.999 \cdot 0.992 \cdot 0.99 \cdot 0.99 \cdot 0.99 \approx 0.96 && 
+\end{flalign*}
+\end{textblock}
+}
+
+\only<5>{
+ \begin{textblock}{130}(15,63)
+ \begin{flalign*}
+  & P(a^1) =  \phantom{ \sum_{e,t,r,l}} &&
+ \end{flalign*}
+ \end{textblock}
+}
+
+\only<6>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \sum_e\sum_t\sum_r\sum_l P(e,t,a^1,r,l) && 
+\end{flalign*}
+\end{textblock}
+}
+
+\only<7>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \sum_{e,t,r,l} P(e,t,a^1,r,l) && 
+\end{flalign*}
+\end{textblock}
+}
+
+\only<8>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \sum_{e,t,r,l} P(e)P(t)P(a^1|t,e)P(r|t)P(l|a^1) && 
+\end{flalign*}
+\end{textblock}
+}
+
+\only<9>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \sum_{e,t,r,\textcolor{red}{l}} P(e)P(t)P(a^1|t,e)P(r|t)\textcolor{red}{\bm{P(l|a^1)}} && 
+\end{flalign*}
+\end{textblock}
+}
+
+\only<10>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+  P(a^1) & = P(l^0|a^1) \sum_{e,t,r} P(e)P(t)P(a^1|t,e)P(r|t) \\
+ & + P(l^1|a^1) \sum_{e,t,r} P(e)P(t)P(a^1|t,e)P(r|t) &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<11>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \Big(\sum_l P(l|a^1) \Big) \Big(\sum_{e,t,r} P(e)P(t)P(a^1|t,e)P(r|t) \Big) && 
+\end{flalign*}
+\end{textblock}
+}
+
+\only<12>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \Big(\sum_l P(l|a^1) \Big) \Big(\sum_{e,\textcolor{red}{\bm{t}},r} P(e)P(t)P(a^1|t,e)P(r|\textcolor{red}{\bm{t}}) \Big) && 
+\end{flalign*}
+\end{textblock}
+}
+
+
+\only<13>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \Big(\sum_l P(l|a^1) \Big) \Big(\sum_{e,t} P(e)P(t)P(a^1|t,e)(\sum_r P(r|t)) \Big) && 
+\end{flalign*}
+\end{textblock}
+}
+
+
 \only<14>{
 \begin{textblock}{130}(15,63)
 \begin{flalign*}
- & P(d,p,r,c,a) = \color{white} P(d)P(p)P(r|d,p)P(a|r)P(c|p) && 
+ & P(a^1) = \Big(\cancel{\sum_l P(l|a^1)} \Big) \Big(\sum_{e,t} P(e)P(t)P(a^1|t,e)(\sum_r P(r|t)) \Big) && 
 \end{flalign*}
 \end{textblock}
-
 }
+
 
 \only<15>{
 \begin{textblock}{130}(15,63)
 \begin{flalign*}
- & P(d,p,r,c,a) = P(d)P(p|d)P(r|d,p)P(c|d,p,r)P(a|d,p,r,c) &&
+ & P(a^1) = \Big(\cancel{\sum_l P(l|a^1)} \Big) \Big(\sum_{e,t} P(e)P(t)P(a^1|t,e)(\cancel{\sum_r P(r|t)}) \Big) && 
 \end{flalign*}
 \end{textblock}
 }
@@ -353,7 +682,7 @@ P(\text{Hip\'otesis }|\text{ Datos}) = \frac{P(\text{Datos }|\text{ Hip\'otesis}
 \only<16>{
 \begin{textblock}{130}(15,63)
 \begin{flalign*}
- & P(d,p,r,c,a) = P(d)P(p|\cancel{d})P(r|d,p)P(c|\cancel{d},p,\cancel{r})P(a|\cancel{d},\cancel{p},r,\cancel{c}) &&
+ & P(a^1) = \sum_{e,t} P(e)P(t)P(a^1|t,e) \phantom{\cancel{\sum_h}}&& 
 \end{flalign*}
 \end{textblock}
 }
@@ -361,177 +690,75 @@ P(\text{Hip\'otesis }|\text{ Datos}) = \frac{P(\text{Datos }|\text{ Hip\'otesis}
 \only<17>{
 \begin{textblock}{130}(15,63)
 \begin{flalign*}
- & P(d,p,r,c,a) = P(d)P(p)P(r|d,p)P(a|r)P(c|p) && 
+ & P(a^1) = \sum_{e,t} P(e)P(t)P(a^1|t,e) = ?  && 
 \end{flalign*}
 \end{textblock}
-
 }
 
 \only<18>{
 \begin{textblock}{130}(15,63)
 \begin{flalign*}
- & P(d^1,p^1,r^1,c^1,a^1) = P(d^1)P(p^1)P(r^1|d^1,p^1)P(a^1|r^1)P(c^1|p^1) && 
+ & P(a^1) = \sum_{e,t} P(e)P(t)P(a^1|t,e) \approx 0.019  && 
 \end{flalign*}
 \end{textblock}
 }
 
+\end{frame}
 
-\only<19>{
-\begin{textblock}{130}(15,63)
- \begin{flalign*}
-  & P(d^1,p^1,r^1,c^1,a^1) =  0.85 \cdot P(p^1)P(r^1|d^1,p^1)P(a^1|r^1)P(c^1|p^1) &&
- \end{flalign*}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large
+ Grafo de factorización
 \end{textblock}
 
-
-}
-
-\only<20>{
-\begin{textblock}{130}(15,63)
- \begin{flalign*}
-  & P(d^1,p^1,r^1,c^1,a^1) = 0.85 \cdot 0.30 \cdot 0.50 \cdot 0.80 \cdot 0.90 \color{white} \approx 0.09 &&
- \end{flalign*}
+\begin{textblock}{40}(5,12)
+\centering
+\begin{figure}[H]
+\centering
+  \scalebox{0.8}{
+\tikz{ %
+        
+        
+        \node[factor] (fa) {} ;
+        \node[const,right=of fa] (pa) {$P(a|e,t)$} ;
+        \node[det, below=of fa, yshift=0.1cm] (a) {$a$} ; %
+        
+        \node[factor, below=of a] (fl) {} ;
+        \node[const,right=of fl] (pl) {$P(l|a)$} ;
+        \node[det, below=of fl,yshift=0.1cm] (l) {$l$} ; %
+        
+        \node[det, above=of fa, xshift=-1.6cm,yshift=-0.1cm] (e) {$e$} ; %
+        \node[factor, above=of e,yshift=-0.1cm] (fe) {} ;
+        \node[const,right=of fe] (pe) {$P(e)$} ;
+        
+        \node[det, above=of fa, xshift=1.6cm,yshift=-0.1cm] (t) {$t$} ; %
+        \node[factor, above=of t,yshift=-0.1cm] (ft) {} ;
+        \node[const,right=of ft] (pt) {$P(t)$} ;
+        \node[factor, below=of t, xshift=1.6cm,yshift=0.1cm] (fr) {} ;
+        \node[det,below=of fr,yshift=0.1cm] (r) {$r$} ; %
+        \node[const,right=of fr] (pr) {$P(r|t)$} ;
+        
+        \edge[-] {fa} {a,e,t};
+        \edge[-] {fe} {e};
+        \edge[-] {ft} {t};
+        \edge[-] {fr} {r,t};
+        \edge[-] {fl} {l,a};
+        } 
+}   
+\end{figure}
 \end{textblock}
-}
 
-
-\only<21>{
-\begin{textblock}{130}(15,63)
- \begin{flalign*}
-  & P(d^1,p^1,r^1,c^1,a^1) = 0.85 \cdot 0.30 \cdot 0.50 \cdot 0.80 \cdot 0.90 \approx 0.09 &&
- \end{flalign*}
+\begin{textblock}{115}(45,30)
+ 
+ \centering Nodos: \\ variables y funciones
+ 
+ \vspace{1cm}
+ 
+ \centering Ejes: \\ 
+  ``la variable $v$ es argumento de la funci\'on $f$''
+ 
 \end{textblock}
-
-}
-
-
-\only<22>{
- \begin{textblock}{130}(15,60)
- \begin{flalign*}
-  & P(r^1) =  \color{white}  \sum_{i,j,l,m} P(d^i,p^j,r^1,c^l,a^m) \color{white} \left(\sum_i P(d^i)\right) &&
- \end{flalign*}
- \end{textblock}
-}
-
-
-\only<23>{
- \begin{textblock}{130}(15,60)
- \begin{flalign*}
-  & P(r^1) = \sum_i \sum_j \sum_l \sum_m P(d^i,p^j,r^1,c^l,a^m)  \color{white} \left(\sum_i P(d^i)\right) &&
- \end{flalign*}
- \end{textblock}
-}
-
-\only<24>{
- \begin{textblock}{130}(15,60)
- \begin{flalign*}
-  & P(r^1) = \sum_{i,j,l,m} P(d^i,p^j,r^1,c^l,a^m)  \color{white} \left(\sum_i P(d^i)\right) &&
- \end{flalign*}
- \end{textblock}
-}
-
-
-\only<25>{
- \begin{textblock}{130}(15,60)
- \begin{flalign*}
-  & P(r^1) = \sum_{i,j,l,m} P(d^i) P(p^j) P(r^1|d^i,p^j) P(c^l|p^j)P(a^m|r^1)  \color{white} \left(\sum_i P(d^i)\right) &&
- \end{flalign*}
- \end{textblock}
-}
-
-\only<26>{
- \begin{textblock}{130}(15,60)
- \begin{flalign*}
-  & P(r^1) = \left(\sum_m P(a^m|r^1) \right) \Bigg( \sum_{i,j,l} P(d^i) P(p^j) P(r^1|d^i,p^j) P(c^l|p^j) \Bigg)  &&
- \end{flalign*}
- \end{textblock}
-}
-
-\only<27>{
- \begin{textblock}{130}(15,60)
- \begin{flalign*}
-  & P(r^1) = \left(\sum_m P(a^m|r^1) \right) \Bigg( \sum_{i,j} P(d^i) P(p^j) P(r^1|d^i,p^j) \Big( \sum_l P(c^l|p^j) \Big) \Bigg)  &&
- \end{flalign*}
- \end{textblock}
-}
-
-
-\only<28>{
- \begin{textblock}{130}(15,60)
- \begin{flalign*}
-  & P(r^1) = \left( \cancel{\sum_m P(a^m|r^1)} \right) \Bigg( \sum_{i,j} P(d^i) P(p^j) P(r^1|d^i,p^j) \Big( \sum_l P(c^l|p^j) \Big) \Bigg)   &&
- \end{flalign*}
- \end{textblock}
-}
-
-\only<29>{
- \begin{textblock}{130}(15,60)
- \begin{flalign*}
-  & P(r^1) = \left( \cancel{\sum_m P(a^m|r^1)} \right) \Bigg( \sum_{i,j} P(d^i) P(p^j) P(r^1|d^i,p^j) \Big( \cancel{\sum_l P(c^l|p^j)} \Big) \Bigg) &&
- \end{flalign*}
- \end{textblock}
-}
-
-\only<30>{
- \begin{textblock}{130}(15,60)
- \begin{flalign*}
-  & P(r^1) = \sum_{i,j} P(d^i) P(p^j) P(r^1|d^i,p^j)   \color{white} \left(\sum_i P(d^i)\right) &&
- \end{flalign*}
- \end{textblock}
-}
-
-\only<31->{
- \begin{textblock}{130}(15,60)
- \begin{flalign*}
-  &P(r^1) = \sum_{i,j} P(d^i) P(p^j) P(r^1|d^i,p^j) \approx 0.23 \color{white} \left(\sum_i P(d^i)\right) &&
- \end{flalign*}
- \end{textblock}
-}
-
-
-\only<32>{
- \begin{textblock}{130}(15,70)
- \begin{flalign*}
-  &P(r^1|p^0) = \color{white}  \Bigg(\sum_i P(d^i)\Bigg)  &&
- \end{flalign*}
- \end{textblock}
-}
-
-\only<33>{
- \begin{textblock}{130}(15,70)
- \begin{flalign*}
-  &P(r^1|p^0) = \frac{P(r^1,p^0)}{P(p^0)} \color{white}  \Bigg(\sum_i P(d^i)\Bigg)  &&
- \end{flalign*}
- \end{textblock}
-}
-
-
-\only<34>{
- \begin{textblock}{130}(15,70)
- \begin{flalign*}
-  &P(r^1|p^0) = \frac{1}{P(p^0)} \sum_{i,l,m} P(d^i) P(p^0) P(r^1|d^i,p^0) P(c^l|p^0)P(a^m|r^k)  \color{white}  \Bigg(\sum_i P(d^i)\Bigg)  &&
- \end{flalign*}
- \end{textblock}
-}
-
-\only<35>{
- \begin{textblock}{130}(15,70)
- \begin{flalign*}
-  &P(r^1|p^0) = \frac{1}{P(p^0)} \sum_{i} P(d^i) P(p^0) P(r^1|d^i,p^0) \color{white}  \Bigg(\sum_i P(d^i)\Bigg)  &&
- \end{flalign*}
- \end{textblock}
-}
-
-\only<36>{
- \begin{textblock}{130}(15,70)
- \begin{flalign*}
-  &P(r^1|p^0) = \frac{1}{P(p^0)} \sum_{i} P(d^i) P(p^0) P(r^1|d^i,p^0) \approx 0.09 \color{white}  \Bigg(\sum_i P(d^i)\Bigg)  &&
- \end{flalign*}
- \end{textblock}
-}
-
-
-
 \end{frame}
 
 
@@ -541,42 +768,51 @@ P(\text{Hip\'otesis }|\text{ Datos}) = \frac{P(\text{Datos }|\text{ Hip\'otesis}
  Sum-product algorithm
 \end{textblock}
 
-\only<1->{
+\only<2->{
 \begin{textblock}{80}(45,30)
 \begin{description}
+ \onslide<3->{\item[$v(n)$ :] Vecinos del nodo $n$} 
  \item[$m_{x \rightarrow f}(x)$ :] Mensaje de variable $x$ a factor $f$ 
- \item[$m_{f \rightarrow x}(x)$ :] Mensaje factor $f$ a variable $x$
- \item[$n(v)$ :] Conjunto de nodos vecinos del nodo $v$
+ \item[$m_{f \rightarrow x}(x)$ :] Mensaje de factor $f$ a variable $x$
 \end{description}
 \end{textblock}
 }
 
-\only<1->{
+
+\only<1-3>{
+\begin{textblock}{80}(45,16)
+\centering
+Algoritmo para calcular cualquier marginal \\ mediante pasaje de mensajes entre nodos
+\end{textblock}
+}
+
+
+\only<4->{
 \begin{textblock}{80}(45,16)
 \begin{equation*}
-P(x) = \prod_{h \in n(x)} m_{h \rightarrow x} 
+P(x) = \prod_{f \in v(x)} m_{f \rightarrow x}(x)
 \end{equation*} 
 \end{textblock}
 }
 
-\only<2->{
+\only<5->{
 \begin{textblock}{80}(45,56)
 \begin{equation*}\label{eq:m_v_f}
-m_{x \rightarrow f}(x) = \prod_{h \in n(x) \setminus \{f\} } m_{h \rightarrow x}(x) 
+m_{x \rightarrow f}(x) = \prod_{h \in \only<6>{\textcolor{red}}{v(x) \setminus \{f\}} } m_{h \rightarrow x}(x)
 \end{equation*}
 \end{textblock}
 }
 
-\only<3->{
+\only<7->{
 \begin{textblock}{80}(45,68)
 \begin{equation*}\label{eq:m_f_v}
- m_{f \rightarrow x}(x) = \sum_{X\setminus \{x\} } \Big( f(X) \prod_{h \in n(f) \setminus \{x\} } m_{h \rightarrow f}(h) \Big) 
+ m_{f \rightarrow x}(x) = \onslide<9->{\sum_{\bm{h}} \Big(} \onslide<8->{f(\bm{h},x)} \prod_{h \in v(f) \setminus \{x\} } m_{h \rightarrow f}(h) \onslide<9->{\Big)} 
 \end{equation*}
 \end{textblock}
 }
 
 \only<1->{
-\begin{textblock}{45}(5,10)
+\begin{textblock}{40}(0,20)
 \centering
 \begin{figure}[H]
 \centering
@@ -584,37 +820,25 @@ m_{x \rightarrow f}(x) = \prod_{h \in n(x) \setminus \{f\} } m_{h \rightarrow x}
 \tikz{ %
         
         
-        \node[det, fill=black!10] (r) {$r_{ab}$} ; %
+        \node[factor] (fa) {} ;
+        \node[det, below=of fa, minimum size=0.55cm, yshift=0.4cm] (a) {$a$} ; %
         
-        \node[factor, above=of r] (fr) {} ;
-        \node[const, right=of fr] (dfr) {\large $f_r$}; 
-        \node[latent, above=of fr, xshift=-0.8cm] (p1) {$p_a$} ; %
-        \node[latent, above=of fr, xshift=0.8cm] (p2) {$p_b$} ; %
+        \node[factor, below=of a, yshift=0.4cm] (fl) {} ;
+        \node[det, below=of fl, minimum size=0.55cm,yshift=0.4cm] (l) {$l$} ; %
         
-        \node[factor, above=of p1] (fp1) {} ;
-        \node[factor, above=of p2] (fp2) {} ;
-        \node[const, right=of fp2] (dp) {\large $f_p$};
+        \node[det, above=of fa, minimum size=0.55cm, xshift=-0.8cm, yshift=-0.4cm] (e) {$e$} ; %
+        \node[factor, above=of e, yshift=-0.4cm] (fe) {} ;
         
+        \node[det,minimum size=0.55cm, above=of fa, xshift=0.8cm, yshift=-0.4cm] (t) {$t$} ; %
+        \node[factor, above=of t, yshift=-0.4cm] (ft) {} ;
+        \node[factor, below=of t, xshift=0.8cm, yshift=0.4cm] (fr) {} ;
+        \node[det,minimum size=0.55cm, below=of fr, yshift=0.4cm] (r) {$r$} ; %
         
-        \node[latent, above=of fp1] (s1) {$s_a$} ; %
-        \node[latent, above=of fp2] (s2) {$s_b$} ; %        
-        
-        \node[factor, above=of s1] (fs1) {} ;
-        \node[factor, above=of s2] (fs2) {} ;                        \node[const, right=of fs2] (ds) {\large $f_s$};
-
-        
-        
-        \node[invisible, right=of s2, xshift=1.5cm] (s-dist) {};
-        
-        \edge[-] {fr} {r};
-        \edge[-] {p1} {fr};
-        \edge[-] {p2} {fr};
-        \edge[-] {fp1} {p1};
-        \edge[-] {fp2} {p2};
-        \edge[-] {s1} {fp1};
-        \edge[-] {s2} {fp2};
-        \edge[-] {fs1} {s1};
-        \edge[-] {fs2} {s2};
+        \edge[-] {fa} {a,e,t};
+        \edge[-] {fe} {e};
+        \edge[-] {ft} {t};
+        \edge[-] {fr} {r,t};
+        \edge[-] {fl} {l,a};
         } 
 }   
 \end{figure}
@@ -622,935 +846,209 @@ m_{x \rightarrow f}(x) = \prod_{h \in n(x) \setminus \{f\} } m_{h \rightarrow x}
 }
 
 % % 
-\only<4>{
+\only<10>{
 \begin{textblock}{160}(0,87)
 \centering \tiny
 \href{https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=910572}{Kschischang FR, Frey BJ, Loeliger HA. Factor graphs and the sum-product algorithm. 2001}
 \end{textblock}
 }
-
-
 \end{frame}
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \Large TrueSkill
+ \centering \Large
+ Modelo sin observables
 \end{textblock}
 
-\vspace{1cm}
-\Wider[2cm]{
-\begin{figure}[h!]
-  \centering
-  \scalebox{.8}{
-  \tikz{
-      
-        \node[factor] (fr) {} ;
-        \node[const, right=of fr] (nfr) {$f_{r}$}; %
-	
-	\node[latent, above=of fr, yshift=-0.4cm] (d) {$d$} ; %
-        \node[factor, above=of d, yshift=-0.4cm] (fd) {} ;
-        \node[const, above=of fd] (nfd) {$f_{d}$}; %
-	
+\begin{textblock}{40}(5,12)
+\centering
+\begin{figure}[H]
+\centering
+  \scalebox{0.8}{
+\tikz{ %
         
-        \node[latent, left=of fd,xshift=0.4cm] (ta) {$t_a$} ; %
-        \node[factor, left=of ta,xshift=0.4cm] (fta) {} ;
-        \node[const, above=of fta] (nfta) {$f_{t_a}$}; %
         
-        \node[latent, left=of fta,yshift=1cm,xshift=0.4cm] (p1) {$p_1$} ; %
-        \node[factor, left=of p1,xshift=0.4cm] (fp1) {} ;
-        \node[const, above=of fp1] (nfp1) {$f_{p_1}$}; %
+        \node[factor] (fa) {} ;
+        %\node[const,left=of fa] (pa) {$P(a|e,t)$} ;
+        \node[det, below=of fa, yshift=0.1cm] (a) {$a$} ; %
         
-        \node[latent, left=of fp1,xshift=0.4cm] (s1) {$s_1$} ; %
-        \node[factor, left=of s1,xshift=0.4cm] (fs1) {} ;
-	\node[const, above=of fs1] (nfs1) {$f_{s_1}$}; %
-     
-        \node[latent, left=of fta,yshift=-1cm,xshift=0.4cm] (p2) {$p_2$} ; %
-        \node[factor, left=of p2,xshift=0.4cm] (fp2) {} ;
-        \node[const, above=of fp2] (nfp2) {$f_{p_2}$}; %
+        \node[factor, below=of a] (fl) {} ;
+        %\node[const,right=of fl] (pl) {$P(l|a)$} ;
+        \node[det, below=of fl,yshift=0.1cm] (l) {$l$} ; %
         
-        \node[latent, left=of fp2,xshift=0.4cm] (s2) {$s_2$} ; %
-        \node[factor, left=of s2,xshift=0.4cm] (fs2) {} ;
-	\node[const, above=of fs2] (nfs2) {$f_{s_2}$}; %
+        \node[det, above=of fa, xshift=-1.6cm,yshift=-0.1cm] (e) {$e$} ; %
+        \node[factor, above=of e,yshift=-0.1cm] (fe) {} ;
+        %\node[const,right=of fe] (pe) {$P(e)$} ;
         
-            
-        \node[latent, right=of fd,xshift=-0.4cm] (tb) {$t_b$} ; %
-        \node[factor, right=of tb,xshift=-0.4cm] (ftb) {} ;
-        \node[const, above=of ftb] (nftb) {$f_{t_b}$}; %
+        \node[det, above=of fa, xshift=1.6cm,yshift=-0.1cm] (t) {$t$} ; %
+        \node[factor, above=of t,yshift=-0.1cm] (ft) {} ;
+        %\node[const,right=of ft] (pt) {$P(t)$} ;
+        \node[factor, below=of t, xshift=1.6cm,yshift=0.1cm] (fr) {} ;
+        \node[det,below=of fr,yshift=0.1cm] (r) {$r$} ; %
+        %\node[const,left=of fr] (pr) {$P(r|t)$} ;
         
-        \node[latent, right=of ftb,yshift=1cm,xshift=-0.4cm] (p3) {$p_3$} ; %
-        \node[factor, right=of p3,xshift=-0.4cm] (fp3) {} ;
-        \node[const, above=of fp3] (nfp3) {$f_{p_3}$}; %
         
-        \node[latent, right=of fp3,xshift=-0.4cm] (s3) {$s_3$} ; %
-        \node[factor, right=of s3,xshift=-0.4cm] (fs3) {} ;
-	\node[const, above=of fs3] (nfs3) {$f_{s_3}$}; %
-     
-        \node[latent, right=of ftb,yshift=-1cm,xshift=-0.5cm] (p4) {$p_4$} ; %
-        \node[factor, right=of p4,xshift=-0.4cm] (fp4) {} ;
-        \node[const, above=of fp4] (nfp4) {$f_{p_4}$}; %
+        \edge[-] {fa} {a,e,t};
+        \edge[-] {fe} {e};
+        \edge[-] {ft} {t};
+        \edge[-] {fr} {r,t};
+        \edge[-] {fl} {l,a};
         
-        \node[latent, right=of fp4,xshift=-0.4cm] (s4) {$s_4$} ; %
-        \node[factor, right=of s4,xshift=-0.4cm] (fs4) {} ;
-	\node[const, above=of fs4] (nfs4) {$f_{s_4}$}; %
-     
-        \edge[-] {fr} {d};
-	\edge[-] {d} {fd};
-	
-        \edge[-] {fd} {ta};
-        \edge[-] {ta} {fta};
-        \edge[-] {fta} {p1};
-        \edge[-] {p1} {fp1};
-        \edge[-] {fp1} {s1};
-        \edge[-] {s1} {fs1};
-        \edge[-] {fta} {p2};
-        \edge[-] {p2} {fp2};
-        \edge[-] {fp2} {s2};
-        \edge[-] {s2} {fs2};
-        	
-	\edge[-] {fd} {tb};
-        \edge[-] {tb} {ftb};
-        \edge[-] {ftb} {p3};
-        \edge[-] {p3} {fp3};
-        \edge[-] {fp3} {s3};
-        \edge[-] {s3} {fs3};
-        \edge[-] {ftb} {p4};
-        \edge[-] {p4} {fp4};
-        \edge[-] {fp4} {s4};
-        \edge[-] {s4} {fs4};
-        
-	
-	\node[const, below=of fr,xshift=8cm,yshift=-0.3cm] (dfr) { $f_r = \mathbb{I}(d>0)$}; %
-	\node[const, left=of dfr,xshift=-0.5cm] (dfd) {$f_d = \mathbb{I}(d=t_a - t_b)$}; %
-	\node[const, left=of dfd,xshift=-0.5cm] (dft) {$f_{t_e} = \mathbb{I}(t_e = \sum_{i \in A_e} p_i)$}; %
-        \node[const, left=of dft,xshift=-0.5cm] (dfp) {$f_{p_i} = \N(p_i|s_i,\beta^2)$}; %
-        \node[const, left=of dfp,xshift=-0.5cm] (dfs) {$f_{s_i} = \N(s_i|\mu_i,\sigma^2)$}; %
-   }
-   }
+        \onslide<1->{\path[draw, ->, fill=black!50] (fe) edge[bend left,draw=black!50] node[right,color=black!75] {\only<2->{$P(e)$}} (e);}
+        \onslide<3>{\path[draw, ->, fill=black!50] (e) edge[bend left,draw=black!50] node[above,color=black!75] {$P(e)$} (fa);}
+        \onslide<4->{\path[draw, ->, fill=black!50] (ft) edge[bend left,draw=black!50] node[right,color=black!75] {$P(t)$} (t);}
+        \onslide<5>{\path[draw, ->, fill=black!50] (r) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (fr);}
+        \onslide<6->{\path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[left,color=black!75] {\only<7->{$1$}} (t);}
+        \onslide<8->{\path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (a);}
+        \onslide<9->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {\only<12->{$1$}} (t);}
+        \onslide<13->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (e);}
+        \onslide<15->{\path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[right,color=black!75] {\only<16->{$P(r)$}} (r);}
+        \onslide<17->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[right,color=black!75] {\only<18->{$P(a)$}} (a);}
+        \onslide<19->{\path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[right,color=black!75] {$P(l)$} (l);}
+        }
+}   
 \end{figure}
-}
-\end{frame}
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large Propiedades 
 \end{textblock}
 
-\footnotesize
+\begin{textblock}{100}(62,16)
+ $m_{f_e\rightarrow e}(e) = \onslide<2->{P(e)} \onslide<3>{= m_{e\rightarrow f_a}(e)}$  \\
+ \onslide<4->{$m_{f_t\rightarrow t}(t) = P(t)$ } \\
+ \only<5>{$m_{r \rightarrow f_r}(r) = 1$ \\}
+ $\onslide<6->{m_{f_r\rightarrow t}(t) = \sum_r \, P(r|t)} \onslide<7->{= 1}$  \\
+ $\onslide<8->{m_{f_l\rightarrow a}(a) = \sum_l \, P(l|a) = 1} $  \\
+ \onslide<9->{$m_{f_a\rightarrow t}(t) = \sum_{ea} \, P(e) P(a|e,t) \only<10>{= \sum_{e} \, P(e) \sum_{a} P(a|e,t) } \only<11>{= \sum_{e} \, P(e)} \only<12->{= 1 }$  }\\
+ \onslide<13->{$m_{f_a\rightarrow e}(e) = \sum_{ta} \, P(t) P(a|e,t) = 1$ } \\
+ \onslide<15->{$m_{f_r\rightarrow r}(r) = \sum_{t} \, P(t) P(r|t) \onslide<16->{= P(r)}$ } \\
+ \onslide<17->{$m_{f_a\rightarrow a}(a) = \sum_{et} \, P(e)P(t)P(a|e,t)  \onslide<18->{= P(a)}$ } \\
+ \onslide<19->{$m_{f_l\rightarrow l}(l) = \sum_{a} \, P(a) P(l|a) = P(l)$ }
+ \end{textblock}
 
-\only<1->{
-\begin{textblock}{160}(0,15)
-\begin{equation*}\label{eq:simetria}
- \N(x|\mu,\sigma^2) = \N(\mu|x,\sigma^2) = \N(-\mu|-x,\sigma^2) = \N(-x|-\mu,\sigma^2) 
-\end{equation*}
-\end{textblock}
-}
-
-\only<2->{
-\begin{textblock}{160}(0,30)
-\begin{equation*}\label{eq:estandarizar}
- \N(x|\mu,\sigma^2) = \N( \frac{X-\mu}{\sigma} | 0,1)
-\end{equation*}
+ \only<14>{
+\begin{textblock}{80}(60,60)
+ \centering
+ Todos los mensajes \\ que suben son $1$
 \end{textblock}
 }
 
-\only<3->{
-\begin{textblock}{160}(0,45)
-\begin{equation*}\label{eq:phi_norm}
- \frac{\partial}{\partial x} \Phi(x|\mu,\sigma^2) = \N(x|\mu,\sigma^2)
-\end{equation*}
-\end{textblock}
-}
-
-\only<4->{
-\begin{textblock}{160}(0,60)
-\begin{equation*}\label{eq:integral_con_indicadora}
-  \iint_{-\infty}^{\infty}  \mathbb{I}(x=h(y,z)) \, f(x) \,  g(y)\, dx\, dy 
- = \int_{-\infty}^{\infty} f(h(y,z)) \, g(y) \, dy 
-\end{equation*}
-
+ \only<20>{
+\begin{textblock}{80}(60,70)
+ \centering
+ Todos los mensajes que \\ bajan son marginales 
 \end{textblock}
 }
 
 
-\only<5>{
-\begin{textblock}{160}(0,75)
-\begin{equation*}\label{eq:multiplicacion_normales}
- \int_{-\infty}^{\infty} N(x|\mu_x,\sigma_x^2)N(x|\mu_y,\sigma_y^2) \, dx  \overset{*}{=} \int_{-\infty}^{\infty}  \underbrace{N(\mu_x|\mu_y,\sigma_x^2+\sigma_y^2)}_{\text{constante}} \underbrace{ N(x|\mu_{*},\sigma_{*}^2) dx}_{\text{integra } 1} 
-\end{equation*}
+ \only<21>{
+\begin{textblock}{80}(60,65)
+ \centering
+ \begin{align*}
+  P(l=1)\cdot 365 = ?
+ \end{align*}
 \end{textblock}
 }
-
 
 \end{frame}
 
+
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering  \large $m_{f_{s} \rightarrow s}(s)$
+ \centering \Large
+Modelo con observables
 \end{textblock}
 
-\only<1->{
-\begin{textblock}{120}(20,10)
-
+\begin{textblock}{40}(5,12)
 \centering
-  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fs_s} 
-\end{textblock}
-
-}
-
-\only<1-2>{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{f_{s_i} \rightarrow s_i}(s_i) & = \onslide<2>{\int f_{s_i}(\bm{x}) \prod_{h \in n(f_{s_i}) \setminus \{s_i\} } m_{h \rightarrow f_{s_i}}(h) d\bm{x}_{\setminus \{s_i\}} }&&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<3-4>{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
-m_{f_{s_i} \rightarrow s_i}(s_i)  & = \int N(s_i| \mu_i, \sigma_i^2) d\bm{x}_{\setminus \{s_i\} }  \onslide<4>{ = N(s_i| \mu_i, \sigma_i^2)} &&
-\end{flalign*}
-\end{textblock}
-}
-
-
-
-\end{frame}
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering $m_{s \rightarrow f_p}(s)$
-\end{textblock}
-
-\only<1->{
-\begin{textblock}{120}(20,10)
+\begin{figure}[H]
 \centering
-  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_s_fp} 
-\end{textblock}
-}
-
-\only<1-2>{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{s_i \rightarrow f_{p_i}}(s_i) & = \onslide<2>{\prod_{h \in n(s_i) \setminus \{f_{p_i}\} } m_{h \rightarrow s_i}(s_i)} \color{white}\int  &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<3>{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{s_i \rightarrow f_{p_i}}(s_i) & =  N(s_i| \mu_i, \sigma_i^2) \color{white}\int  &&
-\end{flalign*}
-\end{textblock}
-}
-
-\end{frame}
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering \large $m_{f_p \rightarrow p}(p)$
-\end{textblock}
-
-\only<1->{
-\begin{textblock}{120}(20,10)
-\centering
-  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fp_p}   
-\end{textblock}
-}
-
-\only<1-2>{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{f_{p_i} \rightarrow p_i}(p_i) & = \onslide<2>{ \int f_{p_i}(\bm{x}) \Big( \prod_{h \in n(f_{p_i}) \setminus \{p_i\} } m_{h \rightarrow f_{p_i}}(h) \Big) d\bm{x}_{\setminus \{p_i\}}} &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<3->{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{f_{p_i} \rightarrow p_i}(p_i) & = \int N(p_i|s_i,\beta^2)\, N(s_i|\mu_i, \sigma_i^2) \, ds_i \onslide<4->{ = \int N(s_i|p_i,\beta^2)\, N(s_i|\mu_i, \sigma_i^2) \, ds_i } \\
-  \onslide<5->{ & =\int  \underbrace{N(p_i|\mu_i,\beta^2+\sigma_i^2)}_{\text{const.}} \underbrace{ N(s_i|\mu_{*},\sigma_{*}^2) \, ds_i}_{1} } 
-  \onslide<6>{ =N(p_i|\mu_i,\beta^2+\sigma_i^2)} &&
-\end{flalign*}
+  \scalebox{0.8}{
+\tikz{ %
+        
+        
+        \node[factor] (fa) {} ;
+        %\node[const,left=of fa] (pa) {$P(a|e,t)$} ;
+        \node[det, below=of fa, yshift=0.1cm] (a) {$a$} ; %
+        
+        \node[factor, below=of a] (fl) {} ;
+        %\node[const,right=of fl] (pl) {$P(l|a)$} ;
+        \node[det, below=of fl,yshift=0.1cm] (l) {$l$} ; %
+        
+        \node[det, fill=black!10,above=of fa, xshift=-1.6cm,yshift=-0.1cm] (e) {$e^*$} ; %
+        \node[factor, above=of e,yshift=-0.1cm] (fe) {} ;
+        %\node[const,right=of fe] (pe) {$P(e)$} ;
+        
+        \node[det, above=of fa, xshift=1.6cm,yshift=-0.1cm] (t) {$t$} ; %
+        \node[factor, above=of t,yshift=-0.1cm] (ft) {} ;
+        %\node[const,right=of ft] (pt) {$P(t)$} ;
+        \node[factor, below=of t, xshift=1.6cm,yshift=0.1cm] (fr) {} ;
+        \node[det,below=of fr,yshift=0.1cm] (r) {$r$} ; %
+        %\node[const,left=of fr] (pr) {$P(r|t)$} ;
+        
+        
+        \edge[-] {fa} {a,e,t};
+        \edge[-] {fe} {e};
+        \edge[-] {ft} {t};
+        \edge[-] {fr} {r,t};
+        \edge[-] {fl} {l,a};
+        
+        \path[draw, ->, fill=black!50] (fe) edge[bend left,draw=black!50] node[right,color=black!75] {$P(e^*)$} (e);
+        \path[draw, ->, fill=black!50] (ft) edge[bend left,draw=black!50] node[right,color=black!75] {$P(t)$} (t);
+        \path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[left,color=black!75] {\only<1->{$1$}} (t);
+        \path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (a);
+        \onslide<2->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {\only<3->{$P(e^*)$}} (t);}
+        \path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (e);
+        \onslide<7->{\path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[right,color=black!75] {\only<8->{$P(r,e^*)$}} (r);}
+        \onslide<9->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[right,color=black!75] {\only<10->{$P(a,e^*)$}} (a);}
+        \onslide<11->{\path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[right,color=black!75] {\only<12->{$P(l,e^*)$}} (l);}
+        }
+}   
+\end{figure}
 \end{textblock}
 
-}
+\begin{textblock}{100}(62,16)
+ $m_{f_e\rightarrow e}\phantom{(e)} = P(e^*) $  \\
+ $m_{f_t\rightarrow t}(t) = P(t)$  \\
+ $m_{f_r\rightarrow t}(t) = \sum_r \, P(r|t) = 1$  \\
+ $m_{f_l\rightarrow a}(a) = \sum_l \, P(l|a) = 1 $  \\
+ $m_{f_a\rightarrow t}(t) = \onslide<2->{\sum_{a} \, P(e^*) P(a|e^*,t)} \onslide<3->{= P(e^*)}$  \\
+ $m_{f_a\rightarrow e}\phantom{(e)} = \sum_{ta} \, P(t) P(a|e^*,t) = 1$  \\
+ $m_{f_r\rightarrow r}(r) = \onslide<7->{\sum_{t} \, P(t) P(r|t)} \onslide<8->{= P(r,e^*)}$ \\
+ $m_{f_a\rightarrow a}(a) = \onslide<9->{\sum_{t} \, P(e^*)P(t)P(a|e^*,t)}\onslide<10->{  = P(a,e^*)}$  \\
+ $m_{f_l\rightarrow l}(l) = \onslide<11->{\sum_{a} \, P(a,e^*) P(l|a)} \onslide<12->{ = P(l,e^*)}$
+ \end{textblock}
 
-\end{frame}
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering \large $m_{p \rightarrow f_t}(p)$
-\end{textblock}
-
-\only<1->{
-\begin{textblock}{120}(20,10)
-\centering
-  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_p_ft}   
-\end{textblock}
-}
-
-\only<1-2>{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{p_i \rightarrow f_{t_e}}(p_i) & = \onslide<2>{\prod_{h \in n(p_i) \setminus \{f_{t_e}\} } m_{h \rightarrow p_i}(p_i)} \color{white}\int  &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<3>{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{p_i \rightarrow f_{t_e}}(p_i) & = \prod_{i \in e} N(p_i|\mu_i, \beta^2 + \sigma_i^2) \color{white}\int  &&
-\end{flalign*}
-\end{textblock}
-}
-
-
-\end{frame}
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering \large $m_{f_t \rightarrow t}(t)$
-\end{textblock}
-
-\only<1->{
-\begin{textblock}{120}(20,10)
-\centering
-  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_ft_t} 
-\end{textblock}
-}
-
-\only<1-2>{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{f_{t_e} \rightarrow t_e}(t_e) & = \onslide<2>{ \int f_{t_e}(\bm{x}) \Big( \prod_{h \in n(f_{t_e}) \setminus \{t_e\} } m_{h \rightarrow f_{t_e}}(h) \Big) d\bm{x}_{\setminus \{t_e\}}} &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<3-4>{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{f_{t_e} \rightarrow t_e}(t_e) \onslide<3->{& = \iint \mathbb{I}(t_e = p_i + p_j) N(p_i|\mu_i,\beta^2 + \sigma_i^2)N(p_j|\mu_j,\beta^2 + \sigma_j^2) dp_idp_j \\}
-  \onslide<4->{& = \int N(p_i|\mu_i,\beta^2 + \sigma_i^2) N(t_e - p_i|\mu_j,\beta^2 + \sigma_j^2) dp_i   \\}
-    &&
-\end{flalign*}
-\end{textblock}
-}
-% 
-\only<5-6>{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{f_{t_e} \rightarrow t_e}(t_e) & = \iint \mathbb{I}(t_e = p_i + p_j) N(p_i|\mu_i,\beta^2 + \sigma_i^2)N(p_j|\mu_j,\beta^2 + \sigma_j^2) dp_idp_j \\
-  & = \int N(p_i|\mu_i,\beta^2 + \sigma_i^2) N(p_i|t_e - \mu_j,\beta^2 + \sigma_j^2) dp_i   \\
-  \onslide<6->{& = \int \underbrace{N(t_e|\mu_i+\mu_j,2\beta^2 + \sigma_i^2 + \sigma_j^2)}_{\text{const.}} \underbrace{N(p_i|\mu_{*},\sigma_{*}^2) dp_i}_{1} \\ }
-    &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<7>{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{f_{t_e} \rightarrow t_e}(t_e) & = \iint \mathbb{I}(t_e = p_i + p_j) N(p_i|\mu_i,\beta^2 + \sigma_i^2)N(p_j|\mu_j,\beta^2 + \sigma_j^2) dp_idp_j \\
-  & = \int N(p_i|\mu_i,\beta^2 + \sigma_i^2) N(p_i|t_e - \mu_j,\beta^2 + \sigma_j^2) dp_i   \\[0.15cm]
-  & = N(t_e|\mu_i+\mu_j,2\beta^2 + \sigma_i^2 + \sigma_j^2) \color{white} \sum_{i \in A_e} &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<8->{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{f_{t_e} \rightarrow t_e}(t_e) & = \iint \mathbb{I}(t_e = p_i + p_j) N(p_i|\mu_i,\beta^2 + \sigma_i^2)N(p_j|\mu_j,\beta^2 + \sigma_j^2) dp_idp_j \\
-  & = \int N(p_i|\mu_i,\beta^2 + \sigma_i^2) N(p_i|t_e - \mu_j,\beta^2 + \sigma_j^2) dp_i   \\[0.15cm]
-  & = N(t_e|\sum_{i \in A_e} \mu_i,\sum_{i \in A_e} \beta^2 + \sigma_i^2) \onslide<9>{= N(t_e| \mu_e, \sigma_e^2)} &&
-\end{flalign*}
-\end{textblock}
-}
-
-\end{frame}
-
-
-% \begin{frame}[plain]
-% \begin{textblock}{108}(10,8)
-%  \centering $m_{t \rightarrow f_d}(t)$
-% \end{textblock}
-% 
-% \only<1->{
-% \begin{textblock}{120}(20,10)
-% \centering
-% %  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_t_fd} 
-%   
-% \end{textblock}
-% 
-% 
-% \only<1-2>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%  m_{t_e \rightarrow f_{d}}(t_e) & = \onslide<2>{\prod_{h \in n(t_e) \setminus \{f_{d}\} } m_{h \rightarrow t_e}(t_e)} \color{white}\int  &&
-% \end{flalign*}
-% \end{textblock}
-% }
-% 
-% \only<3>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%  m_{t_e \rightarrow f_{d}}(t_e) & =  N(t_e| \mu_e, \sigma_e^2) \color{white}\int  &&
-% \end{flalign*}
-% \end{textblock}
-% }
-% 
-% }
-% 
-% \end{frame}
-% 
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering $m_{f_d\rightarrow d}(d)$
-\end{textblock}
-
-\only<1->{
-\begin{textblock}{120}(20,10)
-\centering
-  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fd_d} 
-\end{textblock}
-}
-
-\only<1-2>{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{f_d \rightarrow d}(d) & = \onslide<2>{ \int f_d(\bm{x}) \Big( \prod_{h \in n(f_d) \setminus \{d\} } m_{h \rightarrow f_d}(h) \Big) d\bm{x}_{\setminus \{d\}}} &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<3-4>{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{f_d \rightarrow d}(d) & = \iint \mathbb{I}(d= t_a - t_b) N(t_a | \mu_a, \sigma_a^2) N(t_b | \mu_b, \sigma_b^2) \, dt_a dt_b \\
- & \onslide<4>{ = \int N(d + t_b | \mu_a, \sigma_a^2) N(t_b | \mu_b, \sigma_b^2) \, dt_b }&&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<5-6>{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{f_d \rightarrow d}(d) & = \iint \mathbb{I}(d= t_a - t_b) N(t_a | \mu_a, \sigma_a^2) N(t_b | \mu_b, \sigma_b^2) \, dt_a dt_b \\
- &  = \int N( t_b | \mu_a - d , \sigma_a^2) N(t_b | \mu_b, \sigma_b^2) \, dt_b \\
- & \onslide<6>{= \int \underbrace{N(d|\mu_a -\mu_b, \sigma_a^2 + \sigma_b^2)}_{\text{const.}} \, \underbrace{N(t_b|\mu_{*},\sigma_{*}^2) \, dt_b}_{1} } &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<7>{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{f_d \rightarrow d}(d) & = \iint \mathbb{I}(d= t_a - t_b) N(t_a | \mu_a, \sigma_a^2) N(t_b | \mu_b, \sigma_b^2) \, dt_a dt_b \\
- &  = \int N( t_b | \mu_a - d , \sigma_a^2) N(t_b | \mu_b, \sigma_b^2) \, dt_b \\[0.12cm]
- & = N(d|\, \mu_a -\mu_b, \sigma_a^2 + \sigma_b^2)  &&
-\end{flalign*}
-\end{textblock}
-}
-
-
-\only<8->{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{f_d \rightarrow d}(d) & = \iint \mathbb{I}(d= t_a - t_b) N(t_a | \mu_a, \sigma_a^2) N(t_b | \mu_b, \sigma_b^2) \, dt_a dt_b \\
- &  = \int N( t_b | \mu_a - d , \sigma_a^2) N(t_b | \mu_b, \sigma_b^2) \, dt_b \\[0.12cm]
- & = N(d|\underbrace{\mu_a -\mu_b}_{\hfrac{\text{Diferencia}}{\text{esperada}} \delta }, \underbrace{\sigma_a^2 + \sigma_b^2}_{\hfrac{\text{Varianza}}{\text{total}} \, \vartheta } ) \onslide<9>{ = N(d| \delta, \vartheta^2)} &&
-\end{flalign*}
-\end{textblock}
-}
-
-
-\end{frame}
-% 
-% \begin{frame}[plain]
-% \begin{textblock}{160}(0,4)
-%  \centering $m_{d\rightarrow f_r}(d)$
-% \end{textblock}
-% 
-% \only<1->{
-% \begin{textblock}{120}(20,10)
-% \centering
-%   \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_d_fr} 
-% \end{textblock}
-% }
-% 
-% \only<1-2>{
-% \begin{textblock}{140}(10,50)
-%   \begin{flalign*}
-%  m_{t_e \rightarrow f_{d}}(t_e) & = \onslide<2>{N(d|\delta,\vartheta^2)} \color{white}\int  &&
-% \end{flalign*}
-% \end{textblock}
-% }
-% 
-% \end{frame}
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering $m_{f_r\rightarrow r}(r)$
-\end{textblock}
-
-\only<1->{
-\begin{textblock}{120}(20,10)
-\centering
-  \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fr_r} 
-\end{textblock}
-}
-
-\only<1->{
-\begin{textblock}{140}(10,50)
-  \begin{flalign*}
- m_{f_r \rightarrow r}(r) & = \onslide<2->{ \int \mathbb{I}(d>0) N(d|\delta,\vartheta^2) \, dd} \\
- \onslide<3->{& = \int_0^\infty N(d|\delta,\vartheta^2) \, dd } \\
- \onslide<4->{& = 1 - \Phi(0 | \delta, \vartheta^2)} \onslide<6->{ = \Phi\Big(\frac{\delta}{\vartheta}\Big)} &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<5->{
-\begin{textblock}{80}(80,45)
-\centering
- \includegraphics[width=0.55\textwidth]{figures/evidence} 
-\end{textblock}
-
-}
-
-\end{frame}
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large Evidencia
-\end{textblock}
-
-\begin{equation*}
-P(\text{Dato}| \text{Modelo}) = \Phi \Big(\frac{\delta}{\vartheta} \Big)
-\end{equation*}
-
-\end{frame}
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large Selección de modelo
-\end{textblock}
-
-
-\only<1>{
-\begin{textblock}{160}(0,34) 
-\begin{equation*}
- P(\text{Modelo}|\text{Datos}) = \frac{P(\text{Datos}|\text{Modelo})P(\text{Modelo})}{ P(\text{Datos})}
-\end{equation*}
-\end{textblock}
-}
-
-\only<2>{
-\begin{textblock}{160}(0,34)
-\begin{equation*}
-   \frac{P(\text{Modelo}_i|\text{Datos})}{P(\text{Modelo}_j|\text{Datos})}  = \frac{P(\text{Datos}|\text{Modelo}_i)\,\,P(\text{Modelo}_i)}{P(\text{Datos}|\text{Modelo}_j)\,\,P(\text{Modelo}_j)}  
-\end{equation*}
-\end{textblock}
-}
-\only<3>{
-\begin{textblock}{160}(0,34)
-\begin{equation*}
- \frac{P(\text{Modelo}_i|\text{Datos})}{P(\text{Modelo}_j|\text{Datos})}  = \frac{P(\text{Datos}|\text{Modelo}_i)\,\,P(\text{Modelo}_i)}{ \underbrace{P(\text{Datos}|\text{Modelo}_j)}_{\text{Evidencia!}}\,P(\text{Modelo}_j)}
-\end{equation*}
-\end{textblock}
-}
-
-\only<4->{
-\begin{textblock}{160}(0,34)
-\begin{equation*}
-  \frac{P(\text{Modelo}_i|\text{Datos})}{P(\text{Modelo}_j|\text{Datos})}  = \frac{P(\text{Datos}|\text{Modelo}_i)\,\,P(\text{Modelo}_i)}{ \underbrace{P(\text{Datos}|\text{Modelo}_j)}_{\text{Evidencia!}}\, \underbrace{P(\text{Modelo}_j)}_{\text{Escalar } k } }
-\end{equation*}
-\end{textblock}
-}
-
-
-\only<5->{
-\begin{textblock}{160}(0,48) 
-\begin{equation*}
-\begin{split}
-P(\text{Datos}|\text{Modelo}) &= \sum_{h}^H P(\text{Datos}|\text{Hip\'otesis}=h,\text{Modelo}) P(\text{Hip\'otesis}=h|\text{Modelo}) 
-\\
-\onslide<6>{& = P(\text{D}_1|\text{M}) P(\text{D}_2|\text{D}_1, \text{M}) \dots P(\text{D}_N|\text{D}_{N-1} \dots \text{D}_1, \text{M})  }
-\end{split} 
-\end{equation*}
-\end{textblock}
-}
-
-
-
-% 
-% \only<7>{
-% \begin{textblock}{108}(10,74)
-% \begin{mdframed}[backgroundcolor=black!15]
-% \footnotesize \centering Preferimos modelos con la \textbf{menor sorpresa conjunta}!
-% \end{mdframed}
-% }
-
-
-\end{frame}
-
-
-
-% 
-% 
-% \subsection{Mensaje ascendete}
-% 
-% \begin{frame}
-% \begin{textblock}{108}(10,8)
-% \begin{center}
-%  \large $m_{f_r\rightarrow d}(d)$
-% \end{center}
-% \end{textblock}
-% \only<1->{
-% \begin{textblock}{108}(10,18)
-% \centering
-%   \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fr_d} 
-% \end{textblock}
-% }
-% 
-% \only<1->{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%    & m_{f_r\rightarrow d}(d) = \onslide<2>{\mathbb{I}(d>0)}  \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% \end{frame}
-% 
-% \begin{frame}
-% \begin{textblock}{108}(10,8)
-% \begin{center}
-%  \large $m_{f_d\rightarrow t_a}(t_a)$
-% \end{center}
-% \end{textblock}
-% \only<1->{
-% \begin{textblock}{108}(10,18)
-% \centering
-%   \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fd_ta} 
-% \end{textblock}
-% }
-% 
-% \only<1-2>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%     m_{f_d\rightarrow t_a}(t_a) &= \onslide<2->{\iint \mathbb{I}(d=t_a-t_b) \mathbb{I}(d>0) N(t_b|\mu_b,\sigma_b^2) \, dt_b  \, dd } \\
-%    \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% \only<3->{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%     m_{f_d\rightarrow t_a}(t_a) &= \int \mathbb{I}(t_a>t_b) N(t_b|\mu_b,\sigma_b^2) \, dt_b  \, dd  \\
-%     \onslide<5->{&= \Phi(t_a| \mu_b, \sigma_b^2)}
-%     \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% 
-% \only<4->{
-% \begin{textblock}{48}(80,46)
-%  \includegraphics[width=0.9\textwidth]{figures/m_d_ta} 
-% \end{textblock}
-% }
-% 
-% 
-% 
-% 
-% 
-% \end{frame}
-% 
-% 
-% \begin{frame}
-% \begin{textblock}{108}(10,8)
-% \begin{center}
-%  \large $m_{f_t \rightarrow p}(p)$
-% \end{center}
-% \end{textblock}
-% \only<1->{
-% \begin{textblock}{108}(10,18)
-% \centering
-%   \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_ft_p} 
-% \end{textblock}
-% }
-% 
-% \only<1-2>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%     m_{f_{t_a}\rightarrow p_1}(p_1) &= \onslide<2->{\iint \mathbb{I}(t_a=p_1+p_2) N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \Phi(t_a|\mu_b,\sigma_b^2)  \, dt_a  \, dp_2 } \\
-%    \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% \only<3>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%    m_{f_{t_a}\rightarrow p_1}(p_1) &=\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \Phi(p_1+p_2|\mu_b,\sigma_b^2)  \, dp_2  \\
-%    \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% \only<4-5>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%    & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
-%    \onslide<5>{&\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \frac{\partial}{\partial p_1} \int  N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2 } \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% \only<6>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%    & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
-%    &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \int  N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, \frac{\partial}{\partial p_1} \Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% \only<7>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%    & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
-%    &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \int  N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, N(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% 
-% \only<8>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%    & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
-%    &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) = \int  N(p_2|\mu_2, \sigma_2^2 + \beta^2) \, N(p_2|\mu_b-p_1,\sigma_b^2)  \, dp_2  \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% \only<9>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%    & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
-%    &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) =  \int \underbrace{N(\mu_2| \mu_b - p_1, \sigma_b^2 + \sigma_2^2 + \beta^2)}_{\text{const.}} \underbrace{N(p_2 | \mu_*, \sigma_*^2) dp_2}_{1} \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% \only<10->{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%    & m_{f_{t_a}\rightarrow p_1}(p_1) =\int N(p_2|\mu_2, \sigma_2^2 + \beta^2) \,\Phi(p_1|\mu_b-p_2,\sigma_b^2)  \, dp_2  \\
-%    &\frac{\partial}{\partial p_1} m_{f_{t_a}\rightarrow p_1}(p_1) =  N(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \\
-%    & \onslide<11->{ m_{f_{t_a}\rightarrow p_1}(p_1) = } \onslide<12>{\Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) } \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% 
-% 
-% 
-% 
-% \end{frame}
-% 
-% \begin{frame}
-% \begin{textblock}{108}(10,8)
-% \begin{center}
-%  \large $m_{f_p \rightarrow s}(s)$
-% \end{center}
-% \end{textblock}
-% \only<1->{
-% \begin{textblock}{108}(10,18)
-% \centering
-%   \includegraphics[width=1\textwidth]{figures/trueskill_factorGraph_2equiops_m_fp_s} 
-% \end{textblock}
-% }
-% 
-% \only<1-2>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%     m_{f_{p_1}\rightarrow s_1}(s_1) &= \onslide<2->{\int N(p_1|s_1, \beta^2) \, \Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1 } \\
-%    \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% \only<3-4>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%     & m_{f_{p_1}\rightarrow s_1}(s_1) = \int N(p_1|s_1, \beta^2) \, \Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1  \\
-%   & \frac{\partial}{\partial \mu_2} m_{f_{s_1}\rightarrow s_1}(s_1) = \onslide<4>{\int N(p_1|s_1, \beta^2) \, N(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1}
-%    \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% \only<5-6>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%     & m_{f_{p_1}\rightarrow s_1}(s_1) = \int N(p_1|s_1, \beta^2) \, \Phi(p_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + \beta^2) \, dp_1  \\
-%   & \frac{\partial}{\partial \mu_2} m_{f_{s_1}\rightarrow s_1}(s_1) =  N(s_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + 2\beta^2) \\
-%   & \onslide<6>{ m_{f_{p_1}\rightarrow s_1}(s_1) = \Phi(s_1| \mu_b - \mu_2, \sigma_b^2 + \sigma_2^2 + 2\beta^2) }
-%    \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% \only<7>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1| \mu_b - \mu_2 , \sigma_b^2 + \sigma_2^2 + 2\beta^2) \color{white}\int &&
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% \only<8>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1| \mu_b - \underbrace{\mu_2}_{\mu_a-\mu_1} , \sigma_b^2 + \underbrace{\sigma_2^2 + 2\beta^2}_{\sigma_a^2 - \sigma_1^2}) \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% \only<9>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1| \mu_b - \mu_a + \mu_1 , \sigma_b^2 + \sigma_a^2 - \sigma_1^2) \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% \only<10>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1|  \underbrace{\mu_b - \mu_a}_{-\delta} + \mu_1 , \underbrace{\sigma_b^2 + \sigma_a^2}_{\vartheta^2} - \sigma_1^2) \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% \only<11>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(s_1|  -\delta + \mu_1 ,\vartheta^2 - \sigma_1^2)   \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% \only<12-13>{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(0|  -\delta + \mu_1 - s_1,\vartheta^2 - \sigma_1^2) \\ 
-%      \onslide<13>{& = 1 - \Phi(0| \,  \delta - \mu_1 + s_1 \, ,\vartheta^2 - \sigma_1^2)} & \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% \only<14->{
-% \begin{textblock}{118}(5,60)
-%   \begin{flalign*}
-%      m_{f_{p_1}\rightarrow s_1}(s_1) & = \Phi(0|  -\delta + \mu_1 - s_1,\vartheta^2 - \sigma_1^2) \\[0.2cm] 
-%      & = 1 - \Phi(0| \,  \underbrace{\delta - \mu_1 + s_1}_{\hfrac{\text{\tiny Diferencia esperada}}{\text{\tiny parametrizada en $s$}}} \, ,  \underbrace{\vartheta^2 - \sigma_1^2}_{\hfrac{\text{\tiny Sin incertidumbre}}{\text{\tiny respecto de $s$}}}) \\
-%      & \onslide<15->{= \text{Probabilidad de ganar si la verdadera habilidad fuera $s_1$}}   \color{white}\int && 
-%   \end{flalign*}
-%   \end{textblock}
-% }
-% 
-% 
-% \end{frame}
-% 
-% 
-% \subsection{Posteriori}
-% 
-% 
-% \begin{frame}
-% 
-% \only<-7>{
-% \begin{textblock}{160}(0,11)
-% \begin{equation*}
-% \overbrace{P(s_1 \mid r, \text{Modelo})}^{\text{Posteriori}} \propto \overbrace{N(s_1 \, | \, \mu_1, \sigma_1^2) }^{\text{Priori}} \, \overbrace{1-\Phi(0 \, | s_1 - \mu_2 , \vartheta^2 - \sigma_1^2)}^{\text{Verosimilitud}}  \ \  \text{Caso ganador} 
-% \end{equation*}
-% \end{textblock}
-% }
-% 
-% \begin{textblock}{160}(0,11)
-% \only<8->{
-% \begin{equation*}
-% \overbrace{P(s_2 \mid r, \text{Modelo})}^{\text{Posteriori}} \propto \overbrace{N(s_2 \, | \,\mu_2, \sigma_2^2) }^{\text{Priori}} \, \overbrace{\Phi(0  \, | \mu_1 - s_2, \vartheta^2 - \sigma_1^2)}^{\text{Verosimilitud}}  \ \  \text{Caso perdedor} 
-% \end{equation*}
-% }
-% \end{textblock}
-% 
-% 
-% 
-% \begin{textblock}{160}(0,26)
-% \centering
-% \only<2>{\includegraphics[width=0.49\textwidth]{figures/posterior_win} 
-% }
-% \end{textblock}
-% 
-% \begin{textblock}{160}(0,26)
-% \centering
-% \only<3>{\includegraphics[page=2,width=0.49\textwidth]{figures/posterior_win} 
-% }
-% \end{textblock}
-% 
-% \begin{textblock}{160}(0,26)
-% \centering
-% \only<4>{\includegraphics[page=3,width=0.49\textwidth]{figures/posterior_win} 
-% }
-% \end{textblock}
-% 
-% \begin{textblock}{160}(0,26)
-% \centering
-% \only<5>{\includegraphics[page=4,width=0.49\textwidth]{figures/posterior_win} 
-% }
-% \end{textblock}
-% 
-% 
-% \begin{textblock}{160}(0,26)
-% \centering
-% \only<6>{\includegraphics[page=5,width=0.49\textwidth]{figures/posterior_win} 
-% }
-% \end{textblock}
-% 
-% \begin{textblock}{160}(0,26)
-% \centering
-% \only<7>{\includegraphics[page=6,width=0.49\textwidth]{figures/posterior_win} 
-% }
-% \end{textblock}
-% 
-% \begin{textblock}{160}(0,26)
-% \centering
-% \only<8->{\includegraphics[width=0.49\textwidth]{figures/posterior_loose} 
-% }
-% \end{textblock}
-% 
-% \begin{textblock}{160}(0,93)
-% \centering
-% \only<9>{\tiny Todos los detalles en: \href{https://journals.plos.org/plosone/article/file?type=supplementary&id=info:doi/10.1371/journal.pone.0211014.s002}{Landfried. TrueSkill: Technical Report. 2019} }
-% \end{textblock}
-% %\includegraphics[width=0.49\textwidth]{figures/posterior_loose}   
-% \end{frame}
-% 
-% 
-% 
  
+\only<4-6>{
+\begin{textblock}{80}(70,60)
+\begin{flalign*}
+  P(t,e^*) & = P(e^*) P(t) \\
+  \onslide<5->{P(t|e^*) &= \frac{P(e^*) P(t) }{P(e^*)}} \onslide<6->{= P(t)}&&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<13-14>{
+\begin{textblock}{80}(70,60)
+\begin{flalign*}
+  P(l|e^*) & \, = P(l,e^*)/P(e^*) \only<14>{\overset{?}= \, P(l)} &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<15>{
+\begin{textblock}{80}(69.15,60)
+\begin{flalign*}
+  \underbrace{P(l|e^*)}_{\hfrac{\text{que llamen}}{\text{cuando entran}}} & = P(l,e^*)/P(e^*) \overset{?}=  \underbrace{P(l)}_{\hfrac{\text{que llamen}}{\text{}}} &&
+\end{flalign*}
+\end{textblock}
+}
+
+
+
+ 
+\end{frame}
+
+
+
 \begin{frame}[plain]
 \centering
   \includegraphics[width=0.35\textwidth]{../../aux/static/pachacuteckoricancha.jpg}
