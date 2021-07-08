@@ -1,0 +1,60 @@
+net
+{
+	propagationenginegenerator1791944048146838126L = "edu.ucla.belief.approx.BeliefPropagationSettings@62bf26ac";
+	recoveryenginegenerator6944530267470113528l = "edu.ucla.util.SettingsImpl@603163a2";
+	node_size = (130 55);
+}
+
+node regalo
+{
+	states = ("r1" "r2" "r3" );
+	position = (62 -50);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable0";
+	label = "regalo";
+	excludepolicy = "include whole CPT";
+}
+node eleccion
+{
+	states = ("e1" "e2" "e3" );
+	position = (303 -51);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable1";
+	label = "eleccion";
+	excludepolicy = "include whole CPT";
+}
+node ayuda
+{
+	states = ("a1" "a2" "a3" );
+	position = (184 -161);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable2";
+	label = "ayuda";
+	excludepolicy = "include whole CPT";
+}
+potential ( regalo | )
+{
+	data = (	0.3333333333333333	0.3333333333333333	0.3333333333333333	);
+}
+potential ( eleccion | )
+{
+	data = (	0.3333333333333333	0.3333333333333333	0.3333333333333333	);
+}
+potential ( ayuda | regalo eleccion )
+{
+	data = (((	0.0	0.5	0.5	)
+		(	0.0	0.0	1.0	)
+		(	0.0	1.0	0.0	))
+		((	0.0	0.0	1.0	)
+		(	0.5	0.0	0.5	)
+		(	1.0	0.0	0.0	))
+		((	0.0	1.0	0.0	)
+		(	1.0	0.0	0.0	)
+		(	0.5	0.5	0.0	)));
+}
