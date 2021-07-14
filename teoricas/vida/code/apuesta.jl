@@ -36,6 +36,8 @@ function vida(cambiar=CAMBIAR, tolerancia=TOLERENCIA)
     return (creencia, i)
 end
 
+vida()[2]
+
 function expectativa_de_vida(n,cambiar=CAMBIAR, tolerancia=TOLERENCIA)
     res = []
     for _ in 1:n

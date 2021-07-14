@@ -22,6 +22,6 @@ function alternative(i)
     Dkl([ [0 0 0] ; [i/100 0 1-i/100 ] ; [0 0 0] ], _prior_)
 end
 
-maximum(alternative.(1:100))
+minimum(alternative.(1:100))
 Dkl(_posterior_, _prior_)
 plot(alternative.(1:100))
