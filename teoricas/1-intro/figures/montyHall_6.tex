@@ -2,8 +2,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{tikz}
 
-\input{../../../aux/tex/tikzlibrarybayesnet.code.tex}
-\input{../../../aux/tex/encabezado.tex}
+\input{../../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+\input{../../../auxiliar/tex/encabezado.tex}
 \makeatletter
 \newcommand{\vast}{\bBigg@{2.5}}
 \newcommand{\Vast}{\bBigg@{14.5}}
@@ -15,7 +15,7 @@
 
 \tikz{ %
         
-         \node[factor, minimum size=1cm] (p1) {\includegraphics[width=0.025\textwidth]{../../../aux/static/cerradura.png}} ;
+         \node[factor, minimum size=1cm] (p1) {\includegraphics[width=0.025\textwidth]{../../../auxiliar/static/cerradura.png}} ;
          \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
 %         

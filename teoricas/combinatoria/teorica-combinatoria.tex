@@ -1,7 +1,7 @@
 \documentclass[shownotes,aspectratio=169]{beamer}
 
-\input{../../aux/tex/diapo_encabezado.tex}
-\input{../../aux/tex/tikzlibrarybayesnet.code.tex}
+\input{../../auxiliar/tex/diapo_encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
  \mode<presentation>
  {
  %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
@@ -43,7 +43,7 @@
  %\vspace{2cm}brown
 %\maketitle
 \Wider[2cm]{
-\includegraphics[width=1\textwidth]{../../aux/static/peligro_predador}
+\includegraphics[width=1\textwidth]{../../auxiliar/static/peligro_predador}
 }
 \end{frame}
 
@@ -90,11 +90,11 @@ El principio de razón suficiente \\
  \begin{textblock}{80}(0,22) \centering
 \scalebox{1}{
  \tikz{        
-    \node[latent] (d) {\includegraphics[width=0.1\textwidth]{../../aux/static/dedo.png}} ;
+    \node[latent] (d) {\includegraphics[width=0.1\textwidth]{../../auxiliar/static/dedo.png}} ;
     \node[const,above=of d] (nd) {\Large $s$} ;
-    \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.12\textwidth]{../../aux/static/regalo.png}} ;
+    \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
     \node[const,above=of r] (nr) {\Large $r$} ;
-    \node[latent, fill=black!30, above=of d, xshift=1.5cm] (c) {\includegraphics[width=0.12\textwidth]{../../aux/static/cerradura.png}} ;
+    \node[latent, fill=black!30, above=of d, xshift=1.5cm] (c) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/cerradura.png}} ;
     \node[const,above=of c] (nc) {\Large $c=1$} ;
     \edge {r,c} {d};
 }
@@ -229,8 +229,8 @@ P(r_i|s_2) = \frac{P(r_i,s_2)}{P(s_2)}
 \centering
 
 \tikz{
-         \node[factor, minimum size=1cm] (p1) {\includegraphics[width=0.05\textwidth]{../../aux/static/cerradura.png}} ;
-         \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.06\textwidth]{../../aux/static/dedo.png}} ;
+         \node[factor, minimum size=1cm] (p1) {\includegraphics[width=0.05\textwidth]{../../auxiliar/static/cerradura.png}} ;
+         \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.06\textwidth]{../../auxiliar/static/dedo.png}} ;
          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
 
          \node[const, above=of p1, yshift=.15cm] (fp1) {$1/3$};
@@ -513,7 +513,7 @@ numeradas de manera que haya a lo sumo una bolita por caja?
 
 \begin{frame}[plain]
 \centering
-  \includegraphics[width=0.35\textwidth]{../../aux/static/pachacuteckoricancha.jpg}
+  \includegraphics[width=0.35\textwidth]{../../auxiliar/static/pachacuteckoricancha.jpg}
 \end{frame}
 
 

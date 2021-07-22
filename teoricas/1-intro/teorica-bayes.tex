@@ -1,7 +1,7 @@
 \documentclass[shownotes,aspectratio=169]{beamer}
 
-\input{../../aux/tex/diapo_encabezado.tex}
-\input{../../aux/tex/tikzlibrarybayesnet.code.tex}
+\input{../../auxiliar/tex/diapo_encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
  \mode<presentation>
  {
  %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
@@ -41,7 +41,7 @@
  %\vspace{2cm}brown
 %\maketitle
 \Wider[2cm]{
-\includegraphics[width=1\textwidth]{../../aux/static/peligro_predador}
+\includegraphics[width=1\textwidth]{../../auxiliar/static/peligro_predador}
 }
 \end{frame}
 
@@ -148,11 +148,11 @@
 \begin{textblock}{160}(20,22)
 \onslide<2->{Modelo causal} \\ \vspace{0.3cm}
  \tikz{            
-    \node[latent,] (r) {\includegraphics[width=0.06\textwidth]{../../aux/static/regalo.png}} ;
+    \node[latent,] (r) {\includegraphics[width=0.06\textwidth]{../../auxiliar/static/regalo.png}} ;
     \node[const,left=of r] (nr) {\Large $r$} ;    
     
     \onslide<2->{
-    \node[latent, below=of r] (d) {\includegraphics[width=0.05\textwidth]{../../aux/static/dedo.png}} ;
+    \node[latent, below=of r] (d) {\includegraphics[width=0.05\textwidth]{../../auxiliar/static/dedo.png}} ;
     \node[const, left=of d] (nd) {\Large $s$} ;
 
     \edge {r} {d};
@@ -187,7 +187,7 @@
 \tikz{ %
         
          \node[factor, minimum size=1cm] (p1) {} ;
-         \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.03\textwidth]{../../aux/static/dedo.png}} ;
+         \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.03\textwidth]{../../auxiliar/static/dedo.png}} ;
          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
 %         
 %         
@@ -240,10 +240,10 @@
 \begin{textblock}{160}(20,22)
 Modelo causal \\ \vspace{0.3cm}
  \tikz{            
-    \node[latent,] (r) {\includegraphics[width=0.06\textwidth]{../../aux/static/regalo.png}} ;
+    \node[latent,] (r) {\includegraphics[width=0.06\textwidth]{../../auxiliar/static/regalo.png}} ;
     \node[const,left=of r] (nr) {\Large $r$} ;    
     
-    \node[latent, below=of r] (d) {\includegraphics[width=0.05\textwidth]{../../aux/static/dedo.png}} ;
+    \node[latent, below=of r] (d) {\includegraphics[width=0.05\textwidth]{../../auxiliar/static/dedo.png}} ;
     \node[const, left=of d] (nd) {\Large $s$} ;
 
     \edge {r} {d};
@@ -448,7 +448,7 @@ Modelo causal \\ \vspace{0.3cm}
 \tikz{ %
         
          \node[factor, minimum size=1cm] (p1) {} ;
-         \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.03\textwidth]{../../aux/static/dedo.png}} ;
+         \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.03\textwidth]{../../auxiliar/static/dedo.png}} ;
          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
 
          \node[const, above=of p1, yshift=.15cm] (fp1) {$1/2$};
@@ -1178,7 +1178,7 @@ P(\text{Hip\'otesis }|\text{ Dato}) = \frac{P(\text{Dato }|\text{ Hip\'otesis}) 
  
 \begin{frame}[plain]
 \centering
-  \includegraphics[width=0.35\textwidth]{../../aux/static/pachacuteckoricancha.jpg}
+  \includegraphics[width=0.35\textwidth]{../../auxiliar/static/pachacuteckoricancha.jpg}
 \end{frame}
 
 

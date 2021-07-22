@@ -2,8 +2,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{tikz}
 
-\input{../../../aux/tex/tikzlibrarybayesnet.code.tex}
-\input{../../../aux/tex/encabezado.tex}
+\input{../../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+\input{../../../auxiliar/tex/encabezado.tex}
 \makeatletter
 \newcommand{\vast}{\bBigg@{2.5}}
 \newcommand{\Vast}{\bBigg@{14.5}}
@@ -14,7 +14,7 @@
 \begin{document}
 \tikz{        
     
-    \node[latent,color=white] (d) {\phantom{\includegraphics[width=0.05\textwidth]{../../../aux/static/dedo.png}}} ;
+    \node[latent,color=white] (d) {\phantom{\includegraphics[width=0.05\textwidth]{../../../auxiliar/static/dedo.png}}} ;
     \node[const,above=of d] (nd) {} ;
     
     
@@ -29,7 +29,7 @@
     % 
     % } ;}
     
-    \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.06\textwidth]{../../../aux/static/regalo.png}} ;
+    \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.06\textwidth]{../../../auxiliar/static/regalo.png}} ;
     \node[const,above=of r] (nr) {\Large $r$} ;
     %\onslide<2->{\node[const, left=of r] (dr) {\large
     %\begin{tabular}{|c|c|c|c|}
@@ -41,7 +41,7 @@
     
     
     
-    \node[latent, color=white,above=of d, xshift=1.5cm] (c) {\phantom{\includegraphics[width=0.06\textwidth]{../../../aux/static/cerradura.png}}} ;
+    \node[latent, color=white,above=of d, xshift=1.5cm] (c) {\phantom{\includegraphics[width=0.06\textwidth]{../../../auxiliar/static/cerradura.png}}} ;
     \node[const,above=of c] (nc) {} ;
     %\onslide<2->{\node[const, right=of c] (dc) {\large $\bm{c = 1}$};}
     
