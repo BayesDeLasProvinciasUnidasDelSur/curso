@@ -6,5 +6,11 @@
 # size:
 # ffmpeg -i input.mp4 -vcodec libx265 -crf 28 output.mp4
 
-all:
+opciones:
+	echo "opciones: v2021.2, v2021.1, v2020"
+
+all: v2021.2, v2021.1, v2020
+
+
+v2021.1:
 	make -C 2021.1/
