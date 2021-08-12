@@ -2,7 +2,9 @@ using Plots
 using Random
 
 budget = [0.0]
-# Las puestas del reverdo Bayes # ToDo: pensarlo con Kelly también 
+# Las puestas del reverendo Bayes # ToDo: pensarlo con Kelly también 
+# Bayes habla del "pago justo"
+# El pago justo puede ser entendido 
 odd1 = 1/(2/3)
 odd2 = 1/(1/3)
 for i in 1:100000
