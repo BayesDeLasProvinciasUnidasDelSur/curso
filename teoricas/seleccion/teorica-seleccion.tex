@@ -44,150 +44,20 @@
 
 
 \begin{frame}[plain]
-
-\vspace{0.75cm}
-
- \begin{center}
-  \Large >Cuál es la forma \'optima de actualizar creencias 
-  
-dadas restricciones: modelos y datos?
- \end{center}
-
-\begin{textblock}{160}(0,86)
-\tiny \centering
-\href{https://doi.org/10.1016/S0888-613X(03)00051-3}{Teorema de Cox}
-\end{textblock}
-
-\end{frame}
- 
- 
-
-\begin{frame}[plain]
 \begin{textblock}{160}(0,4)
- \centering \LARGE 
- \en{Hidden variables and honest reasoning}
- \es{Creencias y razonamiento \textbf{honesto}}
- \end{textblock}
- \vspace{1cm}
- 
-\begin{center}
-  Regla 2 \\
-\LARGE
-\textbf{Contextualizar las creencias \\ en partes iguales}
- \end{center}
-
- \begin{align*}
- P(r|s_2) = \frac{P(r, s_2)}{P(s_2)}
- \end{align*} 
-
- 
-\end{frame}
-
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering \LARGE  Las reglas de la probabilidad
+ \centering \Large Modelos alternativos \\
 \end{textblock}
-
 \vspace{1cm}
 
+\centering
 
+Heliocéntrico \hspace{1.2cm} Geocéntrico
 
-\begin{equation*}
-  \text{Marginal}_{i} = \sum_j \text{Conjunta}_{ij}  \ \ \ \ \ \ \ \ \ \ \ \  \text{Condicional}_{j|i} = \frac{\text{Conjunta}_{ij}}{\text{Marginal}_{i}}
-\end{equation*}
+\includegraphics[width=0.5\textwidth]{../../auxiliar/static/geocentrico-heliocentrico-fourier.png}
 
 \pause
-\vspace{1cm}
-
-
-\begin{columns}[t]
-\begin{column}{0.5\textwidth}
- \centering \textbf{Regla de la suma}
- 
- 
-\begin{equation*}
- P(r) = \sum_j P(r,s_j)
-\end{equation*}
- 
- \justifying \footnotesize
-  Cualquier distribución marginal puede ser obtenida integrando la distribución conjunta
-
- \end{column}
- \begin{column}{0.5\textwidth}
-\centering  \textbf{Regla del producto}
-
-\begin{equation*}
- P(r,s) = P(s|r) P(r)
-\end{equation*}
-
- \justifying \footnotesize
-Cualquier distribución conjunta puede ser expresada como el producto de distribuciones condicionales uni-dimensionles.
-
-\end{column}
-\end{columns}
-
-\end{frame}
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering \LARGE 
-\st{Teorema de Bayes} \\
-\Large El corolario de Laplace
-\end{textblock}
-
-\only<1-4>{
-\begin{textblock}{160}(0,34)
- \begin{align*}
-  \phantom{P(r_i)} P(r_i|s_2) & = \frac{P(r_i, s_2)}{P(s_2)} \onslide<4>{= \frac{P(s_2|r_i)P(r_i)}{P(s_2)}}
-  \only<2>{\\ P(s_2 | r_i) &= \frac{P(r_i, s_2)}{P(r_i)}}
-  \only<3-4>{\\[0.27cm]P(r_i) P(s_2 | r_i)  &= P(r_i, s_2)}
- \end{align*}
-\end{textblock}
-}
-
-\only<5>{
-\begin{textblock}{160}(0,34)
- \begin{align*}
-  \phantom{P(r_i)} P(r_i|s_2) & = \frac{P(s_2|r_i)P(r_i)}{P(s_2)} \phantom{= \frac{P(r_i, s_2)}{P(s_2)} \ }
-  \end{align*}
-\end{textblock}
-}
-
-
-
-\only<6>{
-\begin{textblock}{160}(0,43)
-\begin{equation*}
-P(\text{Hip\'otesis }|\text{ Dato}) = \frac{P(\text{Dato }|\text{ Hip\'otesis}) P(\text{Hip\'otesis})}{P(\text{Dato})}
-\end{equation*}
-\end{textblock}
-}
-
-
-\only<7>{
-\begin{textblock}{160}(0,37.75)
-\begin{equation*}
-\underbrace{P(\text{Hip\'otesis }|\text{ Datos})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos }|\text{ Hip\'otesis})}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis})}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos})}_{\text{\scriptsize Evidencia}}}
-\end{equation*}
-\end{textblock}
-}
-
-\vspace{0.2cm}
-
-\only<8->{  
-%\vspace{0.3cm}
-\Wider[2cm]{
-\begin{textblock}{160}(0,34.25) 
-\begin{equation*}
-\underbrace{P(\text{Hip\'otesis }|\text{ Datos, Modelo})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos }|\text{ Hip\'otesis, Modelo})}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis }|\text{ Modelo})}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos }|\text{ Modelo})}_{\text{\scriptsize Evidencia}}}
-\end{equation*}
-
-\end{textblock}
-
-}
-}
+\vspace{0.5cm}
+Ambos predicen las mismas distancias relativas a la tierra
 
 \end{frame}
 
@@ -196,10 +66,30 @@ P(\text{Hip\'otesis }|\text{ Dato}) = \frac{P(\text{Dato }|\text{ Hip\'otesis}) 
 \vspace{0.75cm}
 
  \begin{center}
- \Large ¿Y nuestras creencias respecto de modelos alternativos?  
+ \Large ¿Cómo decidir entonces entre modelos causales alternativos?  
  \end{center}
 
 \end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large Epiciclos () \\
+\end{textblock}
+\vspace{0.75cm}
+
+\centering
+
+\includegraphics[width=0.45\textwidth]{../../auxiliar/static/epiciclos.png}
+
+\end{frame}
+
+\begin{frame}[plain]
+
+\includegraphics[width=1\textwidth]{../../auxiliar/static/geocentrico-heliocentrico.png}
+
+\end{frame}
+
 
 
 \begin{frame}[plain]
