@@ -2,6 +2,21 @@
 
 \input{../../auxiliar/tex/diapo_encabezado.tex}
 \input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+\usepackage{listings}
+\lstset{
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=true,
+  columns=flexible,
+  basicstyle={\ttfamily},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showlines=true
+}
+
+\definecolor{all}{rgb}{0.90, 0.90, 0.90}
+
  \mode<presentation>
  {
  %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
@@ -31,8 +46,12 @@
  
  \begin{textblock}{90}(00,05)
 \begin{center}
- \huge  \textcolor{black!66}{Creencias, datos y sorpresas}
+ \huge  \textcolor{black!66}{Conocimiento empírico}
 \end{center}
+\end{textblock}
+
+ \begin{textblock}{47}(113,74)
+\centering \Large  \textcolor{white!55}{Selección de modelo}
 \end{textblock}
 
  %\vspace{2cm}brown
@@ -55,26 +74,11 @@ Heliocéntrico \hspace{1.2cm} Geocéntrico
 
 \includegraphics[width=0.5\textwidth]{../../auxiliar/static/geocentrico-heliocentrico-fourier.png}
 
-\pause
-\vspace{0.5cm}
-Ambos predicen las mismas distancias relativas a la tierra
-
 \end{frame}
-
-\begin{frame}[plain]
-
-\vspace{0.75cm}
-
- \begin{center}
- \Large ¿Cómo decidir entonces entre modelos causales alternativos?  
- \end{center}
-
-\end{frame}
-
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
- \centering \Large Epiciclos () \\
+ \centering \Large Epiciclos \\
 \end{textblock}
 \vspace{0.75cm}
 
@@ -84,11 +88,39 @@ Ambos predicen las mismas distancias relativas a la tierra
 
 \end{frame}
 
-\begin{frame}[plain]
 
+\begin{frame}[plain]
+ 
+\centering
 \includegraphics[width=1\textwidth]{../../auxiliar/static/geocentrico-heliocentrico.png}
 
+\vspace{0.5cm}
+Con epiciclos, ambos predicen las mismas distancias relativas a la tierra
+
 \end{frame}
+
+
+\begin{frame}[plain]
+
+\vspace{1.5cm}
+
+ \begin{center}
+ \Large ¿Cómo decidir entonces entre modelos causales alternativos?  
+ \end{center}
+
+ \vspace{0.5cm}
+ \pause
+ 
+ \begin{description}
+ \item[\textbf{Conocimiento previo:}] sabemos que alguno es imposible \pause
+ \item[\textbf{Predicción:}] cuán bien predicen los datos (distancia, luz, otros) \pause
+ \item[\textbf{Simplicidad:}] Si predicen igual, preferimos el más simple 
+ \end{description}
+ 
+ 
+ 
+\end{frame}
+
 
 
 
@@ -99,41 +131,35 @@ Ambos predicen las mismas distancias relativas a la tierra
 
 \begin{textblock}{160}(16,24) 
 \begin{equation*}
- P(\text{Modelo}|\text{Datos}) = \frac{\only<1>{P(\text{Datos}|\text{Modelo})\,}\only<2->{\overbrace{P(\text{Datos}|\text{Modelo})}^{\text{Evidencia}}}P(\text{Modelo})}{ P(\text{Datos})} \phantom{\frac{\overbrace{P(\text{Datos}|\text{Modelo})}^{\text{Evidencia}}}{ P(\text{Datos})}}
+ P(\text{Modelo}|\text{Datos}) = \frac{\only<1-2>{P(\text{Datos}|\text{Modelo})}\only<3->{\overbrace{P(\text{Datos}|\text{Modelo})}^{\text{Evidencia}}}  \only<1>{\,P(\text{Modelo})} \only<2->{\overbrace{P(\text{Modelo})}^{\text{Prior}}} }{ P(\text{Datos})} \phantom{\frac{\overbrace{P(\text{Datos}|\text{Modelo})}^{\text{Evidencia}}}{ P(\text{Datos})}}
 \end{equation*}
 \end{textblock}
 
 \only<3>{
-\begin{textblock}{160}(0,50) 
-\begin{equation*}
- P(\text{Datos}) = \sum_i P(\text{Datos}|\text{Modelo})P(\text{Modelo})
-\end{equation*}
-\end{textblock}
-}
-
-
-\end{frame}
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large Evidencia \\
-\end{textblock}
-\only<1>{
-\begin{textblock}{160}(0,30) 
+\begin{textblock}{160}(0,47) 
 \begin{align*}
-P(\text{Datos}|\text{Modelo}) & = \sum_{i}^H P(\text{Datos}|\text{Hip\'otesis}_i,\text{Modelo}) P(\text{Hip\'otesis}_i|\text{Modelo}) 
+P(\text{Datos}|\text{Modelo}) & = \sum_{i} P(\text{Datos}|\text{Hip\'otesis}_i,\text{Modelo}) P(\text{Hip\'otesis}_i|\text{Modelo}) 
 \end{align*}
 \end{textblock}
 }
 
-\only<2->{
-\begin{textblock}{160}(0,30) 
+\only<4>{
+\begin{textblock}{160}(0,47) 
 \begin{align*}
-P(\text{Datos}|\text{Modelo}) & = \sum_{i}^H P(\text{Datos}|\text{Hip\'otesis}_i,\text{Modelo}) P(\text{Hip\'otesis}_i|\text{Modelo}) \\
+P(\text{Datos}|\text{Modelo}) & = \sum_{i} P(\text{Datos}|\text{Hip\'otesis}_i,\text{Modelo}) P(\text{Hip\'otesis}_i|\text{Modelo}) \\
 & = P(\text{D}_1|\text{M}) P(\text{D}_2|\text{D}_1, \text{M}) \dots P(\text{D}_N|\text{D}_{N-1} \dots \text{D}_1, \text{M})  
 \end{align*}
 \end{textblock}
 }
+
+\only<5>{
+\begin{textblock}{160}(0,50) 
+\begin{equation*}
+ P(\text{Datos}) = \sum_i P(\text{Datos}|\text{Modelo}_i)P(\text{Modelo}_i)
+\end{equation*}
+\end{textblock}
+}
+
 
 
 % \only<7>{
@@ -141,6 +167,118 @@ P(\text{Datos}|\text{Modelo}) & = \sum_{i}^H P(\text{Datos}|\text{Hip\'otesis}_i
 % \centering \tiny Sobre comparaci\'on de modelos ver: \href{http://xyala.cap.ed.ac.uk/teaching/tutorials/phylogenetics/Bayesian_Workshop/PDFs/Kass\%20and\%20Raftery\%201995.pdf}{Kass \& Raftery. Bayes factors. 1995.}
 % \end{textblock}
 % }
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Modelos alternativos: Monty Hall
+\end{textblock}
+ \vspace{1.25cm}
+
+\begin{textblock}{80}(80,18)
+\centering
+ \tikz{            
+    \node[latent,] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
+    \node[const,left=of r] (nr) {\Large $r$} ;    
+    
+    
+    \node[latent, below=of r] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;
+    \node[const, left=of d] (nd) {\Large $s$} ;
+
+    \edge {r} {d};
+    
+}
+
+\vspace{0.75cm}
+\onslide<2>{
+\tikz{ 
+         \node[factor, minimum size=1cm] (p1) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/cerradura.png}} ;
+         \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/dedo.png}} ;
+         \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+
+         \node[const, above=of p1, yshift=.15cm] (fp1) {$1/3$};
+         \node[const, above=of p2, yshift=.15cm] (fp2) {$0$};
+         \node[const, above=of p3, yshift=.15cm] (fp3) {$1/3$};
+         \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
+        
+        } 
+}
+
+\end{textblock}
+
+\begin{textblock}{80}(0,18)
+\centering
+\tikz{        
+    
+    \node[latent] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;
+    \node[const,left=of d] (nd) {\Large $s$} ;
+    
+    \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
+    \node[const,left=of r] (nr) {\Large $r$} ;
+    
+    
+    \node[latent, fill=black!30, above=of d, xshift=1.5cm] (c) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/cerradura.png}} ;
+    \node[const,left=of c] (nc) {\Large $c$} ;
+         
+    \edge {r,c} {d};
+}
+
+\vspace{0.75cm}
+\onslide<2>{
+\tikz{ 
+         \node[factor, minimum size=1cm] (p1) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/cerradura.png}} ;
+         \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/dedo.png}} ;
+         \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+
+         \node[const, above=of p1, yshift=.15cm] (fp1) {$1/3$};
+         \node[const, above=of p2, yshift=.15cm] (fp2) {$0$};
+         \node[const, above=of p3, yshift=.15cm] (fp3) {$2/3$};
+         \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
+        
+        } 
+}
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}[plain,fragile]
+
+\begin{lstlisting}[belowskip=-0.6 \baselineskip]
+datos = [ rand(1:3) == 1 ? 0 : 1  for i in 1:16]
+\end{lstlisting}
+\pause
+\begin{lstlisting}[belowskip=-0.6 \baselineskip]
+
+prior = 1/2
+\end{lstlisting}
+\pause
+\begin{lstlisting}[belowskip=-0.6 \baselineskip]
+evidencia_B = cumprod([ 1/3  for d in datos ])
+\end{lstlisting}
+\pause
+\begin{lstlisting}[belowskip=-0.6 \baselineskip]
+evidencia_A = cumprod([ (1/3)^(1-d) * (2/3)^d  for d in datos ])
+\end{lstlisting}
+\pause
+\begin{lstlisting}[belowskip=-0.6 \baselineskip]
+
+p_datos = (evidencia_A .* prior) .+ (evidencia_B .* prior)
+\end{lstlisting}
+\pause
+\begin{lstlisting}
+
+p_modelo_A = evidencia_A .* prior ./ p_datos
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[plain]
+
+\vspace{0.75cm}
+\centering
+\includegraphics[width=0.8\textwidth]{figures/monty_hall_selection.pdf} \hspace{1cm}
+
 \end{frame}
 
 \begin{frame}[plain]
@@ -380,7 +518,7 @@ Y la \textbf{evidencia} del modelo es
 \begin{textblock}{160}(0,26)
      \centering 
        \onslide<1->{\includegraphics[width=0.45\textwidth]{figures/pdf/model_selection_true_and_sample} }
-       \onslide<2>{\includegraphics[width=0.45\textwidth]{figures/pdf/model_selection_MAP} }
+       \onslide<2>{\includegraphics[width=0.45\textwidth]{figures/pdf/model_selection_MAP_non-informative} }
 \end{textblock}
 
 \end{frame}
@@ -415,9 +553,7 @@ Evidencia conjunta
 \end{figure}
 \end{textblock}
 
-
 \end{frame}
-
 
 
 % \begin{frame}
@@ -486,6 +622,69 @@ Evidencia conjunta
  \ \ \ \  Balance natural entre complejidad y predicci\'on
   \end{textblock}
 \end{frame}
+
+
+\begin{frame}[plain]
+
+\centering
+\includegraphics[width=0.50\textwidth]{../../auxiliar/static/regularizador-meme.jpeg} 
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Regularizador frecuentista L2
+\end{textblock}
+
+
+\begin{equation*}
+ \underset{\bm{w}}{\text{ max }} P(\bm{t} | \bm{x}, \bm{w}, \beta) P(\vm{w}) = \underset{\bm{w}}{\text{ min }} \sum_{i=1}^{n}  (t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2 + \sum_{i=0}^{M-1} (w_i - 0 )^2
+\end{equation*}
+
+\todo[inline]{verificar el termino de regularizacion}
+
+
+
+\end{frame}
+
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large  Prior
+\end{textblock}
+\vspace{0.75cm}
+
+       \begin{figure}[H]     
+     \centering 
+     \begin{subfigure}[b]{0.45\textwidth}
+    \centering Informativo
+    \includegraphics[width=1\textwidth]{figures/pdf/model_selection_MAP_informative} 
+     \end{subfigure}
+       \begin{subfigure}[b]{0.45\textwidth}
+     \centering 
+     No informativo
+    \includegraphics[width=1\textwidth]{figures/pdf/model_selection_MAP_non-informative} 
+   \end{subfigure}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Prior no-informativo como regularizador
+\end{textblock}
+\vspace{0.75cm}
+
+\centering
+\includegraphics[width=0.66\textwidth]{figures/pdf/regularizador} 
+
+
+\end{frame}
+
+
 
 
 \begin{frame}[plain]
