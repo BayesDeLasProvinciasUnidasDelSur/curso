@@ -4,7 +4,7 @@ using Random
 prior = 1/2
 datos = [ rand(1:3) == 1 ? 0 : 1  for i in 1:16]
 predicciones_A = [ (1/3)^(1-d) * (2/3)^d  for d in datos ]
-predicciones_B = [ 1/3  for d in datos ]
+predicciones_B = [ 1/2  for d in datos ]
 
 evidencia_A = cumprod(predicciones_A )
 evidencia_B = cumprod(predicciones_B )
@@ -16,3 +16,4 @@ p = plot([0.5; p_modelo_A], ylim=[0,1], ylab="P(M | D)", xlab="Cantidad de datos
 plot!(1.0.-[0.5; p_modelo_A])
 
 savefig(p, "monty_hall_selection.pdf") 
+

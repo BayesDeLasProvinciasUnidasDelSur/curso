@@ -197,9 +197,9 @@ P(\text{Datos}|\text{Modelo}) & = \sum_{i} P(\text{Datos}|\text{Hip\'otesis}_i,\
          \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/dedo.png}} ;
          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
 
-         \node[const, above=of p1, yshift=.15cm] (fp1) {$1/3$};
+         \node[const, above=of p1, yshift=.15cm] (fp1) {$1/2$};
          \node[const, above=of p2, yshift=.15cm] (fp2) {$0$};
-         \node[const, above=of p3, yshift=.15cm] (fp3) {$1/3$};
+         \node[const, above=of p3, yshift=.15cm] (fp3) {$1/2$};
          \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
         
         } 
@@ -254,7 +254,7 @@ prior = 1/2
 \end{lstlisting}
 \pause
 \begin{lstlisting}[belowskip=-0.6 \baselineskip]
-evidencia_B = cumprod([ 1/3  for d in datos ])
+evidencia_B = cumprod([ 1/2 for d in datos ])
 \end{lstlisting}
 \pause
 \begin{lstlisting}[belowskip=-0.6 \baselineskip]
@@ -266,11 +266,14 @@ evidencia_A = cumprod([ (1/3)^(1-d) * (2/3)^d  for d in datos ])
 p_datos = (evidencia_A .* prior) .+ (evidencia_B .* prior)
 \end{lstlisting}
 \pause
-\begin{lstlisting}
+\begin{lstlisting}[belowskip=-0.6 \baselineskip]
 
 p_modelo_A = evidencia_A .* prior ./ p_datos
 \end{lstlisting}
-
+\pause
+\begin{lstlisting}
+p_modelo_B = evidencia_B .* prior ./ p_datos
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}[plain]
@@ -278,6 +281,14 @@ p_modelo_A = evidencia_A .* prior ./ p_datos
 \vspace{0.75cm}
 \centering
 \includegraphics[width=0.8\textwidth]{figures/monty_hall_selection.pdf} \hspace{1cm}
+
+\end{frame}
+
+\begin{frame}[plain]
+
+\centering
+
+\Large Modelos lineales
 
 \end{frame}
 
@@ -343,7 +354,6 @@ P(\bm{t} | \bm{x}, \bm{w}, \beta) = \prod_{i=1}^n \N(t_i | \bm{w}^T \bm{\phi}(\b
 
 \end{frame}
 
-
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
  \Large \centering Soluci\'on completa
@@ -384,9 +394,7 @@ P(\bm{t} | \bm{x}, \bm{w}, \beta) = \prod_{i=1}^n \N(t_i | \bm{w}^T \bm{\phi}(\b
 \end{textblock}
  \vspace{0.75cm}
 
-
-
- La distribuci\'on \textbf{posteriori} sobre $\vm{w}$ tiene como media
+La distribuci\'on \textbf{posteriori} sobre $\vm{w}$ tiene como media
 
 \begin{equation}
  \vm{m}_N = \beta  \vm{S}_N\vm{\Phi}^T \vm{t}
@@ -399,7 +407,6 @@ y como covarianzas
 \end{equation}
 
 \pause
-
 
 Y la \textbf{evidencia} del modelo es
 
@@ -623,31 +630,31 @@ Evidencia conjunta
   \end{textblock}
 \end{frame}
 
-
-\begin{frame}[plain]
-
-\centering
-\includegraphics[width=0.50\textwidth]{../../auxiliar/static/regularizador-meme.jpeg} 
-
-\end{frame}
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering \Large Regularizador frecuentista L2
-\end{textblock}
-
-
-\begin{equation*}
- \underset{\bm{w}}{\text{ max }} P(\bm{t} | \bm{x}, \bm{w}, \beta) P(\vm{w}) = \underset{\bm{w}}{\text{ min }} \sum_{i=1}^{n}  (t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2 + \sum_{i=0}^{M-1} (w_i - 0 )^2
-\end{equation*}
-
-\todo[inline]{verificar el termino de regularizacion}
-
-
-
-\end{frame}
-
-
+% 
+% \begin{frame}[plain]
+% 
+% \centering
+% \includegraphics[width=0.50\textwidth]{../../auxiliar/static/regularizador-meme.jpeg} 
+% 
+% \end{frame}
+% 
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+% \centering \Large Regularizador frecuentista L2
+% \end{textblock}
+% 
+% 
+% \begin{equation*}
+%  \underset{\bm{w}}{\text{ max }} P(\bm{t} | \bm{x}, \bm{w}, \beta) P(\vm{w}) = \underset{\bm{w}}{\text{ min }} \sum_{i=1}^{n}  (t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2 + \sum_{i=0}^{M-1} (w_i - 0 )^2
+% \end{equation*}
+% 
+% \todo[inline]{verificar el termino de regularizacion}
+% 
+% 
+% 
+% \end{frame}
+% 
+% 
 
 
 \begin{frame}[plain]
@@ -685,12 +692,154 @@ Evidencia conjunta
 \end{frame}
 
 
+\begin{frame}[plain]
+
+\centering \Large
+
+Evoluci\'on
+
+\end{frame}
+
 
 
 \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Evolución de estrategias
+\end{textblock}
+\vspace{0.75cm}
 
 \centering
-  \includegraphics[width=0.55\textwidth]{../../auxiliar/static/pachacuteckoricancha.jpg}
+\tikz{
+    \node[latent] (e) {$p$};
+    \node[const, right=of e] (ne) {$p\sim \text{Beta}(\alpha,\beta)$};
+    
+    \node[latent, below=of e] (r) {$m$};
+    \node[const, right=of r] (ne) {$m \sim \text{Binomial}(p)$};
+    
+    \edge {e} {r};
+}
+ \vspace{1.5cm}
+ \pause
+ 
+ Supongamos que se seleccionó la estrategia $p=1.5/2.1$
+
+ \begin{equation}
+ P(p) = \delta(p=1.5/2.1)
+ \end{equation}
+ 
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Cambio de ambiente
+\end{textblock}
+\vspace{0.75cm}
+
+Los datos surgen ahora 50\% y 50\% pero la apuesta de las estrategias sigue siendo la misma (ya no hay diversidad).
+
+\end{frame}
+
+\begin{frame}[plain]
+
+Cómo les va jugando individualmente
+
+Cómo les va a la estrategia óptima
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Cambio de ambiente
+\end{textblock}
+\vspace{0.75cm}
+
+
+\centering
+\tikz{
+
+    \node[latent, minimum size=2cm ] (x1_0) {$x_1(t)$} ;
+    \node[latent, below=of x1_0, minimum size=2cm ] (x2_0) {$x_2(t)$} ;
+
+    \node[latent, right=of x1_0, minimum size=3cm ] (x1_0g) {$x_1(t)+\Delta x_1(t)$} ;
+    \node[latent, right=of x2_0, minimum size=1.8cm, xshift=0.6cm , align=left] (x2_0g) {$x_2(t)+$\\$\Delta x_2(t)$} ;
+    
+    \node[latent, right=of x1_0g, minimum size=3.8cm, yshift=-1.33cm, align=right] (x_0) {$x_1(t)+\Delta x_1(t)$\\$+x_2(t)+\Delta x_2(t)$ } ;
+    
+    \node[const, above=of x_0] (nx_0) {$\overbrace{\text{Pool}\hspace{2.5cm}\text{Share}}^{\text{\normalsize Cooperaci\'on}}$} ;
+    
+    \node[latent, right=of x1_0g, minimum size=2.5cm,  xshift=4.5cm] (x1_1) {$x_1(t+1)$ } ;
+    \node[latent, below=of x1_1, minimum size=2.5cm, yshift=0.7cm] (x2_1) {$x_2(t+1)$ } ;
+    
+    \edge {x1_0} {x1_0g};
+    \edge {x2_0} {x2_0g};
+    \edge {x1_0g,x2_0g} {x_0};
+    \edge {x_0} {x1_1,x2_1};
+    
+}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Evolución de grupos
+\end{textblock}
+\vspace{0.75cm}
+
+\centering
+\tikz{
+    \node[latent] (m) {$M$};
+    
+    \node[latent, right=of m] (e0) {$e_0$};
+    
+    \node[latent, right=of e0] (e1) {$e_1$};
+    \node[latent, below=of e1] (r1) {$r_1$};
+    
+    \node[latent, right=of e1] (e2) {$e_2$};
+    \node[latent, below=of e2] (r2) {$r_2$};
+    
+    \node[latent, right=of e2] (e3) {$e_3$};
+    
+    
+    \edge {m} {e0};
+    \edge {e0} {e1};
+    \edge {e1} {r1,e2};
+    \edge {e2} {r2,e3};
+}
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Evolución de grupos
+\end{textblock}
+\vspace{0.75cm}
+
+\centering
+\tikz{
+    \node[latent] (m) {$M$};
+    
+    \node[latent, right=of m] (e0) {$e_0$};
+    
+    \node[latent, right=of e0] (e1) {$e_1$};
+    \node[latent, below=of e1] (r1) {$r_1$};
+    
+    \node[latent, right=of e1] (e2) {$e_2$};
+    \node[latent, below=of e2] (r2) {$r_2$};
+    
+    \node[latent, right=of e2] (e3) {$e_3$};
+    
+    
+    \edge {m} {e0};
+    \edge {e0} {e1};
+    \edge {e1} {r1,e2};
+    \edge {e2} {r2,e3};
+}
+\end{frame}
+
+
+\begin{frame}[plain]
+\centering
+  \includegraphics[width=0.35\textwidth]{../../auxiliar/static/pachacuteckoricancha.jpg}
 \end{frame}
 
 

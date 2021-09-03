@@ -4,6 +4,7 @@ from numpy.random import normal as noise
 import matplotlib.pyplot as plt
 from scipy.stats import multivariate_normal as normal
 from scipy.stats import norm 
+import statsmodels.api as sm
 #phi = polynomial_basis_function
 
 random.seed(999)
@@ -82,14 +83,60 @@ t = sinus_model(X, 1/beta)
 X_grilla = np.linspace(0, 1, 100).reshape(-1, 1)-0.5
 y_grilla = np.linspace(-1.4, 1.4, 100).reshape(-1, 1)
 y_true = sinus_model(X_grilla , 0)
-
-
 plt.plot(X_grilla, y_true, '--', color="black")
 plt.plot(X,t,'.', color='black')
 plt.ylim(-1.5,1.5)
 plt.savefig("pdf/model_selection_true_and_sample.pdf",bbox_inches='tight')
 plt.savefig('png/model_selection_true_and_sample.png', bbox_inches='tight', transparent=True)
 plt.close()    
+
+# OLS 
+import pandas as pd
+data = pd.DataFrame({"X0": X[:,0]**0, 'X1':X[:,0],"X2": X[:,0]**2,"X3": X[:,0]**3,"X4": X[:,0]**4,"X5": X[:,0]**5,"X6": X[:,0]**6,"X7": X[:,0]**7,"X8": X[:,0]**8,"X9": X[:,0]**9})
+
+X_grilla = np.linspace(0, 1, 100).reshape(-1, 1)-0.5
+y_grilla = np.linspace(-1.4, 1.4, 100).reshape(-1, 1)
+y_true = sinus_model(X_grilla , 0)
+plt.plot(X_grilla, y_true, '--', color="black")
+plt.plot(X,t,'.', color='black')
+plt.ylim(-1.5,1.5)
+for i in range(0,10):
+    model = sm.OLS(t,data.iloc[:,0:(i+1)]).fit()
+    pred = model.params["X0"]*X_grilla[:,0]**0
+    for i in range(1,i+1):
+        pred += model.params["X"+str(i)]*X_grilla[:,0]**i
+    plt.plot(X_grilla[:,0], pred)
+
+plt.savefig("pdf/model_selection_OLS.pdf",bbox_inches='tight')
+plt.savefig('png/model_selection_OLS.png', bbox_inches='tight', transparent=True)
+plt.close()
+
+X_grilla = np.linspace(0, 1, 100).reshape(-1, 1)-0.5
+y_grilla = np.linspace(-1.4, 1.4, 100).reshape(-1, 1)
+y_true = sinus_model(X_grilla , 0)
+plt.plot(X_grilla, y_true, '--', color="black")
+plt.plot(X,t,'.', color='black')
+plt.ylim(-1.5,1.5)
+plt.plot(X_grilla[:,0], pred)
+plt.savefig("pdf/model_selection_OLS_best-at-train.pdf",bbox_inches='tight')
+plt.savefig('png/model_selection_OLS_best-at-train.png', bbox_inches='tight', transparent=True)
+plt.close()
+
+model = sm.OLS(t,data).fit_regularized(method='elastic_net', alpha=0.0001, L1_wt=0.0)
+pred = model.params[0]*X_grilla[:,0]**0
+for i in range(1,10):
+    pred += model.params[i]*X_grilla[:,0]**i
+
+plt.plot(X_grilla[:,0], pred)
+X_grilla = np.linspace(0, 1, 100).reshape(-1, 1)-0.5
+y_grilla = np.linspace(-1.4, 1.4, 100).reshape(-1, 1)
+y_true = sinus_model(X_grilla , 0)
+plt.plot(X_grilla, y_true, '--', color="black")
+plt.plot(X,t,'.', color='black')
+plt.ylim(-1.5,1.5)
+plt.savefig("pdf/model_selection_OLS_L2.pdf",bbox_inches='tight')
+plt.savefig('png/model_selection_OLS_L2.png', bbox_inches='tight', transparent=True)
+plt.close()
 
 prior_predictive_online = np.zeros((10,1))
 prior_maxAposteriori_online = np.zeros((10,1))
@@ -174,7 +221,7 @@ for d in range(0,10):#d=3
 plt.ylim(-1.5,1.5)
 Phi_grilla = polynomial_basis_function(X_grilla, np.array(range(3+1)) )
 y_map = Phi_grilla.dot(w_map[3])
-plt.plot(X_grilla,y_map, color="black"  )
+plt.plot(X_grilla,y_map, color="red"  )
 plt.plot(X_grilla, y_true, '--', color="black")
 plt.plot(X,t,'.', color='black')
 plt.savefig("pdf/model_selection_MAP_non-informative.pdf",bbox_inches='tight')
@@ -202,7 +249,7 @@ for d in range(0,10):#d=3
 plt.ylim(-1.5,1.5)
 Phi_grilla = polynomial_basis_function(X_grilla, np.array(range(3+1)) )
 y_map = Phi_grilla.dot(w_map[3])
-plt.plot(X_grilla,y_map, color="black"  )
+plt.plot(X_grilla,y_map, color="red"  )
 plt.plot(X_grilla, y_true, '--', color="black")
 plt.plot(X,t,'.', color='black')
 plt.savefig("pdf/model_selection_MAP_informative.pdf",bbox_inches='tight')
@@ -236,6 +283,8 @@ for i in range(10):
 
 
 plt.legend(loc="upper left")
+plt.xlabel("log10(Incertidumbre a priori)", size=18)
+plt.ylabel("P(M | D)",size=18)
 plt.savefig("pdf/regularizador.pdf",bbox_inches='tight')
 plt.savefig("png/regularizador.png",bbox_inches='tight',transparent=True)
 plt.close()    
