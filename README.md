@@ -53,18 +53,3 @@ Contactos a **bayesdelsur(en)gmail**
 Tools:
 
 0. [Gaussain process with pytroch](https://gpytorch.ai/)
-
-# Agenda?
-
-| Nombre  | Responsable  | Materiales | Fecha estimada | Método |
-|:-:|:-:|:-:|:-:|:-:|
-| A logic of plausible inference: Cox's theorem| - | [paper](https://www.sciencedirect.com/science/article/pii/S0888613X03000513)| - | Teorema |
-| Causal Inference in Statistics: A premier | - | [Libro](http://gen.lib.rus.ec/) | - | Intervenciones y do-calculus |
-| TrueSkill: A Bayesian Skill Rating System | -| [Paper](https://papers.nips.cc/paper/3079-trueskilltm-a-bayesian-skill-rating-system) | - | Analítico y Variacional (EP) |
-| TrueSkill Through Time: Revisiting the History of Chess | - | [Paper](https://papers.nips.cc/paper/3331-trueskill-through-time-revisiting-the-history-of-chess) | - |  Variacional (EP)|
-| Match Box: Large Scale Online Bayesian Recommendations | -  | [Paper](https://www.microsoft.com/en-us/research/wp-content/uploads/2009/01/www09.pdf) | - |  Variacional (EP y VB)|
-| Probabilistic Backpropagation for Scalable Bayesian Neural Networks | - |[Paper](http://proceedings.mlr.press/v37/hernandez-lobatoc15.html)| - | Variacional (EP) |
-| Tencent Advertising System | - | [Paper](https://arxiv.org/abs/1707.00802) | - | Probabilistic Backpropagation (EP) |
-| Reinforcement Learning and Control as Probabilistic Inference | - | [paper](https://arxiv.org/abs/1805.00909) | - | RL y modelos gráficos|
-
-
