@@ -43,6 +43,154 @@
 \end{frame}
 
 
+
+
+\begin{frame}[plain]
+
+\centering \Large
+
+Evoluci\'on
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Evolución de estrategias
+\end{textblock}
+\vspace{0.75cm}
+
+\centering
+\tikz{
+    \node[latent] (e) {$p$};
+    \node[const, right=of e] (ne) {$p\sim \text{Beta}(\alpha,\beta)$};
+    
+    \node[latent, below=of e] (r) {$m$};
+    \node[const, right=of r] (ne) {$m \sim \text{Binomial}(p)$};
+    
+    \edge {e} {r};
+}
+ \vspace{1.5cm}
+ \pause
+ 
+ Supongamos que se seleccionó la estrategia $p=1.5/2.1$
+
+ \begin{equation}
+ P(p) = \delta(p=1.5/2.1)
+ \end{equation}
+ 
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Cambio de ambiente
+\end{textblock}
+\vspace{0.75cm}
+
+Los datos surgen ahora 50\% y 50\% pero la apuesta de las estrategias sigue siendo la misma (ya no hay diversidad).
+
+\end{frame}
+
+\begin{frame}[plain]
+
+Cómo les va jugando individualmente
+
+Cómo les va a la estrategia óptima
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Cambio de ambiente
+\end{textblock}
+\vspace{0.75cm}
+
+
+\centering
+\tikz{
+
+    \node[latent, minimum size=2cm ] (x1_0) {$x_1(t)$} ;
+    \node[latent, below=of x1_0, minimum size=2cm ] (x2_0) {$x_2(t)$} ;
+
+    \node[latent, right=of x1_0, minimum size=3cm ] (x1_0g) {$x_1(t)+\Delta x_1(t)$} ;
+    \node[latent, right=of x2_0, minimum size=1.8cm, xshift=0.6cm , align=left] (x2_0g) {$x_2(t)+$\\$\Delta x_2(t)$} ;
+    
+    \node[latent, right=of x1_0g, minimum size=3.8cm, yshift=-1.33cm, align=right] (x_0) {$x_1(t)+\Delta x_1(t)$\\$+x_2(t)+\Delta x_2(t)$ } ;
+    
+    \node[const, above=of x_0] (nx_0) {$\overbrace{\text{Pool}\hspace{2.5cm}\text{Share}}^{\text{\normalsize Cooperaci\'on}}$} ;
+    
+    \node[latent, right=of x1_0g, minimum size=2.5cm,  xshift=4.5cm] (x1_1) {$x_1(t+1)$ } ;
+    \node[latent, below=of x1_1, minimum size=2.5cm, yshift=0.7cm] (x2_1) {$x_2(t+1)$ } ;
+    
+    \edge {x1_0} {x1_0g};
+    \edge {x2_0} {x2_0g};
+    \edge {x1_0g,x2_0g} {x_0};
+    \edge {x_0} {x1_1,x2_1};
+    
+}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Evolución de grupos
+\end{textblock}
+\vspace{0.75cm}
+
+\centering
+\tikz{
+    \node[latent] (m) {$M$};
+    
+    \node[latent, right=of m] (e0) {$e_0$};
+    
+    \node[latent, right=of e0] (e1) {$e_1$};
+    \node[latent, below=of e1] (r1) {$r_1$};
+    
+    \node[latent, right=of e1] (e2) {$e_2$};
+    \node[latent, below=of e2] (r2) {$r_2$};
+    
+    \node[latent, right=of e2] (e3) {$e_3$};
+    
+    
+    \edge {m} {e0};
+    \edge {e0} {e1};
+    \edge {e1} {r1,e2};
+    \edge {e2} {r2,e3};
+}
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Evolución de grupos
+\end{textblock}
+\vspace{0.75cm}
+
+\centering
+\tikz{
+    \node[latent] (m) {$M$};
+    
+    \node[latent, right=of m] (e0) {$e_0$};
+    
+    \node[latent, right=of e0] (e1) {$e_1$};
+    \node[latent, below=of e1] (r1) {$r_1$};
+    
+    \node[latent, right=of e1] (e2) {$e_2$};
+    \node[latent, below=of e2] (r2) {$r_2$};
+    
+    \node[latent, right=of e2] (e3) {$e_3$};
+    
+    
+    \edge {m} {e0};
+    \edge {e0} {e1};
+    \edge {e1} {r1,e2};
+    \edge {e2} {r2,e3};
+}
+\end{frame}
+
+
+
 \begin{frame}[plain]
 
 \centering
