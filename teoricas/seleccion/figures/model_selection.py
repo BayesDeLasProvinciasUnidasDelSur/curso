@@ -87,7 +87,7 @@ plt.plot(X_grilla, y_true, '--', color="black")
 plt.plot(X,t,'.', color='black')
 plt.ylim(-1.5,1.5)
 plt.savefig("pdf/model_selection_true_and_sample.pdf",bbox_inches='tight')
-plt.savefig('png/model_selection_true_and_sample.png', bbox_inches='tight', transparent=True)
+plt.savefig('png/model_selection_true_and_sample.png', bbox_inches='tight', transparent=False)
 plt.close()    
 
 # OLS 
@@ -108,7 +108,7 @@ for i in range(0,10):
     plt.plot(X_grilla[:,0], pred)
 
 plt.savefig("pdf/model_selection_OLS.pdf",bbox_inches='tight')
-plt.savefig('png/model_selection_OLS.png', bbox_inches='tight', transparent=True)
+plt.savefig('png/model_selection_OLS.png', bbox_inches='tight', transparent=False)
 plt.close()
 
 X_grilla = np.linspace(0, 1, 100).reshape(-1, 1)-0.5
@@ -119,7 +119,7 @@ plt.plot(X,t,'.', color='black')
 plt.ylim(-1.5,1.5)
 plt.plot(X_grilla[:,0], pred)
 plt.savefig("pdf/model_selection_OLS_best-at-train.pdf",bbox_inches='tight')
-plt.savefig('png/model_selection_OLS_best-at-train.png', bbox_inches='tight', transparent=True)
+plt.savefig('png/model_selection_OLS_best-at-train.png', bbox_inches='tight', transparent=False)
 plt.close()
 
 model = sm.OLS(t,data).fit_regularized(method='elastic_net', alpha=0.0001, L1_wt=0.0)
@@ -135,7 +135,7 @@ plt.plot(X_grilla, y_true, '--', color="black")
 plt.plot(X,t,'.', color='black')
 plt.ylim(-1.5,1.5)
 plt.savefig("pdf/model_selection_OLS_L2.pdf",bbox_inches='tight')
-plt.savefig('png/model_selection_OLS_L2.png', bbox_inches='tight', transparent=True)
+plt.savefig('png/model_selection_OLS_L2.png', bbox_inches='tight', transparent=False)
 plt.close()
 
 prior_predictive_online = np.zeros((10,1))
@@ -185,19 +185,19 @@ plt.close()
 plt.plot(np.exp(log_evidence_joint))
 plt.plot(np.exp(prior_predictive_online))
 plt.savefig("pdf/model_selection_evidence.pdf",bbox_inches='tight')
-plt.savefig('png/model_selection_evidence.png', bbox_inches='tight',transparent=True)
+plt.savefig('png/model_selection_evidence.png', bbox_inches='tight',transparent=False)
 plt.close()    
 
 plt.close()
 plt.plot(np.exp(prior_maxAposteriori_online))
 plt.savefig("pdf/model_selection_maxApriori_online.pdf",bbox_inches='tight')
-plt.savefig('png/model_selection_maxApriori_online.png', bbox_inches='tight',transparent=True)
+plt.savefig('png/model_selection_maxApriori_online.png', bbox_inches='tight',transparent=False)
 plt.close()
 
 plt.close()
 plt.plot(maxAposteriori)
 plt.savefig("pdf/model_selection_maxLikelihood.pdf",bbox_inches='tight')
-plt.savefig("png/model_selection_maxLikelihood.png",bbox_inches='tight',transparent=True)
+plt.savefig("png/model_selection_maxLikelihood.png",bbox_inches='tight',transparent=False)
 plt.close()        
 
 
@@ -225,7 +225,7 @@ plt.plot(X_grilla,y_map, color="red"  )
 plt.plot(X_grilla, y_true, '--', color="black")
 plt.plot(X,t,'.', color='black')
 plt.savefig("pdf/model_selection_MAP_non-informative.pdf",bbox_inches='tight')
-plt.savefig("png/model_selection_MAP_non-informative.png",bbox_inches='tight',transparent=True)
+plt.savefig("png/model_selection_MAP_non-informative.png",bbox_inches='tight',transparent=False)
 plt.close()    
 
 
@@ -253,7 +253,7 @@ plt.plot(X_grilla,y_map, color="red"  )
 plt.plot(X_grilla, y_true, '--', color="black")
 plt.plot(X,t,'.', color='black')
 plt.savefig("pdf/model_selection_MAP_informative.pdf",bbox_inches='tight')
-plt.savefig("png/model_selection_MAP_informative.png",bbox_inches='tight',transparent=True)
+plt.savefig("png/model_selection_MAP_informative.png",bbox_inches='tight',transparent=False)
 plt.close()    
 
 
@@ -286,7 +286,7 @@ plt.legend(loc="upper left")
 plt.xlabel("log10(Incertidumbre a priori)", size=18)
 plt.ylabel("P(M | D)",size=18)
 plt.savefig("pdf/regularizador.pdf",bbox_inches='tight')
-plt.savefig("png/regularizador.png",bbox_inches='tight',transparent=True)
+plt.savefig("png/regularizador.png",bbox_inches='tight',transparent=False)
 plt.close()    
 
 
