@@ -1,9 +1,9 @@
 [submodule "aux/biblio"]
 	path = auxiliar/biblio
-	url = git@git.exactas.uba.ar:bayes/biblio.git
+	url = git@github.com:BayesDeLasProvinciasUnidasDelSur/biblio.git
 [submodule "aux/tex"]
 	path = auxiliar/tex
-	url = git@git.exactas.uba.ar:bayes/tex.git
+	url = git@github.com:BayesDeLasProvinciasUnidasDelSur/tex.git 
 [submodule "aux/static"]
 	path = auxiliar/static
-	url = git@git.exactas.uba.ar:bayes/static.git
+	url = git@github.com:BayesDeLasProvinciasUnidasDelSur/static.git
