@@ -5,10 +5,11 @@ Contactos a **bayesdelsur(en)gmail**
 ## Libros modernos:
 
 0. **Bishop**. [Pattern Recognition and Machine Learning](https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/)
+0. **MacKay**. [Information theory, inference and learning algorithms](https://www.inference.org.uk/itprnn/book.pdf)
 0. Pearl. [Causality](111.90.145.72/get.php?md5=aea29d62416c43c4b3c94444ecad5beb&key=3HX5RWW4J5RHCGGS&mirr=1) y [Causal Inference in Statistics: A premier](http://gen.lib.rus.ec/)
 0. Russell y Norvig [Artificial Intelligence: A Modern Approach](http://libgen.rs/search.php?req=Artificial+Intelligence%3A+A+Modern+Approach&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def)
 0. Koller y Friedman [Probabilistic Graphical Models, Principles and Techniques](http://libgen.rs/search.php?req=Probabilistic+Graphical+Models%2C+Principles+and+Techniques&open=0&res=25&view=simple&phrase=1&column=def)
-0. Halpern [Reasoning about uncertainty](31.42.184.140/main/2359000/a38245f53fe2ab2c3f65d721267b15fd/Halpern%2C%20Joseph%20Y%20-%20Reasoning%20about%20uncertainty-The%20MIT%20Press%20%282017%29.pdf)
+0. Halpern [Reasoning about uncertainty](http://libgen.rs/search.php?req=Reasoning+about+uncertainty&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def)
 
 ## Textos clásicos:
 
