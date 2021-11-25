@@ -10,6 +10,8 @@ Contactos a **bayesdelsur(en)gmail**
 0. Russell y Norvig [Artificial Intelligence: A Modern Approach](http://libgen.rs/search.php?req=Artificial+Intelligence%3A+A+Modern+Approach&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def)
 0. Koller y Friedman [Probabilistic Graphical Models, Principles and Techniques](http://libgen.rs/search.php?req=Probabilistic+Graphical+Models%2C+Principles+and+Techniques&open=0&res=25&view=simple&phrase=1&column=def)
 0. Halpern [Reasoning about uncertainty](http://libgen.rs/search.php?req=Reasoning+about+uncertainty&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def)
+0. Knuth [*Chapter 3 — Random Numbers* in The art of computer programming II](http://libgen.rs/search.php?req=Donald+Knuth&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def) 
+
 
 ## Textos clásicos:
 
