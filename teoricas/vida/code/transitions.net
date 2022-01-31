@@ -1,8 +1,10 @@
 net
 {
-	propagationenginegenerator1791944048146838126L = "edu.ucla.belief.approx.BeliefPropagationSettings@326ed7c6";
-	recoveryenginegenerator6944530267470113528l = "edu.ucla.util.SettingsImpl@6ae5b255";
+	propagationenginegenerator1791944048146838126L = "edu.ucla.belief.approx.BeliefPropagationSettings@7ef7719";
+	recoveryenginegenerator6944530267470113528l = "edu.ucla.util.SettingsImpl@61337b14";
+	jenginegenerator6060830225489488864L = "edu.ucla.belief.inference.JoinTreeSettings@75b22483";
 	node_size = (130.0 55.0);
+	rcenginegenerator1317510038576835557L = "edu.ucla.belief.inference.RCSettings@3631fba";
 }
 
 node G0
@@ -17,27 +19,38 @@ node G0
 	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
 	excludepolicy = "include whole CPT";
 }
-node E2
+node pop1
 {
-	states = ("e21" "e22" "e23" "e24" "e25" "e26" );
-	position = (254 10);
+	states = ("pop11" "pop12" "pop13" );
+	position = (99 100);
 	diagnosistype = "AUXILIARY";
 	DSLxSUBMODEL = "Root Submodel";
 	ismapvariable = "false";
-	ID = "variable3";
-	label = "E2";
+	ID = "variable1";
+	label = "pop1";
 	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
 	excludepolicy = "include whole CPT";
 }
-node R1
+node E0
 {
-	states = ("r10" "r11" "r12" "r13" );
-	position = (90 -86);
+	states = ("e01" "e02" "e03" "e04" "e05" "e06" );
+	position = (-73 18);
 	diagnosistype = "AUXILIARY";
 	DSLxSUBMODEL = "Root Submodel";
 	ismapvariable = "false";
+	ID = "variable1";
+	label = "E0";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	excludepolicy = "include whole CPT";
+}
+node R2
+{
+	states = ("r20" "r21" "r22" "r23" );
+	position = (256 -87);
+	diagnosistype = "AUXILIARY";
+	ismapvariable = "false";
 	ID = "variable4";
-	label = "R1";
+	label = "R2";
 	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
 	excludepolicy = "include whole CPT";
 }
@@ -50,17 +63,7 @@ node pop0
 	ismapvariable = "false";
 	ID = "variable0";
 	label = "pop0";
-	excludepolicy = "include whole CPT";
-}
-node pop1
-{
-	states = ("pop11" "pop12" "pop13" );
-	position = (99 100);
-	diagnosistype = "AUXILIARY";
-	DSLxSUBMODEL = "Root Submodel";
-	ismapvariable = "false";
-	ID = "variable1";
-	label = "pop1";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
 	excludepolicy = "include whole CPT";
 }
 node pop3
@@ -72,16 +75,18 @@ node pop3
 	ismapvariable = "false";
 	ID = "variable4";
 	label = "pop3";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
 	excludepolicy = "include whole CPT";
 }
-node R2
+node E2
 {
-	states = ("r20" "r21" "r22" "r23" );
-	position = (256 -87);
+	states = ("e21" "e22" "e23" "e24" "e25" "e26" );
+	position = (254 10);
 	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
 	ismapvariable = "false";
-	ID = "variable4";
-	label = "R2";
+	ID = "variable3";
+	label = "E2";
 	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
 	excludepolicy = "include whole CPT";
 }
@@ -105,17 +110,18 @@ node pop2
 	ismapvariable = "false";
 	ID = "variable3";
 	label = "pop2";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
 	excludepolicy = "include whole CPT";
 }
-node E0
+node R1
 {
-	states = ("e01" "e02" "e03" "e04" "e05" "e06" );
-	position = (-73 18);
+	states = ("r10" "r11" "r12" "r13" );
+	position = (90 -86);
 	diagnosistype = "AUXILIARY";
 	DSLxSUBMODEL = "Root Submodel";
 	ismapvariable = "false";
-	ID = "variable1";
-	label = "E0";
+	ID = "variable4";
+	label = "R1";
 	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
 	excludepolicy = "include whole CPT";
 }
@@ -133,18 +139,24 @@ node E1
 }
 potential ( G0 | )
 {
-	data = (	0.333	0.334	0.333	);
+	data = (	0.3333333333333333	0.3333333333333333	0.3333333333333333	);
 }
-potential ( E2 | E1 )
+potential ( pop1 | E1 )
+{
+	data = ((	1.0	0.0	0.0	)
+		(	1.0	0.0	0.0	)
+		(	0.0	1.0	0.0	)
+		(	0.0	1.0	0.0	)
+		(	0.0	0.0	1.0	)
+		(	0.0	0.0	1.0	));
+}
+potential ( E0 | G0 )
 {
 	data = ((	0.5	0.5	0.0	0.0	0.0	0.0	)
-		(	0.5	0.5	0.0	0.0	0.0	0.0	)
 		(	0.0	0.0	0.5	0.5	0.0	0.0	)
-		(	0.0	0.0	0.0	1.0	0.0	0.0	)
-		(	0.0	0.0	0.0	0.0	1.0	0.0	)
-		(	0.0	0.0	0.0	0.0	0.0	1.0	));
+		(	0.0	0.0	0.0	0.0	0.5	0.5	));
 }
-potential ( R1 | E1 )
+potential ( R2 | E2 )
 {
 	data = ((	0.1428571	0.3571429	0.1428571	0.3571429	)
 		(	0.1428571	0.1428571	0.3571429	0.3571429	)
@@ -162,15 +174,6 @@ potential ( pop0 | E0 )
 		(	0.0	0.0	1.0	)
 		(	0.0	0.0	1.0	));
 }
-potential ( pop1 | E1 )
-{
-	data = ((	1.0	0.0	0.0	)
-		(	1.0	0.0	0.0	)
-		(	0.0	1.0	0.0	)
-		(	0.0	1.0	0.0	)
-		(	0.0	0.0	1.0	)
-		(	0.0	0.0	1.0	));
-}
 potential ( pop3 | E3 )
 {
 	data = ((	1.0	0.0	0.0	)
@@ -180,14 +183,14 @@ potential ( pop3 | E3 )
 		(	0.0	0.0	1.0	)
 		(	0.0	0.0	1.0	));
 }
-potential ( R2 | E2 )
+potential ( E2 | E1 )
 {
-	data = ((	0.1428571	0.3571429	0.1428571	0.3571429	)
-		(	0.1428571	0.1428571	0.3571429	0.3571429	)
-		(	0.1428571	0.3571429	0.1428571	0.3571429	)
-		(	0.1428571	0.1428571	0.3571429	0.3571429	)
-		(	0.1428571	0.3571429	0.1428571	0.3571429	)
-		(	0.1428571	0.1428571	0.3571429	0.3571429	));
+	data = ((	0.5	0.5	0.0	0.0	0.0	0.0	)
+		(	0.5	0.5	0.0	0.0	0.0	0.0	)
+		(	0.0	0.0	0.5	0.5	0.0	0.0	)
+		(	0.0	0.0	0.0	1.0	0.0	0.0	)
+		(	0.0	0.0	0.0	0.0	1.0	0.0	)
+		(	0.0	0.0	0.0	0.0	0.0	1.0	));
 }
 potential ( E3 | E2 )
 {
@@ -207,17 +210,20 @@ potential ( pop2 | E2 )
 		(	0.0	0.0	1.0	)
 		(	0.0	0.0	1.0	));
 }
-potential ( E0 | G0 )
+potential ( R1 | E1 )
 {
-	data = ((	0.5	0.5	0.0	0.0	0.0	0.0	)
-		(	0.0	0.0	0.5	0.5	0.0	0.0	)
-		(	0.0	0.0	0.0	0.0	0.5	0.5	));
+	data = ((	0.1428571	0.3571429	0.1428571	0.3571429	)
+		(	0.1428571	0.1428571	0.3571429	0.3571429	)
+		(	0.1428571	0.3571429	0.1428571	0.3571429	)
+		(	0.1428571	0.1428571	0.3571429	0.3571429	)
+		(	0.1428571	0.3571429	0.1428571	0.3571429	)
+		(	0.1428571	0.1428571	0.3571429	0.3571429	));
 }
 potential ( E1 | E0 )
 {
-	data = ((	0.5	0.5	0.0	0.0	0.0	0.0	)
-		(	0.5	0.5	0.0	0.0	0.0	0.0	)
-		(	0.0	0.0	0.5	0.5	0.0	0.0	)
+	data = ((	1.0	0.0	0.0	0.0	0.0	0.0	)
+		(	0.0	1.0	0.0	0.0	0.0	0.0	)
+		(	0.0	0.0	1.0	0.0	0.0	0.0	)
 		(	0.0	0.0	0.0	1.0	0.0	0.0	)
 		(	0.0	0.0	0.0	0.0	1.0	0.0	)
 		(	0.0	0.0	0.0	0.0	0.0	1.0	));
