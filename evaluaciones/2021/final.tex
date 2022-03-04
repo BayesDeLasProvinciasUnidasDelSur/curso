@@ -1,0 +1,45 @@
+\documentclass[10pt]{article}
+\input{../../auxiliar/tex/encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+
+\newif\ifen
+\newif\ifes
+\newcommand{\en}[1]{\ifen#1\fi}
+\newcommand{\es}[1]{\ifes#1\fi}
+\entrue
+
+\title{\LARGE Inferencia Bayesiana \\ \Large  Final cursada 2021 }
+
+\author{Docente a cargo: Gustavo Landfried}
+\affil{Facultad de Ciencias Exactas y Naturales. Universidad de Buenos Aires.}
+\affil[]{Mail: \texttt{bayesdelsur@gmail.com}}
+\date{04 Marzo de 2022}
+
+\begin{document}
+
+\maketitle
+
+Entrega: 17 de Marzo a las 23:59 por correo electrónico un sólo archivo en pdf (latex, escaner de manuscrito).
+
+\begin{enumerate}
+
+\item Derive la distribución de creencias conjunta del modelo monty hall cuando la primera puerta ya está elegida (ni pista ni regalo observables) a. Justifique epistemológicamente por qué ese método es correcto. b ¿Siempre es correcto inicializar el modelo causal con un observable, o debe inicializarse sin observables y después actualizar creencias? ¿Por qué?
+
+\item Explique algorítmicamente las tres ecuaciones del sum-product algorithm. Justifique metodo-lógicamente por qué este algoritmo es correcto. Indique de qué tipo es la eficiencia, y por qué es útil. 
+
+\item Exprese la verosimilitud de los datos dado el modelo como (a) suma y como (b) producto. ¿Qué relación existe entre estas ecuaciones y los conceptos de ergodicidad y no ergodicidad de los sistemas? ¿Qué consecuencias tiene la expresión (a) y qué consecuencias tiene la expresión (b) sobre la probabilidad del modelo dados los datos? ¿Por qué cree que ocurre esta dualidad, que quiere decir?
+
+%\item Demuestre el d-separation por casos usando el sum-product algorithm.
+
+\item Escriba acerca de dos temas a elección que le hayan hecho reflexionar, sobre la vida, sobre el conocimiento en general, o cualquier otro preconcepto sobre el que ahora usted tiene otra interpretación que considera relevante, importante. (Una carilla por tema máximo).
+
+\end{enumerate}
+
+\vspace{1cm}
+
+Repositorio de la materia:\\[-.6cm]
+\begin{description}
+\item[Escritura:] \texttt{git@github.com:BayesDeLasProvinciasUnidasDelSur/curso.git} \\[-0.6cm]
+\item[Espejo:] \texttt{git@git.exactas.uba.ar:bayes/seminario.git}
+\end{description}
+\end{document}
