@@ -15,6 +15,8 @@ Contactos a **bayesdelsur(en)gmail**
 
 ## Textos clásicos:
 
+0. Ramsey (1926). [Truth and probability](http://eprints.ukh.ac.id/id/eprint/240/1/2016_Book_ReadingsInFormalEpistemology.pdf#page=42)
+0. Keynes, John Maynard (1921) [A Treatise on Probability](http://gutenberg.readingroo.ms/3/2/6/2/32625/old/2010-05-31-32625-pdf.pdf)
 0. Pascal-Fermat por Keith Devlin. [The Unfinished game: Pascal, Fermat and the letters](31.42.184.140/main/73000/bed190e8d465fc8a07a05709c22924a3/Keith%20Devlin%20-%20The%20Unfinished%20game_%20Pascal%2C%20Fermat%20and%20the%20letters-Basic%20Books%20%282008%29.pdf)
 0. Bayes. [An essay towards solving a problem in the doctrine of chances.](https://royalsocietypublishing.org/doi/pdf/10.1098/rstl.1763.0053?keytype2=tf_ipsecsha&ijkey=d86e9f6c361806fb58be6aad56cb2bcfade22c74)
 0. Laplace. [Théorie analytique des probabilités](93.174.95.29/main/11000/accf70cf7847f79b1940cc91ee65c1fb/Laplace%20J.-B.%20-%20Theorie%20des%20probabilites%20%28Oeuvres%29.%20Tome%207-Gauthier~Villars%20%281886%29.djvu)
