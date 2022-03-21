@@ -1,0 +1,244 @@
+\documentclass[shownotes]{beamer}
+
+\usepackage{ragged2e} %\justifying
+\usepackage{paracol}
+\usepackage[utf8]{inputenc} %Para acentos en UTF8 (Prueba: á é í ó ú Á É Í Ó Ú ñ Ñ)
+\usepackage{url}
+%\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{float} % para que los gr\'aficos se queden en su lugar con [H]
+\usepackage[fleqn]{mathtools} % \coloneqq, flalign
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{soul,color} %\st{Hellow world}
+\usepackage[fleqn]{amsmath} %para escribir funci\'on partida
+\usepackage{blkarray}
+\usepackage{hyperref} % para inlcuir links dentro del texto
+\usepackage{tabu} 
+\usepackage{comment}
+\usepackage{amsfonts} % mathbb{N} -> conjunto de los n\'umeros naturales  
+\usepackage{enumerate}
+\usepackage{listings}
+\usepackage[shortlabels]{enumitem} %  shortlabels option to have compatibility with the enumerate-like scheme for label
+\usepackage{framed}
+\usepackage{mdframed}
+\usepackage{multicol}
+\usepackage{transparent} % \transparent{1.0}
+\usepackage{bm} 
+\usepackage[makeroom]{cancel} % \cancel{} \bcancel{} etc
+\usepackage[absolute,overlay]{textpos} %no funciona
+\setlength{\TPHorizModule}{1mm} %128mm  mitad: 64 
+\setlength{\TPVertModule}{1mm}	%96mm  mitad 48
+
+\newcommand\hfrac[2]{\genfrac{}{}{0pt}{}{#1}{#2}} %\frac{}{} sin la linea del medio
+
+
+\usepackage{bm} % \bm{\alpha} bold greek symbol
+\usepackage[makeroom]{cancel} % \cancel{} \bcancel{} etc
+
+\newcommand{\vm}[1]{\mathbf{#1}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\citel}[1]{\cite{#1}\label{#1}}
+
+
+\newtheorem{midef}{Definition}
+\newtheorem{miteo}{Theorem}
+\newtheorem{mipropo}{Proposition}
+
+\usefonttheme[onlymath]{serif}
+
+
+\usepackage{tikz} % Para graficar, por ejemplo bayes networks
+%\usetikzlibrary{bayesnet} % Para que ande se necesita copiar el archivo  tikzlibrarybayesnet.code.tex en la misma carpeta
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%
+% Incompatibles con textpos
+%
+%\usepackage{todonotes}
+\usepackage{tikz} % Para graficar, por ejemplo bayes networks
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\usepackage[absolute,overlay]{textpos} %no funciona
+\setlength{\TPHorizModule}{1mm} %128mm  mitad: 64 
+\setlength{\TPVertModule}{1mm}	%96mm  mitad 48
+% 
+% 
+\captionsetup[figure]{labelformat=empty}
+
+\hypersetup{
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=white,          % color of internal links (change box color with linkbordercolor)
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+% 
+% http://latexcolor.com/
+\definecolor{lightseagreen}{rgb}{0.13, 0.7, 0.6.5}
+\definecolor{greenblue}{rgb}{0.1, 0.55, 0.5}
+\definecolor{redgreen}{rgb}{0.6, 0.4, 0.}
+\definecolor{greenred}{rgb}{0.4, 0.7, 0.}
+\definecolor{redblue}{rgb}{0.4, 0., .4}
+\definecolor{tangelo}{rgb}{0.98, 0.3, 0.0}
+\definecolor{git}{rgb}{0.94, 0.309, 0.2}
+% 
+\setbeamercolor{structure}{fg=greenblue}
+
+
+%http://latexcolor.com/
+\definecolor{azul}{rgb}{0.36, 0.54, 0.66}
+\definecolor{rojo}{rgb}{0.7, 0.2, 0.116}
+\definecolor{rojopiso}{rgb}{0.8, 0.25, 0.17}
+\definecolor{verdeingles}{rgb}{0.12, 0.5, 0.17}
+\definecolor{ubuntu}{rgb}{0.44, 0.16, 0.39}
+\definecolor{debian}{rgb}{0.84, 0.04, 0.33}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+
+
+
+\newcommand\Wider[2][3em]{%
+\makebox[\linewidth][c]{%
+  \begin{minipage}{\dimexpr\textwidth+#1\relax}
+  \raggedright#2
+  \end{minipage}%
+  }%
+}
+
+\newenvironment{ejercicio}[1]{
+% \setbeamercolor{block title}{bg=tangelo, fg=white}
+\begin{exampleblock}{#1}
+}{
+\end{exampleblock}
+}
+
+\newenvironment{resumen}[1]{
+\setbeamercolor{block title}{bg=git, fg=white}
+\begin{block}{#1}
+}{
+\end{block}
+}
+
+\newenvironment{comando}{
+\setbeamercolor{block body}{bg=git, fg=white}
+\begin{block}{}
+\begin{center}
+\LARGE
+\begin{texttt}
+}{
+\end{texttt}
+\end{center}
+\end{block}
+}
+
+
+
+\input{../../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+\usepackage{todonotes}
+\setbeameroption{show notes}
+\usepackage{xcolor}
+ \setbeamertemplate{navigation symbols}{} 
+\begin{document}
+
+\begin{frame}[plain]
+
+ 
+ \begin{textblock}{118}(5,16)
+ \includegraphics[width=1\textwidth]{../../../auxiliar/static/mapa_icosaedro_blanco.png} 
+ \end{textblock}
+
+ 
+ 
+ \begin{textblock}{128}(92,36)
+  \tikz{%Peru
+    \node[latent, fill=red,minimum size=0.15cm] () {};
+  }
+ \end{textblock}
+
+ \begin{textblock}{128}(82,37)
+  \tikz{%
+    \node[const] (norte) {};
+    \node[const, xshift=0.8cm,yshift=0.75cm] (sur) {};
+    \path[draw, -latex, fill=black!50] (norte) edge[bend left,draw=black!50] node[right,color=black!75] {} (sur);
+  }
+ \end{textblock}
+
+ 
+ \begin{textblock}{128}(79.5,44.75)
+  \tikz{%Mexico
+    \node[latent, fill=red,minimum size=0.15cm] () {};
+  }
+ \end{textblock}
+
+ \begin{textblock}{128}(44,24)
+  \tikz{%Subshara
+    \node[latent, fill=red,minimum size=0.15cm] () {};
+  }
+ \end{textblock}
+
+ \begin{textblock}{128}(39,25) 
+  \tikz{%Subshara
+    \node[const] (africa) {};
+    \node[const, xshift=0.55cm,yshift=-1.4cm] (asia) {};
+    \path[draw, -latex, fill=black!50] (africa) edge[bend left,draw=black!50] node[right,color=black!75] {} (asia);
+  }
+ \end{textblock}
+
+ 
+ \begin{textblock}{128}(46,34)
+  \tikz{%Irak
+    \node[latent, fill=red,minimum size=0.15cm] () {};
+  }
+ \end{textblock}
+
+ \begin{textblock}{128}(45,49)
+  \tikz{%China
+    \node[latent, fill=red,minimum size=0.15cm] () {};
+  }
+ \end{textblock}
+ 
+ \begin{textblock}{128}(50,49)
+  \tikz{%Subshara
+    \node[const] (asia) {};
+    \node[const, xshift=1.55cm,yshift=0cm] (america) {};
+    \path[draw, -latex, fill=black!50] (asia) edge[bend right,draw=black!50] node[right,color=black!75] {} (america);
+  }
+ \end{textblock}
+
+ \begin{textblock}{128}(30,49)
+  \tikz{%Subshara
+    \node[const] (asia) {};
+    \node[const, xshift=-1.33cm,yshift=-1cm] (oceania) {};
+    \path[draw, -latex, fill=black!50] (asia) edge[bend right,draw=black!50] node[right,color=black!75] {} (oceania);
+  }
+ \end{textblock}
+
+ 
+ 
+% 
+%  \begin{textblock}{128}(41,40)
+%   \tikz{%India
+%     \node[latent, fill=red,minimum size=0.15cm] () {};
+%   }
+%  \end{textblock}
+
+ \begin{textblock}{128}(34,61)
+  \tikz{% Nueva Guinea
+    \node[latent, fill=red,minimum size=0.15cm] () {};
+  }
+ \end{textblock}
+
+ 
+ \end{frame}
+% 
+\end{document}
+
+
+

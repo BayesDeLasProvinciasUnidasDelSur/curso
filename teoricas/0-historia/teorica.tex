@@ -1,0 +1,407 @@
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\input{../../auxiliar/tex/diapo_encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+ 
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+\newif\ifen
+\newif\ifes
+\newcommand{\en}[1]{\ifen#1\fi}
+\newcommand{\es}[1]{\ifes#1\fi}
+\estrue
+
+
+
+\newcommand{\E}{\en{S}\es{E}}
+\newcommand{\A}{\en{E}\es{A}}
+\newcommand{\Ee}{\en{s}\es{e}}
+\newcommand{\Aa}{\en{e}\es{a}}
+
+
+%\title[Bayes del Sur]{}
+
+\begin{document}
+
+\color{black!85}
+\large
+
+ 
+%\setbeamercolor{background canvas}{bg=gray!15}
+
+\begin{frame}[plain,noframenumbering]
+\begin{textblock}{80}(34,14)
+ \huge \textcolor{black!50}{Sorpresa}
+\end{textblock}
+
+\begin{textblock}{47}(113,73.5)
+\centering \LARGE  \textcolor{black!5}{Supervivencia}
+\end{textblock}
+
+\begin{textblock}{80}(100,27)
+\LARGE  \textcolor{black!10}{Creencia}
+\end{textblock}
+
+\begin{textblock}{80}(44,61)
+\LARGE  \textcolor{black!15}{Dato}
+\end{textblock}
+
+\begin{textblock}{160}(01,01)
+\scriptsize \textcolor{black!50}{Bayes de la Provincias Unidas del Sur, 2022.}
+\end{textblock}
+
+
+ %\vspace{2cm}brown
+%\maketitle
+\Wider[2cm]{
+\includegraphics[width=1\textwidth]{../../auxiliar/static/peligro_predador}
+}
+\end{frame}
+
+
+% 
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering
+%  \LARGE \textcolor{black!85}{\en{Today}\es{Hoy}}
+% \end{textblock}
+% 
+% \begin{itemize}
+%  \item[$\bullet$] Human dispersal
+%  \item[$\bullet$] Biomass (dentro de los vertebrados terrestres)
+%  \item[$\bullet$] Empatia
+%  \item[$\bullet$] Evolución cultural
+%  \item[$\bullet$] Ciencia como intersubjectividad (muto entendimiento)
+%  \item[$\bullet$] Base empírica 
+%  \item[$\bullet$] Matriz de datos 
+%  \item[$\bullet$] Ciencia empírica 
+%  \item[$\bullet$] Niveles de conocimiento
+%  \item[$\bullet$] Incertidumbre
+%  \item[$\bullet$] Creencias honestas
+%  \item[$\bullet$] Modelos causales
+%  \item[$\bullet$] La lógica de la ciencia empírica
+%  \item[$\bullet$] Selección de modelo
+% \end{itemize}
+% 
+% \end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE
+Vida
+\end{textblock}
+\vspace{1cm}
+\includegraphics[width=1\textwidth]{../../auxiliar/static/biomass.jpg}
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE
+Crecimiento de los linajes
+\end{textblock}
+\vspace{1cm}
+
+\begin{equation*} 
+\omega(T) = \prod_t^T f(\Aa(t)) \approx r^T 
+\end{equation*}
+
+\vspace{0.3cm}
+
+\begin{equation*}
+f(\Aa) =
+\begin{cases}
+ 1.5 & \Aa = \text{ \en{Head}\es{Cara} } \\
+ 0.6 & \Aa = \text{ \en{Tail}\es{Sello} }
+\end{cases}
+\end{equation*}
+
+\pause \centering \vspace{1cm} 
+
+¿Cuál es la tasa de crecimiento $r$?
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE
+Poblaciones de tamaño infinito
+\end{textblock}
+\vspace{1cm}
+
+\only<1>{
+\begin{textblock}{160}(0,22)
+\begin{equation*}
+\langle \omega \rangle_t = \sum_{\omega} \omega \cdot  P(\omega)
+\end{equation*}
+\end{textblock}
+}
+
+\only<2->{
+\begin{textblock}{160}(0,12)
+\begin{equation*}
+\begin{split}
+\langle \omega \rangle_1 & = 1.5 \cdot \frac{1}{2} + 0.6 \cdot  \frac{1}{2} = 1.05 \\ 
+\onslide<3->{\langle \omega \rangle_2 &=  1.5^2 \cdot \frac{1}{4} + 2 (0.6 \cdot 1.5 \cdot \frac{1}{4} ) + 0.6^2 \cdot \frac{1}{4}= 1.05^2 }
+\end{split}
+\end{equation*}
+\end{textblock}
+}
+
+\only<4>{
+\begin{textblock}{140}(10,36)
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.5\linewidth}
+    \includegraphics[width=\linewidth]{figures/pdf/ergodicity_expectedValue.pdf}
+    \end{subfigure}
+\end{figure}
+\end{textblock}
+}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE
+Trayectorias individuales en el tiempo
+\end{textblock}
+\vspace{1cm}
+
+\begin{textblock}{140}(10,10)
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.49\linewidth}
+    \includegraphics[width=\linewidth]{figures/pdf/ergodicity_individual_trayectories_y.pdf}
+    \end{subfigure}
+\end{figure}
+\end{textblock}
+
+
+\only<2->{
+\begin{textblock}{140}(10,58)
+\begin{equation*} 
+\begin{split}
+\omega(T) & = \prod^T_{t=1} f(\Aa(t)) = f(\text{\en{head}\es{cara}})^{n_1} f(\text{\en{tail}\es{sello}})^{n_2}  \approx r^T \\
+\onslide<3->{\left( \lim_{T \rightarrow \infty} \omega_e(T) \right)^{1/T} & =  r}  \onslide<4->{= 1.5^{1/2} \cdot 0.6^{1/2}} \onslide<5>{ \approx 0.95 } 
+\end{split}
+\end{equation*}
+\end{textblock}
+}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE
+Cooperación
+\end{textblock}
+\vspace{1cm}
+
+
+\begin{figure}[H]
+\centering
+\scalebox{0.75}{
+\tikz{
+
+    \node[latent, minimum size=2cm ] (x1_0) {$\omega_1(t)$} ;
+    \node[latent, below=of x1_0, minimum size=2cm ] (x2_0) {$\omega_2(t)$} ;
+
+    \node[latent, right=of x1_0, minimum size=3cm ] (x1_0g) {$ \omega_1(t)\cdot f(\Aa_1(t))$} ;
+    \node[latent, right=of x2_0, minimum size=1.8cm, xshift=0.6cm , align=left] (x2_0g) {$\omega_2(t)\cdot$\\$f(\Aa_2(t))$} ;
+    
+    \node[latent, right=of x1_0g, minimum size=3.8cm, yshift=-1.33cm, align=right] (x_0) {$\omega_1(t)\cdot f(\Aa_1(t))$\\$+\omega_2(t)\cdot f(\Aa_2(t))$ } ;
+    
+    \node[const, above=of x_0] (nx_0) {$\overbrace{\text{Pool}\hspace{2.5cm}\text{Share}}^{\text{\normalsize Coopera\en{tion}\es{ci\'on}}}$} ;
+    
+    \node[latent, right=of x1_0g, minimum size=2.5cm,  xshift=4.5cm] (x1_1) {$\omega_1(t+1)$ } ;
+    \node[latent, below=of x1_1, minimum size=2.5cm, yshift=0.7cm] (x2_1) {$\omega_2(t+1)$ } ;
+    
+    \edge {x1_0} {x1_0g};
+    \edge {x2_0} {x2_0g};
+    \edge {x1_0g,x2_0g} {x_0};
+    \edge {x_0} {x1_1,x2_1};
+    
+}
+}
+\end{figure}
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE
+ Cooperación
+\end{textblock}
+\vspace{1.3cm}
+
+\centering
+
+
+\only<1>{\includegraphics[width=0.6\linewidth]{figures/pdf/ergodicity_desertion0.pdf}}\only<2>{\includegraphics[width=0.6\linewidth]{figures/pdf/ergodicity_desertion1.pdf}}\only<3->{\includegraphics[width=0.6\linewidth]{figures/pdf/ergodicity_desertion.pdf}}
+\onslide<4>{
+\begin{equation*}\label{eq:posterior_multinivel}
+\begin{split}
+\underbrace{P(\texttt{coop}|\vec{\Aa}^{\,1:T})}_{\text{\large \en{Multilevel selection}\es{Selección multinivel}}} = \sum_{g} \ \ \underbrace{P(\texttt{coop}|\vec{\Aa}^{\,1:T}, g)}_{\text{\large \en{Individual selection}\es{Selección de individuos}}} \ \ \ \cdot \underbrace{P(g|\vec{\Aa}^{\,1:T})}_{\text{\large \en{Group selection}\es{Selección de grupo}}}
+\end{split}
+\end{equation*}
+}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE
+ Especialización
+\end{textblock}
+\vspace{1cm}
+
+\begin{textblock}{150}(05,18)
+\begin{equation*}
+f(\Ee,\Aa) \propto \Ee^\Aa(1-\Ee)^\Aa \text{  \ \ \  con \ \ \  } \Ee \in [0,1]
+\end{equation*}
+\end{textblock}
+
+
+\begin{textblock}{150}(05,30)
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.49\linewidth}
+    \only<2>{\includegraphics[width=1\linewidth]{figures/pdf/tasa-temporal-0-a.pdf}}\only<3>{\includegraphics[width=1\linewidth]{figures/pdf/tasa-temporal-0-b1.pdf}}\only<4>{\includegraphics[width=1\linewidth]{figures/pdf/tasa-temporal-0-b.pdf}}
+\only<5->{\includegraphics[width=1\linewidth]{figures/pdf/tasa-temporal-0.pdf}}
+    \end{subfigure}
+    \ 
+    \begin{subfigure}[b]{0.49\linewidth}
+    \only<1-5>{\phantom{\includegraphics[width=1\linewidth]{figures/pdf/tasa-temporal-2-a.pdf}}}\only<6>{\includegraphics[width=1\linewidth]{figures/pdf/tasa-temporal-2-a.pdf}}\only<7>{\includegraphics[width=1\linewidth]{figures/pdf/tasa-temporal-2-b.pdf}}\only<8>{\includegraphics[width=1\linewidth]{figures/pdf/tasa-temporal-2.pdf}}
+    \end{subfigure}
+    \label{fig:tasa-temporal-2}
+\end{figure}
+\end{textblock}
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE
+Crianza cooperativa
+\end{textblock}
+\vspace{1cm}
+
+\includegraphics[width=1\textwidth]{../../auxiliar/static/evolucionCultural.jpg}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE
+La transición cultural
+\end{textblock}
+\vspace{0.3cm}
+
+\centering
+\includegraphics[width=0.95\textwidth]{figures/agricultura.pdf} \ \ \ \ \ 
+
+\end{frame}
+
+% 
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \LARGE
+%  Humanos
+% \end{textblock}
+% \vspace{1.2cm}
+% \Wider[1cm]{
+% \includegraphics[width=1\textwidth]{../../auxiliar/static/mapamundi2.jpg}
+% }
+% \end{frame}
+% 
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \LARGE
+%  Ocupamos todos los nichos ecológicos
+% \end{textblock}
+% \Wider[2cm]{
+% \includegraphics[width=1\textwidth]{../../auxiliar/static/inuit_igloo_low}
+% }
+% \end{frame}
+% 
+% 
+% 
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \LARGE
+%  \en{The cognitive hypotesis}
+%  \es{La hipótesis cognitiva}
+% \end{textblock}
+% \centering \vspace{1cm}
+%  \includegraphics[width=0.5\textwidth]{../../auxiliar/static/cerebros}  
+% \end{frame}
+% 
+% 
+% 
+% \begin{frame}[plain]
+% 
+%  \begin{textblock}{160}(5,30)
+% \includegraphics[width=0.33\textwidth]{../../auxiliar/static/evolucionLitica.jpg} 
+% \end{textblock}
+% \begin{textblock}{160}(0,40)
+%  \centering \LARGE
+%  \en{Cultural \\ evolution}
+%  \es{Evolución \\ cultural}
+% \end{textblock}
+% % \begin{textblock}{160}(105,1)
+% % \includegraphics[width=0.285\textwidth]{../../auxiliar/static/debian_tree.png}
+% % \end{textblock}
+% \end{frame}
+
+% 
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \LARGE 
+%  \en{Evolution of empathy}
+%  \es{La evolución de la empatía}
+% \end{textblock}
+% \vspace{1cm}
+%  
+% %Wired To mutual understanding
+% %Cableados para la comprensión mutua
+%  \centering
+% \includegraphics[width=0.7\textwidth]{../../auxiliar/static/empatia}
+% 
+% % Cooperative breeding permited the evolution of extended life span, prolonged childhoods
+% 
+% % \centering
+% % \en{Cooperative breeding permited the evolution of empathy}
+% % \es{La crianza cooperative permitió la evolución de la empatía}
+%  
+% %Humans are often eager to understand others, to be understood, and to cooperate. 
+% %Los seres humanos suelen estar ansiosos por comprender a los demás, por ser comprendidos y por cooperar. 
+% 
+% 
+% \end{frame}
+
+ 
+\begin{frame}[plain]
+\centering
+  \includegraphics[width=0.35\textwidth]{../../auxiliar/static/pachacuteckoricancha.jpg}
+\end{frame}
+
+
+
+
+
+
+\end{document}
+
+
+
