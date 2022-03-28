@@ -1,4 +1,7 @@
-all: pdf clean
+all:
+	pdflatex -interaction=nonstopmode main.tex
+
+compile: pdf clean
 	
 pdf: 
 	pdflatex main.tex
