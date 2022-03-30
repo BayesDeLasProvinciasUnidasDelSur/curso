@@ -1,4 +1,4 @@
-all: agricultura.pdf china.pdf montyHall_6.pdf forkingPath.pdf clean
+all: montyHall_6.pdf 
 
 
 china.pdf:
