@@ -1,23 +1,33 @@
 Contactos a **bayesdelsur(en)gmail**
 
-# Bibliografía
-
 Jaynes (1984) [Bayesian methods: General background](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=E3CAC8BC04D114B9FA346D29DF78A692?doi=10.1.1.41.1055&rep=rep1&type=pdf)
 
-## Aplicaciones:
+# Materiales de cursada
+
+En negrita señalamos los materiales fundamentales de este curso
+
+## Manuales:
 
 0. **Bishop**. [Pattern Recognition and Machine Learning](https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/)
-0. **MacKay**. [Information theory, inference and learning algorithms](https://www.inference.org.uk/itprnn/book.pdf)
+0. MacKay. [Information theory, inference and learning algorithms](https://www.inference.org.uk/itprnn/book.pdf)
 0. Pearl. [Causality](111.90.145.72/get.php?md5=aea29d62416c43c4b3c94444ecad5beb&key=3HX5RWW4J5RHCGGS&mirr=1) y [Causal Inference in Statistics: A premier](http://gen.lib.rus.ec/)
+0. Jaynes (2003) [Probability theory: The logic of science](http://www.med.mcgill.ca/epidemiology/hanley/bios601/GaussianModel/JaynesProbabilityTheory.pdf)
+0. Halpern (2017) [Reasoning about uncertainty](http://libgen.rs/search.php?req=Reasoning+about+uncertainty&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def)
 0. Russell y Norvig [Artificial Intelligence: A Modern Approach](http://libgen.rs/search.php?req=Artificial+Intelligence%3A+A+Modern+Approach&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def)
 0. Koller y Friedman [Probabilistic Graphical Models, Principles and Techniques](http://libgen.rs/search.php?req=Probabilistic+Graphical+Models%2C+Principles+and+Techniques&open=0&res=25&view=simple&phrase=1&column=def)
 0. Knuth [*Chapter 3 — Random Numbers* in The art of computer programming II](http://libgen.rs/search.php?req=Donald+Knuth&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def) 
 
+## Cursos:
 
-## Fundamentos de la probabilidad:
+0. **Probabilistic Machine Learning** [youtube](https://youtube.com/playlist?list=PL05umP7R6ij1tHaOFY96m5uX3J21a6yNd)
+0. Física estadísitica. [youtube](https://www.youtube.com/watch?v=GL73N3z0j70&t)
+0. Deep Bayes. [youtube](https://www.youtube.com/playlist?list=PLe5rNUydzV9QHe8VDStpU0o8Yp63OecdW)
+0. Probabilistic Graphical Models. Carnegie-Mellon University. [web](http://www.cs.cmu.edu/~epxing/Class/10708-09/lecture.html)
 
-0. Halpern (2017) [Reasoning about uncertainty](http://libgen.rs/search.php?req=Reasoning+about+uncertainty&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def)
-0. Jaynes (2003) [Probability theory: The logic of science](http://www.med.mcgill.ca/epidemiology/hanley/bios601/GaussianModel/JaynesProbabilityTheory.pdf)
+# Fundamentos de la probabilidad:
+
+0. Jaynes (1956-1957). Information theory and statistical mechanics [I](https://bayes.wustl.edu/etj/articles/theory.1.pdf) [II](http://users.df.uba.ar/ariel/materias/FT3_2011_2C/Extra/Jaynes.II.pdf)
+0. Kelly (1956). [A New Interpretation of Information Rate](https://www.princeton.edu/~wbialek/rome/refs/kelly_56.pdf)
 0. Shannon (1950). [A mathematical theory of communication](https://pure.mpg.de/rest/items/item_2383162/component/file_2456978/content)
 0. De Finetti. (1937) [La prévision: ses lois logiques, ses sources [inter]subjectives](www.numdam.org/article/AIHP_1937__7_1_1_0.pdf)
 0. Jeffreys (1931). [Scientific Inference](https://libgen.rocks/get.php?md5=f40e5b6e52f2a05295c8984a7d6d2886&key=P5AOQ0CDN2AEDCBD)
@@ -33,25 +43,14 @@ Jaynes (1984) [Bayesian methods: General background](http://citeseerx.ist.psu.ed
 0. Bernoulli, Jacob. ([1654-1705] 1717) [Ars Conjectandi (English version)](https://libgen.rocks/get.php?md5=2a824bcdb31b45a94882ace89eaaa35e&key=19K8AAU67RBVK67G)
 0. Pascal-Fermat por Keith Devlin. ([1654] 2008) [The Unfinished game: Pascal, Fermat and the letters](31.42.184.140/main/73000/bed190e8d465fc8a07a05709c22924a3/Keith%20Devlin%20-%20The%20Unfinished%20game_%20Pascal%2C%20Fermat%20and%20the%20letters-Basic%20Books%20%282008%29.pdf) (Si no funciona, borrar del link todo lo que está antes de la IP)
 
-## Historia 
+# Historia 
 
 Hobson, John. (2004) [Los orígenes orientales de la civilización de occidente](https://libgen.rocks/get.php?md5=9fb9e17c0203789eb321330af09191f0&key=9NB6QOBJLHRTVOGM)
 Needham, Joseph et al. (2004) [Science and Civilization in China. Vol 7 Pt 2. General Conclusions and Reflections.](https://libgen.rocks/get.php?md5=c0cfb07bd82a9c54d37dd515bcb7450d&key=IMGZ33ANYSVSJ61F)
 
-
-## Cursos:
-
-0. **Probabilistic Machine Learning** [youtube](https://youtube.com/playlist?list=PL05umP7R6ij1tHaOFY96m5uX3J21a6yNd)
-0. Física estadísitica. [youtube](https://www.youtube.com/watch?v=GL73N3z0j70&t)
-0. Deep Bayes. [youtube](https://www.youtube.com/playlist?list=PLe5rNUydzV9QHe8VDStpU0o8Yp63OecdW)
-0. Probabilistic Graphical Models. Carnegie-Mellon University. [web](http://www.cs.cmu.edu/~epxing/Class/10708-09/lecture.html)
-
 ## Papers: 
 
 0. [Constructing a logic of plausible inference: a guide to Cox's theorem](https://www.sciencedirect.com/science/article/pii/S0888613X03000513)
-
-### Variacionales
-
 0. [Factor Graphs and the Sum-product algorithm](https://ieeexplore.ieee.org/document/910572)
 0. [TrueSkill: A Bayesian Skill Rating System](https://papers.nips.cc/paper/3079-trueskilltm-a-bayesian-skill-rating-system)
 0. [TrueSkill Through Time: Revisiting the History of Chess](https://papers.nips.cc/paper/3331-trueskill-through-time-revisiting-the-history-of-chess)
