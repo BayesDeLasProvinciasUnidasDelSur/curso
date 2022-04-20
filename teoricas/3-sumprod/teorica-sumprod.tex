@@ -14,12 +14,6 @@
 \usepackage{todonotes}
 \setbeameroption{show notes}
 
-\newif\ifen
-\newif\ifes
-\newcommand{\en}[1]{\ifen#1\fi}
-\newcommand{\es}[1]{\ifes#1\fi}
-\estrue
-
 %\title[Bayes del Sur]{}
 
 \begin{document}
@@ -53,6 +47,130 @@
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
+ \centering \LARGE Lógica Booleana 
+ \end{textblock}
+ \vspace{1.5cm} \centering
+
+ \includegraphics[width=1\textwidth]{../../auxiliar/static/boole.png}
+
+ \normalsize
+ \hfill George Boole (1854) \href{https://downloads.tuxfamily.org/openmathdep/logic_ante_1900/Laws_of_Thought-Boole.pdf}{\emph{An Investigation of the Laws of Thought}} 
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Lógica de primer orden extendida \\
+ \Large (De una práctica suspendida)
+ \end{textblock}
+ \vspace{1.5cm}
+ 
+Dado \ \ $A \Rightarrow B  \equiv P(B|A) = 1$ 
+
+\pause 
+
+$\bullet$ \ \ $P(B|A) = 1$ (modus ponens) \\
+$\bullet$ \ \ $P(\neg A| \neg B) = 1$ (modus tollens) \\
+\pause
+$\bullet$ \ \ $P(B| \neg A) \leq P(B) $ ($A$ falso implica $B$ menos plausible)
+$\bullet$ \ \ $P(A|B) \geq P(A) $ ($B$ verdadero implica $A$ más plausible) 
+ 
+ \vspace{0.6cm}
+ 
+Dado \ \ $P(B|A) \geq P(B)$ ($A$ verdadero, luego $B$ más plausible) \\
+
+\pause 
+
+$\bullet$ \ \ $P(B|\neg A) \leq P(B)$ ($A$ falso, luego $B$ menos plausible) \\
+$\bullet$ \ \ $P(A|B) \geq P(A)$ ($B$ verdadero, luego $A$ más plausible) \\
+$\bullet$ \ \ $P(\neg A|\neg B) \geq P(\neg A)$ ($B$ falso, luego $A$ menos plausible)
+ 
+ 
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE El problema de la lógica extendida \\
+ \Large La complejidad en memoria
+ \end{textblock}
+ \vspace{1.5cm}
+ 
+ Tenemos $n=27$ variables, las letras del alfabeto \\
+ 
+ \pause
+ 
+ \vspace{0.5cm}
+ 
+ $\bullet$ En lógica binaria asignamos valores a las variables, y con las reglas de la lógica calculamos las combinaciones. \pause Con 27 bits nos alcanza.  \\
+ 
+ \vspace{0.5cm}
+ 
+ \pause
+ 
+ $\bullet$ En lógica extendida debemos asignar una probabilidad a cada posible combinación de todos los posibles combinaciones de valores de verdad.  \\
+ 
+ \vspace{0.2cm}
+  \pause
+  
+  Necesitamos guardar $2^{27}-1$ números reales  \\[0.2cm]
+  
+ \Wider[-2cm]{
+ \begin{itemize}
+ \item[$1$:] $P(A, B, \dots, Z) =  \dots$ \\
+ \item[$.$:] $\dots$ \\
+ \item[$2^{27}-1$:] $P(\neg A, \neg B, \dots, Z) =  \dots$ \\
+ \item[$2^{27}$:] $P(\neg A, \neg B, \dots, \neg Z) =  1 - \sum P(\dots)$ 
+ \end{itemize}
+ }
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Objetivo del curso en adelante
+ \end{textblock}
+ \vspace{1.5cm} \centering
+ 
+\Large
+ Ofrecer herramientas para reducir \\ la complejidad espacial y temporal 
+ 
+ 
+\end{frame}
+
+ 
+ \begin{frame}[plain]
+    \begin{textblock}{160}(0,4)
+    \centering \LARGE Modelos gráficos
+    \end{textblock}
+    \centering
+    \vspace{0.75cm}
+
+    
+    \begin{itemize}
+     \item[$\bullet$] Permite expresar todas las hipótesis de forma intuititva.
+     \item[$\bullet$] Representa la probabilidad conjunta de forma completa.
+     \item[$\bullet$] Proporciona información para hacer inferencia eficientemente.
+    \end{itemize}
+
+     
+ \end{frame}
+
+ 
+ \begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+ \centering \Large
+ Causalidad
+ \end{textblock}
+
+ \centering \normalsize
+ Causal relationships are expressed in the form of deterministic, functional equations, and probabilities are introduced through the assumption that certain variables in the equations are unobserved.
+
+\end{frame} 
+
+
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
  \centering \Large
  Modelo Causal
  \end{textblock}
@@ -81,36 +199,6 @@
 
  
  \end{frame}
- 
- \begin{frame}[plain]
-    \begin{textblock}{160}(0,4)
-    \centering \Large
-    Modelo Causal
-    \end{textblock}
-    \centering
-    \vspace{0.75cm}
-
-    
-    \begin{itemize}
-     \item[$\bullet$] Permite expresar todas las hipótesis de forma intuititva.
-     \item[$\bullet$] Representa la probabilidad conjunta de forma completa.
-     \item[$\bullet$] Proporciona información para hacer inferencia eficientemente.
-    \end{itemize}
-
-     
- \end{frame}
-
-
- \begin{frame}[plain]
- \begin{textblock}{160}(0,4)
- \centering \Large
- Causalidad
- \end{textblock}
-
- \centering \normalsize
- Causal relationships are expressed in the form of deterministic, functional equations, and probabilities are introduced through the assumption that certain variables in the equations are unobserved.
-
-\end{frame} 
  
  \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
@@ -764,6 +852,30 @@
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
+ \centering \Large El truco de la factorización
+\end{textblock}
+\vspace{1.5cm} \centering
+
+\begin{equation*}
+\sum \prod = \prod \sum
+\end{equation*}
+
+$a_1 \, b_1 + a_1 \, b_2 + a_2 \, b_1 + a_2 \, b_2  = (a1 + a_2) \, (b_1 + b_2)$
+
+\pause
+
+\begin{equation*}
+   P(a^1) = \Big(\sum_l P(l|a^1) \Big) \Big(\sum_{e,t} P(e)P(t)P(a^1|t,e)(\sum_r P(r|t)) \Big)
+\end{equation*}
+
+  \includegraphics[width=0.35\textwidth]{../../auxiliar/static/sum_product.png}
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
  \centering \Large
  Sum-product algorithm
 \end{textblock}
@@ -1042,10 +1154,34 @@ Modelo con observables
 \end{textblock}
 }
 
-
-
- 
 \end{frame}
+
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large Flujos de inferencia
+\end{textblock}
+
+\only<1->{
+\begin{textblock}{160}(0,18)
+\centering
+ \begin{tabular}{c c|c}
+ & $\hfrac{\text{Intermedio}}{\text{no observable}}$ &   $\hfrac{\text{Intermedio}}{\text{observable}}$ \\
+ & & \\
+ $ e \rightarrow a \rightarrow l $    & \onslide<2->{$P(l) \overset{?}{=} P(l|e)$} & \onslide<3->{$P(l|a) \overset{?}{=} P(l|e,a)$} \\ 
+ $ l \leftarrow a \leftarrow t $      &  \onslide<4->{$P(t) \overset{?}{=} P(t|l)$}  & \onslide<5->{$P(t|a) \overset{?}{=} P(t|a,l)$} \\ 
+ $ a \leftarrow t \rightarrow r $     & \onslide<6->{$P(r) \overset{?}{=} P(r|a)$} & \onslide<7->{$P(r|t) \overset{?}{=} P(r|t,a)$} \\
+ $ e \rightarrow a \leftarrow t $     & \onslide<8->{$P(t) \overset{?}{=} P(t|e)$} & \onslide<9->{$P(t|a) \overset{?}{=} P(t|e,a)$} \\
+            $\overset{\downarrow}{l}$  &  & \onslide<10->{$P(t|l) \overset{?}{=} P(t|e,l)$}
+ \end{tabular} 
+ \end{textblock}
+ }
+ 
+
+\end{frame}
+
 
 
 
