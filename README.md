@@ -2,19 +2,21 @@ Contactos a **bayesdelsur(en)gmail**
 
 # Agenda de cursada
 
-|Número|Teórica|Fecha|Materiales|Práctica|Fecha|Materiales|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|0 | Procesos multiplicativos | 23/03/2022 (revisión 06/04/2022) | [Presentación](https://github.com/BayesDeLasProvinciasUnidasDelSur/curso/releases/download/2022.1/teorica0.pdf) | Apuestas | 13/04/2022  | [Soluciones](https://github.com/BayesDeLasProvinciasUnidasDelSur/curso/releases/download/2022.1/practica0.pdf) |
-|1 | Inferencia Bayesiana | 30/03/2022 | [Presentación](https://github.com/BayesDeLasProvinciasUnidasDelSur/curso/releases/download/2022.1/teorica1.pdf) | Selección de Modelo | ? | |
-|2 | Máxima entropía dadas restricciones (física estadística) | Suspendida | - |  Gases, distribución de la riqueza | Suspendida | - | 
-| 3 | Algoritmo Suma-Producto | 20/04/2022 | | Flujos de inferencia en el Modelo Alarma-Terremoto | 27/04/2022 | |
-| 4 | Inferencia Causal | 04/05/2022 |  | [Buenos y malos controles](https://papers.ssrn.com/sol3/Delivery.cfm/SSRN_ID4062645_code4146131.pdf?abstractid=3689437&mirid=1) | 11/05/2022 | |
-| 5 | Distribuciones continuas conjugadas | 18/05/2022 | | TrueSkill exacto en un evento | 25/05/2022 | | 
-| 6 | Aproximaciones Variacionales | 01/06/2022 | | Filtro de Kalman (TrueSkill aproximado historia de eventos) |  08/06/2022 | |
-| 7 | State Space Models - Hidden Markov Models | 15/06/2022 | | Smoothing de Kalman (TrueSkill Through Time) | 22/06/2022 | | 8 | Gaussiana Multivariada (cap 2 bishop) | 29/06/2022 | | Regresión Lineal (cap 3 bishop) | 06/07/2022 | |
-| 9 | Procesos Gaussianos | 13/07/2022 | | ¿KickScore? | 20/07/2022 | |
-| 10 | Redes Neuronales | 10/08/2022 | | Variational Auto Encoders | 17/08/2022 | |
-| 11 | Aproximaciones por Cadenas de Markov | 27/07/2022 | | [Ejemplos varios](https://mc-stan.org/docs/2_29/stan-users-guide-2_29.pdf) | 03/08/2022 | |
+|Número|Teórica|Fecha|Materiales|Reunión|Práctica|Fecha|Materiales|Reunión|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|0 | Procesos multiplicativos | 23/03/2022 (revisión 06/04/2022) | Peters [Cooperación](https://researchers.one/articles/19.03.00004) [ergodicidad](https://www.nature.com/articles/s41567-019-0732-0) |[Presentación](https://github.com/BayesDeLasProvinciasUnidasDelSur/curso/releases/download/2022.1/teorica0.pdf) | Apuestas | 13/04/2022  | [Kelly 1956](https://www.princeton.edu/~wbialek/rome/refs/kelly_56.pdf) |[Soluciones](https://github.com/BayesDeLasProvinciasUnidasDelSur/curso/releases/download/2022.1/practica0.pdf) |
+|1 | Inferencia Bayesiana | 30/03/2022 | [Bayesian methods: General background](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=E3CAC8BC04D114B9FA346D29DF78A692?doi=10.1.1.41.1055&rep=rep1&type=pdf) | [Presentación](https://github.com/BayesDeLasProvinciasUnidasDelSur/curso/releases/download/2022.1/teorica1.pdf) | Selección de Modelo | Suspendida | | |
+|2 | Máxima entropía | Suspendida | Cap 1 Bishop - Física estadísitica [Desde](https://www.youtube.com/watch?v=vdSWMIh2o_E&t=0s) [Hasta](https://www.youtube.com/watch?v=37kRnZxJImA)  | |  Gases, distribución de la riqueza (combinatoria) | Suspendida | Ejemplos en [Desde](https://www.youtube.com/watch?v=vdSWMIh2o_E&t=0s) - [Hasta](https://www.youtube.com/watch?v=37kRnZxJImA) | |
+| 3 | Algoritmo Suma-Producto | 20/04/2022 | Cap 8 Bishop | [Presentación](https://github.com/BayesDeLasProvinciasUnidasDelSur/curso/releases/download/2022.1/teorica-sumprod.pdf) | D-separation en el Modelo Alarma-Terremoto | 27/04/2022 | Cap 8 Bishop | |
+| 4 | Inferencia Causal | 04/05/2022 | Pearl [A premier](http://gen.lib.rus.ec/)  | | [Buenos y malos controles](https://papers.ssrn.com/sol3/Delivery.cfm/SSRN_ID4062645_code4146131.pdf?abstractid=3689437&mirid=1) | 11/05/2022 | | |
+| 5 | Distribuciones continuas conjugadas | - | Cap 2 Bishop | | Regresión lineal | - | Cap 3 Bishop | |
+| 6 | Cadenas de Markov MCMC, HMC| - | ¿Cap 11 Bishop? | | Ejemplos varios | - | [Stan](https://mc-stan.org/docs/2_29/stan-users-guide-2_29.pdf) | | 
+| 7 | Aproximaciones Variacionales | - | Cap 10 Bishop y [Deep Bayes](https://www.youtube.com/watch?v=xH1mBw3tb_c&list=PLe5rNUydzV9QHe8VDStpU0o8Yp63OecdW&index=4&t=0s) | | Filtro de Kalman (TrueSkill exacto y aproximado) |  - | [TrueSkill](https://papers.nips.cc/paper/3079-trueskilltm-a-bayesian-skill-rating-system) | |
+| 8 | Series temporales | - | Cap 13 Bishop | | Smoothing de Kalman (TrueSkill Through Time) | - | [TrueSkill Through Time](https://papers.nips.cc/paper/3331-trueskill-through-time-revisiting-the-history-of-chess) | |
+| 9 | Procesos Gaussianos | - | Cap 6 Bishop | | ¿KickScore? |  | [Gaussain process with pytroch](https://gpytorch.ai/) ||
+| - | - | -| - | - | - | - | - | - |
+| ¿? | ¿Estructura invariante del dato de base empírica metodológica? | ¿? | [Juan Samaja Parte 3](https://ens9004-infd.mendoza.edu.ar/sitio/upload/12-%20SAMAJA,%20J.%20-%20LIBRO%20-%20Epistemologia%20y%20metodologia.pdf) - [Klimovsky Base empírica]() | | ¿? | ¿? | | |
+| ¿? | ¿Redes Neuronales? | ¿? | | | ¿Variational Auto Encoders? | ¿? | | |
 
 ## Manuales:
 
@@ -59,7 +61,6 @@ Contactos a **bayesdelsur(en)gmail**
 
 # Tópicos 
 
-0. [Bayesian methods: General background](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=E3CAC8BC04D114B9FA346D29DF78A692?doi=10.1.1.41.1055&rep=rep1&type=pdf)
 0. [Factor Graphs and the Sum-product algorithm](https://ieeexplore.ieee.org/document/910572)
 0. [Crash Course in Good and Bad Controls](https://papers.ssrn.com/sol3/Delivery.cfm/SSRN_ID4062645_code4146131.pdf?abstractid=3689437&mirid=1)
 0. [TrueSkill: A Bayesian Skill Rating System](https://papers.nips.cc/paper/3079-trueskilltm-a-bayesian-skill-rating-system)
