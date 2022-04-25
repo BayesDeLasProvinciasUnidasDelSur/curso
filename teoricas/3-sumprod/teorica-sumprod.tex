@@ -1067,37 +1067,6 @@ m_{x \rightarrow f}(x) = \prod_{h \in \only<6>{\textcolor{red}}{v(x) \setminus \
  \centering \Large
 Modelo con observables
 \end{textblock}
-\vspace{1.5} \centering
-
-Cuando hay algún observable, cambiamos la distribución de probabilidad. \\
-
-\vspace{0.5cm}
-
-\pause
-
-Si la alarma está prendida, luego \\
-
-   \begin{tabular}{|c|c|c|}
-        \hline
-        & $a^0$ & $a^1$ \\ \hline
-       ($e^0, t^0$) & $0$ & $1$  \\ \hline
-       ($e^1, t^0$) & $0$ & $1$  \\ \hline
-       ($e^0, t^1$) & $0$ & $1$  \\ \hline
-       ($e^1, t^1$) & $0$ & $1$  \\ \hline
-    \end{tabular}
-
-    \vspace{0.3cm}
-    
-    $P(a=1|e,t) = 1$
-
-\end{frame}
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large
-Modelo con observables
-\end{textblock}
 
 \begin{textblock}{40}(5,12)
 \centering
@@ -1133,42 +1102,51 @@ Modelo con observables
         \edge[-] {fr} {r,t};
         \edge[-] {fl} {l,a};
         
-        \path[draw, ->, fill=black!50] (fe) edge[bend left,draw=black!50] node[right,color=black!75] {$P(e^*)=1$} (e);
+        \path[draw, ->, fill=black!50] (fe) edge[bend left,draw=black!50] node[right,color=black!75] {$P(e^*)$} (e);
         \path[draw, ->, fill=black!50] (ft) edge[bend left,draw=black!50] node[right,color=black!75] {$P(t)$} (t);
         \path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[left,color=black!75] {\only<1->{$1$}} (t);
         \path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (a);
-        \onslide<2->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {\only<3->{$1$}} (t);}
+        \onslide<2->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {\only<3->{$P(e^*)$}} (t);}
         \path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (e);
-        \onslide<4->{\path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[right,color=black!75] {\only<5->{$P(r,e^*)$}} (r);}
-        \onslide<6->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[right,color=black!75] {\only<7->{$P(a,e^*)$}} (a);}
-        \onslide<8->{\path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[right,color=black!75] {\only<9->{$P(l,e^*)$}} (l);}
+        \onslide<7->{\path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[right,color=black!75] {\only<8->{$P(r,e^*)$}} (r);}
+        \onslide<9->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[right,color=black!75] {\only<10->{$P(a,e^*)$}} (a);}
+        \onslide<11->{\path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[right,color=black!75] {\only<12->{$P(l,e^*)$}} (l);}
         }
 }   
 \end{figure}
 \end{textblock}
 
 \begin{textblock}{100}(62,16)
- $m_{f_e\rightarrow e}\phantom{(e)} = P(e^*) = 1 $  \\
+ $m_{f_e\rightarrow e}\phantom{(e)} = P(e^*) $  \\
  $m_{f_t\rightarrow t}(t) = P(t)$  \\
  $m_{f_r\rightarrow t}(t) = \sum_r \, P(r|t) = 1$  \\
  $m_{f_l\rightarrow a}(a) = \sum_l \, P(l|a) = 1 $  \\
- $m_{f_a\rightarrow t}(t) = \onslide<2->{\sum_{a} \, P(a|e^*,t)} \onslide<3->{= 1}$  \\
+ $m_{f_a\rightarrow t}(t) = \onslide<2->{\sum_{a} \, P(e^*) P(a|e^*,t)} \onslide<3->{= P(e^*)}$  \\
  $m_{f_a\rightarrow e}\phantom{(e)} = \sum_{ta} \, P(t) P(a|e^*,t) = 1$  \\
- $m_{f_r\rightarrow r}(r) = \onslide<4->{\sum_{t} \, P(t) P(r|t)} \onslide<5->{= P(r,e^*)}$ \\
- $m_{f_a\rightarrow a}(a) = \onslide<6->{\sum_{t} \, P(t)P(a|e^*,t)}\onslide<7->{  = P(a,e^*)}$  \\
- $m_{f_l\rightarrow l}(l) = \onslide<8->{\sum_{a} \, P(a,e^*) P(l|a)} \onslide<9->{ = P(l,e^*)}$
+ $m_{f_r\rightarrow r}(r) = \onslide<7->{\sum_{t} \, P(t) P(r|t)} \onslide<8->{= P(r,e^*)}$ \\
+ $m_{f_a\rightarrow a}(a) = \onslide<9->{\sum_{t} \, P(e^*)P(t)P(a|e^*,t)}\onslide<10->{  = P(a,e^*)}$  \\
+ $m_{f_l\rightarrow l}(l) = \onslide<11->{\sum_{a} \, P(a,e^*) P(l|a)} \onslide<12->{ = P(l,e^*)}$
  \end{textblock}
 
  
-\only<10>{
+\only<4-6>{
 \begin{textblock}{80}(70,60)
 \begin{flalign*}
-  P(l|e^*) & \, = P(l,e^*) \only<14>{\overset{?}= \, P(l)} &&
+  P(t,e^*) & = P(e^*) P(t) \\
+  \onslide<5->{P(t|e^*) &= \frac{P(e^*) P(t) }{P(e^*)}} \onslide<6->{= P(t)}&&
 \end{flalign*}
 \end{textblock}
 }
 
-\only<11>{
+\only<13-14>{
+\begin{textblock}{80}(70,60)
+\begin{flalign*}
+  P(l|e^*) & \, = P(l,e^*)/P(e^*) \only<14>{\overset{?}= \, P(l)} &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<15>{
 \begin{textblock}{80}(69.15,60)
 \begin{flalign*}
   \underbrace{P(l|e^*)}_{\hfrac{\text{que llamen}}{\text{cuando entran}}} & = P(l,e^*)/P(e^*) \overset{?}=  \underbrace{P(l)}_{\hfrac{\text{que llamen}}{\text{}}} &&
@@ -1203,9 +1181,6 @@ Modelo con observables
  
 
 \end{frame}
-
-
-
 
 \begin{frame}[plain]
 \centering
