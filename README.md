@@ -56,6 +56,7 @@ Contactos a **bayesdelsur(en)gmail**
 0. Condorcet (1785). [Essai sur l'application de l'analyse à la probabilité des décisions rendues à la pluralité des voix](https://www.hist-math.fr/users/Histoires/textes/Condorcet1785_ProbabiliteDecisions.pdf)
 0. Bayes ([1750?] 1763). [An essay towards solving a problem in the doctrine of chances.](https://royalsocietypublishing.org/doi/pdf/10.1098/rstl.1763.0053?keytype2=tf_ipsecsha&ijkey=d86e9f6c361806fb58be6aad56cb2bcfade22c74)
 0. Bernoulli, Daniel "el sobrino". (1738) [Exposition of a new theory on the measurement of risk](http://www.theparticle.com/cs/bc/dsci/Bernoulli_1738.pdf) [Traducido de "Specimen Theorize Naval de Mensura Sortis" en 1954]
+0. Leibniz (1714) [La monadologie](https://philo-labo.fr/fichiers/Leibniz%20-%20La%20monadologie.pdf) ([Leibniz and China: A Commerce of Light](http://libgen.rs/book/index.php?md5=714C21EB77B595EF583F926FC64E083A))
 0. Bernoulli, Jacob. ([1654-1705] 1717) [Ars Conjectandi (English version)](https://libgen.rocks/get.php?md5=2a824bcdb31b45a94882ace89eaaa35e&key=19K8AAU67RBVK67G)
 0. Pascal-Fermat por Keith Devlin. ([1654] 2008) [The Unfinished game: Pascal, Fermat and the letters](31.42.184.140/main/73000/bed190e8d465fc8a07a05709c22924a3/Keith%20Devlin%20-%20The%20Unfinished%20game_%20Pascal%2C%20Fermat%20and%20the%20letters-Basic%20Books%20%282008%29.pdf) (Si no funciona, borrar del link todo lo que está antes de la IP)
 
