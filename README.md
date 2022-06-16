@@ -39,6 +39,8 @@ Contactos a **bayesdelsur(en)gmail**
 
 # Fundamentos de la probabilidad:
 
+0. Carlos G Gregorio 1991 [Inferencia estadística 
+en decisiones judiciales](https://d1wqtxts1xzle7.cloudfront.net/32128580/Tesis_CGG-libre.pdf?1391501529=&response-content-disposition=inline%3B+filename%3DTesis_doctoral_dirigida_por_el_Doctor_In.pdf&Expires=1655421708&Signature=GTH5JU96ZAFS4fNWsHbJemsC6s233cQoQH34nt6LimmsK7qNkCOc8H27hLtydklSsz~MdwiDx0BQG80R-oTjx52motL-PmoazhPXsOyYP19kUVtQGOPw1JZTyA8OWNqpwSPTpQapbd5EdICLOBF0FFjamGoieW2WCGg-iVzKwFt6NPuo7aRD2P~bKtyXB-LnQhkWACn08KRNtjNJLtRNOIJxCJH72PAlLZYsCGsMHRPRhMq4DKMqlnvjJuqRxsDZZomkw6zBf~E5M49hBV4pxGQWzngNv9-Hdi9Kp63zrU4j1T2qJGyKjRhEHFT9XmkYjfBY5vW-6iM766dj0Fxaug__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA)
 0. Jaynes (1956-1957). Information theory and statistical mechanics [I](https://bayes.wustl.edu/etj/articles/theory.1.pdf) [II](http://users.df.uba.ar/ariel/materias/FT3_2011_2C/Extra/Jaynes.II.pdf)
 0. Kelly (1956). [A New Interpretation of Information Rate](https://www.princeton.edu/~wbialek/rome/refs/kelly_56.pdf)
 0. Shannon (1950). [A mathematical theory of communication](https://pure.mpg.de/rest/items/item_2383162/component/file_2456978/content)
