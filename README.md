@@ -21,13 +21,14 @@ Contactos a **bayesdelsur(en)gmail**
 ## Manuales:
 
 0. **Bishop**. [Pattern Recognition and Machine Learning](https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/)
+0. Rasmussen [Gaussian Processes for Machine Learning](http://gaussianprocess.org/gpml/chapters/RW.pdf)I
 0. MacKay. [Information theory, inference and learning algorithms](https://www.inference.org.uk/itprnn/book.pdf)
 0. Pearl. [Causality](111.90.145.72/get.php?md5=aea29d62416c43c4b3c94444ecad5beb&key=3HX5RWW4J5RHCGGS&mirr=1) y [Causal Inference in Statistics: A premier](http://gen.lib.rus.ec/)
-0. Stan. [Documentation](https://mc-stan.org/docs/2_29/stan-users-guide-2_29.pdf)
 0. Jaynes (2003) [Probability theory: The logic of science](http://www.med.mcgill.ca/epidemiology/hanley/bios601/GaussianModel/JaynesProbabilityTheory.pdf)
+0. Stan. [Documentation](https://mc-stan.org/docs/2_29/stan-users-guide-2_29.pdf)
+0. Koller y Friedman [Probabilistic Graphical Models, Principles and Techniques](http://libgen.rs/search.php?req=Probabilistic+Graphical+Models%2C+Principles+and+Techniques&open=0&res=25&view=simple&phrase=1&column=def)
 0. Halpern (2017) [Reasoning about uncertainty](http://libgen.rs/search.php?req=Reasoning+about+uncertainty&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def)
 0. Russell y Norvig [Artificial Intelligence: A Modern Approach](http://libgen.rs/search.php?req=Artificial+Intelligence%3A+A+Modern+Approach&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def)
-0. Koller y Friedman [Probabilistic Graphical Models, Principles and Techniques](http://libgen.rs/search.php?req=Probabilistic+Graphical+Models%2C+Principles+and+Techniques&open=0&res=25&view=simple&phrase=1&column=def)
 0. Knuth [*Chapter 3 — Random Numbers* in The art of computer programming II](http://libgen.rs/search.php?req=Donald+Knuth&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def) 
 
 ## Cursos:
@@ -39,8 +40,6 @@ Contactos a **bayesdelsur(en)gmail**
 
 # Fundamentos de la probabilidad:
 
-0. Carlos G Gregorio 1991 [Inferencia estadística 
-en decisiones judiciales](https://d1wqtxts1xzle7.cloudfront.net/32128580/Tesis_CGG-libre.pdf?1391501529=&response-content-disposition=inline%3B+filename%3DTesis_doctoral_dirigida_por_el_Doctor_In.pdf&Expires=1655421708&Signature=GTH5JU96ZAFS4fNWsHbJemsC6s233cQoQH34nt6LimmsK7qNkCOc8H27hLtydklSsz~MdwiDx0BQG80R-oTjx52motL-PmoazhPXsOyYP19kUVtQGOPw1JZTyA8OWNqpwSPTpQapbd5EdICLOBF0FFjamGoieW2WCGg-iVzKwFt6NPuo7aRD2P~bKtyXB-LnQhkWACn08KRNtjNJLtRNOIJxCJH72PAlLZYsCGsMHRPRhMq4DKMqlnvjJuqRxsDZZomkw6zBf~E5M49hBV4pxGQWzngNv9-Hdi9Kp63zrU4j1T2qJGyKjRhEHFT9XmkYjfBY5vW-6iM766dj0Fxaug__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA)
 0. Jaynes (1956-1957). Information theory and statistical mechanics [I](https://bayes.wustl.edu/etj/articles/theory.1.pdf) [II](http://users.df.uba.ar/ariel/materias/FT3_2011_2C/Extra/Jaynes.II.pdf)
 0. Kelly (1956). [A New Interpretation of Information Rate](https://www.princeton.edu/~wbialek/rome/refs/kelly_56.pdf)
 0. Shannon (1950). [A mathematical theory of communication](https://pure.mpg.de/rest/items/item_2383162/component/file_2456978/content)
@@ -66,6 +65,7 @@ en decisiones judiciales](https://d1wqtxts1xzle7.cloudfront.net/32128580/Tesis_C
 
 0. [Factor Graphs and the Sum-product algorithm](https://ieeexplore.ieee.org/document/910572)
 0. [Crash Course in Good and Bad Controls](https://papers.ssrn.com/sol3/Delivery.cfm/SSRN_ID4062645_code4146131.pdf?abstractid=3689437&mirid=1)
+0. [Probabilistic Topic Models](https://oar.princeton.edu/bitstream/88435/pr1bv3w/1/OA_IntroductionProbabilisticTopicModels.pdf)
 0. [TrueSkill: A Bayesian Skill Rating System](https://papers.nips.cc/paper/3079-trueskilltm-a-bayesian-skill-rating-system)
 0. [TrueSkill Through Time: Revisiting the History of Chess](https://papers.nips.cc/paper/3331-trueskill-through-time-revisiting-the-history-of-chess)
 0. [Match Box: Large Scale Online Bayesian Recommendations](https://www.microsoft.com/en-us/research/wp-content/uploads/2009/01/www09.pdf)
@@ -80,6 +80,7 @@ en decisiones judiciales](https://d1wqtxts1xzle7.cloudfront.net/32128580/Tesis_C
 
 # Blogs
 
+0. [Optimal transport](http://alexhwilliams.info/itsneuronalblog/2020/10/09/optimal-transport/)
 0. [Bayesian optimization](https://distill.pub/2020/bayesian-optimization/)
 0. [From autoencoder to beta-VAE](https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html)
 0. [What is a variational autoencoder](https://jaan.io/what-is-variational-autoencoder-vae-tutorial/)
@@ -88,6 +89,12 @@ en decisiones judiciales](https://d1wqtxts1xzle7.cloudfront.net/32128580/Tesis_C
 # Tools:
 
 0. [Gaussain process with pytroch](https://gpytorch.ai/)
+0. [GPy](https://github.com/SheffieldML/GPy)
+
+# Cursos externos
+
+0. Larry Wasserman [Statistical methods for machine learning](https://www.stat.cmu.edu/~larry/=sml/)
+0. Tamara Broderik [Non parametric bayesian methods](https://tamarabroderick.com/tutorial_2016_mlss_cadiz.html)
 
 # Historia 
 
