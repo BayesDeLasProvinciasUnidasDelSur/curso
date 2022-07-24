@@ -39,7 +39,7 @@ However we have an integral here.
 \begin{equation}
  \begin{split}
   \mathcal{L}(q(\theta)) & = \int q(\theta) \log \frac{p(x,\theta)}{q(\theta)} \, d\theta = \int q(\theta) \log \frac{p(x\mid \theta)p(\theta)}{q(\theta)} \, d\theta \\
-  & = \int q(\theta) \log p(x,\theta) \, d\theta + \int q(\theta) \log \frac{p(\theta)}{q(\theta)} \, d\theta  \\
+  & = \int q(\theta) \log p(x|\theta) \, d\theta + \int q(\theta) \log \frac{p(\theta)}{q(\theta)} \, d\theta  \\
   & = \mathbb{E}_{q(\theta)} \log p(x \mid \theta) - \text{KL}(q(\theta)||p(\theta))
  \end{split}
 \end{equation}
