@@ -1,4 +1,4 @@
-using Plots
+#using Plots
 
 global _prior_ = [ [0 0 0] ; [1/6 0 1/3 ] ; [1/6 1/3 0 ] ] 
 global _posterior_ = [ [0 0 0] ; [1/3 0 2/3 ] ; [0 0 0 ] ] 
@@ -17,6 +17,9 @@ function Dkl(p,q)
     end end
     return -res 
 end
+
+p = [ [0 0 0] ; [1/100 0 1-1/100 ] ; [0 0 0] ]
+q = _prior_
 
 function alternative(i)
     Dkl([ [0 0 0] ; [i/100 0 1-i/100 ] ; [0 0 0] ], _prior_)
