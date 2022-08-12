@@ -1,2 +1,0 @@
-all:
-	julia main.jl

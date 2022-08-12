@@ -1,0 +1,377 @@
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\input{../../auxiliar/tex/diapo_encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+\estrue
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+\usepackage{listings}
+\lstset{
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=true,
+  columns=flexible,
+  basicstyle={\ttfamily},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showlines=true
+}
+
+
+\begin{document}
+
+\color{black!85}
+\large
+
+\begin{frame}[plain,noframenumbering]
+\begin{textblock}{80}(54,14)
+ \huge \textcolor{black!50}{Sorpresa}
+\end{textblock}
+
+\begin{textblock}{47}(113,73.5)
+\centering \LARGE  \textcolor{black!5}{Supervivencia}
+\end{textblock}
+
+\begin{textblock}{80}(100,27)
+\LARGE  \textcolor{black!10}{Creencia}
+\end{textblock}
+
+\begin{textblock}{80}(44,61)
+\LARGE  \textcolor{black!15}{Dato}
+\end{textblock}
+
+\begin{textblock}{160}(01,87)
+\scriptsize \textcolor{black!5}{Bayes de la Provincias Unidas del Sur, 2022.}
+\end{textblock}
+
+\begin{textblock}{160}(01,01)
+\normalsize \textcolor{black!60}{Práctica 0:\ Coexistencia}
+\end{textblock}
+
+
+ %\vspace{2cm}brown
+%\maketitle
+\Wider[2cm]{
+\includegraphics[width=1\textwidth]{../../auxiliar/static/peligro_predador}
+}
+\end{frame}
+
+
+
+\begin{frame}[plain,noframenumbering]
+\begin{textblock}{160}(00,10)
+\centering
+\huge Práctica 0 \\[0.4cm] 
+\LARGE Teoría de la probabilidad: \\ tecnología de reciprocidad
+\end{textblock}
+
+\begin{textblock}{160}(00,48) \centering
+
+Seminario abierto.
+
+Bayes de la Provincias Unidas del Sur.
+
+
+\vspace{1.5cm}
+
+Primer cuatrimestre 2022
+
+\vspace{.3cm}
+
+Buenos Aires
+\end{textblock}
+
+
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(00,04)
+\centering
+\LARGE Principio de reciprocidad \\
+\large Cartas entre Pascal y Fermat, 1648
+\end{textblock}
+\vspace{1.5cm}
+
+
+
+Tiramos dos veces una moneda: \\
+$\bullet$ Si sale seca (S) en la primera y en la segunda, te hago un favor (Color rojo). \\
+$\bullet$ Caso contrario (C), me hacés un favor (Color negro). \\
+\begin{center}
+\tikz{
+\node[latent, draw=white, yshift=0.7cm, minimum size=0.1cm] (b0) {};
+\node[latent,below=of b0,yshift=0.7cm, xshift=-1cm] (r1) {$S$};
+\node[latent,below=of b0,yshift=0.7cm, xshift=1cm] (r2) {$C$};
+
+\node[latent, below=of r1, draw=white, yshift=0.8cm, minimum size=0.1cm] (bc11) {};
+\node[accion, below=of r2, draw=white, yshift=0cm] (bc12) {};
+\node[latent,below=of bc11,yshift=0.8cm, xshift=-0.5cm] (r1d2) {$S$};
+\node[latent,below=of bc11,yshift=0.8cm, xshift=0.5cm] (r1d3) {$C$};
+
+\node[accion,below=of r1d2,yshift=0cm, color=red] (br1d2) {};
+\node[accion,below=of r1d3,yshift=0cm] (br1d3) {};
+\edge[-] {b0} {r1,r2};
+\edge[-] {r1} {bc11};
+\edge[-] {r2} {bc12};
+\edge[-] {bc11} {r1d2,r1d3};
+\edge[-] {r1d2} {br1d2};
+\edge[-] {r1d3} {br1d3};
+}
+\end{center}
+
+
+\centering
+¿Cuál es el valor justo de la reciprocidad en este contexto de incertidumbre?
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Principio de coexistencia
+\end{textblock}
+\vspace{1cm}
+
+\normalsize
+
+Las casas de apuestas ofrecen pagos $q_c$ y $q_s$ por Cara y Seca (multiplican lo apostado).
+Supongamos que se conoce la probabilidad $p$ de Cara.
+
+\vspace{0.3cm} \pause
+
+$\bullet$ ¿Cuál es la apuesta óptima, las proporciones $b_c$ y $b_s$ de recursos que conviene apostar a Cara y Seca? \\ \pause
+$\bullet$ ¿Existe un conjunto de pagos $q_c$ y $q_s$ que garantice la coexistencia en el tiempo entre la casa de apuestas y una población de apostadoras, o una población cooperadora siempre puede romper cualquier pago que ofrezca la casa de apuestas a través de la especialización?
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Apostar a las dos opciones \\
+ \Large $b = b_c = 1 - b_s$
+\end{textblock}
+\vspace{1.5cm} 
+
+Como apostadores queremos maximizar nuestros recursos $\omega_T$,
+\begin{equation*}
+\omega_T = (\underbrace{(\omega_0 \, \overbrace{b_c \,  q_c}^{\text{Cara}})}_{\omega_1} \, \overbrace{b_s \, q_s}^{\text{Seca}}) \dots \onslide<2->{= \omega_0 \,  (b_c \,  q_c)^{n_c}  \,  (b_s \, q_s)^{n_s}}
+\end{equation*}
+\onslide<3->{donde $n_c + n_s = T$ son las veces que salió Cara y Seca en $T$ intentos.}
+
+\onslide<4->{
+\begin{equation*}
+\begin{split}
+\omega_0 \,  r^T &= \lim_{T \rightarrow \infty} \omega_0 \,  (b_c \,  q_c)^{n_c}  \,  (b_s \, q_s)^{n_s} \\
+\onslide<5->{r &= \lim_{T \rightarrow \infty} (b_c \,  q_c)^{n_c/T}  \,  (b_s \, q_s)^{n_s/T} } \onslide<6->{=  (b_c \,  q_c)^{p}  \,  (b_s \, q_s)^{1-p}} 
+\end{split}
+\end{equation*}
+}
+
+\onslide<7->{Queremos maximizar la tasa de crecimiento $r$}
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Apostar a una sola opción \\
+ \Large $l = b_c > 0$ y $b_s=0$ o al revés
+\end{textblock}
+\vspace{1.5cm} 
+
+Como apostadores queremos maximizar nuestros recursos $\omega_T$,
+\begin{equation*}
+\begin{split}
+\onslide<2->{\omega_T = \overbrace{(\omega_0 \, (1-l)) + (\omega_0 \, l \, q_c)}^{\omega_1} \, (1-l) \dots }
+\onslide<3->{&=\omega_0  ( \overbrace{(1-l) + (l \, q_c)}^{\text{Cara}}) \, \overbrace{(1-l)}^{\text{Seca}} \dots } \\
+\onslide<4->{&=\omega_0 \, (1 +  l \, (q_c - 1))^{n_c} \,  (1-l)^{n_s}}
+\end{split}
+\end{equation*}
+
+\onslide<5->{donde $n_c + n_s = T$ son las veces que salió Cara y Seca en $T$ intentos.}
+
+ \onslide<6->{
+\begin{equation*}
+\begin{split}
+\omega_0 \,  r^T &= \lim_{T \rightarrow \infty} \omega_0 \,  (1 +  l \, (q_c - 1))^{n_c} \,  (1-l)^{n_s} \\
+\onslide<7->{r &= (1 +  l \, (q_c - 1))^{p} \,  (1-l)^{1-p}}
+\end{split}
+\end{equation*}
+}
+
+\onslide<8->{Queremos maximizar la tasa de crecimiento $r$}
+ 
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Apostar a las dos opciones \\
+ \Large Maximizar $r$
+ \end{textblock}
+\vspace{1.75cm} 
+
+ \begin{equation*}
+r =   (b \,  q_c)^{p}  \,  ((1-b) \, q_s)^{1-p} 
+\end {equation*}
+
+\vspace{0.3cm} 
+\onslide<2->{Dados los pagos recíprocos $q_c = 1/p$ y $q_s = 1 / (1-p)$}
+\begin{equation*}
+\begin{split}
+\onslide<3->{r & =  (b / p)^{p}  \,  ((1-b) / (1-p))^{1-p}  \onslide<8->{\overset{b=p}{=} 1}  \\ }
+\onslide<4->{\log r &= p \, \log \frac{b}{p} + (1-p) \log  \frac{1-b}{1-p} } \\
+\end{split}
+\end{equation*}
+
+\onslide<5->{Podemos maximizar $r$ encontrnado su punto crı́tico en b (es cóncava).}
+\begin{equation*}
+\begin{split}
+\onslide<6->{0 &= \frac{d}{db} p \, \log \frac{b}{p} + (1-p) \log  \frac{1-b}{1-p} \\}
+\onslide<7->{b &= p}
+\end{split}
+\end{equation*}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Apostar a las dos opciones \\
+ \Large Maximizar $r$ con pagos sesgados
+\end{textblock}
+\vspace{1.5cm} 
+
+Sea $q_c = 1/q$ y $q_s = 1 / (1-q)$ con $q \in [0,1]$ \\[0.3cm]
+
+\onslide<2->{Podemos maximizar $r$ encontrnado su punto crı́tico en b (es cóncava).}
+\begin{equation*}
+\begin{split}
+\onslide<3->{0 &= \frac{d}{db} p \, \log \frac{b}{q} + (1-p) \log  \frac{1-b}{1-q} \\}
+\onslide<4->{b &= p}
+\end{split}
+\end{equation*}
+
+\Large
+
+\vspace{0.4cm}
+
+\centering
+\onslide<5->{La apuesta óptima siempre se obtiene dividiendo \\ los recursos en la misma proproción que la probabilidad $p$}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Apostar a una opción \\
+ \Large Tarea
+ \end{textblock}
+\vspace{1.75cm} 
+
+$\bullet$ Maximizar $r$ \\
+$\bullet$ Mostrar que es equivalente a apostar en las dos opciones \\
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Apostar a las dos opciones (Cooperativo)
+\end{textblock}
+\vspace{1.75cm} 
+
+Como cooperadores queremos maximizar nuestra cuota del fondo común,
+\begin{equation*}
+\onslide<2->{\text{fondo común}_t = (\omega_t \, b \, q_c ) \, n_c + (\omega_t \, (1-b) \, q_s ) \, n_s }
+\end{equation*}
+\onslide<3->{donde $n_c + n_s = N$ son las veces que salió Cara y Seca en el grupo de tamaño $N$}
+\begin{equation*}
+\begin{split}
+\onslide<4->{\text{couta} = \omega_{t+1} & = \frac{1}{N} \left( (\omega_t \, b \, q_c ) \, n_c  + (\omega_t \, (1-b) \, q_s ) \, n_s }\\
+\onslide<5->{& = \omega_t  \left( b \, q_c  \, \frac{n_c}{N} +  (1-b) \, q_s \, \frac{n_s}{N} \right) } 
+\end{split}
+\end{equation*}
+
+\onslide<6->{Cuando el grupo es de tamaño infinito, la cuota siempre tiene el mismo valor}
+\begin{equation*}
+\begin{split}
+\onslide<7->{ \omega_{t+1} & = \lim_{N \rightarrow \infty } \omega_t  \left( b \, q_c  \, \frac{n_c}{N} +  (1-b) \, q_s \, \frac{n_s}{N} \right) } \onslide<8->{= \omega_t  \underbrace{\left( b \, q_c  \, p +  (1-b) \, q_s \, (1-p)\right)}_{\text{Promedio de pagos}} } 
+\end{split}
+\end{equation*}
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Apostar a las dos opciones (Cooperativo)\\
+ \Large Maximizar $r$
+\end{textblock}
+\vspace{1.75cm} 
+
+\begin{equation*}
+r = \left( b \, q_c  \, p +  (1-b) \, q_s \, (1-p)\right)
+\end{equation*}
+
+\vspace{0.3cm} 
+\onslide<2->{Dados los pagos recíprocos $q_c = 1/p$ y $q_s = 1 / (1-p)$}
+
+\begin{equation*}
+\begin{split}
+\onslide<3->{r &= \left( b \, \frac{1}{p}  \, p +  (1-b) \, \frac{1}{1-p} \, (1-p)\right)}  \\ \onslide<4->{&= b + (1 - b) = 1}
+\end{split}
+\end{equation*}
+
+
+\Large
+
+\vspace{0.4cm}
+
+\centering
+\onslide<5->{Si el pago es recíproco \\ cooperativamentre nunca perdemos.}
+
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Apostar a las dos opciones (Cooperativo)\\
+ \Large Tarea
+\end{textblock}
+\vspace{1.75cm} 
+
+$\bullet$ Maximizar $r$ con pagos sesgados en grupo de tamaño 2 \\
+$\bullet$ Maximizar $r$ con pagos sesgados en grupo de tamaño 3 \\
+$\bullet$ Maximizar $r$ con pagos sesgados en grupo de tamaño infinito.
+
+\vspace{1cm}
+
+Los pagos sesgados son $q_c = 1/q$ y $q_s = 1 / (1-q)$ con $q \neq p$ \\[0.3cm]
+
+
+\end{frame}
+
+\begin{frame}[plain]
+\centering
+  \includegraphics[width=0.35\textwidth]{../../auxiliar/static/pachacuteckoricancha.jpg}
+\end{frame}
+
+
+
+
+
+
+\end{document}
+
+
+

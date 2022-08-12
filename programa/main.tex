@@ -8,7 +8,7 @@
 \newcommand{\es}[1]{\ifes#1\fi}
 \entrue
 
-\title{\huge Inferencia Bayesiana: construcción de acuerdos intersubjetivos en contextos de incertidumbre  \\[0.4cm]  \LARGE Programa}
+\title{\huge Verdades empíricas: construcción de acuerdos intersubjetivos en contextos de incertidumbre  \\[0.4cm]  \LARGE Programa}
 
 \author{Docente a cargo: Gustavo Landfried$^{1,2}$}
 \affil{\small 1. Bayes de las Provincias Unidas del Sur }
@@ -21,7 +21,13 @@
 
 \section{Objetivos}
 
-A diferencia de las ciencias formales (matemáticas) que validan sus proposiciones dentro de sistemas axiomáticos cerrados, las ciencias empíricas (desde la física hasta las ciencias sociales) deben validar sus proposiciones en sistemas abiertos que por definición contienen siempre algún grado de incertidumbre. ¿Es posible alcanzar ``verdades'' si es inevitable decir ``no sé''?. Sí. La aplicación estricta de la teoría de la probabilidad (inferencia Bayesiana) garantiza los acuerdos intersubjetivos en contextos de incertidumbre, fundamento de las verdades empíricas. Sin embargo, su adopción se vio históricamente limitada debido al alto costo computacional asociado. A diferencia del enfoque frecuentista de la probabilidad que selecciona una única hipótesis, la inferencia Bayesiana se ve obligada a actualizar las creencias de cada una de las hipótesis de forma óptima (maximizando la incertidumbre) dada la evidencia empírica y formal (datos y modelos). Si bien en las últimas décadas las limitaciones computacionales han sido superadas en gran medida gracias al desarrollo de métodos eficientes de aproximación, la inercia histórica es ahora su limitación principal. Este curso tiene por objetivo promover la adopción de la inferencia Bayesiana como método general para la construcción de acuerdos intersubjetivos en contextos de incertidumbre a través del estudio de sus conceptos fundamentales (principios y propiedades de los procesos de selección probabilística) y a través de la resolución de problemas concretos (modelos gráficos, inferencia causal, lenguajes de programación probabilística). La inferencia Bayesiana no solo ha mostrado ser la lógica más exitosa en la era de la inteligencia artificial, es un criterio general para la resolución de cualquier problema empírico especialmente en las industrias 4.0, la academia y el poder judicial.
+A diferencia de las ciencias formales (matemáticas) que validan sus proposiciones dentro de sistemas axiomáticos cerrados, las ciencias empíricas (desde la física hasta las ciencias sociales) deben validar sus proposiciones en sistemas abiertos que por definición contienen siempre algún grado de incertidumbre.
+¿Es posible alcanzar ``verdades'' si es inevitable decir ``no sé''?.
+Sí.
+La aplicación estricta de la teoría de la probabilidad (inferencia Bayesiana) garantiza los acuerdos intersubjetivos en contextos de incertidumbre, fundamento de las verdades empíricas. Sin embargo, su adopción se vio históricamente limitada debido al alto costo computacional asociado.
+A diferencia del enfoque frecuentista de la probabilidad que selecciona una única hipótesis, la inferencia Bayesiana se ve obligada a actualizar las creencias de cada una de las hipótesis de forma óptima (maximizando la incertidumbre) dada la evidencia empírica y formal (datos y modelos).
+Si bien en las últimas décadas las limitaciones computacionales han sido superadas en gran medida gracias al desarrollo de métodos eficientes de aproximación, la inercia histórica es ahora su limitación principal.
+Este curso tiene por objetivo promover la adopción de la inferencia Bayesiana como método general para la construcción de acuerdos intersubjetivos en contextos de incertidumbre a través del estudio de sus conceptos fundamentales (principios y propiedades de los procesos de selección probabilística) y a través de la resolución de problemas concretos (modelos gráficos, inferencia causal, lenguajes de programación probabilística). La inferencia Bayesiana no solo ha mostrado ser la lógica más exitosa en la era de la inteligencia artificial, es un criterio general para la resolución de cualquier problema empírico especialmente en las industrias 4.0, la academia y el poder judicial.
 
 \section{Unidades}
 
@@ -35,30 +41,34 @@ A diferencia de las ciencias formales (matemáticas) que validan sus proposicion
 \end{description}
 
 \vspace{0.1cm}
-\item \textbf{Función de costo epistémico-evolutiva}
+\item \textbf{Propiedades de la función de costo epistémico-evolutiva}
 \vspace{-0.15cm}
 \begin{description}
-\item[Teórica:] Naturaleza multiplicativa de los procesos de selección probabilística y evolutiva. Consecuencias de las fluctuaciones en la tasa de crecimiento. La ventaja a favor de las variantes que reducen las fluctuaciones: diversificación individual (propiedad epistémica), cooperación (propiedad evolutiva mayor), especialización (propiedad meta-epistémica), coexistencia (propiedad ecológica). Las distribución de biomasa en la tierra.
+\item[Teórica:] Naturaleza multiplicativa de los procesos de selección probabilística y evolutiva. Sus consecuencias. La ventaja a favor de las variantes que reducen las fluctuaciones: diversificación individual (propiedad epistémica), cooperación (propiedad evolutiva mayor), especialización (propiedad meta-epistémica), coexistencia (propiedad ecológica). Las distribución de biomasa en la tierra.
 \item[Práctica:] Simulación de un proceso multiplicativo, aproximación numérica del promedio de los estados y del promedio temporal. Análisis matemáticas de las apuestas.
 \end{description}
 
 % Parrafo
 
 \vspace{0.1cm}
-\item \textbf{Máxima incertidumbre}
+\item \textbf{Dato: el problema de la comunicación con la realidad}
+%La síntesis que se viene del capítulo 3 tiene que ver con la estructura invariante del dato con el emisor-receptor de la teória de la comunicación. La Fuente F es el estado real de las hipótesis, el Encoder E es el modelo causal real, la Señal S son propiedades perceptibles reales, el Canal C es el cuerpo o algún instrumento de medición, el Mensaje M es aquello que recibimos como observable, el indicador, base empírica fundamental, el Decoder D es el modelo causal que estamos usando, y la Estimación es la conclusión de la inferencia (bayesiana) sobre la hipótesis no observbles de la fuente. El problema de las ciencias empíricas es el problema de la teoría de la información: "La comunicación con la realidad". Así se llama el capítulo 3.
 \vspace{-0.15cm}
 \begin{description}
-\item[Teórica:] Divergencia KL. Entopía. Distribuciones de probabilidad exponencial. Distribuciones conjugadas. Beta-Binomial. Dirichlet-multinomial. Polya Urn.
-\item[Práctica:] Probabilidad de la probabilidad. Gases. Distribución de la riqueza. Polya Urn. Variables pseudo-aleatorias.
+\item[Teórica:] La sorpresa como fuente de información. El principio de máxima incertidumbre. Información esperada. La estructura invariante del dato empírico. La función proposicional y su operacionalización: fuente, unidad de análisis, variable, dimensiones, procedimientos, indicador, estimación. La realidad causal como encoder. El modelo causal como decoder. La hipótesis indicadora universal. El continuo entre datos teóricos y datos de base empírica.
+\item[Práctica:] Compresión de datos. Gases. Distribución de la riqueza. Operacionalización de funciones proposicionales. El problema del acuerdo y su solución.
 \end{description}
 
-% Parrafo
+
+
+%If we can show that we can compress data from a particular source intoa file of L bits per source symbol and recover the data reliably, then we will say that the average information content of that source is at most L bits per symbol.
+
 
 \vspace{0.1cm}
 \item \textbf{Modelos gráficos y algoritmo de inferencia}
 \vspace{-0.15cm}
 \begin{description}
-\item[Teórica:] Variables observadas y ocultas. Modelos digidos y no dirigidos. Gráficos de factores. Algoritmo suma-producto. 
+\item[Teórica:] Distribuciones de probabilidad exponencial. Distribuciones conjugadas. Beta-Binomial. Dirichlet-multinomial. Polya Urn. Variables observadas y ocultas. Modelos digidos y no dirigidos. Gráficos de factores. Algoritmo suma-producto.
 \item[Práctica:] Flujo de inferencia (\emph{d-separation}) en el Modelo Alarma-Terremoto.
 \end{description}
 
@@ -75,7 +85,17 @@ A diferencia de las ciencias formales (matemáticas) que validan sus proposicion
 % Parrafo
 
 \vspace{0.1cm}
-\item \textbf{Selección de modelo}
+\item \textbf{Distribucioens de creencias}
+\vspace{-0.15cm}
+\begin{description}
+\item[Teórica:] Bernoulli, Binomial, Gaussiana, Poly Urn, Beta, Poison, Multinomial, Guasiana multivariada, etc. Regresión lineal multivariada.
+\item[Práctica:] Implementar numeros seudo-aleatorios. Galton Board. Polya Bord. Implentar la clase guasiana. Regresión lineal. Buenos y malos controles.
+\end{description}
+
+% Parrafo
+
+\vspace{0.1cm}
+\item \textbf{Evaluación de modelo}
 \vspace{-0.15cm}
 \begin{description}
 \item[Teórica:] Modelos gaussianos multidimensionales. Regresión lineal bayesiana. El enfoque frecuentista y el sobreajuste \emph{overfitting}. Evidencia. Media 
@@ -85,7 +105,7 @@ A diferencia de las ciencias formales (matemáticas) que validan sus proposicion
 % Parrafo
 
 \vspace{0.1cm}
-\item \textbf{Aproximaciones Variacionales}
+\item \textbf{Aproximaciones analíticas}
 \vspace{-0.15cm}
 \begin{description}
 \item[Teórica:] Modelos de estimación de habilidad de la industria del video juego. Modelo Elo. Modelo TrueSkill. Aproximación por \emph{expectation propagation}. Modelo bayesiano de recomendación de Netflix. Aproximación por \emph{variational inference}.
@@ -105,10 +125,10 @@ A diferencia de las ciencias formales (matemáticas) que validan sus proposicion
 % Parrafo
 
 \vspace{0.1cm}
-\item \textbf{Aproximaciones por cadenas de Markov}
+\item \textbf{Aproximaciones por exploración}
 \vspace{-0.15cm}
 \begin{description}
-\item[Teórica:] Algoritmos de muestreo básicos. Métodos de aceptación y rechazo. Importance sampling. Cadenas de markov. El algoritmo Metrópolis-Hasting. Gibbs Sampling.
+\item[Teórica:] Cadenas de Markov. Algoritmos de muestreo básicos. Métodos de aceptación y rechazo. Importance sampling. Cadenas de markov. El algoritmo Metrópolis-Hasting. Gibbs Sampling.
 \item[Práctica:] Implementación del algoritmo Metrópolis-Hasting
 \end{description}
 
@@ -122,17 +142,6 @@ A diferencia de las ciencias formales (matemáticas) que validan sus proposicion
 \item[Práctica:] Implementación de varios modelos usando PPLs.
 \end{description}
 
-% Parrafo
-
-\vspace{0.1cm}
-\item \textbf{Base empírica metodológica}
-\vspace{-0.15cm}
-\begin{description}
-\item[Teórica:] Concepto de base empírica. La estructura invariante del dato. El lugar de las hipótesis en el dato. La hipótesis indicadora universal. Procedimiento de determinación. Datos T-teóricos y datos de base empírica.
-\item[Práctica:] Debate. Operacionalización de funciones proposicionales. El problema del acuerdo y su solución.
-
-
-\end{description}
 
 \end{enumerate}
 

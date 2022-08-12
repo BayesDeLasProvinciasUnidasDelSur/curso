@@ -1,0 +1,468 @@
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\input{../../auxiliar/tex/diapo_encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+ 
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+\newif\ifen
+\newif\ifes
+\newcommand{\en}[1]{\ifen#1\fi}
+\newcommand{\es}[1]{\ifes#1\fi}
+\estrue
+
+%\title[Bayes del Sur]{}
+
+\begin{document}
+
+\color{black!85}
+\large
+
+ 
+%\setbeamercolor{background canvas}{bg=gray!15}
+
+\begin{frame}[plain,noframenumbering]
+ 
+ \begin{textblock}{90}(03,05)
+ \centering \huge  \textcolor{black!40}{Creencias, datos y sorpresas}
+\end{textblock}
+
+ \begin{textblock}{47}(113,74)
+\centering \Large  \textcolor{white!55}{Ergodicidad}
+\end{textblock}
+
+ %\vspace{2cm}brown
+%\maketitle
+\Wider[2cm]{
+\includegraphics[width=1\textwidth]{../../auxiliar/static/peligro_predador}
+}
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE Monedas
+ \end{textblock}
+
+\vspace{1cm}
+
+\includegraphics[width=1\textwidth]{../../auxiliar/static/plata-potosi}
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large The Unfinished game (1654) \\ \normalsize Pascal, Fermat and the letters
+ \end{textblock}
+ \vspace{1cm}
+
+Dos personas apuestan quién ganará tres lanzamientos de una moneda
+
+\vspace{0.5cm}
+
+Cada uno tira su moneda. El que obtiene más caras gana.
+
+\vspace{0.5cm}
+
+Antes de terminar se ven obligados a escapar. 
+
+\vspace{0.5cm}
+
+¿Cuál es la forma justa de repartir las apuestas?
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Valor esperado
+ \end{textblock}
+ \vspace{1cm}
+ 
+ \centering
+ El promedio de todos los $N$ resultados posibles $x_i$ 
+ 
+ \begin{align*}
+  \frac{1}{N} \sum_i^N x_i
+ \end{align*}
+
+ % TODO: Pregunta práctica. Qué diferencia tiene este criterio respecto de dividir las creencias en partes iguales. (En el caso de la moneda se reduce a dividir las creencias en partes iguales, pero en otros casos no). Mostrar ejemplo y calcular uno y otro valor.
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Paradoja de San Petersburgo (1712)
+ \end{textblock}
+ \vspace{1cm}
+
+ \centering
+ Apuesta que paga $2^{n-1}$, donde $n$ son caras consecutivas de una moneda
+
+ \vspace{0.5cm}
+ 
+ ¿Cuánto pagarías para entrar?
+ 
+ \pause
+ \begin{align*}
+ \sum_i^{\infty} \left(\frac{1}{2} \right)^n 2^{n-1} = \frac{1}{2} \cdot \infty
+ \end{align*}
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Teoría de la utilidad esperada (1738)
+ \end{textblock}
+
+
+ \begin{align*}
+  \frac{1}{N} \sum_i^N u(x_i)
+ \end{align*}
+ 
+ \end{frame}
+
+ 
+
+ 
+ \begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Psicologización de la economía
+\end{textblock}
+\centering
+\vspace{1cm}
+ 
+\includegraphics[width=1\textwidth]{../../auxiliar/static/risk-aversion}
+
+ \end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large >Apostar o no apostar?
+ \end{textblock}
+ \vspace{1cm}
+ 
+ \begin{align*}
+ \Delta \,r = 
+      \begin{cases*}
+       (+0.5) & \ \ \text{Cara} \\
+       (-0.4) & \ \ \text{Seca}
+    \end{cases*}
+ \end{align*}
+
+ \pause
+ \vspace{1cm}
+ \centering
+ 
+ Función de utilidad neutral
+ \begin{align*}
+  0.5\cdot \frac{1}{2} - 0.4 \frac{1}{2} = 0.05
+ \end{align*} 
+ 
+ 
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Resultado temporal
+ \end{textblock}
+ 
+
+ \centering
+\vspace{1cm}
+ 
+\includegraphics[width=0.66\textwidth]{figures/simple_gamble.pdf}
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Promedio temporal
+ \end{textblock}
+ \vspace{1cm}
+ 
+ 
+ \centering
+\includegraphics[width=1\textwidth]{../../auxiliar/static/ergodicity}
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Ergodicidad
+ \end{textblock}
+
+
+ \begin{align*}
+  \lim_{N\rightarrow \infty} \frac{1}{N} \sum_i^N Y_i(t*) = \lim_{T\rightarrow \infty} \frac{1}{T} \sum_t^T Y_{i*}(t)
+ \end{align*}
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE Monedas
+ \end{textblock}
+
+ \vspace{1cm}
+
+\includegraphics[width=0.9\textwidth]{../../auxiliar/static/monedas} 
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE Galton board
+ \end{textblock}
+
+ \vspace{1cm}
+
+ \centering
+\includegraphics[width=0.33\textwidth]{../../auxiliar/static/galton_board.png} 
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE El triangulo de Yanghui
+ \end{textblock}
+
+\vspace{1cm}
+
+\centering
+\includegraphics[width=0.42\textwidth]{../../auxiliar/static/triangleYanghui}
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE El triangulo de Yanghui
+ \end{textblock}
+
+\vspace{1cm}
+
+\centering
+\includegraphics[width=0.6\textwidth]{../../auxiliar/static/triangleCombinatorio}
+
+ 
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE Monedas
+ \end{textblock}
+
+ \begin{textblock}{160}(20,8)
+\includegraphics[width=0.75\textwidth]{../../auxiliar/static/moneda}  
+ \end{textblock}
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE Monedas
+ \end{textblock}
+
+\vspace{1cm}
+
+\includegraphics[width=1\textwidth]{../../auxiliar/static/plata-potosi}
+ 
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE Monedas \\ \normalsize Polya Urn
+ \end{textblock}
+
+ \vspace{1cm}
+\centering
+\includegraphics[width=0.5\textwidth]{../../auxiliar/static/polya-urn}
+
+ \end{frame}
+
+
+ \begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE Monedas \\ \normalsize Polya Urn
+ \end{textblock}
+
+ \vspace{1cm}
+\centering
+\includegraphics[width=0.75\textwidth]{../../auxiliar/static/polya-urn-exp}
+ 
+ \end{frame}
+
+ \begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \LARGE Monedas
+ \end{textblock}
+
+\vspace{1cm}
+
+\includegraphics[width=1\textwidth]{../../auxiliar/static/plata-potosi}
+ 
+\end{frame}
+ 
+ 
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Resultado temporal \\ \normalsize Individual
+ \end{textblock}
+ 
+
+ \centering
+\vspace{1cm}
+ 
+\includegraphics[width=0.66\textwidth]{figures/simple_gamble.pdf}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Proceso multiplicativo
+ \end{textblock}
+ \vspace{1cm}
+ 
+ 
+\begin{align*}
+ V_N & = V_0 (1+r)^N = V_0 (1-l)^L (1+xl)^W \\
+\end{align*}
+
+\vspace{-1cm}
+ \begin{align*}
+V_N & := \text{Capital at time } N \\
+V_0 & := \text{initial capital} \\
+r & := \text{the exponentiation growth (continuous) rate} \\
+L &:= \text{number of losses} \\
+W &:= \text{number of wins} \\
+l & := \text{capital invested (proportion)} \\
+x & := \text{odd}-1, \text{la ganancia neta de odd, los odd como probability$^{-1}$}
+\end{align*} 
+ 
+\end{frame}
+
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large \textbf{Evoluci\'on}: secuencia de tasas de reproducción y supervivencia 
+ \end{textblock}
+\vspace{1.33cm}
+ 
+ \centering
+ \includegraphics[width=0.85\textwidth]{../../auxiliar/static/peligro_predador}
+
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Solución temporal cooperativa \\ \normalsize Cooperar: la puerta a los multiversos
+ \end{textblock}
+ 
+ \centering
+\vspace{1cm}
+ 
+\includegraphics[width=0.66\textwidth]{figures/simple_gamble_incesto.pdf}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Solución temporal individual \\ \normalsize Apuesta parcial
+ \end{textblock}
+
+ \centering
+\vspace{1cm}
+ 
+\includegraphics[width=0.9\textwidth]{../../auxiliar/static/kelly}
+
+ 
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+  \centering \Large Kelly criterion
+ \end{textblock}
+\vspace{1.3cm}
+ 
+Tomo logaritmo de ambos lados
+\begin{align*}
+ \log V_0 (1+r)^N = \log V_0 (1-l)^L (1+xl)^W \\
+\end{align*}
+
+\pause
+
+Simplifico
+\begin{align*}
+ N \log (1+r) &= L \log (1-l) + W \log (1+xl) \\
+ \log (1+r) &= \frac{L}{N} \log (1-l) + \frac{W}{N} \log (1+xl) \\
+\end{align*}
+
+\pause
+
+En el límite $N \rightarrow \infty$
+\begin{align*}
+ \log (1+r) &= p \log (1-l) + (1-p) \log (1+xl) \\
+\end{align*}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+  \centering \Large Kelly criterion
+ \end{textblock}
+\vspace{1.3cm}
+ 
+
+Podemos maximizar $r$ encontrnado su punto crítico en $l$ (es cóncava).
+\begin{align*}
+0 &= \frac{\delta}{\delta l} p \log (1-l) + (1-p) \log (1+xl) \\
+\end{align*}
+
+\pause
+
+Resolviendo la derivada
+\begin{align*}
+0 = - \frac{x (p+l-1) + p}{(1-l)(xl+1)}
+\end{align*}
+
+\pause
+
+Despejando
+\begin{align*}
+ l = \frac{x(1 - p) - p}{x}
+\end{align*}
+ 
+\end{frame}
+
+
+ 
+\begin{frame}[plain]
+\centering
+  \includegraphics[width=0.35\textwidth]{../../auxiliar/static/pachacuteckoricancha.jpg}
+\end{frame}
+
+
+
+
+
+
+\end{document}
+
+
+
