@@ -1,30 +1,92 @@
-Contactos a **bayesdelsur(en)gmail**
+# Seminario: Verdades Empíricas
+### Acuerdos intersubjetivos en contextos de incertidumbre
 
-# Agenda de cursada
+Contactos a **bayesdelsur@gmail.com**
 
-|Número|Teórica|Fecha|Materiales|Reunión|Práctica|Fecha|Materiales|Reunión|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|0 | Procesos multiplicativos | 23/03/2022 (revisión 06/04/2022) | Peters [Cooperación](https://researchers.one/articles/19.03.00004) [ergodicidad](https://www.nature.com/articles/s41567-019-0732-0) |[Presentación](https://github.com/BayesDeLasProvinciasUnidasDelSur/curso/releases/download/2022.1/teorica0.pdf) | Apuestas | 13/04/2022  | [Kelly 1956](https://www.princeton.edu/~wbialek/rome/refs/kelly_56.pdf) |[Soluciones](https://github.com/BayesDeLasProvinciasUnidasDelSur/curso/releases/download/2022.1/practica0.pdf) |
-|1 | Inferencia Bayesiana | 30/03/2022 | [Bayesian methods: General background](http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=E3CAC8BC04D114B9FA346D29DF78A692?doi=10.1.1.41.1055&rep=rep1&type=pdf) | [Presentación](https://github.com/BayesDeLasProvinciasUnidasDelSur/curso/releases/download/2022.1/teorica1.pdf) | Selección de Modelo | Suspendida | | |
-|2 | Máxima entropía | Suspendida | Cap 1 Bishop - Física estadísitica [Desde](https://www.youtube.com/watch?v=vdSWMIh2o_E&t=0s) [Hasta](https://www.youtube.com/watch?v=37kRnZxJImA)  | |  Gases, distribución de la riqueza (combinatoria) | Suspendida | Ejemplos en [Desde](https://www.youtube.com/watch?v=vdSWMIh2o_E&t=0s) - [Hasta](https://www.youtube.com/watch?v=37kRnZxJImA) | |
-| 3 | Algoritmo Suma-Producto | 20/04/2022 | Cap 8 Bishop | [Presentación](https://github.com/BayesDeLasProvinciasUnidasDelSur/curso/releases/download/2022.1/teorica-sumprod.pdf) | D-separation en el Modelo Alarma-Terremoto | 27/04/2022 | Cap 8 Bishop | |
-| 4 | Inferencia Causal | 04/05/2022 | Pearl [A premier](http://gen.lib.rus.ec/)  | | [Buenos y malos controles](https://papers.ssrn.com/sol3/Delivery.cfm/SSRN_ID4062645_code4146131.pdf?abstractid=3689437&mirid=1) | 11/05/2022 | | |
-| 5 | Distribuciones continuas conjugadas | - | Cap 2 Bishop | | Regresión lineal | - | Cap 3 Bishop | |
-| 6 | Cadenas de Markov MCMC, HMC| - | ¿Cap 11 Bishop? | | Ejemplos varios | - | [Stan](https://mc-stan.org/docs/2_29/stan-users-guide-2_29.pdf) | | 
-| 7 | Aproximaciones Variacionales | - | Cap 10 Bishop y [Deep Bayes](https://www.youtube.com/watch?v=xH1mBw3tb_c&list=PLe5rNUydzV9QHe8VDStpU0o8Yp63OecdW&index=4&t=0s) | | Filtro de Kalman (TrueSkill exacto y aproximado) |  - | [TrueSkill](https://papers.nips.cc/paper/3079-trueskilltm-a-bayesian-skill-rating-system) | |
-| 8 | Series temporales | - | Cap 13 Bishop | | Smoothing de Kalman (TrueSkill Through Time) | - | [TrueSkill Through Time](https://papers.nips.cc/paper/3331-trueskill-through-time-revisiting-the-history-of-chess) | |
-| 9 | Procesos Gaussianos | - | Cap 6 Bishop | | ¿KickScore? |  | [Gaussain process with pytroch](https://gpytorch.ai/) ||
-| - | - | -| - | - | - | - | - | - |
-| ¿? | ¿Estructura invariante del dato de base empírica metodológica? | ¿? | [Juan Samaja Parte 3](https://ens9004-infd.mendoza.edu.ar/sitio/upload/12-%20SAMAJA,%20J.%20-%20LIBRO%20-%20Epistemologia%20y%20metodologia.pdf) - [Klimovsky Base empírica]() | | ¿? | ¿? | | |
-| ¿? | ¿Redes Neuronales? | ¿? | | | ¿Variational Auto Encoders? | ¿? | | |
+-------------------------------------------------------
 
+## Objetivos
+
+A diferencia de las ciencias formales, que validan sus proposiciones dentro de sistemas axiomáticos cerrados, las ciencias empíricas (desde la física hasta las ciencias sociales) deben validar sus proposiciones en sistemas abiertos que por definición contienen siempre algún grado de incertidumbre. ¿Es posible alcanzar "verdades" si es inevitable decir "no sé"?. Sí. La aplicación estricta de las reglas de la probabilidad (enfoque Bayesiano) garantiza los acuerdos intersubjetivos en contextos de incertidumbre, fundamento de las verdades empíricas. Bajo incertidumbre, la lógica es paraconsistente en tanto se hace necesario creer al mismo tiempo en A y no A hasta que la sorpresa, única fuente de información, decida. Debido a que este proceso de selección es, como el evolutivo, de naturaleza multiplicativa (un solo cero en la secuencia de reproducción y supervivencia genera una extinción), existe una ventaja a favor de las variantes que reducen las fluctuaciones. Si bien la aplicación estricta de la teoría de la probabilidad ha mostrado ser la lógica ideal en contextos de incertidumbre, su adopción se vio históricamente limitada debido al alto costo computacional asociado: a diferencia del enfoque frecuentista de la probabilidad que selecciona una única hipótesis, el enfoque Bayesiano actualiza las creencias de todas y cada una de las hipótesis de acuerdo a la evidencia empírica y formal (datos y modelos). Si bien en las últimas décadas las limitaciones computacionales han sido superadas en gran medida gracias al desarrollo de métodos eficientes de aproximación, la inercia histórica es ahora su limitación principal. **Este curso tiene por objetivo promover la adopción del enfoque Bayesiano como método general para la resolución de cualquier problema empírico: en la ciencia, la política y la ecología.**
+
+## Agenda de cursada: [2023 primer cuatrimestre](https://github.com/BayesDeLasProvinciasUnidasDelSur/congreso/releases/download/curso.2022/verdades_empiricas.pdf)
+
+### Primera Parte: Fundamentos
+
+No se requiere ningún tipo de formación previa. Toda persona puede hacerlo.
+
+- **1. Principios interculturales de acuerdos intersubjetivos**. Principio de razón suficiente, de integridad, de indiferencia y de coherencia. Las reglas de razonamiento bajo incertidumbre. Evaluación de creencias.
+    - Teórica:
+    - Práctica:
+    - Bibliografía:
+    - Videos:
+- **2. Sorpresa: el problema de la comunicación con la realidad**. La estructura invariante del dato empírico: fuente, realidad causal, señal, canal, percepción, modelo causal, estimación. Base empírica y datos teóricos. Máxima incertidumbre e información.
+    - Teórica:
+    - Práctica:
+    - Bibliografía:
+    - Videos:
+- **3. La función de costo epistémico-evolutiva**. Ventajas a favor de la: Diversificación (propiedad epistémica), Cooperación (propiedad evolutiva mayor), Especialización (propiedad meta-epistémica), Coexistencia (propiedad ecológica).
+    - Teórica:
+    - Práctica:
+    - Bibliografía:
+    - Videos:
+- **4. Modelos gráficos y algoritmos de pasaje de mensajes**. Métodos gráficos de especificación de modelos causales. Cómputo descentralizado de la inferencia y la predicción. Algoritmo suma-producta.
+    - Teórica:
+    - Práctica:
+    - Bibliografía:
+    - Videos:
+- **5. Flujos de inferencia**. Apertura y cierre de flujos de inferencia en las estructuras causales fork, pipe y colider. Criterio general de separación (independencia) de variables.
+    - Teórica:
+    - Práctica:
+    - Bibliografía:
+    - Videos:
+- **6. Inferencia Causal**. Conclusiones causales a partir de datos observacionales. El efecto de las intervenciones sobre los modelos gráficos. Los criterios de puerta trasera y delantera. Contrafácticos.
+    - Teórica:
+    - Práctica:
+    - Bibliografía:
+    - Videos:
+
+### Segunda Parte: Metodologı́as
+
+Sin implicar exclusión, se requieren algunos conocimiento mı́nimos de álgebra, análisis y programación
+
+- **7. Distribuciones de creencias**. Máxima incertidumbre. Gases. Riqueza. Procesos irreversibles. Polya Urn. La familia exponencial: Bernoulli, Binomial, Beta, Multinomial, Dirichlet, Guassiana, Gamma
+    - Teórica:
+    - Práctica:
+    - Bibliografía:
+    - Videos:
+- **8. Evaluación de modelos**. La emergencia del sobreajuste (overfitting) en los enfoques que seleccionan una única hipótesis. El balance natural de la evaluación correcta del espacio de hipótesis (evidencia). Ejemplo: regresión lı́neal bayesiana.
+    - Teórica:
+    - Práctica:
+    - Bibliografía:
+    - Videos:
+- **9. Aproximaciones analı́ticas**. Métodos eficientes de aproximación: minimización por expectation propagation y variational inference. Ejemplo: estimación de habilidad en la industria del video juego.
+    - Teórica:
+    - Práctica:
+    - Bibliografía:
+    - Videos:
+- **10. Series de tiempo**. El problema de usar el posterior como prior del siguiente evento. La mutua dependencia de las hipótesis en modelos de historia completa. Ejemplo: estimación de habilidad estado-del-arte.
+    - Teórica:
+    - Práctica:
+    - Bibliografía:
+    - Videos:
+- **11. Aproximaciones por exploración**. Métodos para modelos causales intratables: Markov chain Monte Carlo. Metrópolis-Hasting y Hamiltonian Monte Carlo.
+    - Teórica:
+    - Práctica:
+    - Bibliografía:
+    - Videos:
+- **12. Programación Probabilísticas**. Implementación de modelos usando lenguajes de programación probabilı́stica. Verificación visual de buen funcionamiento de las aproximaciones.
+    - Teórica:
+    - Práctica:
+    - Bibliografía:
+    - Videos:
 ## Manuales:
 
 0. **Bishop**. [Pattern Recognition and Machine Learning](https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/)
-0. Rasmussen [Gaussian Processes for Machine Learning](http://gaussianprocess.org/gpml/chapters/RW.pdf)I
-0. MacKay. [Information theory, inference and learning algorithms](https://www.inference.org.uk/itprnn/book.pdf)
-0. Pearl. [Causality](111.90.145.72/get.php?md5=aea29d62416c43c4b3c94444ecad5beb&key=3HX5RWW4J5RHCGGS&mirr=1) y [Causal Inference in Statistics: A premier](http://gen.lib.rus.ec/)
+0. **MacKay**. [Information theory, inference and learning algorithms](https://www.inference.org.uk/itprnn/book.pdf)
+0. **Pearl**. [Causality](111.90.145.72/get.php?md5=aea29d62416c43c4b3c94444ecad5beb&key=3HX5RWW4J5RHCGGS&mirr=1) y [Causal Inference in Statistics: A premier](http://gen.lib.rus.ec/)
 0. Jaynes (2003) [Probability theory: The logic of science](http://www.med.mcgill.ca/epidemiology/hanley/bios601/GaussianModel/JaynesProbabilityTheory.pdf)
+0. Rasmussen [Gaussian Processes for Machine Learning](http://gaussianprocess.org/gpml/chapters/RW.pdf)I
 0. Stan. [Documentation](https://mc-stan.org/docs/2_29/stan-users-guide-2_29.pdf)
 0. Koller y Friedman [Probabilistic Graphical Models, Principles and Techniques](http://libgen.rs/search.php?req=Probabilistic+Graphical+Models%2C+Principles+and+Techniques&open=0&res=25&view=simple&phrase=1&column=def)
 0. Halpern (2017) [Reasoning about uncertainty](http://libgen.rs/search.php?req=Reasoning+about+uncertainty&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def)
@@ -34,6 +96,7 @@ Contactos a **bayesdelsur(en)gmail**
 ## Cursos:
 
 0. **Probabilistic Machine Learning** [youtube](https://youtube.com/playlist?list=PL05umP7R6ij1tHaOFY96m5uX3J21a6yNd)
+0. Information Theory (by MacKay) [youtube](https://www.youtube.com/watch?v=BCiZc0n6COY)
 0. Física estadísitica. [youtube](https://www.youtube.com/watch?v=GL73N3z0j70&t)
 0. Deep Bayes. [youtube](https://www.youtube.com/playlist?list=PLe5rNUydzV9QHe8VDStpU0o8Yp63OecdW)
 0. Probabilistic Graphical Models. Carnegie-Mellon University. [web](http://www.cs.cmu.edu/~epxing/Class/10708-09/lecture.html)
