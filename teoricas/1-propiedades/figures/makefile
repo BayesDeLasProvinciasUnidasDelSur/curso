@@ -1,6 +1,13 @@
 all:
 	julia main.jl
 
+R:
+	Rscript main.R
+
+tex:
+	pdflatex agricultura.tex
+	pdfcrop -m '0 0 0 0' agricultura.pdf agricultura.pdf
+
 practica: pdf/simple_gamble.pdf pdf/simple_gamble_incesto.pdf
 
 remake: clear_all all
