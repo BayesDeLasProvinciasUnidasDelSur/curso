@@ -1691,9 +1691,22 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
         
         } 
 }
+
+
+\only<3>{
+\begin{textblock}{160}(14,60)
+\begin{equation*}
+ P(\text{Modelo}_i|\text{Datos}) = \frac{\only<1->{\overbrace{P(\text{Datos}|\text{Modelo}_i)}^{\hfrac{\text{\footnotesize Predicción a priori}}{\text{\footnotesize o evidencia}} }} \only<1->{P(\text{Modelo}_i)} }{ P(\text{Datos})} \phantom{\frac{\overbrace{P(\text{Datos}|\text{Modelo})}^{\text{Evidencia}}}{ P(\text{Datos})}}
+\end{equation*}
+\end{textblock}
+}
+
+
 \end{textblock}
 
 \end{frame}
+
+
 
 \begin{frame}[plain,fragile]
 \begin{textblock}{160}(0,4)
