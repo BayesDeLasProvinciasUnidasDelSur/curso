@@ -1,19 +1,12 @@
-all: montyHall_6.pdf 
+all: tex R jl
 
+jl:
+	julia monty_hall_selection.jl
 
-china.pdf:
-	Rscript main.R china.R
+R:
+	Rscript main.R
 
-baseEmpirica.pdf:
-	Rscript main.R baseEmpirica.R
-
-agricultura.pdf:
-	pdflatex agricultura.tex
-
-forkingPath.pdf:
-	Rscript main.R forkingPath.R
-
-montyHall_6.pdf:
+tex:
 	pdflatex montyHall_0.tex
 	pdflatex montyHall_1.tex
 	pdflatex montyHall_2.tex
@@ -21,6 +14,12 @@ montyHall_6.pdf:
 	pdflatex montyHall_4.tex
 	pdflatex montyHall_5.tex
 	pdflatex montyHall_6.tex
+	pdflatex montyHall_7.tex
+	pdflatex montyHall_8.tex
+	pdflatex montyHall_model_0.tex
+	pdflatex montyHall_model_1.tex
+	pdflatex montyHall_model_2.tex
+	pdflatex montyHall_model.tex
 
 
 
