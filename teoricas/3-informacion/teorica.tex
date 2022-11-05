@@ -1,0 +1,275 @@
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\input{../../auxiliar/tex/diapo_encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+ 
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+%\title[Bayes del Sur]{}
+
+\begin{document}
+
+\color{black!85}
+\large
+
+ \begin{frame}[plain,noframenumbering]
+
+
+\begin{textblock}{160}(0,0)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/deforestacion}
+\end{textblock}
+
+\begin{textblock}{80}(18,9)
+\textcolor{black!15}{\fontsize{44}{55}\selectfont Verdades}
+\end{textblock}
+
+\begin{textblock}{47}(85,70)
+\centering \textcolor{black!15}{{\fontsize{52}{65}\selectfont Empíricas}}
+\end{textblock}
+
+\begin{textblock}{80}(100,28)
+\LARGE  \textcolor{black!15}{\rotatebox[origin=tr]{-3}{\scalebox{9}{\scalebox{1}[-1]{$p$}}}}
+\end{textblock}
+
+\begin{textblock}{80}(66,43)
+\LARGE  \textcolor{black!15}{\scalebox{6}{$=$}}
+\end{textblock}
+
+\begin{textblock}{80}(36,29)
+\LARGE  \textcolor{black!15}{\scalebox{9}{$p$}}
+\end{textblock}
+
+\vspace{2cm}
+\maketitle
+
+
+%
+% \begin{textblock}{160}(01,81)
+% \footnotesize \textcolor{black!5}{Congreso Bayesiano Plurinacional 2023} \\}
+% \end{textblock}
+
+\end{frame}
+
+%\setbeamercolor{background canvas}{bg=gray!15}
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(0,0)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/fuego}
+\end{textblock}
+
+\begin{textblock}{160}(4,26)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{Sorpresa: el problema}}
+\end{textblock}
+\begin{textblock}{160}(4,34)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{de la comunicación}}
+\end{textblock}
+\begin{textblock}{160}(4,42)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{con la realidad}}
+\end{textblock}
+% \begin{textblock}{160}(3,82)
+% \LARGE \textcolor{black!15}{\fontsize{22}{0}\selectfont \textbf{3}}
+% \end{textblock}
+
+
+
+\begin{textblock}{55}[0,0](88,25)
+\begin{turn}{0}
+\parbox{7cm}{\sloppy\setlength\parfillskip{0pt}
+\textcolor{black!0}{Capítulo 3} \\
+\small\textcolor{black!5}{\hspace{0.05cm}La estructura invariante del dato empírico:} \\
+\small\textcolor{black!5}{\hspace{0.1cm}fuente, realidad causal, señal, canal,} \\ \small\textcolor{black!5}{\hspace{0.05cm}percepción, modelo causal, estimación.} \\
+\small\textcolor{black!5}{\hspace{-0.15cm}Base empírica y datos teóricos. Máxima} \\
+\small\textcolor{black!5}{\hspace{-0.35cm}incertidumbre y mínima sorpresa. Información.} \\
+}
+\end{turn}
+\end{textblock}
+
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4) \centering
+\LARGE La comunicación con la realidad \\
+\Large La construcción del dato empírico
+\end{textblock}
+
+
+
+
+\begin{textblock}{160}(0,35) \centering \Large
+El problema fundamental de la construcción del dato empírico \\ es hacer de la percepción una interpretación correcta de la realidad.
+\end{textblock}
+
+
+\begin{textblock}{140}(10,58)
+Soluciones: \\
+\ \ $\bullet$ Física: acercarme para escuchar mejor \\
+\ \ $\bullet$ Técnica: mejorar la interpretación de nuestra percepción\\
+
+\end{textblock}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE
+ Los datos como funciones proposicionales
+\end{textblock}
+\vspace{0.75cm}
+
+\begin{textblock}{160}(0,20)
+\begin{equation*}
+ f(x) = y
+\end{equation*}
+\end{textblock}
+
+\begin{textblock}{160}(43,33)
+\begin{itemize}
+ \item[$x$]
+    \textbf{\en{Unit of analysis}\es{Unidad de análisis}} (UA)
+ \item[$f$]
+   \en{\textbf{Variable} of the unit of analysis}
+   \es{\textbf{Variable} de la unidad de análisis} (V)
+ \item[$y$]
+   \en{\textbf{Value} of the variable}
+   \es{\textbf{Resultado} o valor de la variable} (R)
+\end{itemize}
+\end{textblock}
+
+
+\only<2>{
+\begin{textblock}{160}(0,65) \centering
+ \emph{Altura}(Gustavo) = $1.78$m
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{160}(0,65) \centering
+ \emph{Ideología}(Partido Obrero) = Izquierda
+\end{textblock}
+}
+
+\only<4>{
+\begin{textblock}{160}(0,65) \centering
+ \emph{Habilidad}(Maradona) $>$ \emph{Habilidad}(Messi)
+\end{textblock}
+}
+
+\only<5>{
+\begin{textblock}{140}(10,60)
+\begin{framed} \centering
+   \en{The meaning of data is implicit in their \textbf{operationalization}}
+   \es{El significado preciso de la función depende de la \textbf{operacionalización}}
+   \end{framed}
+\end{textblock}
+}
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE
+La estructura invariante del dato
+\end{textblock}
+\vspace{0.75cm}
+
+\begin{textblock}{160}(0,24) \centering
+\tikz{
+    \node[const] (fuente) {Fuente};
+    \node[const, below=of fuente, yshift=-0.6cm] (realidad_causal) {$\hfrac{\text{\normalsize Realidad}}{\text{\normalsize causal}}$};
+    \node[const, below=of realidad_causal, yshift=-0.6cm] (senal) {Señal};
+    \node[const, right=of senal, xshift=1.4cm] (canal) {Canal};
+    \node[const, right=of canal, xshift=1.4cm] (indicador) {Indicador};
+    \node[const, above=of indicador, yshift=0.6cm] (modelo) {$\hfrac{\text{\normalsize Modelo}}{\text{\normalsize causal}}$};
+    \node[const, above=of modelo, yshift=0.6cm] (estimacion) {Estimación};
+
+    \edge {fuente} {realidad_causal};
+    \edge {realidad_causal} {senal};
+}
+\end{textblock}
+
+\end{frame}
+
+
+% \begin{frame}[plain,noframenumbering]
+%
+%  \begin{textblock}{90}(00,05)
+% \begin{center}
+%  \huge  \textcolor{black!66}{Creencias, datos y sorpresas}
+% \end{center}
+% \end{textblock}
+%
+%  %\vspace{2cm}brown
+% %\maketitle
+% \Wider[2cm]{
+% \includegraphics[width=1\textwidth]{../../auxiliar/static/peligro_predador}
+% }
+% \end{frame}
+%
+ % if we are told that a highly improbable event has just occurred, we will
+% have received more information than if we were told that some very likely event has just occurred, and if we knew that the event was certain to happen we would receive no information. Our measure of information content will therefore depend on the probability distribution p(x), and we therefore look for a quantity h(x) that is a monotonic function of the probability p(x) and that expresses the information content. The form of h(·) can be found by noting that if we have two events x and y that are unrelated, then the information gain from observing both of them should be the sum of the information gained from each of them separately, so that h(x, y) = h(x) + h(y). Two unrelated events will be statistically independent and so p(x, y) = p(x)p(y).
+
+ 
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE 
+ \en{Honesty optimizes information}
+ \es{La honestidad óptimiza la información}
+ \end{textblock}
+ \vspace{1.4cm}
+
+ \begin{equation*}
+ \underbrace{\text{\en{Entropy}\es{Entropía}}(X)}_{\text{\en{Expected information}\es{Información esperada}}} = \ \sum_{x\in X} \ P(x) \  \cdot \underbrace{(-\log P(x))}_{\hfrac{\text{\scriptsize \en{Information generated}\es{Información generada}}}{\text{\scriptsize \en{by the surprise}\es{por la sorpresa}}}}
+\end{equation*}
+
+\pause
+
+\vspace{0.3cm}
+
+\begin{center}
+\en{Maximum expected information $\Leftrightarrow$ Maximum uncertainty}
+\es{M\'axima información esperada $\Leftrightarrow$ Máxima incertidumbre}
+\end{center}
+
+\vspace{0.7cm}
+
+\pause
+
+\Wider[-5cm]{
+\begin{mdframed}[backgroundcolor=black!20]
+\begin{equation*}
+  \text{\en{Honesty}\es{Honestidad}} = \underset{P(X)}{\text{ arg max }} \text{\en{Entropy}\es{Entropía}}(X)
+\end{equation*}
+\end{mdframed}
+}
+
+\end{frame}
+
+
+ 
+\begin{frame}[plain]
+\centering
+  \includegraphics[width=0.35\textwidth]{../../auxiliar/static/pachacuteckoricancha.jpg}
+\end{frame}
+
+
+
+
+
+
+\end{document}
+
+
+
