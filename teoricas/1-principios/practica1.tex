@@ -1,0 +1,122 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\input{../../auxiliar/tex/encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+\newif\ifen
+\newif\ifes
+\newcommand{\en}[1]{\ifen#1\fi}
+\newcommand{\es}[1]{\ifes#1\fi}
+\estrue
+
+\newcommand{\E}{\en{S}\es{E}}
+\newcommand{\A}{\en{E}\es{A}}
+\newcommand{\Ee}{\en{s}\es{e}}
+\newcommand{\Aa}{\en{e}\es{a}}
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Code}% Listing -> Algorithm
+\lstset{
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=true,
+  columns=flexible,
+  basicstyle={\footnotesize\ttfamily},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showlines=true
+}
+\definecolor{all}{rgb}{0.90, 0.90, 0.90}
+
+
+%opening
+\title{Práctica 1}
+\author{Bayes de las Provincias Unidas del Sur}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\paragraph{Variable aleatoria.} La corriente frecuentista de la probabilidad afirma que los eventos deterministas (¿Existe un planeta no detectado en el sistema solar?) tienen probabilidad 0 o 1.
+Las probabilidades entre 0 y 1 se reservan para eventos que se conocen como ``variable aleatoria'', que dadas las mismas condiciones inciales
+
+
+\paragraph{Algortimo generador de números aleatorios} Un algoritmo
+
+\begin{enumerate}[resume]
+\item Cree una método cerrado (sin usar información del mundo exterior) que imite el comportamiento de una variable aleatoria.
+\end{enumerate}
+
+
+
+\begin{enumerate}[resume]
+\item ¿Es posible verificar si algún evento de la naturaleza es una variable aleatoria?
+\item ¿Usted cree que es posible que en la natureza existan variables realmente aleatorias, que para exactamente las mismas condiciones iniciales puede ocurrir A y no A?
+\item ¿Qué debería hacer la corriente frecuentista si la naturaleza no tuviera variables aleatoria?
+\end{enumerate}
+
+\paragraph{Principio de razón suficiente} El principio de razón suficiente es ...
+
+\begin{equation}
+\text{pop}_{t+1} = r \text{pop}_t (1-\text{pop}_t)
+\end{equation}
+
+\begin{enumerate}[resume]
+\item Graficar el comportamiento con diferentes valores de $r \in (0,4)$.
+\item Graficar las trayectorias cuando el valor es $r=3.99$ y los valores iniciales difieren por $10^{-5}$.
+\end{enumerate}
+
+
+\paragraph{Principio de indiferencia} El principio de indiferencia es ...  Supongamos que una persona elige donde esconder un regalo detrás de una de tres cajas.
+
+\begin{enumerate}
+\item Define 2 funciones de probabilidad sobre las cajas, una que exprese certidumbre de la posición del regalo y otra que exprese preferencia sobre una posición sobre la otra.
+\item Hay infinitas distribuciones de probabilidad. Si de verdad no tenemos más información previa que la menconada: ¿Cuál es la función de probabilidad que mejor expresa nuestro estado del conocimiento?. ¿Por qué?
+\end{enumerate}
+
+
+\paragraph{Monty Hall (Bayesiano)} El Monty Hall es... (Explicar el modelo causal en palabras)
+
+\begin{enumerate}[resume]
+\item Escriba el árbol de universos paralelos posibles del modelo causal después de haber elegido la puerta y antes de recibir la pista. ¿Cuál es la creencia honesta sobre los distintos universos paralelos?
+\item ¿Cuál es la distribución conjunta del Monty Hall después de haber elegido la puerta y antes de recibir la pista?
+\end{enumerate}
+
+\paragraph{El problema de la apuesta no finalizada. (Pascal y Fermat 1654).}
+
+Antes de que la teoría de la probabilidad hubiera sido desarrollada, antes incluso de que la palabra probabilidad estuviera en el volcabulario, Blaise Pascal le escribe el lunes 24 de Agosto una carta a su colega Pierre de Fermat:
+
+\begin{quotation}
+No he podido exponerle todo mi pensamiento sobre el problema de la apuesta no finalizada, y tengo cierta reticencia a hacerlo por temor a que esta admirable armonía que existe entre nosotros y que me es tan querida comience a flaquear, pues temo que tengamos opiniones diferentes sobre este tema.
+Deseo exponerle todo mi razonamiento y que me haga el favor de corregirme si estoy en un error o de respaldarme si estoy en lo cierto.
+Se lo pido con toda fe y sinceridad, pues ni siquiera estoy seguro de si estará usted de mi parte.
+\footnote{El original está escrito en Francés.}
+\end{quotation}
+
+El problema abierto que Pascal menciona es el siguiente.
+Supongamos que dos jugadores hacen apuestas iguales sobre quién ganará una serie de tres lanzamientos de una moneda justa.
+Cada uno tira su moneda.
+El que obtiene más caras gana.
+Antes de terminar se ven obligados a escapar.
+Las apuestas son juegos clandestinos.
+¿Cuál es la forma justa de repartir las apuestas?
+Esta es la pregunta que buscan resolver Pascal y Fermat.
+
+\begin{enumerate}[resume]
+ \item >Qué idea usaría usted para repartir una apuesta de un juego no finalizado?
+ \item Calcular cómo se reparte la apuesta si el juego hubiera finalizado luego de 2 tiradas con:
+ \begin{enumerate}
+  \item Dos jugadores en total, uno con 2 caras y otro con 1
+  \item Tres jugadores en total, dos con 2 caras y otro con 1
+ \end{enumerate}
+ \item Programar una función que resuelva cómo se reparten las apuestas si en vez de monedas fueran dados.
+ La función recibe una lista de puntos no finalizados, y la cantidad de pasos que se requieren para finalizar y devuelve una lista de proporciones.
+\end{enumerate}
+
+
+
+
+
+
+\end{document}

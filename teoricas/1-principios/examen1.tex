@@ -1,0 +1,48 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\input{../../auxiliar/tex/encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+\newif\ifen
+\newif\ifes
+\newcommand{\en}[1]{\ifen#1\fi}
+\newcommand{\es}[1]{\ifes#1\fi}
+\estrue
+
+\newcommand{\E}{\en{S}\es{E}}
+\newcommand{\A}{\en{E}\es{A}}
+\newcommand{\Ee}{\en{s}\es{e}}
+\newcommand{\Aa}{\en{e}\es{a}}
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Code}% Listing -> Algorithm
+\lstset{
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=true,
+  columns=flexible,
+  basicstyle={\footnotesize\ttfamily},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showlines=true
+}
+\definecolor{all}{rgb}{0.90, 0.90, 0.90}
+
+
+%opening
+\title{Práctica 1}
+\author{Bayes de las Provincias Unidas del Sur}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\begin{enumerate}
+
+\item
+
+\end{enumerate}
+
+
+\end{document}
