@@ -1,7 +1,6 @@
 *
 !*/
 
-
 ########################
 # Archivos que NO ignora
 
@@ -17,6 +16,8 @@
 !*.c
 !*.jl
 !*.net
+!*.cs
+!*.csproj
 
 ## Texto
 !*.md
