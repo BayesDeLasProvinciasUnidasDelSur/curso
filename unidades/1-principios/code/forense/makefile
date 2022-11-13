@@ -13,3 +13,5 @@ obj/forense.csproj.nuget.dgspec.json:
 	echo bin/ > .gitignore
 	echo obj/ >> .gitignore
 	echo GeneratedSource/ >> .gitignore
+	rm Program.cs
+
