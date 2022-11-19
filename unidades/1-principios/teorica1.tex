@@ -149,6 +149,8 @@ Apoya \href{https://github.com/BayesDeLasProvinciasUnidasDelSur/curso}{Bayes (de
 \begin{textblock}{140}(10,44)
 \small
 %\Large Los principios de la inferencia Bayesiana \\ \justify \large
+
+$\bullet$ Incertidumbre \\
 $\bullet$ Principio de razón suficiente \\
 $\bullet$ Principio de indiferencia \\
 $\bullet$ Principio de integridad \\
@@ -160,27 +162,53 @@ $\bullet$ Evaluación de modelos causales alternativos \\
 
 \end{frame}
 
+
 \begin{frame}[plain]
 \begin{textblock}{160}(00,04)
 \centering
-\LARGE Principio de razón suificiente
+\LARGE Verdades
 \end{textblock}
-\vspace{1.5cm} \Large
+\vspace{1.5cm} \large
 
 \centering
-Todo lo que ocurre tiene una causa previa que lo genera
-\large 
 
-\vspace{.75cm}
+ \Large Ciencias formales \\
+ \normalsize \textcolor{black!50}{(Matemáticas, lógicas)} \\
+ \large  Validadas en sistemas cerrados sin incertidumbre\\
 
-\includegraphics[width=0.22\textwidth]{../../auxiliar/static/pachacuteckoricancha.jpg}
+ \vspace{0.6cm}
+
+ \Large Ciencias empíricas \\
+\normalsize  \textcolor{black!50}{(Físicas, Químicas, Biológicas, Sociales)} \\
+\large Validadas en sistemas abiertos con incertidumbre
 
 \pause
+\vspace{1cm} \Large
 
-\vspace{.5cm}
+¿Es posible alcanzar ``verdades empíricas'' \\ si es inevitable decir ``no sé''?
+
+\end{frame}
 
 
-Que todo tenga alguna explicación $\neq$ Que conozcamos esa explicación
+\begin{frame}[plain]
+\begin{textblock}{160}(00,04)
+\centering
+\LARGE Incertidumbre \\
+\Large ¿Azar?
+\end{textblock}
+\vspace{1.5cm} \Large \centering
+
+\includegraphics[width=0.22\textwidth]{../../auxiliar/static/dosdados.jpg}
+
+\pause
+\vspace{1cm} \Large
+
+¿Es posible crear un azar? \\[0.2cm]
+
+\large
+
+Dadas mismas condiciones iniciales \\
+generar a veces uno resultado y a veces otro
 
 \end{frame}
 
@@ -190,9 +218,33 @@ Que todo tenga alguna explicación $\neq$ Que conozcamos esa explicación
 \begin{textblock}{160}(00,04)
 \centering
 \LARGE Principio de razón suificiente \\
-\Large Modelos causales
+\Large Dioses
 \end{textblock}
-\vspace{1cm} 
+\vspace{1.75cm} \Large  \centering
+
+
+
+\begin{textblock}{70}(74,20)
+\includegraphics[width=0.67\textwidth]{../../auxiliar/static/pachacuteckoricancha.jpg}
+\end{textblock}
+
+\begin{textblock}{60}(18,42)
+\centering Todo lo que ocurre \\ tiene una causa previa \\ que lo genera
+\end{textblock}
+
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(00,04)
+\centering
+\LARGE Principio de razón suificiente \\
+\Large Modelos causales deterministas
+\end{textblock}
+\vspace{1cm}
 
 \begin{align*}
  \text{Población}(t+1) = r \cdot \text{Población}(t)\cdot (1-\text{Población}(t))
@@ -202,12 +254,12 @@ Que todo tenga alguna explicación $\neq$ Que conozcamos esa explicación
 
 \centering
 
-\tikz{         
-    \node[latent, minimum size=1.25cm] (n1) {$\text{pob}_n$} ; 
-    
-    \node[latent, right=of n1, xshift=3cm, minimum size=1.25cm] (n2) {$\text{pob}_{n+1}$} ;
-    
-     \path[->] (n1) edge node [yshift=0.5cm] {$r \cdot \text{pob}_n \cdot (1-\text{pob}_n)$} (n2);
+\tikz{
+    \node[latent, minimum size=1.25cm] (n1) {$\text{pob}_t$} ;
+
+    \node[latent, right=of n1, xshift=3cm, minimum size=1.25cm] (n2) {$\text{pob}_{t+1}$} ;
+
+     \path[->] (n1) edge node [yshift=0.5cm] {$r \cdot \text{pob}_t \cdot (1-\text{pob}_t)$} (n2);
 
 }
 
@@ -220,9 +272,9 @@ Que todo tenga alguna explicación $\neq$ Que conozcamos esa explicación
 \begin{textblock}{160}(00,04)
 \centering
 \LARGE Principio de razón suificiente \\
-\Large Modelos causales
+\Large \only<1-13>{Modelos causales deterministas}\only<14>{Incertidumbre determinista!}
 \end{textblock}
-\vspace{1cm} 
+\vspace{1cm}
 
 
 \only<1>{
@@ -330,6 +382,32 @@ Que todo tenga alguna explicación $\neq$ Que conozcamos esa explicación
 
 \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
+ \centering \LARGE Incertidumbres \\
+ \Large y probabilidades
+ \end{textblock}
+ \vspace{1.7cm} \centering
+
+ \Large Visión ontológica \\
+
+ \large La incertidumbre existe en la naturaleza, producto del azar (o libre albedrío)\\[0.2cm] \pause
+
+ \large \textbf{Variable aleatoria}: Probabilidad como frecuencia
+
+ \vspace{1cm} \pause
+
+ \Large Visión epistémica  \\
+
+ \large La incertidumbre existe en nuestro conocimiento, producto de nuestra ignorancia\\[0.2cm] \pause
+
+ \large \textbf{Hipótesis}: Probabilidad como grado de creencia
+
+
+ \end{frame}
+
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
  \centering \LARGE Incertidumbre \\
  \Large Libre albedrío
 \end{textblock}
@@ -339,18 +417,18 @@ Que todo tenga alguna explicación $\neq$ Que conozcamos esa explicación
 \only<2-3>{
 \begin{textblock}{75}(75,28)
 Detrás de una caja hay un regalo \\[0.3cm]
-    
+
  \scalebox{1}{
 \tikz{ %
          \node[factor, minimum size=1cm] (p1) {} ;
          \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
-         
-         
+
+
          \node[const, above=of p1, yshift=0.1cm] (np1) {\Large $?$};
          \node[const, above=of p2, yshift=0.1cm] (np2) {\Large $?$};
          \node[const, above=of p3, yshift=0.1cm] (np3) {\Large $?$};
-         } 
+         }
 }
 \end{textblock}
 }
@@ -369,22 +447,22 @@ Detrás de una caja hay un regalo \\[0.3cm]
 	\node[accion, below=of s, xshift=1cm] (a3) {} ; %
 	\node[const, right=of a3] {$a$};
         \edge[-] {s} {a1,a2,a3};
-      
+
 	\node[estado, below=of a1,xshift=0cm] (s1a) {}; %
-	  
+
 	\node[estado, below=of a2,xshift=0cm] (s2a) {}; %
-	   
+
 	\node[estado, below=of a3,xshift=0cm] (s3a) {}; %
-	    
+
 	\node[const, right=of s3a] {$s^{\prime}$};
 	\edge[-] {a1} {s1a};
 	\edge[-] {a2} {s2a};
 	\edge[-] {a3} {s3a};
         }
-    
+
     }
 \end{figure}
-\normalsize \textbf{Universos paralelos} \ \ \ \   \\ $s$: estados, $a$: acciones \ \ \ \ 
+\normalsize \textbf{Universos paralelos} \ \ \ \   \\ $s$: estados, $a$: acciones \ \ \ \
 \end{textblock}
 
 \only<3>{
@@ -392,11 +470,11 @@ Detrás de una caja hay un regalo \\[0.3cm]
 \centering \Large
 Funci\'ones de probabilidad permiten expresar nuestra incertidumbre
  \begin{align*}
-P(a = 1)  = \, ? \ \ \  P(a = 2) = \,? \ \ \  P(a = 3) = \,? 
+P(a = 1)  = \, ? \ \ \  P(a = 2) = \,? \ \ \  P(a = 3) = \,?
  \end{align*}
 \end{textblock}
 }
-  
+
 \end{frame}
 
 
@@ -408,70 +486,70 @@ P(a = 1)  = \, ? \ \ \  P(a = 2) = \,? \ \ \  P(a = 3) = \,?
 \centering
 
 \only<1>{
-\begin{textblock}{160}(0,28)    
+\begin{textblock}{160}(0,28)
  \scalebox{1.1}{
 \tikz{ %
          \node[factor, minimum size=1cm] (p1) {} ;
          \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
-         
-         
+
+
          \node[const, above=of p1, yshift=0.1cm] (np1) {\Large $?$};
          \node[const, above=of p2, yshift=0.1cm] (np2) {\Large $?$};
          \node[const, above=of p3, yshift=0.1cm] (np3) {\Large $?$};
-         } 
+         }
 }
 \end{textblock}
 }
 
 \only<2>{
-\begin{textblock}{160}(0,28)    
+\begin{textblock}{160}(0,28)
  \scalebox{1.1}{
 \tikz{ %
          \node[factor, minimum size=1cm] (p1) {} ;
          \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
-         
-         
+
+
          \node[const, above=of p1, yshift=0.125cm] (np1) {\Large $0$};
          \node[const, above=of p2, yshift=0.125cm] (np2) {\Large $1$};
          \node[const, above=of p3, yshift=0.125cm] (np3) {\Large $0$};
-         } 
+         }
 }
 \end{textblock}
 }
 
 \only<3>{
-\begin{textblock}{160}(0,28)    
+\begin{textblock}{160}(0,28)
  \scalebox{1.1}{
 \tikz{ %
          \node[factor, minimum size=1cm] (p1) {} ;
          \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
-         
-         
+
+
          \node[const, above=of p1, yshift=-0.05cm] (np1) {\Large $1/10$};
          \node[const, above=of p2, yshift=-0.05cm] (np2) {\Large $8/10$};
          \node[const, above=of p3, yshift=-0.05cm] (np3) {\Large $1/10$};
-         } 
+         }
 }
 \end{textblock}
 }
 
 
 \only<4>{
-\begin{textblock}{160}(0,28)    
+\begin{textblock}{160}(0,28)
  \scalebox{1.1}{
 \tikz{ %
          \node[factor, minimum size=1cm] (p1) {} ;
          \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
-         
-         
+
+
          \node[const, above=of p1, yshift=-0.05cm] (np1) {\Large $1/3$};
          \node[const, above=of p2, yshift=-0.05cm] (np2) {\Large $1/3$};
          \node[const, above=of p3, yshift=-0.05cm] (np3) {\Large $1/3$};
-         } 
+         }
 }
 \end{textblock}
 }
@@ -485,7 +563,7 @@ P(a = 1)  = \, ? \ \ \  P(a = 2) = \,? \ \ \  P(a = 3) = \,?
 \LARGE Principio de indiferencia \\
 \Large Primer \textbf{acuerdo intersubjetivo} en contextos de incertidumbre
 \end{textblock}
-\vspace{1.5cm} 
+\vspace{1.5cm}
 
 \begin{textblock}{160}(0,28)  \centering
  \scalebox{1.1}{
@@ -493,19 +571,19 @@ P(a = 1)  = \, ? \ \ \  P(a = 2) = \,? \ \ \  P(a = 3) = \,?
          \node[factor, minimum size=1cm] (p1) {} ;
          \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
-         
-         
+
+
          \node[const, above=of p1, yshift=-0.05cm] (np1) {\Large $1/3$};
          \node[const, above=of p2, yshift=-0.05cm] (np2) {\Large $1/3$};
          \node[const, above=of p3, yshift=-0.05cm] (np3) {\Large $1/3$};
-         } 
+         }
 }
 \end{textblock}
 
 \begin{textblock}{140}(10,64)   \centering \Large
 Dividir las creencias en partes iguales \\ por los caminos del modelo causal
 \end{textblock}
- 
+
 \end{frame}
 
 
@@ -515,13 +593,13 @@ Dividir las creencias en partes iguales \\ por los caminos del modelo causal
  \end{textblock}
 \vspace{1cm}
 
- 
+
 \begin{textblock}{160}(20,22)
 \onslide<2->{Modelo causal} \\ \vspace{0.3cm}
- \tikz{            
+ \tikz{
     \node[latent,] (r) {\includegraphics[width=0.06\textwidth]{../../auxiliar/static/regalo.png}} ;
-    \node[const,left=of r] (nr) {\Large $r$} ;    
-    
+    \node[const,left=of r] (nr) {\Large $r$} ;
+
     \onslide<2->{
     \node[latent, below=of r] (d) {\includegraphics[width=0.05\textwidth]{../../auxiliar/static/dedo.png}} ;
     \node[const, left=of d] (nd) {\Large $s$} ;
@@ -543,11 +621,11 @@ Dividir las creencias en partes iguales \\ por los caminos del modelo causal
     \node[const, above=of p2, yshift=.15cm] (fp2) {$1/3$};
     \node[const, above=of p3, yshift=.15cm] (fp3) {$1/3$};
     \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
-    
+
     \node[invisible, xshift=4.75cm] (s-dist) {};
     \node[invisible, yshift=-1cm] (s-dist) {};
     \node[invisible, yshift=1.2cm] (s-dist) {};
-    } 
+    }
 }
 \end{textblock}
 }
@@ -556,27 +634,27 @@ Dividir las creencias en partes iguales \\ por los caminos del modelo causal
 \begin{textblock}{160}(65,33)
 \scalebox{1.5}{
 \tikz{ %
-        
+
          \node[factor, minimum size=1cm] (p1) {} ;
          \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.03\textwidth]{../../auxiliar/static/dedo.png}} ;
          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
-%         
-%         
+%
+%
          \node[const, above=of p1, yshift=.15cm] (fp1) {$?$};
          \node[const, above=of p2, yshift=.15cm] (fp2) {$0$};
          \node[const, above=of p3, yshift=.15cm] (fp3) {$?$};
          \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
-         
+
 %         \node[const, above=of p2, xshift=.8cm, yshift=.15cm] (fp3) {$66\%$};
-%         
+%
          \node[invisible, xshift=4.75cm] (s-dist) {};
          \node[invisible, yshift=-1cm] (s-dist) {};
          \node[invisible, yshift=1.2cm] (s-dist) {};
-%         
+%
 %         \plate[color=red] {no} {(p1)} {}; %
 %         \plate {si} {(p2)(p3)} {}; %
-        
-        } 
+
+        }
 }
 \end{textblock}
 }
@@ -593,10 +671,10 @@ Dividir las creencias en partes iguales \\ por los caminos del modelo causal
 \only<1-3>{
 \begin{textblock}{160}(20,22)
 Modelo causal \\ \vspace{0.3cm}
- \tikz{            
+ \tikz{
     \node[latent,] (r) {\includegraphics[width=0.06\textwidth]{../../auxiliar/static/regalo.png}} ;
-    \node[const,left=of r] (nr) {\Large $r$} ;    
-    
+    \node[const,left=of r] (nr) {\Large $r$} ;
+
     \node[latent, below=of r] (d) {\includegraphics[width=0.05\textwidth]{../../auxiliar/static/dedo.png}} ;
     \node[const, left=of d] (nd) {\Large $s$} ;
 
@@ -606,11 +684,11 @@ Modelo causal \\ \vspace{0.3cm}
 }
 
 
-\only<1->{ 
+\only<1->{
 \begin{textblock}{80}(60,18) \centering
 \scalebox{1.1}{
 \tikz{
-\onslide<1->{ 
+\onslide<1->{
 \node[latent, draw=white, yshift=0.6cm] (b0) {$ 1$};
 
 \node[latent,below=of b0,yshift=0.6cm, xshift=-3cm] (r1) {$r_1$};
@@ -662,18 +740,18 @@ Modelo causal \\ \vspace{0.3cm}
 }
 \end{textblock}
 }
- 
+
 
 \only<4->{
  \begin{textblock}{65}(0,22)
   \centering
   Creencia$(r,s)$ \\ \vspace{0.3cm}
- \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
-        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline 
+ \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm}
+        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline
   $s_1$  & \onslide<5->{$0$} & \onslide<6->{$1/6$} & \onslide<6->{$1/6$} & \\ \hline
   $s_2$  & \onslide<7->{$1/6$} & \onslide<7->{$0$} & \onslide<7->{$1/6$} &  \\ \hline
        $s_3$ & \onslide<8->{$1/6$} & \onslide<8->{$1/6$} & \onslide<8->{$0$} &  \\ \hline \hline
-              & & &  & \\ 
+              & & &  & \\
 \end{tabular}
 \end{textblock}
 }
@@ -684,14 +762,14 @@ Modelo causal \\ \vspace{0.3cm}
  \begin{textblock}{160}(0,4)
  \centering \LARGE Principio de integridad
  \end{textblock}
- 
+
 \vspace{1cm}
 
  \begin{textblock}{160}(0,22)
   \centering
   Creencia$(r,s)$ \\ \vspace{0.3cm}
- \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
-        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline 
+ \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm}
+        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline
   $s_1$ & $0$ & $1/6$ & $1/6$ & \onslide<5->{$1/3$} \\ \hline
   $s_2$ & $1/6$ & $0$ & $1/6$ & \onslide<5->{$1/3$} \\ \hline
   $s_3$ & $1/6$ & $1/6$ & $0$ & \onslide<5->{$1/3$} \\ \hline \hline
@@ -721,18 +799,18 @@ Modelo causal \\ \vspace{0.3cm}
  \centering \LARGE Principio de coherencia \\[-0.1cm]
  \only<3->{\Large y creencia total}
  \end{textblock}
- 
+
 \vspace{1cm}
 
 \only<1->{
  \begin{textblock}{160}(0,22)
   \centering
   \only<1-2>{Creencia$(r,s=2)$}\only<3->{Creencia$(r|s=2)$} \\ \vspace{0.3cm}
- \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
-        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, &  \phantom{\bm{$1/3$}} \\ \hline 
+ \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm}
+        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, &  \phantom{\bm{$1/3$}} \\ \hline
   &  &  &  & \\ \hline
   $s_2$ & \only<1-2>{$1/6$}\only<3>{$\frac{1}{6}/\frac{1}{3}$}\only<4>{$1/2$} & $0$ & \only<1-2>{$1/6$}\only<3>{$\frac{1}{6}/\frac{1}{3}$}\only<4>{$1/2$} & \only<1>{$1/3$}\only<2>{\bm{$1/3$}}\only<3>{$\frac{1}{3}/\frac{1}{3}$}\only<4>{$1$} \\ \hline
-  &  &  & &  \\ 
+  &  &  & &  \\
 \end{tabular}
 \end{textblock}
 }
@@ -768,7 +846,7 @@ P(r|s=2) = \frac{P(r, s=2)}{P(s_2)}
 \centering
 \scalebox{1.2}{
 \tikz{ %
-        
+
          \node[factor, minimum size=1cm] (p1) {} ;
          \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.03\textwidth]{../../auxiliar/static/dedo.png}} ;
          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
@@ -777,12 +855,12 @@ P(r|s=2) = \frac{P(r, s=2)}{P(s_2)}
          \node[const, above=of p2, yshift=.15cm] (fp2) {$0$};
          \node[const, above=of p3, yshift=.15cm] (fp3) {$1/2$};
          \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
-         
+
          \node[invisible, xshift=4.75cm] (s-dist) {};
          \node[invisible, yshift=-1cm] (s-dist) {};
          \node[invisible, yshift=1.2cm] (s-dist) {};
-        
-        } 
+
+        }
 }
 \end{textblock}
 }
@@ -800,7 +878,7 @@ P(r|s=2) = \frac{P(r, s=2)}{P(s_2)}
  El principio de coherencia preserva la creencia \\
   previa que sigue siendo compatible con \\
   la evidencia empírica y formal (datos y modelo)
- \end{center} 
+ \end{center}
 }
 
 \end{frame}
@@ -853,12 +931,12 @@ Los pagos que aceptarías en una apuesta
 \begin{columns}[t]
 \begin{column}{0.5\textwidth}
  \centering \textbf{Regla de la suma}
- 
- 
+
+
 \begin{equation*}
  P(r) = \sum_j P(r,s_j)
 \end{equation*}
- 
+
  \justifying \footnotesize
   Cualquier distribución marginal puede ser obtenida integrando la distribución conjunta
 
@@ -877,7 +955,7 @@ Cualquier distribución conjunta puede ser expresada como el producto de distrib
 \end{columns}
 
 \end{frame}
- 
+
 
 %
 % \begin{frame}[plain]
@@ -1002,7 +1080,7 @@ Cualquier distribución conjunta puede ser expresada como el producto de distrib
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
- \centering \LARGE 
+ \centering \LARGE
  Modelo: Monty Hall
  \end{textblock}
  \vspace{-1cm}
@@ -1013,7 +1091,7 @@ Cualquier distribución conjunta puede ser expresada como el producto de distrib
  \includegraphics[width=0.8\textwidth]{figuras/montyHall_model_0.pdf}
  \end{textblock}
  }
- 
+
  \only<2-3>{
  \begin{textblock}{80}(0,22)
  \centering
@@ -1027,23 +1105,23 @@ Cualquier distribución conjunta puede ser expresada como el producto de distrib
  \includegraphics[width=0.8\textwidth]{figuras/montyHall_model_2.pdf}
  \end{textblock}
  }
- 
 
-\only<1-2>{ 
+
+\only<1-2>{
  \begin{textblock}{80}(70,30)
  \centering
 \includegraphics[width=1\textwidth]{figuras/montyHall_2}
  \end{textblock}
 }
 
-\only<3-4>{ 
+\only<3-4>{
  \begin{textblock}{80}(70,30)
  \centering
 \includegraphics[width=1\textwidth]{figuras/montyHall_6}
  \end{textblock}
 }
 
-\only<5>{ 
+\only<5>{
  \begin{textblock}{80}(70,30)
  \centering
 \includegraphics[width=1\textwidth]{figuras/montyHall_7}
@@ -1070,11 +1148,11 @@ Cualquier distribución conjunta puede ser expresada como el producto de distrib
  \begin{textblock}{80}(0,22)
   \centering
   $P(r,s)$ \\ \vspace{0.3cm}
- \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
-        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline 
+ \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm}
+        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline
   { $s_2$}  & \onslide<5->{$1/6$} & \onslide<7->{$0$} & \onslide<9->{$1/3$} & \onslide<12->{$1/2$} \\ \hline
        {$s_3$} & \onslide<6->{$1/6$} & \onslide<8->{$1/3$} & \onslide<10->{$0$} & \onslide<12->{$1/2$} \\ \hline
-              & \onslide<12->{$1/3$} &  \onslide<12->{$1/3$} & \onslide<12->{$1/3$}  & \onslide<12->{$1$} \\ 
+              & \onslide<12->{$1/3$} &  \onslide<12->{$1/3$} & \onslide<12->{$1/3$}  & \onslide<12->{$1$} \\
 \end{tabular}
 \end{textblock}
 }
@@ -1083,8 +1161,8 @@ Cualquier distribución conjunta puede ser expresada como el producto de distrib
  \begin{textblock}{80}(0,22)
   \centering
   $P(r,s_2)$ \\ \vspace{0.3cm}
- \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
-        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline 
+ \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm}
+        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline
         { $s_2$}  & \onslide<6->{$1/6$} & \onslide<8->{$0$} & \onslide<10->{$1/3$} & \onslide<13->{$1/2$} \\ \hline
 \end{tabular}
 \end{textblock}
@@ -1095,8 +1173,8 @@ Cualquier distribución conjunta puede ser expresada como el producto de distrib
  \begin{textblock}{80}(0,22)
   \centering
   $P(r|s_2)$ \\ \vspace{0.3cm}
- \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm} 
-        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{$1/2$}\\ \hline 
+ \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm}
+        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{$1/2$}\\ \hline
   { $s_2$}  & \onslide<6->{$1/3$} & \onslide<8->{$0$} & \onslide<10->{$2/3$} & \onslide<13->{$1$} \\ \hline
 \end{tabular}
 \end{textblock}
@@ -1105,38 +1183,38 @@ Cualquier distribución conjunta puede ser expresada como el producto de distrib
 
 \only<11-12>{
 \begin{textblock}{80}(0,58)
- \centering 
+ \centering
 \begin{center}
  Regla de la suma
- \end{center} 
- 
- $P(s_i) = \sum_{j} P(r_j,s_i)$ 
+ \end{center}
+
+ $P(s_i) = \sum_{j} P(r_j,s_i)$
  \\
- 
+
 \end{textblock}
 }
- 
+
 \only<13-14>{
 \begin{textblock}{80}(0,58)
- \centering 
+ \centering
 \begin{center}
  Regla del producto
- \end{center} 
+ \end{center}
  \begin{equation*}
-P(r_i|s_2) = \frac{P(r_i,s_2)}{P(s_2)} 
+P(r_i|s_2) = \frac{P(r_i,s_2)}{P(s_2)}
  \end{equation*}
- 
+
 \end{textblock}
 }
- 
+
 
 \only<15>{
 \begin{textblock}{80}(0,53)
 \centering
-\includegraphics[width=0.8\textwidth]{figuras/montyHall_8}     
+\includegraphics[width=0.8\textwidth]{figuras/montyHall_8}
  \end{textblock}
 }
- 
+
  \only<2-12>{
 \begin{textblock}{80}(70,14) \centering
 \scalebox{1.2}{
@@ -1145,7 +1223,7 @@ P(r_i|s_2) = \frac{P(r_i,s_2)}{P(s_2)}
 \node[latent, draw=white, yshift=0.8cm] (b0) {$1$};
 \node[latent,below=of b0,yshift=0.8cm, xshift=-2cm] (r1) {$r_1$};
 {\node[latent,below=of b0,yshift=0.8cm] (r2) {$r_2$}; }
-\node[latent,below=of b0,yshift=0.8cm, xshift=2cm] (r3) {$r_3$}; 
+\node[latent,below=of b0,yshift=0.8cm, xshift=2cm] (r3) {$r_3$};
 \node[latent, below=of r1, draw=white, yshift=0.7cm] (bc11) {$\frac{1}{3}$};
 {\node[latent, below=of r2, draw=white, yshift=0.7cm] (bc12) {$\frac{1}{3}$};}
 \node[latent, below=of r3, draw=white, yshift=0.7cm] (bc13) {$\frac{1}{3}$};
@@ -1190,7 +1268,7 @@ P(r_i|s_2) = \frac{P(r_i,s_2)}{P(s_2)}
 \node[latent, draw=white, yshift=0.8cm] (b0) {$1$};
 \node[latent,below=of b0,yshift=0.8cm, xshift=-2cm] (r1) {$r_1$};
 {\color{gray}\node[latent,draw=gray,below=of b0,yshift=0.8cm] (r2) {$r_2$}; }
-\node[latent,below=of b0,yshift=0.8cm, xshift=2cm] (r3) {$r_3$}; 
+\node[latent,below=of b0,yshift=0.8cm, xshift=2cm] (r3) {$r_3$};
 
 % \node[latent, below=of r1, draw=white, yshift=0.8cm] (br1) {$\frac{1}{3}$};
 % \node[latent, below=of r2, draw=white, yshift=0.8cm] (br2) {$\frac{1}{3}$};
@@ -1239,7 +1317,7 @@ P(r_i|s_2) = \frac{P(r_i,s_2)}{P(s_2)}
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE 
+\centering \LARGE
 \st{Teorema de Bayes} \\
 \Large El corolario de Laplace
 \end{textblock}
@@ -1283,10 +1361,10 @@ P(\text{Hip\'otesis}_i |\,\text{Dato}) = \frac{P(\text{Dato}\,|\text{ Hip\'otesi
 
 \vspace{0.2cm}
 
-\only<8->{  
+\only<8->{
 %\vspace{0.3cm}
 \Wider[2cm]{
-\begin{textblock}{160}(0,34.25) 
+\begin{textblock}{160}(0,34.25)
 \begin{equation*}
 \underbrace{P(\text{Hip\'otesis}_i|\,\text{Datos, Modelo})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos}\,|\,\text{Hip\'otesis$_i$, Modelo})}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis}_i|\text{ Modelo})}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos }|\text{ Modelo})}_{\text{\scriptsize Evidencia}}}
 \end{equation*}
@@ -1310,22 +1388,22 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
 
 \end{frame}
 
-% 
+%
 % \begin{frame}[plain]
 % \begin{textblock}{160}(0,4)
 % \centering \LARGE El teorema de Bayes \\ \Large como generalización de la hipótesis indicadora
 % \end{textblock}
 % \vspace{0.75cm}
-% 
+%
 % \only<2>{
 %  \begin{center} \Large
 %  Principio de validez universal para determinar las creencias \\ honestas dadas las evidencias empíricas y formales
-%  \end{center} 
+%  \end{center}
 % }
-%   
+%
 % \end{frame}
-% 
-%  
+%
+%
 
 
 
@@ -1483,47 +1561,47 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
   \end{align*}
  \end{textblock}
 
- 
+
  \only<2>{
  \begin{textblock}{160}(0,40)
   \centering
-   \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm} 
-  \phantom{$P(r_i|s_2) \propto$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, \\ \hline 
+   \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm}
+  \phantom{$P(r_i|s_2) \propto$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, \\ \hline
      $P(r_i)$ & $1/3$ & $1/3$ & $1/3$  \\ \hline
    \end{tabular}
 \end{textblock}
 }
 
- 
+
 \only<3>{
  \begin{textblock}{160}(0,40)
   \centering
-   \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm} 
-       \phantom{$P(r_i|s_2) \propto$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, \\ \hline 
+   \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm}
+       \phantom{$P(r_i|s_2) \propto$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, \\ \hline
    $P(r_i)$ & $1/3$ & $1/3$ & $1/3$  \\ \hline
    $P(s_2|r_i)$ & $1/2$ & $0$ & $1$  \\ \hline
    \end{tabular}
 \end{textblock}
 }
 
- 
+
 \only<4>{
  \begin{textblock}{160}(0,40)
   \centering
-  \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm} 
-        \phantom{$P(r_i|s_2) \propto$}  & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, \\ \hline 
+  \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm}
+        \phantom{$P(r_i|s_2) \propto$}  & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, \\ \hline
    $P(r_i)$ & $1/3$ & $1/3$ & $1/3$  \\ \hline
    $P(s_2|r_i)$ & $1/2$ & $0$ & $1$  \\ \hline
    $P(r_i,s_2)$ & $1/6$ & $0$ & $1/3$  \\ \hline
 \end{tabular}
 \end{textblock}
 }
- 
+
 \only<5>{
  \begin{textblock}{160}(0,40)
   \centering
-  \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm} 
-         \phantom{$P(r_i|s_2) \propto$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, \\ \hline 
+  \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm}
+         \phantom{$P(r_i|s_2) \propto$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, \\ \hline
    $P(r_i)$ & $1/3$ & $1/3$ & $1/3$  \\ \hline
    $P(s_2|r_i)$ & $1/2$ & $0$ & $1$  \\ \hline
    $P(r_i,s_2) $ & $1/6$ & $0$ & $1/3$  \\ \hline \hline
@@ -1531,21 +1609,21 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
 \end{tabular}
 \end{textblock}
 }
- 
- 
+
+
 \end{frame}
-% 
+%
 % \begin{frame}[plain]
 % \begin{textblock}{160}(0,4)
-%  \centering \LARGE 
+%  \centering \LARGE
 %  \es{Posterior}
 %  \end{textblock}
 %  \vspace{1cm}
-%  
+%
 %  \begin{center}
 %  $P(r_i|s_2) = $ \Large Creencia inicial no filtrada por la sorpresa
 %  \end{center}
-% 
+%
 % \end{frame}
 
 
@@ -1617,7 +1695,7 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
  \only<2>{
  \begin{textblock}{160}(0,50)
  \begin{equation*}
-  P(s_2) = \sum_i P(s_2|r_i) P(r_i) = \frac{1}{2} \frac{1}{3} + 0 \frac{1}{3} + \frac{1}{1} \frac{1}{3} = 1/2 
+  P(s_2) = \sum_i P(s_2|r_i) P(r_i) = \frac{1}{2} \frac{1}{3} + 0 \frac{1}{3} + \frac{1}{1} \frac{1}{3} = 1/2
  \end{equation*}
  \end{textblock}
 }
@@ -1631,21 +1709,21 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
 
 \begin{textblock}{80}(80,18)
 \centering
- \tikz{            
+ \tikz{
     \node[latent,] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
-    \node[const,left=of r] (nr) {\Large $r$} ;    
-    
-    
+    \node[const,left=of r] (nr) {\Large $r$} ;
+
+
     \node[latent, below=of r] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;
     \node[const, left=of d] (nd) {\Large $s$} ;
 
     \edge {r} {d};
-    
+
 }
 
 \vspace{0.75cm}
 \onslide<2>{
-\tikz{ 
+\tikz{
          \node[factor, minimum size=1cm] (p1) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/cerradura.png}} ;
          \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/dedo.png}} ;
          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
@@ -1654,32 +1732,32 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
          \node[const, above=of p2, yshift=.15cm] (fp2) {$0$};
          \node[const, above=of p3, yshift=.15cm] (fp3) {$1/2$};
          \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
-        
-        } 
+
+        }
 }
 
 \end{textblock}
 
 \begin{textblock}{80}(0,18)
 \centering
-\tikz{        
-    
+\tikz{
+
     \node[latent] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;
     \node[const,left=of d] (nd) {\Large $s$} ;
-    
+
     \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
     \node[const,left=of r] (nr) {\Large $r$} ;
-    
-    
+
+
     \node[latent, fill=black!30, above=of d, xshift=1.5cm] (c) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/cerradura.png}} ;
     \node[const,left=of c] (nc) {\Large $c$} ;
-         
+
     \edge {r,c} {d};
 }
 
 \vspace{0.75cm}
 \onslide<2>{
-\tikz{ 
+\tikz{
          \node[factor, minimum size=1cm] (p1) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/cerradura.png}} ;
          \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/dedo.png}} ;
          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
@@ -1688,8 +1766,8 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
          \node[const, above=of p2, yshift=.15cm] (fp2) {$0$};
          \node[const, above=of p3, yshift=.15cm] (fp3) {$2/3$};
          \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
-        
-        } 
+
+        }
 }
 
 
@@ -1755,16 +1833,16 @@ p_modelo_B = evidencia_B * prior / p_datos
 \centering \LARGE Modelos causales alternativos
 \end{textblock}
 
-\begin{textblock}{160}(14,12) 
+\begin{textblock}{160}(14,12)
 \begin{equation*}
  P(\text{Modelo}|\text{Datos}) = \frac{\only<1->{\overbrace{P(\text{Data}|\text{Modelo})}^{\text{\footnotesize Predicción a priori}}} \only<1->{P(\text{Modelo})} }{ P(\text{Data})} \phantom{\frac{\overbrace{P(\text{Datos}|\text{Modelo})}^{\text{Evidencia}}}{ P(\text{Datos})}}
 \end{equation*}
 \end{textblock}
-% 
+%
 % \only<2>{
-% \begin{textblock}{160}(0,47) 
+% \begin{textblock}{160}(0,47)
 % \begin{align*}
-% P(\text{Data}|\text{Modelo}) & = \sum_{i} P(\text{Data}|\text{Hypothesis}_i,\text{Model}) P(\text{Hypothesis}_i|\text{Model}) 
+% P(\text{Data}|\text{Modelo}) & = \sum_{i} P(\text{Data}|\text{Hypothesis}_i,\text{Model}) P(\text{Hypothesis}_i|\text{Model})
 % \end{align*}
 % \end{textblock}
 % }
@@ -1773,7 +1851,7 @@ p_modelo_B = evidencia_B * prior / p_datos
 
 \only<2>{
 
-\begin{textblock}{140}(10,30) 
+\begin{textblock}{140}(10,30)
 \centering
 \includegraphics[width=0.66\textwidth]{figuras/monty_hall_selection.pdf} \hspace{2cm}
 \end{textblock}
@@ -1781,18 +1859,18 @@ p_modelo_B = evidencia_B * prior / p_datos
 \begin{textblock}{80}(86,30)
 \centering
 \scalebox{0.5}{
-\tikz{        
-    
+\tikz{
+
     \node[latent] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;
     \node[const,left=of d] (nd) {\Large $s$} ;
-    
+
     \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
     \node[const,left=of r] (nr) {\Large $r$} ;
-    
-    
+
+
     \node[latent, fill=black!30, above=of d, xshift=1.5cm] (c) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/cerradura.png}} ;
     \node[const,left=of c] (nc) {\Large $c$} ;
-         
+
     \edge {r,c} {d};
 }
 }
@@ -1802,16 +1880,16 @@ p_modelo_B = evidencia_B * prior / p_datos
 \begin{textblock}{80}(86,64)
 \centering
 \scalebox{0.5}{
- \tikz{            
+ \tikz{
     \node[latent,] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
-    \node[const,left=of r] (nr) {\Large $r$} ;    
-    
-    
+    \node[const,left=of r] (nr) {\Large $r$} ;
+
+
     \node[latent, below=of r] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;
     \node[const, left=of d] (nd) {\Large $s$} ;
 
     \edge {r} {d};
-    
+
 }
 }
 \end{textblock}
@@ -1880,7 +1958,7 @@ P(\text{Dat\en{a}\es{os}}|\text{Model\es{o}}) & = P(d_1|\text{Model\es{o}})P(d_2
 
 \end{frame}
 
- 
+
 \begin{frame}[plain]
 \begin{textblock}{96}(0,6.5)\centering
 {\transparent{0.9}\includegraphics[width=0.8\textwidth]{../../auxiliar/static/inti.png}}
