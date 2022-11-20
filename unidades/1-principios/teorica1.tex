@@ -203,7 +203,7 @@ $\bullet$ Evaluación de modelos causales alternativos \\
 \pause
 \vspace{1cm} \Large
 
-¿Es posible crear un azar? \\[0.2cm]
+¿Es posible crear azar? \\[0.2cm]
 
 \large
 
@@ -406,84 +406,94 @@ generar a veces uno resultado y a veces otro
 
 
 
-\begin{frame}[plain]
- \begin{textblock}{160}(0,4)
- \centering \LARGE Incertidumbre \\
- \Large Libre albedrío
-\end{textblock}
-\vspace{1.5cm}
-\centering
 
-\only<2-3>{
-\begin{textblock}{75}(75,28)
-Detrás de una caja hay un regalo \\[0.3cm]
-
- \scalebox{1}{
-\tikz{ %
-         \node[factor, minimum size=1cm] (p1) {} ;
-         \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
-         \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
-
-
-         \node[const, above=of p1, yshift=0.1cm] (np1) {\Large $?$};
-         \node[const, above=of p2, yshift=0.1cm] (np2) {\Large $?$};
-         \node[const, above=of p3, yshift=0.1cm] (np3) {\Large $?$};
-         }
-}
-\end{textblock}
-}
-
-
-\begin{textblock}{75}(05,18)
- \centering
- \begin{figure}[H]
-\centering
-    \scalebox{1.2}{
- \tikz{ %
-        \node[estado] (s) {};
-        \node[const, above=of s] {$s$};
-        \node[accion, below=of s, xshift=-1cm] (a1) {} ; %
-	\node[accion, below=of s, xshift=0cm] (a2) {} ; %
-	\node[accion, below=of s, xshift=1cm] (a3) {} ; %
-	\node[const, right=of a3] {$a$};
-        \edge[-] {s} {a1,a2,a3};
-
-	\node[estado, below=of a1,xshift=0cm] (s1a) {}; %
-
-	\node[estado, below=of a2,xshift=0cm] (s2a) {}; %
-
-	\node[estado, below=of a3,xshift=0cm] (s3a) {}; %
-
-	\node[const, right=of s3a] {$s^{\prime}$};
-	\edge[-] {a1} {s1a};
-	\edge[-] {a2} {s2a};
-	\edge[-] {a3} {s3a};
-        }
-
-    }
-\end{figure}
-\normalsize \textbf{Universos paralelos} \ \ \ \   \\ $s$: estados, $a$: acciones \ \ \ \
-\end{textblock}
-
-\only<3>{
-\begin{textblock}{160}(0,70)
-\centering \Large
-Funci\'ones de probabilidad permiten expresar nuestra incertidumbre
- \begin{align*}
-P(a = 1)  = \, ? \ \ \  P(a = 2) = \,? \ \ \  P(a = 3) = \,?
- \end{align*}
-\end{textblock}
-}
-
-\end{frame}
-
+%
+% \begin{frame}[plain]
+%  \begin{textblock}{160}(0,4)
+%  \centering \LARGE Incertidumbre \\
+%  \Large Libre albedrío
+% \end{textblock}
+% \vspace{1.5cm}
+% \centering
+%
+% \only<2-3>{
+% \begin{textblock}{75}(75,28)
+% Detrás de una caja hay un regalo \\[0.3cm]
+%
+%  \scalebox{1}{
+% \tikz{ %
+%          \node[factor, minimum size=1cm] (p1) {} ;
+%          \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
+%          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+%
+%
+%          \node[const, above=of p1, yshift=0.1cm] (np1) {\Large $?$};
+%          \node[const, above=of p2, yshift=0.1cm] (np2) {\Large $?$};
+%          \node[const, above=of p3, yshift=0.1cm] (np3) {\Large $?$};
+%          }
+% }
+% \end{textblock}
+% }
+%
+%
+% \begin{textblock}{75}(05,18)
+%  \centering
+%  \begin{figure}[H]
+% \centering
+%     \scalebox{1.2}{
+%  \tikz{ %
+%         \node[estado] (s) {};
+%         \node[const, above=of s] {$s$};
+%         \node[accion, below=of s, xshift=-1cm] (a1) {} ; %
+% 	\node[accion, below=of s, xshift=0cm] (a2) {} ; %
+% 	\node[accion, below=of s, xshift=1cm] (a3) {} ; %
+% 	\node[const, right=of a3] {$a$};
+%         \edge[-] {s} {a1,a2,a3};
+%
+% 	\node[estado, below=of a1,xshift=0cm] (s1a) {}; %
+%
+% 	\node[estado, below=of a2,xshift=0cm] (s2a) {}; %
+%
+% 	\node[estado, below=of a3,xshift=0cm] (s3a) {}; %
+%
+% 	\node[const, right=of s3a] {$s^{\prime}$};
+% 	\edge[-] {a1} {s1a};
+% 	\edge[-] {a2} {s2a};
+% 	\edge[-] {a3} {s3a};
+%         }
+%
+%     }
+% \end{figure}
+% \normalsize \textbf{Universos paralelos} \ \ \ \   \\ $s$: estados, $a$: acciones \ \ \ \
+% \end{textblock}
+%
+% \only<3>{
+% \begin{textblock}{160}(0,70)
+% \centering \Large
+% Funci\'ones de probabilidad permiten expresar nuestra incertidumbre
+%  \begin{align*}
+% P(a = 1)  = \, ? \ \ \  P(a = 2) = \,? \ \ \  P(a = 3) = \,?
+%  \end{align*}
+% \end{textblock}
+% }
+%
+% \end{frame}
+%
 
 \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
  \centering \LARGE Distribuciones de creencias \\
+ \Large \onslide<4->{Principio de indiferencia }
 \end{textblock}
 \vspace{1.5cm}
 \centering
+
+
+\only<1>{
+\begin{textblock}{160}(0,62)
+\Large Detrás de una caja hay un regalo.
+\end{textblock}
+}
 
 \only<1>{
 \begin{textblock}{160}(0,28)
@@ -537,7 +547,7 @@ P(a = 1)  = \, ? \ \ \  P(a = 2) = \,? \ \ \  P(a = 3) = \,?
 }
 
 
-\only<4>{
+\only<4->{
 \begin{textblock}{160}(0,28)
  \scalebox{1.1}{
 \tikz{ %
@@ -554,37 +564,43 @@ P(a = 1)  = \, ? \ \ \  P(a = 2) = \,? \ \ \  P(a = 3) = \,?
 \end{textblock}
 }
 
-\end{frame}
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(00,04)
-\centering
-\LARGE Principio de indiferencia \\
-\Large Primer \textbf{acuerdo intersubjetivo} en contextos de incertidumbre
-\end{textblock}
-\vspace{1.5cm}
-
-\begin{textblock}{160}(0,28)  \centering
- \scalebox{1.1}{
-\tikz{ %
-         \node[factor, minimum size=1cm] (p1) {} ;
-         \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
-         \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
-
-
-         \node[const, above=of p1, yshift=-0.05cm] (np1) {\Large $1/3$};
-         \node[const, above=of p2, yshift=-0.05cm] (np2) {\Large $1/3$};
-         \node[const, above=of p3, yshift=-0.05cm] (np3) {\Large $1/3$};
-         }
-}
-\end{textblock}
-
+\only<5>{
 \begin{textblock}{140}(10,64)   \centering \Large
-Dividir las creencias en partes iguales \\ por los caminos del modelo causal
+Acuerdo intersubjetivo \\ \large Máximiza incertidumbre dada información disponible
 \end{textblock}
+}
 
 \end{frame}
+%
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(00,04)
+% \centering
+% \LARGE Principio de indiferencia \\
+% \Large Primer \textbf{acuerdo intersubjetivo} en contextos de incertidumbre
+% \end{textblock}
+% \vspace{1.5cm}
+%
+% \begin{textblock}{160}(0,28)  \centering
+%  \scalebox{1.1}{
+% \tikz{ %
+%          \node[factor, minimum size=1cm] (p1) {} ;
+%          \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
+%          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+%
+%
+%          \node[const, above=of p1, yshift=-0.05cm] (np1) {\Large $1/3$};
+%          \node[const, above=of p2, yshift=-0.05cm] (np2) {\Large $1/3$};
+%          \node[const, above=of p3, yshift=-0.05cm] (np3) {\Large $1/3$};
+%          }
+% }
+% \end{textblock}
+%
+% \begin{textblock}{140}(10,64)   \centering \Large
+% Dividir las creencias en partes iguales \\ por los caminos del modelo causal
+% \end{textblock}
+%
+% \end{frame}
 
 
 \begin{frame}[plain]
@@ -745,7 +761,7 @@ Modelo causal \\ \vspace{0.3cm}
 \only<4->{
  \begin{textblock}{65}(0,22)
   \centering
-  Creencia$(r,s)$ \\ \vspace{0.3cm}
+  Creencia$(r,s|\text{Modelo})$ \\ \vspace{0.3cm}
  \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm}
         & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline
   $s_1$  & \onslide<5->{$0$} & \onslide<6->{$1/6$} & \onslide<6->{$1/6$} & \\ \hline
@@ -760,14 +776,14 @@ Modelo causal \\ \vspace{0.3cm}
 
 \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
- \centering \LARGE Principio de integridad
+ \centering \LARGE \only<1>{Principio de indiferencia}\only<2->{Principio de integridad}
  \end{textblock}
 
 \vspace{1cm}
 
  \begin{textblock}{160}(0,22)
   \centering
-  Creencia$(r,s)$ \\ \vspace{0.3cm}
+  Creencia$(r,s|\text{M})$ \\ \vspace{0.3cm}
  \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm}
         & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline
   $s_1$ & $0$ & $1/6$ & $1/6$ & \onslide<5->{$1/3$} \\ \hline
@@ -780,13 +796,13 @@ Modelo causal \\ \vspace{0.3cm}
 
 \onslide<2->{
 \begin{align*}
- \text{Creencia}(r) = \sum_s \text{Creencia}(r,s)
+ \text{Creencia}(r|\text{M}) = \sum_s \text{Creencia}(r,s|\text{M})
 \end{align*}
 }
 \vspace{-0.5cm}
 \onslide<4->{
 \begin{align*}
- \text{Creencia}(s) = \sum_r \text{Creencia}(r,s)
+ \text{Creencia}(s|\text{M}) = \sum_r \text{Creencia}(r,s|\text{M})
 \end{align*}
 }
 \end{textblock}
@@ -805,7 +821,7 @@ Modelo causal \\ \vspace{0.3cm}
 \only<1->{
  \begin{textblock}{160}(0,22)
   \centering
-  \only<1-2>{Creencia$(r,s=2)$}\only<3->{Creencia$(r|s=2)$} \\ \vspace{0.3cm}
+  \only<1-2>{Creencia$(r,s=2|\text{M})$}\only<3->{Creencia$(r|s=2,\text{M})$} \\ \vspace{0.3cm}
  \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm}
         & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, &  \phantom{\bm{$1/3$}} \\ \hline
   &  &  &  & \\ \hline
@@ -818,7 +834,7 @@ Modelo causal \\ \vspace{0.3cm}
 \only<1>{
 \begin{textblock}{160}(0,62)
 \begin{equation*}
-\ \phantom{P(r|s=2) =} \hfrac{P(r, s=2)}{\phantom{P(s_2)}}
+\ \phantom{P(r|s=2,\text{M}) =} \hfrac{P(r, s=2|\text{M})}{\phantom{P(s_2|\text{M})}}
 \end{equation*}
 \end{textblock}
 }
@@ -826,7 +842,7 @@ Modelo causal \\ \vspace{0.3cm}
 \only<2>{
 \begin{textblock}{160}(0,62)
 \begin{equation*}
-\ \phantom{P(r|s=2) =}\hfrac{P(r, s=2)}{P(s_2)}
+\ \phantom{P(r|s=2,\text{M}) =}\hfrac{P(r, s=2|\text{M})}{P(s_2|\text{M})}
 \end{equation*}
 \end{textblock}
 }
@@ -835,7 +851,7 @@ Modelo causal \\ \vspace{0.3cm}
 \only<3>{
 \begin{textblock}{160}(0,62)
 \begin{equation*}
-P(r|s=2) = \frac{P(r, s=2)}{P(s_2)}
+P(r|s=2,\text{M}) = \frac{P(r, s=2|\text{M})}{P(s_2|\text{M})}
 \end{equation*}
 \end{textblock}
 }
@@ -1786,59 +1802,60 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
 
 
 
-\begin{frame}[plain,fragile]
-\begin{textblock}{160}(0,4)
-\centering \LARGE Modelos causales alternativos \\
-\Large Datos generados con el modelo Monty Hall
-\end{textblock}
-\vspace{1cm}
-
-
-\begin{lstlisting}[belowskip=-0.6 \baselineskip]
-datos = [ rand(1:3) == 1 ? 0 : 1  for i in 1:16]
-\end{lstlisting}
-\pause
-\begin{lstlisting}[belowskip=-0.6 \baselineskip]
-
-prior = 1/2
-\end{lstlisting}
-\pause
-\begin{lstlisting}[belowskip=-0.6 \baselineskip]
-evidencia_B = cumprod([1/2 for d in datos].*1/3)
-\end{lstlisting}
-\pause
-\begin{lstlisting}[belowskip=-0.6 \baselineskip]
-evidencia_A = cumprod([(1/3)^(1-d)*(2/3)^d  for d in datos].*1/2)
-\end{lstlisting}
-\pause
-\begin{lstlisting}[belowskip=-0.6 \baselineskip]
-
-p_datos = (evidencia_A * prior) + (evidencia_B * prior)
-\end{lstlisting}
-\pause
-\begin{lstlisting}[belowskip=-0.6 \baselineskip]
-
-p_modelo_A = evidencia_A * prior / p_datos
-\end{lstlisting}
-\pause
-\begin{lstlisting}
-p_modelo_B = evidencia_B * prior / p_datos
-\end{lstlisting}
-\end{frame}
+% \begin{frame}[plain,fragile]
+% \begin{textblock}{160}(0,4)
+% \centering \LARGE Modelos causales alternativos \\
+% \Large Datos generados con el modelo Monty Hall
+% \end{textblock}
+% \vspace{1cm}
+%
+%
+% \begin{lstlisting}[belowskip=-0.6 \baselineskip]
+% datos = [ rand(1:3) == 1 ? 0 : 1  for i in 1:16]
+% \end{lstlisting}
+% \pause
+% \begin{lstlisting}[belowskip=-0.6 \baselineskip]
+%
+% prior = 1/2
+% \end{lstlisting}
+% \pause
+% \begin{lstlisting}[belowskip=-0.6 \baselineskip]
+% evidencia_B = cumprod([1/2 for d in datos].*1/3)
+% \end{lstlisting}
+% \pause
+% \begin{lstlisting}[belowskip=-0.6 \baselineskip]
+% evidencia_A = cumprod([(1/3)^(1-d)*(2/3)^d  for d in datos].*1/2)
+% \end{lstlisting}
+% \pause
+% \begin{lstlisting}[belowskip=-0.6 \baselineskip]
+%
+% p_datos = (evidencia_A * prior) + (evidencia_B * prior)
+% \end{lstlisting}
+% \pause
+% \begin{lstlisting}[belowskip=-0.6 \baselineskip]
+%
+% p_modelo_A = evidencia_A * prior / p_datos
+% \end{lstlisting}
+% \pause
+% \begin{lstlisting}
+% p_modelo_B = evidencia_B * prior / p_datos
+% \end{lstlisting}
+% \end{frame}
 
 
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE Modelos causales alternativos
-\end{textblock}
-
-\begin{textblock}{160}(14,12)
-\begin{equation*}
- P(\text{Modelo}|\text{Datos}) = \frac{\only<1->{\overbrace{P(\text{Data}|\text{Modelo})}^{\text{\footnotesize Predicción a priori}}} \only<1->{P(\text{Modelo})} }{ P(\text{Data})} \phantom{\frac{\overbrace{P(\text{Datos}|\text{Modelo})}^{\text{Evidencia}}}{ P(\text{Datos})}}
-\end{equation*}
+\centering \LARGE Modelos causales alternativos  \\
+\Large Datos generados con el modelo Monty Hall
 \end{textblock}
 %
+% \begin{textblock}{160}(14,12)
+% \begin{equation*}
+%  P(\text{Modelo}|\text{Datos}) = \frac{\only<1->{\overbrace{P(\text{Data}|\text{Modelo})}^{\text{\footnotesize Predicción a priori}}} \only<1->{P(\text{Modelo})} }{ P(\text{Data})} \phantom{\frac{\overbrace{P(\text{Datos}|\text{Modelo})}^{\text{Evidencia}}}{ P(\text{Datos})}}
+% \end{equation*}
+% \end{textblock}
+% %
 % \only<2>{
 % \begin{textblock}{160}(0,47)
 % \begin{align*}
@@ -1900,7 +1917,8 @@ p_modelo_B = evidencia_B * prior / p_datos
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE Bayes Factor
+\centering \LARGE Comparación de modelos \\
+\Large Bayes Factor
 \end{textblock}
 \vspace{1cm}
 
@@ -1916,7 +1934,8 @@ p_modelo_B = evidencia_B * prior / p_datos
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE Predicción a priori
+\centering \LARGE Comparación de modelos \\
+\Large Predicción a priori
 \end{textblock}
 \vspace{1cm}
 
@@ -1933,7 +1952,7 @@ P(\text{Dat\en{a}\es{os}}|\text{Model\es{o}}) & = P(d_1|\text{Model\es{o}})P(d_2
 \begin{equation*}
 \begin{split}
 P(\text{Dat\en{a}\es{os}}|\text{Model\es{o}}) & = \sum^{\text{Hipótesis}}_h P(\text{Dat\en{a}\es{os}}|h,\text{Model\es{o}}) P(h|\text{Model\es{o}}) \\
-& = \text{arithmetic mean}_h(P(\text{Dat\en{a}\es{os}}|\text{Hipótesis},\text{Model\es{o}}))
+& = \text{arithmetic mean}_h(P(\text{Dat\en{a}\es{os}}|h,\text{Model\es{o}}))
 \end{split}
 \end{equation*}
 
@@ -1942,7 +1961,8 @@ P(\text{Dat\en{a}\es{os}}|\text{Model\es{o}}) & = \sum^{\text{Hipótesis}}_h P(\
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE Predicción a priori
+\centering \LARGE Predicción a priori \\
+\Large Contribución de todas las hipótesis
 \end{textblock}
 \vspace{1cm}
 
@@ -1950,8 +1970,7 @@ P(\text{Dat\en{a}\es{os}}|\text{Model\es{o}}) & = \sum^{\text{Hipótesis}}_h P(\
  \begin{equation*}
 \begin{split}
 P(\text{Dat\en{a}\es{os}}|\text{Model\es{o}}) & = P(d_1|\text{Model\es{o}})P(d_2|d_1,\text{Model\es{o}}) \dots \\
-\onslide<2->{& = \left( \sum^{\text{Hipótesis}}_h P(d_1|h,\text{M}) P(h|\text{M}) \right) \left( \sum^{\text{Hipótesis}}_h P(d_2|d_1,h,\text{M}) P(h|d_1,\text{M}) \right)  \dots \\}
-\onslide<3->{& =  \prod_i^{|\text{Datos}|} \sum_h P(d_i|d_1, \dots, d_{i-1}, h, \text{M}) P(h|d_1, \dots, d_{i-1},\text{M}) }
+\onslide<2->{& = \left( \sum^{\text{Hipótesis}}_h P(d_1|h,\text{M}) P(h|\text{M}) \right) \left( \sum^{\text{Hipótesis}}_h P(d_2|d_1,h,\text{M}) P(h|d_1,\text{M}) \right)  \dots \\}%\onslide<3->{& =  \prod_i^{|\text{Datos}|} \sum_h P(d_i|d_1, \dots, d_{i-1}, h, \text{M}) P(h|d_1, \dots, d_{i-1},\text{M}) }
 \end{split}
 \end{equation*}
 \end{textblock}
