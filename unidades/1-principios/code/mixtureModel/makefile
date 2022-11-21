@@ -9,6 +9,7 @@ obj/forense.csproj.nuget.dgspec.json:
 	dotnet add package Microsoft.ML.Probabilistic
 	dotnet add package Microsoft.ML.Probabilistic.Compiler
 	dotnet add package Microsoft.ML.Probabilistic.Learners
+	dotnet add package Microsoft.ML.Probabilistic.Math
 	touch .gitignore
 	echo bin/ > .gitignore
 	echo obj/ >> .gitignore
