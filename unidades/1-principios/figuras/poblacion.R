@@ -162,6 +162,16 @@ axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
 mtext(text= "Parámetro r = 3.99",side =1,line=2.33,cex=2)
 mtext(text = "Población" ,side =2,line=2,cex=2)
 
+plot(historia(3.99,100,0.5), cex=0.5, pch=19 ,ylab="",xlab="",axes = F,ann = F, ylim=c(0,1))
+lines(historia(3.99,100,0.5))
+lines(historia(3.99,30,0.5),lwd=3)
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext(text= "Parámetro r = 3.99",side =1,line=2.33,cex=2)
+mtext(text = "Población" ,side =2,line=2,cex=2)
+
 
 
 #######################################
