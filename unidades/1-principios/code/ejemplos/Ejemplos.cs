@@ -26,8 +26,8 @@ public class Simples{
     Console.WriteLine("  Posterior de algunaCara: "+engine.Infer(algunaCara));
   }
 
-  public void modelo_causal_con_ruido(bool causaObservada){
-    Console.WriteLine("Modelo causal con ruido");
+  public void modelo_con_ruido(bool causaObservada){
+    Console.WriteLine("Modelo con ruido");
     var causa = Variable.Bernoulli(0.5);
     var efecto = (causa != Variable.Bernoulli(0.05));
     InferenceEngine engine = new InferenceEngine();
@@ -39,6 +39,35 @@ public class Simples{
        efecto.ObservedValue = true;
        Console.WriteLine("  P(Causa|Efecto = 1) = "+engine.Infer(causa));
      }
+  }
+  public void estimacion_de_ruido_simetrico(){
+    Console.WriteLine("Estimacion de ruido simétrico");
+
+    bool[] mediciones1 = {false,true,true,false,false};
+    bool[] mediciones2 = {false,false,true,false,false};
+    Range i = new Range(mediciones1.Length);
+
+    var probabilidad = Variable.Beta(1,10); // La prevalencia
+    var ruido1 = Variable.Beta(1,1); // El ruido (sea FalsePositive o TrueNegative)
+    var ruido2 = Variable.Beta(1,30); // El ruido (sea FalsePositive o TrueNegative)
+    var estado = Variable.Array<bool>(i).Named("Estado");
+    estado[i] = Variable.Bernoulli(probabilidad).ForEach(i);
+    var resultado1 = Variable.Array<bool>(i).Named("Resultado1");
+    var resultado2 = Variable.Array<bool>(i).Named("Resultado2");
+    using (Variable.ForEach(i)){
+        resultado1[i] = (estado[i] != Variable.Bernoulli(ruido1));
+        resultado2[i] = (estado[i] != Variable.Bernoulli(ruido2));
+    }
+
+    var engine = new InferenceEngine();
+
+    resultado1.ObservedValue = mediciones1;
+    resultado2.ObservedValue = mediciones2;
+    Console.WriteLine("  P(ruido1|mediciones) = "+engine.Infer(ruido1));
+    Console.WriteLine("  P(ruido2|mediciones) = "+engine.Infer(ruido2));
+    Console.WriteLine("  P(estado|mediciones) = "+engine.Infer(estado));
+    Console.WriteLine("  P(prev|mediciones) = "+engine.Infer(probabilidad));
+
   }
 
   public void seleccion_modelo_causal_mediante_observaciones(){
