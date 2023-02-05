@@ -1,0 +1,590 @@
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\input{../../auxiliar/tex/diapo_encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+\estrue
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+\usepackage{listings}
+\lstset{
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=true,
+  columns=flexible,
+  basicstyle={\ttfamily},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showlines=true
+}
+
+
+\begin{document}
+
+\color{black!85}
+\large
+
+
+\begin{frame}[plain,noframenumbering]
+
+
+\begin{textblock}{160}(0,0)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/deforestacion}
+\end{textblock}
+
+\begin{textblock}{80}(18,9)
+\textcolor{black!15}{\fontsize{44}{55}\selectfont Verdades}
+\end{textblock}
+
+\begin{textblock}{47}(85,70)
+\centering \textcolor{black!15}{{\fontsize{52}{65}\selectfont Empíricas}}
+\end{textblock}
+
+\begin{textblock}{80}(100,28)
+\LARGE  \textcolor{black!15}{\rotatebox[origin=tr]{-3}{\scalebox{9}{\scalebox{1}[-1]{$p$}}}}
+\end{textblock}
+
+\begin{textblock}{80}(66,43)
+\LARGE  \textcolor{black!15}{\scalebox{6}{$=$}}
+\end{textblock}
+
+\begin{textblock}{80}(36,29)
+\LARGE  \textcolor{black!15}{\scalebox{9}{$p$}}
+\end{textblock}
+
+
+
+\begin{textblock}{160}(01,81)
+\footnotesize \textcolor{black!5}{\textbf{Seminario Verdades Empíricas. Hacia el \\
+Congreso Bayesiano Plurinacional 2023} \\}
+\end{textblock}
+
+\end{frame}
+
+
+
+% \begin{frame}[plain,noframenumbering]
+% \begin{textblock}{80}(54,14)
+%  \huge \textcolor{black!50}{Sorpresa}
+% \end{textblock}
+%
+% \begin{textblock}{47}(113,73.5)
+% \centering \LARGE  \textcolor{black!5}{Supervivencia}
+% \end{textblock}
+%
+% \begin{textblock}{80}(100,27)
+% \LARGE  \textcolor{black!10}{Creencia}
+% \end{textblock}
+%
+% \begin{textblock}{80}(44,61)
+% \LARGE  \textcolor{black!15}{Dato}
+% \end{textblock}
+%
+% \begin{textblock}{160}(01,87)
+% \scriptsize \textcolor{black!5}{Bayes de la Provincias Unidas del Sur, 2022.}
+% \end{textblock}
+%
+% \begin{textblock}{160}(01,01)
+% \normalsize \textcolor{black!60}{1.\ Introducción}
+% \end{textblock}
+%
+%
+%  %\vspace{2cm}brown
+% %\maketitle
+% \Wider[2cm]{
+% \includegraphics[width=1\textwidth]{../../auxiliar/static/peligro_predador}
+% }
+% \end{frame}
+
+
+%
+% \begin{frame}[plain,noframenumbering]
+% \begin{textblock}{160}(00,6)
+% \centering
+% \LARGE \ Seminario: ``Verdades empíricas'' \\
+% \Large 1. Principios interculturales de acuerdos intersubjetivos
+% \end{textblock}
+%
+% \begin{textblock}{160}(00,24) \centering
+% Hacia el Congreso Bayesiano Plurinacional  \\
+% Apoya \href{https://github.com/BayesDeLasProvinciasUnidasDelSur/curso}{Bayes (de las Provincias Unidas) del Sur.}
+% \end{textblock}
+%
+% \begin{textblock}{140}(10,44)
+% \small
+% %\Large Los principios de la inferencia Bayesiana \\ \justify \large
+%
+% $\bullet$ Incertidumbre \\
+% $\bullet$ Principio de razón suficiente \\
+% $\bullet$ Principio de indiferencia \\
+% $\bullet$ Principio de integridad \\
+% $\bullet$ Principio de coherencia \\
+% $\bullet$ Las reglas del razonamiento bajo incertidumbre \\
+% $\bullet$ Teorema de Bayes \\
+% $\bullet$ Evaluación de modelos causales alternativos \\
+% \end{textblock}
+%
+% \end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(00,04)
+\centering
+\LARGE Verdad
+\end{textblock}
+\vspace{2.5cm} \large
+
+\centering
+
+ La ciencia es una institución humana con pretensión de \textbf{verdad}. \\[0.1cm] \pause
+
+\textbf{Acuerdos intersubjetivos con validez intercultural (o universal)}
+
+
+\vspace{1cm}
+\pause
+
+
+Para todas las personas. En todas las culturas.
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(00,04)
+\centering
+\LARGE Verdades
+\end{textblock}
+\vspace{1.5cm} \large
+
+\centering
+
+ \Large Ciencias formales \\
+ \normalsize \textcolor{black!50}{(Matemáticas, lógicas)} \\
+ \large  Validadas en sistemas cerrados sin incertidumbre\\
+
+ \vspace{0.6cm}
+
+  \pause
+
+ \Large Ciencias empíricas \\
+\normalsize  \textcolor{black!50}{(Físicas, Químicas, Biológicas, Sociales)} \\
+\large Validadas en sistemas abiertos con incertidumbre
+
+\pause
+\vspace{1cm}
+
+¿Cuál es el origen de la \textbf{incertidumbre}?
+
+\end{frame}
+
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(00,04)
+\centering \LARGE Incertidumbre ontológica \\
+\Large que existe en la naturaleza
+\end{textblock}
+\vspace{2cm} \centering
+
+
+Dadas mismas condiciones iniciales \\
+se genera a veces un resultado y a veces otro
+
+\pause
+
+\vspace{0.7cm}
+
+\includegraphics[width=0.22\textwidth]{../../auxiliar/static/piedra-papel-tijera.jpg} \hspace{0.5cm}
+\includegraphics[width=0.22\textwidth]{../../auxiliar/static/dosdados.jpg}
+
+{\small Libre albedrío \ \hspace{2cm} \ Azar \hspace{0.4cm}}
+
+
+\pause
+\vspace{0.5cm}
+\textbf{¿Se puede crear?}
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(00,04)
+\centering
+\LARGE Principio de razón suificiente \\
+\end{textblock}
+\vspace{1.75cm} \Large  \centering
+
+
+
+\begin{textblock}{70}(74,20)
+\includegraphics[width=0.67\textwidth]{../../auxiliar/static/pachacuteckoricancha.jpg}
+\end{textblock}
+
+\begin{textblock}{60}(18,42)
+\centering Todo lo que ocurre \\ tiene una causa previa \\ que lo genera
+\end{textblock}
+
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(00,04)
+\centering
+\LARGE Principio de razón suificiente \\
+\Large Modelos causales deterministas
+\end{textblock}
+\vspace{1cm}
+
+\pause
+
+\begin{align*}
+ \text{Población}(t+1) = r \cdot \text{Población}(t)\cdot (1-\text{Población}(t))
+\end{align*}
+
+\vspace{0.5cm}
+
+\centering \pause
+
+\tikz{
+    \node[latent, minimum size=1.25cm] (n1) {$\text{pob}_t$} ;
+
+    \node[latent, right=of n1, xshift=3cm, minimum size=1.25cm] (n2) {$\text{pob}_{t+1}$} ;
+
+     \path[->] (n1) edge node [yshift=0.5cm] {$r \cdot \text{pob}_t \cdot (1-\text{pob}_t)$} (n2);
+
+}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(00,04)
+\centering
+\LARGE Principio de razón suificiente \\
+\Large \only<1-13>{Modelos causales deterministas}\only<14>{Incertidumbre determinista!}
+\end{textblock}
+\vspace{1cm}
+
+
+\only<1>{
+\begin{textblock}{160}(0,22)
+\centering
+ \includegraphics[page={1},width=0.6\textwidth]{figuras/poblacion.pdf}
+\end{textblock}
+}
+
+\only<2>{
+\begin{textblock}{160}(0,22)
+\centering
+ \includegraphics[page={2},width=0.6\textwidth]{figuras/poblacion.pdf}
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{160}(0,22)
+\centering
+ \includegraphics[page={3},width=0.6\textwidth]{figuras/poblacion.pdf}
+\end{textblock}
+}
+
+\only<4>{
+\begin{textblock}{160}(0,22)
+\centering
+ \includegraphics[page={4},width=0.6\textwidth]{figuras/poblacion.pdf}
+\end{textblock}
+}
+
+\only<5>{
+\begin{textblock}{160}(0,22)
+\centering
+ \includegraphics[page={5},width=0.6\textwidth]{figuras/poblacion.pdf}
+\end{textblock}
+}
+
+\only<6>{
+\begin{textblock}{160}(0,22)
+\centering
+ \includegraphics[page={6},width=0.6\textwidth]{figuras/poblacion.pdf}
+\end{textblock}
+}
+
+\only<7>{
+\begin{textblock}{160}(0,22)
+\centering
+ \includegraphics[page={7},width=0.6\textwidth]{figuras/poblacion.pdf}
+\end{textblock}
+}
+
+\only<8>{
+\begin{textblock}{160}(0,22)
+\centering
+ \includegraphics[page={8},width=0.6\textwidth]{figuras/poblacion.pdf}
+\end{textblock}
+}
+
+
+\only<9>{
+\begin{textblock}{160}(0,22)
+\centering
+ \includegraphics[page={9},width=0.6\textwidth]{figuras/poblacion.pdf}
+\end{textblock}
+}
+
+
+\only<10>{
+\begin{textblock}{160}(0,22)
+\centering
+ \includegraphics[page={10},width=0.6\textwidth]{figuras/poblacion.pdf}
+\end{textblock}
+}
+
+\only<11>{
+\begin{textblock}{160}(0,22)
+\centering
+ \includegraphics[page={11},width=0.6\textwidth]{figuras/poblacion.pdf}
+\end{textblock}
+}
+
+
+\only<12>{
+\begin{textblock}{160}(0,22)
+\centering
+ \includegraphics[page={15},width=0.6\textwidth]{figuras/poblacion.pdf}
+\end{textblock}
+}
+
+
+\only<13>{
+\begin{textblock}{160}(0,22)
+\centering
+ \includegraphics[page={12},width=0.59\textwidth]{figuras/poblacion.pdf}
+\end{textblock}
+}
+
+\only<14>{
+\begin{textblock}{160}(0,22)
+\centering
+ \includegraphics[page={13},width=0.59\textwidth]{figuras/poblacion.pdf}
+\end{textblock}
+}
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Creamos (casi) azar! \\
+\Large Números pseudo-aleatorios
+\end{textblock}
+
+\only<2>{
+\begin{textblock}{160}(0,22)
+\centering
+ \includegraphics[page={14},width=0.59\textwidth]{figuras/poblacion.pdf}
+\end{textblock}
+}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE Incertidumbre epistémica \\
+ \Large que existe en nuestro conocimiento
+ \end{textblock}
+ \vspace{1.7cm} \centering
+
+ \pause
+
+\textbf{No podemos conocer con infinita precisión}
+
+\vspace{0.6cm}
+
+ La sensibilidad a las condiciones iniciales es suficiente \\ para introducir incertidumbre en sistemas deterministas
+
+\pause \vspace{1.2cm}
+
+
+Incertidumbre ontológica $\subset$ Incertidumbre epistémica
+\end{frame}
+
+
+%
+% \begin{frame}[plain]
+%  \begin{textblock}{160}(0,4)
+%  \centering \LARGE Incertidumbres \\
+%  %\Large y probabilidades
+%  \end{textblock}
+%  \vspace{1.3cm} \centering
+%
+%  \Large Visión ontológica \\
+%
+%  \large La incertidumbre existe en la naturaleza, producto del azar (o libre albedrío)\\[0.2cm]
+%
+%  %\large \textbf{Variable aleatoria}: Probabilidad como frecuencia
+%
+%  \vspace{1cm} \pause
+%
+%  \Large Visión epistémica  \\
+%
+%  \large La incertidumbre existe en nuestro conocimiento, producto de nuestra ignorancia\\[0.2cm]
+%
+%  %\large \textbf{Hipótesis}: Probabilidad como grado de creencia
+%
+%
+%  \end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(00,04)
+\centering \LARGE Verdades con incertidumbre
+\end{textblock}
+\vspace{2.5cm} \Large \centering
+
+
+\Wider[1cm]{
+``No hay verdades absolutas, todas las verdades son medias verdades. El mal surge de quererlas tratar como verdades absolutas.''
+}
+\large
+
+\vspace{0.2cm}
+
+\hfill \textcolor{black!50}{Whitehead (Dialogues 1953)}
+
+
+\end{frame}
+
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4) \centering
+\LARGE Verdades con incertidumbre\\
+\Large Como relativismo
+\end{textblock}
+\vspace{1.5cm}
+\onslide<1-2>{
+\centering
+ \Large ``Todos los puntos de vista deben ser considerados y respetados''
+}
+
+ \vspace{0.5cm}
+
+ \onslide<2>{
+\Large ``No hay una forma correcta de evaluar modelos''
+}
+
+\only<3->{
+\begin{textblock}{50}(3,20) \centering
+\includegraphics[width=1\textwidth, page={6}]{../../auxiliar/static/sidewalk_bubblegum_1997_1}
+\end{textblock}}
+ \only<4->{
+\begin{textblock}{50}(55,20) \centering
+\includegraphics[width=1\textwidth, page={6}]{../../auxiliar/static/sidewalk_bubblegum_1997_2}
+\end{textblock}}
+% \only<4>{
+% \begin{textblock}{50}(107,20) \centering
+% \includegraphics[width=1\textwidth, page={6}]{../../auxiliar/static/sidewalk_bubblegum_1997_3}
+% \end{textblock}}
+\only<5->{
+\begin{textblock}{50}(107,20) \centering
+\includegraphics[width=1\textwidth, page={6}]{../../auxiliar/static/sidewalk_bubblegum_1997_4}
+\end{textblock}}
+
+
+\only<6>{
+\begin{textblock}{160}(0,74)
+\centering \Large
+El retorno al criterio de autoridad \\[0cm]
+\large
+La verdad, como el poder, sale de la boca del fusil
+\end{textblock}}
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4) \centering
+\LARGE Verdades con incertidumbre \\
+\Large \only<2->{Universalizables}
+\end{textblock}
+\vspace{2cm}
+
+\Large \centering
+
+¿Es posible alcanzar acuerdos intersubjetivos \\ en contextos de incertidumbre?
+
+\vspace{1cm} \large
+
+\pause
+
+Sí, porque \textbf{podemos evitar mentir}!
+
+\vspace{0.2cm} \pause
+
+$\bullet$ No decir más de lo que sabemos
+
+$\bullet$ Incorporando toda la información disponible
+
+\pause \centering \vspace{1cm}
+
+\textbf{¿Cómo exactamente?}
+
+
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+\begin{textblock}{170}(-9,0)
+\rotatebox[origin=tr]{90}{\includegraphics[width=0.53\textwidth]{../../auxiliar/static/egipto3.jpeg}}
+\end{textblock}
+
+\begin{textblock}{160}(16,9)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{Principios interculturales}}
+\end{textblock}
+\begin{textblock}{160}(22,18)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{de acuerdos intersubjetivos}}
+\end{textblock}
+
+
+\begin{textblock}{55}(71,38)
+\begin{turn}{33}
+\parbox{6cm}{
+\textcolor{black!5}{\hspace{-0.3cm}Capítulo 1} \\
+\small\textcolor{black!5}{\hspace{-0.1cm}Principio de indiferencia, de}\\
+\small\textcolor{black!5}{integridad, y de coherencia.} \\
+\small\textcolor{black!5}{\hspace{0.1cm}Las reglas de razonamiento} \\ \small\textcolor{black!5}{\hspace{0.15cm}bajo incertidumbre. Evaluación} \\
+\small\textcolor{black!5}{\hspace{0.36cm}de modelos alternativos.} \\
+}
+\end{turn}
+\end{textblock}
+
+\end{frame}
+
+
+
+
+
+
+
+\end{document}
+
+
+
