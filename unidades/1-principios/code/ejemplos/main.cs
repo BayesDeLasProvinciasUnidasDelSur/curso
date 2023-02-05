@@ -12,7 +12,8 @@ var simples = new Simples();
 //simples.modelo_con_ruido(true);
 //simples.modelo_con_ruido(false);
 
-simples.estimacion_de_ruido_simetrico();
+ //simples.estimacion_de_ruido_simetrico();
+simples.hui_walter_BLCA();
 
 // Ejemplos: Evaluacion de modelos
 //simples.seleccion_modelo_causal_mediante_observaciones();

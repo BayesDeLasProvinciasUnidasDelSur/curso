@@ -1,6 +1,7 @@
 ﻿using Microsoft.ML.Probabilistic.Algorithms;
 using Microsoft.ML.Probabilistic.Distributions;
 using Microsoft.ML.Probabilistic.Models;
+using Microsoft.ML.Probabilistic.Math;
 using Range = Microsoft.ML.Probabilistic.Models.Range;
 namespace Ejemplos{
 
@@ -43,13 +44,14 @@ public class Simples{
   public void estimacion_de_ruido_simetrico(){
     Console.WriteLine("Estimacion de ruido simétrico");
 
-    bool[] mediciones1 = {false,true,true,false,false};
+    bool[] mediciones1 = {true,false,false,true,false};
+    bool[] mediciones0 = {false,true,true,false,false};
     bool[] mediciones2 = {false,false,true,false,false};
     Range i = new Range(mediciones1.Length);
 
-    var probabilidad = Variable.Beta(1,10); // La prevalencia
+    var probabilidad = Variable.Beta(2,10); // La prevalencia
     var ruido1 = Variable.Beta(1,1); // El ruido (sea FalsePositive o TrueNegative)
-    var ruido2 = Variable.Beta(1,30); // El ruido (sea FalsePositive o TrueNegative)
+    var ruido2 = Variable.Beta(2,25); // El ruido (sea FalsePositive o TrueNegative)
     var estado = Variable.Array<bool>(i).Named("Estado");
     estado[i] = Variable.Bernoulli(probabilidad).ForEach(i);
     var resultado1 = Variable.Array<bool>(i).Named("Resultado1");
@@ -69,7 +71,6 @@ public class Simples{
     Console.WriteLine("  P(prev|mediciones) = "+engine.Infer(probabilidad));
 
   }
-
   public void seleccion_modelo_causal_mediante_observaciones(){
     Console.WriteLine("Selección observacional de modelo causal");
     Range N = new Range(5);

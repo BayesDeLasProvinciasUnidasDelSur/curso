@@ -14,6 +14,8 @@
 \usepackage{todonotes}
 \setbeameroption{show notes}
 
+\newcommand{\gray}{\color{black!55}}
+
 \usepackage{listings}
 \lstset{
   aboveskip=3mm,
@@ -64,7 +66,7 @@
 
 
 \begin{textblock}{160}(01,81)
-\footnotesize \textcolor{black!5}{\textbf{Seminario Verdades Empíricas. Hacia el \\
+\footnotesize \textcolor{black!5}{\textbf{Seminario ``Acuerdos inte\dots''. Hacia el \\
 Congreso Bayesiano Plurinacional 2023} \\}
 \end{textblock}
 
@@ -154,7 +156,6 @@ Congreso Bayesiano Plurinacional 2023} \\}
 \vspace{1cm}
 \pause
 
-
 Para todas las personas. En todas las culturas.
 
 \end{frame}
@@ -184,369 +185,11 @@ Para todas las personas. En todas las culturas.
 \pause
 \vspace{1cm}
 
-¿Cuál es el origen de la \textbf{incertidumbre}?
-
-\end{frame}
-
-
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(00,04)
-\centering \LARGE Incertidumbre ontológica \\
-\Large que existe en la naturaleza
-\end{textblock}
-\vspace{2cm} \centering
-
-
-Dadas mismas condiciones iniciales \\
-se genera a veces un resultado y a veces otro
-
-\pause
-
-\vspace{0.7cm}
-
-\includegraphics[width=0.22\textwidth]{../../auxiliar/static/piedra-papel-tijera.jpg} \hspace{0.5cm}
-\includegraphics[width=0.22\textwidth]{../../auxiliar/static/dosdados.jpg}
-
-{\small Libre albedrío \ \hspace{2cm} \ Azar \hspace{0.4cm}}
-
-
-\pause
-\vspace{0.5cm}
-\textbf{¿Se puede crear?}
-
-
-\end{frame}
-
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(00,04)
-\centering
-\LARGE Principio de razón suificiente \\
-\end{textblock}
-\vspace{1.75cm} \Large  \centering
-
-
-
-\begin{textblock}{70}(74,20)
-\includegraphics[width=0.67\textwidth]{../../auxiliar/static/pachacuteckoricancha.jpg}
-\end{textblock}
-
-\begin{textblock}{60}(18,42)
-\centering Todo lo que ocurre \\ tiene una causa previa \\ que lo genera
-\end{textblock}
-
-
-
-\end{frame}
-
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(00,04)
-\centering
-\LARGE Principio de razón suificiente \\
-\Large Modelos causales deterministas
-\end{textblock}
-\vspace{1cm}
-
-\pause
-
-\begin{align*}
- \text{Población}(t+1) = r \cdot \text{Población}(t)\cdot (1-\text{Población}(t))
-\end{align*}
-
-\vspace{0.5cm}
-
-\centering \pause
-
-\tikz{
-    \node[latent, minimum size=1.25cm] (n1) {$\text{pob}_t$} ;
-
-    \node[latent, right=of n1, xshift=3cm, minimum size=1.25cm] (n2) {$\text{pob}_{t+1}$} ;
-
-     \path[->] (n1) edge node [yshift=0.5cm] {$r \cdot \text{pob}_t \cdot (1-\text{pob}_t)$} (n2);
-
-}
-
-\end{frame}
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(00,04)
-\centering
-\LARGE Principio de razón suificiente \\
-\Large \only<1-13>{Modelos causales deterministas}\only<14>{Incertidumbre determinista!}
-\end{textblock}
-\vspace{1cm}
-
-
-\only<1>{
-\begin{textblock}{160}(0,22)
-\centering
- \includegraphics[page={1},width=0.6\textwidth]{figuras/poblacion.pdf}
-\end{textblock}
-}
-
-\only<2>{
-\begin{textblock}{160}(0,22)
-\centering
- \includegraphics[page={2},width=0.6\textwidth]{figuras/poblacion.pdf}
-\end{textblock}
-}
-
-\only<3>{
-\begin{textblock}{160}(0,22)
-\centering
- \includegraphics[page={3},width=0.6\textwidth]{figuras/poblacion.pdf}
-\end{textblock}
-}
-
-\only<4>{
-\begin{textblock}{160}(0,22)
-\centering
- \includegraphics[page={4},width=0.6\textwidth]{figuras/poblacion.pdf}
-\end{textblock}
-}
-
-\only<5>{
-\begin{textblock}{160}(0,22)
-\centering
- \includegraphics[page={5},width=0.6\textwidth]{figuras/poblacion.pdf}
-\end{textblock}
-}
-
-\only<6>{
-\begin{textblock}{160}(0,22)
-\centering
- \includegraphics[page={6},width=0.6\textwidth]{figuras/poblacion.pdf}
-\end{textblock}
-}
-
-\only<7>{
-\begin{textblock}{160}(0,22)
-\centering
- \includegraphics[page={7},width=0.6\textwidth]{figuras/poblacion.pdf}
-\end{textblock}
-}
-
-\only<8>{
-\begin{textblock}{160}(0,22)
-\centering
- \includegraphics[page={8},width=0.6\textwidth]{figuras/poblacion.pdf}
-\end{textblock}
-}
-
-
-\only<9>{
-\begin{textblock}{160}(0,22)
-\centering
- \includegraphics[page={9},width=0.6\textwidth]{figuras/poblacion.pdf}
-\end{textblock}
-}
-
-
-\only<10>{
-\begin{textblock}{160}(0,22)
-\centering
- \includegraphics[page={10},width=0.6\textwidth]{figuras/poblacion.pdf}
-\end{textblock}
-}
-
-\only<11>{
-\begin{textblock}{160}(0,22)
-\centering
- \includegraphics[page={11},width=0.6\textwidth]{figuras/poblacion.pdf}
-\end{textblock}
-}
-
-
-\only<12>{
-\begin{textblock}{160}(0,22)
-\centering
- \includegraphics[page={15},width=0.6\textwidth]{figuras/poblacion.pdf}
-\end{textblock}
-}
-
-
-\only<13>{
-\begin{textblock}{160}(0,22)
-\centering
- \includegraphics[page={12},width=0.59\textwidth]{figuras/poblacion.pdf}
-\end{textblock}
-}
-
-\only<14>{
-\begin{textblock}{160}(0,22)
-\centering
- \includegraphics[page={13},width=0.59\textwidth]{figuras/poblacion.pdf}
-\end{textblock}
-}
-\end{frame}
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering \LARGE Creamos (casi) azar! \\
-\Large Números pseudo-aleatorios
-\end{textblock}
-
-\only<2>{
-\begin{textblock}{160}(0,22)
-\centering
- \includegraphics[page={14},width=0.59\textwidth]{figuras/poblacion.pdf}
-\end{textblock}
-}
-
-\end{frame}
-
-
-\begin{frame}[plain]
- \begin{textblock}{160}(0,4)
- \centering \LARGE Incertidumbre epistémica \\
- \Large que existe en nuestro conocimiento
- \end{textblock}
- \vspace{1.7cm} \centering
-
- \pause
-
-\textbf{No podemos conocer con infinita precisión}
-
-\vspace{0.6cm}
-
- La sensibilidad a las condiciones iniciales es suficiente \\ para introducir incertidumbre en sistemas deterministas
-
-\pause \vspace{1.2cm}
-
-
-Incertidumbre ontológica $\subset$ Incertidumbre epistémica
-\end{frame}
-
-
-%
-% \begin{frame}[plain]
-%  \begin{textblock}{160}(0,4)
-%  \centering \LARGE Incertidumbres \\
-%  %\Large y probabilidades
-%  \end{textblock}
-%  \vspace{1.3cm} \centering
-%
-%  \Large Visión ontológica \\
-%
-%  \large La incertidumbre existe en la naturaleza, producto del azar (o libre albedrío)\\[0.2cm]
-%
-%  %\large \textbf{Variable aleatoria}: Probabilidad como frecuencia
-%
-%  \vspace{1cm} \pause
-%
-%  \Large Visión epistémica  \\
-%
-%  \large La incertidumbre existe en nuestro conocimiento, producto de nuestra ignorancia\\[0.2cm]
-%
-%  %\large \textbf{Hipótesis}: Probabilidad como grado de creencia
-%
-%
-%  \end{frame}
-
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(00,04)
-\centering \LARGE Verdades con incertidumbre
-\end{textblock}
-\vspace{2.5cm} \Large \centering
-
-
-\Wider[1cm]{
-``No hay verdades absolutas, todas las verdades son medias verdades. El mal surge de quererlas tratar como verdades absolutas.''
-}
-\large
-
-\vspace{0.2cm}
-
-\hfill \textcolor{black!50}{Whitehead (Dialogues 1953)}
-
-
-\end{frame}
-
-
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4) \centering
-\LARGE Verdades con incertidumbre\\
-\Large Como relativismo
-\end{textblock}
-\vspace{1.5cm}
-\onslide<1-2>{
-\centering
- \Large ``Todos los puntos de vista deben ser considerados y respetados''
-}
-
- \vspace{0.5cm}
-
- \onslide<2>{
-\Large ``No hay una forma correcta de evaluar modelos''
-}
-
-\only<3->{
-\begin{textblock}{50}(3,20) \centering
-\includegraphics[width=1\textwidth, page={6}]{../../auxiliar/static/sidewalk_bubblegum_1997_1}
-\end{textblock}}
- \only<4->{
-\begin{textblock}{50}(55,20) \centering
-\includegraphics[width=1\textwidth, page={6}]{../../auxiliar/static/sidewalk_bubblegum_1997_2}
-\end{textblock}}
-% \only<4>{
-% \begin{textblock}{50}(107,20) \centering
-% \includegraphics[width=1\textwidth, page={6}]{../../auxiliar/static/sidewalk_bubblegum_1997_3}
-% \end{textblock}}
-\only<5->{
-\begin{textblock}{50}(107,20) \centering
-\includegraphics[width=1\textwidth, page={6}]{../../auxiliar/static/sidewalk_bubblegum_1997_4}
-\end{textblock}}
-
-
-\only<6>{
-\begin{textblock}{160}(0,74)
-\centering \Large
-El retorno al criterio de autoridad \\[0cm]
-\large
-La verdad, como el poder, sale de la boca del fusil
-\end{textblock}}
-\end{frame}
-
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4) \centering
-\LARGE Verdades con incertidumbre \\
-\Large \only<2->{Universalizables}
-\end{textblock}
-\vspace{2cm}
-
-\Large \centering
-
 ¿Es posible alcanzar acuerdos intersubjetivos \\ en contextos de incertidumbre?
-
-\vspace{1cm} \large
-
-\pause
-
-Sí, porque \textbf{podemos evitar mentir}!
-
-\vspace{0.2cm} \pause
-
-$\bullet$ No decir más de lo que sabemos
-
-$\bullet$ Incorporando toda la información disponible
-
-\pause \centering \vspace{1cm}
-
-\textbf{¿Cómo exactamente?}
-
+%
+% \pause
+%
+% Sí, porque \textbf{podemos evitar mentir}!
 
 \end{frame}
 
@@ -1112,10 +755,9 @@ Los pagos que aceptarías en una apuesta
 
 
 \begin{equation*}
-  \text{Marginal}_{i} = \sum_j \text{Conjunta}_{ij}  \ \ \ \ \ \ \ \ \ \ \ \  \text{Condicional}_{j|i} = \frac{\text{Conjunta}_{ij}}{\text{Marginal}_{i}}
+  \text{Marginal}_{i} = \sum_j \text{Conjunta}_{ij}  \ \ \ \ \ \ \ \ \ \ \ \  \ \ \ \ \  \text{Condicional}_{j|i} = \frac{\text{Conjunta}_{ij}}{\text{Marginal}_{i}}
 \end{equation*}
 
-\pause
 \vspace{0.75cm}
 
 
@@ -1128,6 +770,8 @@ Los pagos que aceptarías en una apuesta
  P(r) = \sum_j P(r,s_j)
 \end{equation*}
 
+
+
  \justifying \footnotesize
   Cualquier distribución marginal puede ser obtenida integrando la distribución conjunta
 
@@ -1136,8 +780,9 @@ Los pagos que aceptarías en una apuesta
 \centering  \textbf{Regla del producto}
 
 \begin{equation*}
- P(r,s) = P(s|r) P(r)
+ P(r|s)  = \frac{P(r,s)}{P(r)}
 \end{equation*}
+
 
  \justifying \footnotesize
 Cualquier distribución conjunta puede ser expresada como el producto de distribuciones condicionales uni-dimensionles.
@@ -1883,15 +1528,32 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
 
 
 
- \only<2>{
+ \only<2->{
  \begin{textblock}{160}(0,50)
  \begin{equation*}
-  P(s_2) = \sum_i P(s_2|r_i) P(r_i) = \frac{1}{2} \frac{1}{3} + 0 \frac{1}{3} + \frac{1}{1} \frac{1}{3} = 1/2
+  P(s_2) = \sum_i P(s_2|r_i) P(r_i) \onslide<3->{= \frac{1}{2} \frac{1}{3} + 0 \frac{1}{3} + \frac{1}{1} \frac{1}{3} } \onslide<4>{= 1/2}
  \end{equation*}
  \end{textblock}
 }
 \end{frame}
 
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Modelos causales alternativos
+\end{textblock}
+ \vspace{1.25cm}
+
+ \Large \centering
+
+ ¿Y el acuerdo intersubjetivo respecto de los modelos?
+
+ \pause
+
+ \begin{equation*}
+P(\text{Modelo}_i|\text{Datos})
+ \end{equation*}
+
+ \end{frame}
 
 
 \begin{frame}[plain]
@@ -1977,12 +1639,13 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
 \end{textblock}
 \vspace{1cm}
 
-
+\only<-5>{
 \begin{textblock}{160}(0,18)
 \begin{equation*}
  P(\text{Modelo}_i|\text{Datos}) = \frac{\overbrace{P(\text{Datos}|\text{Modelo}_i)}^{\hfrac{\text{\footnotesize Predicción a priori}}{\text{\footnotesize o evidencia}} } P(\text{Modelo}_i)}{ P(\text{Datos})}
 \end{equation*}
 \end{textblock}
+}
 
 \only<2>{
 \begin{textblock}{160}(0,44)
@@ -1995,7 +1658,7 @@ P(\text{Hip\'otesis}_i|\,\text{Datos, Modelo}) = \frac{P(\text{Datos}\,|\,\text{
 
 
 \only<3-4>{
-\begin{textblock}{160}(0,44)
+\begin{textblock}{160}(0,42)
  \begin{equation*}
 \begin{split}
  \frac{P(\text{Modelo}_A|\text{Datos})}{P(\text{Modelo}_B|\text{Datos})} = \frac{P(\text{Datos}|\text{Modelo}_A)} {P(\text{Datos}|\text{Modelo}_B)} \only<4>{\phantom}{\frac{P(\text{Modelo}_A)}{P(\text{Modelo}_B)}}
@@ -2005,16 +1668,237 @@ P(\text{Hip\'otesis}_i|\,\text{Datos, Modelo}) = \frac{P(\text{Datos}\,|\,\text{
 }
 
 \only<5->{
-\begin{textblock}{160}(0,44)
+\begin{textblock}{160}(0,38)
  \begin{equation*}
 \begin{split}
-P(\text{Dat\en{a}\es{os}}|\text{Model\es{o}}) & = P(d_1|\text{Model\es{o}})P(d_2|d_1,\text{Model\es{o}}) \dots \\
-\onslide<6->{& = \left( \sum^{\text{Hipótesis}}_h P(d_1|h,\text{M}) P(h|\text{M}) \right) \left( \sum^{\text{Hipótesis}}_h P(d_2|d_1,h,\text{M}) P(h|d_1,\text{M}) \right)  \dots \\}%\onslide<3->{& =  \prod_i^{|\text{Datos}|} \sum_h P(d_i|d_1, \dots, d_{i-1}, h, \text{M}) P(h|d_1, \dots, d_{i-1},\text{M}) }
+P(\text{Dat\en{a}\es{os}}|\text{Model\es{o}}) & = P(d_1|\text{Model\es{o}})P(d_2|d_1,\text{Model\es{o}}) \dots
+%\\ \onslide<6->{& = \left( \sum^{\text{Hipótesis}}_h P(d_1|h,\text{M}) P(h|\text{M}) \right) \left( \sum^{\text{Hipótesis}}_h P(d_2|d_1,h,\text{M}) P(h|d_1,\text{M}) \right)  \dots \\}%\onslide<3->{& =  \prod_i^{|\text{Datos}|} \sum_h P(d_i|d_1, \dots, d_{i-1}, h, \text{M}) P(h|d_1, \dots, d_{i-1},\text{M}) }
 \end{split}
 \end{equation*}
 \end{textblock}
 }
 
+
+\only<6,10>{
+\begin{textblock}{80}(60,22)
+\tikz{
+    \node[factor, minimum size=1cm] (p1) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/cerradura.png}} ;
+    \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
+    \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+}
+\end{textblock}
+}
+\only<7-8>{
+\begin{textblock}{80}(60,22)
+\tikz{
+    \node[factor, minimum size=1cm] (p1) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/cerradura.png}} ;
+    \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/dedo.png}} ;
+    \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+}
+\end{textblock}
+}
+\only<9>{
+\begin{textblock}{80}(60,22)
+\tikz{
+    \node[det, minimum size=1cm] (p1) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/regalo.png}} ;
+    \node[det, minimum size=1cm, xshift=1.5cm] (p2) {} ;
+    \node[det, minimum size=1cm, xshift=3cm] (p3) {} ;
+}
+\end{textblock}
+}
+\only<11-12>{
+\begin{textblock}{80}(60,22)
+\tikz{
+    \node[factor, minimum size=1cm] (p1) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/cerradura.png}} ;
+    \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
+    \node[det, minimum size=1cm, xshift=3cm] (p3) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/dedo.png}} ;
+}
+\end{textblock}
+}
+\only<13>{
+\begin{textblock}{80}(60,22)
+\tikz{
+    \node[det, minimum size=1cm] (p1) {} ;
+    \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/regalo.png}} ;
+    \node[det, minimum size=1cm, xshift=3cm] (p3) {} ;
+}
+\end{textblock}
+}
+
+
+\only<6>{
+\begin{textblock}{80}(0,52) \centering
+\begin{tabular}{|c|c|c|c||c|} \hline  \setlength\tabcolsep{0.4cm}
+\phantom{$\bm{s_2}$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{$\bm{1/2}$} \\ \hline
+  $s_1$ & $0$ & $0$ & $0$ &   $0$ \\ \hline
+  $s_2$ & $1/6$ & $0$ & $1/3$ &  $1/2$ \\  \hline
+  $s_3$ & $1/6$ & $1/3$ & $0$ & $1/2$ \\ \hline
+  \end{tabular}
+\end{textblock}
+}
+\only<7>{
+\begin{textblock}{80}(0,52) \centering
+\begin{tabular}{|c|c|c|c||c|} \hline  \setlength\tabcolsep{0.4cm}
+\phantom{$\bm{s_2}$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, &  \phantom{$\bm{1/2}$}  \\ \hline
+  $\gray s_1$ & $\gray0$ & $\gray0$ & $\gray0$ &   $\gray 0$ \\ \hline
+  $\bm{s_2}$ & $1/6$ & $0$ & $1/3$ &  $\bm{1/2}$ \\  \hline
+  $\gray s_3$ & $\gray1/6$ & $\gray1/3$ & $\gray0$ & $\gray1/2$ \\ \hline
+  \end{tabular}
+\end{textblock}
+}
+\only<8>{
+\begin{textblock}{80}(0,52) \centering
+\begin{tabular}{|c|c|c|c||c|} \hline  \setlength\tabcolsep{0.4cm}
+\phantom{$\bm{s_2}$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{$\bm{1/2}$}  \\ \hline
+            & & &  &  \\ \hline
+  $s_2$ & $1/3$ & $0$ & $2/3$ &  1 \\  \hline
+ & & & &\\ \hline
+  \end{tabular}
+\end{textblock}
+}
+\only<9>{
+\begin{textblock}{80}(0,52) \centering
+\begin{tabular}{|c|c|c|c||c|} \hline  \setlength\tabcolsep{0.4cm}
+\phantom{$\bm{s_2}$} & \, $\bm{r_1}$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{$\bm{1/2}$}  \\ \hline
+            & & &  &  \\ \hline
+  $s_2$ & $\bm{1/3}$ & $0$ & $2/3$ &  1 \\  \hline
+ & & & &\\ \hline
+  \end{tabular}
+\end{textblock}
+}
+\only<10>{
+\begin{textblock}{80}(0,52) \centering
+\begin{tabular}{|c|c|c|c||c|} \hline  \setlength\tabcolsep{0.4cm}
+\phantom{$\bm{s_2}$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{$\bm{1/2}$} \\ \hline
+  $s_1$ & $0$ & $0$ & $0$ &   $0$ \\ \hline
+  $s_2$ & $1/6$ & $0$ & $1/3$ &  $1/2$ \\  \hline
+  $s_3$ & $1/6$ & $1/3$ & $0$ & $1/2$ \\ \hline
+  \end{tabular}
+\end{textblock}
+}
+\only<11>{
+\begin{textblock}{80}(0,52) \centering
+\begin{tabular}{|c|c|c|c||c|} \hline  \setlength\tabcolsep{0.4cm}
+\phantom{$\bm{s_2}$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, &  \phantom{$\bm{1/2}$}  \\ \hline
+  $\gray s_1$ & $\gray0$ & $\gray0$ & $\gray0$ &   $\gray 0$ \\ \hline
+  $\gray s_2$ & $\gray1/6$ & $\gray0$ & $\gray1/3$ &  $\gray1/2$ \\  \hline
+  $\bm{s_3}$ & $1/6$ & $1/3$ & $0$ & $\bm{1/2}$ \\ \hline
+  \end{tabular}
+\end{textblock}
+}
+\only<12>{
+\begin{textblock}{80}(0,52) \centering
+\begin{tabular}{|c|c|c|c||c|} \hline  \setlength\tabcolsep{0.4cm}
+\phantom{$\bm{s_2}$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{$\bm{1/2}$}  \\ \hline
+            & & &  &  \\ \hline
+ & & & &\\ \hline
+ $s_3$ & $1/3$ & $2/3$ & $0$ &  1 \\  \hline
+  \end{tabular}
+\end{textblock}
+}
+\only<13>{
+\begin{textblock}{80}(0,52) \centering
+\begin{tabular}{|c|c|c|c||c|} \hline  \setlength\tabcolsep{0.4cm}
+\phantom{$\bm{s_2}$} & \, $r_1$ \, &  \, $\bm{r_2}$ \, & \, $r_3$ \, & \phantom{$\bm{1/2}$}  \\ \hline
+            & & &  &  \\ \hline
+ & & & &\\ \hline
+ $s_3$ & $1/3$ & $\bm{2/3}$ & $0$ &  1 \\  \hline
+  \end{tabular}
+\end{textblock}
+}
+\only<6>{
+\begin{textblock}{80}(80,52) \centering
+\begin{tabular}{|c|c|c|c||c|} \hline  \setlength\tabcolsep{0.4cm}
+\phantom{$\bm{s_2}$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{$\bm{1/3}$}  \\ \hline
+  $s_1$ & $0$ & $1/6$ & $1/6$ &   $1/3$ \\ \hline
+  $s_2$ & $1/6$ & $0$ & $1/6$ &  $1/3$ \\  \hline
+  $s_3$ & $1/6$ & $1/6$ & $0$ & $1/3$ \\ \hline
+  \end{tabular}
+\end{textblock}
+}
+\only<7>{
+\begin{textblock}{80}(80,52) \centering
+\begin{tabular}{|c|c|c|c||c|} \hline  \setlength\tabcolsep{0.4cm}
+ \phantom{$\bm{s_2}$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{$\bm{1/3}$} \\ \hline
+  $\gray s_1$ & $\gray0$ & $\gray1/6$ & $\gray1/6$ &   $\gray 1/3$ \\ \hline
+  $\bm{s_2}$ & $1/6$ & $0$ & $1/6$ &  $\bm{1/3}$ \\  \hline
+  $\gray s_3$ & $\gray1/6$ & $\gray1/6$ & $\gray0$ & $\gray1/3$ \\ \hline
+  \end{tabular}
+\end{textblock}
+}
+\only<8>{
+\begin{textblock}{80}(80,52) \centering
+\begin{tabular}{|c|c|c|c||c|} \hline  \setlength\tabcolsep{0.4cm}
+\phantom{$\bm{s_2}$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{$\bm{1/2}$}  \\ \hline
+            & & &  &  \\ \hline
+  $s_2$ & $1/2$ & $0$ & $1/2$ &  1 \\  \hline
+ & & & &\\ \hline
+  \end{tabular}
+\end{textblock}
+}
+\only<9>{
+\begin{textblock}{80}(80,52) \centering
+\begin{tabular}{|c|c|c|c||c|} \hline  \setlength\tabcolsep{0.4cm}
+\phantom{$\bm{s_2}$} & \, $\bm{r_1}$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{$\bm{1/2}$}  \\ \hline
+            & & &  &  \\ \hline
+  $s_2$ & $\bm{1/2}$ & $0$ & $1/2$ &  1 \\  \hline
+ & & & &\\ \hline
+  \end{tabular}
+\end{textblock}
+}
+\only<10>{
+\begin{textblock}{80}(80,52) \centering
+\begin{tabular}{|c|c|c|c||c|} \hline  \setlength\tabcolsep{0.4cm}
+\phantom{$\bm{s_2}$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{$\bm{1/3}$}  \\ \hline
+  $s_1$ & $0$ & $1/6$ & $1/6$ &   $1/3$ \\ \hline
+  $s_2$ & $1/6$ & $0$ & $1/6$ &  $1/3$ \\  \hline
+  $s_3$ & $1/6$ & $1/6$ & $0$ & $1/3$ \\ \hline
+  \end{tabular}
+\end{textblock}
+}
+\only<11>{
+\begin{textblock}{80}(80,52) \centering
+\begin{tabular}{|c|c|c|c||c|} \hline  \setlength\tabcolsep{0.4cm}
+ \phantom{$\bm{s_2}$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{$\bm{1/3}$} \\ \hline
+  $\gray s_1$ & $\gray0$ & $\gray1/6$ & $\gray1/6$ &   $\gray 1/3$ \\ \hline
+  $\gray s_2$ & $\gray1/6$ & $\gray0$ & $\gray1/6$ &  $\gray1/3$ \\  \hline
+  $\bm{s_3}$ & $1/6$ & $1/6$ & $0$ & $\bm{1/3}$ \\ \hline
+  \end{tabular}
+\end{textblock}
+}
+\only<12>{
+\begin{textblock}{80}(80,52) \centering
+\begin{tabular}{|c|c|c|c||c|} \hline  \setlength\tabcolsep{0.4cm}
+\phantom{$\bm{s_2}$} & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \phantom{$\bm{1/2}$}  \\ \hline
+            & & &  &  \\ \hline
+ & & & &\\ \hline
+ $s_3$ & $1/2$ & $1/2$ & $0$ &  1 \\  \hline
+  \end{tabular}
+\end{textblock}
+}
+\only<13>{
+\begin{textblock}{80}(80,52) \centering
+\begin{tabular}{|c|c|c|c||c|} \hline  \setlength\tabcolsep{0.4cm}
+\phantom{$\bm{s_2}$} & \, $r_1$ \, &  \, $\bm{r_2}$ \, & \, $r_3$ \, & \phantom{$\bm{1/2}$}  \\ \hline
+            & & &  &  \\ \hline
+ & & & &\\ \hline
+ $s_3$ & $1/2$ & $\bm{1/2}$ & $0$ &  1 \\  \hline
+  \end{tabular}
+\end{textblock}
+}
+
+
+
+\begin{textblock}{80}(0,73) \centering
+ \begin{equation*}
+ \onslide<6->{ P(\text{D}|\text{M}) }  \onslide<7->{= \frac{1}{2}} \, \onslide<9->{\frac{1}{3}} \, \onslide<11->{\frac{1}{2}} \, \onslide<13>{\frac{2}{3}}
+ \end{equation*}
+\end{textblock}
+\begin{textblock}{80}(80,73) \centering
+\begin{equation*}
+ \onslide<6->{ P(\text{D}|\text{M})}  \onslide<7->{= \frac{1}{3}} \, \onslide<9->{\frac{1}{2}} \, \onslide<11->{\frac{1}{3}} \, \onslide<13>{\frac{1}{2}}
+ \end{equation*}
+\end{textblock}
 
 
 
@@ -2065,8 +1949,8 @@ P(\text{Dat\en{a}\es{os}}|\text{Model\es{o}}) & = P(d_1|\text{Model\es{o}})P(d_2
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE Modelos causales alternativos  \\
-\Large Datos generados con el modelo Monty Hall
+\centering \LARGE Modelos causales alternativos
+%\\ \Large Datos generados con el modelo Monty Hall
 \end{textblock}
 %
 % \begin{textblock}{160}(14,12)
@@ -2085,14 +1969,14 @@ P(\text{Dat\en{a}\es{os}}|\text{Model\es{o}}) & = P(d_1|\text{Model\es{o}})P(d_2
 
 
 
-\only<2>{
+\only<1>{
 
-\begin{textblock}{140}(10,30)
+\begin{textblock}{140}(10,26)
 \centering
 \includegraphics[width=0.66\textwidth]{figuras/monty_hall_selection.pdf} \hspace{2cm}
 \end{textblock}
 
-\begin{textblock}{80}(86,30)
+\begin{textblock}{80}(86,26)
 \centering
 \scalebox{0.5}{
 \tikz{
@@ -2113,7 +1997,7 @@ P(\text{Dat\en{a}\es{os}}|\text{Model\es{o}}) & = P(d_1|\text{Model\es{o}})P(d_2
 \end{textblock}
 
 
-\begin{textblock}{80}(86,64)
+\begin{textblock}{80}(86,60)
 \centering
 \scalebox{0.5}{
  \tikz{
@@ -2179,6 +2063,26 @@ P(\text{Dat\en{a}\es{os}}|\text{Model\es{o}}) & = P(d_1|\text{Model\es{o}})P(d_2
 %
 % \end{frame}
 %
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Modelos causales alternativos \\
+\Large Preguntas
+\end{textblock}
+\vspace{1.25cm}
+
+\pause
+
+1. ¿Qué hubiera pasado con la evaluación de modelos si una de las pistas hubiera señalado la caja que habíamos elegido previamente?
+
+\pause
+\vspace{0.4cm}
+
+2. ¿Cómo podemos corregir ese modelo sabiendo que a veces, muy rara vez, la persona que señala se puede equivocar?
+
+
+\end{frame}
 
 \begin{frame}[plain]
 \begin{textblock}{96}(0,6.5)\centering
