@@ -37,6 +37,11 @@
 
 
 \begin{frame}[plain,noframenumbering]
+\centering \vspace{0.5cm}
+\includegraphics[width=1\textwidth]{../../auxiliar/static/CBP.png}
+\end{frame}
+
+\begin{frame}[plain,noframenumbering]
 
 
 \begin{textblock}{160}(0,0)
@@ -144,7 +149,7 @@ Congreso Bayesiano Plurinacional 2023} \\}
 \centering
 \LARGE Verdad
 \end{textblock}
-\vspace{2.5cm} \large
+\vspace{2cm} \large
 
 \centering
 
@@ -166,7 +171,7 @@ Para todas las personas. En todas las culturas.
 \centering
 \LARGE Verdades
 \end{textblock}
-\vspace{1.5cm} \large
+\vspace{1cm} \large
 
 \centering
 
@@ -174,7 +179,7 @@ Para todas las personas. En todas las culturas.
  \normalsize \textcolor{black!50}{(Matemáticas, lógicas)} \\
  \large  Validadas en sistemas cerrados sin incertidumbre\\
 
- \vspace{0.6cm}
+ \vspace{0.7cm}
 
   \pause
 
@@ -183,15 +188,74 @@ Para todas las personas. En todas las culturas.
 \large Validadas en sistemas abiertos con incertidumbre
 
 \pause
-\vspace{1cm}
+\vspace{0.6cm}
 
 ¿Es posible alcanzar acuerdos intersubjetivos \\ en contextos de incertidumbre?
 %
 % \pause
+% \vspace{0.2cm}
 %
-% Sí, porque \textbf{podemos evitar mentir}!
+%
+% Sí. Podemos evitar mentir.
 
 \end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(00,04)
+\centering
+\LARGE No hay una forma correcta de evaluar hipótesis \\
+\Large Todo depende del punto de vista (o función de costo)
+\end{textblock}
+\vspace{1cm} \large
+
+
+\only<2->{
+\begin{textblock}{50}(3,26) \centering
+\includegraphics[width=1\textwidth, page={6}]{../../auxiliar/static/sidewalk_bubblegum_1997_1}
+\end{textblock}}
+ \only<3->{
+\begin{textblock}{50}(55,26) \centering
+\includegraphics[width=1\textwidth, page={6}]{../../auxiliar/static/sidewalk_bubblegum_1997_2}
+\end{textblock}}
+% \only<4>{
+% \begin{textblock}{50}(107,20) \centering
+% \includegraphics[width=1\textwidth, page={6}]{../../auxiliar/static/sidewalk_bubblegum_1997_3}
+% \end{textblock}}
+\only<4->{
+\begin{textblock}{50}(107,26) \centering
+\includegraphics[width=1\textwidth, page={6}]{../../auxiliar/static/sidewalk_bubblegum_1997_4}
+\end{textblock}}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4) \centering
+\LARGE Verdades con incertidumbre \\
+\Large Universalizables
+\end{textblock}
+\vspace{2cm}
+
+\Large \centering
+
+Podemos alcanzar acuerdos intersubjetivos \\ en contextos de incertidumbre \\
+gracias a que \textbf{podemos evitar mentir}:
+
+
+
+\vspace{1cm} \pause \large
+
+$\bullet$ No decir más de lo que sabemos
+
+$\bullet$ Incorporando toda la información disponible
+
+\pause \centering \vspace{1cm}
+
+\textbf{¿Cómo exactamente?}
+
+
+\end{frame}
+
 
 
 \begin{frame}[plain,noframenumbering]
@@ -300,7 +364,7 @@ Para todas las personas. En todas las culturas.
 
 \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
- \centering \LARGE Distribuciones de creencias \\
+ \centering \LARGE \onslide<3->{Distribución de creencias \\}
  \Large \only<6>{\textbf{Primer acuerdo intersubjetivo!}}
 \end{textblock}
 \vspace{1.5cm}
@@ -309,7 +373,9 @@ Para todas las personas. En todas las culturas.
 
 \only<1>{
 \begin{textblock}{160}(0,62)
-\Large Detrás de una caja hay un regalo.
+\Large Detrás de una caja hay un regalo. \\[0.1cm]
+
+\large ¿Dónde está el regalo?
 \end{textblock}
 }
 
@@ -423,7 +489,7 @@ Principio de indiferencia \\ \large Máximiza incertidumbre dada información di
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
- \centering \LARGE ¿Cómo podemos dar continuidad a los acuerdos intersubjetivos?
+ \centering \Large ¿Cómo podemos dar continuidad a los acuerdos intersubjetivos?
  \end{textblock}
 \vspace{1cm}
 
@@ -603,11 +669,11 @@ Modelo causal \\ \vspace{0.3cm}
   \centering
   Creencia$(r,s|\text{M})$ \\ \vspace{0.3cm}
  \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm}
-        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, & \\ \hline
-  $s_1$ & $0$ & $1/6$ & $1/6$ & \onslide<5->{$1/3$} \\ \hline
-  $s_2$ & $1/6$ & $0$ & $1/6$ & \onslide<5->{$1/3$} \\ \hline
-  $s_3$ & $1/6$ & $1/6$ & $0$ & \onslide<5->{$1/3$} \\ \hline \hline
-        & \onslide<3->{$1/3$} & \onslide<3->{$1/3$} & \onslide<3->{$1/3$} &  \\
+     $\phantom{\bm{s_2}}$   & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, &  \phantom{\bm{$1/3$}} \\ \hline
+  $\only<6>{\gray}s_1$ & $\only<6>{\gray}0$ & $\only<6>{\gray}1/6$ & $\only<6>{\gray}1/6$ & \onslide<5->{$\only<6>{\gray}1/3$} \\ \hline
+  $\only<6>{\bm}{s_2}$ & $1/6$ & $0$ & $1/6$ & \onslide<5->{$1/3$} \\ \hline
+  $\only<6>{\gray}s_3$ & $\only<6>{\gray}1/6$ & $\only<6>{\gray}1/6$ & $\only<6>{\gray}0$ & \onslide<5->{$\only<6>{\gray}1/3$} \\ \hline \hline
+        & \onslide<3->{$\only<6>{\gray}1/3$} & \onslide<3->{$\only<6>{\gray}1/3$} & \onslide<3->{$\only<6>{\gray}1/3$} &  \\
 \end{tabular}
 
 \vspace{0.3cm}
@@ -631,7 +697,7 @@ Modelo causal \\ \vspace{0.3cm}
 \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
  \centering \LARGE Principio de coherencia \\[-0.1cm]
- \only<4->{\Large (Nueva creencia)}
+ \only<3->{\Large (Nueva creencia)}
  \end{textblock}
 
 \vspace{1cm}
@@ -639,11 +705,11 @@ Modelo causal \\ \vspace{0.3cm}
 \only<1->{
  \begin{textblock}{160}(0,22)
   \centering
-  \only<1-3>{Creencia$(r,s=2|\text{M})$}\only<4->{Creencia$(r|s=2,\text{M})$} \\ \vspace{0.3cm}
+  \only<1-2>{Creencia$(r,s=2|\text{M})$}\only<3->{Creencia$(r|s=2,\text{M})$} \\ \vspace{0.3cm}
  \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm}
-        & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, &  \phantom{\bm{$1/3$}} \\ \hline
+        $\phantom{\bm{s_2}}$ & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, &  \phantom{\bm{$1/3$}} \\ \hline
   &  &  &  & \\ \hline
-  $s_2$ & \only<1-3>{$1/6$}\only<4>{$\frac{1}{6}/\frac{1}{3}$}\only<5>{$1/2$} & $0$ & \only<1-3>{$1/6$}\only<4>{$\frac{1}{6}/\frac{1}{3}$}\only<5>{$1/2$} & \only<2-3>{{$1/3$}}\only<4>{$\frac{1}{3}/\frac{1}{3}$}\only<5>{$1$} \\ \hline
+  $\bm{s_2}$ & \only<1-2>{$1/6$}\only<3>{$\frac{1}{6}/\frac{1}{3}$}\only<4->{$1/2$} & $0$ & \only<1-2>{$1/6$}\only<3>{$\frac{1}{6}/\frac{1}{3}$}\only<4->{$1/2$} & \only<1>{$1/3$}\only<2>{{$\bm{1/3}$}}\only<3>{$\frac{1}{3}/\frac{1}{3}$}\only<4->{$1$} \\ \hline
   &  &  & &  \\
 \end{tabular}
 \end{textblock}
@@ -717,33 +783,6 @@ Modelo causal \\ \vspace{0.3cm}
 
 \end{frame}
 
-\begin{frame}[plain] \centering
-\begin{textblock}{160}(00,04)
-\centering \LARGE Sistemas axiomáticos \\
-\end{textblock}
-\vspace{1.2cm} \centering
-
-Cox (1946) \emph{Probability, Frequency and Reasonable Expectation}\\[0.1cm]
-Las consecuencias del ``sentido común''
-
-\vspace{0.8cm}
-
-Kolmogorov (1933) \emph{Foundations of the Theory of Probability} \\[0.1cm]
-Como medida de conjuntos
-
-\vspace{0.8cm}
-
-Ramsey (1926) \emph{Truth and Probability} \\[0.1cm]
-Los pagos que aceptarías en una apuesta
-
-\vspace{0.4cm}
-
-% \begin{framed}
-% Las reglas de la probabilidad pueden derivarse a partir de sistemas axiomáticos conceptualmente muy distintos, lo cual es uno de los punto fuerte a su favor.
-% \end{framed}
-
-\end{frame}
-
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
@@ -772,23 +811,54 @@ Los pagos que aceptarías en una apuesta
 
 
 
- \justifying \footnotesize
-  Cualquier distribución marginal puede ser obtenida integrando la distribución conjunta
+ \footnotesize
+ No perdemos creencia al distribuirla \\
+ Si sumamos, la recuperamos.
 
  \end{column}
  \begin{column}{0.5\textwidth}
 \centering  \textbf{Regla del producto}
 
 \begin{equation*}
- P(r|s)  = \frac{P(r,s)}{P(r)}
+ P(r|s)  = \frac{P(r,s)}{P(s)}
 \end{equation*}
 
+\vspace{0.1cm}
 
- \justifying \footnotesize
-Cualquier distribución conjunta puede ser expresada como el producto de distribuciones condicionales uni-dimensionles.
+\footnotesize
+Preservamos la creencia previa que \\
+sigue siendo compatible con el dato
 
 \end{column}
 \end{columns}
+
+\end{frame}
+
+
+\begin{frame}[plain] \centering
+\begin{textblock}{160}(00,04)
+\centering \LARGE La misma conclusión de siempre \\
+\end{textblock}
+\vspace{1.2cm} \centering \large
+
+Cox (1946) \emph{Probability, Frequency and Reasonable Expectation}\\[0.1cm]
+Las consecuencias del ``sentido común''
+
+\vspace{0.8cm}
+
+Kolmogorov (1933) \emph{Foundations of the Theory of Probability} \\[0.1cm]
+Como medida de conjuntos
+
+\vspace{0.8cm}
+
+Ramsey (1926) \emph{Truth and Probability} \\[0.1cm]
+Los pagos que aceptarías en una apuesta
+
+\vspace{0.4cm}
+
+% \begin{framed}
+% Las reglas de la probabilidad pueden derivarse a partir de sistemas axiomáticos conceptualmente muy distintos, lo cual es uno de los punto fuerte a su favor.
+% \end{framed}
 
 \end{frame}
 
@@ -1069,12 +1139,14 @@ P(r_i|s_2) = \frac{P(r_i,s_2)}{P(s_2)}
 {\node[latent,below=of bc11,yshift=0.7cm, xshift=0.5cm] (r1d3) {$s_3$};}
 {\node[latent,below=of bc12,yshift=0.7cm] (r2d3) {$s_3$};}
 \node[latent,below=of bc13,yshift=0.7cm] (r3d2) {$s_2$};
-\node[latent,below=of r1d2,yshift=0.7cm,draw=white] (br1d2) {$\frac{1}{3}\frac{1}{2}$};
-{\node[latent,below=of r1d3,yshift=0.7cm, draw=white] (br1d3) {$\frac{1}{3}\frac{1}{2}$};}
-{\node[latent,below=of r2d3,yshift=0.7cm,draw=white] (br2d3) {$\frac{1}{3}$};}
-\node[latent,below=of r3d2,yshift=0.7cm,draw=white] (br3d2) {$\frac{1}{3}$};
+\node[latent,below=of r1d2,yshift=0.7cm,draw=white] (br1d2) {$\only<5>{\bm}{\frac{1}{3}\frac{1}{2}}$};
+{\node[latent,below=of r1d3,yshift=0.7cm, draw=white] (br1d3) {$\only<6>{\bm}{\frac{1}{3}\frac{1}{2}}$};}
+{\node[latent,below=of r2d3,yshift=0.7cm,draw=white] (br2d3) {$\only<8>{\bm}{\frac{1}{3}}$};}
+\node[latent,below=of r3d2,yshift=0.7cm,draw=white] (br3d2) {$\only<9>{\bm}{\frac{1}{3}}$};
 }
 
+\node[invisible, left=of r1d2,xshift=-0.1cm] (il) {};
+\node[invisible, right=of br3d2,xshift=0.1cm] (il) {};
 
 \onslide<2->{
 \edge[-] {b0} {r1,r2,r3};
@@ -1153,42 +1225,31 @@ P(r_i|s_2) = \frac{P(r_i,s_2)}{P(s_2)}
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE
-\st{Teorema de Bayes} \\
-\Large El corolario de Laplace
+\centering \LARGE Teorema de Bayes \\
+\Large {\gray El corolario de Laplace}
 \end{textblock}
 
 \only<1-4>{
 \begin{textblock}{160}(0,34)
  \begin{align*}
-  \phantom{P(r_i)} P(r_i|s_2) & = \frac{P(r_i, s_2)}{P(s_2)} \onslide<4>{= \frac{P(s_2|r_i)P(r_i)}{P(s_2)}}
+  \phantom{P(r_i)} P(r_i|s_2) & = \only<-3>{\frac{\bm{P(r_i, s_2)}}{P(s_2)}} \only<4>{\frac{P(s_2|r_i)P(r_i)}{P(s_2)}}
   \only<2>{\\ P(s_2 | r_i) &= \frac{P(r_i, s_2)}{P(r_i)}}
-  \only<3-4>{\\[0.27cm]P(r_i) P(s_2 | r_i)  &= P(r_i, s_2)}
+  \only<3>{\\[0.27cm]P(r_i) P(s_2 | r_i)  &= P(r_i, s_2)}
  \end{align*}
 \end{textblock}
 }
 
 \only<5>{
-\begin{textblock}{160}(0,34)
- \begin{align*}
-  \phantom{P(r_i)} P(r_i|s_2) & = \frac{P(s_2|r_i)P(r_i)}{P(s_2)} \phantom{= \frac{P(r_i, s_2)}{P(s_2)} \ }
-  \end{align*}
-\end{textblock}
-}
-
-
-
-\only<6>{
 \begin{textblock}{160}(0,43)
 \begin{equation*}
-P(\text{Hip\'otesis}_i |\,\text{Dato}) = \frac{P(\text{Dato}\,|\text{ Hip\'otesis}_i) P(\text{Hip\'otesis}_i)}{P(\text{Dato})}
+P(\text{Hip\'otesis}_i |\,\text{Datos}) = \frac{P(\text{Datos}\,|\,\text{Hip\'otesis}_i) \, P(\text{Hip\'otesis}_i)}{P(\text{Datos})}
 \end{equation*}
 \end{textblock}
 }
 
 
-\only<7>{
-\begin{textblock}{160}(0,37.75)
+\only<6>{
+\begin{textblock}{160}(0,37)
 \begin{equation*}
 \underbrace{P(\text{Hip\'otesis}_i|\,\text{Datos})}_{\text{\scriptsize Posteriori}} = \frac{\overbrace{P(\text{Datos}\,|\,\text{Hip\'otesis}_i)}^{\text{\scriptsize Verosimilitud}} \overbrace{P(\text{Hip\'otesis}_i)}^{\text{\scriptsize Priori}} }{\underbrace{P(\text{Datos})}_{\text{\scriptsize Evidencia}}}
 \end{equation*}
@@ -1197,7 +1258,7 @@ P(\text{Hip\'otesis}_i |\,\text{Dato}) = \frac{P(\text{Dato}\,|\text{ Hip\'otesi
 
 \vspace{0.2cm}
 
-\only<8->{
+\only<7->{
 %\vspace{0.3cm}
 \Wider[2cm]{
 \begin{textblock}{160}(0,34.25)
@@ -1208,7 +1269,7 @@ P(\text{Hip\'otesis}_i |\,\text{Dato}) = \frac{P(\text{Dato}\,|\text{ Hip\'otesi
 }
 }
 
-\only<9->{
+\only<8->{
 \begin{textblock}{100}(30,65)
 \centering \vspace{0.05cm}
 El \textbf{modelo} es lo que permite relacionar
@@ -1522,7 +1583,7 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
 
   \begin{textblock}{160}(0,22)
   \begin{align*}
-   P(r_i|s_2) = \frac{P(r_i) P(s_2|r_i)}{\underbrace{P(s_2)}_{\text{Evidencia}}}
+   P(r_i|s_2) = \frac{P(s_2|r_i)P(r_i)}{\underbrace{P(s_2)}_{\text{Evidencia}}}
   \end{align*}
  \end{textblock}
 
@@ -1531,7 +1592,7 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
  \only<2->{
  \begin{textblock}{160}(0,50)
  \begin{equation*}
-  P(s_2) = \sum_i P(s_2|r_i) P(r_i) \onslide<3->{= \frac{1}{2} \frac{1}{3} + 0 \frac{1}{3} + \frac{1}{1} \frac{1}{3} } \onslide<4>{= 1/2}
+  P(s_2) = \sum_i P(s_2|r_i) P(r_i) \onslide<3->{= \frac{1}{2} \frac{1}{3} + 0 \frac{1}{3} + 1 \frac{1}{3} } \onslide<4>{= 1/2}
  \end{equation*}
  \end{textblock}
 }
