@@ -177,7 +177,7 @@ Para todas las personas. En todas las culturas.
 
  \Large Ciencias formales \\
  \normalsize \textcolor{black!50}{(Matemáticas, lógicas)} \\
- \large  Validadas en sistemas cerrados sin incertidumbre\\
+ \large  Validadas en sistemas cerrados / teóricos\\
 
  \vspace{0.7cm}
 
@@ -185,7 +185,7 @@ Para todas las personas. En todas las culturas.
 
  \Large Ciencias empíricas \\
 \normalsize  \textcolor{black!50}{(Físicas, Químicas, Biológicas, Sociales)} \\
-\large Validadas en sistemas abiertos con incertidumbre
+\large Validadas en sistemas abiertos / naturales
 
 \pause
 \vspace{0.6cm}
@@ -503,6 +503,7 @@ Principio de indiferencia \\ \large Máximiza incertidumbre dada información di
     \onslide<2->{
     \node[latent, below=of r] (d) {\includegraphics[width=0.05\textwidth]{../../auxiliar/static/dedo.png}} ;
     \node[const, left=of d] (nd) {\Large $s$} ;
+    \node[const, below=of d, yshift=-0.2cm] (c) {$(s \neq r)$};
 
     \edge {r} {d};
     }
@@ -577,6 +578,7 @@ Modelo causal \\ \vspace{0.3cm}
 
     \node[latent, below=of r] (d) {\includegraphics[width=0.05\textwidth]{../../auxiliar/static/dedo.png}} ;
     \node[const, left=of d] (nd) {\Large $s$} ;
+    \node[const, below=of d, yshift=-0.2cm] (c) {$(s \neq r)$};
 
     \edge {r} {d};
 }
@@ -656,31 +658,44 @@ Modelo causal \\ \vspace{0.3cm}
 \end{textblock}
 }
 
+
+
+\only<9->{
+ \begin{textblock}{60}(0,65) \centering
+ No mentira inicial \small
+
+Maximizando incertidumbre \\
+
+dado el modelo $(s \neq r)$
+ \end{textblock}
+ }
 \end{frame}
+
+
 
 \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
- \centering \LARGE \only<1>{Principio de indiferencia}\only<2->{Principio de integridad}
+ \centering \Large Acuerdo inicial: el ``prior''
  \end{textblock}
 
 \vspace{1cm}
 
- \begin{textblock}{160}(0,22)
+ \begin{textblock}{160}(0,15)
   \centering
-  Creencia$(r,s|\text{M})$ \\ \vspace{0.3cm}
+  $\overbrace{\text{Creencia}(r,s|\text{M})}^{\text{\scriptsize De ambas variables}}$ \\ \vspace{0.3cm}
  \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm}
-     $\phantom{\bm{s_2}}$   & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, &  \phantom{\bm{$1/3$}} \\ \hline
-  $\only<6>{\gray}s_1$ & $\only<6>{\gray}0$ & $\only<6>{\gray}1/6$ & $\only<6>{\gray}1/6$ & \onslide<5->{$\only<6>{\gray}1/3$} \\ \hline
-  $\only<6>{\bm}{s_2}$ & $1/6$ & $0$ & $1/6$ & \onslide<5->{$1/3$} \\ \hline
-  $\only<6>{\gray}s_3$ & $\only<6>{\gray}1/6$ & $\only<6>{\gray}1/6$ & $\only<6>{\gray}0$ & \onslide<5->{$\only<6>{\gray}1/3$} \\ \hline \hline
-        & \onslide<3->{$\only<6>{\gray}1/3$} & \onslide<3->{$\only<6>{\gray}1/3$} & \onslide<3->{$\only<6>{\gray}1/3$} &  \\
+     $\phantom{\bm{s_2}}$   & \, $r_1$ \, &  \, $\only<2>{\gray}r_2$ \, & \, $\only<2>{\gray}r_3$ \, &  \phantom{\bm{$1/3$}} \\ \hline
+  $\only<5>{\gray}s_1$ & $\only<5>{\gray}0$ & $\only<2,5>{\gray}1/6$ & $\only<2,5>{\gray}1/6$ & \onslide<4->{$\only<5>{\gray}1/3$} \\ \hline
+  $\only<5>{\bm}{s_2}$ & $1/6$ & $\only<2>{\gray}0$ & $\only<2>{\gray}1/6$ & \onslide<4->{$1/3$} \\ \hline
+  $\only<5>{\gray}s_3$ & $\only<5>{\gray}1/6$ & $\only<2,5>{\gray}1/6$ & $\only<2,5>{\gray}0$ & \onslide<4->{$\only<5>{\gray}1/3$} \\ \hline \hline
+        & \onslide<3->{$\only<5>{\gray}1/3$} & \onslide<3->{$\only<5>{\gray}1/3$} & \onslide<3->{$\only<5>{\gray}1/3$} &  \\
 \end{tabular}
 
 \vspace{0.3cm}
 
 \onslide<2->{
 \begin{align*}
- \text{Creencia}(r|\text{M}) = \sum_s \text{Creencia}(r,s|\text{M})
+ \text{Creencia}(r|\text{M}) = \onslide<3->{\sum_s \text{Creencia}(r,s|\text{M})}
 \end{align*}
 }
 \vspace{-0.5cm}
@@ -696,16 +711,15 @@ Modelo causal \\ \vspace{0.3cm}
 
 \begin{frame}[plain]
  \begin{textblock}{160}(0,4)
- \centering \LARGE Principio de coherencia \\[-0.1cm]
- \only<3->{\Large (Nueva creencia)}
+ \centering \Large \only<-2>{Acuerdo inicial: el ``prior''}\only<3->{Nuevo acuerdo: el ``posterior''}
  \end{textblock}
 
 \vspace{1cm}
 
 \only<1->{
- \begin{textblock}{160}(0,22)
+ \begin{textblock}{160}(0,15)
   \centering
-  \only<1-2>{Creencia$(r,s=2|\text{M})$}\only<3->{Creencia$(r|s=2,\text{M})$} \\ \vspace{0.3cm}
+  \only<1-2>{$\overbrace{\text{Creencia}(r,s_2|\text{M})}^{\text{\scriptsize De ambas variables}}$}\only<3->{$\overbrace{\text{Creencia}(r|s_2,\text{M})}^{\text{\scriptsize De ambas variables}}$} \\ \vspace{0.3cm}
  \begin{tabular}{c|c|c|c||c} \setlength\tabcolsep{0.4cm}
         $\phantom{\bm{s_2}}$ & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, &  \phantom{\bm{$1/3$}} \\ \hline
   &  &  &  & \\ \hline
@@ -718,7 +732,7 @@ Modelo causal \\ \vspace{0.3cm}
 \only<1>{
 \begin{textblock}{160}(0,58)
 \begin{equation*}
-\ \phantom{\underbrace{\text{Creencia}(r|s=2,\text{M})}_{\text{Nueva creencia}} =} \hfrac{\overbrace{\text{Creencia}(r, s=2|\text{M})}^{\text{Creencia que sobrevive}}}{\phantom{\underbrace{\text{Creencia}(s_2|\text{M})}_{\text{Creencia total que sobrevive}}}}
+\ \phantom{\underbrace{\text{Creencia}(r|s_2,\text{M})}_{\text{Nueva creencia}} =} \hfrac{\overbrace{\text{Creencia}(r, s_2|\text{M})}^{\text{Creencia que sobrevive}}}{\phantom{\underbrace{\text{Creencia}(s_2|\text{M})}_{\text{Creencia total que sobrevive}}}}
 \end{equation*}
 \end{textblock}
 }
@@ -726,7 +740,7 @@ Modelo causal \\ \vspace{0.3cm}
 \only<2>{
 \begin{textblock}{160}(0,58)
 \begin{equation*}
-\ \phantom{\underbrace{\text{Creencia}(r|s=2,\text{M})}_{\text{Nueva creencia}} =}\hfrac{\overbrace{\text{Creencia}(r, s=2|\text{M})}^{\text{Creencia que sobrevive}}}{\underbrace{\text{Creencia}(s_2|\text{M})}_{\text{Creencia total que sobrevive}}}
+\ \phantom{\underbrace{\text{Creencia}(r|s_2,\text{M})}_{\text{Nueva creencia}} =}\hfrac{\overbrace{\text{Creencia}(r, s_2|\text{M})}^{\text{Creencia que sobrevive}}}{\underbrace{\text{Creencia}(s_2|\text{M})}_{\text{Creencia total que sobrevive}}}
 \end{equation*}
 \end{textblock}
 }
@@ -735,7 +749,7 @@ Modelo causal \\ \vspace{0.3cm}
 \only<3-4>{
 \begin{textblock}{160}(0,58)
 \begin{equation*}
-\underbrace{\text{Creencia}(r|s=2,\text{M})}_{\text{Nueva creencia}} = \frac{\overbrace{\text{Creencia}(r, s=2|\text{M})}^{\text{Creencia que sobrevive}}}{\underbrace{\text{Creencia}(s_2|\text{M})}_{\text{Creencia total que sobrevive}}}
+\underbrace{\text{Creencia}(r|s_2,\text{M})}_{\text{Nueva creencia}} = \frac{\overbrace{\text{Creencia}(r, s_2|\text{M})}^{\text{Creencia que sobrevive}}}{\underbrace{\text{Creencia}(s_2|\text{M})}_{\text{Creencia total que sobrevive}}}
 \end{equation*}
 \end{textblock}
 }
@@ -767,21 +781,21 @@ Modelo causal \\ \vspace{0.3cm}
 
 \end{frame}
 
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering \LARGE Principio de coherencia \\ \Large preservación de los acuerdos intersubjetivos
-\end{textblock}
-\vspace{1.25cm}
-
-\only<2>{
- \begin{center}
- El principio de coherencia preserva la creencia \\
-  previa que sigue siendo compatible con \\
-  la evidencia empírica y formal (datos y modelo)
- \end{center}
-}
-
-\end{frame}
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+% \centering \LARGE Principio de coherencia \\ \Large preservación de los acuerdos intersubjetivos
+% \end{textblock}
+% \vspace{1.25cm}
+%
+% \only<2>{
+%  \begin{center}
+%  El principio de coherencia preserva la creencia \\
+%   previa que sigue siendo compatible con \\
+%   la evidencia empírica y formal (datos y modelo)
+%  \end{center}
+% }
+%
+% \end{frame}
 
 
 \begin{frame}[plain]
@@ -793,16 +807,15 @@ Modelo causal \\ \vspace{0.3cm}
 
 
 
-\begin{equation*}
-  \text{Marginal}_{i} = \sum_j \text{Conjunta}_{ij}  \ \ \ \ \ \ \ \ \ \ \ \  \ \ \ \ \  \text{Condicional}_{j|i} = \frac{\text{Conjunta}_{ij}}{\text{Marginal}_{i}}
-\end{equation*}
-
-\vspace{0.75cm}
-
-
 \begin{columns}[t]
 \begin{column}{0.5\textwidth}
- \centering \textbf{Regla de la suma}
+ \centering
+
+ {\Large Principio de integridad}
+
+ \vspace{0.4cm}
+
+\textbf{``Regla de la suma''}
 
 
 \begin{equation*}
@@ -812,12 +825,18 @@ Modelo causal \\ \vspace{0.3cm}
 
 
  \footnotesize
- No perdemos creencia al distribuirla \\
- Si sumamos, la recuperamos.
+ No perdemos ni creamos creencia. \\
+Si sumamos, recuperamos lo distribuido.
 
  \end{column}
  \begin{column}{0.5\textwidth}
-\centering  \textbf{Regla del producto}
+
+\centering
+ {\Large Principio de coherencia}
+
+ \vspace{0.4cm}
+
+\textbf{``Regla del producto''}
 
 \begin{equation*}
  P(r|s)  = \frac{P(r,s)}{P(s)}
@@ -831,6 +850,12 @@ sigue siendo compatible con el dato
 
 \end{column}
 \end{columns}
+
+\only<2->{
+\begin{textblock}{80}(50,76)
+$P(x,y,z) = P(x|y,z) \, \only<2>{P(y,z)}\only<3>{P(y|z) \, P(z)}$
+\end{textblock}
+}
 
 \end{frame}
 
@@ -991,26 +1016,20 @@ Los pagos que aceptarías en una apuesta
  \end{textblock}
  \vspace{-1cm}
 
- \only<1>{
  \begin{textblock}{80}(0,22)
  \centering
- \includegraphics[width=0.8\textwidth]{figuras/montyHall_model_0.pdf}
- \end{textblock}
- }
+ \tikz{
+    \only<-3>{\phantom}{\node[latent] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;}
+    \only<-3>{\phantom}{\node[const,above=of d] (nd) {\Large $s$} ;}
+    \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
+    \node[const,below=of r] (nr) {\Large $r$} ;
+    \only<-2>{\phantom}{\node[latent, fill=black!30, above=of d, xshift=1.5cm] (c) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/cerradura.png}} ;}
+    \only<-2>{\phantom}{\node[const,below=of c] (nc) {\Large $c_1$} ;}
+    \only<-3>{\phantom}{\edge {r,c} {d};}
 
- \only<2-3>{
- \begin{textblock}{80}(0,22)
- \centering
- \includegraphics[width=0.8\textwidth]{figuras/montyHall_model_1.pdf}
+    \only<-3>{\phantom}{\node[const,below=of d] (modelo) {\large $s \neq r$ \, $s \neq c$} ;}
+}
  \end{textblock}
- }
-
-\only<4->{
- \begin{textblock}{80}(0,22)
- \centering
- \includegraphics[width=0.8\textwidth]{figuras/montyHall_model_2.pdf}
- \end{textblock}
- }
 
 
 \only<1-2>{
@@ -1044,11 +1063,21 @@ Los pagos que aceptarías en una apuesta
  \vspace{-1cm}
 
  \only<1-3>{
- \begin{textblock}{80}(0,21)
+ \begin{textblock}{80}(0,22)
  \centering
- \includegraphics[width=0.8\textwidth]{figuras/montyHall_model.pdf}
+ \tikz{
+    {\node[latent] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;}
+    {\node[const,above=of d] (nd) {\Large $s$} ;}
+    \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
+    \node[const,below=of r] (nr) {\Large $r$} ;
+    {\node[latent, fill=black!30, above=of d, xshift=1.5cm] (c) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/cerradura.png}} ;}
+    {\node[const,below=of c] (nc) {\Large $c_1$} ;}
+    {\edge {r,c} {d};}
+
+    {\node[const,below=of d] (modelo) {\large $s \neq r$ \, $s \neq c$} ;}
+}
  \end{textblock}
- }
+}
 
   \only<4-12>{
  \begin{textblock}{80}(0,22)
@@ -1223,10 +1252,113 @@ P(r_i|s_2) = \frac{P(r_i,s_2)}{P(s_2)}
 
 \end{frame}
 
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Modelos causales alternativos
+\end{textblock}
+ \vspace{1.25cm}
+
+\begin{textblock}{80}(80,18)
+\centering
+ \tikz{
+    \node[latent,] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
+    \node[const,left=of r] (nr) {\Large $r$} ;
+
+
+    \node[latent, below=of r] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;
+    \node[const, left=of d] (nd) {\Large $s$} ;
+
+    \edge {r} {d};
+
+}
+
+\vspace{0.75cm}
+\onslide<-1>{
+\tikz{
+         \node[factor, minimum size=1cm] (p1) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/cerradura.png}} ;
+         \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/dedo.png}} ;
+         \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+
+         \node[const, above=of p1, yshift=.15cm] (fp1) {$1/2$};
+         \node[const, above=of p2, yshift=.15cm] (fp2) {$0$};
+         \node[const, above=of p3, yshift=.15cm] (fp3) {$1/2$};
+         \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
+
+        }
+}
+
+\end{textblock}
+
+
+
+\begin{textblock}{80}(0,18)
+\centering
+\tikz{
+
+    \node[latent] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;
+    \node[const,left=of d] (nd) {\Large $s$} ;
+
+    \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
+    \node[const,left=of r] (nr) {\Large $r$} ;
+
+
+    \node[latent, fill=black!30, above=of d, xshift=1.5cm] (c) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/cerradura.png}} ;
+    \node[const,left=of c] (nc) {\Large $c$} ;
+
+    \edge {r,c} {d};
+}
+
+\vspace{0.75cm}
+\onslide<-1>{
+\tikz{
+         \node[factor, minimum size=1cm] (p1) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/cerradura.png}} ;
+         \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/dedo.png}} ;
+         \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+
+         \node[const, above=of p1, yshift=.15cm] (fp1) {$1/3$};
+         \node[const, above=of p2, yshift=.15cm] (fp2) {$0$};
+         \node[const, above=of p3, yshift=.15cm] (fp3) {$2/3$};
+         \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
+
+        }
+}
+
+\end{textblock}
+
+
+\only<2>{
+\begin{textblock}{160}(0,70)
+\centering \Large ¿Y la verdad empírica respecto de los modelos?  \\[0.2cm] \large
+$P(\text{Modelo}_i|\text{Datos})$
+
+\end{textblock}
+}
+
+\end{frame}
+
+
+
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
 \centering \LARGE Teorema de Bayes \\
-\Large {\gray El corolario de Laplace}
+\end{textblock}
+
+\begin{textblock}{160}(0,43)
+\begin{equation*}
+P(\text{Hip\'otesis}_i |\,\text{Datos}) = \frac{P(\text{Datos}\,|\,\text{Hip\'otesis}_i) \, P(\text{Hip\'otesis}_i)}{P(\text{Datos})}
+\end{equation*}
+\end{textblock}
+
+\end{frame}
+
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Teorema de Bayes \\
+%\Large {\gray El corolario de Laplace}
 \end{textblock}
 
 \only<1-4>{
@@ -1307,14 +1439,13 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
- \centering \LARGE
- \en{Likelihood}
- \es{Verosimilutd: predicción del dato dada la hipótesis}
+ \centering \Large
+ $P(\text{Dato}|\text{Hipótesis})$ \\ \large Verosimilutd
  \end{textblock}
  \vspace{-1cm}
 
 
-\begin{textblock}{80}(70,11) \centering
+\begin{textblock}{80}(70,16) \centering
 \scalebox{1.2}{
 \tikz{
 \only<3->{\phantom}{\node[latent, draw=white, yshift=0.8cm] (b0) {$1$};}
@@ -1325,17 +1456,11 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
 \only<8->{\phantom}{\node[latent, below=of r1, draw=white, yshift=0.8cm] (br1) {$\frac{1}{3}$};}
 \only<3-7,10-11>{\phantom}{\node[latent, below=of r2, draw=white, yshift=0.8cm] (br2) {$\frac{1}{3}$};}
 \only<3-9>{\phantom}{\node[latent, below=of r3, draw=white, yshift=0.8cm] (br3) {$\frac{1}{3}$};}
-\only<8->{\phantom}{\node[latent,below=of br1,yshift=0.8cm] (c11) {$c_1$};}
-\only<3-7,10-11>{\phantom}{\node[latent,below=of br2,yshift=0.8cm] (c12) {$c_1$};}
-\only<3-9>{\phantom}{\node[latent,below=of br3,yshift=0.8cm] (c13) {$c_1$};}
 
-\only<8->{\phantom}{\node[latent, below=of c11, draw=white, yshift=0.8cm] (bc11) {$\frac{1}{3}$};}
-\only<3-7,10-11>{\phantom}{\node[latent, below=of c12, draw=white, yshift=0.8cm] (bc12) {$\frac{1}{3}$};}
-\only<3-9>{\phantom}{\node[latent, below=of c13, draw=white, yshift=0.8cm] (bc13) {$\frac{1}{3}$};}
-\only<8->{\phantom}{\node[latent,below=of bc11,yshift=0.8cm, xshift=-0.7cm] (r1d2) {$s_2$};}
-\only<8->{\phantom}{\node[latent,below=of bc11,yshift=0.8cm, xshift=0.7cm] (r1d3) {$s_3$};}
-\only<3-7,10-11>{\phantom}{\node[latent,below=of bc12,yshift=0.8cm] (r2d3) {$s_3$};}
-\only<3-9>{\phantom}{\node[latent,below=of bc13,yshift=0.8cm] (r3d2) {$s_2$};}
+\only<8->{\phantom}{\node[latent,below=of br1,yshift=0.8cm, xshift=-0.7cm] (r1d2) {$s_2$};}
+\only<8->{\phantom}{\node[latent,below=of br1,yshift=0.8cm, xshift=0.7cm] (r1d3) {$s_3$};}
+\only<3-7,10-11>{\phantom}{\node[latent,below=of br2,yshift=0.8cm] (r2d3) {$s_3$};}
+\only<3-9>{\phantom}{\node[latent,below=of br3,yshift=0.8cm] (r3d2) {$s_2$};}
 
 \only<8->{\phantom}{\node[latent,below=of r1d2,yshift=0.8cm,draw=white] (br1d2) {$\frac{1}{3}\frac{1}{2}$};}
 \only<8->{\phantom}{\node[latent,below=of r1d3,yshift=0.8cm, draw=white] (br1d3) {$\frac{1}{3}\frac{1}{2}$};}
@@ -1348,15 +1473,9 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
 \only<8->{\phantom}{\edge[-] {r1} {br1};}
 \only<3-7,10-11>{\phantom}{\edge[-] {r2} {br2};}
 \only<3-9>{\phantom}{\edge[-] {r3} {br3};}
-\only<8->{\phantom}{\edge[-] {br1} {c11};}
-\only<3-7,10-11>{\phantom}{\edge[-] {br2} {c12};}
-\only<3-9>{\phantom}{\edge[-] {br3} {c13};}
-\only<8->{\phantom}{\edge[-] {c11} {bc11};}
-\only<3-7,10-11>{\phantom}{\edge[-] {c12} {bc12};}
-\only<3-9>{\phantom}{\edge[-] {c13} {bc13};}
-\only<8->{\phantom}{\edge[-] {bc11} {r1d2,r1d3};}
-\only<3-7,10-11>{\phantom}{\edge[-] {bc12} {r2d3};}
-\only<3-9>{\phantom}{\edge[-] {bc13} {r3d2};}
+\only<8->{\phantom}{\edge[-] {br1} {r1d2,r1d3};}
+\only<3-7,10-11>{\phantom}{\edge[-] {br2} {r2d3};}
+\only<3-9>{\phantom}{\edge[-] {br3} {r3d2};}
 \only<8->{\phantom}{\edge[-] {r1d2} {br1d2};}
 \only<8->{\phantom}{\edge[-] {r1d3} {br1d3};}
 \only<3-7,10-11>{\phantom}{\edge[-] {r2d3} {br2d3};}
@@ -1365,8 +1484,15 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
 }
 \end{textblock}
 
+\only<1>{
+\begin{textblock}{120}(0,16) \centering
+   \begin{equation*}
+   P(r_i|s_2)= \frac{\overbrace{P(s_2|r_i)}^{\text{Verosimilutd}}P(r_i) }{P(s_2)} \onslide<2->{\propto P(r_i) P(s_2|r_i)} \onslide<3->{= P(r_i, s_2)}
+  \end{equation*}
+ \end{textblock}
+}
 
-\only<1->{
+\only<2->{
  \begin{textblock}{80}(0,16)
   \centering
   $P(s_2|r_i)$ \\ \vspace{0.1cm}
@@ -1448,18 +1574,18 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
- \centering \LARGE Posterior \\
- \Large La \textbf{sorpresa} como filtro de las creencias previas
+ \centering \Large
+ $P(\text{Hipótesis}|\text{Dato})$ \\ \large Posterior
  \end{textblock}
 
- \begin{textblock}{160}(0,18)
+ \begin{textblock}{160}(0,15)
   \begin{align*}
-   P(r_i|s_2) \propto \underbrace{P(r_i) P(s_2|r_i)}_{P(r_i, s_2)}
+   \overbrace{P(r_i|s_2)}^{\text{Posterior}} = \frac{P(r_i) P(s_2|r_i)}{P(s_2)} \onslide<2->{\propto P(r_i) P(s_2|r_i)} \onslide<3->{= P(r_i, s_2)}
   \end{align*}
  \end{textblock}
 
 
- \only<2>{
+ \only<4>{
  \begin{textblock}{160}(0,40)
   \centering
    \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm}
@@ -1470,7 +1596,7 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
 }
 
 
-\only<3>{
+\only<5>{
  \begin{textblock}{160}(0,40)
   \centering
    \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm}
@@ -1482,7 +1608,7 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
 }
 
 
-\only<4>{
+\only<6-7>{
  \begin{textblock}{160}(0,40)
   \centering
   \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm}
@@ -1494,7 +1620,7 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
 \end{textblock}
 }
 
-\only<5>{
+\only<8>{
  \begin{textblock}{160}(0,40)
   \centering
   \begin{tabular}{c|c|c|c} \setlength\tabcolsep{0.4cm}
@@ -1507,6 +1633,11 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
 \end{textblock}
 }
 
+\only<7->{
+\begin{textblock}{160}(0,74) \centering
+\Large Lo inverosimil (\textbf{sorpresa}) como filtro de las creencias previas
+\end{textblock}
+}
 
 \end{frame}
 %
@@ -1576,8 +1707,8 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
- \centering \LARGE Evidencia \\
- \Large Predicción a priori, con la contribución de todas las hipótesis.
+ \centering \Large
+ $P(\text{Dato})$ \\ \large Evidencia
  \end{textblock}
  \vspace{1cm}
 
@@ -1592,106 +1723,20 @@ los \textbf{datos} con nuestras \textbf{hipótesis}!
  \only<2->{
  \begin{textblock}{160}(0,50)
  \begin{equation*}
-  P(s_2) = \sum_i P(s_2|r_i) P(r_i) \onslide<3->{= \frac{1}{2} \frac{1}{3} + 0 \frac{1}{3} + 1 \frac{1}{3} } \onslide<4>{= 1/2}
+  P(s_2) = \sum_i P(s_2|r_i) P(r_i) \onslide<4->{= \frac{1}{2} \frac{1}{3} + 0 \frac{1}{3} + 1 \frac{1}{3} } \onslide<5>{= 1/2}
  \end{equation*}
  \end{textblock}
 }
-\end{frame}
 
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering \LARGE Modelos causales alternativos
+
+ \only<3->{
+ \begin{textblock}{160}(0,70) \centering
+\Large Predicción con la contribución de todas las hipótesis.
 \end{textblock}
- \vspace{1.25cm}
-
- \Large \centering
-
- ¿Y el acuerdo intersubjetivo respecto de los modelos?
-
- \pause
-
- \begin{equation*}
-P(\text{Modelo}_i|\text{Datos})
- \end{equation*}
-
- \end{frame}
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering \LARGE Modelos causales alternativos
-\end{textblock}
- \vspace{1.25cm}
-
-\begin{textblock}{80}(80,18)
-\centering
- \tikz{
-    \node[latent,] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
-    \node[const,left=of r] (nr) {\Large $r$} ;
-
-
-    \node[latent, below=of r] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;
-    \node[const, left=of d] (nd) {\Large $s$} ;
-
-    \edge {r} {d};
-
 }
 
-\vspace{0.75cm}
-\onslide<1>{
-\tikz{
-         \node[factor, minimum size=1cm] (p1) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/cerradura.png}} ;
-         \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/dedo.png}} ;
-         \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
-
-         \node[const, above=of p1, yshift=.15cm] (fp1) {$1/2$};
-         \node[const, above=of p2, yshift=.15cm] (fp2) {$0$};
-         \node[const, above=of p3, yshift=.15cm] (fp3) {$1/2$};
-         \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
-
-        }
-}
-
-\end{textblock}
-
-
-
-\begin{textblock}{80}(0,18)
-\centering
-\tikz{
-
-    \node[latent] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;
-    \node[const,left=of d] (nd) {\Large $s$} ;
-
-    \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
-    \node[const,left=of r] (nr) {\Large $r$} ;
-
-
-    \node[latent, fill=black!30, above=of d, xshift=1.5cm] (c) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/cerradura.png}} ;
-    \node[const,left=of c] (nc) {\Large $c$} ;
-
-    \edge {r,c} {d};
-}
-
-\vspace{0.75cm}
-\onslide<1>{
-\tikz{
-         \node[factor, minimum size=1cm] (p1) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/cerradura.png}} ;
-         \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/dedo.png}} ;
-         \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
-
-         \node[const, above=of p1, yshift=.15cm] (fp1) {$1/3$};
-         \node[const, above=of p2, yshift=.15cm] (fp2) {$0$};
-         \node[const, above=of p3, yshift=.15cm] (fp3) {$2/3$};
-         \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
-
-        }
-}
-
-\end{textblock}
 
 \end{frame}
-
 
 
 \begin{frame}[plain,fragile]
