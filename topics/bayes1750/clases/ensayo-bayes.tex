@@ -1,0 +1,239 @@
+\documentclass{beamer}
+
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{csquotes}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\graphicspath{ {../figures/} }
+
+\usecolortheme{seahorse}
+\setlength{\parskip}{1em}
+
+\title{An Essay towards solving a Problem in the Doctrine of Chances}
+\subtitle{O un método para calcular la probabilidad exacta de todas las conclusiones basado en inducción}
+\author{Basado en el trabajo de Thomas Bayes}
+
+\begin{document}
+\begin{frame}[plain]
+    \maketitle
+\end{frame}
+
+\begin{frame}{Ensayo original}
+	Trabajo publicado y editado por Richard Price, dos años después de la muerte de Bayes.
+
+	La teoría de la probabilidad recién estaba naciendo.
+	Bayes usa el nombre "Doctrina de las Chances" basado en un libro de Abraham de Moivre
+
+	Algunas reimpresiones le cambian el nombre a ``Un método para calcular la probabilidad exacta de todas las conclusiones basado en inducción'', ya que es el problema real que busca resolver
+
+	En el proceso, va a discutir sobre probabilidad condicional y \textbf{probabilidad inversa}
+\end{frame}
+
+\begin{frame}{Primeros estudios de probabilidad}
+  \begin{itemize}
+    \item Siglo VIII: Primeros estudios (conocidos) de permutaciones y combinaciones, Al-Khalil
+    \item Siglo IX: Primeros estudios (conocidos) de uso de frecuencias para descifrar mensajes encriptados, Al-Khindi
+    \item 1654: Cartas entre Pascal y Fermat
+    \item 1713: Ars Conjectandi, Jacob Bernoulli (escrito entre 1684 y 1689)
+    \item 1718: The Doctrine of Chances, Primera Edición, De Moivre
+    \item 1763: An Essay towards solving a Problem in the Doctrine of Chances, Bayes
+    \item 1814: Essai philosophique sur les probabilités, Laplace
+  \end{itemize}
+
+  Esto es solo una selección personal, hubo otros trabajos relevantes durante estos siglos.
+\end{frame}
+
+\begin{frame}{Problema a resolver}
+	\begin{itemize}
+		\item \textbf{Dado}: el número de veces que un evento sucedió exitosamente y el número de veces que falló.
+		\item \textbf{Queremos conocer} la chance de que la probabilidad de que su ocurrencia en un intento esté entre dos grados de probabilidad que pueden ser nombrados.
+	\end{itemize}
+
+	En términos actuales,
+	dados n intentos y x éxitos, con $X \sim Binomial(p, n)$,
+	queremos calcular $P(a < p < b | X = x)$
+
+	Es decir, es una pregunta sobre \textbf{la probabilidad de la probabilidad}.
+\end{frame}
+
+\begin{frame}{Definiciones}
+	\begin{displayquote}
+		The probability of any event is the ratio between the value at which an expectation depending on the happening of the event ought to be computed, and the chance of the thing expected upon it’s happening.  
+	\end{displayquote}
+
+	En español, ``La probabilidad de un evento está dada por la proporción entre el valor sobre el cual la esperanza debe ser computada, y la cosa esperada al suceder''.
+
+	Tanto de Moivre como Bayes usan la palabra ``expectation'' como ``el valor de un contrato que da un premio al suceder algo'', es decir, el precio para entrar a una apuesta.
+\end{frame}
+
+\begin{frame}{Definiciones}
+	Es decir, la probabilidad
+	\begin{itemize}
+		\item Se piensa en términos de apuestas
+		\item Debe ser el precio \textbf{justo} para entrar a una apuesta
+		\item Es una proporción, con respecto a un premio
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Regla de la suma}
+	Proposición 1: Cuando varios eventos son inconsistentes, la probabilidad de que suceda alguna es la suma de las probabilidades de cada una.
+	Corolario: Si tenemos certeza que debe suceder alguno de estos eventos, y el premio de la apuesta es de \$N, entonces la suma de los precios de las apuestas da \$N.
+
+	La proposición es un caso especial de la regla de la suma, y el corolario nos lleva a que la probabilidad debe sumar 1.
+\end{frame}
+
+\begin{frame}{Regla del producto, en orden}
+	Proposición 3: La probabilidad de que dos eventos consecutivos sucedan es el producto de la probabilidad del primero, y la probabilidad del segundo suponiendo que el primero sucedió.
+
+	Es decir, \textbf{si el evento A sucede antes que el evento B}, $P(A \land B) = P(A) P(B|A)$
+\end{frame}
+
+\begin{frame}{Probabilidad y conocimiento}
+	Pero ¿qué pasa si A sucede después que B? ¿O si no conocemos nada sobre el orden de los eventos? ¿Por qué es relevante el orden?\pause
+
+	Hay distintas formas de pensar la probabilidad:
+	\begin{itemize}
+		\item Estado ``objetivo'' del universo. Si un evento ya sucedió, su probabilidad de éxito es 0 (falló) o 1 (tuvo éxtio), a pesar de que no tengamos información al respecto
+		\item Conocimiento subjetivo o intersubjetivo, medida de incertidumbre
+	\end{itemize}
+	\pause
+
+	Bayes va a discutir la relevancia del orden de los sucesos.
+	Recordemos que la probabilidad la piensa en término de apuestas.
+\end{frame}
+
+\begin{frame}{El argumento de Bayes}
+	Proposición 4: si hay dos eventos consecutivos a ser determinados cada día, y la probabilidad del segundo es b/N y la probabilidad de ambos es P/N, y voy a recibir \$N si ambos suceden el primer día que el segundo sucede. Digo que, bajo estas condiciones, la probabilidad de obtener \$N es P/b.
+
+    Es importante que la apuesta se hace el dia 0, antes de que suceda nada.\pause
+
+    $$P(A_i) = P(A) \forall i \in \mathbb{N}$$
+    $$P(B_i) = P(B) \forall i \in \mathbb{N}$$
+	$$P(A_k | \land_{1 \leq i < k} (\neg B_i) \land  B_k) = \frac{P(A \land B)}{P(B)}$$
+\end{frame}
+
+\begin{frame}{Lema de Bayes}
+	Proposición 5: si hay dos eventos consecutivos, la probabilidad del segundo es b/N y la probabilidad de ambos es P/N, y descubro que el segundo evento sucedió con éxito, de lo cuál digo que el primer evento también sucedió. \textbf{La probabilidad de que esté en lo correcto} es de P/b.\pause
+
+	$$P(A | B) = \frac{P(A \land B)}{P(B)}$$
+
+	Juntando la Prop. 3 y Prop. 5, tenemos el famoso Lema de Bayes.
+	\pause
+
+	\begin{itemize}
+		\item Descubrir nueva información nos sirve para actualizar nuestra creencia... ¿suena de algún lado?\pause
+		\item Bayes da una vuelta y habla de la probabilidad de estar en lo correcto... ¿Por qué?
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Distribución binomial}
+	Bayes continúa definiendo lo que hoy en día llamaríamos una distribución binomial. Dados n eventos binarios independientes, cada uno con probabilidad p de tener éxito, tenemos que la probabilidad de tener k éxitos es:
+	
+	$$P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}$$
+	
+	¿De dónde viene esto?
+\end{frame}
+
+\begin{frame}{Distribución binomial}
+	Si tenemos 5 eventos, 3 éxitos y 2 fallos. Pensemos que tenemos 5 bolitas ($x_1, x_2, x_3, x_4, x_5$), veamos cuantas formas tenemos de elegir 3 (que van a ser nuestros 3 éxitos).\pause
+	
+	Tenemos $5 \cdot 4 \cdot 3 = \frac{5!}{(5-3)!}$ formas de agarrar 3 bolitas.\pause
+
+	Llamemos a estas 3 $e_1, e_2, e_3$. En realidad, no nos el orden en que las agarramos. Por eso, se divide por $3!$. Finalmente, tenemos:
+
+	$$\frac{5!}{3!(5-3)!} = \binom{5}{3}$$
+\end{frame}
+
+\begin{frame}{Probabilidad de la probabilidad}
+	Dados $n$ intentos y $x$ éxitos, con $X \sim Binomial(p, n)$.
+	¿Qué podemos decir sobre $p$, dado que $X = x$?\pause
+
+	Solución inocente: tenemos un estimador $\hat{p} = \frac{x}{n}$\pause
+
+	Problemas:
+	\begin{itemize}
+		\item ¿Qué tan seguro estás?
+		\item ¿Cómo comparamos dos procesos distintos?
+	\end{itemize}
+
+	Soluciones frecuentistas:
+	\begin{itemize}
+		\item Test de hipótesis
+		\item Intervalos de confianza, p-valores
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{El juego de la mesa y las bolitas}
+	\begin{figure}
+		\centering
+		\includegraphics[height=0.6\textheight]{bayes-table.png}
+		\caption{Geometría de la mesa y la Beta}
+		\label{fig:bayes-table}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Distribución Beta}
+	Dados n eventos binarios independientes, cada uno con probabilidad p de tener éxito, tenemos que la probabilidad de tener k éxitos es:
+	
+	$$P(X=p) =
+		(n+1)
+		\textcolor{blue}{\binom{n}{k} p^k (1-p)^{n-k}}
+		\mathbb{I}(0 \leq p \leq 1)$$
+
+	Suena conocido... ¿Cómo llegamos de la binomial a la beta?
+	\footnote{En realidad, la Beta se define para $k,n \in \mathbb{R}$. Esta es la definición para $k,n \in \mathbb{N}$, que es lo más natural de pensar.}
+\end{frame}
+
+\begin{frame}{Distribución Beta}
+	$$P(p|n,k) = \frac{
+		\textcolor{blue}{P(k|n,p)}
+		\textcolor{red}{P(p|n)}
+	}{
+		P(k|n)
+	}$$
+	\pause
+
+	Como $k|n,p \sim Binom(n, p)$ y $p \sim Unif(0, 1)$:
+	$$P(p|n,k) = \frac{
+		\textcolor{blue}{\binom{n}{k} p^k (1-p)^{n-k}}
+		\textcolor{red}{\mathbb{I}(0 \leq p \leq 1)}
+	}{
+		P(k|n)
+	}$$
+	\pause
+
+	¿Y $P(k|n)$? Volvamos al experimento de la mesa.
+	\pause
+	$$
+		P(X=p) =
+		(n+1)
+		\textcolor{blue}{\binom{n}{k} p^k (1-p)^{n-k}}
+		\textcolor{red}{\mathbb{I}(0 \leq p \leq 1)}
+	$$
+\end{frame}
+
+\begin{frame}{Estimacion puntual}
+  Ahora, en vez de tener una estimación en un solo número, tenemos la distribucion completa.
+  Esto es mucho más informativo.\pause
+
+  Pero, ¿qué pasa si queremos resumir en un solo número?
+  Si tenemos n éxitos en n ensayos, ¿decimos que p=1?
+\end{frame}
+
+\begin{frame}{Regla de la sucesión de Laplace}
+  Si tenemos X con distribución binomial, k éxitos en n ensayos:
+
+  $$E(X) = \frac{k+1}{n+2}$$
+
+  Es decir, es como $\frac{k}{n}$ pero imaginándose que hubo un fallo y un éxito más.\pause
+
+  En realidad, Laplace llegó a que
+
+  $$P(X_{n+1} = 1 | \sum_{i=1}^{n} X_i = k) = \frac{k+1}{n+2}$$
+
+  si $X_i | p \sim Bernoulli(p)$ son independientes al condicionar por $p$ y se usa un prior equiprobable $P(X_i) = \frac{1}{2}$.
+\end{frame}
+
+\end{document}
