@@ -17,3 +17,6 @@ clean:
 	- rm -f *.nav
 	- rm -f *.snm
 	- rm -f *~
+
+tapa:
+	convert -density 300 teorica1.pdf[1] -resize 100% tapa.png
