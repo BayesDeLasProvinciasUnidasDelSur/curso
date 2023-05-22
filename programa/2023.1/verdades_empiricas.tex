@@ -1,0 +1,574 @@
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\input{../../auxiliar/tex/diapo_encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+\usetikzlibrary{decorations.text}
+\usepackage{rotating}
+\usepackage{transparent}
+
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+\newcounter{capitulo}
+\setcounter{capitulo}{1}
+\newcommand{\unidad}{\thecapitulo \stepcounter{capitulo}}
+
+
+\estrue
+
+%\title[Bayes del Sur]{}
+
+\begin{document}
+
+\color{black!85}
+\large
+
+% \begin{frame}[plain,noframenumbering]
+%
+%
+% \begin{textblock}{160}(0,6) \centering
+% \includegraphics[width=0.45\textwidth]{../../auxiliar/static/CBP}
+% \end{textblock}
+%
+%
+% % \begin{textblock}{160}(0,24) \centering
+% % \LARGE \textcolor{black!85}{\fontsize{22}{0}\selectfont \textbf{Congreso Bayesiano Plurinacional}}
+% % \end{textblock}
+% % \begin{textblock}{160}(0,6) \centering
+% % \LARGE  \textcolor{black!85}{\rotatebox[origin=tr]{0}{\scalebox{4}{\scalebox{1}[-1]{$p$}}}}
+% % \end{textblock}
+% % \begin{textblock}{160}(0,6) \centering
+% % \LARGE \textcolor{black!85}{\scalebox{4}{$p$}}
+% % \end{textblock}
+% % \begin{textblock}{160}(0,6) \centering
+% % \LARGE \textcolor{black!85}{\scalebox{3.7}{C} \hspace{2.4cm} }
+% % \end{textblock}
+% % \begin{textblock}{160}(0,6) \centering
+% % \LARGE \textcolor{black!85}{ \hspace{2.5cm} \scalebox{3.7}{P} }
+% % \end{textblock}
+%
+% \begin{textblock}{160}(0,40)\centering
+% \hspace{3.6cm} \LARGE  \textcolor{black!85}{\rotatebox[origin=tr]{-3}{\scalebox{6}{\scalebox{1}[-1]{$p$}}}}
+% \end{textblock}
+%
+% \begin{textblock}{160}(0,49) \centering
+% \LARGE  \textcolor{black!85}{\scalebox{4}{$=$}}
+% \end{textblock}
+%
+% \begin{textblock}{160}(0,40)\centering
+% \hspace{-3.8cm} \LARGE  \textcolor{black!85}{\scalebox{6}{$p$}}
+% \end{textblock}
+%
+% \begin{textblock}{160}(0,73) \centering \Large \textcolor{black!75}{\textbf{
+% Del 4 al 5 de agosto 2023 \\
+% La Banda, Santiago del Estero, Argentina \\[0.1cm]}}
+%
+% \normalsize \texttt{bayesdelsur@gmail.com}
+% \end{textblock}
+%
+% \end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+
+
+\begin{textblock}{160}(0,0)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/deforestacion}
+\end{textblock}
+
+\begin{textblock}{80}(18,9)
+\textcolor{black!15}{\fontsize{44}{55}\selectfont Verdades}
+\end{textblock}
+
+\begin{textblock}{47}(85,70)
+\centering \textcolor{black!15}{{\fontsize{52}{65}\selectfont Empíricas}}
+\end{textblock}
+
+\begin{textblock}{80}(100,28)
+\LARGE  \textcolor{black!15}{\rotatebox[origin=tr]{-3}{\scalebox{9}{\scalebox{1}[-1]{$p$}}}}
+\end{textblock}
+
+\begin{textblock}{80}(66,43)
+\LARGE  \textcolor{black!15}{\scalebox{6}{$=$}}
+\end{textblock}
+
+\begin{textblock}{80}(36,29)
+\LARGE  \textcolor{black!15}{\scalebox{9}{$p$}}
+\end{textblock}
+
+\vspace{2cm}
+\maketitle
+
+
+
+\begin{textblock}{160}(01,81)
+\footnotesize \textcolor{black!5}{\textbf{Curso Verdades Empíricas. \\
+Congreso Bayesiano Plurinacional 2023} \\}
+\end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(01,03)\centering
+\textcolor{black!85}{{\large
+\large Curso \textbf{Verdades empíricas} \\[-0.1cm] \footnotesize Congreso Bayesiano Plurinacional 2023}} \\ \scriptsize \texttt{bayesdelsur@gmail.com.ar} - \texttt{bayesdelsur.com.ar}
+\end{textblock}
+
+
+
+\begin{textblock}{140}(10,19)
+
+\normalsize
+ No se requiere ningún tipo de formación previa para participar, pero el curso se aprovecha mejor teniendo conocimientos mínimos de programación.
+
+\vspace{0.3cm}
+
+\normalsize Jueves 3 de agosto, de 9hs a 12hs. Fundamentos. \\[0.1cm] \footnotesize
+\ \ $1$. Principios interculturales de acuerdos intersubjetivos (Teoría de la probabilidad) \\
+\ \ $2$. Sorpresa: el problema de la comunicación con la realidad (Teoría de la información) \\
+\ \ $3$. Modelos gráficos y algoritmos de inferencia (Introducción metodología)\\
+
+ \vspace{0.3cm}
+
+\normalsize Viernes 4 de Agosto, de 9hs a 12hs. Metodologías.\scriptsize  \\[0.1cm] \footnotesize
+\ \ $3$. Fundamentos e inferencia causal \\
+\ \ $4$. Evaluación de modelos causales \\
+\ \ $5$. Series de tiempo \\
+
+\vspace{0.3cm}
+
+\normalsize Sábado 5 de agosto, de 9hs a 12hs. Toma de decisiones.\scriptsize  \\[0.1cm] \footnotesize
+\ \ $6$. La función de costo epistémico-evolutiva\\
+\ \ $7$. Competencia de inferencia con apuestas \\
+\ \ $8$. Tiempo para hackatón.
+
+\end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(00,04)\centering
+\textcolor{black!85}{\Large Objetivos}
+\end{textblock}
+
+\begin{textblock}{150}(05,16)
+\parbox{15cm}{En las últimas décadas se han desarrollado una gran cantidad de algoritmos de aprendizaje automático.
+Para abordar un nuevo problema bajo este enfoque, se debe mapear cada nuevo problema con alguno de los métodos ya existentes.
+Este flujo de trabajo suele ser fácil de replicar inicialmente, pero al mismo tiempo suele ser inflexible, limitando nuestra capacidad para considerar las especificidades de cada problema. Por ejemplo, bajo este enfoque se dificulta la inferencia causal.
+
+\vspace{0.3cm}
+
+En este curso introduciremos el enfoque ``aprendizaje automático basado en modelos''.
+A lo largo de esas mismas décadas, se fueron desarrollando otras técnicas más generales y dinámicas, que permiten personalizar los modelos a medida de cada problema concreto: expresando de forma gráfica las relaciones causales entre las variables; descomponiendo la aplicación de las reglas de la probabilidad en pasaje de mensajes entre los nodos de la red causal; y realizando la inferencia a través de la programación probabilística.
+Este enfoque ofrece toda la flexibilidad que se requiere para las ciencias de datos.
+}
+\end{textblock}
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+\begin{textblock}{170}(-9,0)
+\rotatebox[origin=tr]{90}{\includegraphics[width=0.53\textwidth]{../../auxiliar/static/egipto3.jpeg}}
+\end{textblock}
+
+\begin{textblock}{160}(16,9)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{Principios interculturales}}
+\end{textblock}
+\begin{textblock}{160}(22,18)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{de acuerdos intersubjetivos}}
+\end{textblock}
+
+
+\begin{textblock}{55}(71,38)
+\begin{turn}{33}
+\parbox{6cm}{
+\textcolor{black!5}{\hspace{-0.3cm}Capítulo \unidad} \\
+\small\textcolor{black!5}{\hspace{-0.1cm}Principio de razón suficiente, de}\\
+\small\textcolor{black!5}{integridad, de indiferencia y de} \\
+\small\textcolor{black!5}{\hspace{0.1cm}coherencia. Las reglas de razo-} \\ \small\textcolor{black!5}{\hspace{0.2cm}namiento bajo incertidumbre.} \\
+\small\textcolor{black!5}{\hspace{0.36cm}Evaluación de creencias.} \\
+}
+\end{turn}
+\end{textblock}
+
+\end{frame}
+
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(0,0)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/fuego}
+\end{textblock}
+
+\begin{textblock}{160}(4,26)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{Sorpresa: el problema}}
+\end{textblock}
+\begin{textblock}{160}(4,34)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{de la comunicación}}
+\end{textblock}
+\begin{textblock}{160}(4,42)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{con la realidad}}
+\end{textblock}
+% \begin{textblock}{160}(3,82)
+% \LARGE \textcolor{black!15}{\fontsize{22}{0}\selectfont \textbf{3}}
+% \end{textblock}
+
+
+
+\begin{textblock}{55}[0,0](88,25)
+\begin{turn}{0}
+\parbox{7cm}{\sloppy\setlength\parfillskip{0pt}
+\textcolor{black!0}{Capítulo \unidad} \\
+\small\textcolor{black!5}{\hspace{0.05cm}La estructura invariante del dato empírico:} \\
+\small\textcolor{black!5}{\hspace{0.1cm}fuente, realidad causal, señal, canal,} \\ \small\textcolor{black!5}{\hspace{0.05cm}percepción, modelo causal, estimación.} \\
+\small\textcolor{black!5}{\hspace{-0.15cm}Base empírica y datos teóricos. Máxima} \\
+\small\textcolor{black!5}{\hspace{-0.35cm}incertidumbre y mínima sorpresa. Información.} \\
+}
+\end{turn}
+\end{textblock}
+
+
+\end{frame}
+
+\begin{frame}[plain,noframenumbering]
+\begin{textblock}{160}(0,43)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/modelosGraficos}
+\end{textblock}
+
+
+\begin{textblock}{160}(4,4)
+\LARGE \textcolor{black!85}{\fontsize{22}{0}\selectfont \textbf{Modelos gráficos y}}
+\end{textblock}
+\begin{textblock}{160}(4,12)
+\LARGE \textcolor{black!85}{\fontsize{22}{0}\selectfont \textbf{algoritmos de inferencia}}
+\end{textblock}
+
+
+\begin{textblock}{55}[0,0](68,27)
+\begin{turn}{0}
+\parbox{10cm}{\sloppy\setlength\parfillskip{0pt}
+\textcolor{black!85}{Capítulo \unidad} \\
+\small\textcolor{black!85}{Métodos gráficos de especificación de modelos causales.} \\
+\small\textcolor{black!85}{Algoritmos de inferencia: conjugado, variacional y muestreo.} \\
+\small\textcolor{black!85}{Ejemplos: beta-binomial, }\\
+}
+\end{turn}
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(0,0)
+\includegraphics[width=1.01\textwidth]{../../auxiliar/static/bali-channel}
+\end{textblock}
+
+
+\begin{textblock}{160}(99,68)
+\LARGE \textcolor{black!95}{\rotatebox[origin=tr]{10}{\fontsize{22}{0}\selectfont \textbf{Flujos de}}}
+\end{textblock}
+
+\begin{textblock}{160}(103,76)
+\LARGE \textcolor{black!95}{\rotatebox[origin=tr]{12}{\fontsize{22}{0}\selectfont \textbf{inferencia}}}
+\end{textblock}
+
+
+
+\begin{textblock}{55}(48,20)
+\begin{turn}{0}
+\parbox{15cm}{\textcolor{black!5}{\hspace{0.3cm} Capítulo \unidad} \\
+\small \textcolor{black!5}{\hspace{0.7cm} Flujos de \hspace{0.6cm} inferencia} \\
+\small \textcolor{black!5}{\hspace{0.3cm} en modelos \hspace{0.7cm} causales.} \\}
+\end{turn}
+\end{textblock}
+
+
+
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(0,0)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/peligro_predador}
+\end{textblock}
+
+\begin{textblock}{160}(127,67)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{Inferencia  \\[-0.1cm] \hspace{0.5cm} causal}}
+\end{textblock}
+
+\begin{textblock}{55}(2,3)
+\begin{turn}{0}
+\parbox{15cm}{\small \textcolor{black!95}{Conclusiones causales a partir de datos observacionales. El} \\
+\textcolor{black!95}{efecto de las intervenciones sobre los modelos gráficos. Los} \\
+\textcolor{black!95}{criterios de puerta trasera y delantera. Contrafácticos.} \\
+\normalsize\textcolor{black!95}{Capítulo \unidad} \\
+}
+\end{turn}
+\end{textblock}
+
+
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+% \begin{textblock}{160}(0,-80)  \centering
+% \includegraphics[width=1\textwidth]{../../auxiliar/static/galton_box}
+% \end{textblock}
+
+\begin{textblock}{160}(0,11)  \centering
+\includegraphics[width=0.42\textwidth]{../../auxiliar/static/treeOfLife}
+\end{textblock}
+
+\begin{textblock}{160}(0,3) \centering
+\LARGE \textcolor{black!85}{\rotatebox[origin=tr]{0}{\fontsize{22}{0}\selectfont \textbf{Distribuciones de creencias}}}
+\end{textblock}
+% % <
+% \begin{textblock}{160}(0,3) \centering
+% \begin{tikzpicture}
+%   \node (Start) at (2.8,0) {};
+%   \node (End) at (-2.8,0) {};
+%   \draw [decorate,decoration={text along path,text align=center,text={sssssssssssssssssssssssssssssssssss|\bf\fontsize{22}{22}\selectfont|Distribuciones de creencias},text color=black!85 }] (End) to [bend left=45] (Start);
+% \end{tikzpicture}
+% \end{textblock}
+
+%  \begin{textblock}{160}(0,3) \centering
+% \tikz{
+% \node[factor, xshift=-3cm, opacity=0] (a) {} ;
+% \node[factor, xshift=3cm, opacity=0] (b) {} ;
+% \path[draw, -, fill=black!50,sloped,draw opacity=0] (a) edge[bend left=45,draw=black!50] node[color=black!75] {\scriptsize  \texttt{lhood\_lose\_tb}} (b);
+% }
+% \end{textblock}
+
+
+\begin{textblock}{55}(75,40)
+\textcolor{black!85}{\small El árbol de la vida \\
+\fontsize{2}{0}\selectfont Synthesis of phylogeny and taxonomy into a comprehensive tree of life \\}
+\end{textblock}
+
+
+\begin{textblock}{55}(3,82)
+\textcolor{black!85}{Capítulo \unidad}
+\end{textblock}
+
+\begin{textblock}{55}(23,80)
+\begin{turn}{0}
+\parbox{15cm}{\small \textcolor{black!85}{Máxima entropía. Gases. Distribución de la riqueza. Procesos irreversibles. Polya Urn.   \\
+La familia exponencial: Bernoulli, Binomial, Beta, Multinomial, Dirichlet, Guassiana.} \\
+}
+\end{turn}
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}[plain,noframenumbering]
+\begin{textblock}{160}(0,15) \centering
+\includegraphics[width=0.8\textwidth]{../../auxiliar/static/biomass.jpg}
+\end{textblock}
+
+\begin{textblock}{160}(0,3) \centering
+\LARGE \textcolor{black!90}{\fontsize{22}{0}\selectfont \textbf{Evaluación de modelos}}
+\end{textblock}
+
+\begin{textblock}{160}(35,24)
+\textcolor{black!95}{\small Biomasa de la vida \\
+\fontsize{2}{0}\selectfont \hspace{0.05cm} Bar-on et al. The biomass distribution on Earth (2018) \\}
+\end{textblock}
+
+\begin{textblock}{160}(16,15)
+\LARGE \textcolor{black!0}{\fontsize{1200}{1200}\selectfont $\bm{\bullet}$ }
+\end{textblock}
+\begin{textblock}{160}(16,17)
+\LARGE \textcolor{black!0}{\fontsize{1200}{1200}\selectfont $\bm{\bullet}$ }
+\end{textblock}
+
+\begin{textblock}{160}(77,15)
+\LARGE \textcolor{black!0}{\fontsize{1200}{1200}\selectfont $\bm{\bullet}$ }
+\end{textblock}
+\begin{textblock}{160}(78,17)
+\LARGE \textcolor{black!0}{\fontsize{1200}{1200}\selectfont $\bm{\bullet}$ }
+\end{textblock}
+
+
+\begin{textblock}{160}(0,73) \centering
+\textcolor{black!95}{Capítulo \unidad \\ \small
+La emergencia del sobreajuste (\emph{overfitting}) en los enfoques que seleccionan una única hipótesis. \\
+El balance natural de la evaluación de modelo por integración del espacio de hipótesis (evidencia). \\
+%La forma correcta de evaluar modelo. Ejemplo: regresión líneal bayesiana.\\
+}
+\end{textblock}
+
+
+\end{frame}
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}[0,0](0,-47.5)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/raices}
+\end{textblock}
+
+% \begin{textblock}{160}[0,1](0,80)
+% \includegraphics[width=0.19\textwidth]{../../auxiliar/static/aproximacion1}
+% \hspace{-0.1cm}
+% \includegraphics[width=0.19\textwidth]{../../auxiliar/static/aproximacion2}
+% \hspace{-0.1cm}
+% \includegraphics[width=0.19\textwidth]{../../auxiliar/static/aproximacion3}
+% \hspace{-0.1cm}
+% \includegraphics[width=0.19\textwidth]{../../auxiliar/static/aproximacion4}
+% \hspace{-0.1cm}
+% \includegraphics[width=0.19\textwidth]{../../auxiliar/static/aproximacion5}
+% \end{textblock}
+
+\begin{textblock}{160}(107,3)
+\LARGE \textcolor{black!65}{\fontsize{22}{0}\selectfont \textbf{Aproximaciones \\ analíticas}}
+\end{textblock}
+
+
+
+\begin{textblock}{160}(2,2)
+\textcolor{black!80}{Capítulo \unidad \\ \small
+Métodos eficientes de aproximación: \\
+expectation propagation y variational \\
+inference. Ejemplo: estimación de habi-\\ \hspace{0.8cm} lidad en la industria del video juego. \\
+}
+\end{textblock}
+
+\end{frame}
+
+
+
+\begin{frame}[plain,noframenumbering]
+\begin{textblock}{160}(0,-4.3) \centering
+\includegraphics[width=1\textwidth]{../../auxiliar/static/antartic}
+\end{textblock}
+
+\begin{textblock}{160}(0,0) \centering
+\tikz{
+\node[det, fill=black,draw=black] (k) {\textcolor{black}{--------------------------------------------------------------------------------------------------------------------------------------}} ;
+}
+\end{textblock}
+
+\begin{textblock}{160}(5,0)
+\tikz{
+\node[det, fill=black,draw=black,text width=0.01cm] (k) {\textcolor{black}{--------------------------------------------------------------------------------------------------------------------------------------}} ;
+}
+\end{textblock}
+
+
+\begin{textblock}{160}(0,4) \centering
+\LARGE \hspace{1cm} \textcolor{black!10}{\fontsize{22}{0}\selectfont \textbf{Series de tiempo}}
+\end{textblock}
+
+
+\begin{textblock}{55}[0,1](8,70)
+\begin{turn}{90}
+\parbox{6cm}{\footnotesize
+\textcolor{black!10}{Millones de km$^2$ de hielo Antártico}}
+\end{turn}
+\end{textblock}
+
+
+\begin{textblock}{160}(20,63)
+\textcolor{black!5}{Capítulo \unidad \\ \small
+El problema de usar el posterior como \\
+prior del siguiente evento. La mutua dependencia \\
+de las hipótesis en series temporales. Ejemplo:  \\
+modelo de estimación de habilidad estado-del-arte. \\
+}
+\end{textblock}
+
+
+\end{frame}
+
+\begin{frame}[plain,noframenumbering]
+\begin{textblock}{160}(-5,0) \centering
+\includegraphics[width=1.05\textwidth]{../../auxiliar/static/pajarosTrayectorias}
+\end{textblock}
+\begin{textblock}{160}(4,20)
+\LARGE \textcolor{black!6}{\fontsize{22}{0}\selectfont \textbf{Aproximaciones}}
+\end{textblock}
+\begin{textblock}{160}(14,27)
+\LARGE \textcolor{black!6}{\fontsize{22}{0}\selectfont \textbf{por exploración}}
+\end{textblock}
+
+
+\begin{textblock}{65}(90,40)
+\textcolor{black!5}{ \hfill Capítulo \unidad \\ \small
+\hfill Métodos de aproximación para \\
+\hfill modelos causales intratables: \\
+\hfill Markov chain Monte Carlo.\\
+\hfill MCMC. HMC. \\
+}
+\end{textblock}
+
+
+\end{frame}
+
+\begin{frame}[plain,noframenumbering]
+\begin{textblock}{160}(0,0) \centering
+\includegraphics[width=1.2\textwidth]{../../auxiliar/static/ppls}
+\end{textblock}
+\begin{textblock}{160}(8,8)
+\LARGE \textcolor{black!15}{\fontsize{22}{0}\selectfont \textbf{Programación \\ probabilistica \\}}
+\end{textblock}
+% \begin{textblock}{160}(94,23)
+% \LARGE \textcolor{black!16}{\fontsize{22}{0}\selectfont \textbf{probabilistica}}
+% \end{textblock}
+
+\begin{textblock}{160}(70,30)
+\normalsize
+\textcolor{black!25}{
+\tikz{
+\node[det, fill=black!60,draw=black!25] (k) {\textcolor{black!5}{$k_i$}} ;
+\node[latent, fill opacity=0, draw=black!25, text opacity=1, above=of k, xshift=-1cm] (p) {\textcolor{black!5}{$p$}};
+\node[det, fill opacity=0, draw=black!25, text opacity=1, above=of k, xshift=1cm] (n) {\textcolor{black!5}{$n$}};
+\edge {p,n} {k};
+\plate[inner sep=0.3cm, xshift=0cm, yshift=0.12cm] {intentos} {(k)} {$i$}
+\node[const, right=of n, xshift=0.3cm] (np) {$p \sim \text{Beta}(1,1)$};
+\node[const, right=of n, xshift=0.3cm, yshift=-1cm] (np) {$n \sim \text{Categorical}(N_\text{max})$};
+\node[const, right=of n, xshift=0.3cm, yshift=-2cm] (np) {$k_i \sim \text{Binomial}(p,n)$};
+}
+}
+\end{textblock}
+
+\begin{textblock}{160}(20,74)
+\textcolor{black!15}{Capítulo \unidad \\ \small
+Implementación de modelos usando lenguajes de programación probabilística. \\
+Verificación visual de buen funcionamiento de las aproximaciones.  \\
+}
+\end{textblock}
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{96}(0,6.5)\centering
+{\transparent{0.9}\includegraphics[width=0.8\textwidth]{../../auxiliar/static/inti.png}}
+\end{textblock}
+
+\begin{textblock}{160}(96,5.5)
+\includegraphics[width=0.35\textwidth]{../../auxiliar/static/pachacuteckoricancha}
+\end{textblock}
+
+\end{frame}
+
+
+\end{document}
