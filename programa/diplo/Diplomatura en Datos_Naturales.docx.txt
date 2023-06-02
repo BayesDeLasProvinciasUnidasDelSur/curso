@@ -1,0 +1,190 @@
+﻿NOMBRE DE LA PROPUESTA FORMATIVA: Diplomatura de posgrado en Introducción a las Ciencias de Datos con orientación a las Ciencias Naturales.
+
+
+ UNIDAD ACADÉMICA RESPONSABLE: Facultad de Ciencias Naturales. UNSa.
+RESPONSABLES DE LA ELABORACIÓN DE LA PROPUESTA FORMATIVA: Tec. Ariel Ramos, Lic. Carolina Trogliero, Lic. Mariano Valdéz, Dr. Gustavo Landfried, Dr. Carlos Córdoba, Dr. Juan Gonzalo Veizaga,
+COORDINADOR: Tec. Ariel Ramos
+ FINES Y OBJETIVOS QUE DESEA ALCANZAR
+Varias décadas de investigación en el campo del aprendizaje automático han dado lugar a una multitud de algoritmos diferentes para resolver una amplia gama de problemas. Para abordar un nuevo proyecto bajo este enfoque, un investigador debe mapear su problema con alguno de los métodos ya existentes. Esto es a menudo complicado por la variedad de algoritmos, siempre diferentes, cada uno con sus especificidades, que requieren generalmente implementaciones de software proveídos por terceros. Si bien este flujo de trabajo tradicional ha sido exitoso, es al mismo tiempo muy inflexible, especialmente para quienes no tienen una formación en matemática y programación. 
+En esas mismas décadas se fueron desarrollando técnicas generales, que permiten aprovechar toda la potencia del aprendizaje automático de forma dinámica e intuitiva, permitiendo crear modelos personalizados a la medida de cada problema específico. A esto le llaman "Aprendizaje automático basado en modelos" [1]. Las técnicas las podemos resumir en tres. Una para especificar modelos intuitivamente (1) y otras dos técnicas para resolver la inferencia de forma sencilla, una para cuando podemos resolver la matemática (2) y otra cuando no podemos (3). Especificar modelos y resolver la inferencia es todo lo que hay que hacer en ciencia de datos. Simplemente es aplicar las reglas de la probabilidad: la regla de la suma, hacer las predicciones con la contribución de todas las hipótesis; y la regla del producto, preservar la creencia previa que sigue siendo compatible con el dato. Estas reglas se las conoce hace 250 años y desde entonces no se encontró nada mejor. El problema de la teoría de la probabilidad es que nos obliga a evaluar todas y cada una de las hipótesis, lo que es computacionalmente costoso. Desde su descubrimiento se fueron desarrollando soluciones parciales a este problema. A finales del siglo 19 la física estadística logra resolver este problema para un conjunto de problemas. En el siglo 20, el enfoque frecuentista busca desarrollar métodos robustos que seleccionan cuando se selecciona una única hipótesis (e.g. por máxima verosimilitud). No fue posible hacer la inferencia correctamente (evaluando todo el espacio de hipótesis) hasta que a finales del siglo 20 se produce el enorme crecimiento de la capacidad de cómputo. A finales del siglo pasado se desarrollaron las 3 técnicas generales que yo creo que deberían ser el centro de la diplomatura.
+(1) La primera es la especificación de todas las hipótesis usando modelos causales gráficos. En ellos se dibuja una red, en el cual las variables quedan vinculadas por flechas que representan relaciones causales probabilísticas entre variables. Este método tiene varias ventajas. No sólo es intuitivo, es al mismo tiempo la especificación matemática de la distribución conjunta de todas nuestras hipótesis, el modelo. Pero además, está estrechamente relacionado con los dos métodos para resolver la inferencia.
+(2) La segunda es el algoritmo de pasaje de mensajes en modelos gráficos (factor graph). Este algoritmo, conocido como belief propagation o sum-product algorithm, simplemente descompone las dos reglas de la probabilidad en pasos elementales: los mensajes que envían las variables (product step), y los mensajes que envían las funciones (sum step). Es el algoritmo más eficiente posible para aplicar las reglas de la probabilidad cuando podemos resolver la matemática. Además se puede ejecutar de forma paralela.
+(3) La tercera son los lenguajes de programación probabilística. Cuando no podemos resolver la matemática, hoy contamos con algoritmos que nos pueden ayudar a aproximar la inferencia. La programación probabilística nos permite abstraernos de la mayor parte de los detalles detrás de esos algoritmos. Como usuarios, tenemos una sintaxis que nos permite traducir directamente la especificación gráfica del modelo que hicimos en (1). Y se requiere algunos conocimientos mínimos para asegurarse que el resultado que escupe tenga sentido, porque a veces los algoritmos tienen limitaciones.
+En la diplomatura vamos a aprender estas técnicas. Además de permitir resolver cualquier problema de ciencia de datos, nos enseña los conceptos fundamentales de la teoría de la probabilidad. Las personas que aprueben esta diplomatura, van a estar capacitadas para formar parte de equipos de ciencia de datos en la industria, especialmente en proyectos sensibles como salud y ciencias forenses, donde realizar una correcta inferencia causal es fundamental.
+[1]https://www.microsoft.com/en-us/research/wp-content/uploads/2016/05/Bishop-MBML-2012.pdf
+[2]https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf
+  
+
+
+
+- - - - 
+Dar los conocimientos con la práctica para lograr modelar las estructuras de datos convenientes para contener la información a procesar, esta información puede ser en grandes cantidades, de manera local o remota, y proceder de bases de datos o dispositivos locales o remota o desde la web.
+En el procedimiento de la información se desarrolla la selección de información representativa significativa para aplicar métodos de machine learning o tomar decisiones en el contexto de las ciencias naturales.
+
+
+MODALIDAD: A distancia. 
+REQUISITOS DE INGRESO: Las personas que ingresan deben tener un conocimiento mínimo de programación y matemática. No se requiere conocimientos en probabilidad y estadística.
+ESTRUCTURA: La Diplomatura está formada por cuatro módulos o cursos, que se impartirán en línea. Algunos de los cursos, o partes de ellos, se dictarán desde un anfiteatro de la Universidad Nacional de Salta, de manera que los cursantes puedan seguir el dictado a distancia y aquellos que lo deseen puedan hacerlo presencialmente. Los archivos electrónicos de las clases se entregarán a los cursantes y las clases quedarán grabadas en videos de manera que los cursantes puedan verlas en horario distinto al del dictado.
+La carga horaria total de la Diplomatura es de 144 horas, según se indica en la siguiente tabla, en la que también se observan las correlatividades entre los cursos:
+Curso
+	Horas
+	Duración
+	Para cursar, debe tener aprobado
+	Módulo 1: 
+	30
+	1 mes
+	Programación básica
+	Módulo 2: 
+	44
+	1.5 meses
+	Módulo 1
+	Módulo 3: 
+	30
+	1 mes
+	Módulo 2
+	Módulo 4: 
+	40 
+	1.2 meses
+	Módulo 3
+	Total
+	144
+	6 meses
+	 
+	 RÉGIMEN DE CURSADO
+-. A distancia, con la posibilidad de que además sea presencial según lugar de residencia del Docente.
+-. Los horarios serán los siguientes (se prevén además cuatro horas de trabajo en casa):[a]
+Jueves
+	Viernes
+	Sáb.
+	Dom.
+	lunes
+	Martes
+	Miércoles
+	18:00 a 21:00 Teoría
+	 
+	 
+	 
+	 
+	18:00 a 21:00 Práctica
+	 
+	 -. Cada curso se terminará de dictar en un mes, con examen al finalizar el mismo.
+CONTENIDOS MÍNIMOS DE LOS CURSOS
+MÓDULO 1:  Introducción  (Probabilidad, datos, modelos e inferencia)
+Docentes
+Profesor responsable del curso: Dr. Carlos Córdoba Universidad de Los Andes
+
+
+Docente Colaborador[b]:  Gustavo Landfried
+
+
+Contenidos mínimos
+
+
+Opinión de Gustavo Landfried.
+
+
+Las 30 horas cubren 5 semanas, con 6 horas por semana, 3 de teórica y 3 de práctica.
+
+
+* Clases teóricas: Definición de verdad en contextos de incertidumbre. Principios de máxima incertidumbre y coherencia. Las reglas de la probabilidad. El teorema de Bayes. Interpretación de la verosimilitud y la evidencia. Introducción a la notación de los métodos gráficos. Algunas distribuciones conjugadas. El problema de la comunicación con la realidad: teoría de la información. La estructura invariante del dato empírico y la equivalencia con el esquema emisor-receptor. Problemas de los enfoques ad-hoc que seleccionan una única hipótesis del espacio: sobreajuste y doble descenso. La justificación teórica de los conjuntos de datos de entrenamiento y testeo, y sus efectos positivos en la práctica.
+
+
+* Clases práctica: Un ejemplo por clase: Monty Hall, beta-binomial, modelo de habilidad-desempeño y regresión lineal bayesiana. Implementación por cuadratura del ejemplo beta-binomia y el modelo de habilidad - desempeño (gaussiana - gaussiana). Comparación con la solución exacta. Evaluación de regresiones lineales bayesianas de complejidad creciente sobre datos simulados. Selección de hipótesis por máxima verosimilitud y el problema del sobreajuste y donde descenso. Evaluación por validación cruzada y comparación con la evaluación de modelos por evidencia. Regresiones lineales sobre datos reales.   
+   
+(Antes; Matemática con el desarrollo de gráficas usando las librerías convenientes de Python, usando los métodos numéricos más relevantes. Fórmulas matemáticas relevantes y estructuras de datos.) 
+
+
+ MÓDULO 2: Fundamentos (Inferencia causal e introducción a la programación probabilística)
+Docentes
+Profesor responsable del curso:  Gustavo Landfried
+Docentes Colaboradores:  Dr. Carlos Córdoba, Dr. Gustavo Landfried, Dra. Ana Cecilia Vieira, Ariel Ramos
+
+
+Contenidos mínimos
+
+
+Opinión de Gustavo Landfried.
+
+
+Las 44 horas cubren 7 semanas, con 6 horas por semana, 3 de teórica y 3 de práctica, más 2 horas adicionales de parcial. 
+
+
+* Clases Teóricas:
+   * Parte 1 (Modelos gráficos e inferencia causal). El alto costo computacional de la aplicación estricta de la probabilidad. Cómputo eficiente en modelos gráficos probabilísticos a través de pasaje de mensaje distribuidos entre nodos de la red bayesiana (algoritmo suma-producto). Flujos de inferencia en modelos causales, dependencia e independencia condicional. Criterio d-separación. El concepto del operador “do”. Estimación de efectos causales con datos observables no experimentales. Controles backdoor y frontdoor.  Evaluación de modelos causales alternativos a través del factor de Bayes y la ventaja natural a favor de los modelos de complejidad intermedia. 
+   * Parte 2. (Aproximación eficientes). Modelos mixtos. Divergencia entre distribuciones de probabilidad. Métodos de aproximación analítica por minimización de divergencia: expectation propagation y variational inference. Las ventajas y limitaciones de las aproximaciones analíticas. Métodos de aproximación por muestreo. Las ventajas y desventajas. Markov Chain Monte Carlo Metropolis Algorithm en detalle. Ideas de Hamiltonian Monte Carlo y Sequential Monte Carlo. Ejemplo: diagnósticos de test tipo COVID con independencia y sin independencia.
+* Clases prácticas. 1. Utilizar el algoritmo suma-producto para derivar a mano las dependencias e independencias causales en el modelo alarma-terremoto. Derivar las reglas de d-separación. Determinación de variables de control en estructuras causales genéricas. 2. Simulación de datos a través de modelos causales generativos, evaluación de modelos causales alternativos y estimación de efectos causales.  3. Pasaje de mensajes en el modelo de habilidad exacto, e implementación de la aproximación analítica para solución de filtrado. 4. Implementación del algoritmo de sampleo metropolis. 5. Implementación de modelos mixtos gaussianos en PyMC y selección de modelo a través de sequential monte carlo.  6. Implementación en PyMC de estimación de prevalencia, sensibilidad y especificidad en base a resultados diagnósticos de test tipo PCR y test rápidos.
+
+
+[Antes:
+Las herramientas que me permiten el trabajo de procesar información (Jupyter y Spyder).
+Métodos de clasificación de información. Tipos de formatos de almacenamiento de la información. Base para identificar, contener y estructurar la información para procesar o aplicar métodos de Análisis Exploratorio de Datos.]
+
+
+ MÓDULO 3: Aplicaciones (Series de tiempo y programación probabilística)
+
+
+Docentes
+Profesor responsable del curso:  Gustavo Landfried
+Docentes Colaboradores: Dr. Carlos Cordoba, Dr. Gustavo Landfried, Dra. Ana Cecilia Vieira, Ariel Ramos
+
+
+Las 30 horas cubren 5 semanas, con 6 horas por semana, 2 de teórica y 4 de práctica.
+
+
+ Contenidos mínimos
+
+
+        Teórica: Hidden Markov Model (HMM). Conceptos de filtrado y smoothing en series de tiempo. El forward-backward algorithm. El algoritmo suma-producto para HMM. El algoritmo de convergencia por loopy belief propagation. Sistemas lineales dinámicos. Kernel methods. Gaussian processes. Toma de decisiones y maximización de la tasa de crecimiento temporal.  
+        
+        Práctica: 1. Implementación propia del “Monty Hall extendido” estimar el sesgo de la persona que esconde el regalo a través del tiempo a través de un modelo dirichlet-multinomial. Comparación de las estimaciones obtenidas mediante filtrado y smoothing. 2. Competencia “inferencia con apuestas”, en el que una casa de apuestas  las personas tienen que apostar 3. Implementación del estimación de habilidad en la industria del video juego (TrueSkill Through Time) a partir de una programa semi terminado. 4. Estimación de habilidades deportivas y apuestas contra una base de datos de los pagos ofrecidos por una casa de apuestas.
+
+
+
+
+
+
+ MÓDULO 4: Trabajo final integrador (Resolución completa de un problema complejo)
+
+
+Las 40 horas cubren 6 semanas, con 6.40 horas por semana, 0.40 mínutos de teórica y 6 de práctica
+
+
+Docentes
+Profesor responsable del curso: Dr. Emiliano López
+Docentes Colaboradores: Gustavo Landfried
+
+
+ Contenidos mínimos
+
+
+Opinión Gustavo Landfried
+
+
+* Trabajo Final. Resolución de un problema completo: modelo de recomendaciones de netflix bayesiano. Implementación a partir de un programa casi finalizado. Análisis de datos. Reporte de datos.  
+
+
+(Antes: Conclusiones con un aprendizaje demostrado, conocimientos y habilidades adquiridas, experiencias desarrolladas.)
+
+
+----------------------------------------o------------------------------------------
+ SISTEMA DE EVALUACIÓN: cada curso tendrá un examen final que consistirá en un examen virtual individual con preguntas relacionadas a lo enseñado en cada curso (multiple-choice, preguntas y respuestas para desarrollar, informe final, entre otros).
+JUSTIFICACIÓN DE LA SELECCIÓN, ORGANIZACIÓN Y SECUENCIACIÓN DE LOS CURSOS DE LA DIPLOMATURA Y SU VINCULACIÓN CON LA OFERTA DE CARRERAS DE LA UNSa.
+CONOCIMIENTOS PREVIOS NECESARIOS: Los relativos a egresados universitarios de grado.
+ DESTINATARIOS
+-. Está dirigida en particular a profesionales universitarios egresados de carreras de grado de Ciencias Naturales, aunque también egresados de Ingenierías o Licenciaturas en Ciencias, en todos los casos interesados en adquirir conceptos y manejar un lenguaje técnico adecuado del tema programación.
+EQUIPO DOCENTE
+
+
+Justificación de la inclusión de docentes sin título de posgrado.
+
+
+POLÍTICA DE BECAS: Se otorgarán dos medias becas a alumnos inscriptos de la Escuela de Posgrado de la Facultad de Ciencias Naturales. Los aspirantes deberán enviar CV y carta de motivación que serán evaluadas por el coordinador y el cuerpo docente para la selección.
+ ARANCEL: cada curso costará la suma de 30.000,00 $ (ARS).
+CUPO: cupo mínimo 20 alumnos, cupo máximo 100 alumnos.
+FUENTES DE FINANCIAMIENTO: La Diplomatura será autofinanciada.
+
+
+
+
+[a]Las horas de trabajo en casa no están incluidas en las horas previstas para cada módulo, no? Si el modulo tiene 30 horas, entonces tengo exactamente 5 semanas para dar clases de 6 horas (entre teórica y práctica)
+[b]Yo puedo estar de colaborador aqui
