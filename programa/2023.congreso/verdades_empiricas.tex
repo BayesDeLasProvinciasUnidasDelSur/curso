@@ -1,0 +1,545 @@
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\input{../../auxiliar/tex/diapo_encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+\usetikzlibrary{decorations.text}
+\usepackage{rotating}
+\usepackage{transparent}
+
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+\newcounter{capitulo}
+\setcounter{capitulo}{1}
+\newcommand{\unidad}{\thecapitulo \stepcounter{capitulo}}
+
+
+\estrue
+
+%\title[Bayes del Sur]{}
+
+\begin{document}
+
+\color{black!85}
+\large
+
+% \begin{frame}[plain,noframenumbering]
+%
+%
+% \begin{textblock}{160}(0,6) \centering
+% \includegraphics[width=0.45\textwidth]{../../auxiliar/static/CBP}
+% \end{textblock}
+%
+%
+% % \begin{textblock}{160}(0,24) \centering
+% % \LARGE \textcolor{black!85}{\fontsize{22}{0}\selectfont \textbf{Congreso Bayesiano Plurinacional}}
+% % \end{textblock}
+% % \begin{textblock}{160}(0,6) \centering
+% % \LARGE  \textcolor{black!85}{\rotatebox[origin=tr]{0}{\scalebox{4}{\scalebox{1}[-1]{$p$}}}}
+% % \end{textblock}
+% % \begin{textblock}{160}(0,6) \centering
+% % \LARGE \textcolor{black!85}{\scalebox{4}{$p$}}
+% % \end{textblock}
+% % \begin{textblock}{160}(0,6) \centering
+% % \LARGE \textcolor{black!85}{\scalebox{3.7}{C} \hspace{2.4cm} }
+% % \end{textblock}
+% % \begin{textblock}{160}(0,6) \centering
+% % \LARGE \textcolor{black!85}{ \hspace{2.5cm} \scalebox{3.7}{P} }
+% % \end{textblock}
+%
+% \begin{textblock}{160}(0,40)\centering
+% \hspace{3.6cm} \LARGE  \textcolor{black!85}{\rotatebox[origin=tr]{-3}{\scalebox{6}{\scalebox{1}[-1]{$p$}}}}
+% \end{textblock}
+%
+% \begin{textblock}{160}(0,49) \centering
+% \LARGE  \textcolor{black!85}{\scalebox{4}{$=$}}
+% \end{textblock}
+%
+% \begin{textblock}{160}(0,40)\centering
+% \hspace{-3.8cm} \LARGE  \textcolor{black!85}{\scalebox{6}{$p$}}
+% \end{textblock}
+%
+% \begin{textblock}{160}(0,73) \centering \Large \textcolor{black!75}{\textbf{
+% Del 4 al 5 de agosto 2023 \\
+% La Banda, Santiago del Estero, Argentina \\[0.1cm]}}
+%
+% \normalsize \texttt{bayesdelsur@gmail.com}
+% \end{textblock}
+%
+% \end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+
+
+\begin{textblock}{160}(0,0)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/deforestacion}
+\end{textblock}
+
+\begin{textblock}{80}(18,9)
+\textcolor{black!15}{\fontsize{44}{55}\selectfont Verdades}
+\end{textblock}
+
+\begin{textblock}{47}(85,70)
+\centering \textcolor{black!15}{{\fontsize{52}{65}\selectfont Empíricas}}
+\end{textblock}
+
+\begin{textblock}{80}(100,28)
+\LARGE  \textcolor{black!15}{\rotatebox[origin=tr]{-3}{\scalebox{9}{\scalebox{1}[-1]{$p$}}}}
+\end{textblock}
+
+\begin{textblock}{80}(66,43)
+\LARGE  \textcolor{black!15}{\scalebox{6}{$=$}}
+\end{textblock}
+
+\begin{textblock}{80}(36,29)
+\LARGE  \textcolor{black!15}{\scalebox{9}{$p$}}
+\end{textblock}
+
+\vspace{2cm}
+\maketitle
+
+
+
+\begin{textblock}{160}(01,81)
+\footnotesize \textcolor{black!5}{\textbf{Curso Verdades Empíricas. \\
+Congreso Bayesiano Plurinacional 2023} \\}
+\end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(01,03)\centering
+\textcolor{black!85}{{\large
+\large Curso \textbf{Verdades empíricas} \\[-0.1cm] \footnotesize Congreso Bayesiano Plurinacional 2023}} \\ \scriptsize \texttt{bayesdelsur@gmail.com.ar} - \texttt{bayesdelsur.com.ar}
+\end{textblock}
+
+
+
+\begin{textblock}{140}(10,19)
+
+\normalsize
+ No se requiere ningún tipo de formación previa para participar, pero el curso se aprovecha mejor teniendo conocimientos mínimos de programación.
+
+\vspace{0.3cm}
+
+
+\normalsize \textbf{Causalidad} \\[0.1cm] \footnotesize
+\ \ $1$. Modelos gráficos y algoritmos de inferencia \\
+\ \ $2$. Inferencia Causal\\
+
+ \vspace{0.3cm}
+
+\normalsize \textbf{Series de tiempo} \\[0.1cm] \footnotesize
+\ \ $3$. Sorpresa: el problema de la comunicación con la realidad \\
+\ \ $4$. Series de tiempo. \\
+
+\vspace{0.3cm}
+
+\normalsize \textbf{Toma de decisiones} \\[0.1cm] \footnotesize
+\ \ $5$. La función de costo epistémico-evolutiva \\
+\ \ $6$. Competencia ``Apuestas de vida'' \\
+
+\end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(00,04)\centering
+\textcolor{black!85}{\Large Objetivos}
+\end{textblock}
+
+\begin{textblock}{140}(10,16)
+
+\normalsize
+
+\parbox{14cm}{En las últimas décadas se han desarrollado una gran cantidad de algoritmo de aprendizaje automático.
+Bajo este marco, cada nuevo problema se ``resuelve'' con alguno de los algoritmos ya existentes.
+Si bien este flujo de trabajo ha sido exitoso para muchas tareas, tiene la desventaja de ser inflexible a la hora de considerar las especificidades propias de cada problema.
+Por ejemplo, en él se dificulta la inferencia causal.
+
+\vspace{0.3cm}
+
+En este curso introduciremos un enfoque ``basado en modelos''.
+A lo largo de esas mismas décadas también se fueron desarrollando técnicas generales, que permiten crear modelos a medida del problema, de forma sencilla.
+Con ellas podemos: expresar de forma gráfica las relaciones causales entre las variables; descomponer las reglas de la probabilidad como mensajes entre los nodos de la red causal; y delegar la inferencia a los lenguajes de programación probabilística.
+Además de ser flexible, hace uso óptimo de la información debido a que está basado en la aplicación estricta de la probabilidad.
+}
+\end{textblock}
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+
+\centering \LARGE
+Taller 1. Causalidad.
+
+\end{frame}
+
+
+
+\begin{frame}[plain,noframenumbering]
+\begin{textblock}{160}(0,43)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/modelosGraficos}
+\end{textblock}
+
+
+\begin{textblock}{160}(4,4)
+\LARGE \textcolor{black!85}{\fontsize{22}{0}\selectfont \textbf{Modelos gráficos e inferencia}}
+\end{textblock}
+% \begin{textblock}{160}(4,12)
+% \LARGE \textcolor{black!85}{\fontsize{22}{0}\selectfont \textbf{algoritmos de inferencia}}
+% \end{textblock}
+
+
+\begin{textblock}{55}[0,0](72,23)
+\begin{turn}{0}
+\parbox{10cm}{\sloppy\setlength\parfillskip{0pt}
+\textcolor{black!85}{Unidad \unidad} \\
+\small\textcolor{black!85}{Acuerdos intersubjetivos en contextos de incertidumbre.} \\
+\small\textcolor{black!85}{Especificación gráfica de modelos causales. Evaluación} \\
+\small\textcolor{black!85}{de modelos causales. La emergencia del sobreajuste y el} \\
+\small\textcolor{black!85}{balance natural de las reglas de la probabilidad.} \\
+}
+\end{turn}
+\end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(0,0)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/peligro_predador}
+\end{textblock}
+
+\begin{textblock}{160}(127,67)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{Inferencia  \\[-0.1cm] \hspace{0.5cm} causal}}
+\end{textblock}
+
+\begin{textblock}{55}(2,3)
+\begin{turn}{0}
+\parbox{15cm}{\small
+\textcolor{black!95}{Flujos de inferencia en modelos causales. Efecto de}\\
+\textcolor{black!95}{las intervenciones en modelos causales. Conclusiones} \\
+\textcolor{black!95}{causales a partir de datos observables. Identificación} \\
+\textcolor{black!95}{de modelo causal.} \\
+\normalsize\textcolor{black!95}{Unidad \unidad} \\
+}
+\end{turn}
+\end{textblock}
+
+\end{frame}
+
+
+
+\begin{frame}[plain,noframenumbering]
+
+\centering \LARGE
+Taller 1. Series temporales.
+
+\end{frame}
+
+
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(0,0)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/fuego}
+\end{textblock}
+
+\begin{textblock}{160}(4,26)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{Sorpresa: el problema}}
+\end{textblock}
+\begin{textblock}{160}(4,34)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{de la comunicación}}
+\end{textblock}
+\begin{textblock}{160}(4,42)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{con la realidad}}
+\end{textblock}
+% \begin{textblock}{160}(3,82)
+% \LARGE \textcolor{black!15}{\fontsize{22}{0}\selectfont \textbf{3}}
+% \end{textblock}
+
+
+
+\begin{textblock}{55}[0,0](88,25)
+\begin{turn}{0}
+\parbox{7cm}{\sloppy\setlength\parfillskip{0pt}
+\textcolor{black!0}{Unidad \unidad} \\
+\small\textcolor{black!5}{\hspace{-0.3cm}La estructura invariante del dato empírico.} \\
+\small\textcolor{black!5}{\hspace{-0.3cm}Construcción de un sistema de información.}\\
+\small\textcolor{black!5}{\hspace{-0.4cm}Algoritmo de inferencia por pasaje de mensajes.} \\
+\small\textcolor{black!5}{\hspace{-0.6cm}Ejemplos: modelos de estimación de habilidad.} \\
+}
+\end{turn}
+\end{textblock}
+
+\end{frame}
+
+
+
+\begin{frame}[plain,noframenumbering]
+\begin{textblock}{160}(0,-4.3) \centering
+\includegraphics[width=1\textwidth]{../../auxiliar/static/antartic}
+\end{textblock}
+
+\begin{textblock}{160}(0,0) \centering
+\tikz{
+\node[det, fill=black,draw=black] (k) {\textcolor{black}{--------------------------------------------------------------------------------------------------------------------------------------}} ;
+}
+\end{textblock}
+
+\begin{textblock}{160}(5,0)
+\tikz{
+\node[det, fill=black,draw=black,text width=0.01cm] (k) {\textcolor{black}{--------------------------------------------------------------------------------------------------------------------------------------}} ;
+}
+\end{textblock}
+
+
+\begin{textblock}{160}(0,4) \centering
+\LARGE \hspace{1cm} \textcolor{black!20}{\fontsize{22}{0}\selectfont \textbf{Series de tiempo}}
+\end{textblock}
+
+
+\begin{textblock}{55}[0,1](8,70)
+\begin{turn}{90}
+\parbox{6cm}{\footnotesize
+\textcolor{black!10}{Millones de km$^2$ de hielo Antártico}}
+\end{turn}
+\end{textblock}
+
+
+\begin{textblock}{160}(20,63)
+\textcolor{black!10}{Unidad \unidad \\ \small
+Redes bayesianas de historia completa. \\
+El problema de usar el posterior como prior del siguiente evento\\
+El algoritmo de inferencia por loopy belief propagation. \\
+Consideraciones de inferencia causal en series temporales. \\
+}
+\end{textblock}
+
+
+\end{frame}
+%
+% \begin{frame}[plain,noframenumbering]
+% \begin{textblock}{160}(-5,0) \centering
+% \includegraphics[width=1.05\textwidth]{../../auxiliar/static/pajarosTrayectorias}
+% \end{textblock}
+% \begin{textblock}{160}(4,20)
+% \LARGE \textcolor{black!6}{\fontsize{22}{0}\selectfont \textbf{Aproximaciones}}
+% \end{textblock}
+% \begin{textblock}{160}(14,27)
+% \LARGE \textcolor{black!6}{\fontsize{22}{0}\selectfont \textbf{por exploración}}
+% \end{textblock}
+%
+%
+% \begin{textblock}{65}(90,40)
+% \textcolor{black!5}{ \hfill Capítulo \unidad \\ \small
+% \hfill Métodos de aproximación para \\
+% \hfill modelos causales intratables: \\
+% \hfill Markov chain Monte Carlo.\\
+% \hfill MCMC. HMC. \\
+% }
+% \end{textblock}
+%
+%
+% \end{frame}
+%
+% \begin{frame}[plain,noframenumbering]
+% \begin{textblock}{160}(0,0) \centering
+% \includegraphics[width=1.2\textwidth]{../../auxiliar/static/ppls}
+% \end{textblock}
+% \begin{textblock}{160}(8,8)
+% \LARGE \textcolor{black!15}{\fontsize{22}{0}\selectfont \textbf{Programación \\ probabilistica \\}}
+% \end{textblock}
+% % \begin{textblock}{160}(94,23)
+% % \LARGE \textcolor{black!16}{\fontsize{22}{0}\selectfont \textbf{probabilistica}}
+% % \end{textblock}
+%
+% \begin{textblock}{160}(70,30)
+% \normalsize
+% \textcolor{black!25}{
+% \tikz{
+% \node[det, fill=black!60,draw=black!25] (k) {\textcolor{black!5}{$k_i$}} ;
+% \node[latent, fill opacity=0, draw=black!25, text opacity=1, above=of k, xshift=-1cm] (p) {\textcolor{black!5}{$p$}};
+% \node[det, fill opacity=0, draw=black!25, text opacity=1, above=of k, xshift=1cm] (n) {\textcolor{black!5}{$n$}};
+% \edge {p,n} {k};
+% \plate[inner sep=0.3cm, xshift=0cm, yshift=0.12cm] {intentos} {(k)} {$i$}
+% \node[const, right=of n, xshift=0.3cm] (np) {$p \sim \text{Beta}(1,1)$};
+% \node[const, right=of n, xshift=0.3cm, yshift=-1cm] (np) {$n \sim \text{Categorical}(N_\text{max})$};
+% \node[const, right=of n, xshift=0.3cm, yshift=-2cm] (np) {$k_i \sim \text{Binomial}(p,n)$};
+% }
+% }
+% \end{textblock}
+%
+% \begin{textblock}{160}(20,74)
+% \textcolor{black!15}{Capítulo \unidad \\ \small
+% Implementación de modelos usando lenguajes de programación probabilística. \\
+% Verificación visual de buen funcionamiento de las aproximaciones.  \\
+% }
+% \end{textblock}
+%
+%
+% \end{frame}
+
+
+
+\begin{frame}[plain,noframenumbering]
+
+\centering \LARGE
+Taller 3. Toma de decisiones.
+
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+
+% \begin{textblock}{160}(0,0)
+% \includegraphics[width=1.18\textwidth]{../../aux/static/fotosintesis}
+% \end{textblock}
+\begin{textblock}{160}(0,-15)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/tsimane}
+\end{textblock}
+
+
+% VERSION 2
+\begin{textblock}{160}(6,36)
+\LARGE \rotatebox[origin=tr]{18}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{La función}}}
+\end{textblock}
+\begin{textblock}{160}(41,32)
+\LARGE \rotatebox[origin=tr]{23}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{de}}}
+\end{textblock}
+\begin{textblock}{160}(50.5,23)
+\LARGE \rotatebox[origin=tr]{28}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{costo}}}
+\end{textblock}
+\begin{textblock}{160}(68,5.3)
+\LARGE \rotatebox[origin=tr]{26}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{epistémico}}}
+\end{textblock}
+\begin{textblock}{160}(104,5.5)
+\LARGE \rotatebox[origin=tr]{8}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{-}}}
+\end{textblock}
+\begin{textblock}{160}(110,3)
+\LARGE \rotatebox[origin=tr]{-14}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{evolutiva}}}
+\end{textblock}
+
+
+\begin{textblock}{55}[0,0](119,22)
+\begin{turn}{-57}
+\parbox{7cm}{\sloppy\setlength\parfillskip{0pt}
+\textcolor{black!0}{\ \ \ \ \ Unidad \unidad} \\
+\small\textcolor{black!5}{\hspace{-0.15cm} Apuestas óptimas.} \\
+\small\textcolor{black!5}{\hspace{-0.85cm} Ventajas a favor de la:} \\
+\small\textcolor{black!5}{\hspace{-1.45cm} Diversificación (propiedad epistémica)}\\
+\small\textcolor{black!5}{\hspace{-1.7cm} Cooperación (propiedad evolutiva)}\\
+\small\textcolor{black!5}{ \hspace{-1.75cm}Especialización (propiedad de especiación)} \\
+\small\textcolor{black!5}{\hspace{-2cm} Heterogeniedad (propiedad ecológica).\\ }}
+\end{turn}
+\end{textblock}
+
+
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+% \begin{textblock}{160}(0,-80)  \centering
+% \includegraphics[width=1\textwidth]{../../aux/static/galton_box}
+% \end{textblock}
+
+\begin{textblock}{160}(0,11)  \centering
+\includegraphics[width=0.40\textwidth]{../../auxiliar/static/treeOfLife-liviano}
+\end{textblock}
+
+\begin{textblock}{160}(0,3) \centering
+\LARGE \textcolor{black!85}{\rotatebox[origin=tr]{0}{\fontsize{22}{0}\selectfont \textbf{Apuestas de vida}}}
+\end{textblock}
+% % <
+% \begin{textblock}{160}(0,3) \centering
+% \begin{tikzpicture}
+%   \node (Start) at (2.8,0) {};
+%   \node (End) at (-2.8,0) {};
+%   \draw [decorate,decoration={text along path,text align=center,text={sssssssssssssssssssssssssssssssssss|\bf\fontsize{22}{22}\selectfont|Distribuciones de creencias},text color=black!85 }] (End) to [bend left=45] (Start);
+% \end{tikzpicture}
+% \end{textblock}
+
+%  \begin{textblock}{160}(0,3) \centering
+% \tikz{
+% \node[factor, xshift=-3cm, opacity=0] (a) {} ;
+% \node[factor, xshift=3cm, opacity=0] (b) {} ;
+% \path[draw, -, fill=black!50,sloped,draw opacity=0] (a) edge[bend left=45,draw=black!50] node[color=black!75] {\scriptsize  \texttt{lhood\_lose\_tb}} (b);
+% }
+% \end{textblock}
+
+
+\begin{textblock}{55}(75,39)
+\textcolor{black!85}{\normalsize El árbol de la vida \\
+\fontsize{2}{0}\selectfont Synthesis of phylogeny and taxonomy into a comprehensive tree of life \\}
+\end{textblock}
+
+
+\begin{textblock}{55}(3,81)
+\textcolor{black!85}{Unidad \unidad}
+\end{textblock}
+
+\begin{textblock}{55}(25,81.3)
+\begin{turn}{0}
+\parbox{15cm}{\small \textcolor{black!85}{Presentación de una competencia de inferecia con apuestas e intercambio de recursos.}
+}
+\end{turn}
+\end{textblock}
+
+\end{frame}
+
+%
+%
+% \begin{frame}[plain,noframenumbering]
+% \begin{textblock}{160}(0,0)  \centering
+% \includegraphics[width=1\textwidth]{../../auxiliar/static/reciprocidad}
+% \end{textblock}
+%
+% \begin{textblock}{160}(0,3) \centering
+% \LARGE \textcolor{black!15}{\rotatebox[origin=tr]{0}{\fontsize{22}{0}\selectfont \textbf{Tiempo de colaborar}}}
+% \end{textblock}
+%
+% \begin{textblock}{55}(126,82)
+% \begin{turn}{-5}
+% \textcolor{black!5}{Capítulo \unidad}
+% \end{turn}
+% \end{textblock}
+%
+% \begin{textblock}{55}(115,84)
+% \begin{turn}{-5}
+% \small \textcolor{black!5}{Tecnologías de reciprocidad}
+% \end{turn}
+% \end{textblock}
+%
+% \end{frame}
+
+%
+% \begin{frame}[plain,noframenumbering]
+%
+% \begin{textblock}{96}(0,6.5)\centering
+% {\transparent{0.9}\includegraphics[width=0.8\textwidth]{../../auxiliar/static/inti.png}}
+% \end{textblock}
+%
+% \begin{textblock}{160}(96,5.5)
+% \includegraphics[width=0.35\textwidth]{../../auxiliar/static/pachacuteckoricancha}
+% \end{textblock}
+%
+% \end{frame}
+
+
+\end{document}
