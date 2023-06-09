@@ -1,0 +1,1011 @@
+\newif\ifen
+\newif\ifes
+\newif\iffr
+\newcommand{\fr}[1]{\iffr#1 \fi}
+\newcommand{\En}[1]{\ifen#1\fi}
+\newcommand{\Es}[1]{\ifes#1\fi}
+\estrue
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\input{../../auxiliar/tex/diapo_encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+\estrue
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+\newcommand{\gray}{\color{black!55}}
+
+\usepackage{listings}
+\lstset{
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=true,
+  columns=flexible,
+  basicstyle={\ttfamily},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showlines=true
+}
+
+
+\begin{document}
+
+\color{black!85}
+\large
+
+\begin{frame}[plain,noframenumbering]
+
+
+\begin{textblock}{160}(0,0)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/deforestacion}
+\end{textblock}
+
+\begin{textblock}{80}(18,9)
+\textcolor{black!15}{\fontsize{44}{55}\selectfont Verdades}
+\end{textblock}
+
+\begin{textblock}{47}(85,70)
+\centering \textcolor{black!15}{{\fontsize{52}{65}\selectfont Empíricas}}
+\end{textblock}
+
+\begin{textblock}{80}(100,28)
+\LARGE  \textcolor{black!15}{\rotatebox[origin=tr]{-3}{\scalebox{9}{\scalebox{1}[-1]{$p$}}}}
+\end{textblock}
+
+\begin{textblock}{80}(66,43)
+\LARGE  \textcolor{black!15}{\scalebox{6}{$=$}}
+\end{textblock}
+
+\begin{textblock}{80}(36,29)
+\LARGE  \textcolor{black!15}{\scalebox{9}{$p$}}
+\end{textblock}
+
+%
+%
+% \begin{textblock}{160}(01,81)
+% \footnotesize \textcolor{black!5}{\textbf{\small Seminario ``Acuerdos intersubjetivos''\\
+% Comunidad Bayesiana Plurinacional} \\}
+% \end{textblock}
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(00,04)
+\centering
+\LARGE Verdad
+\end{textblock}
+\vspace{1.5cm} \large
+
+\centering
+
+ La ciencia tiene pretensión de verdad, de alcanzar\\
+
+\textbf{acuerdos intersubjetivos con validez universal}
+
+\vspace{0.7cm}
+
+\pause
+
+ \large Ciencias formales  \\
+ \large  Sistemas axiomáticos sin incertidumbre\\
+
+ \vspace{0.3cm}
+
+  \pause
+
+ \large Ciencias con datos  \\
+\large Sistemas abiertos con incertidumbre
+
+\pause
+\vspace{0.6cm}
+
+\Large
+
+¿Cuál es la verdad en \\ contextos de incertidumbre?
+%
+% \pause
+% \vspace{0.2cm}
+%
+%
+% Sí. Podemos evitar mentir.
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(00,04)
+\centering
+\LARGE ¿Todo vale lo mismo?\\
+\end{textblock}
+\vspace{1cm} \large
+
+
+\only<2->{
+\begin{textblock}{50}(3,26) \centering
+\includegraphics[width=1\textwidth, page={6}]{../../auxiliar/static/sidewalk_bubblegum_1997_1}
+\end{textblock}}
+ \only<3->{
+\begin{textblock}{50}(55,26) \centering
+\includegraphics[width=1\textwidth, page={6}]{../../auxiliar/static/sidewalk_bubblegum_1997_2}
+\end{textblock}}
+% \only<4>{
+% \begin{textblock}{50}(107,20) \centering
+% \includegraphics[width=1\textwidth, page={6}]{../../auxiliar/static/sidewalk_bubblegum_1997_3}
+% \end{textblock}}
+\only<4->{
+\begin{textblock}{50}(107,26) \centering
+\includegraphics[width=1\textwidth, page={6}]{../../auxiliar/static/sidewalk_bubblegum_1997_4}
+\end{textblock}}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4) \centering
+\LARGE Sabemos no mentir \\
+\end{textblock}
+\vspace{2cm}
+
+
+
+\Large
+
+\centering
+
+$\bullet$ No afirmar más de lo que sabemos \pause
+
+$\bullet$ Sin dejar de decir todo lo que sí sabemos
+
+\pause \centering \vspace{1cm}
+
+\Large
+
+\textbf{¿Cómo exactamente?}
+
+
+\end{frame}
+
+
+
+
+
+
+%
+% \begin{frame}[plain]
+%  \begin{textblock}{160}(0,4)
+%  \centering \LARGE Incertidumbre \\
+%  \Large Libre albedrío
+% \end{textblock}
+% \vspace{1.5cm}
+% \centering
+%
+% \only<2-3>{
+% \begin{textblock}{75}(75,28)
+% Detrás de una caja hay un regalo \\[0.3cm]
+%
+%  \scalebox{1}{
+% \tikz{ %
+%          \node[factor, minimum size=1cm] (p1) {} ;
+%          \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
+%          \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+%
+%
+%          \node[const, above=of p1, yshift=0.1cm] (np1) {\Large $?$};
+%          \node[const, above=of p2, yshift=0.1cm] (np2) {\Large $?$};
+%          \node[const, above=of p3, yshift=0.1cm] (np3) {\Large $?$};
+%          }
+% }
+% \end{textblock}
+% }
+%
+%
+% \begin{textblock}{75}(05,18)
+%  \centering
+%  \begin{figure}[H]
+% \centering
+%     \scalebox{1.2}{
+%  \tikz{ %
+%         \node[estado] (s) {};
+%         \node[const, above=of s] {$s$};
+%         \node[accion, below=of s, xshift=-1cm] (a1) {} ; %
+% 	\node[accion, below=of s, xshift=0cm] (a2) {} ; %
+% 	\node[accion, below=of s, xshift=1cm] (a3) {} ; %
+% 	\node[const, right=of a3] {$a$};
+%         \edge[-] {s} {a1,a2,a3};
+%
+% 	\node[estado, below=of a1,xshift=0cm] (s1a) {}; %
+%
+% 	\node[estado, below=of a2,xshift=0cm] (s2a) {}; %
+%
+% 	\node[estado, below=of a3,xshift=0cm] (s3a) {}; %
+%
+% 	\node[const, right=of s3a] {$s^{\prime}$};
+% 	\edge[-] {a1} {s1a};
+% 	\edge[-] {a2} {s2a};
+% 	\edge[-] {a3} {s3a};
+%         }
+%
+%     }
+% \end{figure}
+% \normalsize \textbf{Universos paralelos} \ \ \ \   \\ $s$: estados, $a$: acciones \ \ \ \
+% \end{textblock}
+%
+% \only<3>{
+% \begin{textblock}{160}(0,70)
+% \centering \Large
+% Funci\'ones de probabilidad permiten expresar nuestra incertidumbre
+%  \begin{align*}
+% P(a = 1)  = \, ? \ \ \  P(a = 2) = \,? \ \ \  P(a = 3) = \,?
+%  \end{align*}
+% \end{textblock}
+% }
+%
+% \end{frame}
+%
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE \onslide<3->{Distribución de creencias \\}
+ %\Large \only<5>{\textbf{Primer acuerdo intersubjetivo!}}
+\end{textblock}
+\vspace{1.5cm}
+\centering
+
+
+\only<1>{
+\begin{textblock}{160}(0,62)
+\Large Detrás de una de estas caja hay un regalo. \\[0.1cm]
+
+\large ¿Dónde está el regalo?
+\end{textblock}
+}
+
+\only<1>{
+\begin{textblock}{160}(0,28)
+ \scalebox{1.1}{
+\tikz{ %
+         \node[factor, minimum size=1cm] (p1) {} ;
+         \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
+         \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+
+
+         \node[const, above=of p1, yshift=0.1cm] (np1) {\Large $?$};
+         \node[const, above=of p2, yshift=0.1cm] (np2) {\Large $?$};
+         \node[const, above=of p3, yshift=0.1cm] (np3) {\Large $?$};
+         }
+}
+\end{textblock}
+}
+
+\only<2>{
+\begin{textblock}{160}(0,28)
+ \scalebox{1.1}{
+\tikz{ %
+         \node[factor, minimum size=1cm] (p1) {} ;
+         \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
+         \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+
+
+         \node[const, above=of p1, yshift=0.125cm] (np1) {\Large $0$};
+         \node[const, above=of p2, yshift=0.125cm] (np2) {\Large $1$};
+         \node[const, above=of p3, yshift=0.125cm] (np3) {\Large $0$};
+         }
+}
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{160}(0,28)
+ \scalebox{1.1}{
+\tikz{ %
+         \node[factor, minimum size=1cm] (p1) {} ;
+         \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
+         \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+
+
+         \node[const, above=of p1, yshift=-0.05cm] (np1) {\Large $1/10$};
+         \node[const, above=of p2, yshift=-0.05cm] (np2) {\Large $8/10$};
+         \node[const, above=of p3, yshift=-0.05cm] (np3) {\Large $1/10$};
+         }
+}
+\end{textblock}
+}
+
+
+\only<4->{
+\begin{textblock}{160}(0,28)
+ \scalebox{1.1}{
+\tikz{ %
+         \node[factor, minimum size=1cm] (p1) {} ;
+         \node[factor, minimum size=1cm, xshift=1.5cm] (p2) {} ;
+         \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+
+
+         \node[const, above=of p1, yshift=-0.05cm] (np1) {\Large $1/3$};
+         \node[const, above=of p2, yshift=-0.05cm] (np2) {\Large $1/3$};
+         \node[const, above=of p3, yshift=-0.05cm] (np3) {\Large $1/3$};
+         }
+}
+\end{textblock}
+}
+
+\only<5->{
+\begin{textblock}{140}(10,64)   \centering \Large
+Acuerdo intersubjetivo\\[0.1cm]
+\large 1. Máximizamos incertidumbre  \\
+\large 2. Dada la información disponible
+
+\end{textblock}
+}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \Large ¿Cómo podemos dar continuidad a los acuerdos intersubjetivos? \\
+\large \onslide<2>{\textbf{Las reglas de la probabilidad}}
+\end{textblock}
+\onslide<2>{
+\vspace{1.5cm}
+
+
+
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+ \centering
+
+ {\large Principio de integridad}
+
+ \vspace{0.4cm}
+
+\textbf{Regla de la suma}
+
+
+\begin{equation*}
+ P(r) = \sum_j P(r,s_j)
+\end{equation*}
+
+
+
+ \footnotesize
+ No perdemos ni creamos creencia cuando \\
+la distribuimos. Si sumamos, la recuperamos.
+
+ \end{column}
+ \begin{column}{0.5\textwidth}
+
+\centering
+ {\large Principio de coherencia}
+
+ \vspace{0.4cm}
+
+\textbf{Regla del producto}
+
+\begin{equation*}
+ P(r|s)  = \frac{P(r,s)}{P(s)}
+\end{equation*}
+
+\vspace{0.1cm}
+
+\footnotesize
+Preservamos la creencia previa que \\
+sigue siendo compatible con el dato
+
+\end{column}
+\end{columns}
+}
+\end{frame}
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+% \centering \Large Ejemplo: Monty Hall
+% \end{textblock}
+%
+% \begin{textblock}{150}(0,18)
+% \begin{figure}[ht!]
+%  \centering
+%   \begin{subfigure}[b]{0.3\textwidth}
+%   \centering
+%   \tikz{
+%
+%     \node[latent] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;
+%     \node[const,below=of d] (nd) {\En{Hint}\Es{Pista}: $s \neq r$, $s \neq c$  } ;
+%
+%     \node[latent, above=of d,yshift=-1.2cm, xshift=-1.3cm] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
+%     \node[const,above=of r] (nr) {\phantom{g}\En{Gift}\Es{Regalo}: $r$\phantom{g}} ;
+%
+%     \node[latent, fill=black!30, above=of d,yshift=-1.2cm, xshift=1.3cm] (c) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/cerradura.png}} ;
+%     \node[const,above=of c] (nc) {\phantom{g}\En{Election}\Es{Elección}: $c_1$\phantom{g}} ;
+%
+%     \edge {r,c} {d};
+%
+%          \node[factor, minimum size=0.8cm, xshift=-1.3cm, yshift=2.5cm] (p1) {\includegraphics[width=0.075\textwidth]{../../auxiliar/static/cerradura.png}} ;
+%          \node[det, minimum size=0.8cm, yshift=2.5cm] (p2) {\includegraphics[width=0.085\textwidth]{../../auxiliar/static/dedo.png}} ;
+%          \node[factor, minimum size=0.8cm, xshift=1.3cm, yshift=2.5cm] (p3) {} ;
+%          \node[const, above=of p1, yshift=.05cm] (fp1) {$?$};
+%          \node[const, above=of p2, yshift=.05cm] (fp2) {$?$};
+%          \node[const, above=of p3, yshift=.05cm] (fp3) {$?$};
+%          \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
+%
+%   }
+%   \label{fig:modelo_causal}
+%   \end{subfigure}
+%   \onslide<2->{
+%  \begin{subfigure}[b]{0.32\textwidth}
+% \centering
+% \tikz{
+% \node[latent, draw=white, yshift=0.7cm] (b0) {$1$};
+% \node[latent,below=of b0,yshift=0.9cm, xshift=-1.5cm] (r1) {$r_1$};
+% {\color{black}\node[latent,draw=black,below=of b0,yshift=0.9cm] (r2) {$r_2$}; }
+% \node[latent,below=of b0,yshift=0.9cm, xshift=1.5cm] (r3) {$r_3$};
+% \node[latent, below=of r1, draw=white, yshift=0.7cm] (bc11) {$\frac{1}{3}$};
+% {\color{black}\node[latent, below=of r2, draw=white, yshift=0.7cm] (bc12) {$\frac{1}{3}$};}
+% \node[latent, below=of r3, draw=white, yshift=0.7cm] (bc13) {$\frac{1}{3}$};
+% \node[latent,below=of bc11,yshift=0.9cm, xshift=-0.5cm] (r1d2) {$s_2$};
+% {\color{black}\node[latent,draw=black,below=of bc11,yshift=0.9cm, xshift=0.5cm] (r1d3) {$s_3$};}
+% {\color{black}\node[latent, draw=black,below=of bc12,yshift=0.9cm] (r2d3) {$s_3$};}
+% \node[latent,below=of bc13,yshift=0.9cm] (r3d2) {$s_2$};
+%
+% \node[latent,below=of r1d2,yshift=0.9cm,draw=white] (br1d2) {$\frac{1}{3}\frac{1}{2}$};
+% {\color{black}\node[latent,below=of r1d3,yshift=0.9cm, draw=white] (br1d3) {$\frac{1}{3}\frac{1}{2}$};}s
+% {\color{black}\node[latent,below=of r2d3,yshift=0.9cm,draw=white] (br2d3) {$\frac{1}{3}$};}
+% \node[latent,below=of r3d2,yshift=0.9cm,draw=white] (br3d2) {$\frac{1}{3}$};
+% \edge[-] {b0} {r1,r3};
+% \edge[-,draw=black] {b0} {r2};
+% \edge[-] {r1} {bc11};
+% \edge[-,draw=black] {r2} {bc12};
+% \edge[-] {r3} {bc13};
+% \edge[-] {bc11} {r1d2};
+% \edge[-,draw=black] {bc11} {r1d3};
+% \edge[-,draw=black] {bc12} {r2d3};
+% \edge[-] {bc13} {r3d2};
+% \edge[-] {r1d2} {br1d2};
+% \edge[-,draw=black] {r1d3} {br1d3};
+% \edge[-,draw=black] {r2d3} {br2d3};
+% \edge[-] {r3d2} {br3d2};
+% }
+% \label{fig:caminos_montyhall_compatibles}
+% \end{subfigure}
+% }
+% \onslide<3>{
+% \begin{subfigure}[b]{0.32\textwidth}
+% \phantom{$P(s_j)$\hspace{0.2cm}g$P(r_i, s_j)$\phantom{g}\hspace{0.8cm}$P(s_j)$} \\
+% \centering
+%   \begin{tabular}{|c|c|c|c||c|} \hline  \setlength\tabcolsep{0.4cm}
+%  & \, $r_1$ \, &  \, $r_2$ \, & \, $r_3$ \, &  \\ \hline
+%   $\gray s_1$ & $\gray0$ & $\gray0$ & $\gray0$ &   $\gray 0$ \\ \hline
+%   $\bm{s_2}$ & $\bm{1/6}$ & $\bm{0}$ & $\bm{1/3}$ &  $\bm{1/2}$ \\  \hline
+%   $\gray s_3$ & $\gray1/6$ & $\gray1/3$ & $\gray0$ & $\gray1/2$ \\ \hline
+%   \end{tabular}
+%
+%   \phantom{--}\\[0.1cm]
+%
+%   \tikz{
+%
+%          \node[factor, minimum size=0.8cm, xshift=-1.3cm] (p1) {\includegraphics[width=0.075\textwidth]{../../auxiliar/static/cerradura.png}} ;
+%          \node[det, minimum size=0.8cm] (p2) {\includegraphics[width=0.085\textwidth]{../../auxiliar/static/dedo.png}} ;
+%          \node[factor, minimum size=0.8cm, xshift=1.3cm] (p3) {} ;
+%          \node[const, below=of p1, yshift=-.025cm] (fp1) {$1/3$};
+%          \node[const, below=of p2, yshift=-.025cm] (fp2) {$0$};
+%          \node[const, below=of p3, yshift=-.025cm] (fp3) {$2/3$};
+%          \node[const, above=of p2, yshift=.045cm] (title) {$P(r_i | s_2)=P(r_i,s_2)/P(s_2)$};
+%
+%          \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
+%
+%   }
+% \label{fig:f3}
+% \end{subfigure}
+% }
+% \label{fig:monty_hall}
+% \end{figure}
+% \end{textblock}
+%
+% \only<3>{
+% \begin{textblock}{160}(105,20)
+% \phantom{$P(s_j)$\hspace{0.2cm}g}$P(r_i, s_j)$\phantom{g}\hspace{0.8cm}$P(s_j)$
+% \end{textblock}
+% }
+% \end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Enfoque bayesiano \\
+\Large Aplicación estricta de las reglas de la probabilidad
+\end{textblock}
+
+
+
+\begin{textblock}{160}(0,28) \centering
+\Large El problema histórico: \\[0.1cm]
+
+\large
+La complejidad computacional de evaluar \\
+\textbf{todo el espacio de hipótesis}.
+
+\end{textblock}
+
+
+\begin{textblock}{120}(20,56)
+\only<2->{$\bullet$ Siglo 19: Física estadística}
+
+\only<3->{$\bullet$ Siglo 20: Enfoque frecuentista}
+
+\only<4->{$\bullet$ Siglo 21: Por primera vez comienza a ser posible aplicar las reglas de la probabilidad de forma estricta en todos los campos de la ciencia}
+\end{textblock}
+
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering  \Large Regresi\'on lineal (bayesiana)
+\end{textblock}
+
+\vspace{1.5cm}
+
+\begin{equation*}
+\begin{split}
+y & = \beta_0 + \beta_1 x + \varepsilon \\[0.2cm]
+p(\varepsilon) &= \N(\varepsilon\,|\, 0, c^2) \\[0.6cm]
+\onslide<2->{
+p(\beta_0) &= \N(\beta_0 \,|\, 0, \sigma_{0}^2) \\[0cm]
+p(\beta_1) &= \N(\beta_1 \,|\, 0, \sigma_{1}^2) \\}
+\end{split}
+\end{equation*}
+
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+
+\Wider[-3cm]{
+ \begin{figure}
+\begin{subfigure}[t]{0.32\textwidth}
+\onslide<3->{\caption*{Verosimilitud}}
+\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}
+\caption*{Priori\onslide<3->{/Posteriori}}
+\includegraphics[width=\textwidth]{../../clases/5-regresionLineal/figures/pdf/linearRegression_posterior_0.pdf}
+\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}
+\onslide<2->{
+\caption*{Espacio de datos}
+\includegraphics[width=\textwidth]{../../clases/5-regresionLineal/figures/pdf/linearRegression_dataSpace_0.pdf}}
+\end{subfigure}
+
+
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<3->{\includegraphics[width=\textwidth]{../../clases/5-regresionLineal/figures/pdf/linearRegression_likelihood_1.pdf}}
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<3->{\includegraphics[width=\textwidth]{../../clases/5-regresionLineal/figures/pdf/linearRegression_posterior_1.pdf}}
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<3->{\includegraphics[width=\textwidth]{../../clases/5-regresionLineal/figures/pdf/linearRegression_dataSpace_1.pdf}}
+\end{subfigure}
+
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<4->{\includegraphics[width=\textwidth]{../../clases/5-regresionLineal/figures/pdf/linearRegression_likelihood_2.pdf}}
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<4->{\includegraphics[width=\textwidth]{../../clases/5-regresionLineal/figures/pdf/linearRegression_posterior_2.pdf}}
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<4->{\includegraphics[width=\textwidth]{../../clases/5-regresionLineal/figures/pdf/linearRegression_dataSpace_2.pdf}}
+\end{subfigure}
+
+\end{figure}
+}
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering  \Large Regresi\'on lineal (bayesiana)
+\end{textblock}
+
+\only<2->{
+\begin{textblock}{160}(0,13)
+\begin{equation*}
+y = \beta_0 + \beta_1 x + \beta_2 x^2 + \dots
+\end{equation*}
+\end{textblock}
+}
+
+
+\begin{textblock}{80}(0,26)
+ \centering
+ \onslide<1->{Funci\'on objetivo}
+\end{textblock}
+
+\begin{textblock}{80}(80,26)
+ \centering
+ \onslide<2>{Modelos polinomiales}
+\end{textblock}
+
+\begin{textblock}{160}(0,32)
+     \centering
+       \onslide<1->{\includegraphics[width=0.45\textwidth]{../../clases/5-regresionLineal/figures/pdf/model_selection_true_and_sample} }
+       \onslide<2>{\includegraphics[width=0.45\textwidth]{../../clases/5-regresionLineal/figures/pdf/model_selection_MAP_non-informative} }
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering  \Large Regresi\'on lineal (bayesiana)
+\end{textblock}
+
+
+\begin{textblock}{80}(0,22)
+ \centering
+ M\'axima verosimilitud
+\end{textblock}
+
+\only<2->{
+\begin{textblock}{80}(80,22)
+\centering
+Aplicación estricta de la probabilidad
+\end{textblock}
+}
+
+\begin{textblock}{160}(0,24)
+     \centering
+  \begin{figure}[H]
+     \centering
+      \begin{subfigure}[b]{0.49\textwidth}
+       \includegraphics[width=1\textwidth]{../../clases/5-regresionLineal/figures/pdf/model_selection_maxLikelihood}
+     \end{subfigure}
+     \onslide<2->{
+    \begin{subfigure}[b]{0.47\textwidth}
+       \includegraphics[width=1\textwidth]{../../clases/5-regresionLineal/figures/pdf/model_selection_evidence}
+     \end{subfigure}
+    }
+\end{figure}
+\end{textblock}
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE La función de costo epistémica \\
+\end{textblock}
+
+
+\begin{textblock}{160}(0,20)
+\begin{equation*}
+\underbrace{P(\text{Modelo},\text{\En{Data}\Es{Datos}})}_{\hfrac{\text{\footnotesize\En{Initial belief compatible}\Es{Creencia compatible }}}{\text{\footnotesize \En{with the data}\Es{con los datos}}}} = \underbrace{P(\text{Modelo})}_{\hfrac{\text{\footnotesize\En{Initial intersubjective}\Es{Acuerdo intersubjetivo}}}{\text{\footnotesize\En{agreement}\Es{inicial}}}} \underbrace{P(\text{data}_1 |\text{Modelo})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 1}} \, \underbrace{P(\text{data}_2 | \text{data}_1 , \text{Modelo})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 2}} \dots
+\end{equation*}
+\end{textblock}
+
+\only<2->{
+\begin{textblock}{140}(10,50)\centering
+Un 0 (cero) en la secuencia hace falsa la hipótesis para siempre \\
+
+\only<3->{\textbf{Ventaja a favor de las variantes que reducen fluctuaciones}}
+\end{textblock}
+}
+
+
+\only<4->{
+\begin{textblock}{140}(10,66)\centering
+\begin{equation*}
+P(\text{data}_1|\text{Modelo}) = \only<5->{\phantom}{\sum_{\text{hipótesis}}}  P(\text{data}_1| \text{hipótesis}, \text{Modelo}) \only<5->{\phantom}{P(\text{hipótesis} | \text{Modelo})}
+\end{equation*}
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE La función de costo evolutiva \\
+\end{textblock}
+
+\begin{textblock}{160}(0,18) \centering
+La selección de las formas de vida también es por\\
+
+secuencia de tasas de supervivencia y reproducción
+\end{textblock}
+
+
+
+\only<2>{
+\begin{textblock}{160}(0,34) \centering
+El modelo estándar de evolución es equivalente al \textbf{Teorema de Bayes}!
+
+\begin{equation*} \footnotesize
+\overbrace{P\Big(\hfrac{\text{Hipótesis o}}{\text{Forma de vida}}  \Big| \text{Datos}, \hfrac{\text{Modelo}}{\text{Causal}} \Big)}^{\hfrac{\text{\scriptsize Nueva proporción}}{\text{\scriptsize de la variante}}} = \frac{ \overbrace{P\Big(\text{Datos},  \Big|  \hfrac{\text{Hipótesis o}}{\text{Forma de vida}}  , \hfrac{\text{Modelo}}{\text{Causal}} \Big)}^{\hfrac{\text{\scriptsize Adaptabilidad de la}}{\text{\scriptsize variante a la realidad}}} \overbrace{P\Big(\hfrac{\text{Hipótesis o}}{\text{Forma de vida}} \Big|  \hfrac{\text{Modelo}}{\text{Causal}} \Big)}^{\hfrac{\text{\scriptsize Vieja proporción}}{\text{\scriptsize de la variante}}}}{\underbrace{P\Big(\text{Datos},  \hfrac{\text{\small Modelo}}{\text{\small Causal}} \Big)}_{\hfrac{\text{\scriptsize Proporción}}{\text{\scriptsize sobreviviente}}}}
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<3>{
+\begin{textblock}{160}(0,36) \centering
+
+Transiciones evolutivas mayores
+
+\vspace{0.5cm}
+
+\begin{figure}[ht!]
+    \centering
+  \scalebox{1.2}{
+  \tikz{
+      \node[accion] (i1) {} ;
+      \node[accion, yshift=0.6cm, xshift=0.4cm] (i2) {} ;
+      \node[accion, yshift=0.6cm, xshift=-0.4cm] (i3) {} ;
+      \node[const, yshift=0.3cm, xshift=0.4cm] (i) {};
+
+      \node[const, yshift=-0.8cm] (ni) {$\hfrac{\text{Individuos}}{\text{solitarios}}$};
+
+      \node[const, yshift=1.2cm, xshift=1.5cm] (m1) {$\hfrac{\text{Formación}}{\text{de grupos}}$};
+
+      \node[const, right=of i, xshift=2cm] (c) {};
+      \node[accion, below=of c, yshift=0.35cm, xshift=0.4cm] (c1) {} ;
+      \node[accion, above=of c, yshift=-0.35cm, xshift=0.6cm] (c2) {} ;
+      \node[accion, above=of c, yshift=-0.35cm, xshift=0.2cm] (c3) {} ;
+      \node[const, right=of c, xshift=0.6cm] (cc) {};
+
+      \node[const, right=of ni, xshift=1.3cm] (nc) {$\hfrac{\text{Grupos}}{\text{cooperativos}}$};
+
+      \node[const, right=of m1, xshift=1.2cm] (m2) {$\hfrac{\text{Transición}}{\text{mayor}}$};
+
+      \node[const, right=of cc, xshift=2cm] (t) {};
+      \node[accion, below=of t, yshift=0.35cm, xshift=0.4cm] (t1) {} ;
+      \node[accion, above=of t, yshift=-0.35cm, xshift=0.6cm] (t2) {} ;
+      \node[accion, above=of t, yshift=-0.35cm, xshift=0.2cm] (t3) {} ;
+
+      \node[const, right=of nc, xshift=1.1cm] (nt) {$\hfrac{\text{Unidad de}}{\text{nivel superior}}$};
+
+      \edge {i} {c};
+      \edge {cc} {t};
+
+      \plate {transition} {(t1)(t2)(t3)} {}; %
+      }
+  }
+  \end{figure}
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,04) \centering
+  \LARGE Las apuestas como ejemplo\\
+  %\Large Otro proceso multiplicativo
+\end{textblock}
+\vspace{1.2cm}
+
+\begin{textblock}{140}(10,16)
+\begin{multicols*}{2}
+\noindent
+\large Casa de apuestas,\\[0.2cm]
+
+\normalsize
+$\bullet$ Pagos por \texttt{Cara}: $Q_c= 3$
+
+$\bullet$ Pagos por \texttt{Seca}: $Q_s= 1.2$
+
+
+\columnbreak
+
+\onslide<2->{
+\noindent
+\large Las apuestas,\\[0.2cm]
+
+\normalsize
+$\bullet$ Proporción de recursos a \texttt{Cara}: $b$
+
+$\bullet$ Proporción de recursos a \texttt{Seca}: $1-b$
+}
+
+\end{multicols*}
+\end{textblock}
+%
+% \only<3-8>{
+% \begin{textblock}{140}(10,46)
+%  \begin{equation*}
+%  \onslide<6->{(} \omega_0 \, \onslide<4->{\phantom}{b} \,  \onslide<5->{\phantom}{Q_c} \onslide<6->{)} \, \onslide<7->{\phantom}{(1-b)} \, \onslide<8->{\phantom}{Q_s}
+% \end{equation*}
+% \end{textblock}
+% }
+%
+%
+% \only<9>{
+% \begin{textblock}{140}(10,37)
+% \begin{equation*}
+% \begin{split}
+% \omega_2(b) & = \underbrace{\omega_0 \, \overbrace{b \,  Q_c}^{\text{Cara}}}_{\omega_1(b)} \, \overbrace{(1-b) \, Q_s}^{\text{Seca}}
+% \end{split}
+% \end{equation*}
+% \end{textblock}
+% }
+%
+%
+% \only<10->{
+% \begin{textblock}{140}(10,41)
+% \begin{equation*}
+% \begin{split}
+% \omega_T(b) & = \omega_0 \,  (b \,  {Q_c})^{n_c}  \,  ((1-b) \, {Q_s})^{n_s}
+% \end{split}
+% \end{equation*}
+% \end{textblock}
+% }
+%
+%
+% \only<11->{
+% \begin{textblock}{140}(10,54)
+% \begin{equation*}
+% \begin{split}
+% & \frac{\omega_T(b)}{\omega_T(d)} = \frac{\omega_0 \,  (b \,  \cancel{Q_c})^{n_c}  \,  ((1-b) \, \bcancel{Q_s})^{n_s}}{\omega_0 \,   (d \,  \cancel{Q_c})^{n_c}  \,  ((1-d) \, \bcancel{Q_s})^{n_s}}
+% \end{split}
+% \end{equation*}
+% \end{textblock}
+% }
+%
+% \only<3->{
+% \begin{textblock}{140}(10,42)
+% \begin{equation*}
+% \begin{split}
+% \underset{b}{\text{arg max}} \phantom{T} \omega_T(b) \ = \onslide<3>{?}\onslide<4->{f}
+% \end{split}
+% \end{equation*}
+% \end{textblock}
+% }
+%
+%
+% \only<5->{
+% \begin{textblock}{140}(10,57) \centering
+% ¡No importa lo que pague la casa de apuestas!
+% \end{textblock}
+% }
+%
+% \only<6->{
+% \begin{textblock}{140}(10,70) \centering
+% \Large La propiedad epistémica: \\ \large
+%
+% La apuesta óptima diversifica en la misma proporción que la frecuencia\\
+% \end{textblock}
+% }
+
+
+\only<3>{
+\begin{textblock}{160}(0,44) \centering
+\includegraphics[width=0.4\linewidth]{figuras/pdf/ergodicity_individual_trayectories_phantom.pdf}
+\end{textblock}
+}
+\only<4>{
+\begin{textblock}{160}(0,44) \centering
+\includegraphics[width=0.4\linewidth]{figuras/pdf/ergodicity_individual_trayectories.pdf}
+\end{textblock}
+}
+
+\only<3->{
+\begin{textblock}{160}(115,70)
+Jugando individual
+\end{textblock}
+}
+
+\only<4->{
+\begin{textblock}{160}(115,44)
+Cooperando
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,04) \centering
+  \LARGE La propiedad mayor\\
+\end{textblock}
+
+
+\begin{textblock}{140}(05,23) \centering
+¿Y si dejo de aportar al fondo común y sigo recibiendo sus beneficios?
+
+\vspace{0.8cm}
+
+\only<2>{\includegraphics[width=0.5\linewidth]{figuras/pdf/ergodicity_desertion0.pdf}}\only<3>{\includegraphics[width=0.5\linewidth]{figuras/pdf/ergodicity_desertion1.pdf}}\only<4>{\includegraphics[width=0.5\linewidth]{figuras/pdf/ergodicity_desertion.pdf}}
+\end{textblock}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,04) \centering
+  \LARGE La historia de la vida\\
+\end{textblock}
+\centering
+\vspace{1cm}
+
+
+\textbf{A largo plazo solo sobreviven las variantes que \\ reducen fluctuaciones por diversificación y cooperación.}
+
+\vspace{1cm}
+
+
+\onslide<2->{Nuestra propia vida depende de varios niveles de cooperación}
+
+\vspace{0.3cm}
+
+\begin{figure}[ht!]
+\centering
+ \begin{subfigure}[b]{0.25\textwidth} \centering
+  \onslide<3->{\includegraphics[width=\linewidth]{../../auxiliar/static//cloroplastos.jpg}
+  \caption*{Células eucariotas}}
+  \end{subfigure}
+ \begin{subfigure}[b]{0.23\textwidth} \centering
+  \onslide<4->{\includegraphics[width=\linewidth]{../../auxiliar/static//fotosintesis.jpg}
+  \caption*{Organismos}
+  }
+  \end{subfigure}
+  \begin{subfigure}[b]{0.235\textwidth} \centering
+ \onslide<5->{\includegraphics[width=\linewidth]{../../auxiliar/static//hormigas2.jpg}
+ \caption*{Sociedades}
+ }
+  \end{subfigure}
+ \begin{subfigure}[b]{0.235\textwidth} \centering
+ \onslide<6->{\includegraphics[width=\linewidth]{../../auxiliar/static//tsimane2.jpg}
+ \caption*{Ecosistemas}
+ }
+  \end{subfigure}
+\end{figure}
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain,noframenumbering]
+\centering \vspace{0.5cm}
+\includegraphics[width=1\textwidth]{../../auxiliar/static/CBP.png}
+\end{frame}
+
+%
+% \begin{frame}[plain]
+% \begin{textblock}{96}(0,6.5)\centering
+% {\transparent{0.9}\includegraphics[width=0.8\textwidth]{../../auxiliar/static/inti.png}}
+% \end{textblock}
+%
+% \begin{textblock}{160}(96,5.5)
+% \includegraphics[width=0.35\textwidth]{../../auxiliar/static/pachacuteckoricancha}
+% \end{textblock}
+% \end{frame}
+
+
+
+
+
+\end{document}
+
+
+
