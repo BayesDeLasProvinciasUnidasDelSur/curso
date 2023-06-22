@@ -1,11 +1,11 @@
-all: R tex python
+all: R julia python
 
 R:
 	/usr/bin/Rscript main.R
 	- rm Rplots.pdf
 
-tex:
-	for i in $(shell ls *.tex); do pdflatex $$i;done
+julia:
+	for i in $(shell ls *.jl); do julia $$i;done
 
 python:
 	for i in $(shell ls *.py); do python3 $$i;done
