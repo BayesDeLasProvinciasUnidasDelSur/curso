@@ -1,26 +1,14 @@
 net
 {
-	propagationenginegenerator1791944048146838126L = "edu.ucla.belief.approx.BeliefPropagationSettings@436939f1";
-	recoveryenginegenerator6944530267470113528l = "edu.ucla.util.SettingsImpl@42867378";
+	propagationenginegenerator1791944048146838126L = "edu.ucla.belief.approx.BeliefPropagationSettings@2ec0f972";
+	recoveryenginegenerator6944530267470113528l = "edu.ucla.util.SettingsImpl@6ead6aba";
 	node_size = (130.0 55.0);
 }
 
-node a
-{
-	states = ("a0" "a1" );
-	position = (153 -143);
-	diagnosistype = "AUXILIARY";
-	DSLxSUBMODEL = "Root Submodel";
-	ismapvariable = "false";
-	ID = "variable4";
-	label = "Alarma";
-	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
-	excludepolicy = "include whole CPT";
-}
 node l
 {
 	states = ("l0" "l1" );
-	position = (152 -252);
+	position = (338 -425);
 	diagnosistype = "AUXILIARY";
 	DSLxSUBMODEL = "Root Submodel";
 	ismapvariable = "false";
@@ -32,7 +20,7 @@ node l
 node t
 {
 	states = ("t0" "t1" );
-	position = (265 -35);
+	position = (451 -208);
 	diagnosistype = "AUXILIARY";
 	DSLxSUBMODEL = "Root Submodel";
 	ismapvariable = "false";
@@ -41,22 +29,22 @@ node t
 	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
 	excludepolicy = "include whole CPT";
 }
-node e
+node a
 {
-	states = ("e0" "e1" );
-	position = (45 -33);
+	states = ("a0" "a1" );
+	position = (339 -316);
 	diagnosistype = "AUXILIARY";
 	DSLxSUBMODEL = "Root Submodel";
 	ismapvariable = "false";
-	ID = "variable1";
-	label = "Entradera";
+	ID = "variable4";
+	label = "Alarma";
 	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
 	excludepolicy = "include whole CPT";
 }
 node r
 {
 	states = ("r0" "r1" );
-	position = (356 -139);
+	position = (542 -312);
 	diagnosistype = "AUXILIARY";
 	DSLxSUBMODEL = "Root Submodel";
 	ismapvariable = "false";
@@ -65,6 +53,39 @@ node r
 	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
 	excludepolicy = "include whole CPT";
 }
+node e
+{
+	states = ("e0" "e1" );
+	position = (231 -206);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable1";
+	label = "Entradera";
+	DSLxEXTRA_DEFINITIONxDIAGNOSIS_TYPE = "AUXILIARY";
+	excludepolicy = "include whole CPT";
+}
+node ciudad
+{
+	states = ("c0" "c1" );
+	position = (339 -97);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable0";
+	label = "ciudad";
+	excludepolicy = "include whole CPT";
+}
+potential ( l | a )
+{
+	data = ((	0.99	0.01	)
+		(	0.01	0.99	));
+}
+potential ( t | ciudad )
+{
+	data = ((	0.99	0.01	)
+		(	0.95	0.05	));
+}
 potential ( a | e t )
 {
 	data = (((	0.99	0.01	)
@@ -72,21 +93,17 @@ potential ( a | e t )
 		((	0.01	0.99	)
 		(	1.0E-4	0.9999	)));
 }
-potential ( l | a )
-{
-	data = ((	0.99	0.01	)
-		(	0.01	0.99	));
-}
-potential ( t | )
-{
-	data = (	0.992	0.008	);
-}
-potential ( e | )
-{
-	data = (	0.999	0.001	);
-}
 potential ( r | t )
 {
 	data = ((	0.99	0.01	)
 		(	0.01	0.99	));
+}
+potential ( e | ciudad )
+{
+	data = ((	0.999	0.001	)
+		(	0.95	0.05	));
+}
+potential ( ciudad | )
+{
+	data = (	0.2	0.8	);
 }
