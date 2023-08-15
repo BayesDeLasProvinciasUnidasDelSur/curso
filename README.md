@@ -7,7 +7,19 @@ Contactos a **bayesdelsur@gmail.com**
 
 ## Objetivos
 
-A diferencia de las ciencias formales, que validan sus proposiciones dentro de sistemas axiomáticos cerrados, las ciencias empíricas (desde la física hasta las ciencias sociales) deben validar sus proposiciones en sistemas abiertos que por definición contienen siempre algún grado de incertidumbre. ¿Es posible alcanzar "verdades" si es inevitable decir "no sé"?. Sí. La aplicación estricta de las reglas de la probabilidad (enfoque Bayesiano) garantiza los acuerdos intersubjetivos en contextos de incertidumbre, fundamento de las verdades empíricas. Bajo incertidumbre, la lógica es paraconsistente en tanto se hace necesario creer al mismo tiempo en A y no A hasta que la sorpresa, única fuente de información, decida. Debido a que este proceso de selección es, como el evolutivo, de naturaleza multiplicativa (un solo cero en la secuencia de reproducción y supervivencia genera una extinción), existe una ventaja a favor de las variantes que reducen las fluctuaciones. Si bien la aplicación estricta de la teoría de la probabilidad ha mostrado ser la lógica ideal en contextos de incertidumbre, su adopción se vio históricamente limitada debido al alto costo computacional asociado: a diferencia del enfoque frecuentista de la probabilidad que selecciona una única hipótesis, el enfoque Bayesiano actualiza las creencias de todas y cada una de las hipótesis de acuerdo a la evidencia empírica y formal (datos y modelos). Si bien en las últimas décadas las limitaciones computacionales han sido superadas en gran medida gracias al desarrollo de métodos eficientes de aproximación, la inercia histórica es ahora su limitación principal. **Este curso tiene por objetivo promover la adopción del enfoque Bayesiano como método general para la resolución de cualquier problema empírico: en la ciencia, la política y la ecología.**
+La ciencia tiene pretensión de verdad: alcanzar acuerdos intersubjetivos con validez universal. Las ciencias formales (matemática, lógica) alcanzan estos acuerdos derivando teoremas dentro de sistemas axiomáticos cerrados. Sin embargo, las ciencias empíricas (desde la física hasta las ciencias sociales) deben validar sus proposiciones en sistemas abiertos que contienen siempre algún grado de incertidumbre. ¿Es posible entonces alcanzar acuerdos intersubjetivos ("verdades") en las ciencias empíricas en las que es inevitable decir "no sé"? Sí. Podemos evitar mentir: maximizando incertidumbre (no afirmar más de lo que se sabe) dada la información disponible (sin ocultar lo que sí se sabe).
+
+A diferencia de los procedimientos ad-hoc que seleccionan una única hipótesis (por ejemplo, por máxima verosimilitud), la aplicación estricta de las reglas de probabilidad (enfoque bayesiano) nos obliga a considerar todas y cada una de las hipótesis. Debido a que este proceso de evaluación de hipótesis es, como el proceso de selección de las formas de vida en evolución, de naturaleza multiplicativa (un solo cero en la secuencia de reproducción y supervivencia genera una extinción), existe una ventaja a favor de las variantes que reducen las fluctuaciones. Del mismo modo que seleccionar una única hipótesis tiene consecuencias negativas conocidas en probabilidad (overfitting), la masiva pérdida de la diversidad cultural provocada por la imposición de un único tipo de sociedad durante la colonial-modernidad está tenido consecuencia ecológicas que la ciencia metropolitana no es capaz de compensar.
+
+Las reglas de la probabilidad se conocen desde finales del siglo 18 y desde entonces se las ha adoptado como sistema de razonamiento en todas las ciencias empíricas. Ellas son conceptualmente intuitivas: preservar la creencia previa que sigue siendo compatible con los datos (regla del producto) y predecir con la contribución de todas las hipótesis (regla de la suma). Si bien, luego de todo este tiempo no se ha propuesto nada mejor en lo práctico, el costo computacional asociados a la evaluación de todo el espacio de hipótesis ha limitado en los hechos su campo de aplicación. Por eso, con el tiempo se fueron desarrollando soluciones parciales, como la física estadística en el siglo 19 y el enfoque frecuentista en el siglo 20. Solo cuando se produce el enorme crecimiento en la capacidad de cómputo, en las vísperas del siglo 21, comienza por primera vez a ser posible aplicar de forma estricta las reglas de la probabilidad en todos los campos de la ciencia.
+
+Luego de superados estos obstáculos, la inercia histórica aparece ahora como una de las limitaciones principales. Si bien en la actualidad el crecimiento del enfoque bayesiano es un fenómeno mundial que se está acelerando, su desarrollo sigue siendo incipiente. A pesar de que el conocimientos bajo incertidumbre sea "plural y condicional", el lenguaje tradicional de las ciencias empíricas se presenta como "singular y definitvo". El objetivo del seminario "Verdades empíricas" es revisar los métodos actuales que permiten implementar modelos a medida del problema de forma sencilla e intuitiva. Con ellos podemos computar la incertidumbre óptima dada la información disponible, expresando las relaciones causales entre las variables de forma gráfica, descomponiendo las reglas de la probabilidad como mensajes entre los nodos de la red causal, y delegando la inferencia a los lenguajes de programación probabilística.
+
+<!--Bajo incertidumbre, la lógica es paraconsistente en tanto se hace necesario creer al mismo tiempo en A y no A hasta que la sorpresa, única fuente de información, decida. -->
+
+
+
+<!--
 
 ## Agenda de cursada: [2023 primer cuatrimestre](https://github.com/BayesDeLasProvinciasUnidasDelSur/congreso/releases/download/curso.2022/verdades_empiricas.pdf)
 
@@ -79,29 +91,36 @@ Sin implicar exclusión, se requieren algunos conocimiento mı́nimos de álgebr
     - Teórica:
     - Práctica:
     - Bibliografía:
-    - Videos:
+    - Videos:-->
 ## Manuales:
 
+0. **Murphy** [Book 1](https://github.com/probml/pml-book/releases/latest/download/book1.pdf) y [book2](https://github.com/probml/pml2-book/releases/latest/download/book2.pdf)
 0. **Bishop**. [Pattern Recognition and Machine Learning](https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/)
 0. **MacKay**. [Information theory, inference and learning algorithms](https://www.inference.org.uk/itprnn/book.pdf)
 0. **Pearl**. [Causality](111.90.145.72/get.php?md5=aea29d62416c43c4b3c94444ecad5beb&key=3HX5RWW4J5RHCGGS&mirr=1) y [Causal Inference in Statistics: A premier](http://gen.lib.rus.ec/)
 0. Jaynes (2003) [Probability theory: The logic of science](http://www.med.mcgill.ca/epidemiology/hanley/bios601/GaussianModel/JaynesProbabilityTheory.pdf)
 0. Rasmussen [Gaussian Processes for Machine Learning](http://gaussianprocess.org/gpml/chapters/RW.pdf)I
-0. Stan. [Documentation](https://mc-stan.org/docs/2_29/stan-users-guide-2_29.pdf)
 0. Koller y Friedman [Probabilistic Graphical Models, Principles and Techniques](http://libgen.rs/search.php?req=Probabilistic+Graphical+Models%2C+Principles+and+Techniques&open=0&res=25&view=simple&phrase=1&column=def)
+<!--
+0. Stan. [Documentation](https://mc-stan.org/docs/2_29/stan-users-guide-2_29.pdf)
 0. Halpern (2017) [Reasoning about uncertainty](http://libgen.rs/search.php?req=Reasoning+about+uncertainty&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def)
 0. Russell y Norvig [Artificial Intelligence: A Modern Approach](http://libgen.rs/search.php?req=Artificial+Intelligence%3A+A+Modern+Approach&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def)
-0. Knuth [*Chapter 3 — Random Numbers* in The art of computer programming II](http://libgen.rs/search.php?req=Donald+Knuth&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def) 
+0. Knuth [*Chapter 3 — Random Numbers* in The art of computer programming II](http://libgen.rs/search.php?req=Donald+Knuth&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def)
+-->
 
 ## Cursos:
 
 0. **Probabilistic Machine Learning** [youtube](https://youtube.com/playlist?list=PL05umP7R6ij1tHaOFY96m5uX3J21a6yNd)
 0. Information Theory (by MacKay) [youtube](https://www.youtube.com/watch?v=BCiZc0n6COY)
 0. Física estadísitica. [youtube](https://www.youtube.com/watch?v=GL73N3z0j70&t)
+0. Statistical rethinking [github + videos](https://github.com/rmcelreath/stat_rethinking_2023)
+
+<!--
 0. Deep Bayes. [youtube](https://www.youtube.com/playlist?list=PLe5rNUydzV9QHe8VDStpU0o8Yp63OecdW)
 0. Probabilistic Graphical Models. Carnegie-Mellon University. [web](http://www.cs.cmu.edu/~epxing/Class/10708-09/lecture.html)
+-->
 
-# Fundamentos de la probabilidad:
+## Fundamentos de la probabilidad:
 
 0. Jaynes (1956-1957). Information theory and statistical mechanics [I](https://bayes.wustl.edu/etj/articles/theory.1.pdf) [II](http://users.df.uba.ar/ariel/materias/FT3_2011_2C/Extra/Jaynes.II.pdf)
 0. Kelly (1956). [A New Interpretation of Information Rate](https://www.princeton.edu/~wbialek/rome/refs/kelly_56.pdf)
@@ -124,7 +143,8 @@ Sin implicar exclusión, se requieren algunos conocimiento mı́nimos de álgebr
 0. Bernoulli, Jacob. ([1654-1705] 1717) [Ars Conjectandi (English version)](https://libgen.rocks/get.php?md5=2a824bcdb31b45a94882ace89eaaa35e&key=19K8AAU67RBVK67G)
 0. Pascal-Fermat por Keith Devlin. ([1654] 2008) [The Unfinished game: Pascal, Fermat and the letters](31.42.184.140/main/73000/bed190e8d465fc8a07a05709c22924a3/Keith%20Devlin%20-%20The%20Unfinished%20game_%20Pascal%2C%20Fermat%20and%20the%20letters-Basic%20Books%20%282008%29.pdf) (Si no funciona, borrar del link todo lo que está antes de la IP)
 
-# Tópicos 
+<!--
+# Tópicos
 
 0. [Factor Graphs and the Sum-product algorithm](https://ieeexplore.ieee.org/document/910572)
 0. [Crash Course in Good and Bad Controls](https://papers.ssrn.com/sol3/Delivery.cfm/SSRN_ID4062645_code4146131.pdf?abstractid=3689437&mirid=1)
@@ -135,7 +155,9 @@ Sin implicar exclusión, se requieren algunos conocimiento mı́nimos de álgebr
 0. [Probabilistic Backpropagation for Scalable Bayesian Neural Networks](http://proceedings.mlr.press/v37/hernandez-lobatoc15.html)
 0. [Parallel Bayesian Online Deep Learning for Click-Through Rate Prediction in Tencent Advertising System](https://arxiv.org/abs/1707.00802)
 0. [Reinforcement Learning and Control as Probabilistic Inference: Tutorial and Review](https://arxiv.org/abs/1805.00909)
+-->
 
+<!--
 ## Otros
 
 0. [Optimal eye movement strategiesin visual search](https://www.cns.nyu.edu/~david/courses/perceptionGrad/Readings/NajemnikGeisler-Nature2005.pdf)
@@ -157,10 +179,31 @@ Sin implicar exclusión, se requieren algunos conocimiento mı́nimos de álgebr
 # Cursos externos
 
 0. Larry Wasserman [Statistical methods for machine learning](https://www.stat.cmu.edu/~larry/=sml/)
-0. Tamara Broderik [Non parametric bayesian methods](https://tamarabroderick.com/tutorial_2016_mlss_cadiz.html)
+0. Tamara Broderik [Non parametric bayesian methods](https://tamarabroderick.com/tutorial_2016_mlss_cadiz.html)-->
 
 # Historia 
 
+Enrique Dussel (201?) [Transmodernidad: discurso en el Universidad de Chile](https://youtu.be/jFVE2jBV3hA)
 Hobson, John. (2004) [Los orígenes orientales de la civilización de occidente](https://libgen.rocks/get.php?md5=9fb9e17c0203789eb321330af09191f0&key=9NB6QOBJLHRTVOGM)
 Needham, Joseph et al. (2004) [Science and Civilization in China. Vol 7 Pt 2. General Conclusions and Reflections.](https://libgen.rocks/get.php?md5=c0cfb07bd82a9c54d37dd515bcb7450d&key=IMGZ33ANYSVSJ61F)
+
+<!--
+# Columna vertebral del programa:
+
+- Linear basis functions regression
+- Parametrised basis functions regression
+- Hierarchy of parametrised basis functions (Neural Networks)
+
+
+## machine learning summer school 2009
+http://videolectures.net/mlss09uk_cambridge/
+http://videolectures.net/mlss09uk_minka_ai/
+
+## Deep Bayes 2019
+https://www.youtube.com/playlist?list=PLe5rNUydzV9QHe8VDStpU0o8Yp63OecdW
+
+## Otros cursos
+http://www.cs.cmu.edu/~epxing/Class/10708-09/lecture.html
+-->
+
 
