@@ -1,0 +1,258 @@
+\newif\ifen
+\newif\ifes
+\newif\iffr
+\newcommand{\fr}[1]{\iffr#1 \fi}
+\newcommand{\En}[1]{\ifen#1\fi}
+\newcommand{\Es}[1]{\ifes#1\fi}
+\estrue
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\usepackage{siunitx}
+\input{../../auxiliar/tex/diapo_encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+\estrue
+\usepackage{todonotes}
+\setbeameroption{show notes}
+%
+\newcommand{\gray}{\color{black!55}}
+\usepackage{ulem} % sout
+\usepackage{mdframed}
+\usepackage{listings}
+\lstset{
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=true,
+  columns=flexible,
+  basicstyle={\footnotesize\ttfamily},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showlines=true,
+}
+
+\begin{document}
+
+\color{black!85}
+\large
+%
+% \begin{frame}[plain,noframenumbering]
+%
+%
+% \begin{textblock}{160}(0,0)
+% \includegraphics[width=1\textwidth]{../../auxiliar/static/deforestacion}
+% \end{textblock}
+%
+% \begin{textblock}{80}(18,9)
+% \textcolor{black!15}{\fontsize{44}{55}\selectfont Verdades}
+% \end{textblock}
+%
+% \begin{textblock}{47}(85,70)
+% \centering \textcolor{black!15}{{\fontsize{52}{65}\selectfont Empíricas}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(100,28)
+% \LARGE  \textcolor{black!15}{\rotatebox[origin=tr]{-3}{\scalebox{9}{\scalebox{1}[-1]{$p$}}}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(66,43)
+% \LARGE  \textcolor{black!15}{\scalebox{6}{$=$}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(36,29)
+% \LARGE  \textcolor{black!15}{\scalebox{9}{$p$}}
+% \end{textblock}
+%
+% %
+% %
+% % \begin{textblock}{160}(01,81)
+% % \footnotesize \textcolor{black!5}{\textbf{\small Seminario ``Acuerdos intersubjetivos''\\
+% % Comunidad Bayesiana Plurinacional} \\}
+% % \end{textblock}
+%
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(0,11)  \centering
+\includegraphics[width=0.40\textwidth]{../../auxiliar/static/treeOfLife-liviano}
+\end{textblock}
+
+\begin{textblock}{160}(0,3) \centering
+\LARGE \textcolor{black!85}{\rotatebox[origin=tr]{0}{\fontsize{22}{0}\selectfont \textbf{Apuestas de vida}}}
+\end{textblock}
+
+
+\begin{textblock}{55}(75,39)
+\textcolor{black!85}{\normalsize El árbol de la vida \\
+\fontsize{2}{0}\selectfont Synthesis of phylogeny and taxonomy into a comprehensive tree of life \\}
+\end{textblock}
+
+
+\begin{textblock}{55}(3,81)
+\textcolor{black!85}{Unidad 6}
+\end{textblock}
+
+\begin{textblock}{55}(25,81.3)
+\begin{turn}{0}
+\parbox{15cm}{\small \textcolor{black!85}{Presentación de una competencia de inferecia con apuestas e intercambio de recursos.}
+}
+\end{turn}
+\end{textblock}
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Monty Hall\\
+\large \only<2->{Con sesgo }\only<8->{dinámico}
+\end{textblock}
+
+
+\begin{textblock}{80}(5,12)
+\raggedright
+%\onslide<2->{Modelo gráfico} \\ \vspace{0.3cm}
+ \tikz{
+
+    \node[det, minimum size=0.8cm] (s) {\includegraphics[width=0.05\textwidth]{../../auxiliar/static/dedo.png}\only<8->{$_1$}} ;
+    \node[factor, above=of s, yshift=-0.4cm] (fs) {};
+
+    \node[const,right=of fs] (ps) {\normalsize $P(s|r,c)$} ;
+
+    \only<-5,8->{
+      \node[det, above=of fs, minimum size=0.8cm, yshift=-0.5cm] (r) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/regalo.png}\only<8->{$_1$}} ;
+    }
+    \only<6-7>{
+      \node[det, above=of fs, fill=black!15, minimum size=0.8cm, yshift=-0.5cm] (r) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/regalo.png}\only<8->{$_1$}} ;
+    }
+
+    \node[det, minimum size=0.6cm, fill=black!60, left=of fs, xshift=0.5cm] (c) {\includegraphics[width=0.045\textwidth]{../../auxiliar/static/cerradura.png}} ;
+    %\node[const,above=of c] (pc) {\normalsize $\text{do}(c) = 1$} ;
+
+    \node[factor, above=of r, yshift=-0.4cm] (fr) {};
+
+    \only<1>{
+      \node[const, above=of fr] (tr) {\normalsize
+      \begin{tabular}{|c|c|c|}
+        1 & 2 & 3 \\ \hline
+        1/3 & 1/3 & 1/3 \\ \hline
+      \end{tabular}
+      } ;
+      \node[const, above=of tr] (pr) {\normalsize $P(r)$ } ;
+    }
+    \only<2->{
+      \node[det, above=of fr, minimum size=0.8cm, yshift=-0.5cm] (p) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/cara-emoji.png}\only<8->{$_1$}} ;
+      \only<-7>{
+        \node[factor, above=of p, yshift=-0.4cm] (fp) {};
+      }
+      \only<8->{
+        \node[factor, left=of p, xshift=-0.2cm] (fp) {};
+      }
+      \node[const, above=of fp, yshift=0.15cm] (pr) {\normalsize\only<2-3>{Uniforme?}\only<4-5>{Dirichlet$(1,1,1)$}\only<6>{Dirichlet$(5,5,5)$}\only<7>{Dirichlet$(2,5,15)$}\only<8->{Dirichlet$(a_1,b_1,c_1)$}} ;
+    }
+
+%     \only<5->{
+%       \node[factor, right=of r, xshift=0.2cm] (fr2) {};
+%     }
+    \only<8->{
+      \node[factor, right=of p, xshift=1.3cm] (fp2) {};
+      \node[det, right=of fp2, minimum size=0.8cm, xshift=1.3cm] (p2) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/cara-emoji.png}$_2$} ;
+      \node[const, above=of fp2, yshift=0.15cm] (pp2) {\normalsize $\alpha + (1-\alpha) \text{D}(a_1 ,\, b_1,\, c_1)$} ;
+      \node[factor, below=of p2, yshift=0.5cm] (fr2) {};
+      \node[det, below=of fr2, minimum size=0.8cm, yshift=0.4cm] (r2) {\includegraphics[width=0.07\textwidth]{../../auxiliar/static/regalo.png}$_2$} ;
+      \node[factor, below=of r2, yshift=0.5cm] (fs2) {};
+      \node[det, below=of fs2, minimum size=0.8cm, yshift=0.4cm] (s2) {\includegraphics[width=0.05\textwidth]{../../auxiliar/static/dedo.png}$_2$} ;
+      \node[det, minimum size=0.6cm, fill=black!60, left=of fs2, xshift=0.5cm] (c2) {\includegraphics[width=0.045\textwidth]{../../auxiliar/static/cerradura.png}} ;
+      \node[const,right=of fs2] (ps2) {\normalsize $P(s|r,c)$} ;
+      \node[const,left=of fr] (pr) {\normalsize Categorical$(p_1)$} ;
+      \node[const,left=of fr2] (pr2) {\normalsize Categorical$(p_1)$} ;
+    }
+
+
+    \node[invisible,above=of fr, yshift=2.9cm] (ia) {} ;
+    \node[invisible,left=of s, xshift=-2.9cm] (il) {} ;
+
+    \edge {fr} {r};
+    \edge[-] {r,c} {fs};
+    \edge {fs} {s};
+    \only<2->{
+      \edge {fp} {p};
+      \edge[-] {p} {fr};
+    }
+    \only<8->{
+      \edge[-] {p} {fp2};
+      \edge {fp2} {p2};
+      \edge[-] {p2} {fr2};
+      \edge {fr2} {r2};
+      \edge[-] {r2,c2} {fs2};
+      \edge {fs2} {s2};
+    }
+    %\edge[-] {r} {fr2};
+
+    \only<5->{\plate {datos} {(r)(s)(c)(ps)} {$i: $ Datos\vspace{1cm}};}
+    \only<8->{\plate {datos2} {(r2)(s2)(c2)(ps2)} {$i: $ Datos\vspace{1cm}};}
+
+}
+\end{textblock}
+
+\only<3-5>{
+\begin{textblock}{80}(75,16)
+\includegraphics[width=1\textwidth]{figuras/dirichlet0.pdf}
+\end{textblock}
+}
+\only<6>{
+\begin{textblock}{80}(75,16)
+\includegraphics[width=1\textwidth]{figuras/dirichlet1.pdf}
+\end{textblock}
+}
+\only<7>{
+\begin{textblock}{80}(75,16)
+\includegraphics[width=1\textwidth]{figuras/dirichlet2.pdf}
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+\centering \vspace{0.5cm}
+\includegraphics[width=1\textwidth]{../../auxiliar/static/BP.png}
+\end{frame}
+
+
+
+
+
+%
+% \begin{frame}[plain]
+% \begin{textblock}{96}(0,6.5)\centering
+% {\transparent{0.9}\includegraphics[width=0.8\textwidth]{../../auxiliar/static/inti.png}}
+% \end{textblock}
+%
+% \begin{textblock}{160}(96,5.5)
+% \includegraphics[width=0.35\textwidth]{../../auxiliar/static/pachacuteckoricancha}
+% \end{textblock}
+% \end{frame}
+
+
+
+
+
+\end{document}
+
+
+

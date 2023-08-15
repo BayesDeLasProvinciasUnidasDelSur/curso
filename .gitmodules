@@ -5,5 +5,5 @@
 	path = auxiliar/tex
 	url = git@github.com:BayesDeLasProvinciasUnidasDelSur/tex.git 
 [submodule "aux/static"]
-	path = auxiliar/static
+	path = auxiliar/img
 	url = git@github.com:BayesDeLasProvinciasUnidasDelSur/static.git

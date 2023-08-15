@@ -1,0 +1,2808 @@
+\newif\ifen
+\newif\ifes
+\newif\iffr
+\newcommand{\fr}[1]{\iffr#1 \fi}
+\newcommand{\En}[1]{\ifen#1\fi}
+\newcommand{\Es}[1]{\ifes#1\fi}
+\estrue
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\usepackage{siunitx}
+\usepackage{transparent}
+
+\input{../../auxiliar/tex/diapo_encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+
+\newcommand{\Arrow}[1]{%
+\parbox{#1}{\tikz{\draw[->](0,0)--(#1,0);}}
+}
+
+\mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+\estrue
+\usepackage{todonotes}
+\setbeameroption{show notes}
+%
+\newcommand{\gray}{\color{black!55}}
+\usepackage{ulem} % sout
+\usepackage{mdframed}
+\usepackage{listings}
+\lstset{
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=true,
+  columns=flexible,
+  basicstyle={\ttfamily},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showlines=true
+}
+
+
+\begin{document}
+
+\color{black!85}
+\large
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(0,0)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/peligro_predador}
+\end{textblock}
+
+\begin{textblock}{160}(127,67)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{Inferencia  \\[-0.1cm] \hspace{0.5cm} causal}}
+\end{textblock}
+
+\begin{textblock}{55}(2,3)
+\begin{turn}{0}
+\parbox{15cm}{\small
+\textcolor{black!95}{Flujos de inferencia en modelos causales. Efecto de}\\
+\textcolor{black!95}{las intervenciones en modelos causales. Conclusiones} \\
+\textcolor{black!95}{causales a partir de datos observables. Identificación} \\
+\textcolor{black!95}{de modelo causal.} \\
+\normalsize\textcolor{black!95}{Unidad 2} \\
+}
+\end{turn}
+\end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE \phantom{Causales} Modelos \only<1-8>{Gráficos}\only<9->{\sout{Gráficos}} \onslide<9->{Causales}\\
+ \large o redes bayesianas
+\end{textblock}
+ \centering
+ \vspace{0.75cm}
+
+\begin{textblock}{70}(5,18)
+\raggedleft
+ \tikz{
+    \node[det] (a) {$A_{_{\onslide<6->{\phantom}{i}}}$} ; %
+    \node[det, below=of a] (b) {$B_{_{\onslide<6->{\phantom}{i}}}$} ; %
+    \node[const, left= of a, xshift=-0.3cm, yshift=0.1cm] (pa) { \small
+    \begin{tabular}{|c|c|}
+          $A=0$  &  $A=1$   \\ \hline
+        $0.5$ & $0.5$   \\ \hline
+    \end{tabular}
+    }; %
+    \node[const, above= of pa] (npa) {\small$P(A)$};
+
+
+    \node[const, left=of b, xshift=-0.3cm, yshift=-0.1cm] (pb) { \small
+    \begin{tabular}{c|c|c|}
+        &  $B=0$  &  $B=1$   \\ \hline
+       $A=0$ & $0.95$ & $0.05$   \\ \hline
+       $A=1$ & $0.05$ & $0.95$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of pb] (npb) {\small$P(B|A)$};
+
+    \node[invisible, above=of a, yshift=1cm] (ia) {};
+
+    \onslide<6->{\plate {datos} {(a)(b)} {\tiny$i$: Dato};}
+
+    \edge {a} {b};
+    }
+\end{textblock}
+\only<4->{
+\begin{textblock}{70}(85,18)
+\raggedright
+    \tikz{
+    \node[det] (a) {$A_{_{\onslide<6->{\phantom}{i}}}$} ; %
+    \node[det, below=of a] (b) {$B_{_{\onslide<6->{\phantom}{i}}}$} ; %
+    \node[const, right= of a, xshift=0.3cm, yshift=0.1cm] (pa) { \small
+    \begin{tabular}{c|c|c|}
+        &  $A=0$  &  $A=1$   \\ \hline
+       $B=0$ & $0.95$ & $0.05$   \\ \hline
+       $B=1$ & $0.05$ & $0.95$   \\ \hline
+    \end{tabular}
+    }; %
+    \node[const, above= of pa] (npa) {\small$P(A|B)$};
+
+
+    \node[const, right=of b, xshift=0.3cm, yshift=-0.1cm] (pb) { \small
+    \begin{tabular}{|c|c|}
+          $B=0$  &  $B=1$   \\ \hline
+        $0.5$ & $0.5$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of pb] (npb) {\small$P(B)$};
+
+    \node[invisible, above=of a, yshift=1cm] (ia) {};
+
+    \onslide<6->{\plate {datos} {(a)(b)} {\tiny$i$: Dato};}
+
+    \edge {b} {a};
+    }
+\end{textblock}
+}
+
+\only<2-5>{
+\begin{textblock}{140}(44,66)
+\begin{flalign*}
+& P(A, B) = P(A) P(B|A) \only<3->{= P(B) P(A|B)} &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<6-7>{
+\begin{textblock}{160}(0,60)
+\begin{equation*}
+P(\text{Modelo} | \text{Datos} = \{(a_1, b_1), (a_2, b_2), \dots \}) = \onslide<6>{?} \onslide<7>{\frac{\overbrace{P(\text{Datos}|\text{Modelo})}^{\text{Predicción}} P(\text{Modelo})}{P(\text{Datos})}}
+\end{equation*}
+\end{textblock}
+}
+
+\only<8->{
+\begin{textblock}{160}(0,66)
+\begin{equation*}
+P(\text{Datos}|\text{Modelo}_{A\rightarrow B}) =  P(\text{Datos}|\text{Modelo}_{B\rightarrow A})
+\end{equation*}
+
+\only<9>{Con mismas predicciones, no podemos distinguir el modelo causal!}
+
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Inferencia causal \\
+ \large Los \textbf{niveles} del razonamiento causal
+\end{textblock}
+
+ \vspace{0.75cm}
+
+\only<1-3>{
+\begin{textblock}{140}(10,24)
+1. \textbf{Asociacional}:  $P(y \, | \, x , \, \text{Modelo Causal})$ \ y \ $P(\text{Modelo Causal} \, | \, x )$  \\[0.05cm] \normalsize
+\hspace{0.3cm} Permite evaluar el efecto y el modelo causal sólo si se cumplen ciertas condiciones \\
+
+\vspace{1cm} \large
+
+
+\only<2-3>{
+2. \textbf{Intervencional}:  $P(y \, | \, \text{do}(x), \, \text{Modelo Causal})$ \ y \ $P(\text{Modelo Causal} \, | \, y, \, \text{do}(x) )$ \\[0.05cm] \normalsize
+\hspace{0.3cm} Permite evaluar tanto el efecto causal y el modelo causal
+}
+
+\vspace{0.7cm} \large
+
+\only<3->{
+3. \textbf{Contrafactual}:  $P(\overbrace{y \, | \, \text{do}(x),}^{\text{Contrafactual}} \, \overbrace{y^{\prime}, \, \text{do}(x^{\prime}),}^{\text{Factual}}\, \text{Modelo Causal})$ \\[0.05cm] \normalsize
+\hspace{0.3cm} Permite evaluar el efecto causal contrafactual (no permite evaluar el modelo causal)
+}
+\end{textblock}
+}
+
+\only<4>{
+\begin{textblock}{140}(10,36) \centering \Large
+Estos niveles surgen naturalmente \\
+
+del proceso generativo de lo datos
+\end{textblock}
+}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Monty Hall Causal \\
+ \large \only<1>{Los \textbf{niveles} del razonamiento causal}\only<2>{Asociación}\only<3>{Intervención}\only<4-7>{Contrafáctico}\only<8->{Los \textbf{niveles} del razonamiento causal}
+\end{textblock}
+ \centering
+ \vspace{0.75cm}
+
+
+\only<2>{
+\begin{textblock}{80}(5,22)
+\raggedright
+%\onslide<2->{Modelo gráfico} \\ \vspace{0.3cm}
+ \tikz{
+    \node[det, minimum size=1.4cm] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
+    \node[const,above=of r] (pr) {\normalsize $P(r)$} ;
+
+    \node[det, below=of r,minimum size=1.4cm] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;
+    \node[const,left=of d] (pd) {\normalsize $P(s|r)$} ;
+
+\node[invisible,left=of d, xshift=-1.5cm] () {} ;
+
+
+    \edge {r} {d};
+}
+\end{textblock}
+
+\begin{textblock}{80}(65,24) \centering \Large
+Asociación
+\begin{equation*}
+P(r, s)
+\end{equation*}
+\large
+\begin{tabular}{c|c|c|c|}
+         &  $r1$  &  $r2$ & $r3$   \\ \hline
+       $s1$ & $0$ & $1/6$ & $1/6$ \\ \hline
+       $s2$ & $1/6$ & $0$ & $1/6$ \\ \hline
+       $s3$ & $1/6$ & $1/6$ & $0$ \\ \hline
+    \end{tabular}
+\end{textblock}
+}
+
+
+
+\only<3>{
+\begin{textblock}{80}(5,22)
+\raggedright
+%\onslide<2->{Modelo gráfico} \\ \vspace{0.3cm}
+ \tikz{
+
+    \node[det, minimum size=1.4cm] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;
+    \node[const,left=of d] (pd) {\normalsize $P(s|r,c)$} ;
+
+    \node[det, above=of d, minimum size=1.4cm, xshift=1.2cm] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
+    \node[const,above=of r] (pr) {\normalsize $P(r)$} ;
+
+    \node[det, minimum size=1.4cm, fill=black!40, above=of d, xshift=-1.2cm] (c) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/cerradura.png}} ;
+    \node[const,above=of c] (pc) {\normalsize $\text{do}(c) = 1$} ;
+
+
+    \node[invisible,left=of d, xshift=-1.5cm] () {} ;
+
+
+
+    \edge {r,c} {d};
+}
+\end{textblock}
+
+\begin{textblock}{80}(65,24) \centering \Large
+Intervención
+\begin{equation*}
+P(r, s| \text{do}_c = 1)
+\end{equation*}
+\large
+\begin{tabular}{c|c|c|c|}
+         &  $r1$  &  $r2$ & $r3$   \\ \hline
+       $s1$ & $0$ & $0$ & $0$ \\ \hline
+       $s2$ & $1/6$ & $0$ & $1/3$ \\ \hline
+       $s3$ & $1/6$ & $1/3$ & $0$ \\ \hline
+    \end{tabular}
+\end{textblock}
+}
+
+
+\only<4-7>{
+\begin{textblock}{80}(5,22)
+\raggedright
+%\onslide<2->{Modelo gráfico} \\ \vspace{0.3cm}
+ \tikz{
+
+    \only<4-5>{
+      \node[det, minimum size=1.4cm, fill=black!15] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;
+      \node[const,left=of d] (pd) {\normalsize $s=2$} ;
+
+      \node[det, minimum size=1.4cm, fill=black!40, above=of d, xshift=-1.2cm] (c) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/cerradura.png}} ;
+      \node[const,above=of c] (pc) {\normalsize $\text{do}(c)=1$} ;
+       \edge {r,c} {d};
+    }
+    \only<6->{
+      {\color{black!15}
+      \node[det, minimum size=1.4cm, fill=black!15, opacity=0.3] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png} } ;
+      \node[const,left=of d] (pd) {\normalsize $s=2$} ;
+
+
+      \node[det, minimum size=1.4cm, fill=black!40, above=of d, xshift=-1.2cm, opacity=0.3] (c) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/cerradura.png}} ;
+      \node[const,above=of c] (pc) {\normalsize $\text{do}(c)=1$} ;
+      \edge {r,c} {d};
+      }
+    }
+
+      \node[det, above=of d, minimum size=1.4cm, xshift=1.2cm] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
+      \node[const,above=of r] (pr) {\normalsize $P(r)$} ;
+
+      \only<6->{
+        \node[det,  below=of r, xshift=1.2cm, minimum size=1.4cm] (d_prima) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png} } ;
+        \node[const,right=of d_prima] (pd_prima) {\normalsize $P(s^{\prime}|r,c^{\prime})$} ;
+
+        \node[det, minimum size=1.4cm, fill=black!40, above=of d_prima, xshift=1.2cm] (c_prima) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/cerradura.png}} ;
+        \node[const,above=of c_prima] (pc_prima) {\normalsize $\text{do}(c^{\prime})=2$} ;
+        \edge {r,c_prima} {d_prima};
+      }
+
+    \node[invisible,left=of d, xshift=-1.5cm] () {} ;
+
+
+
+}
+\end{textblock}
+}
+
+\only<4-5>{
+\begin{textblock}{80}(65,24) \centering \Large
+Factual
+\begin{equation*}
+P(r| \text{do}_{c} = 1, s = 2 )
+\end{equation*}
+\large
+\begin{tabular}{|c|c|c|}
+           $r1$  &  $r2$ & $r3$   \\ \hline
+        $1/3$ & $0$ & $2/3$ \\ \hline
+    \end{tabular}
+\end{textblock}
+}
+
+\only<6-7>{
+\begin{textblock}{80}(75,24) \centering \Large
+Contra factual
+\begin{equation*}
+P(s^{\prime}, r | \text{do}_{c} = 1, s = 2 , \text{do}_{c^{\prime}}= 2)
+\end{equation*}
+\large
+\only<7>{
+\begin{tabular}{c|c|c|c|}
+         &  $r1$  &  $r2$ & $r3$   \\ \hline
+       $s^{\prime}1$ & $0$ & $0$ & $2/3$ \\ \hline
+       $s^{\prime}2$ & $0$ & $0$ & $0$ \\ \hline
+       $s^{\prime}3$ & $1/3$ & $0$ & $0$ \\ \hline
+    \end{tabular}
+}
+\end{textblock}
+}
+
+
+\only<5-7>{
+\begin{textblock}{140}(10,73) \centering \Large
+¿Que caja hubiera señalado si hubieramos elegido la caja 2, \\
+dado que elegimos la caja 1 y señaló la caja 2?
+\end{textblock}
+}
+
+\only<8->{
+\begin{textblock}{50}(4,28) \centering
+\textbf{Asociación}
+\begin{equation*}
+P(r, s)
+\end{equation*}
+\large
+\begin{tabular}{c|c|c|c|}
+         &  $r1$  &  $r2$ & $r3$   \\ \hline
+       $s1$ & $0$ & $1/6$ & $1/6$ \\ \hline
+       $s2$ & $1/6$ & $0$ & $1/6$ \\ \hline
+       $s3$ & $1/6$ & $1/6$ & $0$ \\ \hline
+    \end{tabular}
+\end{textblock}
+}
+
+\only<9->{
+\begin{textblock}{50}(54,28) \centering
+\textbf{Intervención}
+\begin{equation*}
+P(r, s| \text{do}_c = 1)
+\end{equation*}
+\large
+\begin{tabular}{c|c|c|c|}
+         &  $r1$  &  $r2$ & $r3$   \\ \hline
+       $s1$ & $0$ & $0$ & $0$ \\ \hline
+       $s2$ & $1/6$ & $0$ & $1/3$ \\ \hline
+       $s3$ & $1/6$ & $1/3$ & $0$ \\ \hline
+    \end{tabular}
+\end{textblock}
+}
+
+\only<10->{
+\begin{textblock}{50}(104,28) \centering
+\textbf{Contra factual}
+\begin{equation*}
+P(s^{\prime}, r | \text{do}_{c^{\prime}}= 2, \text{do}_{c} = 1, s = 2) \ \
+\end{equation*}
+\large
+\begin{tabular}{c|c|c|c|}
+         &  $r1$  &  $r2$ & $r3$   \\ \hline
+       $s^{\prime}1$ & $0$ & $0$ & $2/3$ \\ \hline
+       $s^{\prime}2$ & $0$ & $0$ & $0$ \\ \hline
+       $s^{\prime}3$ & $1/3$ & $0$ & $0$ \\ \hline
+    \end{tabular}
+\end{textblock}
+}
+
+\only<11>{
+\begin{textblock}{160}(0,72) \centering
+\textbf{Efecto causal}\\[-0.8cm]
+\begin{align*}
+\underbrace{P(r,s|\text{do}_c = 1, \text{Modelo Causal})}_{\text{Intervención 1}} - \underbrace{P(r,s|\text{do}_c = 2, \text{Modelo Causal})}_{\text{Intervención 2}}
+\end{align*}
+\end{textblock}
+}
+
+\only<12>{
+\begin{textblock}{160}(0,72) \centering
+\textbf{Efecto causal}\\ \Large
+Suponemos que el modelo causal es correcto!
+
+\large(está en el condicional)
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Identificación de modelo causal \\
+\end{textblock}
+
+
+\begin{textblock}{140}(10,12) \centering \Large
+\begin{equation*}
+P(\text{Modelo causal}\,|\, \text{Datos},\, \text{Intervenciones}) = \,  ?
+\end{equation*}
+\end{textblock}
+
+\begin{textblock}{80}(5,34) \centering
+ \tikz{
+    \node[det] (a) {$A_{_{i}}$} ; %
+    \node[det, below=of a] (b) {$B_{_{i}}$} ; %
+    \node[const, left= of a, xshift=-0.3cm, yshift=0.1cm] (pa) { \small
+    \begin{tabular}{|c|c|}
+          $A=0$  &  $A=1$   \\ \hline
+        $0.5$ & $0.5$   \\ \hline
+    \end{tabular}
+    }; %
+    \node[const, above= of pa] (npa) {\small$P(A)$};
+
+
+    \node[const, left=of b, xshift=-0.3cm, yshift=-0.1cm] (pb) { \small
+    \begin{tabular}{c|c|c|}
+        &  $B=0$  &  $B=1$   \\ \hline
+       $A=0$ & $0.95$ & $0.05$   \\ \hline
+       $A=1$ & $0.05$ & $0.95$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of pb] (npb) {\small$P(B|A)$};
+
+    \node[invisible, above=of a, yshift=1cm] (ia) {};
+
+    \plate {datos} {(a)(b)} {\tiny$i$: Dato};
+
+    \edge {a} {b};
+    }
+\end{textblock}
+\begin{textblock}{80}(75,34) \centering
+    \tikz{
+    \node[det] (a) {$A_{_{i}}$} ; %
+    \node[det, below=of a] (b) {$B_{_{i}}$} ; %
+    \node[const, right= of a, xshift=0.3cm, yshift=0.1cm] (pa) { \small
+    \begin{tabular}{c|c|c|}
+        &  $A=0$  &  $A=1$   \\ \hline
+       $B=0$ & $0.95$ & $0.05$   \\ \hline
+       $B=1$ & $0.05$ & $0.95$   \\ \hline
+    \end{tabular}
+    }; %
+    \node[const, above= of pa] (npa) {\small$P(A|B)$};
+
+
+    \node[const, right=of b, xshift=0.3cm, yshift=-0.1cm] (pb) { \small
+    \begin{tabular}{|c|c|}
+          $B=0$  &  $B=1$   \\ \hline
+        $0.5$ & $0.5$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of pb] (npb) {\small$P(B)$};
+
+    \node[invisible, above=of a, yshift=1cm] (ia) {};
+
+    \plate {datos} {(a)(b)} {\tiny$i$: Dato};
+
+    \edge {b} {a};
+    }
+\end{textblock}
+
+
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\only<1->{
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Factor Graph \\
+ \large \only<1-6>{Notación extendida para de los modelos gráficos}\only<7->{\textbf{Modelos dinámicos: independencias específicas al contexto}}
+\end{textblock}
+}
+
+
+\only<1>{
+\begin{textblock}{80}(5,34)
+\raggedleft
+ \tikz{
+    \node[det] (a) {$A$} ; %
+    \node[det, below=of a] (b) {$B$} ; %
+    \node[const, left= of a, xshift=-0.3cm, yshift=0.1cm] (pa) { \small
+    \begin{tabular}{|c|c|}
+          $A=0$  &  $A=1$   \\ \hline
+        $0.5$ & $0.5$   \\ \hline
+    \end{tabular}
+    }; %
+    \node[const, above= of pa] (npa) {\small$P(A)$};
+
+
+    \node[const, left=of b, xshift=-0.3cm, yshift=-0.1cm] (pb) { \small
+    \begin{tabular}{c|c|c|}
+        &  $B=0$  &  $B=1$   \\ \hline
+       $A=0$ & $0.95$ & $0.05$   \\ \hline
+       $A=1$ & $0.05$ & $0.95$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of pb] (npb) {\small$P(B|A)$};
+
+    \node[invisible, right=of a, xshift=1.5cm] (ia) {};
+
+    \edge {a} {b};
+    }
+\end{textblock}
+}
+
+\only<2-4>{
+\begin{textblock}{80}(5,18)
+\raggedleft
+ \tikz{
+
+    \node[factor] (fa) {} ; %
+    \node[det, below=of fa, yshift=0.3cm] (a) {$A$} ; %
+    \node[factor, below=of a, yshift=0.3cm] (fb) {} ; %
+    \node[det, below=of fb, yshift=0.3cm] (b) {$B$} ; %
+
+
+    \node[const, right= of fa, xshift=0cm] (npa) {\small\only<2-3>{$P(A)$}\only<4->{$P(A|\text{do}_A)$}};
+    \node[const, left= of fa, xshift=0cm] (pa) { \small
+      \only<2-3>{
+      \begin{tabular}{|c|c|}
+            $A=0$  &  $A=1$   \\ \hline
+          $0.5$ & $0.5$   \\ \hline
+      \end{tabular}
+      }
+      \only<4->{
+      \begin{tabular}{c|c|c|}
+            & $A=0$  &  $A=1$   \\ \hline
+         {\scriptsize \text{do}$_A = 0$ } & $0.5$ & $0.5$   \\ \hline
+         {\scriptsize \text{do}$_A = 1$ } & $1-\alpha$ & $\alpha$   \\ \hline
+      \end{tabular}
+      }
+    }; %
+
+    \onslide<4->{
+
+      %\node[factor, right=of fa, xshift=-0.7cm] (f2a) {} ;
+      %\gate {if} {(fa)(f2a)} {};
+      \node[det, above=of fa, yshift=-0.3cm] (doA) {do$_A$} ;
+      %\gate {if_Trata} {(f2a)} {};
+      %\gate {if_noTrata} {(f2a)} {};
+
+      \node[factor, above=of doA, yshift=-0.3cm] (fdoA) {} ;
+
+      \node[const, right= of fdoA] (npdoA) {\small$P(\text{do}_A)$};
+      \node[const, left= of fdoA, xshift=0cm] (pdoA) { \small
+        \begin{tabular}{|c|c|}
+            do$_A=0$  &  do$_A=1$   \\ \hline
+            $1-\delta_{A}$ & $\delta_A$   \\ \hline
+        \end{tabular}
+    }; %
+
+    }
+
+
+    \node[const, right= of fb] (npb) {\small$P(B|A)$};
+    \node[const, left=of fb, xshift=-0.3cm] (pb) { \small
+    \begin{tabular}{c|c|c|}
+        &  $B=0$  &  $B=1$   \\ \hline
+       $A=0$ & $0.95$ & $0.05$   \\ \hline
+       $A=1$ & $0.05$ & $0.95$   \\ \hline
+    \end{tabular}
+    };
+
+    \node[invisible, right=of a, xshift=1.5cm] (ia) {};
+
+
+    \edge {fa} {a};
+    \onslide<4->{
+      \edge {fdoA} {doA};
+      \edge {doA} {fa};
+    }
+    \edge[-] {a} {fb};
+    \edge {fb} {b};
+
+    }
+\end{textblock}
+}
+
+\only<1-2>{
+\begin{textblock}{70}(80,42) \centering \Large
+\begin{equation*}
+ P(A, B | \text{Modelo}_{A \rightarrow B})
+\end{equation*}
+\end{textblock}
+}
+\only<3>{
+\begin{textblock}{70}(80,42) \centering
+\textbf{Nodos}: Variables y Funciones \\[0.6cm]
+
+\textbf{Ejes}: Variable $v$ es parámetro
+
+de la función $f$
+\end{textblock}
+}
+\only<4>{
+\begin{textblock}{70}(80,42) \centering \Large
+\begin{equation*}
+ P(A, B, \text{do}_A | \text{Modelo}_{A \rightarrow B })
+\end{equation*}
+\end{textblock}
+}
+
+\only<5>{
+\begin{textblock}{70}(0,42) \centering \Large
+\begin{equation*}
+ P(A, B, \text{do}_A | \text{Modelo}_{B \rightarrow A })
+\end{equation*}
+\end{textblock}
+}
+
+\begin{textblock}{160}(15,74)
+\begin{flalign*}
+ \only<8>{& P(A, B, \text{do}_A | \text{Modelo}_{B \rightarrow A}) }
+ \only<8>{= P(B) \, P_0(A|B)^{1-\text{do}_A} \, P_1(A)^{\text{do}_A} \, P(\text{do}_A)   \\}
+ \only<9>{& P(A, B | \underbrace{\text{do}_A = 1, \text{Modelo}_{B \rightarrow A}}_{\text{Intervención}})= P(B) \, P_1(A)    \\}
+ \only<10>{& P(A, B | \underbrace{\text{do}_A = 0, \text{Modelo}_{B \rightarrow A}}_{\text{Sin intervención}})= P(B) \, P_0(A|B)    \\}
+ &&
+\end{flalign*}
+\end{textblock}
+
+
+
+
+
+\only<5->{
+\begin{textblock}{85}(25,18)
+\raggedright
+ \tikz{
+
+    \node[det] (a) {$A$} ; %
+    \only<-8,10->{\node[factor, below=of a] (fa) {} ; }
+    \only<9>{\node[factor, below=of a, fill=black!7, draw=black!7] (fa) {} ; }
+    \node[det, below=of fa] (b) {$B$} ; %
+    \node[factor, below=of b] (fb) {} ; %
+
+    \onslide<6->{
+      \only<-8>{\node[det, left=of b] (doA) {do$_A$} ;}
+      \only<9->{\node[det, left=of b, fill=black!20] (doA) {do$_A$} ;}
+      \only<9>{\node[const, left=of doA] (odoA) {\small do$_A$=1} ;}
+      \only<10>{\node[const, left=of doA] (odoA) {\small do$_A$=0} ;}
+      \node[factor, below=of doA] (fdoA) {} ; %
+      \node[const, left= of fdoA] (ndoA) {\small$P(\text{do}_A)$};
+      \node[const, left=of ndoA] (pdoA) { \small
+          \begin{tabular}{|c|c|}
+                do$_A=0$  &  do$_A=1$   \\ \hline
+              $1-\delta_A$ & $\delta_A$   \\ \hline
+          \end{tabular}
+        };
+    }
+    \onslide<7->{
+      \only<-9>{\node[factor, left=of fa, xshift=0.725cm] (f2a) {} ;}
+      \only<10->{\node[factor, left=of fa, draw=black!7, fill=black!7, xshift=0.725cm] (f2a) {} ;}
+      \gate {ifA} {(fa)(f2a)} {};
+      {\only<10>{\color{black!7}} \gate {ifA1} {(f2a)} {};}
+      {\only<9>{\color{black!7}} \gate {ifA0} {(fa)} {};}
+    }
+
+    \only<-6>{\node[const, left=of fa] (npa) {\small \only<5>{$P(A|B)$} \only<6>{$P(A|B, \text{do}_A)$}};}
+    \node[const, right= of fa, xshift=0.3cm] (pa) { \small
+      \only<5>{
+        \begin{tabular}{c|c|c|}
+            &  $A=0$  &  $A=1$   \\ \hline
+          $B=0$ & $0.95$ & $0.05$   \\ \hline
+          $B=1$ & $0.05$ & $0.95$   \\ \hline
+        \end{tabular}
+      }
+      \only<6>{
+        \begin{tabular}{c|c|c|}
+            &  $A=0$  &  $A=1$   \\ \hline
+          {\scriptsize $B=0$ do$_A = 0$} & $0.95$ & $0.05$   \\ \hline
+          {\scriptsize $B=1$ do$_A = 0$} & $0.05$ & $0.95$   \\ \hline
+          {\scriptsize do$_A = 1$} & $1-\alpha$ & $\alpha$   \\ \hline
+        \end{tabular}
+      }
+    }; %
+    \only<7->{
+      {\only<9>{\color{black!7}}\node[const, right=of ifA] (npa) {\small $P_0(A|B)$};}
+      {\only<10>{\color{black!7}} \node[const, left=of ifA] (np2a) {\small $P_1(A)$}; }
+      {\only<9>{\color{black!7}}\node[const, right= of npa] (pa) { \small
+        \begin{tabular}{c|c|c|}
+            &  $A=0$  &  $A=1$   \\ \hline
+          $B=0$ & $0.95$ & $0.05$   \\ \hline
+          $B=1$ & $0.05$ & $0.95$   \\ \hline
+        \end{tabular}
+      };}
+      {\only<10>{\color{black!7}} \node[const, left= of np2a] (p2a) { \small
+        \begin{tabular}{|c|c|}
+              $A=0$  &  $A=1$   \\ \hline
+           $1-\alpha$ & $\alpha$   \\ \hline
+        \end{tabular}
+      };}
+    }
+
+
+    \node[const, right= of fb] (npb) {\small$P(B)$};
+    \node[const, right=of npb, xshift=0.3cm] (pb) { \small
+    \begin{tabular}{|c|c|}
+          $B=0$  &  $B=1$   \\ \hline
+        $0.5$ & $0.5$   \\ \hline
+    \end{tabular}
+    };
+
+%     \node[invisible, above=of a, yshift=0.2cm] (ia) {};
+%     \node[invisible, left=of a, xshift=0.2cm] (ia) {};
+
+
+    {\only<9>{\color{black!7}} \edge {fa} {a};}
+    \edge {fb} {b};
+    {\only<9>{\color{black!7}} \edge[-] {b} {fa}; }
+    \onslide<6->{
+      \edge {fdoA} {doA};
+    }
+    \onslide<6>{
+      \edge[-] {doA} {fa};
+    }
+    \onslide<7->{
+      \edge[-,dashed] {doA} {ifA0};
+      {\only<10>{\color{black!7}} \edge {f2a} {a}; }
+    }
+    }
+\end{textblock}
+}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Identificación de modelo causal\\
+ \large A través de intervenciones do$(\cdot)$
+ \end{textblock}
+ \vspace{0.75cm}
+
+\begin{textblock}{140}(3,24)
+Datos:
+
+\vspace{0.3cm}
+\normalsize
+\begin{tabular}{c|c|c|c|}
+    $i$ & do$_{Ai}$ &  $A_i$  &  $B_i$   \\ \hline
+    \onslide<1-7>{1 & $0$ & $1$ & $1$  \\ \hline
+    {\tiny$\dots$} & $0$ & {\tiny$\dots$} & {\tiny$\dots$}   \\ \hline
+    10 & $0$ & $0$ & $0$   \\ \hline \hline}11 & $1$ & $0$ & $1$   \\ \hline
+    12 & $1$ & $1$ & $0$   \\ \hline
+    {\tiny$\dots$} & $1$ & {\tiny$\dots$} & {\tiny$\dots$}  \\ \hline
+\end{tabular}
+\end{textblock}
+
+\only<2->{
+\begin{textblock}{110}(46,15) \normalsize
+\begin{flalign*}
+&
+\only<2>{P(\text{Modelo}_{B\rightarrow A}|\text{Datos})}
+\only<3->{\frac{P(\text{Modelo}_{B\rightarrow A}|\text{Datos})}{P(\text{Modelo}_{A\rightarrow B}|\text{Datos})}}
+=
+\only<2>{\frac{P(\text{Datos}|\text{M}_{B\rightarrow A}) \, P(\text{M}_{B\rightarrow A}) }{P(\text{Datos})}}
+\only<3>{\frac{P(\text{Datos}|\text{M}_{B\rightarrow A}) \, P(\text{M}_{B\rightarrow A}) }{P(\text{Datos}|\text{M}_{A\rightarrow B}) \, P(\text{M}_{A\rightarrow B})}}
+\only<4->{\frac{P(\text{Datos}|\text{M}_{B\rightarrow A})}{P(\text{Datos}|\text{M}_{A\rightarrow B}) }}
+\\[0.5cm] &
+\only<5>{ = \frac{\prod_i^n P(B_i, A_i, \text{do}_{A_i}|\text{M}_{BA}) }{\prod_i^n P(B_i, A_i, \text{do}_{A_i}|\text{M}_{AB}) }  }
+\only<6>{ = \frac{\prod_i^n P(B_i|\text{M}_{_{BA}}) P_0(A_i|B_i,\text{M}_{_{BA}})^{1-\text{do}_A} P_1(A_i|\text{M}_{_{BA}})^{\text{do}_A}  P(\text{do}_A|\text{M}_{BA}) }{\prod_i^n P(A_i|\text{do}_A,\text{M}_{_{AB}}) P(B_i|A_i,\text{M}_{_{AB}}) P(\text{do}_A|\text{M}_{AB}) }}
+\only<7-8>{ = \frac{\prod_i^n  P(B_i|\text{M}_{_{BA}}) P_0(A_i|B_i,\text{M}_{_{BA}})^{1-\text{do}_A} P_1(A_i|\text{M}_{_{BA}})^{\text{do}_A}  \phantom{P(\text{do}_A|\text{M}_{BA})} }{\prod_i^n  P(A_i|\text{do}_A,\text{M}_{_{AB}}) P(B_i|A_i,\text{M}_{_{AB}}) \phantom{P(\text{do}_A|\text{M}_{AB})} }}
+\only<9>{ = \prod_{i=11}^n  \frac{P(B_i|\text{M}_{_{BA}}) \alpha^{A_i} \, (1 - \alpha)^{1-A_i}}{P(B_i|A_i,\text{M}_{_{AB}}) \alpha^{A_i} \, (1 - \alpha)^{1-A_i}  }  }
+\only<10->{ = \prod_{i=11}^n \frac{P(B_i|\text{M}_{_{BA}})}{P(B_i|A_i,\text{M}_{_{AB}})  }  }
+&&
+\end{flalign*}
+
+\centering
+\only<11>{
+\includegraphics[width=0.7\textwidth]{figuras/identificacion.pdf}
+}
+\end{textblock}
+}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Identificación de modelo causal\\
+ \large El conocimiento experto
+ \end{textblock}
+ \vspace{0.75cm}
+
+
+ \begin{textblock}{160}(0,42) \Large \centering
+ La principal fuente de información para la identificación
+
+ modelos causales alternativos es el conocimiento experto.
+ \end{textblock}
+
+
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Identificación de efecto causal\\
+ \large Con observación, sin intervenciones.
+ \end{textblock}
+ \vspace{0.75cm}
+
+
+\only<1-2>{
+\begin{textblock}{160}(0,24)
+\begin{equation*}
+P(y|\text{do}(x) = a, \text{Modelo Causal}) - P(y|\text{do}(x) = b, \text{Modelo Causal})
+\end{equation*}
+\end{textblock}
+}
+
+\only<2>{
+\begin{textblock}{160}(0,44) \centering
+\Large ¿Es posible evaluar el efecto causal sin hacer intervenciones?
+\large
+\begin{equation*}
+P(y|\text{do}(x) = a, \text{Modelo Causal}) \overset{?}{=} P(y| x = a, Z, \text{Modelo Causal})
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<3>{
+\begin{textblock}{140}(10,27) \centering
+\includegraphics[width=0.70\textwidth, page=1]{figuras/simpson.pdf}
+\end{textblock}
+}
+\only<4>{
+\begin{textblock}{140}(10,27) \centering
+\includegraphics[width=0.70\textwidth, page=2]{figuras/simpson.pdf}
+\end{textblock}
+}
+
+
+\only<3->{
+\begin{textblock}{150}(5,14) \centering
+\begin{flalign*}
+& P(\text{Derrumbes}|do(\text{Intensidad del sismo})) = \only<3>{?}\only<4>{P(\text{Derrumbes}|\text{Intensidad del sismo}, \text{Ciudad})}
+&&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\end{frame}
+
+%
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \LARGE Flujo de inferencia \\
+%  \end{textblock}
+%  \vspace{0.75cm}
+%
+% % \only<1>{
+% %  \begin{textblock}{160}(0,23) \centering
+% %  \tikz{
+% %     \node[det] (u) {U} ; %
+% %     \node[const, above=of u] (nu) {Genotipo} ; %
+% %     \node[det, below=of u, xshift=-1.2cm] (f) {F} ; %
+% %     \node[const, left=of f] (nf) {Fuma} ; %
+% %     \node[det, below=of u, xshift=1.2cm] (c) {C};
+% %     \node[const, right=of c] (nc) {Cancer} ; %
+% %
+% %     \edge {u} {f,c};
+% %     \edge {f} {c};
+% %     }
+% %
+% % \vspace{1cm}
+% %  $P( \text{Cancer}|do(\text{Fuma}) ) \overset{?}{=}  P(\text{Cancer}|\text{Fuma})$
+% % \end{textblock}
+% % }
+%
+%
+% \only<1-2>{
+% \begin{textblock}{160}(0,14) \centering
+%  \tikz{
+%     \node[det] (l) {$l$} ; %
+%     \node[det, above=of l] (a) {$a$} ; %
+%     \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+%     \node[det, above=of a,xshift=-1.5cm] (e) {$e$} ; %
+%     \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+%     \node[det, above=of t,xshift=-1.5cm] (c) {$c$} ;
+%
+%
+%     \edge {a} {l};
+%     \edge {t,e} {a};
+%     \edge {t} {r};
+%     \edge {c} {e,t};
+%
+%     \node[const, left= of e, xshift=-0.1cm] (cpd_e) {Entradera:};
+%     \node[const, right= of t, xshift=0.1cm] (cpd_t) {:Terremoto};
+%     \node[const, right= of c, xshift=0.1cm] (cpd_c) {:Ciudad};
+%     \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
+%     \node[const, right= of r, xshift=0.1cm] (cpd_r) {:Redes};
+%     \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
+%
+%     }
+% \end{textblock}
+% }
+%
+% \only<3>{
+% \begin{textblock}{160}(0,14) \centering
+%  \tikz{
+%     \node[det] (l) {$l$} ; %
+%     \node[det, above=of l] (a) {$a$} ; %
+%     \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+%     \node[det, double, double distance=0.5mm, above=of a,xshift=-1.5cm] (e) {$e$} ;
+%     \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+%     \node[det, above=of t,xshift=-1.5cm] (c) {$c$} ;
+%
+%
+%     \edge {a} {l};
+%     \edge {t,e} {a};
+%     \edge {t} {r};
+%     \edge {c} {t};
+%
+%      \node[const, left= of e, xshift=-0.1cm] (cpd_e) {Entradera:};
+%      \node[const, right= of t, xshift=0.1cm] (cpd_t) {:Terremoto};
+%      \node[const, right= of c, xshift=0.1cm] (cpd_c) {:Ciudad};
+%      \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
+%      \node[const, right= of r, xshift=0.1cm] (cpd_r) {:Redes};
+%      \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
+%
+%     }
+% \end{textblock}
+% }
+%
+%
+% \only<2->{
+% \begin{textblock}{160}(0,76) \centering
+% \begin{equation*}
+% P( \text{Llamada} | do(\text{Entradera}) ) \overset{?}{=}  P(\text{Llamada}|\text{Entradera})
+% \end{equation*}
+% \end{textblock}
+% }
+%
+% \end{frame}
+%
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \LARGE Flujo de inferencia \\
+%  \large Sum-product algorithm
+% \end{textblock}
+%
+% \only<2-8>{
+% \begin{textblock}{80}(45,34)
+% \begin{description}
+%  \onslide<3->{\item[$v(n)$ :] Vecinos del nodo $n$}
+%  \item[$m_{x \rightarrow f}(x)$ :] Mensaje de variable $x$ a factor $f$
+%  \item[$m_{f \rightarrow x}(x)$ :] Mensaje de factor $f$ a variable $x$
+% \end{description}
+% \end{textblock}
+% }
+%
+%
+% \only<1-2>{
+% \begin{textblock}{80}(45,20)
+% \centering
+% Algoritmo para calcular cualquier marginal \\ mediante pasaje de mensajes entre nodos
+% \end{textblock}
+% }
+%
+%
+% \only<3-9>{
+% \begin{textblock}{80}(45,20)
+% \begin{equation*}
+% P(x) = \prod_{f \in v(x)} m_{f \rightarrow x}(x)
+% \end{equation*}
+% \end{textblock}
+% }
+%
+% \only<4-9>{
+% \begin{textblock}{80}(45,56)
+% \begin{equation*}\label{eq:m_v_f}
+% m_{x \rightarrow f}(x) = \prod_{g \in \only<5>{\textcolor{red}}{v(x) \setminus \{f\}} } m_{g \rightarrow x}(x)
+% \end{equation*}
+% \end{textblock}
+% }
+%
+% \only<6-9>{
+% \begin{textblock}{80}(45,68)
+% \begin{equation*}\label{eq:m_f_v}
+%  m_{f \rightarrow x}(x) = \onslide<8->{\sum_{\bm{y}} \Big(} \onslide<7->{f(\bm{y},x)} \prod_{y \in v(f) \setminus \{x\} } m_{y \rightarrow f}(y) \onslide<8->{\Big)}
+% \end{equation*}
+% \end{textblock}
+% }
+%
+% \only<1->{
+% \begin{textblock}{40}(0,14)
+% \centering
+% \begin{figure}[H]
+% \centering
+%   \scalebox{.8}{
+% \tikz{ %
+%         \node[factor] (fa) {} ;
+%         \node[det, below=of fa, minimum size=0.55cm, yshift=0.4cm] (a) {$a$} ; %
+%
+%         \node[factor, below=of a, yshift=0.4cm] (fl) {} ;
+%         \node[det, below=of fl, minimum size=0.55cm,yshift=0.4cm] (l) {$l$} ; %
+%
+%         \node[det, above=of fa, minimum size=0.55cm, xshift=-0.8cm, yshift=-0.4cm] (e) {$e$} ; %
+%         \node[factor, above=of e, yshift=-0.4cm] (fe) {} ;
+%
+%         \node[det,minimum size=0.55cm, above=of fa, xshift=0.8cm, yshift=-0.4cm] (t) {$t$} ; %
+%         \node[factor, above=of t, yshift=-0.4cm] (ft) {} ;
+%         \node[factor, below=of t, xshift=0.8cm, yshift=0.4cm] (fr) {} ;
+%         \node[det,minimum size=0.55cm, below=of fr, yshift=0.4cm] (r) {$r$} ; %
+%
+%         \node[det, above=of fe, minimum size=0.55cm, xshift=0.8cm, yshift=-0.4cm] (c) {$c$} ; %
+%         \node[factor, above=of c, yshift=-0.4cm] (fc) {} ;
+%
+%
+%         \edge {fc} {c};
+%         \edge[-] {c} {fe,ft};
+%         \edge[-] {fa} {e,t};
+%         \edge {fa} {a};
+%         \edge {fe} {e};
+%         \edge {ft} {t};
+%         \edge[-] {fr} {t};
+%         \edge {fr} {r};
+%         \edge[-] {fl} {a};
+%         \edge {fl} {l};
+%         }
+% }
+% \end{figure}
+% \end{textblock}
+% }
+%
+%
+% \only<9>{
+% \begin{textblock}{110}(35,40) \Large
+% \centering El método de inferencia más eficiente
+% \end{textblock}
+% }
+%
+% \end{frame}
+
+%  \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \Large
+%  Modelo Causal \\
+%  \large Prior redes sociales
+%  \end{textblock}
+%  \vspace{0.75cm}
+%
+%  \centering
+%
+%
+%  \begin{textblock}{160}(0,25)
+%   $P(r|t)$ \\[0.1cm]
+%     \begin{tabular}{|c|c|c|}
+%         \hline
+%         & \, $r^0$ \, & \, $r^1$ \,  \\ \hline
+%        $(t^0)$ & \only<3-4>{$1$}\only<5>{$0.99$} & \only<3-4>{$0$}\only<5>{$0.01$}   \\ \hline
+%        $(t^1)$ & \only<3-4>{$0$}\only<5>{$0.01$} & \only<3-4>{$1$}\only<5>{$0.99$}   \\ \hline
+%     \end{tabular}
+% \end{textblock}
+%
+%
+%  \begin{textblock}{140}(10,54)
+% \onslide<2->{
+%  \begin{itemize}
+%   \item[$\bullet$] Siempre que hay un terremoto, en alguna de mis redes sociales (whatsapp, facebook, twitter, instagram), se habla del tema.
+%   \only<4->{\item[$\bullet$] También puedo mirar mal, o por algún momento no haya nada, o que por algún otro motivo nadie pueda comunicarse}
+%  \end{itemize}
+% }
+% \end{textblock}
+%
+%
+%  \end{frame}
+%
+%
+%  \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \Large
+%  Modelo Causal \\
+%  \large Prior llamada
+%  \end{textblock}
+%  \vspace{0.75cm}
+%
+%  \centering
+%
+%
+%  \begin{textblock}{160}(0,25)
+%   $P(l|a)$ \\[0.1cm]
+%     \begin{tabular}{|c|c|c|}
+%         \hline
+%         & \, $l^0$ \, & \, $l^1$ \,  \\ \hline
+%        $(a^0)$ & \onslide<3>{$0.99$} & \onslide<3>{$0.01$}   \\ \hline
+%        $(a^1)$ & \onslide<3>{$0.01$} & \onslide<3>{$0.99$}   \\ \hline
+%     \end{tabular}
+% \end{textblock}
+%
+%
+%  \begin{textblock}{140}(10,54)
+% \onslide<2->{
+%  \begin{itemize}
+%   \item[$\bullet$] Siempre que se activa la alarma, me llaman desde el call center de la empresa (si no pasa nada raro)
+%  \end{itemize}
+% }
+% \end{textblock}
+%
+%  \end{frame}
+
+%
+%  \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \Large
+%  Modelo Causal \\
+%  \large Prior alarma
+%  \end{textblock}
+%  \vspace{0.75cm}
+%
+%  \centering
+%
+%
+%  \begin{textblock}{160}(0,18)
+%   $P(l|a)$ \\[0.1cm]
+%     \begin{tabular}{|c|c|c|}
+%         \hline
+%         & \hspace{1cm} $a^0$ \hspace{1cm} & \hspace{1cm} $a^1$ \hspace{1cm} \\ \hline
+%        $(e^0, t^0)$ & \only<10->{$0.99$}\only<4-9>{$P(\overline{\alpha})$} & \only<11->{$0.01$}\only<4-10>{$P(\alpha)$} \\ \hline
+%        $(e^1, t^0)$ & \only<13->{$\approx 0.01$}\only<12>{$0.99 \cdot 0.01$}\only<7-11>{$P(\overline{\alpha} \cap \overline{\varepsilon})$}\only<6>{$P(\overline{\alpha \cup \varepsilon})$} & \only<14->{$\approx 0.99$} \only<5-13>{$P(\alpha \cup \varepsilon)$}  \\ \hline
+%        $(e^0, t^1)$ & \only<15->{$\approx 0.01$}\only<8-14>{$P(\overline{\alpha} \cap \overline{\tau})$} &\only<15->{$\approx0.99$}\only<8-14>{$P(\alpha \cup \tau)$}  \\ \hline
+%        $(e^1, t^1)$ & \only<16>{$\approx 0.0001$} \only<9-15>{$P(\overline{\alpha} \cap \overline{\varepsilon}  \cap \overline{\tau})$} & \only<16>{$\approx 0.9999$} \only<9-15>{$P(\alpha \cup \varepsilon \cup \tau)$}  \\ \hline
+%     \end{tabular}
+% \end{textblock}
+%
+%
+%  \begin{textblock}{140}(10,52)
+% \onslide<2->{
+%  \begin{itemize}
+%   \item[$\bullet$] Siempre que entra alguien a la casa o que hay un terremoto se activa la alarma (si no pasa nada raro):
+%   \onslide<3->{
+%   \begin{description}
+%    \item[$\alpha$] Se activa sola: $P(\alpha) = 0.01$
+%    \item[$\overline{\varepsilon}$] No se activa a pesar de entradera: $P(\overline{\varepsilon}) = 0.01$
+%    \item[$\overline{\tau}$] No se activa a pesar de terremoto: $P(\overline{\tau}) = 0.01$
+%   \end{description}
+% }
+%  \end{itemize}
+% }
+% \end{textblock}
+%
+%  \end{frame}
+%
+
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large
+ Modelo Causal
+ \end{textblock}
+
+\begin{textblock}{160}(0,12)
+ \centering
+
+ \tikz{
+    \node[det] (l) {$l$} ; %
+    \node[det, above=of l] (a) {$a$} ; %
+    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+    \node[det, above=of a,xshift=-1.5cm] (e) {$e$} ; %
+    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+
+    \edge {a} {l};
+    \edge {t,e} {a};
+    \edge {t} {r};
+
+    \onslide<2->{
+    \node[const, left= of e, xshift=-0.1cm] (cpd_e) {
+    \begin{tabular}{|c|c|}
+        \hline
+        $e^0$ & $e^1$ \\ \hline
+        $0.999$ & $0.001$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_e] (n_e) {Entradera:};
+        }
+
+    \onslide<3->{
+    \node[const, right= of t, xshift=0.1cm] (cpd_t) {
+    \begin{tabular}{|c|c|}
+        \hline
+        $t^0$ & $t^1$ \\ \hline
+        $0.992$ & $0.008$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_t] (n_t) {Terremoto:};
+    }
+
+    \onslide<4->{
+    \node[const, left= of a, yshift=-0.7cm, xshift=-0.3cm] (cpd_a) {
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & $a^0$ & $a^1$ \\ \hline
+       ($e^0, t^0$) & $0.99$ & $0.01$  \\ \hline
+       ($e^1, t^0$) & $0.01$ & $0.99$  \\ \hline
+       ($e^0, t^1$) & $0.01$ & $0.99$  \\ \hline
+       ($e^1, t^1$) & $0.0001$ & $0.9999$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_a] (n_a) {Alarma:};
+    }
+
+ \onslide<5->{
+    \node[const, right= of r, xshift=0.1cm] (cpd_r) {
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \, $r^0$ \, & \, $r^1$ \,  \\ \hline
+       $(t^0)$ & $0.99$ & $0.01$   \\ \hline
+       $(t^1)$ & $0.01$ & $0.99$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_r] (n_r) {Redes:};
+    }
+
+
+ \onslide<6->{
+    \node[const, right= of l, xshift=0.1cm] (cpd_l) {
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \, $l^0$ \, & \, $l^1$ \,  \\ \hline
+       $(a^0)$ & $0.99$ & $0.01$   \\ \hline
+       $(a^1)$ & $0.01$ & $0.99$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_l] (n_l) {Llamada:};
+    }
+
+
+ }
+\end{textblock}
+
+\only<2>{
+\begin{textblock}{160}(10,66)
+ \begin{itemize}
+  \item[$\bullet$] Una vez cada 3 años
+  \item[$\bullet$] Una casa cada 1000 por día
+ \end{itemize}
+\end{textblock}
+}
+
+\only<3>{
+ \begin{textblock}{160}(10,66)
+ \begin{itemize}
+  \item[$\bullet$] Hay 3 terremotos por años
+ \end{itemize}
+\end{textblock}
+}
+
+\only<4>{
+ \begin{textblock}{160}(10,66)
+ \begin{itemize}
+   \item[$\bullet$] Se activa sola: $P(\alpha) = 0.01$
+   \item[$\bullet$] No se activa a pesar de entradera: $P(\overline{\varepsilon}) = 0.01$
+   \item[$\bullet$] No se activa a pesar de terremoto: $P(\overline{\tau}) = 0.01$
+ \end{itemize}
+\end{textblock}
+}
+
+\only<5>{
+ \begin{textblock}{160}(10,66)
+ \begin{itemize}
+   \item[$\bullet$] Siempre se habla de los terremotos en las redes (si no pasa nada raro)
+ \end{itemize}
+\end{textblock}
+}
+
+\only<6>{
+ \begin{textblock}{160}(10,66)
+ \begin{itemize}
+   \item[$\bullet$] Llaman siempre que se activa la alarma (si no pasa nada raro)
+ \end{itemize}
+\end{textblock}
+}
+
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \Large
+ Modelo Causal
+ \end{textblock}
+
+\begin{textblock}{160}(0,12)
+ \centering
+
+ \tikz{
+    \node[det] (l) {$l$} ; %
+    \node[det, above=of l] (a) {$a$} ; %
+    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+    \node[det, above=of a,xshift=-1.5cm] (e) {$e$} ; %
+    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+
+    \edge {a} {l};
+    \edge {t,e} {a};
+    \edge {t} {r};
+
+    \node[const, left= of e, xshift=-0.1cm] (cpd_e) {
+    \begin{tabular}{|c|c|}
+        \hline
+        $e^0$ & $e^1$ \\ \hline
+        $0.999$ & $0.001$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_e] (n_e) {Entradera:};
+
+    \node[const, right= of t, xshift=0.1cm] (cpd_t) {
+    \begin{tabular}{|c|c|}
+        \hline
+        $t^0$ & $t^1$ \\ \hline
+        $0.992$ & $0.008$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_t] (n_t) {Terremoto:};
+
+    \node[const, left= of a, yshift=-0.7cm, xshift=-0.3cm] (cpd_a) {
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & $a^0$ & $a^1$ \\ \hline
+       ($e^0, t^0$) & $0.99$ & $0.01$  \\ \hline
+       ($e^1, t^0$) & $0.01$ & $0.99$  \\ \hline
+       ($e^0, t^1$) & $0.01$ & $0.99$  \\ \hline
+       ($e^1, t^1$) & $0.0001$ & $0.9999$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_a] (n_a) {Alarma:};
+
+    \node[const, right= of r, xshift=0.1cm] (cpd_r) {
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \, $r^0$ \, & \, $r^1$ \,  \\ \hline
+       $(t^0)$ & $0.99$ & $0.01$   \\ \hline
+       $(t^1)$ & $0.01$ & $0.99$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_r] (n_r) {Redes:};
+
+    \node[const, right= of l, xshift=0.1cm] (cpd_l) {
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \, $l^0$ \, & \, $l^1$ \,  \\ \hline
+       $(a^0)$ & $0.99$ & $0.01$   \\ \hline
+       $(a^1)$ & $0.01$ & $0.99$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_l] (n_l) {Llamada:};
+
+ }
+\end{textblock}
+
+\only<1>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(e^0,t^0,a^0,r^0,l^0) = P(e^0)P(t^0)P(a^0|t^0,e^0)P(r^0|t^0)P(l^0|a^0) &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<2>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(e^0,t^0,a^0,r^0,l^0) = 0.999 \cdot P(t^0)P(a^0|t^0,e^0)P(r^0|t^0)P(l^0|a^0) &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(e^0,t^0,a^0,r^0,l^0) = 0.999 \cdot 0.992 \cdot 0.99 \cdot 0.99 \cdot 0.99 &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<4>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(e^0,t^0,a^0,r^0,l^0) = 0.999 \cdot 0.992 \cdot 0.99 \cdot 0.99 \cdot 0.99 \approx 0.96 &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<5>{
+ \begin{textblock}{130}(15,63)
+ \begin{flalign*}
+  & P(a^1) =  \phantom{ \sum_{e,t,r,l}} &&
+ \end{flalign*}
+ \end{textblock}
+}
+
+\only<6>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \sum_e\sum_t\sum_r\sum_l P(e,t,a^1,r,l) &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<7>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \sum_{e,t,r,l} P(e,t,a^1,r,l) &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<8>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \sum_{e,t,r,l} P(e)P(t)P(a^1|t,e)P(r|t)P(l|a^1) &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<9>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \sum_{e,t,r,\textcolor{red}{l}} P(e)P(t)P(a^1|t,e)P(r|t)\textcolor{red}{\bm{P(l|a^1)}} &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<10>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+  P(a^1) & = P(l^0|a^1) \sum_{e,t,r} P(e)P(t)P(a^1|t,e)P(r|t) \\
+ & + P(l^1|a^1) \sum_{e,t,r} P(e)P(t)P(a^1|t,e)P(r|t) &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<11>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \Big(\sum_l P(l|a^1) \Big) \Big(\sum_{e,t,r} P(e)P(t)P(a^1|t,e)P(r|t) \Big) &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<12>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \Big(\sum_l P(l|a^1) \Big) \Big(\sum_{e,\textcolor{red}{\bm{t}},r} P(e)P(t)P(a^1|t,e)P(r|\textcolor{red}{\bm{t}}) \Big) &&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\only<13>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \Big(\sum_l P(l|a^1) \Big) \Big(\sum_{e,t} P(e)P(t)P(a^1|t,e)(\sum_r P(r|t)) \Big) &&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\only<14>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \Big(\cancel{\sum_l P(l|a^1)} \Big) \Big(\sum_{e,t} P(e)P(t)P(a^1|t,e)(\sum_r P(r|t)) \Big) &&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\only<15>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \Big(\cancel{\sum_l P(l|a^1)} \Big) \Big(\sum_{e,t} P(e)P(t)P(a^1|t,e)(\cancel{\sum_r P(r|t)}) \Big) &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<16>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \sum_{e,t} P(e)P(t)P(a^1|t,e) \phantom{\cancel{\sum_h}}&&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<17>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \sum_{e,t} P(e)P(t)P(a^1|t,e) = ?  &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<18>{
+\begin{textblock}{130}(15,63)
+\begin{flalign*}
+ & P(a^1) = \sum_{e,t} P(e)P(t)P(a^1|t,e) \approx 0.019  &&
+\end{flalign*}
+\end{textblock}
+}
+
+\end{frame}
+
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \Large
+%  Grafo de factorización
+% \end{textblock}
+%
+% \begin{textblock}{40}(5,12)
+% \centering
+% \begin{figure}[H]
+% \centering
+%   \scalebox{0.8}{
+% \tikz{ %
+%
+%
+%         \node[factor] (fa) {} ;
+%         \node[const,right=of fa] (pa) {$P(a|e,t)$} ;
+%         \node[det, below=of fa, yshift=0.1cm] (a) {$a$} ; %
+%
+%         \node[factor, below=of a] (fl) {} ;
+%         \node[const,right=of fl] (pl) {$P(l|a)$} ;
+%         \node[det, below=of fl,yshift=0.1cm] (l) {$l$} ; %
+%
+%         \node[det, above=of fa, xshift=-1.6cm,yshift=-0.1cm] (e) {$e$} ; %
+%         \node[factor, above=of e,yshift=-0.1cm] (fe) {} ;
+%         \node[const,right=of fe] (pe) {$P(e)$} ;
+%
+%         \node[det, above=of fa, xshift=1.6cm,yshift=-0.1cm] (t) {$t$} ; %
+%         \node[factor, above=of t,yshift=-0.1cm] (ft) {} ;
+%         \node[const,right=of ft] (pt) {$P(t)$} ;
+%         \node[factor, below=of t, xshift=1.6cm,yshift=0.1cm] (fr) {} ;
+%         \node[det,below=of fr,yshift=0.1cm] (r) {$r$} ; %
+%         \node[const,right=of fr] (pr) {$P(r|t)$} ;
+%
+%         \edge[-] {fa} {a,e,t};
+%         \edge[-] {fe} {e};
+%         \edge[-] {ft} {t};
+%         \edge[-] {fr} {r,t};
+%         \edge[-] {fl} {l,a};
+%         }
+% }
+% \end{figure}
+% \end{textblock}
+%
+% \begin{textblock}{115}(45,30)
+%
+%  \centering Nodos: \\ variables y funciones
+%
+%  \vspace{1cm}
+%
+%  \centering Ejes: \\
+%   ``la variable $v$ es argumento de la funci\'on $f$''
+%
+% \end{textblock}
+% \end{frame}
+
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \Large El truco de la factorización
+% \end{textblock}
+% \vspace{1.5cm} \centering
+%
+% \begin{equation*}
+% \sum \prod = \prod \sum
+% \end{equation*}
+%
+% $a_1 \, b_1 + a_1 \, b_2 + a_2 \, b_1 + a_2 \, b_2  = (a1 + a_2) \, (b_1 + b_2)$
+%
+% \pause
+%
+% \begin{equation*}
+%    P(a^1) = \Big(\sum_l P(l|a^1) \Big) \Big(\sum_{e,t} P(e)P(t)P(a^1|t,e)(\sum_r P(r|t)) \Big)
+% \end{equation*}
+%
+%   \includegraphics[width=0.35\textwidth]{../../auxiliar/static/sum_product.png}
+%
+% \end{frame}
+%
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \Large
+%  Modelo sin observables
+% \end{textblock}
+%
+% \begin{textblock}{40}(5,12)
+% \centering
+% \begin{figure}[H]
+% \centering
+%   \scalebox{0.8}{
+% \tikz{ %
+%
+%
+%         \node[factor] (fa) {} ;
+%         %\node[const,left=of fa] (pa) {$P(a|e,t)$} ;
+%         \node[det, below=of fa, yshift=0.1cm] (a) {$a$} ; %
+%
+%         \node[factor, below=of a] (fl) {} ;
+%         %\node[const,right=of fl] (pl) {$P(l|a)$} ;
+%         \node[det, below=of fl,yshift=0.1cm] (l) {$l$} ; %
+%
+%         \node[det, above=of fa, xshift=-1.6cm,yshift=-0.1cm] (e) {$e$} ; %
+%         \node[factor, above=of e,yshift=-0.1cm] (fe) {} ;
+%         %\node[const,right=of fe] (pe) {$P(e)$} ;
+%
+%         \node[det, above=of fa, xshift=1.6cm,yshift=-0.1cm] (t) {$t$} ; %
+%         \node[factor, above=of t,yshift=-0.1cm] (ft) {} ;
+%         %\node[const,right=of ft] (pt) {$P(t)$} ;
+%         \node[factor, below=of t, xshift=1.6cm,yshift=0.1cm] (fr) {} ;
+%         \node[det,below=of fr,yshift=0.1cm] (r) {$r$} ; %
+%         %\node[const,left=of fr] (pr) {$P(r|t)$} ;
+%
+%
+%         \edge[-] {fa} {a,e,t};
+%         \edge[-] {fe} {e};
+%         \edge[-] {ft} {t};
+%         \edge[-] {fr} {r,t};
+%         \edge[-] {fl} {l,a};
+%
+%         \onslide<1->{\path[draw, ->, fill=black!50] (fe) edge[bend left,draw=black!50] node[right,color=black!75] {\only<2->{$P(e)$}} (e);}
+%         \onslide<3>{\path[draw, ->, fill=black!50] (e) edge[bend left,draw=black!50] node[above,color=black!75] {$P(e)$} (fa);}
+%         \onslide<4->{\path[draw, ->, fill=black!50] (ft) edge[bend left,draw=black!50] node[right,color=black!75] {$P(t)$} (t);}
+%         \onslide<5>{\path[draw, ->, fill=black!50] (r) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (fr);}
+%         \onslide<6->{\path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[left,color=black!75] {\only<7->{$1$}} (t);}
+%         \onslide<8->{\path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (a);}
+%         \onslide<9->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {\only<12->{$1$}} (t);}
+%         \onslide<13->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (e);}
+%         \onslide<15->{\path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[right,color=black!75] {\only<16->{$P(r)$}} (r);}
+%         \onslide<17->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[right,color=black!75] {\only<18->{$P(a)$}} (a);}
+%         \onslide<19->{\path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[right,color=black!75] {$P(l)$} (l);}
+%         }
+% }
+% \end{figure}
+% \end{textblock}
+%
+% \begin{textblock}{100}(62,16)
+%  $m_{f_e\rightarrow e}(e) = \onslide<2->{P(e)} \onslide<3>{= m_{e\rightarrow f_a}(e)}$  \\
+%  \onslide<4->{$m_{f_t\rightarrow t}(t) = P(t)$ } \\
+%  \only<5>{$m_{r \rightarrow f_r}(r) = 1$ \\}
+%  $\onslide<6->{m_{f_r\rightarrow t}(t) = \sum_r \, P(r|t)} \onslide<7->{= 1}$  \\
+%  $\onslide<8->{m_{f_l\rightarrow a}(a) = \sum_l \, P(l|a) = 1} $  \\
+%  \onslide<9->{$m_{f_a\rightarrow t}(t) = \sum_{ea} \, P(e) P(a|e,t) \only<10>{= \sum_{e} \, P(e) \sum_{a} P(a|e,t) } \only<11>{= \sum_{e} \, P(e)} \only<12->{= 1 }$  }\\
+%  \onslide<13->{$m_{f_a\rightarrow e}(e) = \sum_{ta} \, P(t) P(a|e,t) = 1$ } \\
+%  \onslide<15->{$m_{f_r\rightarrow r}(r) = \sum_{t} \, P(t) P(r|t) \onslide<16->{= P(r)}$ } \\
+%  \onslide<17->{$m_{f_a\rightarrow a}(a) = \sum_{et} \, P(e)P(t)P(a|e,t)  \onslide<18->{= P(a)}$ } \\
+%  \onslide<19->{$m_{f_l\rightarrow l}(l) = \sum_{a} \, P(a) P(l|a) = P(l)$ }
+%  \end{textblock}
+%
+%  \only<14>{
+% \begin{textblock}{80}(60,60)
+%  \centering
+%  Todos los mensajes \\ que suben son $1$
+% \end{textblock}
+% }
+%
+%  \only<20>{
+% \begin{textblock}{80}(60,70)
+%  \centering
+%  Todos los mensajes que \\ bajan son marginales
+% \end{textblock}
+% }
+%
+% \end{frame}
+%
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \Large
+% Modelo con observables
+% \end{textblock}
+%
+% \begin{textblock}{40}(5,12)
+% \centering
+% \begin{figure}[H]
+% \centering
+%   \scalebox{0.8}{
+% \tikz{ %
+%
+%
+%         \node[factor] (fa) {} ;
+%         %\node[const,left=of fa] (pa) {$P(a|e,t)$} ;
+%         \node[det, below=of fa, yshift=0.1cm] (a) {$a$} ; %
+%
+%         \node[factor, below=of a] (fl) {} ;
+%         %\node[const,right=of fl] (pl) {$P(l|a)$} ;
+%         \node[det, below=of fl,yshift=0.1cm] (l) {$l$} ; %
+%
+%         \node[det, fill=black!10,above=of fa, xshift=-1.6cm,yshift=-0.1cm] (e) {$e^*$} ; %
+%         \node[factor, above=of e,yshift=-0.1cm] (fe) {} ;
+%         %\node[const,right=of fe] (pe) {$P(e)$} ;
+%
+%         \node[det, above=of fa, xshift=1.6cm,yshift=-0.1cm] (t) {$t$} ; %
+%         \node[factor, above=of t,yshift=-0.1cm] (ft) {} ;
+%         %\node[const,right=of ft] (pt) {$P(t)$} ;
+%         \node[factor, below=of t, xshift=1.6cm,yshift=0.1cm] (fr) {} ;
+%         \node[det,below=of fr,yshift=0.1cm] (r) {$r$} ; %
+%         %\node[const,left=of fr] (pr) {$P(r|t)$} ;
+%
+%
+%         \edge[-] {fa} {a,e,t};
+%         \edge[-] {fe} {e};
+%         \edge[-] {ft} {t};
+%         \edge[-] {fr} {r,t};
+%         \edge[-] {fl} {l,a};
+%
+%         \path[draw, ->, fill=black!50] (fe) edge[bend left,draw=black!50] node[right,color=black!75] {$P(e^*)$} (e);
+%         \path[draw, ->, fill=black!50] (ft) edge[bend left,draw=black!50] node[right,color=black!75] {$P(t)$} (t);
+%         \path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[left,color=black!75] {\only<1->{$1$}} (t);
+%         \path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (a);
+%         \onslide<2->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {\only<3->{$P(e^*)$}} (t);}
+%         \path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (e);
+%         \onslide<7->{\path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[right,color=black!75] {\only<8->{$P(r,e^*)$}} (r);}
+%         \onslide<9->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[right,color=black!75] {\only<10->{$P(a,e^*)$}} (a);}
+%         \onslide<11->{\path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[right,color=black!75] {\only<12->{$P(l,e^*)$}} (l);}
+%         }
+% }
+% \end{figure}
+% \end{textblock}
+%
+% \begin{textblock}{100}(62,16)
+%  $m_{f_e\rightarrow e}\phantom{(e)} = P(e^*) $  \\
+%  $m_{f_t\rightarrow t}(t) = P(t)$  \\
+%  $m_{f_r\rightarrow t}(t) = \sum_r \, P(r|t) = 1$  \\
+%  $m_{f_l\rightarrow a}(a) = \sum_l \, P(l|a) = 1 $  \\
+%  $m_{f_a\rightarrow t}(t) = \onslide<2->{\sum_{a} \, P(e^*) P(a|e^*,t)} \onslide<3->{= P(e^*)}$  \\
+%  $m_{f_a\rightarrow e}\phantom{(e)} = \sum_{ta} \, P(t) P(a|e^*,t) = 1$  \\
+%  $m_{f_r\rightarrow r}(r) = \onslide<7->{\sum_{t} \, P(t) P(r|t)} \onslide<8->{= P(r,e^*)}$ \\
+%  $m_{f_a\rightarrow a}(a) = \onslide<9->{\sum_{t} \, P(e^*)P(t)P(a|e^*,t)}\onslide<10->{  = P(a,e^*)}$  \\
+%  $m_{f_l\rightarrow l}(l) = \onslide<11->{\sum_{a} \, P(a,e^*) P(l|a)} \onslide<12->{ = P(l,e^*)}$
+%  \end{textblock}
+%
+%
+% \only<4-6>{
+% \begin{textblock}{80}(70,60)
+% \begin{flalign*}
+%   P(t,e^*) & = P(e^*) P(t) \\
+%   \onslide<5->{P(t|e^*) &= \frac{P(e^*) P(t) }{P(e^*)}} \onslide<6->{= P(t)}&&
+% \end{flalign*}
+% \end{textblock}
+% }
+%
+% \only<13-14>{
+% \begin{textblock}{80}(70,60)
+% \begin{flalign*}
+%   P(l|e^*) & \, = P(l,e^*)/P(e^*) \only<14>{\neq \, P(l)} &&
+% \end{flalign*}
+% \end{textblock}
+% }
+%
+% \only<15>{
+% \begin{textblock}{80}(69.15,60)
+% \begin{flalign*}
+%   \underbrace{P(l|e^*)}_{\hfrac{\text{que llamen}}{\text{cuando entran}}} & = P(l,e^*)/P(e^*) \neq  \underbrace{P(l)}_{\hfrac{\text{que llamen}}{\text{}}} &&
+% \end{flalign*}
+% \end{textblock}
+% }
+%
+% \end{frame}
+%
+%
+
+
+
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Flujo de inferencia \\
+ \large Independencia condicional
+ \end{textblock}
+ \centering
+ \vspace{0.75cm}
+
+ \begin{textblock}{68}(0,25)
+ \tikz{
+    \node[det] (l) {$l$} ; %
+    \node[det, above=of l] (a) {$a$} ; %
+    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+    \node[det, above=of a,xshift=-1.5cm] (e) {$e$} ; %
+    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+
+    \edge {a} {l};
+    \edge {t,e} {a};
+    \edge {t} {r};
+
+    \node[const, above= of e, yshift=0.1cm] (cpd_e) {Entradera:};
+    \node[const, above= of t, yshift=0.1cm] (cpd_t) {Terremoto:};
+    \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
+    \node[const, left= of r, xshift=-0.1cm] (cpd_r) {Redes:};
+    \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
+
+    }
+\end{textblock}
+
+
+\only<1->{
+\begin{textblock}{90}(68,24)
+\centering
+ \begin{tabular}{c c c}
+ & \onslide<2->{$\hfrac{\text{Intermedio}}{\text{no observable}}$} &   \onslide<3->{$\hfrac{\text{Intermedio}}{\text{observable}}}$ \\
+ & & \\
+ $ e \rightarrow a \rightarrow l $    & \onslide<2->{$P(l) \overset{?}{=} P(l|e)$} & \onslide<3->{$P(l|a) \overset{?}{=} P(l|e,a)$} \\
+ %$ l \leftarrow a \leftarrow t $      &  \onslide<4->{$P(t) \overset{?}{=} P(t|l)$}  & \onslide<5->{$P(t|a) \overset{?}{=} P(t|a,l)$} \\
+ $ a \leftarrow t \rightarrow r $     & \onslide<4->{$P(r) \overset{?}{=} P(r|a)$} & \onslide<5->{$P(r|t) \overset{?}{=} P(r|t,a)$} \\
+ $ e \rightarrow a \leftarrow t $     & \onslide<6->{$P(t) \overset{?}{=} P(t|e)$} & \onslide<7->{$P(t|a) \overset{?}{=} P(t|e,a)$} \\
+            $\overset{\downarrow}{l}$  &  & \onslide<8->{$P(t|l) \overset{?}{=} P(t|e,l)$}
+ \end{tabular}
+ \end{textblock}
+ }
+
+
+ \end{frame}
+
+
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Flujo de inferencia \\
+ \large Independencia condicional
+ \end{textblock}
+ \centering
+ \vspace{0.75cm}
+
+ \only<1-14>{
+ \begin{textblock}{68}(0,25)
+ \tikz{
+    \node[det] (l) {$l$} ; %
+    \node[det, above=of l] (a) {$a$} ; %
+    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+    \node[det, above=of a,xshift=-1.5cm] (e) {$e$} ; %
+    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+
+    \edge {a} {l};
+    \edge {t,e} {a};
+    \edge {t} {r};
+
+    \node[const, above= of e, yshift=0.1cm] (cpd_e) {Entradera:};
+    \node[const, above= of t, yshift=0.1cm] (cpd_t) {Terremoto:};
+    \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
+    \node[const, left= of r, xshift=-0.1cm] (cpd_r) {Redes:};
+    \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
+
+    }
+\end{textblock}
+}
+
+\only<1-14>{
+\begin{textblock}{90}(68,24)
+\centering
+ \begin{tabular}{c c c}
+ & \onslide<1->{$\hfrac{\text{Intermedio}}{\text{no observable}}$} &   \onslide<1->{$\hfrac{\text{Intermedio}}{\text{observable}}}$ \\
+ & & \\
+ $ e \rightarrow a \rightarrow l $    & \only<1>{$P(l) \overset{?}{=} P(l|e)$}\only<2->{$P(l) \neq P(l|e)$} & \only<1-3>{$P(l|a) \overset{?}{=} P(l|e,a)$}\only<4->{$P(l|a) \overset{\phantom{?}}{=} P(l|e,a)$} \\
+ $ a \leftarrow t \rightarrow r $     & \only<1-5>{$P(r) \overset{?}{=} P(r|a)$}\only<6->{$P(r) \neq P(r|a)$} & \only<1-7>{$P(r|t) \overset{?}{=} P(r|t,a)$}\only<8->{$P(r|t) \overset{\phantom{?}}{=} P(r|t,a)$} \\
+ $ e \rightarrow a \leftarrow t $     & \only<1-9>{$P(t) \overset{?}{=} P(t|e)$}\only<10->{$P(t) \overset{\phantom{?}}{=} P(t|e)$} & \only<1-11>{$P(t|a) \overset{?}{=} P(t|e,a)$}\only<12->{$P(t|a) \neq P(t|e,a)$} \\
+            $\overset{\downarrow}{l}$  &  & \only<1-13>{$P(t|l) \overset{?}{=} P(t|e,l)$}\only<14->{$P(t|l) \neq P(t|e,l)$}
+ \end{tabular}
+\end{textblock}
+ }
+
+
+\only<15>{
+\begin{textblock}{140}(10,32) \Large
+ Hay flujo de inferencia entre los extremos de una cadena si:\\[0.3cm] \large
+ \begin{itemize}
+  \item[$\bullet$] Todas las consecuencias comunes (o sus descendientes) son observables
+  \item[$\bullet$] Ninguna otra variable es observable
+ \end{itemize}
+\end{textblock}
+}
+
+\only<1-2>{
+\begin{textblock}{80}(65,72) \Large
+$\phantom{\overset{?}{=}} P(l) \only<1>{\overset{?}{=}}\only<2>{\neq} P(l|e)\phantom{\overset{?}{=}}$
+\end{textblock}
+}
+
+\only<3-4>{
+\begin{textblock}{80}(65,72) \Large
+$\phantom{\overset{?}{=}} P(l|a) \only<3>{\overset{?}{=}}\only<4>{=} P(l|a,e)\phantom{\overset{?}{=}}$
+\end{textblock}
+}
+
+
+\only<5-6>{
+\begin{textblock}{80}(65,72) \Large
+$\phantom{\overset{?}{=}} P(r) \only<5>{\overset{?}{=}}\only<6>{\neq} P(r|a)\phantom{\overset{?}{=}}$
+\end{textblock}
+}
+
+
+\only<7-8>{
+\begin{textblock}{80}(65,72) \Large
+$\phantom{\overset{?}{=}} P(r|t) \only<7>{\overset{?}{=}}\only<8>{=} P(r|t,a)\phantom{\overset{?}{=}}$
+\end{textblock}
+}
+
+
+\only<9-10>{
+\begin{textblock}{80}(65,72) \Large
+$\phantom{\overset{?}{=}} P(t) \only<9>{\overset{?}{=}}\only<10>{=} P(t|e)\phantom{\overset{?}{=}}$
+\end{textblock}
+}
+
+
+\only<11-12>{
+\begin{textblock}{80}(65,72) \Large
+$\phantom{\overset{?}{=}} P(t|a) \only<11>{\overset{?}{=}}\only<12>{\neq} P(t|a,e)\phantom{\overset{?}{=}}$
+\end{textblock}
+}
+
+
+\only<13-14>{
+\begin{textblock}{80}(65,72) \Large
+$\phantom{\overset{?}{=}} P(t|l) \only<13>{\overset{?}{=}}\only<14>{\neq} P(t|l,e)\phantom{\overset{?}{=}}$
+\end{textblock}
+}
+
+
+
+
+
+
+ \end{frame}
+
+
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Flujo de inferencia causal \\
+ \end{textblock}
+ \vspace{0.75cm}
+
+
+\only<2->{
+\begin{textblock}{160}(0,14) \centering
+ \tikz{
+    \node[det] (l) {$l$} ; %
+    \node[det, above=of l] (a) {$a$} ; %
+    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+    \node[det, fill=black!15, above=of a,xshift=-1.5cm] (e) {$e$} ; %
+    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+    \node[det, fill=black!15,above=of t,xshift=-1.5cm] (c) {$c$} ;
+
+
+    \edge {a} {l};
+    \edge {t,e} {a};
+    \edge {t} {r};
+    \edge {c} {e,t};
+
+    \node[const, left= of e, xshift=-0.1cm] (cpd_e) {Entradera:};
+    \node[const, right= of t, xshift=0.1cm] (cpd_t) {:Terremoto};
+    \node[const, right= of c, xshift=0.1cm] (cpd_c) {:Ciudad};
+    \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
+    \node[const, right= of r, xshift=0.1cm] (cpd_r) {:Redes};
+    \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
+
+    }
+\end{textblock}
+}
+
+\only<1>{
+\begin{textblock}{160}(0,14) \centering
+ \tikz{
+    \node[det] (l) {$l$} ; %
+    \node[det, above=of l] (a) {$a$} ; %
+    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+    \node[det, double, double distance=0.5mm, above=of a,xshift=-1.5cm] (e) {$e$} ;
+    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+    \node[det, above=of t,xshift=-1.5cm] (c) {$c$} ;
+
+
+    \edge {a} {l};
+    \edge {t,e} {a};
+    \edge {t} {r};
+    \edge {c} {t};
+
+     \node[const, left= of e, xshift=-0.1cm] (cpd_e) {Entradera:};
+     \node[const, right= of t, xshift=0.1cm] (cpd_t) {:Terremoto};
+     \node[const, right= of c, xshift=0.1cm] (cpd_c) {:Ciudad};
+     \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
+     \node[const, right= of r, xshift=0.1cm] (cpd_r) {:Redes};
+     \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
+
+    }
+\end{textblock}
+}
+
+
+\only<1-2>{
+\begin{textblock}{160}(0,76) \centering
+\begin{equation*}
+P( \text{Llamada} | do(\text{Entradera}) ) = \onslide<2>{ P(\text{Llamada}|\text{Entradera}, \text{Ciudad}) }
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<3>{
+\begin{textblock}{150}(5,75)
+Backdoor criterion
+
+\Large
+ Hay inferencia casual si todos los flujos ``traseros'' permanecen cerrados.
+\end{textblock}
+}
+
+\end{frame}
+
+
+
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE  Flujo de inferencia causal
+ \end{textblock}
+
+\begin{textblock}{160}(0,12)
+ \centering
+
+ \tikz{
+    \node[det] (l) {$l$} ; %
+    \node[det, above=of l] (a) {$a$} ; %
+    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+    \only<1-2>{\node[det, above=of a,xshift=-1.5cm] (e) {$e$} ; }
+    \only<3->{\node[det, above=of a,fill=black!15,xshift=-1.5cm] (e) {$e$} ; }
+    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+    \only<1-3>{\node[det, above=of e,xshift=1.5cm] (c) {$c$} ; }
+    \only<4->{\node[det, above=of e, fill=black!15, xshift=1.5cm] (c) {$c$} ; }
+
+    \edge {c} {e,t};
+    \edge {a} {l};
+    \edge {t,e} {a};
+    \edge {t} {r};
+
+
+    \only<1-2>{
+    \node[const, left= of c, xshift=-0.1cm] (cpd_c) {
+    \begin{tabular}{|c|c|}
+        \hline
+        $c^0$ & $c^1$ \\ \hline
+        $0.200$ & $0.800$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_c] (n_c) {$P(\text{Ciudad})$};
+    }
+    \only<3>{
+    \node[const, left= of c, xshift=-0.1cm] (cpd_c) {
+    \begin{tabular}{|c|c|}
+        \hline
+        $c^0$ & $c^1$ \\ \hline
+        $0.208$ & $0.792$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_c] (n_c) {$P(\text{Ciudad}|\text{Entradera}=0)$};
+    }
+    \only<4>{
+    \node[const, left= of c, xshift=-0.1cm] (cpd_c) {
+    \begin{tabular}{|c|c|}
+        \hline
+        $c^0$ & $c^1$ \\ \hline
+        $1.000$ & $0.000$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_c] (n_c) {$\phantom{P|}\text{Ciudad}=0\phantom{P}$};
+    }
+
+    \only<1>{
+    \node[const,  left= of e, yshift=-0.3cm, xshift=-0.1cm] (cpd_e) {
+    \begin{tabular}{|c|c|c|}
+        \hline
+       & $e^0$ & $e^1$ \\ \hline
+      $c^0$ & $0.999$ & $0.001$  \\ \hline
+      $c^1$ & $0.95$ & $0.05$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_e] (n_e) {$P(\text{Entradera}|\text{Ciudad})$};
+    }
+    \only<2>{
+    \node[const,  left= of e, yshift=-0.3cm, xshift=-0.1cm] (cpd_e) {
+    \begin{tabular}{|c|c|}
+        \hline
+        $e^0$ & $e^1$ \\ \hline
+       $0.960$ & $0.040$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_e] (n_e) {$P(\text{Entradera})$};
+    }
+    \only<3-4>{
+    \node[const,  left= of e, yshift=-0.3cm, xshift=-0.1cm] (cpd_e) {
+    \begin{tabular}{|c|c|}
+        \hline
+        $e^0$ & $e^1$ \\ \hline
+       $1.000$ & $0.000$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_e] (n_e) {$\text{Entradera}=0$};
+    }
+
+    \only<1>{
+    \node[const, right= of t, yshift=0.9cm, xshift=0.1cm] (cpd_t) {
+    \begin{tabular}{|c|c|c|}
+        \hline
+       & $t^0$ & $t^1$ \\ \hline
+      $c^0$ & $0.99$ & $0.01$  \\ \hline
+     $c^1$  & $0.95$ & $0.05$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_t] (n_t) {$P(\text{Terremoto}|\text{Ciudad})$};
+    }
+    \only<2>{
+    \node[const, right= of t, yshift=0.6cm, xshift=0.1cm] (cpd_t) {
+    \begin{tabular}{|c|c|}
+        \hline
+        $t^0$ & $t^1$ \\ \hline
+       $0.958$ & $0.042$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_t] (n_t) {$P(\text{Terremoto})$};
+    }
+    \only<3>{
+    \node[const, right= of t, yshift=0.6cm, xshift=0.1cm] (cpd_t) {
+    \begin{tabular}{|c|c|}
+        \hline
+        $t^0$ & $t^1$ \\ \hline
+       $0.959$ & $0.041$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_t] (n_t) {$P(\text{Terremoto}|\text{Entradera}=0)$};
+    }
+    \only<4>{
+    \node[const, right= of t, yshift=0.6cm, xshift=0.1cm] (cpd_t) {
+    \begin{tabular}{|c|c|}
+        \hline
+        $t^0$ & $t^1$ \\ \hline
+       $0.990$ & $0.010$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_t] (n_t) {$P(\text{Terremoto}|\text{Ciudad}=0)$};
+    }
+
+
+    \only<1>{
+    \node[const, left= of a, yshift=-1.6cm, xshift=-0.5cm] (cpd_a) {
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & $a^0$ & $a^1$ \\ \hline
+       ($e^0, t^0$) & $0.99$ & $0.01$  \\ \hline
+       ($e^1, t^0$) & $0.01$ & $0.99$  \\ \hline
+       ($e^0, t^1$) & $0.01$ & $0.99$  \\ \hline
+       ($e^1, t^1$) & $0.0001$ & $0.9999$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_a] (n_a) {$P(\text{Alarma}|\text{Entradera},\text{Terremoto})$};
+    }
+    \only<2>{
+    \node[const, left= of a, yshift=-0.6cm, xshift=-0.5cm] (cpd_a) {
+    \begin{tabular}{|c|c|}
+        \hline
+         $a^0$ & $a^1$ \\ \hline
+        $0.911$ & $0.089$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_a] (n_a) {$P(\text{Alarma})$};
+    }
+    \only<3>{
+    \node[const, left= of a, yshift=-0.6cm, xshift=-0.5cm] (cpd_a) {
+    \begin{tabular}{|c|c|}
+        \hline
+         $a^0$ & $a^1$ \\ \hline
+        $0.949$ & $0.051$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_a] (n_a) {$P(\text{Alarma}|\text{Entradera}=0)$\hspace{1.5cm}\phantom{.}};
+    }
+    \only<4>{
+    \node[const, left= of a, yshift=-0.6cm, xshift=-0.5cm] (cpd_a) {
+    \begin{tabular}{|c|c|}
+        \hline
+         $a^0$ & $a^1$ \\ \hline
+        $0.980$ & $0.020$  \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_a] (n_a) {$P(\text{Alarma}|\text{Entradera}=0, \text{Ciudad}=0)$\hspace{3cm}\phantom{.}};
+    }
+
+    \only<1>{
+    \node[const, right= of r, yshift=0.2cm, xshift=0.1cm] (cpd_r) {
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \, $r^0$ \, & \, $r^1$ \,  \\ \hline
+       $(t^0)$ & $0.99$ & $0.01$   \\ \hline
+       $(t^1)$ & $0.01$ & $0.99$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_r] (n_r) {$P(\text{Redes}|\text{Terremoto})$};
+    }
+    \only<2>{
+    \node[const, right= of r, yshift=0.2cm, xshift=0.1cm] (cpd_r) {
+    \begin{tabular}{|c|c|}
+        \hline
+        \, $r^0$ \, & \, $r^1$ \,  \\ \hline
+       $0.948$ & $0.052$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_r] (n_r) {$P(\text{Redes})$};
+    }
+    \only<3>{
+    \node[const, right= of r, yshift=0.2cm, xshift=0.1cm] (cpd_r) {
+    \begin{tabular}{|c|c|}
+        \hline
+        \, $r^0$ \, & \, $r^1$ \,  \\ \hline
+       $0.949$ & $0.051$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_r] (n_r) {$P(\text{Redes}|\text{Entradera}=0)$};
+    }
+    \only<4>{
+    \node[const, right= of r, yshift=0.2cm, xshift=0.1cm] (cpd_r) {
+    \begin{tabular}{|c|c|}
+        \hline
+        \, $r^0$ \, & \, $r^1$ \,  \\ \hline
+       $0.980$ & $0.020$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_r] (n_r) {$P(\text{Redes}|\text{Ciudad}=0)$};
+    }
+
+    \only<1>{
+    \node[const, right= of l, yshift=-0.4cm,xshift=0.1cm] (cpd_l) {
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \, $l^0$ \, & \, $l^1$ \,  \\ \hline
+       $(a^0)$ & $0.99$ & $0.01$   \\ \hline
+       $(a^1)$ & $0.01$ & $0.99$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_l] (n_l) {$P(\text{Llamada}|\text{Alarma})$};
+    }
+    \only<2>{
+    \node[const, right= of l, yshift=-0.4cm,xshift=0.1cm] (cpd_l) {
+    \begin{tabular}{|c|c|}
+        \hline
+         \, $l^0$ \, & \, $l^1$ \,  \\ \hline
+        $0.903$ & $0.097$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_l] (n_l) {$P(\text{Llamada})$};
+    }
+    \only<3>{
+    \node[const, right= of l, yshift=-0.4cm,xshift=0.1cm] (cpd_l) {
+    \begin{tabular}{|c|c|}
+        \hline
+         \, $l^0$ \, & \, $l^1$ \,  \\ \hline
+        $0.940$ & $0.060$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_l] (n_l) {$\phantom{.}\hspace{1.5cm}P(\text{Llamada}|\text{Entradera}=0)$};
+    }
+    \only<4>{
+    \node[const, right= of l, yshift=-0.4cm,xshift=0.1cm] (cpd_l) {
+    \begin{tabular}{|c|c|}
+        \hline
+         \, $l^0$ \, & \, $l^1$ \,  \\ \hline
+        $0.970$ & $0.030$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of cpd_l] (n_l) {$\phantom{.}\hspace{3.6cm}P(\text{Llamada}|\text{Entradera}=0, \text{Ciudad}=0)$};
+    }
+
+    \node[invisible, left=of e, xshift=-5.5cm] (il) {};
+    \node[invisible, right=of r, xshift=4.8cm] (ir) {};
+ }
+\end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Controles \only<1-6>{buenos}\only<7-12,16>{malos}\only<13-15>{neutrales} \\
+ \large \only<12>{Sesgo de selección}\only<13-14>{Mejoran precisión}\only<15>{Reducen precisión}
+ \end{textblock}
+ \vspace{0.75cm}
+
+
+\only<1>{
+\begin{textblock}{140}(10,30) \centering
+\tikz{
+    \node[latent, fill=red!30] (z) {$z$} ; %
+    \node[latent, fill=black!15 , below=of z, xshift=-1.5cm] (x) {$x$} ; %
+    \node[latent, fill=black!15, below=of z, xshift=1.5cm] (y) {$y$} ; %
+
+    \phantom{\node[latent, right=of y] (il) {$l$} ; }
+    \phantom{\node[latent, left=of x] (ir) {$r$} ; }
+
+    \edge {z} {x,y};
+    \edge {x} {y};
+}
+\end{textblock}
+}
+
+
+\only<2>{
+\begin{textblock}{140}(10,30) \centering
+\tikz{
+    \node[latent] (u) {$u$} ; %
+
+    \node[latent, fill=red!30,  below=of u, xshift=-1cm,yshift=0.6cm] (z) {$z$} ; %
+    \node[latent, fill=black!15 , below=of z, xshift=-1cm,yshift=0.6cm] (x) {$x$} ; %
+    \node[latent, fill=black!15, right=of x, xshift=2cm] (y) {$y$} ; %
+
+    \phantom{\node[latent, right=of y] (il) {$l$} ; }
+    \phantom{\node[latent, left=of x] (ir) {$r$} ; }
+
+
+    \edge {u} {z};
+    \edge {z} {x};
+    \edge {u,x} {y};
+}
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{140}(10,30) \centering
+\tikz{
+    \node[latent] (u) {$u$} ; %
+
+    \node[latent, fill=red!30,  below=of u, xshift=1cm,yshift=0.6cm] (z) {$z$} ; %
+    \node[latent, fill=black!15, below=of z, xshift=1cm, yshift=0.6cm] (y) {$y$} ; %
+    \node[latent, fill=black!15 , left=of y, xshift=-2cm] (x) {$x$} ; %
+
+    \phantom{\node[latent, right=of y] (il) {$l$} ; }
+    \phantom{\node[latent, left=of x] (ir) {$r$} ; }
+
+    \edge {u} {z,x};
+    \edge {z,x} {y};
+}
+\end{textblock}
+}
+
+\only<4>{
+\begin{textblock}{140}(10,30) \centering
+\tikz{
+    \node[latent] (u) {$u$} ; %
+
+    \node[latent, fill=red!30,  below=of u, xshift=1cm,yshift=0.6cm] (z) {$z$} ; %
+    \node[latent, below=of z, xshift=1cm, yshift=0.6cm] (m) {$m$} ; %
+    \node[latent, fill=black!15 , left=of m, xshift=-2cm] (x) {$x$} ; %
+    \node[latent, fill=black!15, right=of m] (y) {$y$} ; %
+
+    \phantom{\node[latent, left=of x] (ir) {$r$} ; }
+
+    \edge {u} {z,x};
+    \edge {z,x} {m};
+    \edge {m} {y};
+}
+\end{textblock}
+}
+
+\only<5>{
+\begin{textblock}{140}(10,30) \centering
+\tikz{
+    \node[latent] (u) {$u$} ; %
+
+    \node[latent, fill=red!30,  below=of u, xshift=-1cm,yshift=0.6cm] (z) {$z$} ; %
+    \node[latent, fill=black!15 , below=of z, xshift=-1cm,yshift=0.6cm] (x) {$x$} ; %
+    \node[latent, right=of x, xshift=2cm] (m) {$m$} ; %
+
+    \node[latent, fill=black!15, right=of m] (y) {$y$} ;
+    \phantom{\node[latent, left=of x] (ir) {$r$} ; }
+
+
+    \edge {u} {m,z};
+    \edge {z} {x};
+    \edge {x} {m};
+    \edge {m} {y};
+}
+\end{textblock}
+}
+
+
+\only<6>{
+\begin{textblock}{140}(10,30) \centering
+\tikz{
+    \node[latent, fill=red!30] (z) {$z$} ; %
+    \node[latent, fill=black!15 , below=of z, xshift=-1.5cm] (x) {$x$} ; %
+    \node[latent, below=of z, xshift=1.5cm] (m) {$m$} ; %
+
+    \node[latent, fill=black!15, right=of m] (y) {$y$} ;
+    \phantom{\node[latent, left=of x] (ir) {$r$} ; }
+
+    \edge {x,z} {m};
+    \edge {z} {x};
+    \edge {m} {y};
+
+}
+\end{textblock}
+}
+
+
+\only<7>{
+\begin{textblock}{140}(10,30) \centering
+\tikz{
+    \node[latent, fill=red!30] (z) {$z$} ; %
+    \node[latent, fill=black!15 , below=of z, xshift=-1.5cm] (x) {$x$} ; %
+    \node[latent, below=of z, xshift=1.5cm] (m) {$m$} ; %
+
+    \node[latent, above=of x] (ux) {$u_1$} ; %
+    \node[latent, above=of m] (um) {$u_2$} ; %
+
+
+    \node[latent, fill=black!15, right=of m] (y) {$y$} ;
+    \phantom{\node[latent, left=of x] (ir) {$r$} ; }
+
+    \edge {um,ux} {z};
+    \edge {um,x} {m};
+    \edge {ux} {x};
+    \edge {m} {y};
+}
+\end{textblock}
+}
+
+\only<8>{
+\begin{textblock}{140}(10,30) \centering
+\tikz{
+    \phantom{\node[latent] (ia) {$a$} ; }
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+    \node[latent, fill=red!30, below=of ia] (z) {$z$} ;
+
+    \node[latent, fill=black!15, below=of ia, xshift=1.5cm] (y) {$y$} ;
+
+    \phantom{\node[latent, right=of y] (il) {$l$} ; }
+    \phantom{\node[latent, left=of x] (ir) {$r$} ; }
+
+    \edge {x} {z};
+    \edge {z} {y};
+}
+\end{textblock}
+}
+
+
+\only<9>{
+\begin{textblock}{140}(10,30) \centering
+\tikz{
+    \phantom{\node[latent] (ia) {$a$} ; }
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+    \node[latent, below=of ia] (m) {$m$} ;
+
+    \node[latent, fill=red!30, below=of m] (z) {$z$} ;
+    \node[latent, fill=black!15, below=of ia, xshift=1.5cm] (y) {$y$} ;
+
+    \phantom{\node[latent, right=of y] (il) {$l$} ; }
+    \phantom{\node[latent, left=of x] (ir) {$r$} ; }
+
+    \edge {x} {m};
+    \edge {m} {z,y};
+
+}
+\end{textblock}
+}
+
+\only<10>{
+\begin{textblock}{140}(10,30) \centering
+\tikz{
+    \phantom{\node[latent] (ia) {$a$} ; }
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+    \phantom{\node[latent, below=of ia] (m) {$m$} ;}
+
+    \node[latent, fill=red!30, below=of m] (z) {$z$} ;
+    \node[latent, fill=black!15, below=of ia, xshift=1.5cm] (y) {$y$} ;
+
+    \phantom{\node[latent, right=of y] (il) {$l$} ; }
+    \phantom{\node[latent, left=of x] (ir) {$r$} ; }
+
+    \edge {x} {y,z};
+    \edge {y} {z};
+
+}
+\end{textblock}
+}
+
+\only<11>{
+\begin{textblock}{140}(10,30) \centering
+\tikz{
+    \node[latent] (ia) {$u$} ;
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+    \phantom{\node[latent, below=of ia] (m) {$m$} ;}
+
+
+
+    \node[latent, fill=red!30, below=of m] (z) {$z$} ;
+    \node[latent, fill=black!15, below=of ia, xshift=1.5cm] (y) {$y$} ;
+
+    \phantom{\node[latent, right=of y] (il) {$l$} ; }
+    \phantom{\node[latent, left=of x] (ir) {$r$} ; }
+
+    \edge {x} {y,z};
+    \edge {ia} {z,y};
+
+}
+\end{textblock}
+}
+
+\only<12>{
+\begin{textblock}{140}(10,30) \centering
+\tikz{
+    \phantom{\node[latent] (ia) {$u$} ;}
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+    \phantom{\node[latent, below=of ia] (m) {$m$} ;}
+
+
+
+    \node[latent, fill=red!30, below=of m] (z) {$z$} ;
+    \node[latent, fill=black!15, below=of ia, xshift=1.5cm] (y) {$y$} ;
+
+    \phantom{\node[latent, right=of y] (il) {$l$} ; }
+    \phantom{\node[latent, left=of x] (ir) {$r$} ; }
+
+    \edge {x} {y};
+    \edge {y} {z};
+}
+\end{textblock}
+}
+
+\only<13>{
+\begin{textblock}{140}(10,30) \centering
+\tikz{
+    \phantom{\node[latent] (ia) {$u$} ;}
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+    \phantom{\node[latent, below=of ia] (m) {$m$} ;}
+
+
+
+    \node[latent, fill=red!30, right=of ia,xshift=1.5cm] (z) {$z$} ;
+    \node[latent, fill=black!15, below=of ia, xshift=1.5cm] (y) {$y$} ;
+
+    \phantom{\node[latent, right=of y] (il) {$l$} ; }
+    \phantom{\node[latent, left=of x] (ir) {$r$} ; }
+
+    \edge {x} {y};
+    \edge {z} {y};
+}
+\end{textblock}
+}
+
+
+\only<14>{
+\begin{textblock}{140}(10,30) \centering
+\tikz{
+    \node[latent, fill=red!30] (ia) {$z$} ;
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+    \node[latent, below=of ia] (m) {$m$} ;
+
+    \node[latent, fill=black!15, below=of ia, xshift=1.5cm] (y) {$y$} ;
+
+    \phantom{\node[latent, right=of y] (il) {$l$} ; }
+    \phantom{\node[latent, left=of x] (ir) {$r$} ; }
+
+    \edge {x} {m};
+    \edge {m} {y};
+    \edge {ia} {m};
+}
+\end{textblock}
+}
+
+
+\only<15>{
+\begin{textblock}{140}(10,30) \centering
+\tikz{
+    \phantom{\node[latent] (ia) {$u$} ;}
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+    \phantom{\node[latent, below=of ia] (m) {$m$} ;}
+
+
+
+    \node[latent, fill=red!30, left=of ia,xshift=-1.5cm] (z) {$z$} ;
+    \node[latent, fill=black!15, below=of ia, xshift=1.5cm] (y) {$y$} ;
+
+    \phantom{\node[latent, right=of y] (il) {$l$} ; }
+    \phantom{\node[latent, left=of x] (ir) {$r$} ; }
+
+    \edge {x} {y};
+    \edge {z} {x};
+}
+\end{textblock}
+}
+
+
+\only<16>{
+\begin{textblock}{140}(10,30) \centering
+\tikz{
+    \node[latent] (ia) {$u$} ;
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+
+    \node[latent, fill=black!15 , below=of ia, xshift=-1.5cm] (x) {$x$} ; %
+    \phantom{\node[latent, below=of ia] (m) {$m$} ;}
+
+
+
+    \node[latent, fill=red!30, left=of ia,xshift=-1.5cm] (z) {$z$} ;
+    \node[latent, fill=black!15, below=of ia, xshift=1.5cm] (y) {$y$} ;
+
+    \phantom{\node[latent, right=of y] (il) {$l$} ; }
+    \phantom{\node[latent, left=of x] (ir) {$r$} ; }
+
+    \edge {ia} {x,y};
+    \edge {x} {y};
+    \edge {z} {x};
+}
+\end{textblock}
+}
+
+
+
+
+\end{frame}
+
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Estimación de efecto causal\\
+ \large \only<3->{Modelo lineales}
+ \end{textblock}
+ \vspace{0.75cm}
+
+ \only<1-3>{
+\begin{textblock}{160}(0,24) \centering
+\tikz{
+  \node[latent] (z1) {$z_1$} ;
+  \node[latent, below=of z1] (w1) {$w_1$} ;
+  \only<1>{\node[latent, right=of w1] (z3) {$z_3$} ;}
+  \only<2->{\node[latent, fill=red!30, right=of w1] (z3) {$z_3$} ;}
+  \only<1>{\node[latent, right=of z3] (w2) {$w_2$} ;}
+  \only<2->{\node[latent, fill=red!30, right=of z3] (w2) {$w_2$} ;}
+  \node[latent, above=of w2] (z2) {$z_2$} ;
+  \node[latent, fill=black!15, below=of w1] (x) {$x$} ;
+  \node[latent, below=of z3] (w3) {$w_3$} ;
+  \node[latent, fill=black!15, below=of w2] (y) {$y$} ;
+
+  \onslide<3>{
+    \node[const, below=of z1, xshift=-0.2cm, yshift=-0.15cm] (z1_w1) {$6$};
+    \node[const, below=of z2, xshift=0.2cm, yshift=-0.15cm] (z2_w2) {$5$};
+    \node[const, above=of z3, xshift=-0.6cm, yshift=0.4cm] (z3_z1) {$-4$};
+    \node[const, above=of z3, xshift=0.63cm, yshift=0.43cm] (z2_z1) {$3$};
+    \node[const, below=of z3, xshift=-1cm, yshift=-0.1cm] (z2_x) {$2$};
+    \node[const, below=of z3, xshift=1.05cm, yshift=-0.1cm] (z2_y) {$-1$};
+    \node[const, below=of w1, xshift=-0.35cm, yshift=-0.15cm] (w1_x) {$-1$};
+    \node[const, below=of w2, xshift=0.2cm, yshift=-0.15cm] (w2_y) {$1$};
+    \node[const, below=of x, xshift=0.8cm, yshift=0.3cm] (x_w3) {$2$};
+    \node[const, below=of w3, xshift=0.8cm, yshift=0.3cm] (w3_y) {$-1$};
+  }
+
+  \edge {w3,z3,w2} {y}
+  \edge {x} {w3}
+  \edge {z1} {w1}
+  \edge {z2} {w2}
+  \edge {z1,z2} {z3}
+  \edge {w1,z3} {x}
+
+}
+\end{textblock}
+}
+
+\only<4>{
+\begin{textblock}{120}(20,18) \centering
+$y \sim c_0 + c_1\,x + c_2\,z_3 + c_3\,w_2$
+
+\includegraphics[width=0.7\textwidth]{figuras/pdf/controles-modeloComplejos.pdf}
+\end{textblock}
+}
+
+
+
+% \begin{textblock}{160}(0,24) \centering
+%  \tikz{
+%     % MODELO DE DISCRIMINACION LABORAL
+%     \node[det] (m) {$m$} ; % Mujer
+%     \node[latent, right=of m] (d) {$d$} ; % Discriminacion
+%     \node[det, right=of d,yshift=1.5cm] (o) {$o$} ; % Cargo
+%     \node[latent, right=of d,yshift=-1.5cm] (s) {$s$} ; % Sueldo
+%     \node[latent, right=of d, xshift = 1.8cm] (a) {$a$} ; % Habilidad
+%
+%     \edge {m} {d};
+%     \edge {d} {o,s};
+%     \edge {o} {s};
+%     \edge {a} {o,s};
+%     }
+% \end{textblock}
+
+
+ \end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+\centering \vspace{0.5cm}
+\includegraphics[width=1\textwidth]{../../auxiliar/static/BP.png}
+\end{frame}
+
+%
+% \begin{frame}[plain]
+% \begin{textblock}{96}(0,6.5)\centering
+% {\transparent{0.9}\includegraphics[width=0.8\textwidth]{../../auxiliar/static/inti.png}}
+% \end{textblock}
+%
+% \begin{textblock}{160}(96,5.5)
+% \includegraphics[width=0.35\textwidth]{../../auxiliar/static/pachacuteckoricancha}
+% \end{textblock}
+% \end{frame}
+
+
+
+
+
+\end{document}
+
+
+

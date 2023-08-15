@@ -1,0 +1,1380 @@
+\newif\ifen
+\newif\ifes
+\newif\iffr
+\newcommand{\fr}[1]{\iffr#1 \fi}
+\newcommand{\En}[1]{\ifen#1\fi}
+\newcommand{\Es}[1]{\ifes#1\fi}
+\estrue
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\usepackage{siunitx}
+\input{../../auxiliar/tex/diapo_encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+\estrue
+\usepackage{todonotes}
+\setbeameroption{show notes}
+%
+\newcommand{\gray}{\color{black!55}}
+\usepackage{ulem} % sout
+\usepackage{mdframed}
+\usepackage{listings}
+\lstset{
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=true,
+  columns=flexible,
+  basicstyle={\footnotesize\ttfamily},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showlines=true,
+}
+
+\begin{document}
+
+\color{black!85}
+\large
+%
+% \begin{frame}[plain,noframenumbering]
+%
+%
+% \begin{textblock}{160}(0,0)
+% \includegraphics[width=1\textwidth]{../../auxiliar/static/deforestacion}
+% \end{textblock}
+%
+% \begin{textblock}{80}(18,9)
+% \textcolor{black!15}{\fontsize{44}{55}\selectfont Verdades}
+% \end{textblock}
+%
+% \begin{textblock}{47}(85,70)
+% \centering \textcolor{black!15}{{\fontsize{52}{65}\selectfont Empíricas}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(100,28)
+% \LARGE  \textcolor{black!15}{\rotatebox[origin=tr]{-3}{\scalebox{9}{\scalebox{1}[-1]{$p$}}}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(66,43)
+% \LARGE  \textcolor{black!15}{\scalebox{6}{$=$}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(36,29)
+% \LARGE  \textcolor{black!15}{\scalebox{9}{$p$}}
+% \end{textblock}
+%
+% %
+% %
+% % \begin{textblock}{160}(01,81)
+% % \footnotesize \textcolor{black!5}{\textbf{\small Seminario ``Acuerdos intersubjetivos''\\
+% % Comunidad Bayesiana Plurinacional} \\}
+% % \end{textblock}
+%
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[plain,noframenumbering]
+\begin{textblock}{160}(0,-4.3) \centering
+\includegraphics[width=1\textwidth]{../../auxiliar/static/antartic}
+\end{textblock}
+
+\begin{textblock}{160}(0,0) \centering
+\tikz{
+\node[det, fill=black,draw=black] (k) {\textcolor{black}{--------------------------------------------------------------------------------------------------------------------------------------}} ;
+}
+\end{textblock}
+
+\begin{textblock}{160}(5,0)
+\tikz{
+\node[det, fill=black,draw=black,text width=0.01cm] (k) {\textcolor{black}{--------------------------------------------------------------------------------------------------------------------------------------}} ;
+}
+\end{textblock}
+
+
+\begin{textblock}{160}(0,4) \centering
+\LARGE \hspace{1cm} \textcolor{black!20}{\fontsize{22}{0}\selectfont \textbf{Modelos de historia \\ \hspace{1cm} completa}}
+\end{textblock}
+
+
+\begin{textblock}{55}[0,1](8,70)
+\begin{turn}{90}
+\parbox{6cm}{\footnotesize
+\textcolor{black!10}{Millones de km$^2$ de hielo Antártico}}
+\end{turn}
+\end{textblock}
+
+
+\begin{textblock}{160}(20,63)
+\textcolor{black!10}{Unidad 4 \\ \small
+Redes bayesianas de historia completa. \\
+El problema de usar el posterior como prior del siguiente evento\\
+El algoritmo de inferencia por loopy belief propagation. \\
+Consideraciones de inferencia causal en series temporales. \\
+}
+\end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Series de tiempo \\
+\large Creencias adaptativas
+\end{textblock}
+
+
+\only<1-4>{
+\begin{textblock}{160}(0,26) \centering
+
+\Large La función de costo epistémica
+
+\large
+\begin{equation*}
+\underbrace{P(\text{Hipótesis},\text{\En{Data}\Es{Datos}})}_{\hfrac{\text{\footnotesize\En{Initial belief compatible}\Es{Creencia compatible }}}{\text{\footnotesize \En{with the data}\Es{con los datos}}}} = \underbrace{P(\text{Hipótesis})}_{\hfrac{\text{\footnotesize\En{Initial intersubjective}\Es{Acuerdo intersubjetivo}}}{\text{\footnotesize\En{agreement}\Es{inicial}}}} \underbrace{P(\text{dato}_1 |\text{Hipótesis})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 1}} \, \underbrace{P(\text{dato}_2 | \text{dato}_1 , \text{Hipótesis})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 2}} \dots
+\end{equation*}
+
+\vspace{0.8cm}
+
+
+\only<2>{
+\Large Un único 0 en la secuencia de predicciones
+
+hace falsa la hipótesis para siempre.\\
+}\only<3-4>{
+Ejemplo
+
+\Large Esa persona no está apta para realizar esa tarea.
+
+\only<4>{\textbf{¿Para siempre?!}}
+}
+
+\end{textblock}
+}
+\only<5>{ \centering
+\begin{textblock}{160}(0,-93)
+\includegraphics[width=0.9\textwidth]{../../auxiliar/static/lifeHistory.jpeg}
+\end{textblock}
+}
+
+
+\end{frame}
+
+\begin{comment}
+\end{comment}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Estimación de habilidad \\
+\large en la industria del videojuego
+\end{textblock}
+
+
+ \only<1->{
+ \begin{textblock}{140}(3,24)
+ \normalsize
+\tikz{
+    \node[det, fill=black!10] (r) {$r$} ;
+    \node[const, right=of r] (dr) {\normalsize $ P(r|d) = \mathbb{I}(r = d > 0)$};
+
+    \node[latent, above=of r, yshift=-0.45cm] (d) {$d$} ; %
+    \node[const, right=of d] (dd) {\normalsize $ p(d|p_a,p_b) = \delta(d = p_a-p_b)$};
+
+    \node[latent, above=of d, xshift=-0.8cm, yshift=-0.45cm] (p1) {$p_a$} ; %
+    \node[latent, above=of d, xshift=0.8cm, yshift=-0.45cm] (p2) {$p_b$} ; %
+
+
+    \node[latent, above=of p1, yshift=-0.35cm] (s1) {$s_a$} ; %
+    \node[latent, above=of p2, yshift=-0.35cm] (s2) {$s_b$} ; %
+    \node[const, right=of s2] (ds2) {$p(s_i) = \N(s_i|\mu_i,\sigma_i^2)$};
+
+    \node[const, right=of p2] (dp2) {\normalsize $p(p_i|s_i) = \N(p_i|s_i,\beta^2)$};
+
+    \node[const, above=of dr] (r_name) {\small Resultado};
+    \node[const, above=of dd] (d_name) {\small Diferencia};
+    \node[const, above=of dp2] (p_name) {\small Desempeño};
+
+    \node[const, above=of ds2, yshift=0.1cm] (s_name) {\small Habilidad};
+
+    \edge {d} {r};
+    \edge {p1,p2} {d};
+    \edge {s1} {p1};
+    \edge {s2} {p2};
+
+}
+\end{textblock}
+}
+
+
+\only<2->{
+\begin{textblock}{100}(60,22) \centering
+Prior \ $\rightarrow$ \ Posterior
+
+\only<2>{ \includegraphics[width=0.85\textwidth,page=4]{../3-dato/figuras/posterior_win.pdf}}
+\end{textblock}
+}
+
+
+\only<3->{
+\begin{textblock}{100}(60,30) \centering
+¿Cómo estimamos una habilidad en el tiempo?
+
+\Large \vspace{0.8cm}
+
+\only<4->{
+¿Si usamos el último posterior como
+
+prior del siguiente evento?
+
+\vspace{0.6cm} \large
+
+Posterior$_t$ $\rightarrow$ Prior$_{t+1}$
+}
+
+\end{textblock}
+}
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{120}(40,4)
+ \centering \LARGE Algoritmo suma-producto \\
+ \large Las reglas de la probabilidad por pasaje de mensajes
+\end{textblock}
+
+
+\only<1->{
+ \begin{textblock}{140}(2,6)
+ \normalsize
+\tikz{
+    \node[det, fill=black!10] (r) {$r$} ;
+    \node[factor, above=of r, yshift=-0.4cm] (fr) {};
+    \node[const, left=of fr] (dr) {\normalsize $\mathbb{I}(r = d > 0)$};
+
+    \node[latent, above=of fr, yshift=-0.55cm] (d) {$d$} ; %
+    \node[factor, above=of d, yshift=-0.4cm] (fd) {};
+
+    \node[const, left=of fd] (dd) {\normalsize $\delta(d = p_a-p_b)$};
+
+    \node[latent, above=of fd, xshift=-0.8cm, yshift=-0.55cm] (p1) {$p_a$} ; %
+    \node[latent, above=of fd, xshift=0.8cm, yshift=-0.55cm] (p2) {$p_b$} ; %
+
+    \node[factor, above=of p1, yshift=-0.4cm] (fp1) {};
+    \node[factor, above=of p2, yshift=-0.4cm] (fp2) {};
+
+    \node[latent, above=of fp1, yshift=-0.55cm] (s1) {$s_a$} ; %
+    \node[latent, above=of fp2, yshift=-0.55cm] (s2) {$s_b$} ; %
+
+    \node[factor, above=of s1, yshift=-0.4cm] (fs1) {};
+    \node[factor, above=of s2, yshift=-0.4cm] (fs2) {};
+
+
+    \node[const, left=of fs1] (ds2) {$\N(s_i|\mu_i,\sigma_i^2)$};
+
+    \node[const, left=of fp1] (dp2) {\normalsize $\N(p_i|s_i,\beta^2)$};
+
+    \node[const, left=of r] (r_name) {\small Resultado};
+    \node[const, left=of d] (d_name) {\small Diferencia};
+    \node[const, left=of p1] (p_name) {\small Desempeño};
+
+    \node[const, left=of s1, yshift=0.1cm] (s_name) {\small Habilidad \ };
+
+    \edge {d} {r};
+    \edge[-] {p1,p2} {fd};
+    \edge {fd} {d};
+    \edge[-] {s1} {fp1};
+    \edge[-] {s2} {fp2};
+    \edge {fp1} {p1};
+    \edge {fp2} {p2};
+    \edge {fs1} {s1};
+    \edge {fs2} {s2};
+
+    \uncover<2->{
+      \path[draw, ->, fill=black!50] (fs2) edge[bend left,draw=black!50] node[right,color=black!75] {} (s2);
+      \path[draw, ->, fill=black!50] (fp2) edge[bend left,draw=black!50] node[right,color=black!75] {} (s2);
+    }
+}
+\end{textblock}
+}
+
+
+
+\only<2->{
+\begin{textblock}{90}(55,18)
+\begin{flalign*}
+p(s_b,r) = \underbrace{m_{f_{s_b} \rightarrow s_b}(s_b)}_{\text{Prior}} \cdot \underbrace{m_{f_{p_b} \rightarrow s_b}(s_b)}_{\text{Likelihood}}
+\end{flalign*}
+\end{textblock}
+}
+
+\only<3->{
+\begin{textblock}{90}(55,40)
+\begin{equation*}\label{eq:m_v_f}
+\underbrace{m_{x \rightarrow f}(x)}_{\hfrac{\text{\footnotesize Mensaje de}}{\text{\footnotesize las \textbf{variables}}}} = \underbrace{\prod_{g \in v(x) \setminus \{f\}} m_{g \rightarrow x}(x)}_{\hfrac{\text{\footnotesize El producto de}}{\text{\footnotesize lo que recibe de atrás}}}
+\end{equation*}
+\end{textblock}
+}
+
+\only<4->{
+\begin{textblock}{90}(55,62)
+\begin{equation*}\label{eq:m_f_v}
+ \underbrace{m_{f \rightarrow x}(x)}_{\hfrac{\text{\footnotesize Mensaje de}}{\text{\footnotesize los \textbf{factores}}}} =  \underbrace{\sum_{\bm{y}} \Big(f(\bm{y},x) \prod_{y \in v(f) \setminus \{x\} } m_{y \rightarrow f}(y) \Big)}_{\hfrac{\text{\footnotesize Lo que recibe de atrás por el factor,}}{\text{\footnotesize integrando todas las variables de atrás}}}
+\end{equation*}
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(20,4)
+\centering \LARGE Estimación de habilidad \\
+\large en la industria del videojuego
+\end{textblock}
+
+\only<1->{
+ \begin{textblock}{140}(2,6)
+ \normalsize
+\tikz{
+    \node[det, fill=black!10] (r) {$r$} ;
+    \node[factor, above=of r, yshift=-0.4cm] (fr) {};
+    \node[const, left=of fr] (dr) {\normalsize $\mathbb{I}(d > 0)$};
+
+    \node[latent, above=of fr, yshift=-0.55cm] (d) {$d$} ; %
+    \node[factor, above=of d, yshift=-0.4cm] (fd) {};
+
+    \node[const, left=of fd] (dd) {\normalsize $\delta(d = p_a-p_b)$};
+
+    \node[latent, above=of fd, xshift=-0.8cm, yshift=-0.55cm] (p1) {$p_a$} ; %
+    \node[latent, above=of fd, xshift=0.8cm, yshift=-0.55cm] (p2) {$p_b$} ; %
+
+    \node[factor, above=of p1, yshift=-0.4cm] (fp1) {};
+    \node[factor, above=of p2, yshift=-0.4cm] (fp2) {};
+
+    \node[latent, above=of fp1, yshift=-0.55cm] (s1) {$s_a$} ; %
+    \only<1-20>{\node[latent, above=of fp2, yshift=-0.55cm] (s2) {$s_b$} ; }
+    \only<21->{\node[latent, above=of fp2, yshift=-0.55cm] (s2) {$\bm{s_b}$} ; }
+
+
+    \node[factor, above=of s1, yshift=-0.4cm] (fs1) {};
+    \node[factor, above=of s2, yshift=-0.4cm] (fs2) {};
+
+
+    \node[const, left=of fs1] (ds2) {$\N(s_i|\mu_i,\sigma_i^2)$};
+
+    \node[const, left=of fp1] (dp2) {\normalsize $\N(p_i|s_i,\beta^2)$};
+
+    \node[const, left=of r] (r_name) {\small Resultado};
+    \node[const, left=of d] (d_name) {\small Diferencia};
+    \node[const, left=of p1] (p_name) {\small Desempeño};
+
+    \node[const, left=of s1, yshift=0.1cm] (s_name) {\small Habilidad \ };
+
+%     \only<12->{
+%       \node[factor, right=of s2] (fs2_t2) {};
+%       \node[latent, right=of fs2_t2] (s2_t2) {$s_{b_{t+1}}$};
+%     }
+
+    \edge {d} {r};
+    \edge[-] {p1,p2} {fd};
+    \edge {fd} {d};
+    \edge[-] {s1} {fp1};
+    \edge[-] {s2} {fp2};
+    \edge {fp1} {p1};
+    \edge {fp2} {p2};
+    \edge {fs1} {s1};
+    \edge {fs2} {s2};
+
+    \uncover<2-11,21->{
+      \path[draw, ->, fill=black!50] (fs2) edge[bend left,draw=black!50] node[right,color=black!75] {\large\only<2>{$\N(s_b|\mu_b,\sigma^2)$}} (s2);
+    }
+    \uncover<3-11>{
+      \path[draw, ->, fill=black!50] (s2) edge[bend left,draw=black!50] node[right,color=black!75] {\large\only<3>{$\N(s_b|\mu_b,\sigma^2)$}} (fp2);
+    }
+    \uncover<4-11>{
+      \path[draw, ->, fill=black!50] (fp2) edge[bend left,draw=black!50] node[right,color=black!75] {\large$\only<4-5>{\int \N(p_b|s_b,\beta^2) \N(s_b|\mu_b,\sigma^2) \, ds_b }\only<5>{= p(p_b)}$} (p2);
+    }
+    \uncover<12->{
+      \path[draw, ->, fill=black!50] (fs1) edge[bend left,draw=black!50] node[right,color=black!75] {} (s1);
+      \path[draw, ->, fill=black!50] (s1) edge[bend left,draw=black!50] node[right,color=black!75] {} (fp1);
+      \path[draw, ->, fill=black!50] (fp1) edge[bend left,draw=black!50] node[right,color=black!75] {} (p1);
+      \path[draw, ->, fill=black!50] (p1) edge[bend left,draw=black!50] node[right,color=black!75] {} (fd);
+    }
+    \uncover<13->{
+      \path[draw, ->, fill=black!50] (fr) edge[bend right,draw=black!50] node[right,color=black!75] {\large$\only<13>{\mathbb{I}(d > 0)}$} (d);
+    }
+    \uncover<14->{
+      \path[draw, ->, fill=black!50] (d) edge[bend right,draw=black!50] node[right,color=black!75] {\large$\only<14>{\mathbb{I}(d > 0)}$} (fd);
+    }
+    \uncover<15->{
+      \path[draw, ->, fill=black!50] (fd) edge[bend right,draw=black!50] node[right,color=black!75] {\large \ $\only<15>{\int_{p_a} \int_d \delta(d=p_a - p_b) \mathbb{I}(d > 0) \N(p_a|\mu_a,\beta^2 + \sigma_a^2) \, dp_a \, dd}$$\only<16>{\int_{p_a} \int_d \delta(\bm{d=p_a - p_b}) \mathbb{I}(\bm{d} > 0) \N(p_a|\mu_a,\beta^2 + \sigma_a^2) \, dp_a \, dd}\only<17-18>{\int_{p_a} \mathbb{I}(p_a > p_b) \N(p_a|\mu_a,\beta^2 + \sigma_a^2) \, dp_a \only<18>{= 1 - \Phi(p_b|\mu_a, \beta^2 + \sigma_a^2)}}$} (p2);
+    }
+    \uncover<19->{
+      \path[draw, ->, fill=black!50] (p2) edge[bend right,draw=black!50] node[right,color=black!75] {\large \ $\only<19-20>{1 - \Phi(p_b|\mu_a, \beta^2 + \sigma_a^2)}$} (fp2);
+    }
+    \uncover<20->{
+      \path[draw, ->, fill=black!50] (fp2) edge[bend right,draw=black!50] node[right,color=black!75] {\large \ $\only<20>{1 - \Phi(\bm{s_b}|\mu_a, \bm{2}\beta^2 + \sigma_a^2)}$} (s2);
+    }
+
+}
+\end{textblock}
+}
+
+
+
+\only<6-14>{
+\begin{textblock}{120}(65,18)
+  \begin{flalign*}
+   \uncover<-11>{p(p_b) &= \int \N(p_b|s_b,\beta^2) \N(s_b|\mu_b,\sigma_b^2) ds_b \\}
+    \only<9>{& \overset{*}{=} \int \N(p_a|\mu_a,\beta^2 + \sigma_a^2) \, \N(s_a | \mu_*,\sigma_{*}^2)ds_a}
+    \only<10>{& \overset{*}{=} \int \underbrace{\N(p_b|\mu_b,\beta^2 + \sigma_b^2)}_{\text{const.}} \underbrace{\N(s_a | \mu_*,\sigma_{*}^2)ds_b}_{1}}
+    \only<11>{ \phantom{p(p_a)} & \overset{*}{=} \phantom{\int} \, \N(p_b|\mu_b,\beta^2 + \sigma_b^2) \phantom{\N(s_b | \mu_*,\sigma_{*}^2)ds_b}}
+    \only<12->{ p(p_a) & \overset{*}{=} \phantom{\int} \, \N(p_b|\mu_a,\beta^2 + \sigma_a^2) \phantom{\N(s_a | \mu_*,\sigma_{*}^2)ds_a}}
+    &&
+  \end{flalign*}
+\end{textblock}
+}
+
+
+\only<7-8>{
+\begin{textblock}{120}(40,34)
+  \begin{figure}[H]
+     \centering
+     \uncover<7->{
+     \begin{subfigure}[b]{0.4\textwidth}
+       \includegraphics[page=1,width=1\textwidth]{figuras/paso_1_multiplicacion_normales_image}
+     \end{subfigure}}
+     \uncover<8->{
+     \begin{subfigure}[b]{0.4\textwidth}
+       \includegraphics[page=1,width=\textwidth]{figuras/paso_1_multiplicacion_normales_p}
+     \end{subfigure}}
+  \end{figure}
+\end{textblock}
+}
+
+
+\only<17-19>{
+\begin{textblock}{120}(40,48)
+  \begin{figure}[H]
+     \centering
+     \begin{subfigure}[b]{0.58\textwidth}
+       \includegraphics[page=1,width=\textwidth]{figuras/m_d_ta.pdf}
+     \end{subfigure}
+  \end{figure}
+\end{textblock}
+}
+
+
+
+\only<21-23>{
+\begin{textblock}{100}(55,15)
+\begin{flalign*}
+p(s_b, r^*) =  \overbrace{\N(s_b|\mu_b, \sigma_b^2)}^{\text{Prior}} \overbrace{1 - \Phi(0|\mu_a-s_b, 2\beta^2 + \sigma_a^2)}^{\text{Predicción o verosimilitud}}
+\end{flalign*}
+\end{textblock}
+}
+
+\only<21>{
+\begin{textblock}{100}(60,35)
+\includegraphics[page=1,width=0.8\textwidth]{figuras/posterior_lose.pdf}
+\end{textblock}
+}
+\only<22>{
+\begin{textblock}{100}(60,35)
+\includegraphics[page=2,width=0.8\textwidth]{figuras/posterior_lose.pdf}
+\end{textblock}
+}
+\only<23-25>{
+\begin{textblock}{100}(60,35)
+\includegraphics[page=3,width=0.8\textwidth]{figuras/posterior_lose.pdf}
+\end{textblock}
+}
+
+
+\only<24-25>{
+\begin{textblock}{100}(60,18)
+\begin{flalign*}
+& \, \widehat{p}(s_b| r^*) = \only<24>{\underset{\mu, \sigma}{\text{ arg min }} \ \ \text{KL}(\, p(s_b| r^*) \, || \,  \N(s_b|\mu, \sigma^2) \, )}\only<25>{\N(s_b\,|\,\widehat{\mu},\, \widehat{\sigma}^2)}
+&&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\only<26->{
+\begin{textblock}{100}(60,18)
+\begin{flalign*}
+& \underbrace{\widehat{p}(s_b| r^*)}_{\text{Posterior}_1} =\N(s_b\,|\,\widehat{\mu},\, \widehat{\sigma}^2)
+&&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<26->{
+\begin{textblock}{110}(60,40)
+\begin{flalign*}
+ & \widehat{\text{Posterior}}_t \rightarrow \text{Prior}_{t+1} %= \text{Prior}_1 \prod_{i=1}^t \text{Likelihood}_i
+ &&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\only<27>{
+\begin{textblock}{100}(60,58)
+\begin{flalign*}
+& \underbrace{p(s_b)}_{\text{Prior}_2} = \N(s_b\,|\,\widehat{\mu}, \,  \widehat{\sigma}^2 + \gamma^2)
+&&
+\end{flalign*}
+\end{textblock}
+}
+
+
+
+%
+%
+% \begin{textblock}{90}(60,56) \centering
+%  \normalsize
+% \tikz{
+%     \node[factor] (fs_t) {};
+%     \node[const, above=of fs_t] (dfs_t) {$\N(s_t|\mu_t,\sigma_t^2)$};
+%     \node[latent, right=of fs_t, minimum size=0.75cm] (s_t) {$s_{t}$};
+%     \node[factor, right=of s_t] (fs_t2) {};
+%     \node[latent, right=of fs_t2] (s_t2) {$s_{t+1}$};
+%  }
+% \end{textblock}
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Enfoque Posterior $\rightarrow$ Prior \\
+\only<3->{\large Problemas de un procedimiento ad-hoc}
+\end{textblock}
+
+\only<1-2>{
+\begin{textblock}{150}(0,22)
+\begin{figure}[ht!]
+\centering
+\tikz{
+    \node[const] (a1) {\includegraphics[page=1,width=0.2\linewidth]{figuras/trueskillthroughtime}};
+    \node[const, left=of a1] (na) {Jugador A:};
+    \node[const,below=of a1] (b1) {\includegraphics[page=3,width=0.2\linewidth]{figuras/trueskillthroughtime}};
+    \uncover<2>{
+    \node[const,right=of a1] (a2) {\includegraphics[page=2,width=0.2\linewidth]{figuras/trueskillthroughtime}};
+      \node[const,below=of a2] (b2) {\includegraphics[page=4,width=0.2\linewidth]{figuras/trueskillthroughtime}};
+      \node[const, above=of a2] (g2) {\small \ \ Gana B};
+    }
+    \node[const, above=of a1] (g1) {\small Gana A \ \ };
+    \node[const, left=of b1] (nb) {Jugador B:};
+
+}
+\end{figure}
+\end{textblock}
+}
+
+\only<3->{
+\begin{textblock}{140}(10,42)
+\Large Problemas. \\[0.2cm] \normalsize
+
+$\bullet$ Ofrece resultados que van en contra de nuestra intuición
+
+\onslide<4->{$\bullet$ Mucha incertidumbre al inicio de las series temporales}
+
+\onslide<5->{$\bullet$ No aprovecha la información disponible (entre ramas paralelas)}
+
+\onslide<6->{$\bullet$ No garantiza comparabilidad entre estimaciones lejanas en el tiempo y el espacio.}
+\end{textblock}
+}
+
+
+\only<7>{
+\begin{textblock}{160}(0,24)  \centering \Large
+Propaga la información en una sola
+
+dirección, del pasado al futuro.
+\end{textblock}
+}
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\only<4>{
+ \begin{textblock}{160}(0,4) \normalsize \centering
+\includegraphics[width=0.55\textwidth]{../../auxiliar/static/ttt_history.png}
+\end{textblock}
+}
+\begin{textblock}{160}(0,4)
+\centering \LARGE Modelos de historia completa \\
+\large \only<1-4>{Estado del arte en la industria del videojuego.}\only<5->{Smoothing}
+\end{textblock}
+
+
+
+\only<1-3>{
+ \begin{textblock}{160}(0,16) \normalsize \centering
+ \scalebox{0.9}{
+\tikz{
+    \node[det, fill=black!10] (r) {$r$} ;
+    \node[factor, above=of r, yshift=-0.4cm] (fr) {};
+
+    \node[latent, above=of fr, yshift=-0.55cm] (d) {$d$} ; %
+    \node[factor, above=of d, yshift=-0.4cm] (fd) {};
+
+
+    \node[latent, above=of fd, xshift=-0.8cm, yshift=-0.55cm] (p1) {$p_a$} ; %
+    \node[latent, above=of fd, xshift=0.8cm, yshift=-0.55cm] (p2) {$p_b$} ; %
+
+    \node[factor, above=of p1, yshift=-0.4cm] (fp1) {};
+    \node[factor, above=of p2, yshift=-0.4cm] (fp2) {};
+
+    \node[latent, above=of fp1, yshift=-0.55cm] (s1) {$s_{a_1}$} ; %
+    \node[latent, above=of fp2, yshift=-0.55cm] (s2) {$s_{b_1}$} ;
+
+    \node[factor, above=of s1, yshift=-0.4cm] (fs1) {};
+    \node[factor, above=of s2, yshift=-0.4cm] (fs2) {};
+
+%     \node[const, left=of fr] (dr) {\normalsize $\mathbb{I}(d > 0)$};
+%     \node[const, left=of fd] (dd) {\normalsize $\delta(d = p_a-p_b)$};
+%     \node[const, left=of fs1] (ds2) {$\N(s_i|\mu_i,\sigma_i^2)$};
+%     \node[const, left=of fp1] (dp2) {\normalsize $\N(p_i|s_i,\beta^2)$};
+
+%     \node[const, left=of r] (r_name) {\small Resultado};
+%     \node[const, left=of d] (d_name) {\small Diferencia};
+%     \node[const, left=of p1] (p_name) {\small Desempeño};
+%     \node[const, left=of s1, yshift=0.1cm] (s_name) {\small Habilidad \ };
+
+    \edge {d} {r};
+    \edge[-] {p1,p2} {fd};
+    \edge {fd} {d};
+    \edge[-] {s1} {fp1};
+    \edge[-] {s2} {fp2};
+    \edge {fp1} {p1};
+    \edge {fp2} {p2};
+    \edge {fs1} {s1};
+    \edge {fs2} {s2};
+
+    \only<2->{
+      \node[factor, right=of s2, xshift=-0.3cm] (fs2_t2) {};
+      \node[latent, right=of fs2_t2, xshift=-0.15cm] (s2_t2) {$s_{b_2}$};
+      \node[factor, left=of s1, xshift=0.3cm] (fs1_t2) {};
+      \node[latent, left=of fs1_t2, xshift=0.15cm] (s1_t2) {$s_{a_2}$};
+
+      \node[const, above=of fs2_t2, yshift=0.1cm, xshift=0.1cm] (ds2_t2) {$\N(s_{b_2}|s_{b_1}, \gamma^2)$};
+      \node[const, above=of fs1_t2, yshift=0.1cm, xshift=-0.1cm] (ds1_t2) {$\N(s_{a_2}|s_{a_1}, \gamma^2)$};
+
+      \edge[-] {s1} {fs1_t2};
+      \edge[-] {s2} {fs2_t2};
+      \edge {fs1_t2} {s1_t2};
+      \edge {fs2_t2} {s2_t2};
+    }
+    \only<3->{
+      \node[factor, below=of s1_t2, yshift=0.55cm] (fp1_t2) {} ;
+      \node[latent, below=of fp1_t2, yshift=0.4cm] (p1_t2) {$p_{a_2}$} ;
+      \node[factor, below=of p1_t2, xshift=-0.8cm, yshift=0.55cm] (fd_t2) {} ;
+      \node[latent, below=of fd_t2, yshift=0.4cm] (d_t2) {$d$} ;
+      \node[factor, below=of d_t2, yshift=0.55cm] (fr_t2) {};
+      \node[det, below=of fr_t2, yshift=0.4cm, fill=black!10] (r_t2) {$r$} ;
+
+      \node[latent, above=of fd_t2, xshift=-0.8cm, yshift=-0.55cm] (p3) {$p_{e_t}$} ;
+      \node[factor, above=of p3, yshift=-0.4cm] (fp3) {} ;
+      \node[latent, above=of fp3,yshift=-0.55cm] (s3) {$s_{e_t}$} ;
+      \node[factor, left=of s3,xshift=0.4cm] (fs3) {} ;
+      \node[const, left=of fs3] (ds3) {$\dots$} ;
+
+
+      \edge[-] {s1_t2} {fp1_t2};
+      \edge {fp1_t2} {p1_t2};
+      \edge[-] {p1_t2, p3} {fd_t2};
+      \edge {fd_t2} {d_t2};
+      \edge[-] {d_t2} {fr_t2};
+      \edge {fr_t2} {r_t2};
+      \edge {fs3} {s3};
+      \edge[-] {s3} {fp3};
+      \edge {fp3} {p3};
+
+      \node[factor, below=of s2_t2, yshift=0.55cm] (fp2_t2) {} ;
+      \node[latent, below=of fp2_t2, yshift=0.4cm] (p2_t2) {$p_{b_2}$} ;
+
+      \node[factor, below=of p2_t2, xshift=0.8cm, yshift=0.55cm] (fdb_t2) {} ;
+      \node[latent, below=of fdb_t2, yshift=0.4cm] (db_t2) {$d$} ;
+      \node[factor, below=of db_t2, yshift=0.55cm] (frb_t2) {};
+      \node[det, below=of frb_t2, yshift=0.4cm, fill=black!10] (rb_t2) {$r$} ;
+
+      \node[latent, above=of fdb_t2, xshift=0.8cm, yshift=-0.55cm] (p4) {$p_{c_t}$} ;
+      \node[factor, above=of p4, yshift=-0.4cm] (fp4) {} ;
+      \node[latent, above=of fp4,yshift=-0.55cm] (s4) {$s_{c_t}$} ;
+      \node[factor, right=of s4,xshift=-0.4cm] (fs4) {} ;
+      \node[const, right=of fs4] (ds4) {$\dots$} ;
+
+
+      \edge[-] {s2_t2} {fp2_t2};
+      \edge {fp2_t2} {p2_t2};
+      \edge[-] {p2_t2, p4} {fdb_t2};
+      \edge {fdb_t2} {db_t2};
+      \edge[-] {db_t2} {frb_t2};
+      \edge {frb_t2} {rb_t2};
+      \edge {fs4} {s4};
+      \edge[-] {s4} {fp4};
+      \edge {fp4} {p4};
+
+
+    }
+
+}
+}
+\end{textblock}
+}
+
+
+
+
+\only<5->{
+\begin{textblock}{160}(0,16)  \centering
+\scalebox{1}{
+\tikz{ %
+        \node[latent] (s0) {$s_{t-1}$} ; %
+        \node[const, left=of s0] (ns0) {$\dots$}; %
+
+        \node[factor, right=of s0,xshift=1cm ] (fs1) {} ;
+        \node[const, above=of fs1] (nfs1) {$f_{s_t}$}; %
+
+        \node[latent, right=of fs1, xshift=1.25cm] (s1) {$s_t$} ; %
+
+        \node[factor, right=of s1, xshift=1.25cm ] (fs2) {} ;
+        \node[const, above=of fs2] (nfs2) {\ \ \ $f_{s_{t+1}}$}; %
+
+        \node[latent, right=of fs2,xshift=1cm] (s2) {$s_{t+1}$} ; %
+        \node[const, right=of s2] (ns2) {$\dots$}; %
+
+
+        \node[factor, below=of s1,xshift=-1.4cm,yshift=-1cm] (fp0) {} ;
+        \node[const, right=of fp0] (nfp0) {$f_{p_t(1)}$}; %
+
+        \node[factor, color=white, below=of s1] (fp1) {} ;
+        \node[const, below=of fp1, yshift=0.2cm] (nfp1) {$\dots$}; %
+
+        \node[factor, below=of s1,xshift=1.4cm,yshift=-1cm] (fp2) {} ;
+        \node[const, left=of fp2] (nfp2) {$f_{p_t(k)}$}; %
+
+        \node[latent, below=of fp0] (p0) {\footnotesize$p_t(1)$} ; %
+        %\node[latent, below=of fp1] (p1) {\footnotesize$p_i^{t}(2)$} ; %
+        \node[latent, below=of fp2] (p2) {\footnotesize$p_t(k)$} ; %
+
+        \node[invisible, above=of s1, yshift=1cm] (ia) {};
+%         %\draw[bend right=90] (fs1) arc (s1) node[midway,above]{label};
+        %\draw[bend left,->]  (fs1) to node [auto] {Link} (s1);
+        \edge[-] {s1} {fp0,fp1,fp2};
+        \edge {fp0} {p0};
+        %\edge[-] {fp1} {p1};
+        \edge {fp2} {p2};
+        \edge {fs1} {s1};
+        \edge[-] {fs1} {s0};
+        \edge[-] {fs2} {s1};
+        \edge {fs2} {s2};
+        %\edge[bend right] {s0} {fs1};
+        \only<6-22>{
+          \path[draw, -latex, fill=black!50] (s0) edge[bend right,draw=black!50] node[midway,below,color=black!75] {\scriptsize \textit{forwardPosterior}$(s_{t-1})$} (fs1);
+        }
+        \only<7-21>{
+          \path[draw, -latex, fill=black!50] (fs1) edge[bend left,draw=black!50] node[midway,above,color=black!75] {\scriptsize \textit{forwardPrior}$(s_t)$} (s1);
+        }
+        \only<8,16->{
+          \path[draw, -latex, fill=black!50] (s2) edge[bend left,draw=black!50] node[midway,below,color=black!75] {\scriptsize \textit{\ \ backwardPosterior}$(s_{t+1})$} (fs2);
+        }
+        \only<8,17->{
+          \path[draw, -latex, fill=black!50] (fs2) edge[bend right,draw=black!50] node[midway,above,color=black!75] {\scriptsize \textit{backwardPrior}$(s_t)$} (s1);
+        }
+        \only<10,18>{
+          \path[draw, -latex, fill=black!50,sloped] (s1) edge[bend right,draw=black!50] node[midway,above,color=black!75] {\scriptsize \textit{\ \ withinPrior}$_k(s_t)$} (fp0);
+        }
+        \only<11-17,19->{
+          \path[draw, -latex, fill=black!50,sloped] (fp0) edge[bend left,draw=black!50] node[midway,above,color=black!75] {\scriptsize \textit{likelihood}$_1(s_t)$} (s1);
+        }
+        \only<12,20>{
+          \path[draw, -latex, fill=black!50,sloped] (s1) edge[bend left,draw=black!50] node[midway,above,color=black!75] {\scriptsize \textit{\ \ withinPrior}$_k(s_t)$} (fp2);
+        }
+        \only<13-19,21->{
+          \path[draw, -latex, fill=black!50,sloped] (fp2) edge[bend right,draw=black!50] node[midway,above,color=black!75] {\scriptsize \textit{\ \ likelihood}$_k(s_t)$} (s1);
+        }
+        \only<14-15>{
+          \path[draw, -latex, fill=black!50] (s1) edge[bend left,draw=black!50] node[midway,above,color=black!75] {\scriptsize \textit{forwardPosterior}$(s_t)$} (fs2);
+        }
+        \only<15>{
+          \path[draw, -latex, fill=black!50] (fs2) edge[bend right,draw=black!50] node[midway,below,color=black!75] {\scriptsize \textit{\ \ forwardPrior}$(s_{t+1})$} (s2);
+        }
+        \only<22->{
+          \path[draw, -latex, fill=black!50] (s1) edge[bend right,draw=black!50] node[midway,above,color=black!75] {\scriptsize \textit{backwardPosterior}$(s_t)$} (fs1);
+        }
+        \only<23->{
+          \path[draw, -latex, fill=black!50] (fs1) edge[bend left,draw=black!50] node[midway,below,color=black!75] {\scriptsize \textit{backwardPrior}$(s_{t-1})$} (s0);
+        }
+}
+}
+\end{textblock}
+}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Modelos de historia completa \\
+\large Smoothing
+\end{textblock}
+
+\begin{textblock}{160}(0,20)
+\begin{figure}[ht!]
+  \centering
+  \scalebox{.95}{
+    \tikz{ %
+      \node[latent] (s10) {$s_{a_0}$} ;
+      %
+      \node[latent,  below=of s10,yshift=-0.7cm] (s11) {$s_{a_1}$} ;
+
+      \node[latent, right=of s11, xshift=3cm] (p11) {$p_{a_1}$} ;
+      %
+      \node[latent, below=of s11,yshift=-0.4cm] (s12) {$s_{a_2}$} ;
+      \node[latent, right=of s12, xshift=3cm] (p12) {$p_{a_2}$} ;
+
+      \node[const, right=of p11,xshift=0.5cm] (r1) {$\bm{>}$} ;
+      \node[const, above=of r1, yshift=0.3cm] (nr1) {\footnotesize \ \  Observed result} ;
+      \node[const, right=of p12,xshift=0.5cm] (r2) {$\bm{<}$} ;
+      \node[const, above=of r2, yshift=0.3cm] (nr2) {\footnotesize \ \ Observed result} ;
+
+      \node[latent, left=of s10, xshift=13.4cm] (s20) {$s_{b_0}$} ;
+      \node[latent, below=of s20,yshift=-0.7cm] (s21) {$s_{b_1}$} ;
+      \node[latent, left=of s21, xshift=-3cm] (p21) {$p_{b_1}$} ;
+
+      \node[latent, below=of s21, yshift=-0.4cm] (s22) {$s_{b_2}$} ;
+      \node[latent, left=of s22, xshift=-3cm] (p22) {$p_{b_2}$} ;
+
+
+      \edge {s10} {s11};
+      \edge {s11} {s12};
+      \edge {s20} {s21};
+      \edge {s21} {s22};
+      \edge {s11} {p11};
+      \edge {s12} {p12};
+      \edge {s21} {p21};
+      \edge {s22} {p22};
+
+      \node[const, right=of s10, yshift=0cm,xshift=-0.15cm ] (wp10) {\includegraphics[page={73},width=.125\linewidth]{figuras/smoothing-por-pasos}} ;
+      \node[const, left=of s20, yshift=0cm,xshift=0.15cm ] (wp20) {\includegraphics[page={73},width=.125\linewidth]{figuras/smoothing-por-pasos}} ;
+
+
+      \node[const, left=of s11, yshift=0.6cm ] (post11) {\only<1-3>{\phantom{\includegraphics[page={1},width=.125\linewidth]{figuras/smoothing-por-pasos}}}\only<4-9>{\includegraphics[page={1},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<10-13>{\includegraphics[page={13},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<14>{\includegraphics[page={25},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<15>{\includegraphics[page={37},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<16>{\includegraphics[page={49},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<17>{\includegraphics[page={61},width=.125\linewidth]{figuras/smoothing-por-pasos}} } ;
+      \node[const, right=of s11, yshift=0.6cm, xshift=-0.15cm ] (wp11) {\only<2-7>{\includegraphics[page={2},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<8-13>{\includegraphics[page={14},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<14>{\includegraphics[page={26},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<15>{\includegraphics[page={38},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<16>{\includegraphics[page={50},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<17>{\includegraphics[page={62},width=.125\linewidth]{figuras/smoothing-por-pasos}}} ;
+      \node[const, left=of p11, yshift=0.6cm, xshift=0.15cm ] (lh11) {\only<3-8>{\includegraphics[page={3},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<9-13>{\includegraphics[page={15},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<14>{\includegraphics[page={27},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<15>{\includegraphics[page={39},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<16>{\includegraphics[page={51},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<17>{\includegraphics[page={63},width=.125\linewidth]{figuras/smoothing-por-pasos}}} ;
+
+      \node[const, left=of s12, yshift=0.6cm ] (post12) {\only<7-12>{\includegraphics[page={4},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<13>{\includegraphics[page={16},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<14>{\includegraphics[page={28},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<15>{\includegraphics[page={40},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<16>{\includegraphics[page={52},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<17>{\includegraphics[page={64},width=.125\linewidth]{figuras/smoothing-por-pasos}} } ;
+      \node[const, right=of s12, yshift=0.6cm, xshift=-0.15cm  ] (wp12) {\only<5-10>{\includegraphics[page={5},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<11-13>{\includegraphics[page={17},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<14>{\includegraphics[page={29},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<15>{\includegraphics[page={41},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<16>{\includegraphics[page={53},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<17>{\includegraphics[page={65},width=.125\linewidth]{figuras/smoothing-por-pasos}} } ;
+      \node[const, left=of p12, yshift=0.6cm, xshift=0.15cm  ] (lh12) {\only<6-11>{\includegraphics[page={6},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<12-13>{\includegraphics[page={18},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<14>{\includegraphics[page={30},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<15>{\includegraphics[page={42},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<16>{\includegraphics[page={54},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<17>{\includegraphics[page={66},width=.125\linewidth]{figuras/smoothing-por-pasos}} } ;
+
+
+      \node[const, right=of s21, yshift=0.6cm ] (post21) {\only<1-3>{\phantom{\includegraphics[page={7},width=.125\linewidth]{figuras/smoothing-por-pasos}}}\only<4-9>{\includegraphics[page={7},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<10-13>{\includegraphics[page={19},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<14>{\includegraphics[page={31},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<15>{\includegraphics[page={43},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<16>{\includegraphics[page={55},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<17>{\includegraphics[page={67},width=.125\linewidth]{figuras/smoothing-por-pasos}}}  ;
+      \node[const, left=of s21, yshift=0.6cm, xshift=0.15cm  ] (wp21) {\only<2-7>{\includegraphics[page={8},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<8-13>{\includegraphics[page={20},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<14>{\includegraphics[page={32},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<15>{\includegraphics[page={44},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<16>{\includegraphics[page={56},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<17>{\includegraphics[page={68},width=.125\linewidth]{figuras/smoothing-por-pasos}}} ;
+      \node[const, right=of p21, yshift=0.6cm, xshift=-0.15cm  ] (lh21) {\only<3-8>{\includegraphics[page={9},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<9-13>{\includegraphics[page={21},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<14>{\includegraphics[page={33},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<15>{\includegraphics[page={45},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<16>{\includegraphics[page={57},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<17>{\includegraphics[page={69},width=.125\linewidth]{figuras/smoothing-por-pasos}} } ;
+
+
+      \node[const, right=of s22, yshift=0.6cm ] (post22) {\only<7-12>{\includegraphics[page={10},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<13>{\includegraphics[page={22},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<14>{\includegraphics[page={34},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<15>{\includegraphics[page={46},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<16>{\includegraphics[page={58},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<17>{\includegraphics[page={70},width=.125\linewidth]{figuras/smoothing-por-pasos}}} ;
+      \node[const, left=of s22, yshift=0.6cm, xshift=0.15cm  ] (wp22) {\only<5-10>{\includegraphics[page={11},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<11-13>{\includegraphics[page={23},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<14>{\includegraphics[page={35},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<15>{\includegraphics[page={47},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<16>{\includegraphics[page={59},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<17>{\includegraphics[page={71},width=.125\linewidth]{figuras/smoothing-por-pasos}} } ;
+      \node[const, right=of p22, yshift=0.6cm, xshift=-0.15cm  ] (lh22) {\only<6-11>{\includegraphics[page={12},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<12-13>{\includegraphics[page={24},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<14>{\includegraphics[page={36},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<15>{\includegraphics[page={48},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<16>{\includegraphics[page={60},width=.125\linewidth]{figuras/smoothing-por-pasos}}\only<17>{\includegraphics[page={72},width=.125\linewidth]{figuras/smoothing-por-pasos}}} ;
+
+      \only<4->{\node[const, above=of post11] (npost11) {\scriptsize \only<10>{\phantom}{Posterior}} ;}
+      \only<10>{\node[const, above=of post11] (npost11) {\scriptsize \textbf{Posterior}} ;}
+      \only<2->{\node[const, above=of wp11] (nwp11) {\scriptsize \only<8>{\phantom}{Prior}} ;}
+      \only<8>{\node[const, above=of wp11] (nwp11) {\scriptsize \textbf{Prior}} ;}
+      \only<3->{\node[const, above=of lh11] (nlh11) {\scriptsize \only<9>{\phantom}{Likelihood}} ;}
+      \only<9>{\node[const, above=of lh11] (nlh11) {\scriptsize \textbf{Likelihood}} ;}
+      \only<4->{\node[const, above=of post21] (npost21) {\scriptsize \only<10>{\phantom}{Posterior}} ;}
+      \only<10>{\node[const, above=of post21] (npost21) {\scriptsize \textbf{Posterior}} ;}
+      \only<2->{\node[const, above=of wp21] (nwp21) {\scriptsize \only<8>{\phantom}{Prior}} ;}
+      \only<8>{\node[const, above=of wp21] (nwp21) {\scriptsize \textbf{Prior}} ;}
+      \only<3->{\node[const, above=of lh21] (nlh21) {\scriptsize \only<9>{\phantom}{Likelihood}} ;}
+      \only<9>{\node[const, above=of lh21] (nlh21) {\scriptsize \textbf{Likelihood}} ;}
+
+      \only<7->{\node[const, above=of post12] (npost12) {\scriptsize \only<13>{\phantom}{Posterior}} ;}
+      \only<13>{\node[const, above=of post12] (npost12) {\scriptsize \textbf{Posterior}} ;}
+      \only<5->{\node[const, above=of wp12] (nwp12) {\scriptsize \only<11>{\phantom}{Prior}} ;}
+      \only<11>{\node[const, above=of wp12] (nwp12) {\scriptsize \textbf{Prior}} ;}
+      \only<6->{\node[const, above=of lh12] (nlh12) {\scriptsize \only<12>{\phantom}{Likelihood}} ;}
+      \only<12>{\node[const, above=of lh12] (nlh12) {\scriptsize \textbf{Likelihood}} ;}
+
+      \only<7->{\node[const, above=of post22] (npost22) {\scriptsize \only<13>{\phantom}{Posterior}} ;}
+      \only<13>{\node[const, above=of post22] (npost22) {\scriptsize \textbf{Posterior}} ;}
+      \only<5->{\node[const, above=of wp22] (nwp22) {\scriptsize \only<11>{\phantom}{Prior}} ;}
+      \only<11>{\node[const, above=of wp22] (nwp22) {\scriptsize \textbf{Prior}} ;}
+      \only<6->{\node[const, above=of lh22] (nlh22) {\scriptsize \only<12>{\phantom}{Likelihood}} ;}
+      \only<12>{\node[const, above=of lh22] (nlh22) {\scriptsize \textbf{Likelihood}} ;}
+
+      \node[const, above=of wp10,yshift=-0.55cm] (nwp10) {\scriptsize Prior} ;
+      \node[const, above=of wp20,yshift=-0.55cm] (nwp20) {\scriptsize Prior} ;
+
+      }
+  }
+\end{figure}
+\end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE TrueSkill Through Time \\
+\large Estado del arte en la industria del videojuego.
+\end{textblock}
+
+\begin{textblock}{50}(5,28)
+\centering
+\includegraphics[width=0.7\textwidth]{../../auxiliar/static/julia.png}
+\end{textblock}
+\begin{textblock}{50}(55,28)
+\centering
+\includegraphics[width=1\textwidth]{../../auxiliar/static/python.png}
+\end{textblock}
+\begin{textblock}{50}(115,28) \raggedright
+\includegraphics[width=0.55\textwidth]{../../auxiliar/static/R.png}
+\end{textblock}
+
+
+\end{frame}
+
+
+\begin{frame}[plain, fragile]
+\begin{textblock}{160}(0,4)
+\centering \LARGE TrueSkill Through Time \\
+\large Estado del arte en la industria del videojuego.
+\end{textblock}
+
+
+\begin{textblock}{130}(15,24)
+\begin{lstlisting}[backgroundcolor=\color{black!10}]
+using CSV; using Dates
+using TrueSkillThroughTime
+global const ttt = TrueSkillThroughTime
+
+data = CSV.read("atp.csv")
+dates = Dates.value.(data[:,"time_start"] .- Date("1900-1-1"))
+
+matches = [ r.double == "t" ? [[r.w1_id,r.w2_id],[r.l1_id,r.l2_id]] : [[r.w1_id],[r.l1_id]] for r in eachrow(data) ]
+h = History(composition = matches, times = dates, sigma = 1.6, gamma = 0.036)
+convergence(h, epsilon = 0.01, iterations = 10)
+\end{lstlisting}
+\end{textblock}
+
+\only<2->{
+\begin{textblock}{155}(0,20) \centering
+\tikz{
+  \node[det, draw=white, minimum size=8cm] (x) {.\hspace{16cm}.};
+}
+\end{textblock}
+\begin{textblock}{155}(0,20) \centering
+\includegraphics[width=0.9\textwidth]{figuras/atp.pdf}
+\end{textblock}
+}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Efecto causal temporal \\
+\large \only<5>{El control sintético}
+\end{textblock}
+
+\only<1>{
+\begin{textblock}{155}(0,20) \centering
+\includegraphics[page=1,width=0.7\textwidth]{figuras/ICP}
+\end{textblock}
+}
+\only<2>{
+\begin{textblock}{155}(0,20) \centering
+\includegraphics[page=2,width=0.7\textwidth]{figuras/ICP}
+\end{textblock}
+}
+\only<3>{
+\begin{textblock}{155}(0,20) \centering
+\includegraphics[page=3,width=0.7\textwidth]{figuras/ICP}
+\end{textblock}
+}
+\only<4->{
+\begin{textblock}{155}(0,20) \centering
+\includegraphics[page=4,width=0.7\textwidth]{figuras/ICP}
+\end{textblock}
+}
+
+\only<5>{
+\begin{textblock}{150}(45,28) \Large
+\textbf{Necesitamos modelar \\ el contrafactual}
+% Modelos lineales de series de tiempo \\[0.2cm]
+%
+% \large
+%
+% \ \ \ $\bullet$ El comportamiento de la serie temporal previa a la intervención
+%
+% \ \ \ $\bullet$ El comportamiento de otras series temporales (misma serie en otras regiones)
+%
+% \ \ \ $\bullet$ Información del conocimiento experto
+\end{textblock}
+}
+
+
+\end{frame}
+
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+% \centering \LARGE Modelos lineas para series temporales \\
+% \large Modelo lineal básico
+% \end{textblock}
+% %
+%
+% \begin{textblock}{80}(80,18)
+% \begin{equation*}
+% \begin{split}
+% y &= w_0 + w_1 \, x_1 + w_2 \, x_2^2 + w_3 \, x_3^3 + \varepsilon \\
+% & = \sum_{i=0}^{m-1} w_i \phi_i(x) = \bm{w}^T \bm{\phi}(x) \\[0.2cm]
+% p(\varepsilon) &= \N(\varepsilon \,|\, 0, \beta^2) \\[0.6cm]
+% p(w_i) &= \N(w_i \,|\, 0, \sigma_{i}^2) \\[0cm]
+% \end{split}
+% \end{equation*}
+% \end{textblock}
+%
+% \only<1->{
+% \begin{textblock}{80}(0,24)
+% \begin{figure}[H]
+%     \centering
+%     \tikz{
+%     \node[latent, fill=black!20] (y) {$y$} ; %
+%     \node[latent, above=of y, xshift=-1cm, yshift=-0.33cm ,fill=black!100, minimum size=2pt] (x) {} ; %
+%     \node[const, left=of x] (c_x) {$\bm{\phi}(x)$};
+%     \node[latent, fill=black!100, left=of y,minimum size=2pt] (beta)
+%     {} ; %
+%     \node[const, left=of beta] (c_beta) {$\beta$};
+%     \node[latent, fill=black!0, above=of y] (w) {$\bm{w}$};
+%     \node[latent, above=of w, fill=black!100, minimum size=2pt] (alpha) {} ; %
+%     \node[const, right=of alpha] (c_alpha) {$\bm{\sigma}$};
+%
+%     \edge {x,beta,w} {y};
+%     \edge {alpha} {w};
+%
+%     \node[invisible, fill=black!0, minimum size=0pt, xshift=-0.52cm] (data_inv) {} ; %
+%
+%     %\plate {no} {(x)(y)(data_inv)(c_x)} {$i: $ Datos\vspace{1cm}}; %
+%     }
+% \end{figure}
+% \end{textblock}
+% }
+%
+%
+% \end{frame}
+%
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Modelos lineas para series temporales \\
+\large \only<1-4>{Modelo lineal básico}\only<5->{Structural state-space models}
+\end{textblock}
+
+\only<1->{
+\begin{textblock}{155}(20,20)
+\raggedright
+\tikz{
+    \node[latent, fill=black!20] (y) {$y\only<5->{_0}$} ; %
+    \node[factor, above=of y, yshift=-0.4cm] (fy) {} ; %
+    \only<1-4>{
+      \node[const, right=of fy] (py) {$p(y|\bm{w}, x) = \N(\, y \, | \, \only<1>{w_0 + w_1 \, x_1 + w_2 \, x_2^2 + w_3 \, x_3^3}\only<2>{\sum_i w_i \phi_i(x)}\only<3->{\bm{w}^T \bm{\phi}(x)}, \, \beta^2) $};
+    }
+
+    \node[latent, left=of fy, xshift=0.75cm ,fill=black!100, minimum size=2pt] (x) {} ;
+
+    \node[const, left=of x] (c_x) {$x\only<5->{_0}$};
+
+    \node[latent, above=of fy, yshift=-0.55cm] (w) {$\bm{w}\only<5->{_0}$};
+
+    \only<1-4>{\node[factor, above=of w, yshift=-0.4cm] (fw) {};}
+    \only<5->{\node[factor, left=of w, xshift=0.4cm] (fw) {};}
+    \only<1-4>{
+      \node[const, right=of fw] (py) {$p(\bm{w}) = \only<1-3>{\prod_i \N(\, w_i \, | \, 0 , \, \sigma^2)}\only<4->{\N(\, \bm{w} \, | \, 0 , \, \bm{S})}$};
+    }
+    \only<5->{
+      \node[const, above=of fw] (py) {$p(\bm{w}_0)$};
+    }
+
+%     \only<5->{
+%       \node[const, right=of fy] (py) {$p(y|\bm{w}, x)$};
+%     }
+
+    \only<5->{
+      \node[factor, right=of w] (fw1) {};
+      \node[latent, right=of fw1, xshift=0.15cm] (w1) {$\bm{w}_1$};
+      \node[factor, below=of w1, yshift=0.55cm] (fy1) {};
+      \node[latent, below=of fy1, fill=black!15, yshift=0.4cm] (y1) {$y_1$};
+      \node[latent, left=of fy1, xshift=0.75cm ,fill=black!100, minimum size=2pt] (x1) {} ;
+      \node[const, left=of x1] (nx1) {$x_1$};
+
+      \node[factor, right=of w1] (fw2) {};
+      \node[latent, right=of fw2, xshift=0.15cm] (w2) {$\bm{w}_2$};
+      \node[factor, below=of w2, yshift=0.55cm] (fy2) {};
+      \node[latent, below=of fy2, yshift=0.4cm] (y2) {$y_2$};
+      \node[latent, left=of fy2, xshift=0.75cm ,fill=black!100, minimum size=2pt] (x2) {} ;
+      \node[const, left=of x2] (nx2) {$x_2$};
+
+      \only<5-6>{\node[const, above=of fw1] (nfw1) {\normalsize$\N(\bm{w}_{t+1}|\bm{w}_t, R )$};}
+      \node[const, right=of fy2] (nfy2) {\normalsize $\N(\, y_t \, | \, \bm{w}_t^T \bm{\phi}(x_t), \, \beta^2) $};
+    }
+
+    \only<6->{
+      \draw[dashed] (4.1,-1.2) -- (4.1,4.5);
+      \node[const, xshift=2.7cm, yshift=-1cm] (pre) {\normalsize Pre-tratamiento};
+      \node[const, xshift=5.6cm, yshift=-1cm] (pre) {\normalsize Post-tratamiento};
+    }
+
+    \only<7->{
+      \node[latent, above=of fw1] (z1) {$\bm{z}_1$};
+      \node[latent, above=of fw2] (z2) {$\bm{z}_2$};
+      \node[factor, left=of z1] (fz1) {};
+      \node[factor, left=of z2, xshift=-0.15cm] (fz2) {};
+      \node[const, above=of fz2] (nfz2) {\normalsize$\N(\bm{z}_{t+1}|\bm{z}_t, Q )$ \ \  };
+    }
+    \only<8->{
+      \node[const, right=of fw2, yshift=0.6cm] (nfwt) {\normalsize$p(\bm{w}_{t+1}|\bm{w}_t,\bm{z}_t) = \N(\bm{w}_{t+1}|\bm{w}_t \Phi(\bm{z}_t), R )$ \ \  };
+    }
+
+
+
+    \edge {fw} {w};
+    \edge[-] {x,w} {fy};
+    \edge {fy} {y};
+    \only<5->{
+      \edge[-] {w} {fw1};
+      \edge {fw1} {w1};
+      \edge[-] {x1,w1} {fy1};
+      \edge {fy1} {y1};
+      \edge[-] {w1} {fw2};
+      \edge {fw2} {w2};
+      \edge[-] {x2,w2} {fy2};
+      \edge {fy2} {y2};
+    }
+    \only<7->{
+      \edge {fz1} {z1};
+      \edge[-] {z1} {fz2};
+      \edge {fz2} {z2};
+      \edge[-] {z1} {fw1};
+      \edge[-] {z2} {fw2};
+    }
+
+
+    \node[invisible, above=of w, yshift=2cm] (ia) {};
+    \node[invisible, left=of y, xshift=-1.3cm] (il) {};
+
+    %\plate {no} {(x)(y)(data_inv)(c_x)} {$i: $ Datos\vspace{1cm}}; %
+}
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Modelos lineas para series temporales \\
+\large Tendencia lineal local \only<4->{\texttt{+} controles externos}
+\end{textblock}
+
+\only<1->{
+\begin{textblock}{155}(20,20)
+\raggedright
+\tikz{
+    \node[latent, fill=black!20] (y) {$y_0$} ; %
+    \node[factor, above=of y, yshift=-0.4cm] (fy) {} ; %
+
+    \node[latent, left=of fy, xshift=0.75cm ,fill=black!100, minimum size=2pt] (x) {} ;
+
+    \node[const, left=of x] (c_x) {$\only<3->{\bm}{x}_0$};
+
+    \node[latent, above=of fy, yshift=-0.55cm] (w) {$\mu_0$};
+
+    \node[factor, left=of w, xshift=0.4cm] (fw) {};
+    \node[const, above=of fw] (py) {$p(\mu_0)$};
+
+      \node[factor, right=of w] (fw1) {};
+      \node[latent, right=of fw1, xshift=0.15cm] (w1) {$\mu_1$};
+      \node[factor, below=of w1, yshift=0.55cm] (fy1) {};
+      \node[latent, below=of fy1, fill=black!15, yshift=0.4cm] (y1) {$y_1$};
+      \node[latent, left=of fy1, xshift=0.75cm ,fill=black!100, minimum size=2pt] (x1) {} ;
+      \node[const, left=of x1] (nx1) {$\only<3->{\bm}{x}_1$};
+
+      \node[factor, right=of w1] (fw2) {};
+      \node[latent, right=of fw2, xshift=0.15cm] (w2) {$\mu_2$};
+      \node[factor, below=of w2, yshift=0.55cm] (fy2) {};
+      \node[latent, below=of fy2, yshift=0.4cm] (y2) {$y_2$};
+      \node[latent, left=of fy2, xshift=0.75cm ,fill=black!100, minimum size=2pt] (x2) {} ;
+      \node[const, left=of x2] (nx2) {$\only<3->{\bm}{x}_2$};
+
+
+      \draw[dashed] (4.1,-1.2) -- (4.1,4.5);
+
+      \only<-2>{
+        \node[const, xshift=2.7cm, yshift=-1cm] (pre) {\normalsize Pre-tratamiento};
+        \node[const, xshift=5.6cm, yshift=-1cm] (post) {\normalsize Post-tratamiento};
+      }
+
+      \node[latent, above=of fw1] (z1) {$\delta_1$};
+      \node[latent, above=of fw2] (z2) {$\delta_2$};
+      \node[factor, left=of z1] (fz1) {};
+      \node[factor, left=of z2, xshift=-0.15cm] (fz2) {};
+      \node[const, above=of fz2] (nfz2) {\normalsize$\N(\delta_{t+1}|\delta_t, q^2)$ \ \  };
+
+      \node[const, right=of fw2, yshift=0.6cm] (nfwt) {\normalsize$p(\mu_{t+1}|\mu_t,\delta_t) = \N(\mu_{t+1}|\mu_t + \delta_t, r^2 )$ \ \  };
+
+      \only<2->{
+        \node[const, right=of z2] (nz2) {\normalsize El cambio};
+        \node[const, right=of w2] (nw2) {\normalsize Lo establecido};
+      }
+
+      \only<3>{
+        \node[const, xshift=4cm, yshift=-1.7cm] (pregunta) {\Large ¿Y la relación con otras series temporales?};
+      }
+
+      \only<4->{
+        \node[latent, right=of y, xshift=-0.15cm , yshift=-1.3cm] (W) {$\bm{w}$};
+        \node[factor, left=of W] (fW) {};
+        \node[const, left=of fW] (pW) {\normalsize $p(\bm{w})$};
+        \node[const, below=of W] (static) {\normalsize Regresión estática};
+        \node[const, right=of fy2] (py2) {\normalsize $\N(y_t|\mu_t + \bm{w}^T \bm{\phi}(\bm{x}_t), \, \beta^2 )$};
+      }
+
+
+    \edge {fw} {w};
+    \edge[-] {x,w} {fy};
+    \edge {fy} {y};
+    \edge[-] {w} {fw1};
+    \edge {fw1} {w1};
+    \edge[-] {x1,w1} {fy1};
+    \edge {fy1} {y1};
+    \edge[-] {w1} {fw2};
+    \edge {fw2} {w2};
+    \edge[-] {x2,w2} {fy2};
+    \edge {fy2} {y2};
+    \edge {fz1} {z1};
+    \edge[-] {z1} {fz2};
+    \edge {fz2} {z2};
+    \edge[-] {z1} {fw1};
+    \edge[-] {z2} {fw2};
+    \only<4->{
+      \edge[-] {W} {fy,fy1,fy2};
+      \edge {fW} {W};
+    }
+
+    \node[invisible, above=of w, yshift=2cm] (ia) {};
+    \node[invisible, left=of y, xshift=-1.3cm] (il) {};
+
+    %\plate {no} {(x)(y)(data_inv)(c_x)} {$i: $ Datos\vspace{1cm}}; %
+}
+\end{textblock}
+}
+
+\end{frame}
+
+\begin{frame}[plain, fragile]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Modelos lineas para series temporales \\
+\large Ejemplo. Generación de datos.
+\end{textblock}
+
+\begin{textblock}{140}(10,14)
+\begin{lstlisting}[backgroundcolor=\color{black!10}]
+set.seed(1)
+x <- 100 + arima.sim(model = list(ar = 0.999), n = 100)
+y <- 1.2 * x + rnorm(100)
+y[71:100] <- y[71:100] + 10 # Intervencion
+\end{lstlisting}
+\end{textblock}
+
+\only<2->{
+\begin{textblock}{140}(10,23)
+\centering
+\includegraphics[width=0.8\textwidth]{figuras/causalTimeSeries.pdf}
+\end{textblock}
+}
+
+\end{frame}
+
+
+\begin{frame}[plain, fragile]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Modelos lineas para series temporales \\
+\large Ejemplo. Inferencia.
+\end{textblock}
+
+\begin{textblock}{120}(20,22)
+\begin{lstlisting}[backgroundcolor=\color{black!10}]
+library("CausalImpact")
+# Google "Inferring causal impact using
+# bayesian structural time-series models"
+
+data <- cbind(y,  x)
+pre.period <- c(1, 70)
+post.period <- c(71, 100)
+impact <- CausalImpact(data, pre.period, post.period)
+\end{lstlisting}
+\end{textblock}
+
+\only<2->{
+\begin{textblock}{140}(10,16)
+\centering
+\includegraphics[width=0.9\textwidth]{figuras/causalTimeSeries2.pdf}
+\end{textblock}
+}
+
+\end{frame}
+
+
+
+\begin{frame}[plain,noframenumbering]
+\centering \vspace{0.5cm}
+\includegraphics[width=1\textwidth]{../../auxiliar/static/BP.png}
+\end{frame}
+
+
+
+
+
+%
+% \begin{frame}[plain]
+% \begin{textblock}{96}(0,6.5)\centering
+% {\transparent{0.9}\includegraphics[width=0.8\textwidth]{../../auxiliar/static/inti.png}}
+% \end{textblock}
+%
+% \begin{textblock}{160}(96,5.5)
+% \includegraphics[width=0.35\textwidth]{../../auxiliar/static/pachacuteckoricancha}
+% \end{textblock}
+% \end{frame}
+
+
+
+
+
+\end{document}
+
+
+

@@ -1,0 +1,381 @@
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\input{../auxiliar/tex/diapo_encabezado.tex}
+\input{../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+\usetikzlibrary{decorations.text}
+\usepackage{rotating}
+\usepackage{transparent}
+
+\usepackage{todonotes}
+\setbeameroption{show notes}
+
+\newcounter{capitulo}
+\setcounter{capitulo}{1}
+\newcommand{\unidad}{\thecapitulo \stepcounter{capitulo}}
+
+
+\estrue
+
+%\title[Bayes del Sur]{}
+
+\begin{document}
+
+\color{black!85}
+\large
+
+\begin{frame}[plain,noframenumbering]
+
+
+\begin{textblock}{160}(0,0)
+\includegraphics[width=1\textwidth]{../auxiliar/static/deforestacion}
+\end{textblock}
+
+\begin{textblock}{80}(18,9)
+\textcolor{black!15}{\fontsize{44}{55}\selectfont Verdades}
+\end{textblock}
+
+\begin{textblock}{47}(85,70)
+\centering \textcolor{black!15}{{\fontsize{52}{65}\selectfont Empíricas}}
+\end{textblock}
+
+\begin{textblock}{80}(100,28)
+\LARGE  \textcolor{black!15}{\rotatebox[origin=tr]{-3}{\scalebox{9}{\scalebox{1}[-1]{$p$}}}}
+\end{textblock}
+
+\begin{textblock}{80}(66,43)
+\LARGE  \textcolor{black!15}{\scalebox{6}{$=$}}
+\end{textblock}
+
+\begin{textblock}{80}(36,29)
+\LARGE  \textcolor{black!15}{\scalebox{9}{$p$}}
+\end{textblock}
+
+\vspace{2cm}
+\maketitle
+
+
+
+\begin{textblock}{160}(01,81)
+\footnotesize \textcolor{black!5}{\textbf{Talleres ``Verdades Empíricas'' \\
+Congreso Bayesiano Plurinacional 2023} \\}
+\end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(01,03)\centering
+\textcolor{black!85}{{\large
+\large Talleres \textbf{Verdades empíricas} \\[-0.1cm] \footnotesize Congreso Bayesiano Plurinacional 2023}} \\[0.2cm]
+
+\small Responsable: Gustavo Landfried \\[0.1cm]
+
+\scriptsize \texttt{https://github.com/BayesPlurinacional/tallerBP-2023} (a partir del 4 de agosto)
+\end{textblock}
+
+
+
+\begin{textblock}{140}(10,20)
+
+\vspace{0.8cm}
+
+
+\normalsize Taller 1 \textbf{Causalidad} \footnotesize 4 de agosto 10:30 - 12:20 \\[0.1cm]
+\ \ $1$. Modelos gráficos e inferencia \\
+\ \ $2$. Inferencia Causal\\
+
+ \vspace{0.5cm}
+
+\normalsize Taller 2 \textbf{Datos temporales} \footnotesize 5 de agosto 9:20 - 10:50 \\[0.1cm]
+\ \ $3$. Sorpresa: el problema de la comunicación con la realidad \\
+\ \ $4$. Modelos de historia completa\\
+
+\vspace{0.5cm}
+
+\normalsize Taller 3 \textbf{Toma de decisiones}  \footnotesize 5 de agosto 11:00 - 12:20 \\[0.1cm]
+\ \ $5$. La función de costo epistémico-evolutiva \\
+\ \ $6$. Competencia ``Apuestas de vida'' \\
+
+\end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(00,04)\centering
+\textcolor{black!85}{\Large Objetivos}
+\end{textblock}
+
+\begin{textblock}{140}(10,18)
+
+\small
+
+\parbox{14cm}{
+
+Las reglas de la probabilidad se conocen desde finales del siglo 18 y desde entonces se han adoptado como sistema de razonamiento en todas las ciencias empíricas (ciencias con datos).
+%
+Sin embargo, su aplicación estricta (enfoque bayesiano) ha estado históricamente limitada debido al alto costo computacional asociado a la evaluación de todo el espacio de hipótesis.
+
+\vspace{0.3cm}
+
+En las últimas décadas se han desarrollado una gran cantidad de algoritmo de aprendizaje automático.
+Bajo este marco, cada nuevo problema se ``resuelve'' aplicando alguno de los algoritmos ya existentes.
+Si bien este flujo de trabajo ha sido exitoso para muchas tareas, tiene la desventaja de ser inflexible y de dificultar la inferencia causal.
+
+\vspace{0.3cm}
+
+En esas mismas décadas se desarrollaron métodos generales para implementar modelos a medida del problema de forma sencilla e intuitiva.
+Con ellos podemos computar la incertidumbre óptima dada la información disponible, expresando las relaciones causales entre las variables de forma gráfica, descomponiendo las reglas de la probabilidad como mensajes entre los nodos de la red causal, y delegando la inferencia a los lenguajes de programación probabilística.
+
+
+}
+\end{textblock}
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+
+\centering \LARGE
+Taller 1. Causalidad.
+
+\end{frame}
+
+
+
+\begin{frame}[plain,noframenumbering]
+\begin{textblock}{160}(0,43)
+\includegraphics[width=1\textwidth]{../auxiliar/static/modelosGraficos}
+\end{textblock}
+
+
+\begin{textblock}{160}(4,4)
+\LARGE \textcolor{black!85}{\fontsize{22}{0}\selectfont \textbf{Modelos gráficos e inferencia}}
+\end{textblock}
+% \begin{textblock}{160}(4,12)
+% \LARGE \textcolor{black!85}{\fontsize{22}{0}\selectfont \textbf{algoritmos de inferencia}}
+% \end{textblock}
+
+
+\begin{textblock}{55}[0,0](72,23)
+\begin{turn}{0}
+\parbox{10cm}{\sloppy\setlength\parfillskip{0pt}
+\textcolor{black!85}{Unidad \unidad} \\
+\small\textcolor{black!85}{Acuerdos intersubjetivos en contextos de incertidumbre.} \\
+\small\textcolor{black!85}{Especificación gráfica de modelos causales. Evaluación} \\
+\small\textcolor{black!85}{de modelos causales. La emergencia del sobreajuste y el} \\
+\small\textcolor{black!85}{balance natural de las reglas de la probabilidad.} \\
+}
+\end{turn}
+\end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(0,0)
+\includegraphics[width=1\textwidth]{../auxiliar/static/peligro_predador}
+\end{textblock}
+
+\begin{textblock}{160}(127,67)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{Inferencia  \\[-0.1cm] \hspace{0.5cm} causal}}
+\end{textblock}
+
+\begin{textblock}{55}(2,3)
+\begin{turn}{0}
+\parbox{15cm}{\small
+\textcolor{black!95}{Flujos de inferencia en modelos causales. Efecto de}\\
+\textcolor{black!95}{las intervenciones en modelos causales. Conclusiones} \\
+\textcolor{black!95}{causales a partir de datos observables. Identificación} \\
+\textcolor{black!95}{de modelo causal. Contrafactuales.} \\
+\normalsize\textcolor{black!95}{Unidad \unidad} \\
+}
+\end{turn}
+\end{textblock}
+
+\end{frame}
+
+
+
+\begin{frame}[plain,noframenumbering]
+
+\centering \LARGE
+Taller 1. Datos temporales.
+
+\end{frame}
+
+
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(0,0)
+\includegraphics[width=1\textwidth]{../auxiliar/static/fuego}
+\end{textblock}
+
+\begin{textblock}{160}(4,26)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{Sorpresa: el problema}}
+\end{textblock}
+\begin{textblock}{160}(4,34)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{de la comunicación}}
+\end{textblock}
+\begin{textblock}{160}(4,42)
+\LARGE \textcolor{black!5}{\fontsize{22}{0}\selectfont \textbf{con la realidad}}
+\end{textblock}
+
+
+\begin{textblock}{55}[0,0](88,25)
+\begin{turn}{0}
+\parbox{7cm}{\sloppy\setlength\parfillskip{0pt}
+\textcolor{black!0}{Unidad \unidad} \\
+\small\textcolor{black!5}{\hspace{-0.3cm}La estructura invariante del dato empírico.} \\
+\small\textcolor{black!5}{\hspace{-0.3cm}Construcción de un sistema de información.}\\
+\small\textcolor{black!5}{\hspace{-0.4cm}Evaluación de sistemas de información alternativos.} \\
+\small\textcolor{black!5}{\hspace{-0.6cm}Ejemplos: evaluación de test diagnóstico,} \\
+\small\textcolor{black!5}{\hspace{-0.8cm}estimación de habilidad en la industria del videojuego.} \\
+}
+\end{turn}
+\end{textblock}
+
+\end{frame}
+
+
+
+\begin{frame}[plain,noframenumbering]
+\begin{textblock}{160}(0,-4.3) \centering
+\includegraphics[width=1\textwidth]{../auxiliar/static/antartic}
+\end{textblock}
+
+\begin{textblock}{160}(0,0) \centering
+\tikz{
+\node[det, fill=black,draw=black] (k) {\textcolor{black}{--------------------------------------------------------------------------------------------------------------------------------------}} ;
+}
+\end{textblock}
+
+\begin{textblock}{160}(5,0)
+\tikz{
+\node[det, fill=black,draw=black,text width=0.01cm] (k) {\textcolor{black}{--------------------------------------------------------------------------------------------------------------------------------------}} ;
+}
+\end{textblock}
+
+
+\begin{textblock}{160}(0,4) \centering
+\LARGE \hspace{1cm} \textcolor{black!20}{\fontsize{22}{0}\selectfont \textbf{Modelos de historia \\ \hspace{1cm} completa}}
+\end{textblock}
+
+
+\begin{textblock}{55}[0,1](8,70)
+\begin{turn}{90}
+\parbox{6cm}{\footnotesize
+\textcolor{black!10}{Millones de km$^2$ de hielo Antártico}}
+\end{turn}
+\end{textblock}
+
+
+\begin{textblock}{160}(20,63)
+\textcolor{black!10}{Unidad \unidad \\ \small
+Redes bayesianas de historia completa. \\
+El problema de usar el posterior como prior del siguiente evento\\
+El algoritmo de inferencia por loopy belief propagation. \\
+Consideraciones de inferencia causal en series temporales. \\
+}
+\end{textblock}
+
+
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+
+\centering \LARGE
+Taller 3. Toma de decisiones.
+
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(0,-15)
+\includegraphics[width=1\textwidth]{../auxiliar/static/tsimane}
+\end{textblock}
+
+
+% VERSION 2
+\begin{textblock}{160}(6,36)
+\LARGE \rotatebox[origin=tr]{18}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{La función}}}
+\end{textblock}
+\begin{textblock}{160}(41,32)
+\LARGE \rotatebox[origin=tr]{23}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{de}}}
+\end{textblock}
+\begin{textblock}{160}(50.5,23)
+\LARGE \rotatebox[origin=tr]{28}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{costo}}}
+\end{textblock}
+\begin{textblock}{160}(68,5.3)
+\LARGE \rotatebox[origin=tr]{26}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{epistémico}}}
+\end{textblock}
+\begin{textblock}{160}(104,5.5)
+\LARGE \rotatebox[origin=tr]{8}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{-}}}
+\end{textblock}
+\begin{textblock}{160}(110,3)
+\LARGE \rotatebox[origin=tr]{-14}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{evolutiva}}}
+\end{textblock}
+
+
+\begin{textblock}{55}[0,0](119,22)
+\begin{turn}{-57}
+\parbox{7cm}{\sloppy\setlength\parfillskip{0pt}
+\textcolor{black!0}{\ \ \ \ \ Unidad \unidad} \\
+\small\textcolor{black!5}{\hspace{-0.15cm} Apuestas óptimas.} \\
+\small\textcolor{black!5}{\hspace{-0.85cm} Ventajas a favor de la:} \\
+\small\textcolor{black!5}{\hspace{-1.45cm} Diversificación (propiedad epistémica)}\\
+\small\textcolor{black!5}{\hspace{-1.7cm} Cooperación (propiedad evolutiva)}\\
+\small\textcolor{black!5}{ \hspace{-1.75cm}Especialización (propiedad de especiación)} \\
+\small\textcolor{black!5}{\hspace{-2cm} Heterogeniedad (propiedad ecológica).\\ }}
+\end{turn}
+\end{textblock}
+
+
+\end{frame}
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(0,11)  \centering
+\includegraphics[width=0.40\textwidth]{../auxiliar/static/treeOfLife-liviano}
+\end{textblock}
+
+\begin{textblock}{160}(0,3) \centering
+\LARGE \textcolor{black!85}{\rotatebox[origin=tr]{0}{\fontsize{22}{0}\selectfont \textbf{Apuestas de vida}}}
+\end{textblock}
+
+
+\begin{textblock}{55}(75,39)
+\textcolor{black!85}{\normalsize El árbol de la vida \\
+\fontsize{2}{0}\selectfont Synthesis of phylogeny and taxonomy into a comprehensive tree of life \\}
+\end{textblock}
+
+
+\begin{textblock}{55}(3,81)
+\textcolor{black!85}{Unidad \unidad}
+\end{textblock}
+
+\begin{textblock}{55}(25,81.3)
+\begin{turn}{0}
+\parbox{15cm}{\small \textcolor{black!85}{Presentación de una competencia de inferecia con apuestas e intercambio de recursos.}
+}
+\end{turn}
+\end{textblock}
+
+\end{frame}
+
+\end{document}

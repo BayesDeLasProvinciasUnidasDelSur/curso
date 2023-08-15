@@ -1,0 +1,908 @@
+\newif\ifen
+\newif\ifes
+\newif\iffr
+\newcommand{\fr}[1]{\iffr#1 \fi}
+\newcommand{\En}[1]{\ifen#1\fi}
+\newcommand{\Es}[1]{\ifes#1\fi}
+\estrue
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\usepackage{siunitx}
+\input{../../auxiliar/tex/diapo_encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+\estrue
+\usepackage{todonotes}
+\setbeameroption{show notes}
+%
+\newcommand{\gray}{\color{black!55}}
+\usepackage{ulem} % sout
+\usepackage{mdframed}
+\usepackage{listings}
+\lstset{
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=true,
+  columns=flexible,
+  basicstyle={\footnotesize\ttfamily},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showlines=true,
+}
+
+\begin{document}
+
+\color{black!85}
+\large
+%
+% \begin{frame}[plain,noframenumbering]
+%
+%
+% \begin{textblock}{160}(0,0)
+% \includegraphics[width=1\textwidth]{../../auxiliar/static/deforestacion}
+% \end{textblock}
+%
+% \begin{textblock}{80}(18,9)
+% \textcolor{black!15}{\fontsize{44}{55}\selectfont Verdades}
+% \end{textblock}
+%
+% \begin{textblock}{47}(85,70)
+% \centering \textcolor{black!15}{{\fontsize{52}{65}\selectfont Empíricas}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(100,28)
+% \LARGE  \textcolor{black!15}{\rotatebox[origin=tr]{-3}{\scalebox{9}{\scalebox{1}[-1]{$p$}}}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(66,43)
+% \LARGE  \textcolor{black!15}{\scalebox{6}{$=$}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(36,29)
+% \LARGE  \textcolor{black!15}{\scalebox{9}{$p$}}
+% \end{textblock}
+%
+% %
+% %
+% % \begin{textblock}{160}(01,81)
+% % \footnotesize \textcolor{black!5}{\textbf{\small Seminario ``Acuerdos intersubjetivos''\\
+% % Comunidad Bayesiana Plurinacional} \\}
+% % \end{textblock}
+%
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(0,-15)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/tsimane}
+\end{textblock}
+
+
+% VERSION 2
+\begin{textblock}{160}(6,36)
+\LARGE \rotatebox[origin=tr]{18}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{La función}}}
+\end{textblock}
+\begin{textblock}{160}(41,32)
+\LARGE \rotatebox[origin=tr]{23}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{de}}}
+\end{textblock}
+\begin{textblock}{160}(50.5,23)
+\LARGE \rotatebox[origin=tr]{28}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{costo}}}
+\end{textblock}
+\begin{textblock}{160}(68,5.3)
+\LARGE \rotatebox[origin=tr]{26}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{epistémico}}}
+\end{textblock}
+\begin{textblock}{160}(104,5.5)
+\LARGE \rotatebox[origin=tr]{8}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{-}}}
+\end{textblock}
+\begin{textblock}{160}(110,3)
+\LARGE \rotatebox[origin=tr]{-14}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{evolutiva}}}
+\end{textblock}
+
+
+\begin{textblock}{55}[0,0](119,22)
+\begin{turn}{-57}
+\parbox{7cm}{\sloppy\setlength\parfillskip{0pt}
+\textcolor{black!0}{\ \ \ \ \ Unidad 5} \\
+\small\textcolor{black!5}{\hspace{-0.15cm} Apuestas óptimas.} \\
+\small\textcolor{black!5}{\hspace{-0.85cm} Ventajas a favor de la:} \\
+\small\textcolor{black!5}{\hspace{-1.45cm} Diversificación (propiedad epistémica)}\\
+\small\textcolor{black!5}{\hspace{-1.7cm} Cooperación (propiedad evolutiva)}\\
+\small\textcolor{black!5}{ \hspace{-1.75cm}Especialización (propiedad de especiación)} \\
+\small\textcolor{black!5}{\hspace{-2cm} Heterogeniedad (propiedad ecológica).\\ }}
+\end{turn}
+\end{textblock}
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Toma de decisiones \\
+\large Las funciones de costo
+\end{textblock}
+
+
+\only<1->{
+\begin{textblock}{160}(0,24) \centering
+
+\Large \only<1>{La función de costo epistémica\phantom{evolutiva}}\only<2->{La función de costo evolutiva\phantom{epistémica}}
+
+\large
+\only<1>{\begin{equation*}
+\underbrace{P(\text{Hipótesis},\text{\En{Data}\Es{Datos}})}_{\hfrac{\text{\footnotesize\En{Initial belief compatible}\Es{Creencia compatible }}}{\text{\footnotesize \En{with the data}\Es{con los datos}}}} = \underbrace{P(\text{Hipótesis})}_{\hfrac{\text{\footnotesize\En{Initial intersubjective}\Es{Acuerdo inter-}}}{\text{\footnotesize\En{agreement}\Es{subjetivo inicial}}}} \ \underbrace{P(\text{dato}_1 |\text{Hipótesis})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 1}} \, \underbrace{P(\text{dato}_2 | \text{dato}_1 , \text{Hipótesis})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 2}} \dots
+\end{equation*}
+}\only<2->{\begin{equation*}
+\underbrace{\text{P}(\text{Variante},\text{\En{Data}\Es{Datos}})}_{\hfrac{\text{\footnotesize\En{Initial belief compatible}\Es{Tamaño actual}}}{\text{\footnotesize \En{with the data}\Es{de la población}}}} = \underbrace{\text{P}(\text{Variante})}_{\hfrac{\text{\footnotesize\En{Initial intersubjective}\Es{Tamaño inicial}}}{\text{\footnotesize\En{agreement}\Es{de la población}}}} \underbrace{\text{ R}(\text{dato}_1|\text{Variante})}_{\text{\footnotesize Reproducción $\geq 1$}} \, \underbrace{\text{ S}(\text{dato}_2|\text{dato}_1,\text{Variante}) }_{\text{\footnotesize $0 \leq$ Supervivencia $\leq 1$  }} \dots
+\end{equation*}
+}
+
+\end{textblock}
+}
+
+
+
+\only<3->{
+\begin{textblock}{160}(0,60) \centering \Large
+Un 0 en la secuencia de tasas de reproducción y
+
+supervivencia produce una extinción irreversible
+
+\vspace{0.6cm}
+
+\only<4>{
+\textbf{¿Cuáles son las variantes que más crecen?}
+}
+
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE La función de costo evolutiva \\
+\large \only<2->{Apuestas de vida}
+\end{textblock}
+
+
+\only<1-3>{
+\begin{textblock}{160}(0,24)
+\begin{equation*}
+\underbrace{\text{P}(\text{Variante},\text{\En{Data}\Es{Datos}})}_{ \only<1-2>{\hfrac{\text{\footnotesize\En{Initial belief compatible}\Es{Tamaño actual}}}{\text{\footnotesize \En{with the data}\Es{de la población}}}}\only<3>{\text{\footnotesize $\omega_t(b)$ recursos finales}}} = \underbrace{\text{P}(\text{Variante})}_{\only<1-2>{\hfrac{\text{\footnotesize\En{Initial intersubjective}\Es{Tamaño inicial}}}{\text{\footnotesize\En{agreement}\Es{de la población}}}}\only<3>{\text{\footnotesize $\omega_0$ $\hfrac{\text{\footnotesize recursos}}{\text{\footnotesize iniciales}}$}}} \underbrace{\text{ R}(\text{dato}_1|\text{Variante})}_{\only<1-2>{\text{\footnotesize Reproducción $\geq 1$}}\only<3>{\text{\footnotesize $b \, Q_c$ Reproducción }}} \, \underbrace{\text{ S}(\text{dato}_2|\text{dato}_1,\text{Variante}) }_{\only<1-2>{\text{\footnotesize $0 \leq$ Supervivencia $\leq 1$  }}\only<3>{\text{\footnotesize $(1-b) Q_s$ Supervivencia}}} \dots
+\end{equation*}
+\end{textblock}
+}
+
+
+
+\only<4->{
+\begin{textblock}{160}(55,16)
+\begin{flalign*}
+\omega_2(b) & = \underbrace{\omega_0 \, \overbrace{b \,  Q_c}^{\text{Cara}}}_{\omega_1(b)} \, \overbrace{(1-b) \, Q_s}^{\text{Seca}}
+&&
+\end{flalign*}
+\end{textblock}
+}
+
+
+
+\only<2-8>{
+\begin{textblock}{150}(10,48)
+Casa de apuestas paga: \\[0.2cm] \normalsize
+
+\ \ $\bullet$ Por \textbf{Cara}. $Q_c = 3$
+
+\ \ $\bullet$ Por \textbf{Seca}. $Q_s = 1.2$
+
+\vspace{0.3cm} \large
+
+Apuestamos proporciones\\[0.2cm] \normalsize
+
+\ \ $\bullet$ A \textbf{Cara}. $b \in [0,1]$
+
+\ \ $\bullet$ A \textbf{Seca}. $(1-b)$
+
+
+\end{textblock}
+}
+
+\only<9-16>{
+\begin{textblock}{74}(2,48) \centering
+Regla de la suma \\ \footnotesize
+(Predecir integrando todas las hipótesis)
+
+\begin{align*}
+ \widehat{\omega}_1(b=0.5) =  & P(\text{Cara}) 1.5 + P(\text{Seca}) 0.6 = \bm{1.05} \\[0.2cm]
+\only<10->{\widehat{\omega}_2(0.5) = & P(\text{CC}) 1.5\cdot1.5  + \\ & 2\cdot P(\text{CS}) 1.5\cdot0.6 + \\
+ & P(\text{SS}) 0.6\cdot0.6 = \bm{1.05^2}}
+\end{align*}
+
+\end{textblock}
+}
+
+\only<17->{
+\begin{textblock}{74}(2,56) \centering \Large
+Los impactos de las caídas son
+
+más fuertes que los de la ganancias
+\end{textblock}
+}
+
+
+\only<2-4>{
+\begin{textblock}{95}(60,48)
+\raggedleft
+\includegraphics[width=0.82\textwidth]{../../auxiliar/static/plata-potosi.jpg}
+\end{textblock}
+}
+
+\only<5-7>{
+\begin{textblock}{85}(70,48) \centering
+\Large
+Ya conocemos bien esta función de costo
+
+¿Nos conviene jugar? \\[0.5cm] \normalsize
+
+
+\only<6->{
+Si apostamos todo a una opción y sale
+
+la contraria, perdemos todos.
+}
+
+\vspace{0.5cm}
+
+\only<7->{\large
+
+¿Qué pasa si apostamos $b=0.5$?
+}
+
+\end{textblock}
+}
+
+\only<8>{
+\begin{textblock}{78}(81,40) \centering
+\includegraphics[page=1,width=1\textwidth]{figuras/apuestasParalelas.pdf}
+\end{textblock}
+}
+\only<9>{
+\begin{textblock}{78}(81,40) \centering
+\includegraphics[page=2,width=1\textwidth]{figuras/apuestasParalelas.pdf}
+\end{textblock}
+}
+\only<10>{
+\begin{textblock}{78}(81,40) \centering
+\includegraphics[page=3,width=1\textwidth]{figuras/apuestasParalelas.pdf}
+\end{textblock}
+}
+\only<11>{
+\begin{textblock}{78}(81,40) \centering
+\includegraphics[page=4,width=1\textwidth]{figuras/apuestasParalelas.pdf}
+\end{textblock}
+}
+\only<12>{
+\begin{textblock}{78}(81,40) \centering
+\includegraphics[page=5,width=1\textwidth]{figuras/apuestasParalelas.pdf}
+\end{textblock}
+}
+\only<13>{
+\begin{textblock}{78}(81,40) \centering
+\includegraphics[page=6,width=1\textwidth]{figuras/apuestasParalelas.pdf}
+\end{textblock}
+}
+\only<14>{
+\begin{textblock}{78}(81,40) \centering
+\includegraphics[page=9,width=1\textwidth]{figuras/apuestasParalelas.pdf}
+\end{textblock}
+}
+\only<15>{
+\begin{textblock}{78}(81,40) \centering
+\includegraphics[page=8,width=1\textwidth]{figuras/apuestasParalelas.pdf}
+\end{textblock}
+}
+\only<16->{
+\begin{textblock}{78}(81,40) \centering
+\includegraphics[page=7,width=1\textwidth]{figuras/apuestasParalelas.pdf}
+\end{textblock}
+}
+
+
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE La función de costo evolutiva \\
+\large Tasa de crecimiento temporal
+\end{textblock}
+
+
+\only<1->{
+\begin{textblock}{160}(10,12)
+\begin{flalign*}
+\phantom{\left(\frac{\omega_T(b)}{\omega_0}\right)^{\frac{1}{T}} } \onslide<4->{\lim_{T\rightarrow \infty}} \only<1-4>{\omega_T(b)}\only<5->{\left(\frac{\omega_T(b)}{\omega_0}\right)^{\onslide<6->{\frac{1}{T}}} } & =  \only<-4>{\omega_0} \, (b \,  Q_c)^{\only<1-5>{n_c}\only<6>{\frac{n_c}{T}}\only<7->{\, p\,}} \, ((1-b) \,  Q_s)^{\only<1-5>{n_s}\only<6>{\frac{n_s}{T}}\only<7->{(1-p)}} \only<1-3>{\approx}\only<4->{=} \onslide<1-3>{\text{¿}} \, \only<-4>{\omega_0} \only<-5>{\,} r(b)\only<1-5>{^T} \onslide<1-3>{\text{?}} \phantom{\left(\frac{\omega_T(b)}{\omega_0}\right)^{\frac{1}{T}} } \\
+\only<8->{& = \  (\underbrace{0.5 \cdot 3.0}_{1.5}) ^{1/2} \ \ (\underbrace{0.5 \cdot 1.2}_{0.6})^{1/2} \approx 0.949}
+&&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\only<2>{
+\begin{textblock}{100}(30,33) \centering
+\includegraphics[page=10,width=0.9\textwidth]{figuras/apuestasParalelas.pdf}
+\end{textblock}
+}
+\only<3>{
+\begin{textblock}{100}(30,33) \centering
+\includegraphics[page=11,width=0.9\textwidth]{figuras/apuestasParalelas.pdf}
+\end{textblock}
+}
+\only<4-7>{
+\begin{textblock}{100}(30,33) \centering
+\includegraphics[page=12,width=0.9\textwidth]{figuras/apuestasParalelas.pdf}
+\end{textblock}
+}
+\only<8>{
+\begin{textblock}{100}(30,33) \centering
+\includegraphics[page=13,width=0.9\textwidth]{figuras/apuestasParalelas.pdf}
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE \only<8->{\phantom{epistémico-}}La función de costo \only<8->{epistémico-}evolutiva \\
+\large Comportamiento óptimo a largo plazo
+\end{textblock}
+
+
+
+\only<1->{
+\begin{textblock}{160}(0,18)
+\begin{align*}
+\frac{r(b)}{r(d)} & = \frac{(b\, \only<1>{Q_c\,}\only<2->{\cancel{Q_c}} )^p \, ((1-b)\, \only<1>{Q_s\,}\only<2->{\bcancel{Q_s}} )^{1-p}}{(d\, \only<1>{Q_c\,}\only<2->{\cancel{Q_c}} )^p \, ((1-d)\,  \only<1>{Q_s\,}\only<2->{\bcancel{Q_s}} )^{1-p}}
+\end{align*}
+\end{textblock}
+}
+
+
+\only<3>{
+\begin{textblock}{160}(0,48) \centering \Large
+Para elegir la apuesta óptima,
+
+no importa el pago que ofrezca la casa!!
+\end{textblock}
+}
+
+
+\only<4->{
+\begin{textblock}{160}(30,44)
+\begin{flalign*}
+& \underset{b}{\text{ arg max }} \ b^{\,p}  (1-b)^{1-p} \only<5>{= \underset{b}{\text{ arg max }} \ p \, \log b + (1-p) \, \log (1-b)}\only<6->{= \underset{b}{\text{ arg max }} \, \underbrace{p \, \log b + (1-p) \, \log (1-b)}_{-\text{\small Entropía cruzada!}} }
+&&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\only<7>{
+\begin{textblock}{160}(0,58) \centering \huge
+\begin{equation*}
+b^* = p
+\end{equation*}
+\end{textblock}
+}
+
+\only<8->{
+\begin{textblock}{160}(0,58) \centering \huge
+\begin{equation*}
+\underbrace{b^* = p}_{\text{\normalsize Propiedad epistémica}}
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<9>{
+\begin{textblock}{160}(0,83) \centering \normalsize
+(Ventaja a favor de la diversificación individual)
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE El isomorfismo evolución - probabilidad \\
+\large \only<1>{Replicator dynamic - Teorema de Bayes}\only<2->{Proporción actual de las poblaciones}
+\end{textblock}
+
+\only<1>{
+\begin{textblock}{160}(0,28) \centering
+\begin{equation*} \footnotesize
+\overbrace{P\Big(\hfrac{\text{Hipótesis o}}{\text{Forma de vida}}  \Big| \text{Datos}, \hfrac{\text{Modelo}}{\text{Causal}} \Big)}^{\hfrac{\text{\scriptsize Nueva proporción}}{\text{\scriptsize de la variante}}} = \frac{ \overbrace{P\Big(\text{Datos},  \Big|  \hfrac{\text{Hipótesis o}}{\text{Forma de vida}}  , \hfrac{\text{Modelo}}{\text{Causal}} \Big)}^{\hfrac{\text{\scriptsize Adaptabilidad de la}}{\text{\scriptsize variante a la realidad}}} \overbrace{P\Big(\hfrac{\text{Hipótesis o}}{\text{Forma de vida}} \Big|  \hfrac{\text{Modelo}}{\text{Causal}} \Big)}^{\hfrac{\text{\scriptsize Vieja proporción}}{\text{\scriptsize de la variante}}}}{\underbrace{P\Big(\text{Datos},  \hfrac{\text{\small Modelo}}{\text{\small Causal}} \Big)}_{\hfrac{\text{\scriptsize Proporción}}{\text{\scriptsize sobreviviente}}}}
+\end{equation*}
+\end{textblock}
+}
+
+\only<2-3>{
+\begin{textblock}{140}(10,22) \centering
+\includegraphics[width=1\textwidth]{../../auxiliar/static/biomassBarOn.png}
+\end{textblock}
+}
+
+\only<2>{
+\begin{textblock}{160}(0,22)
+\tikz{
+  \node[det, draw=white, minimum size=9cm] (c) {};
+  \node[invisible, left=of c, xshift=-6.7cm] (i) {};
+  \node[det, right= of i,draw=white, minimum size=1cm, xshift=5.46cm,yshift=0.05cm] (c2) {};
+}
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE La estrategia de la vida \\
+\large Transiciones evolutivas mayores
+\end{textblock}
+
+
+\only<1>{
+\begin{textblock}{160}(0,28) \centering
+\begin{figure}[ht!]
+    \centering
+  \scalebox{1.2}{
+  \tikz{
+      \node[accion] (i1) {} ;
+      \node[accion, yshift=0.6cm, xshift=0.4cm] (i2) {} ;
+      \node[accion, yshift=0.6cm, xshift=-0.4cm] (i3) {} ;
+      \node[const, yshift=0.3cm, xshift=0.4cm] (i) {};
+
+      \node[const, yshift=-0.8cm] (ni) {$\hfrac{\text{Individuos}}{\text{solitarios}}$};
+
+      \node[const, yshift=1.2cm, xshift=1.5cm] (m1) {$\hfrac{\text{Formación}}{\text{de grupos}}$};
+
+      \node[const, right=of i, xshift=2cm] (c) {};
+      \node[accion, below=of c, yshift=0.35cm, xshift=0.4cm] (c1) {} ;
+      \node[accion, above=of c, yshift=-0.35cm, xshift=0.6cm] (c2) {} ;
+      \node[accion, above=of c, yshift=-0.35cm, xshift=0.2cm] (c3) {} ;
+      \node[const, right=of c, xshift=0.6cm] (cc) {};
+
+      \node[const, right=of ni, xshift=1.3cm] (nc) {$\hfrac{\text{Grupos}}{\text{cooperativos}}$};
+
+      \node[const, right=of m1, xshift=1.2cm] (m2) {$\hfrac{\text{Transición}}{\text{mayor}}$};
+
+      \node[const, right=of cc, xshift=2cm] (t) {};
+      \node[accion, below=of t, yshift=0.35cm, xshift=0.4cm] (t1) {} ;
+      \node[accion, above=of t, yshift=-0.35cm, xshift=0.6cm] (t2) {} ;
+      \node[accion, above=of t, yshift=-0.35cm, xshift=0.2cm] (t3) {} ;
+
+      \node[const, right=of nc, xshift=1.1cm] (nt) {$\hfrac{\text{Unidad de}}{\text{nivel superior}}$};
+
+      \edge {i} {c};
+      \edge {cc} {t};
+
+      \plate {transition} {(t1)(t2)(t3)} {}; %
+      }
+  }
+\end{figure}
+\end{textblock}
+}
+
+
+\only<2->{
+\begin{textblock}{160}(0,22) \centering \Large
+
+
+La emergencia de unidades cooperativas de
+
+nivel superior es un fenómeno permanente
+
+\vspace{0.8cm} \large
+
+\only<3->{
+Nuestra propia vida depende de al menos 4 niveles:
+\begin{figure}[H]
+\centering
+ \begin{subfigure}[b]{0.25\textwidth} \centering
+ \onslide<4->{\includegraphics[width=1\linewidth]{../../auxiliar/static/cloroplastos.jpg}
+  \caption*{\En{Eukaryotic cells}\Es{Células eucariota}}}
+  \end{subfigure}
+ \begin{subfigure}[b]{0.23\textwidth} \centering
+  \onslide<5->{\includegraphics[width=1\linewidth]{../../auxiliar/static/fotosintesis.jpg}
+  \caption*{\En{Organisms}\Es{Organismos}}}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.235\textwidth} \centering
+ \onslide<6->{\includegraphics[width=1\linewidth]{../../auxiliar/static/hormigas2.jpg}
+  \caption*{\En{Societies}\Es{Sociedades}}}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.235\textwidth} \centering
+ \onslide<7->{\includegraphics[width=1\linewidth]{../../auxiliar/static/tsimane2.jpg}
+  \caption*{\En{Ecosystems}\Es{Ecosistemas}}}
+ \end{subfigure}
+\end{figure}
+}
+\end{textblock}
+}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE \only<1>{Sin cooperación}\only<2->{Cooperación} \\
+\large \only<7>{Propiedad evolutiva}
+\end{textblock}
+
+
+\only<1>{
+\begin{textblock}{160}(0,24)
+\centering
+  \begin{tabular}{|l|c|c|c|c|c|}
+     \hline
+         & {\small $\omega_0$} & {\small \  $\Delta$}  & {\small \, $\omega_1(b)$ } & {\small \  $\Delta$}  & {\small \,  $\omega_2(b)$ }  \\ \hline \hline
+        A no-coop& $1$ & $1.5$ &  $1.5$ & $0.6$ & $\bm{0.9}$ \\ \hline
+        B no-coop & $1$ & $0.6$ & $0.6$ & $1.5$ & $\bm{0.9}$ \\ \hline
+\end{tabular}
+\end{textblock}
+}
+\only<2>{
+\begin{textblock}{160}(0,24)
+\centering
+  \begin{tabular}{|l|c|c|c|c|c|}
+     \hline
+         & {\small $\omega_0$} & {\small \  $\Delta$}  & {\small \, $\omega_1(b)$ } & {\small \  $\Delta$}  & {\small \,  $\omega_2(b)$ }  \\ \hline \hline
+        A no-coop& $1$ & $1.5$ &  $1.5$ & $0.6$ & $\bm{0.9}$ \\ \hline
+        B no-coop & $1$ & $0.6$ & $0.6$ & $1.5$ & $\bm{0.9}$ \\ \hline\hline
+        A coop & $1$ & $1.5$ & $1.05$ & $0.6$ & $\bm{1.1}$ \\ \hline
+        B coop & $1$ & $0.6$ & $1.05$ & $1.5$ & $\bm{1.1}$\\ \hline
+\end{tabular}
+\end{textblock}
+}
+
+\only<3-6>{
+\begin{textblock}{160}(0,18)
+\begin{align*}
+\omega_{T+1}(N,b) & = \frac{1}{N} \overbrace{\bigg( n_c \, \omega_{T}(N,b) \, b \, Q_c  + n_s \, \omega_{T}(N,b) \, (1-b) \, Q_s   \bigg)}^{\hfrac{\text{\footnotesize \phantom{g}\En{Sum of all resources}\Es{Fondo común de todos los recursos}\phantom{g} }}{\text{\scriptsize (\En{with}\Es{con} $n_s$ \En{Heads}\Es{Caras} y $n_s$ \En{Tails}\Es{Secas})}}} \\
+\uncover<4->{& =\omega_T(N,b) \, \underbrace{\left( \frac{n_c}{N}     \, b \,Q_c + \frac{m_s}{N}  \, (1-b)\, Q_s  \right)}_{\text{\scriptsize\phantom{Tg} $r(N,b)$: \En{growth rate}\Es{Tasa de crecimiento}  \phantom{Tg}}} \\[0.3cm]}
+\end{align*}
+\end{textblock}
+}
+
+\only<5-6>{
+\begin{textblock}{160}(0,62)
+\begin{align*}
+\lim_{N \rightarrow \infty} r(N,b) & = p \, b \, Q_c + (1-p) \, (1-b) \, Q_s \\
+\uncover<6>{& = 0.5 \cdot 0.5 \cdot 1.5 + 0.5 \cdot 0.5 \cdot 0.6 = 1.05}
+\end{align*}
+\end{textblock}
+}
+
+\only<7>{
+\begin{textblock}{100}(30,20) \centering
+\includegraphics[page=10,width=1\textwidth]{figuras/apuestasParalelas.pdf}
+\end{textblock}
+}
+
+\only<7>{
+\begin{textblock}{100}(130,22)
+Cooperación
+\end{textblock}
+}
+\only<7>{
+\begin{textblock}{100}(130,68)
+Individual
+\end{textblock}
+}
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE \only<1-4>{Tragedia de los comunes} \only<5->{Ventaja de la cooperación} \\
+\large \only<1-4>{Dilema del prisionero}
+\end{textblock}
+
+
+\only<1-2>{
+\begin{textblock}{160}(0,20) \centering
+ \begin{equation*}
+  \bordermatrix{ _{\text{\tiny Focal}}{\rotatebox{45}{\text{$\mid$}}}^{\text{\tiny \En{Other}\Es{Otro}}} \hspace{-0.5cm} & C & D \cr
+      \ \ \   C & v-c & -c \cr
+      \ \ \ D & v & 0 }
+\end{equation*}
+\end{textblock}
+
+\begin{textblock}{80}(52,50)
+$C$: Cooperar
+
+$D$: Desertar
+\end{textblock}
+\begin{textblock}{80}(92,50)
+$v$: Ventaja
+
+$c$: Costo
+\end{textblock}
+}
+
+ \only<2>{
+\begin{textblock}{160}(0,70) \centering \Large
+¿Y si dejamos de aportar al fondo común
+
+y seguimos recibiendo la cuota común?
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{120}(20,14) \centering
+\includegraphics[page=1,width=1\textwidth]{figuras/dilema.pdf}
+\end{textblock}
+}
+\only<4>{
+\begin{textblock}{120}(20,14) \centering
+\includegraphics[page=2,width=1\textwidth]{figuras/dilema.pdf}
+\end{textblock}
+}
+\only<5->{
+\begin{textblock}{120}(20,14) \centering
+\includegraphics[page=3,width=1\textwidth]{figuras/dilema.pdf}
+\end{textblock}
+}
+
+
+
+\only<6->{
+\begin{textblock}{160}(35,40)
+\tikz{
+  \node[invisible] (i1) {};
+  \node[invisible, xshift=1cm, yshift=0.5cm] (i2) {};
+  \plate {menor} {(i1)(i2)} {};
+  \node[const,below=of menor] (nmenor) {$\hfrac{\text{Propiedad}}{\text{menor}}$};
+}
+\end{textblock}
+}
+
+
+\only<7>{
+\begin{textblock}{160}(68,15)
+\tikz{
+  \node[invisible] (i1) {};
+  \node[invisible, xshift=7cm, yshift=4cm] (i2) {};
+  \plate {mayor} {(i1)(i2)} {};
+  \node[const,below=of mayor] (nmayor) {\large \ \hspace{4cm} \ Propiedad Mayor};
+}
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Especialización cooperativa \\
+\large \only<7->{Propiedad de especiación}
+\end{textblock}
+
+\only<1-6>{
+\begin{textblock}{120}(20,10) \centering
+\begin{equation*}
+r(N,b) = \frac{n_c}{N}     \, b \,Q_c + \frac{m_s}{N}  \, (1-b)\, Q_s¨
+\end{equation*}
+\end{textblock}
+}
+
+\only<2>{
+\begin{textblock}{120}(20,22) \centering \huge
+\includegraphics[page=1,width=0.9\textwidth]{figuras/especializacion.pdf}
+\end{textblock}
+}
+\only<3>{
+\begin{textblock}{120}(20,22) \centering \huge
+\includegraphics[page=2,width=0.9\textwidth]{figuras/especializacion.pdf}
+\end{textblock}
+}
+\only<4>{
+\begin{textblock}{120}(20,22) \centering \huge
+\includegraphics[page=3,width=0.9\textwidth]{figuras/especializacion.pdf}
+\end{textblock}
+}
+\only<5>{
+\begin{textblock}{120}(20,22) \centering \huge
+\includegraphics[page=4,width=0.9\textwidth]{figuras/especializacion.pdf}
+\end{textblock}
+}
+\only<6>{
+\begin{textblock}{120}(20,22) \centering \huge
+\includegraphics[page=5,width=0.9\textwidth]{figuras/especializacion.pdf}
+\end{textblock}
+}
+
+
+ \only<7->{
+\begin{textblock}{160}(40,24)
+\begin{flalign*}
+\lim_{N \rightarrow \infty} & r(N,b)  = p \,  Q_c  \, b + (1-p) \, Q_s  \, (1-b) \\[0.5cm]
+\only<8->{& \underset{b}{\text{ arg max }} \  0.5 \cdot 3.0  \cdot b + 0.5 \cdot 1.2  \cdot (1-b)}
+&&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<9>{
+\begin{textblock}{160}(0,54) \centering \huge
+\begin{equation*}
+\underbrace{b^* = 1}_{\text{\normalsize Especialización total!}}
+\end{equation*}
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Heterogenidad cooperativa \\
+\large \only<2>{Propiedad ecológica}
+\end{textblock}
+
+\only<1>{
+\begin{textblock}{160}(0,20) \centering \Large
+¿Si hay heterogenidad? \\[0.3cm] \large
+
+
+Por ejemplo, si existen "Estaciones" en los hemisferios \small
+
+(La moneda tiene una probabilidad en tiempos pares y otra en impares)
+\end{textblock}
+}
+
+\only<2>{
+\begin{textblock}{160}(0,35) \centering \Large
+\includegraphics[width=0.45\textwidth]{figuras/pdf/diversificacionCooperativa}
+\end{textblock}
+}
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Tecnología de reciprocidad \\
+\large Teoría de la probabilidad
+\end{textblock}
+\vspace{1.2cm} \centering
+
+\only<1>{
+\begin{textblock}{160}(0,30) \Large
+El problema del \textbf{valor justo} da inicio
+
+a la teoría de la probabilidad \\[0.2cm]
+
+\large (Pascal - Fermat 1648)
+\end{textblock}
+}
+
+\only<2->{
+\begin{textblock}{160}(0,22)
+Probabilidad de hacer favores:
+
+\begin{figure}[ht!]
+    \centering
+    \tikz{
+    \node[latent, draw=white, yshift=0.7cm, minimum size=0.1cm] (b0) {};
+    \node[latent,below=of b0,yshift=0.7cm, xshift=-1cm] (r1) {$S$};
+    \node[latent,below=of b0,yshift=0.7cm, xshift=1cm] (r2) {$C$};
+
+    \node[latent, below=of r1, draw=white, yshift=0.8cm, minimum size=0.1cm] (bc11) {};
+    \node[accion, below=of r2, draw=white, yshift=0cm, color=blue!70] (bc12) {};
+    \node[latent,below=of bc11,yshift=0.8cm, xshift=-0.5cm] (r1d2) {$S$};
+    \node[latent,below=of bc11,yshift=0.8cm, xshift=0.5cm] (r1d3) {$C$};
+
+    \node[accion,below=of r1d2,yshift=0cm, color=red!70] (br1d2) {};
+    \node[accion,below=of r1d3,yshift=0cm, color=blue!70] (br1d3) {};
+    \edge[-] {b0} {r1,r2};
+    \edge[-] {r1} {bc11};
+    \edge[-] {r2} {bc12};
+    \edge[-] {bc11} {r1d2,r1d3};
+    \edge[-] {r1d2} {br1d2};
+    \edge[-] {r1d3} {br1d3};
+    }
+\end{figure}
+\end{textblock}
+}
+
+
+\only<3>{
+\begin{textblock}{160}(0,68)
+El pago del favor debe ser inverso a la probabilidad
+\end{textblock}
+}
+
+
+\only<4>{
+\begin{textblock}{160}(0,66)
+Garantiza \textbf{coexistencia} entre la casa de apuestas y la población cooperativa
+\begin{equation*}
+\cancel{p_{\text{rojo}}} \,  \cancel{Q^*_{\text{rojo}}} \, b + \bcancel{(1- p_{\text{rojo}})} \, \bcancel{Q^*_{\text{azul}}}  \, (1-b) = b + (1-b)  = 1
+\end{equation*}
+\end{textblock}
+}
+
+\end{frame}
+
+
+
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+% \centering \LARGE Transición epistémica mayor \\
+% \large
+% \end{textblock}
+% \vspace{1.2cm} \centering
+%
+%
+% \end{frame}
+
+\begin{frame}[plain,noframenumbering]
+\centering \vspace{0.5cm}
+\includegraphics[width=1\textwidth]{../../auxiliar/static/BP.png}
+\end{frame}
+
+
+
+
+
+%
+% \begin{frame}[plain]
+% \begin{textblock}{96}(0,6.5)\centering
+% {\transparent{0.9}\includegraphics[width=0.8\textwidth]{../../auxiliar/static/inti.png}}
+% \end{textblock}
+%
+% \begin{textblock}{160}(96,5.5)
+% \includegraphics[width=0.35\textwidth]{../../auxiliar/static/pachacuteckoricancha}
+% \end{textblock}
+% \end{frame}
+
+
+
+
+
+\end{document}
+
+
+
