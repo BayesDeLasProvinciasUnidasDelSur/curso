@@ -19,18 +19,22 @@ np.random.seed(2023-7-7)
 cmap = plt.get_cmap("tab10")
 N = 1000
 
+def numpy_float(numpy_scalar_in_array):
+    return np.squeeze(numpy_scalar_in_array)
 
-def plot_parametros(mean,cov,real,nombre_params,nombre_archivo,pos=(0,0)):
+def plot_parametros(mean, cov, real, nombre_params, nombre_archivo, pos=(0,0)):
     plt.xticks(ticks=real)
     ax = plt.gca()
     ax.tick_params(axis='both', labelsize=20)
     handles = []  # List to store legend handles
     labels = []  # List to store legend labels
-    for i in range(len(mean)):
-        a = mean[i]-10*np.sqrt(cov[i,i])
-        b = mean[i]+10*np.sqrt(cov[i,i])
+    for i in range(len(mean)):# i = 0
+        mean_i = numpy_float(mean[i])
+        cov_ii = numpy_float(cov[i,i])
+        a = mean_i-10*np.sqrt(cov_ii)
+        b = mean_i+10*np.sqrt(cov_ii)
         grilla = np.arange(a,b,step=(b-a)/200)
-        line = plt.plot(grilla ,normal(mean=mean[i], cov=cov[i,i] ).pdf(grilla), linewidth=2,color=cmap(i))
+        line = plt.plot(grilla ,normal(mean=mean_i, cov=cov_ii ).pdf(grilla), linewidth=2,color=cmap(i))
         plt.axvline(x=real[i], color=cmap(i), linewidth=0.3)
         handles.append(line[0])  # Add the line as a handle
         #labels.append(f'Label {i+1}')  # Add the label for the legend
