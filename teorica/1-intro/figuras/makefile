@@ -1,4 +1,4 @@
-all: R tex python
+all: R tex python julia
 
 R:
 	/usr/bin/Rscript main.R
@@ -10,3 +10,5 @@ tex:
 python:
 	for i in $(shell ls *.py); do python3 $$i;done
 
+julia:
+	julia monty_hall_selection.jl
