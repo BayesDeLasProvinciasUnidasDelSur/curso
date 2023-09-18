@@ -161,7 +161,7 @@ m, S = moments_posterior(alpha, beta, t, Phi)
 def _predictive(x, y):#mu=m_N.T; x=0.5
     Phi_new = phi(np.array([x]).reshape((1,1)), identity_basis_function)
     Phi_new = Phi_new.T
-    return normal.pdf(y,float(m.T.dot(Phi_new)),np.sqrt((1/beta)+float(Phi_new.T.dot(S.dot(Phi_new)))) )
+    return normal.pdf(y,np.squeeze(m.T.dot(Phi_new)),np.sqrt((1/beta)+np.squeeze(Phi_new.T.dot(S.dot(Phi_new)))[0]) )
 _predictive_v = np.vectorize(_predictive)
 belief = _predictive_v(X_, Y_)
 max_pedictive = np.max(belief)
