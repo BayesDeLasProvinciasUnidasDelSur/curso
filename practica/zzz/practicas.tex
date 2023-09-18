@@ -1,0 +1,365 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\input{../auxiliar/tex/encabezado.tex}
+\input{../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+\newif\ifen
+\newif\ifes
+\newcommand{\en}[1]{\ifen#1\fi}
+\newcommand{\es}[1]{\ifes#1\fi}
+\estrue
+
+\newcommand{\E}{\en{S}\es{E}}
+\newcommand{\A}{\en{E}\es{A}}
+\newcommand{\Ee}{\en{s}\es{e}}
+\newcommand{\Aa}{\en{e}\es{a}}
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Code}% Listing -> Algorithm
+\lstset{
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=true,
+  columns=flexible,
+  basicstyle={\footnotesize\ttfamily},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showlines=true
+}
+\definecolor{all}{rgb}{0.90, 0.90, 0.90}
+
+
+%opening
+\title{Prácticas}
+\author{Bayes de las Provincias Unidas del Sur}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introducción}
+
+
+\paragraph{Procesos multiplicativos.} La teoría de la evolución dice que los linajes crecen como un proceso multiplicativo: una secuencia de tasas de reproducción y supervivencia.
+Por ejemplo, tiramos una moneda.
+Si sale cara, la biomasa crece 50\%.
+Si sale seca, sobrevive 60\% de la biomasa.
+%
+\begin{equation} \label{eq:linajes}
+\omega(T) = \prod_t^T f(\Aa(t))   \ \ \ \text{ con } \ \ \  f(\Aa) =
+\begin{cases}
+ 1.5 & \Aa = \text{ \en{Head}\es{Cara} } \\
+ 0.6 & \Aa = \text{ \en{Tail}\es{Sello} }
+\end{cases}
+\end{equation}
+%
+De modo similar, la teoría de la probabilidad dice que la probabilidad de las hipótesis se actualiza como un proceso multiplicativo: una secuencia de predicciones a priori del dato observado, dado los datos anteriores y la hipótesis que estamos evaluando.
+Por ejemplo, los modelos causales son hipótesis.
+La probabilidad de un modelo causal dados los datos es
+%
+\begin{equation} 
+P(\text{Modelo}|\text{Datos}) = P(d_1|\text{Modelo}) \cdot P(d_2|d_1,\text{Modelo}) \dots
+\end{equation} 
+%
+Una caracterísitica de los procesos multiplicativos es que las pérdidas son más difíciles de remontar que las ganancias.
+En el caso más extremo, una único cero en la secuencia es la extinción.
+Y de la extinción no se vuelve.
+Aunque los casos sean menos extremos, como el caso del crecimiento del linaje de la ecuación \ref{eq:linajes}, las fluctuaciones igualmente producen un efecto negativo sobre la tasa de crecimiento.
+Si bien el promedio de los recursos $\omega$ pesado por su probabilidad $P(\omega)$ tiene un valor positivo de $1.05$ por paso temporal,
+%
+\begin{equation*}
+\begin{split}
+\langle \omega \rangle_t = \sum_{\omega} \omega \cdot  P(\omega) \ \ \ \ \  \ \ \ \ \ 
+\langle \omega \rangle_1 & = 1.5 \cdot \frac{1}{2} + 0.6 \cdot  \frac{1}{2} = 1.05 \\[-0.1cm] 
+\langle \omega \rangle_2 &=  1.5^2 \cdot \frac{1}{4} + 2 (0.6 \cdot 1.5 \cdot \frac{1}{4} ) + 0.6^2 \cdot \frac{1}{4}= 1.05^2
+\end{split}
+\end{equation*}
+%
+En tiempo infinito todas las trayectorias individuales caen a una tasa equivalente a 5\%.
+%
+\begin{figure}[ht!]
+    \centering
+    \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{../teoricas/0-historia/figures/pdf/ergodicity_individual_trayectories_y.pdf}
+    \end{subfigure}
+    \caption{El eje y representa el logaritmo de la biomasa. El eje x el tiempo. La línea negra es el promedio de las biomasas de una población infinita. Las líneas de colores son las trayectorias individuales de la biomasa. }
+\end{figure}
+%
+Los sistemas en los que el promedio de sus estados no representa las trayectorias individuales en el tiempo se dice que son \emph{sistemas no ergódicos}.
+Esto ocurre porque, al considerar una población de tamaño infinito, siempre va a exisitir, por más baja que sea la probabilidad, una proporción que en un tiempo finito reciba todas caras, haciendo efectivo el crecimiento promedio de 5\% en cada paso temporal.
+Sin embargo, en tiempo infinito, todas los individuos necesariamente (por el concepto mismo de frecuencia o ley de los grandes números) van a haber recibido mitad de caras y mitad de secas.
+Esas secuencias van a estar compuestas por muchas pares de multiplicaciones como las siguiente,
+%
+\begin{equation}
+1.5 \cdot 0.6 = 0.9
+\end{equation}
+%
+que equivale a dos pasos temporales con 10\% de caída.
+
+\paragraph{Ventaja de la cooperación} .
+
+\todo[inline]{Explicar cooperación, que cambia la variable aleatoria de la moneda al fondo común.}
+
+\begin{figure}[H]
+\centering 
+\scalebox{0.66}{
+\tikz{
+
+    \node[latent, minimum size=2cm ] (x1_0) {$\omega_1(t)$} ;
+    \node[latent, below=of x1_0, minimum size=2cm ] (x2_0) {$\omega_2(t)$} ;
+
+    \node[latent, right=of x1_0, minimum size=3cm ] (x1_0g) {$ \omega_1(t)\cdot f(\Aa_1(t))$} ;
+    \node[latent, right=of x2_0, minimum size=1.8cm, xshift=0.6cm , align=left] (x2_0g) {$\omega_2(t)\cdot$\\$f(\Aa_2(t))$} ;
+    
+    \node[latent, right=of x1_0g, minimum size=3.8cm, yshift=-1.33cm, align=right] (x_0) {$\omega_1(t)\cdot f(\Aa_1(t))$\\$+\omega_2(t)\cdot f(\Aa_2(t))$ } ;
+    
+    \node[const, above=of x_0] (nx_0) {$\overbrace{\text{Pool}\hspace{2.5cm}\text{Share}}^{\text{\normalsize Coopera\en{tion}\es{ci\'on}}}$} ;
+    
+    \node[latent, right=of x1_0g, minimum size=2.5cm,  xshift=4.5cm] (x1_1) {$\omega_1(t+1)$ } ;
+    \node[latent, below=of x1_1, minimum size=2.5cm, yshift=0.7cm] (x2_1) {$\omega_2(t+1)$ } ;
+    
+    \edge {x1_0} {x1_0g};
+    \edge {x2_0} {x2_0g};
+    \edge {x1_0g,x2_0g} {x_0};
+    \edge {x_0} {x1_1,x2_1};
+    
+}
+}
+\end{figure}
+
+\todo[inline]{Mostrar la ventaja de la cooperación  }
+
+
+\begin{figure}[ht!]
+    \centering
+    \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{../teoricas/0-historia/figures/pdf/ergodicity_desertion.pdf}
+    \end{subfigure}
+\end{figure}
+
+\paragraph{Ventaja de la especialización} .
+
+\todo[inline]{Describir la generalización del escenario, donde ahora los pagos son como ``evidencias'' donde sobreviven los recursos de la hipótesis que se hace efectiva.}
+
+\begin{equation}
+f(\Ee,\Aa) \propto \Ee^\Aa(1-\Ee)^\Aa \text{  \ \ \  con \ \ \  } \Ee \in [0,1]
+\end{equation}
+
+\todo[inline]{Agrega la matemática del fondo común, que en una población infinita es una constante: el promedio de los pagos.}
+
+\begin{equation}
+\lim_{N \rightarrow \infty}  \propto \Big( p \Ee + (1-p)(1-\Ee) \Big)  \frac{n+1}{N}
+\end{equation}
+
+\todo[inline]{Mostrar la ventaja de la especialización}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=1\linewidth]{../teoricas/0-historia/figures/pdf/tasa-temporal-0.pdf}
+    \end{subfigure}
+    \ 
+    \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=1\linewidth]{../teoricas/0-historia/figures/pdf/tasa-temporal-2.pdf}
+    \end{subfigure}
+\end{figure}
+
+\todo[inline]{Destacar que cuando hay cooperación conviene apostar más recursos de los que indica la probabilidad a la hipótesis más probable}
+
+
+\newpage
+
+\paragraph{El principio de reciprocidad.} La teoría de la probabilidad colonial-moderna nace como respuesta al siguiente problema.
+
+Tiramos dos veces una moneda no sesgada (misma chances de salir cara como seca): \\
+$\bullet$ Si sale seca (S) en la primera y en la segunda, te hago un favor (Color rojo). \\
+$\bullet$ Caso contrario (C), me hacés un favor (Color negro). \\
+\begin{center}
+\tikz{
+\node[latent, draw=white, yshift=0.7cm, minimum size=0.1cm] (b0) {};
+\node[latent,below=of b0,yshift=0.7cm, xshift=-1cm] (r1) {$S$};
+\node[latent,below=of b0,yshift=0.7cm, xshift=1cm] (r2) {$C$};
+
+\node[latent, below=of r1, draw=white, yshift=0.8cm, minimum size=0.1cm] (bc11) {};
+\node[accion, below=of r2, draw=white, yshift=0cm] (bc12) {};
+\node[latent,below=of bc11,yshift=0.8cm, xshift=-0.5cm] (r1d2) {$S$};
+\node[latent,below=of bc11,yshift=0.8cm, xshift=0.5cm] (r1d3) {$C$};
+
+\node[accion,below=of r1d2,yshift=0cm, color=red] (br1d2) {};
+\node[accion,below=of r1d3,yshift=0cm] (br1d3) {};
+\edge[-] {b0} {r1,r2};
+\edge[-] {r1} {bc11};
+\edge[-] {r2} {bc12};
+\edge[-] {bc11} {r1d2,r1d3};
+\edge[-] {r1d2} {br1d2};
+\edge[-] {r1d3} {br1d3};
+}
+\end{center}
+
+
+\begin{enumerate}
+\item ¿Cuál es el valor justo de la reciprocidad en este contexto de incertidumbre?
+\end{enumerate}
+
+La respuesta a esta pregunta (en las cartas entre Pascal y Fermatr de 1648) es el axioma principal de Kolmogorov (1931).
+
+\paragraph{Principio de coexistencia}
+Las casas de apuestas ofrecen pagos a cada uno de las hipótesis.
+Los pagos actualizan nuestra riqueza siguiendo un proceo multiplicativo.
+Hemos visto que en los procesos multiplicativos existe una ventaja a favor de la cooperación y la especialización.
+Supongamos que la casa de apuestas paga $Q_C$ por Cara y $Q_S$ por Secas.
+Sea $R$ nuestros recursos totales y $e_C$ la proporción de los recursos que ponemos en Cara y $e_S$ la proporción de recursos que ponemos en Seca.
+Supongamos que se conoce la probabilidad exacta de la moneda $p$, la cual está sesgada a favor de Cara, $p>0.5$.
+¿Existe un conjunto de pagos que garantice la coexistencia en el tiempo entre la casa de apuestas y una población de apostadoras?
+¿Es decir, no será que una población cooperadora siempre puede romper cualquier pago que ofrezca la casa de apuestas a través de la especialización, poniendo más recursos en Cara que en Seca de los que indica la probabilidad?
+
+\begin{enumerate}
+\item Una opción es hacer una simulación. Imaginar pagos posibles para Cara y Seca. Y revisar si existe una asignación de recursos $e \in [0,1]$ que logre tener una tasa de crecimiento positiva.
+\item Otra opción es calcular analíticamente la tasa de crecimiento. En el caso ideal, una población de tamaño infinito, el fondo común siempre es el promedio de pagos. ¿Cuál es la estrategia $e$ de asignación de recursos que maximiza la tasa de crecimiento de la población cooperadora?. ¿Somos capaces de romper siempre la casa de apuestas?. ¿Qué es lo mejor que puede hacer la casa de apuestas?. ¿Cuál es la mejor tasa de crecimiento individual en ese caso?
+\end{enumerate}
+
+
+\newpage
+
+\paragraph{Variable aleatoria.} La corriente frecuentista de la probabilidad afirma que los eventos deterministas (¿Existe un planeta no detectado en el sistema solar?) tienen probabilidad 0 o 1.
+Las probabilidades entre 0 y 1 se reservan para eventos que se conocen como ``variable aleatoria'', que dadas las mismas condiciones inciales 
+
+\begin{enumerate}[resume]
+\item ¿Es posible verificar si algún evento de la naturaleza es una variable aleatoria?
+\item ¿Usted cree que es posible que en la natureza existan variables realmente aleatorias, que para exactamente las mismas condiciones iniciales puede ocurrir A y no A?
+\item ¿Qué debería hacer la corriente frecuentista si la naturaleza no tuviera variables aleatoria? 
+\end{enumerate}
+
+\paragraph{Principio de razón suficiente} El principio de razón suficiente es ... 
+
+\begin{equation}
+\text{pop}_{t+1} = r \text{pop}_t (1-\text{pop}_t)
+\end{equation}
+
+\begin{enumerate}[resume]
+\item Graficar el comportamiento con diferentes valores de $r \in (0,4)$.
+\item Graficar las trayectorias cuando el valor es $r=3.99$ y los valores iniciales difieren por $10^{-5}$.
+\end{enumerate}
+
+\paragraph{Algortimo generador de números aleatorios} Un algoritmo 
+
+\begin{enumerate}[resume]
+\item Cree una método cerrado (sin usar información del mundo exterior) que imite el comportamiento de una variable aleatoria. 
+\end{enumerate}
+
+\paragraph{Principio de indiferencia} El principio de indiferencia es ...  Supongamos que una persona elige donde esconder un regalo detrás de una de tres cajas.
+
+\begin{enumerate}
+\item Define 2 funciones de probabilidad sobre las cajas, una que exprese certidumbre de la posición del regalo y otra que exprese preferencia sobre una posición sobre la otra.
+\item Hay infinitas distribuciones de probabilidad. Si de verdad no tenemos más información previa que la menconada: ¿Cuál es la función de probabilidad que mejor expresa nuestro estado del conocimiento?. ¿Por qué?
+\end{enumerate}
+
+
+\paragraph{Monty Hall (Bayesiano)} El Monty Hall es... (Explicar el modelo causal en palabras)
+
+\begin{enumerate}[resume]
+\item Escriba el árbol de universos paralelos posibles del modelo causal después de haber elegido la puerta y antes de recibir la pista. ¿Cuál es la creencia honesta sobre los distintos universos paralelos?
+\item ¿Cuál es la distribución conjunta del Monty Hall después de haber elegido la puerta y antes de recibir la pista?
+\end{enumerate}
+
+\paragraph{El problema de la apuesta no finalizada. (Pascal y Fermat 1654).}
+
+Antes de que la teoría de la probabilidad hubiera sido desarrollada, antes incluso de que la palabra probabilidad estuviera en el volcabulario, Blaise Pascal le escribe el lunes 24 de Agosto una carta a su colega Pierre de Fermat:
+
+\begin{quotation}
+No he podido exponerle todo mi pensamiento sobre el problema de la apuesta no finalizada, y tengo cierta reticencia a hacerlo por temor a que esta admirable armonía que existe entre nosotros y que me es tan querida comience a flaquear, pues temo que tengamos opiniones diferentes sobre este tema.
+Deseo exponerle todo mi razonamiento y que me haga el favor de corregirme si estoy en un error o de respaldarme si estoy en lo cierto.
+Se lo pido con toda fe y sinceridad, pues ni siquiera estoy seguro de si estará usted de mi parte.
+\footnote{El original está escrito en Francés.}
+\end{quotation}
+
+El problema abierto que Pascal menciona es el siguiente. 
+Supongamos que dos jugadores hacen apuestas iguales sobre quién ganará una serie de tres lanzamientos de una moneda justa.
+Cada uno tira su moneda.
+El que obtiene más caras gana.
+Antes de terminar se ven obligados a escapar. 
+Las apuestas son juegos clandestinos.
+¿Cuál es la forma justa de repartir las apuestas?
+Esta es la pregunta que buscan resolver Pascal y Fermat.
+
+\begin{enumerate}[resume]
+ \item >Qué idea usaría usted para repartir una apuesta de un juego no finalizado?
+ \item Calcular cómo se reparte la apuesta si el juego hubiera finalizado luego de 2 tiradas con:
+ \begin{enumerate}
+  \item Dos jugadores en total, uno con 2 caras y otro con 1
+  \item Tres jugadores en total, dos con 2 caras y otro con 1
+ \end{enumerate}
+ \item Programar una función que resuelva cómo se reparten las apuestas si en vez de monedas fueran dados.
+ La función recibe una lista de puntos no finalizados, y la cantidad de pasos que se requieren para finalizar y devuelve una lista de proporciones.
+\end{enumerate}
+
+
+
+
+\section{Sum-product algorithm}
+
+
+\section{Tenis ATP} 
+
+La base de datos cuenta con más de 400 mil partidas.
+
+\begin{enumerate}
+ \item Descargar la historia de partidas (1915-2020) de los tenistas profesionales ATP en: \url{https://github.com/glandfried/tennis/releases/download/atp/history.csv.zip}
+ \item Identificar jugadores que tengan nombres con algún substring \texttt{unknown}
+ \item Hacer un ranking de los 20 jugadores con más partidas en orden descendente, con sus nombres y sus identificadores.
+ \item Probar el paquete \texttt{trueskill}. Tiene un página dónde explica la funciones básicas \url{https://trueskill.org/}.
+ \item Revisen el \emph{environment} de \texttt{trueskill}.
+    Recomendamos que usen los siguientes parámetros,
+
+    \begin{lstlisting}[backgroundcolor=\color{white},label=lst:env, caption=\relax, belowskip=-1.0 \baselineskip, aboveskip=-0 \baselineskip]
+    \end{lstlisting}
+    \begin{lstlisting}[backgroundcolor=\color{all}]
+    env = trueskill.TrueSkill(mu=0, sigma=2 beta=1, tau=0.0, draw_probability=0.0)
+    \end{lstlisting}  
+ \item Imageninen algunos escenario para explorar y estimen las habilidades de los jugadores. Por ejemplo, >qué pasa si hay 3 jugadores, el jugador $1$ le gana al $2$, luego el $2$ le gana al $3$ y finalmente el $3$ le gana al $1$?
+    \begin{enumerate}
+    \item >Cuál es la habilidad que ustedes creen que tienen los jugadores luego de ver las 3 partidas?
+    \item >Qué resultado ofrece TrueSkill?
+    \item >Cuál es la diferencia entre lo que estima TrueSkill y lo que esperaban ustedes?
+    \item >Por qué creen que ocurre esa diferencia?
+    \item >Cuántas rondas como la mencionada tienen que pasar para que la diferencia de estimación media ente los jugadores sea menor a 0.1 entre los 3.
+    \item >Grafiquen como varía la incertidumbre de la estimación.
+    \end{enumerate}
+\end{enumerate}
+
+
+
+\section{Anexo}
+
+\subsection{Tenis}
+
+\paragraph{Datos}
+
+Pueden descargar la historia de partidas (1915-2020) de los tenistas profesionales ATP en: \url{https://github.com/glandfried/tennis/releases/download/atp/history.csv.zip}.
+La base de datos cuenta con más de 400 mil partidas.
+
+Columnas:
+\begin{description} \setlength\itemsep{0cm}
+ \item[\texttt{match\_id}:] Identificador de la partida
+ \item[\texttt{double}:] Bool indicando si la partida es en equipos de 2
+ \item[\texttt{round\_number}:] Indica la ronda de la partida, donde $0$ represeta la final
+ \item[\texttt{winner\_player\_1}:] Identificador del jugador ganador número 1
+ \item[\texttt{w1\_name}:] Nombre del jugador ganador número 1
+ \item[\texttt{winner\_player\_2}:] Identificador del jugador ganador número 2
+ \item[\texttt{w2\_name}:] Nombre del jugador ganador número 2
+ \item[\texttt{loser\_player\_1}:] Identificador del jugador perdedor número 1
+ \item[\texttt{l1\_name}:] Nombre del jugador perdedor número 1
+ \item[\texttt{loser\_player\_2}:] Identificador del jugador perdedor número 2
+ \item[\texttt{l2\_name}:] Nombre del jugador perdedor número 2
+ \item[\texttt{time\_start}:] Comienzo del torneo 
+ \item[\texttt{time\_end}:] Finalizacion del torneo (puede ser nulo)
+ \item[\texttt{ground}:] Tipo de piso del torneo
+ \item[\texttt{tour\_id}:] Identificador del torneo
+ \item[\texttt{tour\_name}:] Nombre del torneo 
+\end{description}
+
+
+
+
+\end{document}
