@@ -21,6 +21,8 @@ Del mismo modo que seleccionar una única hipótesis tiene consecuencias negativ
 
 ## Programa ([descargar](https://github.com/BayesDeLasProvinciasUnidasDelSur/curso/releases/download/2023.1/0-programa.pdf))
 
+(Ver RELEASE [2023.1](https://github.com/BayesDeLasProvinciasUnidasDelSur/curso/releases/tag/2023.1))
+
 - **1. Modelos gráficos e inferencia** (descargar [1-intro.pdf](https://github.com/BayesDeLasProvinciasUnidasDelSur/curso/releases/download/2023.1/1-intro.pdf)). Acuerdos intersubjetivos en contextos de incertidumbre. Especificación gráfica de modelos causales. Evaluación de modelos causales. La emergencia del sobreajuste y el balance natural de las reglas de la probabilidad.
 
 - **2. Inferencia causal** (descargar [2-causa.pdf](https://github.com/BayesDeLasProvinciasUnidasDelSur/curso/releases/download/2023.1/2-causa.pdf)). Los niveles del razonamiento causal. Flujo de inferencia en modelos causales. Efecto de las intervenciones en modelos causales. Conclusiones causales a partir de observaciones. Identificación de modelo causal mediante intervenciones.
