@@ -7,3 +7,6 @@
 [submodule "aux/static"]
 	path = auxiliar/img
 	url = git@github.com:BayesDeLasProvinciasUnidasDelSur/static.git
+[submodule "evaluacion/2023.1/hackaton/hackaton40"]
+	path = evaluacion/2023.1/hackaton/hackaton40
+	url = git@github.com:MetodosBayesianos/hackaton40.git
