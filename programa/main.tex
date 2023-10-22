@@ -8,12 +8,13 @@
 \newcommand{\es}[1]{\ifes#1\fi}
 \entrue
 
-\title{\huge Verdades empíricas: construcción de acuerdos intersubjetivos en contextos de incertidumbre  \\[0.4cm]  \LARGE Programa}
+\title{\huge Verdades empíricas: \\ inferencia probabilística causal. \\[0.4cm]  \LARGE Programa}
 
-\author{Docente a cargo: Gustavo Landfried$^{1,2}$}
-\affil{\small 1. Bayes de las Provincias Unidas del Sur }
-\affil{\vspace{-0.2cm}\small 2. Laboratorio Pacha Pampas}
-\affil[]{Correspondencia: \texttt{glandfried@dc.uba.ar}, \texttt{bayesdelsur@gmail.com}}
+\author{Docente a cargo: Gustavo Landfried$^{1,2,3}$}
+\affil{\small 1. Departamento de Computación. \\ Facultad de Ciencias Exactas y Naturales.  \\ Universidad de Buenos Aires. }
+\affil{\vspace{-0.2cm}\small 2. Laboratorios de Métodos Bayesianos}
+\affil{\vspace{-0.2cm}\small 3. Bayes Plurinacional}
+\affil[]{Correspondencia: \texttt{glandfried@dc.uba.ar}}
 
 \begin{document}
 
@@ -21,13 +22,86 @@
 
 \section{Objetivos}
 
-A diferencia de las ciencias formales (matemáticas) que validan sus proposiciones dentro de sistemas axiomáticos cerrados, las ciencias empíricas (desde la física hasta las ciencias sociales) deben validar sus proposiciones en sistemas abiertos que por definición contienen siempre algún grado de incertidumbre.
-¿Es posible alcanzar ``verdades'' si es inevitable decir ``no sé''?.
+La ciencia tiene pretensión de verdad: alcanzar acuerdos intersubjetivos con validez universal.
+Las ciencias formales (matemática, lógica) alcanzan estos acuerdos derivando teoremas dentro de sistemas axiomáticos cerrados.
+Por el contrario, las ciencias empíricas (desde la física hasta las ciencias sociales) deben validar sus proposiciones en sistemas abiertos que contienen siempre algún grado de incertidumbre.
+¿Es posible entonces alcanzar acuerdos intersubjetivos (``verdades'') en las ciencias empíricas en las que es inevitable decir ``no sé''?
 Sí.
-La aplicación estricta de la teoría de la probabilidad (inferencia Bayesiana) garantiza los acuerdos intersubjetivos en contextos de incertidumbre, fundamento de las verdades empíricas. Sin embargo, su adopción se vio históricamente limitada debido al alto costo computacional asociado.
-A diferencia del enfoque frecuentista de la probabilidad que selecciona una única hipótesis, la inferencia Bayesiana se ve obligada a actualizar las creencias de cada una de las hipótesis de forma óptima (maximizando la incertidumbre) dada la evidencia empírica y formal (datos y modelos).
-Si bien en las últimas décadas las limitaciones computacionales han sido superadas en gran medida gracias al desarrollo de métodos eficientes de aproximación, la inercia histórica es ahora su limitación principal.
-Este curso tiene por objetivo promover la adopción de la inferencia Bayesiana como método general para la construcción de acuerdos intersubjetivos en contextos de incertidumbre a través del estudio de sus conceptos fundamentales (principios y propiedades de los procesos de selección probabilística) y a través de la resolución de problemas concretos (modelos gráficos, inferencia causal, lenguajes de programación probabilística). La inferencia Bayesiana no solo ha mostrado ser la lógica más exitosa en la era de la inteligencia artificial, es un criterio general para la resolución de cualquier problema empírico especialmente en las industrias 4.0, la academia y el poder judicial.
+Podemos evitar mentir: no afirmar más de lo que se sabe (maximizando incertidumbre) sin ocultar lo que sí se sabe (dada la información disponible).
+
+% Parrafo
+
+Las reglas de la probabilidad se formalizaron a finales del siglo 18 y desde entonces se las ha adoptado como sistema de razonamiento en todas las ciencias empíricas.
+Ellas son conceptualmente intuitivas: preservar la creencia previa que sigue siendo compatible con los datos (regla del producto) y predecir con la contribución de todas las hipótesis (regla de la suma).
+A lo largo de todos estos siglos, las reglas de la probabilidad han sido derivadas repetidas veces a partir de diversos sistemas axiomáticos~\cite{halpern2017}.
+A pesar de que ellas garantizan la preservación de los acuerdos intersubjetivos en contextos de incertidumbre (verdades en ciencias empíricas), y que en todo este tiempo no se ha propuesto nada mejor en términos prácticos, el costo computacional asociados a la evaluación de todo el espacio de hipótesis ha limitado históricamente la aplicación estricta de las reglas de la probabilidad (aka enfoque bayesiano).
+
+% Parrafo
+
+El primer ciclo de soluciones llega de la mano de física estadística, en la segunda mitad del siglo 19.
+En esta época se desarrollan métodos analíticos para estimar la probabilidad de los micro-estados dada alguna información macro, como la energía, la temperatura, o algún otro promedio observable.
+Conceptualmente se ha mostrado que las soluciones que ofrece la física estadística son equivalentes a las que se obtiene con el enfoque bayesiano a través del principio de ``no mentir'' (maximizar entropía dada la información disponible)~\cite{jaynes1957-informationTheoryAndStatisticalMechanics, jaynes2003-bookProbabilityTheory}.
+
+% Parrafo
+
+Durante el siglo 20 se deja de lado la pretensión de evaluar todo el espacio de hipótesis y se comienzan a desarrollar métodos que seleccionan una única hipótesis mediante alguna función de costo ad-hoc (e.g~como máxima verosimilitud).
+Estas aproximaciones puntuales, al evitar evaluar todo el espacio de hipótesis, permitieron extender en la práctica el campo de aplicaciones estadísticas~\cite{friedman2001-elementsOfStatisticalLearning}.
+Sin embargo, seleccionar una única hipótesis en contextos de incertidumbre tiene como consecuencia desafortunada la emergencia de inestabilidades conocidas como \emph{overfitting}, presentes en mucos modelos de aprendizaje automáticos actuales, pero que no están presentes en el sistema de razonamiento basado en la aplicación estricta de las reglas de la probabilidad~\cite{bishop2006-PRML}.
+
+% Parrafo
+
+En las vísperas del siglo 21, el crecimiento en la capacidad de cómputo levantó finalmente el principal obstáculo que pesaba sobre la aplicabilidad de las reglas de la probabilidad.
+En esta época se desarrollan los métodos de aproximación por muestreo (basados en Cadenas de Markov) y los métodos analíticos de minimización de la divergencias entre distribuciones de probabilidad (expectation propogation, variational inference)~\cite{bishop2006-PRML}.
+Por primera vez desde el descubrimiento de la teoría de la probabilidad, comienza a ser posible en todos los campos de las ciencia resolver la inferencia de los modelos probabilísticos aplicando estrictamente las reglas de la probabilidad, evaluando todo el espacio de hipótesis (aka~enfoque bayesiano).
+
+% Parrafo
+
+¿Pero qué es la inteligencia?
+La inteligencia no puede reducirse a la verdad, pues no todas las verdades son igualmente relevantes.
+Los problemas de conocimiento científico están, directamente o indirectamente, vinculados a un conjunto de problemas reales, y de ellos obtiene su relevancia y jerarquía.
+El concepto mismo de ``problema'' sólo adquiere sentido en relación a algún sistema vivo.
+Los problemas de la física y la química existen en tanto se subsumen como relevantes para los procesos de la vida.
+En este sentido, podemos describir a la inteligencia como la capacidad que tienen las formas de vida para sobrevivir a través de los diversos contexto históricos y evolutivos.
+
+% Parrafo
+
+El problema de la comunicación con la realidad es el problema fundamental de la vida y por lo tanto de toda ciencia empírica.
+Del mismo modo en que la evaluación de las hipótesis en probabilidad se hace a través de la secuencias de predicciones (siendo la sorpresa la única fuente de información~\cite{shannon1948-theoryOfCommunication}), la selección de las formas de vida en evolución también sigue un proceso de naturaleza multiplicativa, por secuencia de tasas de supervivencia y reproducción~\cite{taylor1978-replicatorDynamic,harper2009-replicatorAsInference,shalizi2009-replicatorAsInference, czegel2019-bayesianEvolution, czegel2022-bayesDarwin}.
+Debido a que en los procesos multiplicativos los impactos de las pérdidas son más fuertes que los de las ganancias (por ejemplo, un único cero en la secuencia produce una extinción irreversible) existe una ventaja a favor de las variantes que reducen las fluctuaciones: por diversificación individual (\emph{propiedad epistémica}), por cooperación (\emph{propiedad evolutiva}), por especialización cooperativa (\emph{propiedad de especiación}), y por heterogeneidad cooperativa (\emph{propiedad ecológica}).
+
+% Parrafo
+
+Debido a que la teoría de toma de decisiones de Von Neumann está mal fundada, pues se base en funciones de costo ad-hoc (la utilidad esperada), todavía se sigue postulando en la teoría de juegos que la evolución de la cooperación está condicionada por un dilema (el dilema del prisionero).
+%
+Sin embargo, ya en el artículo ``A new interpretation of information rate'' John L Kelly~\cite{kelly1956} (colega de Shannon) se ve obligado a apartarse de la teoría de Von Neumann para resolver cuál es la apuesta óptima en proceso multiplicativos.
+%
+\begin{quotation}
+The cost function approach [..] can actually be used to analyze nearly any branch of human endeavor.
+The utility theory of Von Neumann shows us one way to obtain such a cost function.
+The point here is that an arbitrary combination of a statistical transducer (i.e., a channel) and a cost function does not necessarily constitute a communication system.
+What can be done, however, is to take some real-life situation which seems to possess the essential features of a communication problem, and to analyze it without the introduction of an arbitrary cost function.
+\end{quotation}
+%
+La teoría de decisiones ha sido reformula recientemente, incorporando el concepto de ergodicidad~\cite{peters2019-ergodicityEconomics, peters2021-interpretation}, lo que permite evaluar lo que nos va a ocurrir en el tiempo, que depende de la naturaleza del problema que estamos analizando.
+
+% Parrafo
+
+La evolución de la cooperación no está condicionada por un dilema justamente debido a que en los procesos de selección multiplicativos, los individuos desertores aumentan las fluctuaciones de los cooperadores de quienes dependen, aumentando por lo tanto sus propias fluctuaciones y afectando negativamente su propia tasa de crecimiento de largo plazo (\emph{propiedad mayor})~\cite{GustavoLandfried}.
+Si bien ciertas coyunturas pueden favorecer a la deserción en el corto plazo (\emph{propiedad menor}), la emergencia de unidades cooperativas de nivel superior es un fenómeno permanente en la historia de la vida (transiciones evolutivas mayores) \cite{maynardSmith}.
+La evidencia es nuestra propia vida, que depende de al menos cuatro de estos niveles para sobrevivir: la célula con la mitocondria, el organismo multicelular, el sistema social y la comunidad ecológica.
+
+% Parrafo
+
+Esta tendencia hacia la agregación de unidades no ocurre solo con la información genética, también ocurre con la información cultural o científica.
+Así es que las hipótesis individuales se agregan para formar variables, las variables se relacionan para formar modelos causales y los modelos causales se coordinan para formar teorías causales~\cite{pearl2009-causality}.
+Y esta tendencia a la agregación epistémica emerge naturalmente de la aplicación estricta de las reglas de la probabilidad~\cite{winn2012-causality}, en particular del proceso multiplicativo de evaluación de hipótesis por secuencias de predicciones.
+Justamente las teorías causales son las agregaciones de modelos causales que, al adaptarse a los diversos contextos, tienen mejor capacidad predictiva que modelos causales individuales~\cite{winn2012-causality}.
+
+% Parrafo
+
+El objetivo del curso ``Verdades empíricas'' es revisar los métodos actuales que permiten implementar modelos a medida del problema de forma sencilla e intuitiva.
+En las últimas décadas se fueron desarrollando técnicas que permiten aprovechar toda la potencia del aprendizaje automático probabilístico~\cite{murphy-pmlBook1,murphy-pmlBook2} de forma flexible e intuitiva, para crear modelos personalizados a la medida de cada problema específico.
+Con ellos podemos computar la incertidumbre óptima dada la información disponible, expresando las relaciones causales entre las variables de forma gráfica, descomponiendo las reglas de la probabilidad como mensajes entre los nodos de la red causal, y delegando la inferencia a los lenguajes de programación probabilística.
 
 \section{Unidades}
 
