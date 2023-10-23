@@ -20,6 +20,29 @@
 
 \maketitle
 
+\begin{abstract}
+Las verdades en ciencias con datos deben cumplir con el principio de ``no mentir'': no afirmar más de lo que se sabe (maximizando incertidumbre) sin ocultar lo que sí se sabe (dada la información disponible).
+A pesar de que las reglas de la probabilidad formalizadas desde el siglo 18 garantizan la preservación de este principio, y que en todo este tiempo no se ha propuesto nada mejor en términos prácticos, el costo computacional asociados a la evaluación de todo el espacio de hipótesis ha limitado en la historia la aplicación estricta de este razonamiento para contextos de incertidumbre (aka enfoque bayesiano).
+
+% Parrafo
+
+Si bien durante el siglo 19 la física estadística logra resolver de forma completa una gran cantidad de problemas, durante el siglo 20 se deja de lado la pretensión de evaluar todo el espacio de hipótesis y se comienzan a desarrollar métodos que seleccionan una única hipótesis mediante alguna función de costo ad-hoc (e.g~como máxima verosimilitud).
+Sin embargo, esto tuvo como consecuencia la emergencia de inestabilidades conocidas como \emph{overfitting}, que no existen bajo la aplicación estricta de las reglas de la probabilidad.
+
+% Parrafo
+
+En las vísperas del siglo 21, el crecimiento en la capacidad de cómputo levantó finalmente el principal obstáculo que pesaba sobre la aplicabilidad de las reglas de la probabilidad.
+Con ellas se produce naturalmente una tendencia a favor de la agregación epistémica: las hipótesis individuales se agregan para formar variables, las variables se relacionan para formar modelos causales y los modelos causales se coordinan para formar teorías causales.
+Justamente porque las teorías causales son las agregaciones de modelos causales que, al adaptarse a los diversos contextos, tienen mejor capacidad predictiva que modelos causales individuales.
+
+% Parrafo
+
+El objetivo del curso ``Verdades empíricas'' es revisar los métodos que se fueron desarrollando en las últimas décadas, que permiten aprovechar toda la potencia del aprendizaje automático probabilístico de forma flexible e intuitiva, para crear modelos personalizados a la medida de cada problema específico.
+Con ellos podemos computar la incertidumbre óptima dada la información disponible, expresando las relaciones causales entre las variables de forma gráfica, descomponiendo las reglas de la probabilidad como mensajes entre los nodos de la red causal, y delegando la inferencia a los lenguajes de programación probabilística.
+
+
+\end{abstract}
+
 \section{Objetivos}
 
 La ciencia tiene pretensión de verdad: alcanzar acuerdos intersubjetivos con validez universal.
@@ -46,7 +69,7 @@ Conceptualmente se ha mostrado que las soluciones que ofrece la física estadís
 
 Durante el siglo 20 se deja de lado la pretensión de evaluar todo el espacio de hipótesis y se comienzan a desarrollar métodos que seleccionan una única hipótesis mediante alguna función de costo ad-hoc (e.g~como máxima verosimilitud).
 Estas aproximaciones puntuales, al evitar evaluar todo el espacio de hipótesis, permitieron extender en la práctica el campo de aplicaciones estadísticas~\cite{friedman2001-elementsOfStatisticalLearning}.
-Sin embargo, seleccionar una única hipótesis en contextos de incertidumbre tiene como consecuencia desafortunada la emergencia de inestabilidades conocidas como \emph{overfitting}, presentes en mucos modelos de aprendizaje automáticos actuales, pero que no están presentes en el sistema de razonamiento basado en la aplicación estricta de las reglas de la probabilidad~\cite{bishop2006-PRML}.
+Sin embargo, seleccionar una única hipótesis en contextos de incertidumbre tiene como consecuencia desafortunada la emergencia de inestabilidades conocidas como \emph{overfitting}, presentes en muchos modelos de aprendizaje automáticos actuales, pero que no están presentes en el sistema de razonamiento basado en la aplicación estricta de las reglas de la probabilidad~\cite{bishop2006-PRML}.
 
 % Parrafo
 
@@ -103,16 +126,75 @@ El objetivo del curso ``Verdades empíricas'' es revisar los métodos actuales q
 En las últimas décadas se fueron desarrollando técnicas que permiten aprovechar toda la potencia del aprendizaje automático probabilístico~\cite{murphy-pmlBook1,murphy-pmlBook2} de forma flexible e intuitiva, para crear modelos personalizados a la medida de cada problema específico.
 Con ellos podemos computar la incertidumbre óptima dada la información disponible, expresando las relaciones causales entre las variables de forma gráfica, descomponiendo las reglas de la probabilidad como mensajes entre los nodos de la red causal, y delegando la inferencia a los lenguajes de programación probabilística.
 
-\section{Unidades}
+
+\section{Contenidos mínimos}
+
+Acuerdos intersubjetivos en contextos de incertidumbre. Las reglas de la probabilidad. Especificación gráfica de modelos causales. Evaluación de modelos causales.
+
+Sorpresa: el problema de la comunicación con la realidad. La estructura invariante del dato empírico. Tasa de predicción e información. Evaluación de sistemas de comunicación alternativos en base a su tasa de sorpresa. Entropía y entropía cruzada. Distribuciones de probabilidad exponencial.
+
+Algoritmo eficientes de inferencia en modelos gráficos (sum-product algorithm sobre factor graphs). Introducción a las Aproximaciones analíticas (expectation propagation). Lenguajes de programación probabilísticos. Modelos de estimación de habilidad y evaluación de test diagnósticos.
+
+Inferencia causal. Los niveles del razonamiento causal. Flujos de inferencia en modelos causales. Efecto de las intervenciones en modelos causales. Conclusiones causales a partir de observaciones. Identificación de modelo causal mediante intervenciones. Buenos y malos controles.
+
+Series de tiempo. El problema de usar el posterior como prior del siguiente evento en el modelo de estimación de habilidad. Los modelos gráficos de historia completa. El algoritmos de pasaje de mensajes iterativos y su convergencia. Consideraciones de inferencia causal en series temprales.
+
+Toma de decisiones. Naturaleza multiplicativa de los procesos de selección probabilística y evolutiva. Sus consecuencias. La ventaja a favor de las variantes que reducen las fluctuaciones: diversificación individual (propiedad epistémica), cooperación (propiedad evolutiva mayor), especialización (propiedad meta-epistémica), heterogeneidad (propiedad ecológica).
+
+Competencia por grupos. Presentación de una competencia de inferecia con apuestas e intercambio de recursos.
+
 
 \begin{enumerate}
 
-\item \textbf{Principios interculturales de acuerdos intersubjetivos}
+\item \textbf{Modelos gráficos e inferencia}
 \vspace{-0.15cm}
 \begin{description}
-\item[Teórica:] Principios de razón suficiente, integridad, indiferencia y coherencia. Las reglas de la probabilidad. El teorema de Bayes. Interpretación de la verosimilitud y la evidencia. Introducción a la selección de modelos causales alternativos.
-\item[Práctica:] Juegos de apuestas en grupos. Implementación del juego de apuestas en un lenguaje de programación.
+\item[Teórica:] Acuerdos intersubjetivos en contextos de incertidumbre. Las reglas de la probabilidad. Especificación gráfica de modelos causales. Evaluación de modelos causales.
+\item[Laboratorio:] Simulación de procesos generativos y evaluación de modelos causales alternativos (Monty Hall). Apuestas óptimas individuales en procesos multiplicativos (casa de apuesta por la moneda). Implementar numeros seudo-aleatorios. Galton Board. Polya Bord.
 \end{description}
+
+
+\item \textbf{Algoritmos eficientes de inferencia}
+\vspace{-0.15cm}
+\begin{description}
+\item[Teórica:] El problema histórico de las reglas de la probabilidad. Distribuciones conjugadas gaussiana y beta-binomial. La emergencia del sobreajuste y el balance natural de las reglas de la probabilidad.
+\item[Laboratorio:] Implementación de modelos de recomendación Beta-Binomial. Implementación de regresión lineal bayesiana.
+\end{description}
+
+\vspace{0.1cm}
+\item \textbf{Sorpresa: el problema de la comunicación con la realidad}
+\vspace{-0.15cm}
+\begin{description}
+\item[Teórica:] La estructura invariante del dato empírico. Construcción de sistemas de comunicación con la realidad. Tasa de predicción e información. Evaluación de sistemas de comunicación alternativos en base a su tasa de sorpresa. Entropía y entropía cruzada. Distribuciones de probabilidad exponencial.
+\item[Práctica:] Selección de modelo lineal bayesiano.
+% Monedas con sesgo, basados en infecciones no observables, evaluados con diversos test diagnósticos. (Para después de lenguajes progrmación probabilística)
+\end{description}
+
+
+\vspace{0.1cm}
+\item \textbf{Modelos gráficos y algoritmo de inferencia}
+\vspace{-0.15cm}
+\begin{description}
+\item[Teórica:] Algoritmo eficientes de inferencia en modelos gráficos (sum-product algorithm sobre factor graphs). Introducción a las Aproximaciones analíticas (expectation propagation). Lenguajes de programación probabilísticos.
+\item[Práctica:] Implementación estimación de habilidad de habilidad, Elo y TrueSkill. Implementación de evaluación de test diagnósticos.
+\end{description}
+
+
+\vspace{0.1cm}
+\item \textbf{Inferencia causal}
+\vspace{-0.15cm}
+\begin{description}
+\item[Teórica:] Los niveles del razonamiento causal. Flujos de inferencia en modelos causales. Efecto de las intervenciones en modelos causales. Conclusiones causales a partir de observaciones. Identificación de modelo causal mediante intervenciones.
+\item[Práctica:] Buenos y malos controles en regresión lineal bayesianas. Selección de teorías causales alternativas (la rama y el árbol).
+\end{description}
+
+% Parrafo
+
+
+
+
+
+% Parrafo
 
 \vspace{0.1cm}
 \item \textbf{Propiedades de la función de costo epistémico-evolutiva}
@@ -124,37 +206,7 @@ Con ellos podemos computar la incertidumbre óptima dada la información disponi
 
 % Parrafo
 
-\vspace{0.1cm}
-\item \textbf{Dato: el problema de la comunicación con la realidad}
-%La síntesis que se viene del capítulo 3 tiene que ver con la estructura invariante del dato con el emisor-receptor de la teória de la comunicación. La Fuente F es el estado real de las hipótesis, el Encoder E es el modelo causal real, la Señal S son propiedades perceptibles reales, el Canal C es el cuerpo o algún instrumento de medición, el Mensaje M es aquello que recibimos como observable, el indicador, base empírica fundamental, el Decoder D es el modelo causal que estamos usando, y la Estimación es la conclusión de la inferencia (bayesiana) sobre la hipótesis no observbles de la fuente. El problema de las ciencias empíricas es el problema de la teoría de la información: "La comunicación con la realidad". Así se llama el capítulo 3.
-\vspace{-0.15cm}
-\begin{description}
-\item[Teórica:] La sorpresa como fuente de información. El principio de máxima incertidumbre. Información esperada. La estructura invariante del dato empírico. La función proposicional y su operacionalización: fuente, unidad de análisis, variable, dimensiones, procedimientos, indicador, estimación. La realidad causal como encoder. El modelo causal como decoder. La hipótesis indicadora universal. El continuo entre datos teóricos y datos de base empírica.
-\item[Práctica:] Compresión de datos. Gases. Distribución de la riqueza. Operacionalización de funciones proposicionales. El problema del acuerdo y su solución.
-\end{description}
 
-
-
-%If we can show that we can compress data from a particular source intoa file of L bits per source symbol and recover the data reliably, then we will say that the average information content of that source is at most L bits per symbol.
-
-
-\vspace{0.1cm}
-\item \textbf{Modelos gráficos y algoritmo de inferencia}
-\vspace{-0.15cm}
-\begin{description}
-\item[Teórica:] Distribuciones de probabilidad exponencial. Distribuciones conjugadas. Beta-Binomial. Dirichlet-multinomial. Polya Urn. Variables observadas y ocultas. Modelos digidos y no dirigidos. Gráficos de factores. Algoritmo suma-producto.
-\item[Práctica:] Flujo de inferencia (\emph{d-separation}) en el Modelo Alarma-Terremoto.
-\end{description}
-
-% Parrafo
-
-\vspace{0.1cm}
-\item \textbf{Inferencia causal}
-\vspace{-0.15cm}
-\begin{description}
-\item[Teórica:] Intervenciones sobre modelos causales (\emph{do-operator}) y su correlato en modelos gráficos. Criterios para sacar conclusiones causales de datos observacionales. Contrafácticos. 
-\item[Práctica:] Buenos y malos controles.
-\end{description}
 
 % Parrafo
 
@@ -163,7 +215,7 @@ Con ellos podemos computar la incertidumbre óptima dada la información disponi
 \vspace{-0.15cm}
 \begin{description}
 \item[Teórica:] Bernoulli, Binomial, Gaussiana, Poly Urn, Beta, Poison, Multinomial, Guasiana multivariada, etc. Regresión lineal multivariada.
-\item[Práctica:] Implementar numeros seudo-aleatorios. Galton Board. Polya Bord. Implentar la clase guasiana. Regresión lineal. Buenos y malos controles.
+\item[Práctica:] Implentar la clase guasiana. Regresión lineal. Buenos y malos controles.
 \end{description}
 
 % Parrafo
@@ -172,7 +224,7 @@ Con ellos podemos computar la incertidumbre óptima dada la información disponi
 \item \textbf{Evaluación de modelo}
 \vspace{-0.15cm}
 \begin{description}
-\item[Teórica:] Modelos gaussianos multidimensionales. Regresión lineal bayesiana. El enfoque frecuentista y el sobreajuste \emph{overfitting}. Evidencia. Media 
+\item[Teórica:] Modelos gaussianos multidimensionales. Regresión lineal bayesiana. El enfoque frecuentista y el sobreajuste \emph{overfitting}. Evidencia. Media
 \item[Práctica:] Buenos y malos controles.
 \end{description}
 
