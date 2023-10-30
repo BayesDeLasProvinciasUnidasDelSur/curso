@@ -11,7 +11,7 @@ La ciencia tiene pretensión de verdad: alcanzar acuerdos intersubjetivos con va
 
 Las reglas de la probabilidad se conocen desde finales del siglo 18 y desde entonces se las ha adoptado como sistema de razonamiento en todas las ciencias empíricas. Ellas son conceptualmente intuitivas: preservar la creencia previa que sigue siendo compatible con los datos (regla del producto) y predecir con la contribución de todas las hipótesis (regla de la suma). Si bien, luego de todo este tiempo no se ha propuesto nada mejor en lo práctico, el costo computacional asociados a la evaluación de todo el espacio de hipótesis ha limitado en los hechos su campo de aplicación. Por eso, con el tiempo se fueron desarrollando soluciones parciales, como la física estadística en el siglo 19 y el enfoque frecuentista en el siglo 20. Solo cuando se produce el enorme crecimiento en la capacidad de cómputo, en las vísperas del siglo 21, comienza por primera vez a ser posible aplicar de forma estricta las reglas de la probabilidad en todos los campos de la ciencia.
 
-|Cantidad de artículos bayesianos con alguna afiliación en Latinoamérica y el Caribe|
+|Cantidad de artículos basados en métodos bayesianos con alguna afiliación en Latinoamérica y el Caribe|
 |:-----------:|
 |![Hola](https://github.com/glandfried/images/blob/master/bayes/redes/papers.jpg)|
 
