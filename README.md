@@ -7,19 +7,60 @@ Contactos a **bayesdelsur@gmail.com**
 
 ## Objetivos
 
-La ciencia tiene pretensión de verdad: alcanzar acuerdos intersubjetivos con validez universal. Las ciencias formales (matemática, lógica) alcanzan estos acuerdos derivando teoremas dentro de sistemas axiomáticos cerrados. Sin embargo, las ciencias empíricas (desde la física hasta las ciencias sociales) deben validar sus proposiciones en sistemas abiertos que contienen siempre algún grado de incertidumbre. ¿Es posible entonces alcanzar acuerdos intersubjetivos ("verdades") en las ciencias empíricas en las que es inevitable decir "no sé"? Sí. Podemos evitar mentir: maximizando incertidumbre (no afirmar más de lo que se sabe) dada la información disponible (sin ocultar lo que sí se sabe).
+La ciencia tiene pretensión de alcanzar verdades: acuerdos intersubjetivos con validez universal. Las ciencias formales (matemática, lógica) alcanzan estos acuerdos derivando teoremas dentro de sistemas axiomáticos cerrados. Sin embargo, las ciencias empíricas (desde la física hasta las ciencias sociales) deben validar sus proposiciones en sistemas abiertos que contienen siempre algún grado de incertidumbre. ¿Es posible entonces alcanzar acuerdos intersubjetivos ("verdades") en las ciencias empíricas en las que es inevitable decir "no sé"? Sí. Podemos evitar mentir: maximizando incertidumbre (no afirmar más de lo que se sabe) dada la información disponible (sin ocultar lo que sí se sabe).
 
-Las reglas de la probabilidad se conocen desde finales del siglo 18 y desde entonces se las ha adoptado como sistema de razonamiento en todas las ciencias empíricas. Ellas son conceptualmente intuitivas: preservar la creencia previa que sigue siendo compatible con los datos (regla del producto) y predecir con la contribución de todas las hipótesis (regla de la suma). Si bien, luego de todo este tiempo no se ha propuesto nada mejor en lo práctico, el costo computacional asociados a la evaluación de todo el espacio de hipótesis ha limitado en los hechos su campo de aplicación. Por eso, con el tiempo se fueron desarrollando soluciones parciales, como la física estadística en el siglo 19 y el enfoque frecuentista en el siglo 20. Solo cuando se produce el enorme crecimiento en la capacidad de cómputo, en las vísperas del siglo 21, comienza por primera vez a ser posible aplicar de forma estricta las reglas de la probabilidad en todos los campos de la ciencia.
+Las reglas de la probabilidad se conocen desde finales del siglo 18 y desde entonces se las ha adoptado como sistema de razonamiento en todas las ciencias empíricas. Ellas son conceptualmente intuitivas: preservar la creencia previa que sigue siendo compatible con los datos (regla del producto) y predecir con la contribución de todas las hipótesis (regla de la suma). Si bien, luego de todo este tiempo no se ha propuesto nada mejor en términos prácticos, el costo computacional asociados a la evaluación de todo el espacio de hipótesis ha limitado en los hechos su campo de aplicación.
+Su relevancia contrasta con la realidad actual en la que el enfoque bayesiano sigue siendo marginal incluso en la universidades más importante de América Latina, y es prácticamente inexistente en ciencias empíricas que no cuentan con formación específica en matemática y programación.
+
+En la siguiente figura se detalla la cantidad de artículos científicos vinculados al
+enfoque bayesiano publicados cada año con al menos una autoría con filiación en
+América Plurinacional (fuente Scopus).
 
 |Cantidad de artículos basados en métodos bayesianos con alguna afiliación en Latinoamérica y el Caribe|
 |:-----------:|
 |![Hola](https://github.com/glandfried/images/blob/master/bayes/redes/papers.jpg)|
 
-Luego de superados estos obstáculos, la inercia histórica aparece ahora como una de las limitaciones principales. A pesar de que el conocimientos bajo incertidumbre sea "plural y condicional", el lenguaje tradicional de las ciencias empíricas, incluida la inteligencia artificial, lo trata como si fuera "singular y definitvo". El objetivo del curso "Verdades empíricas" es revisar los métodos actuales que permiten implementar modelos a medida del problema de forma sencilla e intuitiva. Con ellos podemos computar la incertidumbre óptima dada la información disponible, expresando las relaciones causales entre las variables de forma gráfica, descomponiendo las reglas de la probabilidad como mensajes entre los nodos de la red causal, y delegando la inferencia a los lenguajes de programación probabilística.
+A finales de siglo, con el proceso de masificación de las computadoras personales, el enfoque bayesiano comenzó a ocupar el centro de atención de la IA, hasta que en el año 2012 se presenta una red neuronal convolucional profunda entrenada sobre GPU [1].
+Nuevamente la complejidad computacional actuó como un límite a la aplicación estricta de las reglas de la probabilidad, que obligan a evaluar todo el espacio de hipótesis.
+Aún así, el auge de las redes neuronales profundas no produjo la aparición de un nuevo sistema de razonamiento bajo incertidumbre con mejor desempeño que el de las reglas de la probabilidad.
+El enfoque bayesiano sigue siendo el corazón de la IA y de toda ciencia empírica.
+En este contexto, NeurlIPS realizó una competencia en el año 2021 denominada “Approximate inference in Bayesian Deep Learning” [2,3], donde se confirma que los deep ensambles son
+buenas aproximaciones.
 
-A diferencia de los procedimientos ad-hoc que seleccionan una única hipótesis (por ejemplo, por máxima verosimilitud), la aplicación estricta de las reglas de probabilidad (enfoque bayesiano) nos obliga a considerar todas y cada una de las hipótesis. Debido a que el proceso de evaluación de hipótesis (por secuencia de predicciones) es como el proceso de selección de las formas de vida en evolución (por secuencia de tasas de reproducción y supervivencia) ambos de naturaleza multiplicativa (un solo cero en la secuencia de reproducción y supervivencia genera una extinción), existe una ventaja a favor de las variantes que reducen las fluctuaciones por diversificación individual (propiedad epistémica), por cooperación (propiedad evolutiva), por especialización cooperativa (propiedad de especiación) y por heterogeneidad (propiedad ecológica).
+Las cuestiones computacionales, sin embargo, son solo el primer paso de la IA.
+Para sacar conclusiones causales y predecir las consecuencias de las
+intervenciones es necesario evaluar modelos que tengan una interpretación causal [4, 5].
+Las teorías causales, al ser hipótesis, pueden ser evaluadas mediante la aplicación estricta de las reglas de la probabilidad [6], P(Teoría causal|Datos), que penaliza naturalmente la complejidad innecesaria de los modelos.
+Hoy la IA tiene la oportunidad de hacer uso de los modelos causales que se desarrollan en diversas ciencias empíricas, y las ciencias empíricas tienen la oportunidad de crear y evaluar modelos a la
+medida de cada problema específico [7-10]
 
-Del mismo modo que seleccionar una única hipótesis tiene consecuencias negativas conocidas en probabilidad (overfitting), la masiva pérdida de la diversidad cultural provocada durante la colonial-modernidad no ha podido ser compensada por la ciencia metropolitana moderna y la crisis ecológica no deja de profundizarse.
+El objetivo del curso "Verdades empíricas" es revisar los métodos actuales que permiten implementar modelos a medida del problema de forma sencilla e intuitiva.
+Con ellos podemos computar la incertidumbre óptima dada la información disponible, expresando las relaciones causales entre las variables de forma gráfica, descomponiendo las reglas de la probabilidad como mensajes entre los nodos de la red causal, y delegando la inferencia a los lenguajes de programación probabilística.
+El curso finaliza con juegos de apuestas, la moderna teoría de toma de decisiones basada en funciones costo ergódicas, y las propiedades comunes que comporten los procesos de evaluación de hipótesis en probabilidad (por secuencia de predicciones) y los procesos de selección de las formas de vida en evolución (por secuencia de tasas de reproducción y supervivencia).
+<!--A diferencia de los procedimientos ad-hoc que seleccionan una única hipótesis (por ejemplo, por máxima verosimilitud), la aplicación estricta de las reglas de probabilidad (enfoque bayesiano) nos obliga a considerar todas y cada una de las hipótesis. -->
+<!-- Esto nos permitirá mostrar las propiedades comunes Debido a que el proceso de evaluación de hipótesis (por secuencia de predicciones) y el proceso de selección de las formas de vida en evolución (por secuencia de tasas de reproducción y supervivencia) son ambos de naturaleza multiplicativa (un solo cero en la secuencia genera una extinción irreversible),-->
+<!-- Del mismo modo que seleccionar una única hipótesis tiene consecuencias negativas conocidas en probabilidad (overfitting), la masiva pérdida de la diversidad cultural provocada durante la colonial-modernidad no ha podido ser compensada por la ciencia metropolitana moderna y la crisis ecológica no deja de profundizarse.-->
+
+[1] Krizhevsky A, Sutskever I, Hinton GE. Imagenet classification with deep convolutional neural
+networks. Advances in neural information processing systems. 2012;25.
+
+[2] Wilson AG, Izmailov P. Bayesian deep learning and a probabilistic perspective of generalization. Advances in neural information processing systems. 2020;33:4697–4708.
+
+[3] Izmailov P, Vikram S, Hoffman MD, Wilson AGG. What are Bayesian neural network posteriors really like? In: International conference on machine learning. PMLR; 2021. p. 4629–4640
+
+[4] Pearl J. Causality. Cambridge University Press; 2009.
+
+[5] Peters J, Janzing D, Schölkopf B. Elements of causal inference: foundations and learning algorithms. The MIT Press; 2017
+
+[6] Winn J. Causality with gates. In: Artificial Intelligence and Statistics. Proceedings of Machine
+Learning Research; 2012. p. 1314–1322.
+
+[7] Murphy KP. Probabilistic Machine Learning: An introduction. MIT Press; 2022.
+
+[8] Murphy KP. Probabilistic Machine Learning: Advanced Topics. MIT Press; 2023.[9] Bishop CM. Model-based machine learning. Philosophical Transactions of the Royal Society A:
+Mathematical,Physical and Engineering Sciences. 2013;371(1984):20120222.
+
+[10] Bishop CM. Pattern recognition and machine learning. springer; 2006.
 
 <!--Bajo incertidumbre, la lógica es paraconsistente en tanto se hace necesario creer al mismo tiempo en A y no A hasta que la sorpresa, única fuente de información, decida. -->
 
