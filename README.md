@@ -41,7 +41,7 @@ El curso finaliza con juegos de apuestas, la moderna teoría de toma de decision
 <!-- Esto nos permitirá mostrar las propiedades comunes Debido a que el proceso de evaluación de hipótesis (por secuencia de predicciones) y el proceso de selección de las formas de vida en evolución (por secuencia de tasas de reproducción y supervivencia) son ambos de naturaleza multiplicativa (un solo cero en la secuencia genera una extinción irreversible),-->
 <!-- Del mismo modo que seleccionar una única hipótesis tiene consecuencias negativas conocidas en probabilidad (overfitting), la masiva pérdida de la diversidad cultural provocada durante la colonial-modernidad no ha podido ser compensada por la ciencia metropolitana moderna y la crisis ecológica no deja de profundizarse.-->
 
-<span style="font-size:0.2em;">
+<font size="1">
 
 [1] Krizhevsky A, Sutskever I, Hinton GE. Imagenet classification with deep convolutional neural
 networks. Advances in neural information processing systems. 2012;25.
@@ -64,7 +64,7 @@ Mathematical,Physical and Engineering Sciences. 2013;371(1984):20120222.
 
 [10] Bishop CM. Pattern recognition and machine learning. springer; 2006.
 
-</span>
+</font>
 
 <!--Bajo incertidumbre, la lógica es paraconsistente en tanto se hace necesario creer al mismo tiempo en A y no A hasta que la sorpresa, única fuente de información, decida. -->
 
