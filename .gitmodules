@@ -13,3 +13,6 @@
 [submodule "practica/mcelreath/stat_rethinking_2024"]
 	path = practica/mcelreath/stat_rethinking_2024
 	url = git@github.com:BayesDeLasProvinciasUnidasDelSur/stat_rethinking_2024.git
+[submodule "practica/pymc/pymc-resources"]
+	path = practica/pymc/pymc-resources
+	url = git@github.com:BayesDeLasProvinciasUnidasDelSur/pymc-resources.git
