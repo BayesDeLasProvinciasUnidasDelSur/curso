@@ -10,3 +10,6 @@
 [submodule "evaluacion/2023.1/hackaton/hackaton40"]
 	path = evaluacion/2023.1/hackaton/hackaton40
 	url = git@github.com:MetodosBayesianos/hackaton40.git
+[submodule "practica/mcelreath/stat_rethinking_2024"]
+	path = practica/mcelreath/stat_rethinking_2024
+	url = git@github.com:BayesDeLasProvinciasUnidasDelSur/stat_rethinking_2024.git
