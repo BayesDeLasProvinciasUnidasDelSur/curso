@@ -1,0 +1,884 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+
+\input{../../../../auxiliar/tex/encabezado.tex}
+\input{../../../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+\newif\ifen
+\newif\ifes
+\newcommand{\en}[1]{\ifen#1\fi}
+\newcommand{\es}[1]{\ifes#1\fi}
+\estrue
+
+\newcommand{\E}{\en{S}\es{E}}
+\newcommand{\A}{\en{E}\es{A}}
+\newcommand{\Ee}{\en{s}\es{e}}
+\newcommand{\Aa}{\en{e}\es{a}}
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Code}% Listing -> Algorithm
+\lstset{
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=true,
+  columns=flexible,
+  basicstyle={\scriptsize\ttfamily},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showlines=true
+}
+\definecolor{all}{rgb}{0.90, 0.90, 0.90}
+
+
+%opening
+\title{Práctica 1. \\ Especificación y evaluación de argumentos causales.}
+\author{Docente: Gustavo Landfried \\ Inferencia Bayesiana Causal 1\\ 2do cuatrimestre  2024 \\ UBA - UNSAM}
+\date{}
+
+%\setcounter{section}{-1} % Para que empiece con número de sección 0.
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Modelo Base vs Modelo Monty Hall}
+
+En la siguiente figura se puede observar la especificación gráfica del modelo ``Monty Hall'' (derecha) y el modelo ``Base'' (izquierda) visto en la presentación.
+Abajo de ellos se muestra la distribución de creencias \textit{a posteriori} sobre la posición del regalo luego de que hayamos elegido cerrar la caja $1$ y nos mostraran que en la caja $2$ no estaba el regalo, $P(r|s=2,c=1)$.
+
+
+ \begin{figure}[H]
+\begin{subfigure}[t]{0.48\textwidth}
+\centering
+\tikz{
+    \node[invisible] (id) {};
+    \node[latent, left=of id, xshift=-1.5cm] (d) {\includegraphics[width=0.10\textwidth]{../../../../auxiliar/download/dedo.png}} ;
+    \node[const,left=of d] (nd) {\Large $P(s|r)$} ;
+    \node[const, below=of d, yshift=-0.2cm] (restricciones) {$s \neq r$};
+
+
+    \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.12\textwidth]{../../../../auxiliar/download/regalo.png}} ;
+    \node[const,left=of r] (nr) {\Large $P(r)$} ;
+
+
+    \node[latent, fill=black!30, above=of d, xshift=1.5cm] (c) {\includegraphics[width=0.12\textwidth]{../../../../auxiliar/download/cerradura.png}} ;
+    \node[const,left=of c] (nc) {\Large $P(c)$} ;
+
+    \edge {r} {d};
+}
+
+\vspace{0.15cm}
+\tikz{
+         \node[factor, minimum size=1cm] (p1) {\includegraphics[width=0.07\textwidth]{../../../../auxiliar/download/cerradura.png}} ;
+         \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.07\textwidth]{../../../../auxiliar/download/dedo.png}} ;
+         \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+
+         \node[const, above=of p1, yshift=.1cm] (fp1) {$1/2$};
+         \node[const, above=of p2, yshift=.1cm] (fp2) {$\phantom{/}0\phantom{/}$};
+         \node[const, above=of p3, yshift=.1cm] (fp3) {$1/2$};
+         \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
+
+        }
+\caption{Modelo Base ($M_0$)}
+\end{subfigure}
+\begin{subfigure}[t]{0.48\textwidth}
+\centering
+\tikz{
+    \node[invisible] (id) {};
+    \node[latent, left=of id, xshift=-1.5cm] (d) {\includegraphics[width=0.10\textwidth]{../../../../auxiliar/download/dedo.png}} ;
+    \node[const,left=of d] (nd) {\Large $P(s|r,c)$} ;
+    \node[const, below=of d, yshift=-0.2cm] (restricciones) {$s \neq r \text{, } s \neq c$};
+
+
+    \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.12\textwidth]{../../../../auxiliar/download/regalo.png}} ;
+    \node[const,left=of r] (nr) {\Large $P(r)$} ;
+
+
+    \node[latent, fill=black!30, above=of d, xshift=1.5cm] (c) {\includegraphics[width=0.12\textwidth]{../../../../auxiliar/download/cerradura.png}} ;
+    \node[const,left=of c] (nc) {\Large $P(c)$} ;
+
+    \edge {r,c} {d};
+}
+
+\vspace{0.15cm}
+\tikz{
+         \node[factor, minimum size=1cm] (p1) {\includegraphics[width=0.07\textwidth]{../../../../auxiliar/download/cerradura.png}} ;
+         \node[det, minimum size=1cm, xshift=1.5cm] (p2) {\includegraphics[width=0.07\textwidth]{../../../../auxiliar/download/dedo.png}} ;
+         \node[factor, minimum size=1cm, xshift=3cm] (p3) {} ;
+
+         \node[const, above=of p1, yshift=.1cm] (fp1) {$1/3$};
+         \node[const, above=of p2, yshift=.1cm] (fp2) {$\phantom{/}0\phantom{/}$};
+         \node[const, above=of p3, yshift=.1cm] (fp3) {$2/3$};
+         \node[const, below=of p2, yshift=-.10cm, xshift=0.3cm] (dedo) {};
+
+        }
+\caption{Modelo Monty Hall ($M_1$)}
+\end{subfigure}
+\caption{Modelos causales alternativos}
+\label{fig_ModeloCausalesAlternativos}
+\end{figure}
+
+El modelo Base (izquierda) supone que la pista $s$ no puede señalar únicamente la caja en la que se encuentra el regalo $s\neq r$. El modelo Monty Hall (derecha) supone que la pista $s$ no puede señalar la caja en la que se encuentra el regalo $s\neq r$ ni la caja que hemos cerrado previamente $s\neq c$.
+El objetivo de este ejercicio es actualizar nuestras creencias sobre los modelos causales alternativos luego de observar un conjunto datos, $P(\text{Modelo}|\text{Datos})$.
+
+\begin{equation*}
+P(\text{Modelo}|\text{Datos}) = \frac{P(\text{Datos}|\text{Modelo})P(\text{Modelo})}{P(\text{Datos})}
+\end{equation*}
+
+Para ello deberemos calcular:
+\vspace{-0.1cm}
+\begin{itemize}  \setlength\itemsep{-0.1cm}
+\item La predicción que hace el modelo sobre los datos: $P(\text{Datos}|\text{Modelo})$
+\item La predicción de los datos realizada con la contribución de todos los modelos: $P(\text{Datos})$
+\item La creencia previa ``honesta'' sobre los modelos: $P(\text{Modelo})$
+\end{itemize}
+Vayamos paso a paso.
+
+\subsection{Definir la distribución de creencia conjunta como producto de las distribuciones condicionales del modelo}
+
+Las especificaciones gráficas de los argumentos causales representan dos descomposiciones alternativas de la distribución de creencias conjuntas $P(r,c,s|M)$.
+$$\underbrace{P(r,c,s|M_0)}_{\hfrac{\text{\scriptsize Prior conjunto}}{\text{\scriptsize hipótesis en $M_0$}}} = \underbrace{P(r|M_0)P(c|M_0)P(s|r,M_0)}_{\hfrac{\text{\scriptsize Relaciones causales probabilísticas}}{\text{\scriptsize propuestas por el modelo $M_0$}}} \hspace{0.3cm} , \hspace{0.3cm} \underbrace{P(r,c,s|M_1)}_{\hfrac{\text{\scriptsize Prior conjunto}}{\text{\scriptsize hipótesis en $M_1$}}} = \underbrace{P(r|M_1)P(c|M_1)P(s|r,c,M_1)}_{\hfrac{\text{\scriptsize Relaciones causales probabilísticas}}{\text{\scriptsize propuestas por el modelo $M_1$}}}$$
+
+Ambos modelos suponen que $r$ y $c$ son variables independientes.
+El modelo Base $M_0$, sin embargo, supone que $s$ depende únicamente de $r$, ($s\neq r$) mientras que el modelo Monty Hall $M_1$ considera que $s$ depende tanto de $r$ como de $s$, ($s\neq r, \, s\neq c$).
+
+Las distribuciones condicionales a priori sobre $r$ y $c$ son iguales en ambos modelos.
+$$
+P(r|M) = P(r) = \begin{array}{c|c|c}
+  r=0 & r=1 & r=2 \\
+  \hline
+  1/3 & 1/3 & 1/3 \\
+\end{array}
+\ \ \ \ \ \
+P(c|M) = P(c) = \begin{array}{c|c|c}
+  c=0 & c=1 & c=2 \\
+  \hline
+  1/3 & 1/3 & 1/3 \\
+\end{array}
+$$
+La única diferencia entre los modelos aparece en la distribución condicional sobre la pista. En el modelo Base solo depende del regalo $r$.
+$$
+P(s|r,M_0) = \begin{array}{c|c|c|c}
+  & s=0 & s=1 & s=2 \\ \hline
+ r=0 & 0 & 1/2 & 1/2 \\ \hline
+ r=1 & 1/2 & 0 & 1/2 \\ \hline
+ r=2 & 1/2 & 1/2 & 0 \\ \hline
+\end{array}
+$$
+Y en el modelo Monty Hall depende del regalo $r$ y la caja cerrada $c$. Para simplificar, mostraremos los valores cuando $c=1$.
+$$
+P(s|r,c=1,M_1) = \begin{array}{c|c|c|c}
+ (c=0) & s=0 & s=1 & s=2 \\ \hline
+ r=0 & 0 & 1/2 & 1/2 \\ \hline
+ r=1 & 0 & 0 & 1 \\ \hline
+ r=2 & 0 & 1 & 0 \\ \hline
+\end{array}
+$$
+Notar que cada renglón suma 1, pues cada condicional representa una distribución de probabilidad distinta.
+
+% Si antes de ver datos no tenemos preferencia por ninguno de los modelos por lo que podemos dividir nuestra creencia en partes iguales.
+%
+% $$P(\text{Modelo}) = \begin{array}{c|c}
+%   M=0 & M=1  \\
+%   \hline
+%   1/2 & 1/2  \\
+% \end{array}
+% $$
+
+\subsection{Mostrar que el producto de las predicciones a priori de la secuencia de datos de un episodio es igual a la probabilidad conjunta a priori}
+
+Un episodio es la secuencias completa de observaciones de todas las variables ocultas de un modelo.
+Al iniciar un episodio, todas las variables son ocultas (hipótesis).
+Al final del episodio, todas son observables.
+En este ejemplo, vamos a considerar que al interior de un episodio $t$ las observaciones llegan siempre en el mismo orden: observamos primero la caja que se cierra $c_t$, luego la pista $s_t$ y finalmente la posición del regalo $r_t$.
+Luego, la predicción que hace un modelo sobre esos datos puede escribirse del siguiente modo,
+$$\underbrace{P(\text{Episodio}= (c_t,s_t,r_t)|\text{Modelo})}_{\hfrac{\text{\scriptsize Predicción de los datos}}{\text{\scriptsize de un episodio completo}} }  = \underbrace{P(c_t|\text{Modelo})}_{\hfrac{\text{\scriptsize Predicción}}{\text{\scriptsize primer dato}} } \underbrace{P(s_t|c_t,\text{Modelo})}_{\hfrac{\text{\scriptsize Predicción}}{\text{\scriptsize segundo dato}} } \underbrace{P(r_t|s_t,c_t,\text{Modelo})}_{\hfrac{\text{\scriptsize Predicción}}{\text{\scriptsize tercer dato}} }$$
+
+Mostrar que el producto de las predicciones a priori de la secuencia de datos de un episodio es igual a la probabilidad conjunta a priori.
+$$  \underbrace{P (r, c, s| \text{Modelo})}_{\hfrac{\text{\scriptsize Creencia conjunta}}{\text{\scriptsize de hipótesis a priori}} }  = \underbrace{P(c_t|\text{Modelo})}_{\hfrac{\text{\scriptsize Predicción}}{\text{\scriptsize primer dato}} } \underbrace{P(s_t|c_t,\text{Modelo})}_{\hfrac{\text{\scriptsize Predicción}}{\text{\scriptsize segundo dato}} } \underbrace{P(r_t|s_t,c_t,\text{Modelo})}_{\hfrac{\text{\scriptsize Predicción}}{\text{\scriptsize tercer dato}} } $$
+
+
+\subsection{Simular datos con el modelo Monty Hall}
+
+Antes de evaluar los modelos necesitamos un conjunto de datos que provengan de la realidad subyacente oculta.
+Podríamos buscar los datos reales del programa de televisión Monty Hall y revisar si efectivamente el modelo Monty Hall propuesto es mejor que el modelo Base. Para simplificar vamos a suponer que nuestro modelo Monty Hall representa perfectamente la realidad causal subyacente y vamos a generar entonces los datos usando de nuestro propio modelo Monty Hall.
+Generar un conjunto de datos con $T=16$ episodios.
+$$ \text{Datos} = \{(c_0, s_0, r_0), \,  \dots  \, , (c_{T-1}, s_{T-1}, r_{T-1}) \} $$
+
+\subsection{Calcular la predicción a priori que hace cada uno de los modelos sobre la totalidad de la base de datos simulada}
+
+Ahora sí, podemos calcular la predicción del conjunto de datos que hace cada uno de los modelos con la contribución de todas sus hipótesis internas.
+$$P(\text{Datos} = \{\underbrace{(c_0, s_0, r_0)}_{\genfrac{}{}{0pt}{}{\text{Primer}}{\text{episodio}}}, \underbrace{(c_1, s_1, r_1)}_{\genfrac{}{}{0pt}{}{\text{Segundo}}{\text{episodio}}},  \,  \dots \, \underbrace{(c_{T-1}, s_{T-1}, r_{T-1})}_{\genfrac{}{}{0pt}{}{\text{T-ésimo}}{\text{episodio}}}  \}|\text{Modelo})$$
+
+Los modelos causales expresados en la figura~\ref{fig_ModeloCausalesAlternativos} proponen relaciones causales probabilísticas entre las variables al interior de un episodio.
+En principio, estos modelos sólo están definidos para un único episodio.
+Para extenderlos a $T$ episodios vamos a considerar que contamos con $T$ repeticiones de esa misma estructura causales.
+Las repeticiones se especifican gráficamente mediante el uso de ``placas''.
+
+
+ \begin{figure}[H]\centering
+\begin{subfigure}[t]{0.48\textwidth}
+\centering
+\tikz{
+    \node[invisible] (id) {};
+    \node[latent, left=of id, xshift=-1.5cm] (d) {\includegraphics[width=0.10\textwidth]{../../../../auxiliar/download/dedo.png}} ;
+    \node[const,left=of d] (nd) {\Large $P(s_t|r_t)$} ;
+    \node[const, below=of d, yshift=-0.2cm] (restricciones) {$s_t \neq r_t$};
+
+
+    \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.12\textwidth]{../../../../auxiliar/download/regalo.png}} ;
+    \node[const,left=of r] (nr) {\Large $P(r_t)$} ;
+
+
+    \node[latent, fill=black!30, above=of d, xshift=1.5cm] (c) {\includegraphics[width=0.12\textwidth]{../../../../auxiliar/download/cerradura.png}} ;
+    \node[const,left=of c] (nc) {\Large $P(c_t)$} ;
+
+    \edge {r} {d};
+    \plate {repeticiones} {(nr)(c)(restricciones)} {$t \in \{0, \dots, T-1\}$};
+}
+\caption{Modelo Base ($M_0$)}
+\end{subfigure}
+\begin{subfigure}[t]{0.48\textwidth}
+\centering
+\tikz{
+    \node[invisible] (id) {};
+    \node[latent, left=of id, xshift=-1.5cm] (d) {\includegraphics[width=0.10\textwidth]{../../../../auxiliar/download/dedo.png}} ;
+    \node[const,left=of d] (nd) {\Large $P(s_t|r_t,c_t)$} ;
+    \node[const, below=of d, yshift=-0.2cm] (restricciones) {$s_t \neq r_t \text{, } s_t \neq c_t$};
+
+
+    \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.12\textwidth]{../../../../auxiliar/download/regalo.png}} ;
+    \node[const,left=of r] (nr) {\Large $P(r_t)$} ;
+
+
+    \node[latent, fill=black!30, above=of d, xshift=1.5cm] (c) {\includegraphics[width=0.12\textwidth]{../../../../auxiliar/download/cerradura.png}} ;
+    \node[const,left=of c] (nc) {\Large $P(c_t)$} ;
+
+    \edge {r,c} {d};
+
+    \plate {repeticiones} {(nr)(c)(restricciones)} {$t \in \{0, \dots, T-1\}$};
+}
+\caption{Modelo Monty Hall ($M_1$)}
+\end{subfigure}
+\caption{Extensión de los modelos causales alternativos a $T$ episodios mediante la notación de ``placas''. El subíndice $t$ representa las repeticiones.}
+\label{fig_ModeloCausalesAlternativosExtendidos}
+\end{figure}
+
+Es decir, entre episodios no hay flechas que vinculen las estructuras causales, por lo que ninguno modelo usa los datos de un episodio para predecir lo datos de otro episodio.
+Esto permite descomponer la predicción sobre el conjunto de datos sobre todos los episodios como el producto de las predicciones que lo modelos hacen al interior de cada episodio.
+$$P(\text{Datos} |\text{Modelo}) = \prod_{t\in \{0,\dots,T-1 \}} P(c_t|\text{Modelo})P(s_t|c_t,\text{Modelo})P(r_t|s_t,c_t,\text{Modelo})  $$
+
+Calcular $P(\text{Datos} |\text{Modelo})$.
+
+\subsection{Expresar intuitivamente la diferencia de desempeño predictivo de los modelos}
+
+La predicción sobre un conjunto de datos necesariamente resulta ser un número muy cercano a 0.
+En este caso, en el que observamos tan solo 16 episodios, el modelo Base predijo el conjunto de datos con probabilidad $P(\text{Datos}_T|M_0) = 8.23e-21$ (con 21 ceros después de la coma) y el modelo Monty Hall predijo con probabilidad $P(\text{Datos}|M_1) = 3.37e-17$ (con 17 ceros después de la coma).
+Si seguimos agregando episodios al conjunto de datos, este número alcanza valores tan cercanos a cero que deja de ser posible representarlo en una computadora.
+
+Existen dos formas alternativas de expresar este número, que son muy útiles además para ganar intuición respecto de la diferencia de desempeño entre modelos.
+
+\subsubsection{Calcular la diferencia de desempeño predictivo entre modelos expresada en órdenes de magnitud y la cantidad de creencia que el modelo Monty Hall preserva respecto del modelo Base.}
+
+Expresar la predicción en órdenes de magnitud significa hablar en términos del exponente.
+Por ejemplo, el exponente de las predicciones del modelo Base es alrededor de $-21$ y el exponente del modelo Monty Hall es alrededor de $-17$, como ya mencionamos anterioramente.
+La función que nos devuelve el exponente de un número es el logaritmo.
+\begin{align*}
+\overbrace{\log_{10} P(\text{Datos} =\{d_1, d_2, \dots, d_N \}|M)}^{\text{\scriptsize Exponente de la predicción conjunta}} & = \log_{10} (\overbrace{P(d_1|M) P(d_2|d_1,M) \dots}^{P(\text{Datos}|M)}) \\
+& \overset{*}{=}  \underbrace{\log_{10} P(d_1|M)}_{\text{Exponente de $d_1$}} + \underbrace{\log_{10} P(d_2|d_1,M) }_{\text{Exponente de $d_2$}} + \dots
+\end{align*}
+
+El exponente de la predicción conjunta se puede descomponer ($\overset{*}{=}$) como la suma de los exponentes de las predicciones individuales.
+Esto permite evitar los problemas de representación computacional.
+Además, si calculamos la diferencia de exponentes entre los modelos obtendremos la diferencia de desempeño predictivo en órdenes de magnitud, lo que se conoce como \emph{log Bayes Factor}.
+$$ \log_{10} \underbrace{\frac{P(\text{Datos}|M_1)}{P(\text{Datos}|M_0)}}_{\text{Bayes factor}}  = \underbrace{\log_{10} P(\text{Datos}|M_1) - \log_{10}P(\text{Datos}|M_0)}_{\text{Diferencia predicitva en ordenes de magnitud}} \approx (-17) - (-21) = 4$$
+
+En base 10, una diferencia de un orden de magnitud significa que uno de los modelos preservó 10 veces más creencia que el otro, dos ordenes de magnitud significa que un modelos preservó 100 veces más creencia que el otro, y así sucesivamente.
+Aunque estos números parezcan extraordinarios, cuatro órdenes de magnitud se considera en el límite de una diferencia no concluyente. Cuando las bases de datos crecen, la diferencia en órdenes de magnitud continuan creciendo, por lo que es normal ver diferencia de 10000, pero en órdenes de magnitud! En esos casos, para ganar intuición es útil calcular la predicción "típica".
+
+\subsubsection{Calcular la predicción típica (o media geométrica) de los modelos.}
+
+La media geométrica representa la predicción "típica" que hace un modelo de los datos. Decimos que es típica porque podemos reemplazar cada una de las predicciones que componen la secuencia por la media geometrica sin alterar el valor final. Es decir,
+$$P(\text{Datos}=\{d_1, d_2, \dots, d_N \}|M) = P(d_1|M) P(d_2|d_1,M) \dots =  \prod_{i\in \{1,\dots,N\}} \underbrace{(P(d_1|M) P(d_2|d_1,M) \dots )^{1/N}}_{\text{Media geométrica}} $$
+
+Así expresada, la media geométrica tendría el mismo problema de representación computacional que señalamos al inicio de este ejercicio. Para calcularla hay que trabajar en órdenes de magnitud.
+$$ 10^{\, \log_{10} (P(d_1|M) P(d_2|d_1,M) \dots )^{1/N}} = 10^{\,\frac{1}{N}\big(\log_{10} P(d_1|M) + \log_{10} P(d_2|d_1,M) + \dots \big)}$$
+
+La expresión de la derecha puede ser calculada gracias a que es la suma de los exponentes individuales, dividido luego por $N$, la cantidad de datos. En nuestro caso tenemos $T=16$ episodios, pero la cantidad total de datos es $N=T\cdot3 = 48$, tres por cada episodio. Usaremos este número para calcular la predicción típica.
+
+\vspace{0.3cm}
+
+Verán que la predicción típica del modelo Base será de $0.382$ y la del modelo Monty Hall será de $0.454$.
+Dado que observamos en total $N=48$ datos ($3$ datos en cada una de los $T=16$ episodios), podemos usar la predicción típica para recuperar la predicción conjunta.
+ $$P(\text{Datos}|M_0) = 0.382^{48}   \hspace{2cm}  P(\text{Datos}|M_1) = 0.454^{48}$$
+
+En promedio (geométrico), el modelo base preserva solo el $38.2\%$ de la creencia previa luego de cada nueva observación, mientras que el modelo Monty Hall preserva $45.4\%$.
+Debido a que le predicción es un proceso multiplicativo, la pérdida de creencia de los modelos es exponencial.
+Por eso en tan solo 48 pasos temporales el modelo Monty Hall logra preservar $4096$ veces más de creencia que el modelo Base.
+\footnote{La naturaleza exponencial de la pérdida de creencia hace que diferencias mucho menores entre las predicciones típicas de los modelos sean suficientes para identificar qué modelo funciona realmente mejor que otro.
+Por ejemplo, si la predicción típica del modelo Base hubiera sido $0.452$, preservando apenas $0.02\%$ menos de creencia previa que el modelo Monty Hall, con tan solo $2000$ observaciones totales encontraríamos la misma diferencia de desempeño predictivo.
+Aunque la diferencia de predicción típica parezca chica, si el conjunto de datos es más grande, la diferencia de desempeño predictivo también puede ser igualmente grande.}
+
+\subsection{Calcular la predicción de los datos con la contribución de todos los modelos.}
+
+Para actualizar la creencia de los modelos vamos a necesitar la probabilidad de los datos, $P(\text{Datos})$, que no es más que la predicción hecha con la contribución de todos los modelos.
+
+$$P(\text{Datos}) \overset{\genfrac{}{}{0pt}{}{\text{Regla de}}{\text{la suma}} }{=} \sum_{\text{Modelo}} P(\text{Modelo},\text{Datos}) \overset{\genfrac{}{}{0pt}{}{\text{Regla de}}{\text{la producto}} }{=} \sum_{\text{Modelo}} \underbrace{P(\text{Datos}|\text{Modelo})}_{\hfrac{\text{\scriptsize Predicción hecha}}{\text{\scriptsize por el modelo}}} \underbrace{P(\text{Modelo})}_{\hfrac{\text{\scriptsize Creencia en}}{\text{\scriptsize el modelo}}}$$
+
+Aprovechar que tenemos la secuencia de predicciones hechas en cada uno de los episodios para calcular cómo se va actualizando la predicción conjunta a medida que se van incorporando nuevos datos.
+
+\subsection{Calcular el posterior de los modelos a medida que vamos agregando datos}
+
+Ahora sí.
+Tenemos todos los elementos necesarios para calcular cómo se va actualizando la creencia de los modelos a medida que vamos agregando datos.
+$$ P(\text{Modelo}|\text{Datos}) = \frac{P(\text{Modelo}, \text{Datos})}{P(\text{Datos})} $$
+
+\subsection{Graficar el valor del posterior a medida que se observan nuevos episodios}
+
+Para graficar cómo se va actualizando el posterior deberemos tener guardado el valor del posterior luego de observar cada uno de los episodios.
+
+ \begin{figure}[H] \centering
+\begin{subfigure}[t]{0.48\textwidth}
+\includegraphics[width=1\textwidth]{../../../../figuras/MontyHall/posterior}
+\end{subfigure}
+\end{figure}
+
+\subsection{Leer los datos \texttt{NoMontyHall.csv}, proponer un modelo alternativo superior a Monty Hall y el modelo Base, y evaluarlo en función del desempeño predictivo.}
+
+Los datos del archivo \texttt{NoMontyHall.csv} contienen 2000 episodios.
+Los datos fueron generados con el modelo Monty Hall, salvo en algunas ocasiones en los que la persona que da la pista se olvida de tener en cuenta la caja elegida, y actúa siguiendo el modelo Base.
+Crear un modelo alternativo que tenga un desempeño similar al modelo Monty Hall.
+Calcular la secuencia de predicciones de los tres modelos en esta nueva base de datos (Modelo Base, Monty Hall y Alternativo).
+Calcular la diferencia de desempeño predictivo en órden de magnitud entre los modelos.
+Calcular la media geométrica de las predicciones de los diferentes modelos.
+Graficar el posterior de los tres modelos en los primeros 60 episodios.
+Debería quedar algo similar a lo siguiente.
+
+ \begin{figure}[H] \centering
+\begin{subfigure}[t]{0.48\textwidth}
+\includegraphics[width=1\textwidth]{../../../../figuras/MontyHall/posterior2}
+\end{subfigure}
+\end{figure}
+
+Como ayuda, en la siguiente figura mostramos la especificación del modelo alternativo a Base y Monty Hall utilizado.
+En este modelo se agregan dos variable.
+La primera es una variable de ``acción'' ($a_t$) que indica el comportamiento adquirido por la persona que da la pista en el episodio $t$.
+
+
+
+ \begin{figure}[H]\centering
+\centering
+\scalebox{0.75}{
+\tikz{
+    \node[invisible] (id) {};
+    \node[latent, left=of id, xshift=-3.5cm] (d) {\includegraphics[width=0.05\textwidth]{../../../../auxiliar/download/dedo.png}} ;
+    \node[const,left=of d] (nd) {\Large $P(s_t|r_t)$} ;
+    \node[const, below=of d, yshift=-0.2cm] (restricciones) {$s_t \neq r_t$};
+
+
+    \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.06\textwidth]{../../../../auxiliar/download/regalo.png}} ;
+    \node[const,left=of r] (nr) {\Large $P(r_t)$} ;
+
+
+    \node[latent, fill=black!30, above=of d, xshift=1.5cm] (c) {\includegraphics[width=0.06\textwidth]{../../../../auxiliar/download/cerradura.png}} ;
+    \node[const,left=of c] (nc) {\Large $P(c_t)$} ;
+
+    \node[invisible, above=of c] (ic) {};
+
+
+    \edge {r} {d};
+    %\plate {repeticiones} {(nr)(c)(restricciones)} {$t \in \{0, \dots, T-1\}$};
+
+
+    \node[invisible] (id_1) {};
+    \node[latent, left=of id, xshift=3.5cm] (d_1) {\includegraphics[width=0.05\textwidth]{../../../../auxiliar/download/dedo.png}} ;
+    \node[const,left=of d_1] (nd) {\Large $P(s_t|r_t,c_t)$} ;
+    \node[const, below=of d_1, yshift=-0.2cm] (restricciones_1) {$s_t \neq r_t \text{, } s_t \neq c_t$};
+
+
+    \node[latent, above=of d_1, xshift=-1.5cm] (r_1) {\includegraphics[width=0.06\textwidth]{../../../../auxiliar/download/regalo.png}} ;
+    \node[const,left=of r_1] (nr_1) {\Large $P(r_t)$} ;
+
+
+    \node[latent, fill=black!30, above=of d_1, xshift=1.5cm] (c_1) {\includegraphics[width=0.06\textwidth]{../../../../auxiliar/download/cerradura.png}} ;
+    \node[const,left=of c_1] (nc_1) {\Large $P(c_t)$} ;
+
+    \edge {r_1,c_1} {d_1};
+
+    \node[latent, yshift=4.4cm, xshift=-2.4cm ] (a) {\includegraphics[width=0.06\textwidth]{../../../../auxiliar/static/prendido-apagado.png}};
+    \node[const,left=of a] (pm) {\Large $P(a_t|p) $} ;
+    \node[const,right=of a] (nm) {\Large Acción} ;
+
+
+    \node[latent, above=of a] (m) {\includegraphics[width=0.06\textwidth]{../../../../auxiliar/static/cerebro.jpg}};
+    \node[const,left=of m] (pm) {\Large $P(p) $} ;
+    \node[const,right=of m] (nm) {\Large Probabilidad acción} ;
+
+    \vgate {M} {(nr)(ic)(restricciones)} {$a_t=0$} {(nr_1)(c_1)(restricciones_1)} {$a_t=1$} {a};
+
+
+    \edge {m} {a};
+
+    \plate {B} {(a)(M)} {$t \in \{0, \dots, T-1\} $};
+}
+}
+\caption{Modelo alternativo al Base y MontyHall. Dependiendo de si la persona se acuerda o no, actúa en función de un modelo u otro.}
+\label{fig_ModeloCausalMemoria}
+\end{figure}
+
+La probabilidad conjunta es
+\begin{align*}
+P(r,c,s,a,p|M_2) = P(r) P(c) P(s|r,M_0)^{1-a} P(s|r,c,M_1)^a P(a|p) P(p)
+\end{align*}
+
+En este caso, cuando queremos hacer la predicción al interior de un episodio $t$ vamos a tener dos variables ocultas, $a_t$ y $p$ que deberemos integrar usando la regla de la suma.
+
+\section{Modelos AcausaB vs Modelo BcausaA}
+
+Hasta ahora pudimos usar las reglas de las probabilidad para evaluar modelos causales alternativos.
+En este ejercicios intentaremos descubrir la dirección de una relación causal entre dos variables A y B.
+
+ \begin{figure}[H]
+\begin{subfigure}[t]{0.48\textwidth}
+\centering
+\tikz{
+    \node[det] (a) {$A_i$} ; %
+    \node[det, below=of a] (b) {$B_i$} ; %
+    \node[const, left= of a, xshift=-0.3cm, yshift=0.1cm] (pa) { \small
+    \begin{tabular}{|c|c|}
+          $A=0$  &  $A=1$   \\ \hline
+        $0.5$ & $0.5$   \\ \hline
+    \end{tabular}
+    }; %
+    \node[const, above= of pa] (npa) {\small$P(A)$};
+
+
+    \node[const, left=of b, xshift=-0.3cm, yshift=-0.1cm] (pb) { \small
+    \begin{tabular}{c|c|c|}
+        &  $B=0$  &  $B=1$   \\ \hline
+       $A=0$ & $0.95$ & $0.05$   \\ \hline
+       $A=1$ & $0.05$ & $0.95$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of pb] (npb) {\small$P(B|A)$};
+
+    \node[invisible, above=of a, yshift=1cm] (ia) {};
+
+    \plate {datos} {(a)(b)} {\tiny$i$: Dato};
+
+    \edge {a} {b};
+    }
+\caption{Modelo AcausaB}
+\end{subfigure}
+\begin{subfigure}[t]{0.48\textwidth}
+\centering
+    \tikz{
+    \node[det] (a) {$A_i$} ; %
+    \node[det, below=of a] (b) {$B_i$} ; %
+    \node[const, right= of a, xshift=0.3cm, yshift=0.1cm] (pa) { \small
+    \begin{tabular}{c|c|c|}
+        &  $A=0$  &  $A=1$   \\ \hline
+       $B=0$ & $0.95$ & $0.05$   \\ \hline
+       $B=1$ & $0.05$ & $0.95$   \\ \hline
+    \end{tabular}
+    }; %
+    \node[const, above= of pa] (npa) {\small$P(A|B)$};
+
+
+    \node[const, right=of b, xshift=0.3cm, yshift=-0.1cm] (pb) { \small
+    \begin{tabular}{|c|c|}
+          $B=0$  &  $B=1$   \\ \hline
+        $0.5$ & $0.5$   \\ \hline
+    \end{tabular}
+    };
+    \node[const, above= of pb] (npb) {\small$P(B)$};
+
+    \node[invisible, above=of a, yshift=1cm] (ia) {};
+
+    \plate {datos} {(a)(b)} {\tiny$i$: Dato};
+
+    \edge {b} {a};
+    }
+\caption{Modelo BcausaA}
+\end{subfigure}
+\caption{Incertidumbre sobre la dirección de la relación causal}
+\label{fig_DireccionesCausalesAlternativas}
+\end{figure}
+
+\subsection{Generar datos con el modelo AcausaB}
+
+Vamos a suponer que el modelo AcausaB representa perfectamente la realidad causal subyacente.
+Generar un conjunto de datos con $T = 16$ episodios.
+\begin{align*}
+\text{Datos} = \{(a_0, b_0), \dots, (a_{15}, b_{15})  \}
+\end{align*}
+
+\subsection{Evaluar el desempeño predictivo de los modelos causales alternativos sobre los datos sintéticos generados en el punto anterior}
+\begin{align*}
+P(\text{Datos}|\text{Modelo}) = \prod_t P(\text{Episodio}_t = (a_t,b_t)|\text{Modelo})
+\end{align*}
+
+\subsection{Actualizar la creencia respecto de los modelos causales alternativos luego de ver los datos.}
+
+Calcular el posterior de los modelos dado los datos.
+
+\begin{align*}
+P(\text{Modelo}|\text{Datos}) =  \frac{P(\text{Datos}|\text{Modelo})P(\text{Modelo}) }{P(\text{Datos})}
+\end{align*}
+
+\subsection{Dar sus conclusiones.}
+
+Explicar el posterior de los modelos obtenido.
+
+
+\section{Modelos polinomiales de complejidad creciente.}
+
+\begin{framed}
+Pueden usar cualquier librería que implemente: 1. la regresión lineal por mínimos cuadrados (máxima verosimilitud); y 2. la regresión lineal bayesiana.
+%
+En el primer caso proponemos el uso del métodos \texttt{OLS} de la libraría \texttt{statmodels}, en particular los métodos \texttt{fit()} que selecciona las hipótesis (atributo \texttt{params}) y el logaritmo del likelihood del modelo (atributo \texttt{llf}).
+%
+En el segundo caso proponemos de la librería contenida en el archivo \texttt{ModeloLineal.py}, incluido en los materiales de esta práctica, y en particular los métodos \texttt{posterior()} que devuelve la media y la covarianza de los hipótesis y \texttt{log\_evidence()} que devuelve la predicción que hace el modelo del conjunto de datos en escala logarítmica.
+%
+Ambos librerías tienen un uso similar.
+\begin{lstlisting}[basicstyle=\small, backgroundcolor=\color{black!10}]
+from statsmodels.api import OLS
+import ModeloLineal as ml         # El archivo ModeloLineal.py debe estar en la misma carpeta
+...
+N = 20
+X = np.random.rand(N,1)-0.5
+Y = realidad_causal_subyacente(X)
+assert Y.shape == (20,1)
+
+# Transformacion de los X
+def phi(X, complejidad):
+    return(pd.DataFrame({f'X{d}': X[:, 0]**d for d in range(complejidad+1)}))
+
+assert phi(X, 2).shape == (20,3)
+
+modelo = OLS(Y, phi(X,2)).fit()
+modelo.params # La hipotesis seleccionadas
+modelo.llf    # El likelihood del modelo en escala logaritmica
+
+MU_2, COV_2 = ml.posterior(Y, phi(X, 2))
+log_evidence_2 = ml.log_evidence(Y, phi(X, 2))
+\end{lstlisting}
+
+\end{framed}
+
+La gran mayoría de los modelos de inteligencia artificial, incluyendo las redes neuronales, se construyen a partir de modelos que postulan relaciones ``lineales'' entre las hipótesis.
+El modelo más básico es la famosa regresión lineal.
+Dado un conjunto de datos $\{(x_1, y_1), \dots, (x_T, y_T)\}$, un modelo causal lineal afirma que el valor de la variable $y_i$ se generar en función de $x_i$ y un conjunto de hipótesis ocultas $h$, tal que
+$$y \leftarrow h_0 + h_1 \cdot x$$
+$h_0$ representa el valor base de $y$ cuando $x$ es neutral ($x = 0$), y $h_1$ representa el efecto causal que la varibale $x$ tiene sobre $y$, el cual es proporcional a su propio valor ($h_1\cdot x$), dando una relación lineal entre el valor de la causa $x$ y el valor de su efecto $y$. De modo similar, podemos construir relaciones más complejas, como son los polinomios de grado $M$.
+$$y \leftarrow h_0 + h_1 \cdot x + h_2 \cdot x^2 + \dots + h_M \cdot x^M = \sum_{i = 0}^M h_i \cdot x^i$$
+
+Es interesante notar que un polinomio de grado $M-1$ es un caso especial de un polinomio de grado $M$ en el que el $h_M = 0$.
+Es decir, cuánto más complejo sea el polinomio, más flexibilidad tiene el modelo para representar la relación entre $x$ e $y$.
+Debido a que los datos se miden con un error que se produce con desvío estándar $\beta$ centrado en cero, la probabilidad condicional de observar un dato es,
+$$p(y|x, \bm{h}, \text{Modelo} = M) = \mathcal{N}\bigg(y\, \bigg| \, \sum_{i =  0}^M h_i \cdot x^i , \, \beta^2\bigg) $$
+
+Como tenemos incertidumbre respecto de los valores de las hipótesis $h_i$, proponemos una distribución que creencias \emph{a priori} alrededor del cero.
+$$p(h_i) = \mathcal{N}(h_i\, | \, 0, \alpha_i^2) $$
+
+Luego, la especificación gráfica del modelo lineal es
+\begin{figure}[H]
+    \centering
+    \tikz{
+
+    \node[latent, fill=black!100, minimum size=2pt] (x) {} ; %
+    \node[const, right=of x] (c_x) {$x_j$};
+    \node[latent, fill=black!20, yshift=-1.5cm] (t) {$y_j$} ; %
+    \node[latent, fill=black!100, yshift=-1.5cm , xshift=-2cm,minimum size=2pt] (beta)
+    {} ; %
+    \node[const, above=of beta] (c_beta) {$\beta$};
+    \node[latent, fill=black!0, yshift=-1.5cm, xshift=2.3cm] (w) {$h_i$};
+    \node[latent, fill=black!100, xshift=2.3cm, minimum size=2pt] (alpha) {} ; %
+    \node[const, left=of alpha] (c_alpha) {$\alpha_i$};
+
+    \edge {x,beta,w} {t};
+    \edge {alpha} {w};
+
+    \node[invisible, fill=black!0, minimum size=0pt, xshift=0.52cm] (data_inv) {} ; %
+
+    \plate {no} {(x)(t)(data_inv)} {\ $j: $\scriptsize Datos};
+    \plate {hipotesis} {(w)(alpha)} {$i: $ \scriptsize Hipótesis}; %
+    }
+\end{figure}
+
+
+Quisiéramos actualizar nuestra creencia respecto de las hipótesis $h$ al interior de cada modelo y actualizar nuestra creencia sobre los modelos causales alternativos.
+Ninguno de estas dos objetivos se pudo realizar de forma exacta hasta las vísperas del siglo $21$.
+En este ejercicio nos interesa comparar los resultados que se obtienen mediante los métodos propuestos durante el siglo $20$, basados en estimadores puntuales, respecto de los resultado que se obtienen de evaluar todo el espacio de hipótesis (y modelos) mediante la aplicación estricta de las reglas de la probabilidad.
+En el primer caso usaremos el método OLS (por \emph{Ordinary Least Squares}) del paquete \texttt{statsmodels} y para el segundo caso usaremos nuestra propia implementación disponible en el archivo \texttt{ModeloLineal.py}\footnote{La derivación matemática de la regresión lineal la pueden encontrar en el capítulo 2 del libro de Bishop PRML. El presente ejercicio está extraído del capítulo 3 del mismo libro.}.
+
+
+\subsection{Generar 20 datos alrededor de una período de una sinoidal}
+
+Supongamos que los datos se generan de una realidad causal subyacente completamente distinta, siguiendo una función sinoidal en el rango $x\in [-\frac{1}{2}, \frac{1}{2}]$.
+\begin{align*}
+p(x) &= \text{Unif}(x|-0.5,0.5) \\
+p(y|x) &= \N(y|\texttt{sin}(2\pi x), \beta^2 )
+\end{align*}
+
+Al graficar la función objetivo (línea) y los datos (puntos) se soberva lo siguiente.
+ \begin{figure}[H] \centering
+\begin{subfigure}[t]{0.4\textwidth}
+\includegraphics[width=1\textwidth]{../solucion/pdf/model_selection_true_and_sample}
+\end{subfigure}
+\caption{Datos generados de la ``función objetivo'' (realidad causal subyacente)}
+\end{figure}
+
+\subsection{Graficar el valor de máxima verosimilitud obtenido por los modelos polinomiales de grado 0 a 9}
+
+Debido a la complejidad computacional de la aplicación estricta de las reglas de la probabilidad, durante el siglo $20$ se propusieron una gran cantidad de criterios arbitrarios para la selección de una única hipótesis del espacio, como es el principio de máxima verosimilitud.
+$$\underset{h}{\text{arg max \ }} p( \bm{y}| \bm{x}, \bm{h}, M_M ) \overset{*}{=}  \underset{h}{\text{arg min \ }} \sum_{j\in \{1,\dots,N\}} (y_j - \sum_i^M h_i \cdot x_j^i)^2 $$
+
+Por propiedades de este tipo de modelos ($\overset{*}{=}$) encontrar las hipótesis que mejor predicen es lo mismo que minimizar la suma de las distancias cuadradas entre el verdadero valor y el valor medio propuesto.
+Al graficar el valor de máxima verosimilitud obtenido con cada uno de los modelos veremos que a medida que aumentamos la complejidad de los modelos aumenta también el valor de máxima verosimilitud.
+ \begin{figure}[H] \centering
+\begin{subfigure}[t]{0.4\textwidth}
+\includegraphics[width=1\textwidth]{../solucion/pdf/model_selection_maxLikelihood}
+\end{subfigure}
+\end{figure}
+
+Esto ocurre debido a que cuanto más flexible es un modelo, más se puede acercar a todos los puntos.
+Por lo tanto, si usamos el criterio de máxima verosimilitud para seleccionar modelo, elegiríamos siempre el modelo más complejo.
+
+\subsection{Graficar las curvas obtenidas con cada modelo mediante máxima verosimilitud.}
+
+Seleccionar el modelo de mayor complejidad no es deseable.
+Para ver por qué, vamos a graficar las curvas obtenidas por cada uno de los modelos de grado 0 a 9.
+ \begin{figure}[H] \centering
+\begin{subfigure}[t]{0.4\textwidth}
+\includegraphics[width=1\textwidth]{../solucion/pdf/model_selection_OLS}
+\caption{Todos los modelos}
+\label{fig_model_selection_OLS}
+\end{subfigure}
+\begin{subfigure}[t]{0.4\textwidth}
+\includegraphics[width=1\textwidth]{../solucion/pdf/model_selection_OLS_best-at-train}
+\caption{Modelo de máxima verosimilitud}
+\label{fig_model_selection_OLS_best-at-train}
+\end{subfigure}
+\caption{Ajuste de los polinomios por máxima verosimilitud.}
+\end{figure}
+
+En la figura~\ref{fig_model_selection_OLS} podemos ver que los modelos de grado 0 a 2 no tienen la complejidad suficiente para acercarse a los datos como lo hacen los modelo de complejidad 3 o superior.
+En la figura~\ref{fig_model_selection_OLS_best-at-train} destacamos la curva que se obtiene con el modelo más complejo, de grado 9.
+
+A diferencia del modelo 3 (color rojo en figura~\ref{fig_model_selection_OLS}) que se mantiene cerca de la función objetivo, el modelo de grado 9 se separa significativamente de la función objetivo alrededor de los valores $x=0.3$ y $x=0.5$.
+La excesiva flexibilidad hace que los modelos más complejos adopten formas extrañas que suelen alejarse más de la función objetivo oculta, por lo que la predicción sobre nuevos datos del modelo 3 termina siendo superior al del modelo 9 que habíamos elegido por máxima verosimilitud.
+
+Esto se conoce se conocen en el área de inteligencia artificial con el nombre de sobreajuste o \emph{overfitting} y veremos que es efecto secundario de utilizar métodos arbitrarios de selección de hipótesis (cómo máxima verosimilitud) y no una propiedad indeseable del sistema de razonamiento probabilístico.
+
+\subsection{Evaluación de la predicción ``en línea'' que hacen los modelos ajustados por máxima verosimilitud.}
+
+Para evaluar correctamente los modelos alternativos deberíamos calcular la evidencia de los modelos ($P(\text{Datos}|\text{Modelo})$), que no es más que la predicción \emph{a priori} que hace el modelo de todos los datos, lo que es lo mismo que el producto de las predicciones individuales del siguiente dato usando los datos ya observados como información previa.
+$$P(\text{Datos} = \{ d_1, d_2, \dots\}|M_D) = P(d_1|M_d)P(d_2|d_1,M_D) \dots$$
+
+Este producto de predicciones representa lo que nos ocurriría efectivamente si usáramos el modelo en la vida real: ajustamos el modelo con los datos que ya tenemos disponibles (entrenamiento) y evaluamos el desempeño en los datos nuevos (testeo).
+Para simular este proceso, vamos a implementar un procedimiento en el cual predecimos los datos individuales ajustando los modelos por máxima verosimilitud sobre los datos observados previamente.
+
+\begin{figure}[H] \centering
+\begin{subfigure}[t]{0.4\textwidth}
+\includegraphics[width=1\textwidth]{../solucion/pdf/model_selection_maxApriori_online}
+\end{subfigure}
+\caption{Producto de las predicciones a prior de los modelos ajustados por máxima verosimilitud.}
+\end{figure}
+
+Si evaluáramos los modelos en base al desempeño predictivo, dado por el producto de las predicciones a periori, rechazaríamos todos los modelos salvo el de grado 3.
+Esto también es un caso de sobreajuste (overfitting), pues en caso de recibir datos por fuera del período, tendremos bajo desempeño predictivo debido a que el modelo de grado 3 no tendrá la flexibilidad suficiente para acercarse a la función objetivo.
+El problema del sobreajuste (overfitting) ocurre como efecto secundario de seleccionar una única hipótesis del espacio y no poder computar de forma exacta la evidencia de los modelos, $P(\text{Datos}|\text{Modelo})$.
+
+Cuando seleccionamos de forma arbitraria una única hipótesis no podemos computar la evidencia de los modelos, $P(\text{Datos}|\text{Modelo})$, debido a que las predicciones que hacen los modelos debería realizarse con la contribución de todas las hipótesis, y no con una única hipótesis seleccionada previamente.
+\begin{align*}
+P(y_i| \underbrace{x_1, y_1}_{d_1}, \dots, \underbrace{x_{i-1}, y_{i-1}}_{d_{i-1}}, x_i, M_D) &= \int_{\bm{h}} P(y_i| d_1, \dots, d_{i-1}, x_i, \bm{h}, M_D) P(\bm{h}|d_1, \dots, d_{i-1}, M_D) \\
+& \approx P(y_i| d_1, \dots, d_{i-1}, x_i, \underbrace{\underset{\bm{h}}{\text{ arg max }} P(d_1,  \dots, d_{i-1}| \bm{h}, M_D)}_{\text{Hipóteis de máxima verosimilitud}} , M_D)
+\end{align*}
+
+Es decir, aproximamos las predicciones que deberían hacer los modelos con la contribución de todas las hipótesis mediante la predicción que obtenemos con la hipótesis que maximizaba la verosimilitud en el paso anterior.
+
+\subsection{Más criterios arbitrarios de selección de hipótesis: los regularizadores}
+
+Para evitar algunos de los efectos secundarios de la selección arbitraria de hipótesis mediante máxima verosimilitud, se han propuesto una gran variedad de otros criterios arbitrarios de selección.
+Una familia alternativa de criterios muy difundida son los llamados regularizadores.
+En vez de seleccionar la hipótesis que mejor predice los datos (máxima verosimilitud) elegimos la hipótesis que tienen mayor creencia luego de observar los datos (máximo a posteriori).
+\begin{align*}
+\underset{h}{\text{arg max \ }} \underbrace{p(\bm{h}| \overbrace{\bm{y}, \bm{x}}^{\text{Datos}}, M_M )}_{\text{Posterior}} = &
+\underset{h}{\text{arg max \ }} \overbrace{p( \bm{y}| \bm{x}, \bm{h}, M_M )}^{\text{Verosimilitud}} \overbrace{p(\bm{h}|M_M )}^{\text{Prior}} \\
+\overset{*}{=}& \underset{h}{\text{arg min \ }} \underbrace{\sum_{j} (y_j - \sum_i h_i \cdot x_j^i) ^2}_{\text{Distancia entre dato y predicción media}} + \underbrace{ \frac{\alpha}{2}||h||^2}_{\text{Penalización}}
+\end{align*}
+
+Por propiedades del modelo ($\overset{*}{=}$) maximizar el producto de la verosimilitud con el prior es equivalente a minimizar la suma de distancias cuadradas entre el dato y la predicción, más la suma de la distancia cuadrada de las hipótesis al origen pesada por la precisión a priori sobre las hipótesis $\alpha$.
+Esto hace que la hipótesis que se seleccione no sea la que más se acerca a los datos, sino la que mejor balance tenga entre la distancia y la penalización.
+
+Veamos cómo se desempeñan los modelos bajo este nuevo criterio arbitrario de selección de hipótesis.
+Vamos a proceder del modo similar a lo realizado en el ejercicio anterior.
+Para calcular el posterior exacto sobre las hipótesis vamos a usar nuestra propia implementación disponible en el archivo \texttt{ModeloLineal.py}.
+Debido a que la penalización depende del prior, vamos a calcular el posterior usando un prior 100 veces más informativo que el prior que definimos al inicio del ejercicio.
+
+\begin{figure}[H] \centering
+\begin{subfigure}[t]{0.4\textwidth}
+\includegraphics[width=1\textwidth]{../solucion/pdf/model_selection_maxPosteriori_ajustes}
+\caption{Ajuste por Máximo a posteriori}
+\end{subfigure}
+\begin{subfigure}[t]{0.4\textwidth}
+\includegraphics[width=1\textwidth]{../solucion/pdf/model_selection_maxPosteriori_prediccionAPriori}
+\caption{Predicciones a priori ``en línea''}
+\end{subfigure}
+\caption{Selección arbitraria de hipótesis por máximo a posterior con prior informativo.}
+\end{figure}
+
+El prior informativo obliga a que los valores de las hipótesis no puedan alejarse de 0.
+Esto hace que los modelos más complejos pierdan flexibilidad y se comporten como si fueran modelos más simples.
+De esta forma, se logra mejorar el desempeño de los modelos complejos incluso cuando evaluamos sus predicciones a priori, entrenando el modelo en línea cada vez que recibe un nuevo dato.
+
+En este caso estamos rechazando todos los modelos simples, quedándonos con los modelos de mayor complejidad.
+Si bien esto podría parecer una solución al problema del ejercicio anterior, no lo es.
+Así como el rechazo de todos los modelos salvo el de grado 3 hacía que no pudiéramos predecir potenciales datos futuros que estuvieran fuera del período observado, la selección de los modelos más complejos no ocurre por mérito de su complejidad sino por la reducción de flexibilidad que le impusimos mediante la regularización.
+En términos prácticos, los modelos complejos están funcionando como una variante apenas más flexible que el modelo 3 regularizado.
+La regularización de hipótesis entonces no resuelve el problema, pues cuando veamos datos por fuera del período observado, estos modelos tampoco van a ser capaces de predecir los nuevos datos.
+\begin{align*}
+P(\text{Datos}) &= \sum_{m \in \{5, \dots, 9\}} P(\text{Datos}|\text{Modelo}=m) P(\text{Modelo}=m) \approx P(\text{Datos}|\text{Modelo} = 3)
+\end{align*}
+
+\subsection{El balance natural de las reglas de la probabilidad.}
+
+Para evaluar correctamente las hipótesis y modelos causales alternativos es suficiente con actualizar las creencias aplicando estrictamente las reglas de la probabilidad. Para eso necesitamos calcular la probabilidad a posteriori de los los modelos dado los datos.
+$$P(\text{Modelo} = m|\text{Datos})  =  \frac{\overbrace{P(\text{Datos}|\text{Modelo} = m)}^{\text{Evidencia}} P(\text{Modelo}=m)}{\sum_i P(\text{Datos}|\text{Modelo} = i) P(\text{Modelo}=i)}$$
+
+Para calcular de forma exacta la evidencia del modelo (en órdenes de magnitud) podemos usar el método \texttt{lm.log\_evidence()} de nuestro paquete \texttt{ModeloLineal.py}.
+Suponiendo que no tenemos preferencia a priori por ningún modelo, vamos a usar la evidencia para calcular el posterior exacto de los modelos.
+
+
+\begin{figure}[H] \centering
+\begin{subfigure}[t]{0.4\textwidth}
+\includegraphics[width=1\textwidth]{../solucion/pdf/model_selection_posterior}
+\end{subfigure}
+\caption{Posterior exacto de los modelos.}
+\end{figure}
+
+Cuando evaluamos correctamente las hipótesis, encontramos que:
+el modelo que tiene la menor complejidad necesaria (grado 3) es el que obtiene mayor creencia a posteriori;
+los modelos que tienen menor complejidad de la necesaria (grado 0 a 2) son rechazados;
+y los modelos que tienen mayor complejidad de la necesaria (grado 4 a 9) tienen baja probabilidad, pero no son rechazados.
+A diferencia de lo que ocurría cuando seleccionábamos hipótesis de forma arbitraria, evaluando correctamente las hipótesis garantizamos nuestra capacidad para predecir potenciales datos que aparecieran en el futuro por fuera del del período observado gracias a que tenemos disponibles todavía modelos más complejos capaces de explicarlos.
+$$P(\text{Datos}) = \sum_m P(\text{Datos}|\text{Modelo} = m)  P(\text{Modelo} = m) $$
+
+En definitva, los problemas que emergen cuando se seleccionan las hipótesis mediante criterios arbitrarios simplemente no forman parte del sistema de razonamiento en contextos de incertidumbre. Por eso, la aplicación estricta de las reglas de la probabilidad, siguiendo el principio de "no mentir", es el razonamiento óptimo en contextos de incertidumbre.
+
+\subsection{Cómo se explica el balance natural de las reglas de la probabilidad}
+
+En probabilidad las predicciones son distribuciones de probabilidad que deben integrar 1.
+Esto produce una balance natural entre los modelos debido a que ningún modelo es superior a otro en términos absolutos.
+Todos los modelos tienen una región en donde ganan y todos tienen una región en donde pierden.
+Veamos esto de forma concreta.
+
+En la figura~\ref{fig_model_selection_MAP_non-informative} graficamos la media del posterior de los modelos basado en un prior no informativo.
+No estamos graficando la incertidumbre de los modelos, que representaría la predicción que hacen los modelos de los datos.
+Para graficar esa incertidumbre vamos a hacer un corte en la figura~\ref{fig_model_selection_MAP_non-informative} cuando $x$ vale $-0.23$ (linea vertical).
+
+\begin{figure}[H] \centering
+\begin{subfigure}[t]{0.4\textwidth}
+\includegraphics[width=1\textwidth]{../solucion/pdf/model_selection_MAP_non-informative}
+\caption{Media del posterior con priori no informativo}
+\label{fig_model_selection_MAP_non-informative}
+\end{subfigure}
+\begin{subfigure}[t]{0.4\textwidth}
+\includegraphics[width=1\textwidth]{../solucion/pdf/model_selection_prediccionEnX}
+\caption{Predicción en $x=-0.23$}
+\label{fig_model_selection_prediccionEnX}
+\end{subfigure}
+\caption{El balance natural entre modelos}
+\end{figure}
+
+En la figura~\ref{fig_model_selection_prediccionEnX} hacemos un corte en línea punteada ($x=-0.23$) y graficamos la predicción que hace el modelo más rígido (grado 0), el modelo simple (grado 3) y el modelo más complejo (grado 9) luego de ver el cuarto dato, vamos a observar tres distribuciones gaussianas con diferente media y diferente desvío estándar.
+Podemos ver que el modelo más rígidos (grado 0) concentra su creencia en una región lejana al valor verdadero.
+Los modelos simples (grado 3) y complejo (grado 9) distribuyen su creencia alrededor del verdadero valor pero de forma distinta: cuanto mayor flexibilidad tienen los modelos, mayor tendencia a distribuir la creencia en una región más amplia de valores posibles.
+En términos un poco más esquemáticos (con $x = 0.1$) lo que ocurre es.
+
+\begin{figure}[H] \centering
+\begin{subfigure}[t]{0.4\textwidth}
+\includegraphics[width=1\textwidth]{../../../../figuras/ModeloLineal/pdf/evidencia_de_modelos_alternativos}
+\end{subfigure}
+\caption{Esquema de la predicción de los modelos}
+\end{figure}
+
+De esta forma, el modelo rígido se rechaza por su incapacidad de llevar su creencia a la región correcta.
+Pero entre el modelo simple y el modelo complejo hay una balance en el cual existen ciertas regiones donde el modelo simple gana y ciertas regiones donde el modelo más complejo gana.
+
+
+\section{Efecto causal del sexo biológico sobre la altura.}
+
+Vamos a utilizar un conjunto de datos sobre alturas de un grupo de personas y 3 variables adicionales: sexo biológico, contextura de la madre, y altura de la madre. En este ejemplo vamos a proponer modelos causales alternativos entre estas variables.
+
+\subsection{Abrir el archivo \texttt{alturas.csv} y visualizar los datos}
+
+El archivo de datos tiene la siguiente estructura,.
+
+\begin{lstlisting}
+   id  altura sexo contextura_madre  altura_madre
+0   1   172.7    M          mediana         159.8
+1   2   171.5    M          mediana         160.3
+2   3   162.6    F          mediana         160.5
+3   4   174.1    M          mediana         159.8
+4   5   168.3    M          mediana         158.3
+\end{lstlisting}
+
+\begin{figure}[H] \centering
+\begin{subfigure}[t]{0.4\textwidth}
+\includegraphics[width=1\textwidth]{../solucion/pdf/alturas_visualizacion_por_sexo}
+\end{subfigure}
+\caption{Datos de alturas}
+\end{figure}
+
+
+\subsection{Definir 3 modelos causales alternativos}
+
+Si bien los datos son de dudosa procedencia, vamos a jugar un juego de inferencia causal.
+Vamos a proponer y evaluar tres modelos causales alternativos.
+En el modelo base vamos a suponer que la altura de la madre tienen un efecto causal lineal sobre la altura de su descendencia.
+$$\text{Modelo Base: \ }\texttt{altura} = h_0 + h_1 \cdot \texttt{altura\_madre} $$
+
+En el modelo biológico vamos a suponer que el sexo tiene un efecto causal adicional sobre la altura.
+$$\text{Modelo Biológico: \ }\texttt{altura} = h_0 + h_1 \cdot \texttt{altura\_madre} + h_2 \cdot \mathbb{I}(\texttt{sexo} = F)$$
+Cuando el sexo es masculino, la función identidad $\mathbb{I}(\texttt{sexo} = M)$ vale 1 y en caso contrario vale 0, lo que prende y apaga la hipótesis $h_2$, que reprersentar el efecto causal adicional del sexo biológico.
+
+Por último vamos a plantear el modelo identitario, en el que vamos a suponer que la identidad de la persona (y no el sexo) tiene efecto causal sobre la altura.
+$$\text{Modelo grupos al azar: \ }\texttt{altura} = h_0 \cdot \texttt{altura\_madre} +  h_{1+(\texttt{ID mod (max(ID)/2)})} $$
+
+Notar que los grupos al azar son todos de tamaño 2 y que cada grupo tiene su propia ordenada al origen pero comparten la misma pendiente.
+%
+Es decir, cuando queramos usar \texttt{OLS(Y,phi)} o \texttt{log\_evidence(Y,phi)}, el \texttt{phi} va a ser una matriz con 26 columnas: la primera con la altura de la madre y las siguiente 25 columnas con 0 y 1, indicando quién pertenece a un determinado grupo.
+
+\subsection{Computar la evidencia de los modelos causales alternativos}
+
+En la siguiente figura graficamos los órdenes de magnitud de evidencia ($P(\text{Datos}|\text{Modelo})$) de los 3 modelos causales alternativos.
+
+
+\begin{figure}[H] \centering
+\begin{subfigure}[t]{0.4\textwidth}
+\includegraphics[width=1\textwidth]{../solucion/pdf/alturas_log_evidencia}
+\end{subfigure}
+\caption{Evidencia en escala logarítmica de los modelos causales alternativos}
+\end{figure}
+
+\subsection{Computar la media geométrica de los modelos causales alternativos}
+
+La media geométrica
+$$P(\text{Datos}=\{d_1, d_2, \dots, d_N \}|M) = P(d_1|M) P(d_2|d_1,M) \dots =  \prod_{i\in \{1,\dots,N\}} \underbrace{(P(d_1|M) P(d_2|d_1,M) \dots )^{1/N}}_{\text{Media geométrica}} $$
+
+\subsection{Computar el posterior de los modelos}
+
+\begin{align*}
+P(\text{Modelo}|\text{Datos}) =  \frac{P(\text{Datos}|\text{Modelo})P(\text{Modelo}) }{P(\text{Datos})}
+\end{align*}
+
+
+
+
+\end{document}
